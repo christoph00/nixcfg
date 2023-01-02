@@ -20,7 +20,6 @@
     });
 
   defaultModules = [
-    # make flake inputs accessiable in NixOS
     {
       _module.args.self = self;
       _module.args.inputs = self.inputs;
@@ -40,6 +39,14 @@
 
       imports = [
         inputs.nur.nixosModules.nur
+        inputs.home-manager.nixosModules.home-manager
+        inputs.base16.nixosModule
+        inputs.agenix.nixosModules.age
+        inputs.vscode-server.nixosModule
+        inputs.hyprland.nixosModules.default
+        inputs.impermanence.nixosModules.impermanence
+
+        self.nixosModules.conf
       ];
     })
   ];
@@ -50,8 +57,7 @@ in {
       modules =
         defaultModules
         ++ [
-          inputs.home-manager.nixosModules.home-manager
-          #./air13.nix
+          ./air13.nix
         ];
     };
   };
