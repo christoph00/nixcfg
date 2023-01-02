@@ -3,12 +3,7 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        # inputs.base16.nixosModule
-        # inputs.home-manager.nixosModule
-        # inputs.agenix.nixosModules.age
-        # inputs.vscode-server.nixosModule
-        # inputs.hyprland.nixosModules.default
-        # inputs.impermanence.nixosModules.impermanence
+        ./hosts
       ];
       systems = ["x86_64-linux" "aarch64-linux"];
       perSystem = {inputs', ...}: {
@@ -26,9 +21,13 @@
     hardware.url = "github:NixOS/nixos-hardware";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+    utils = {
+      url = "github:numtide/flake-utils";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "utils";
     };
 
     agenix = {
@@ -38,10 +37,18 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "utils";
+    };
+
     helix = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
+
     base16.url = "github:SenchoPens/base16.nix";
     base16.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -49,18 +56,24 @@
       url = "github:base16-project/base16-schemes";
       flake = false;
     };
-    hyprland.url = "github:hyprwm/hyprland/v0.19.2beta";
-    hyprwm-contrib.url = "github:hyprwm/contrib";
+    hyprland = {
+      url = "github:hyprwm/hyprland/v0.19.2beta";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprwm-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     xdg-portal-hyprland = {
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vscode-server.url = "github:msteen/nixos-vscode-server";
-
-    nur = {
-      url = "github:nix-community/NUR";
+    vscode-server = {
+      url = "github:msteen/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nur.url = "github:nix-community/NUR";
   };
 }
