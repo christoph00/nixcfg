@@ -1,22 +1,5 @@
 {
   description = "NIX CONFIG";
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      imports = [
-        ./hosts
-        ./modules
-      ];
-      systems = ["x86_64-linux" "aarch64-linux"];
-      perSystem = {inputs', ...}: {
-        # make pkgs available to all `perSystem` functions
-        _module.args.pkgs = inputs'.nixpkgs.legacyPackages;
-      };
-      flake = {
-        overlays = {
-          default = import ./pkgs;
-        };
-      };
-    };
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     hardware.url = "github:NixOS/nixos-hardware";
@@ -30,6 +13,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "utils";
     };
+
+    srvos.url = "github:numtide/srvos";
+    srvos.inputs.nixpkgs.follows = "nixpkgs";
+
+    disko.url = "github:nix-community/disko/bcachefs";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -77,4 +66,28 @@
 
     nur.url = "github:nix-community/NUR";
   };
+
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }:
+    inputs.flake-parts.lib.mkFlake {inherit (inputs) self;} {
+      systems = ["x86_64-linux" "aarch64-linux"];
+      imports = [
+        ./lib.nix
+        ./nixos
+        ./home
+        ./hosts
+      ];
+
+      perSystem = {
+        pkgs,
+        config,
+        inputs',
+        ...
+      }: {
+        formatter = pkgs.alejandra;
+      };
+    };
 }

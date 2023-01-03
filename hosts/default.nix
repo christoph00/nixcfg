@@ -31,11 +31,11 @@
         "nur=${inputs.nur}"
       ];
 
-      nix.extraOptions = ''
-        flake-registry = ${inputs.flake-registry}/flake-registry.json
-      '';
       documentation.info.enable = false;
       services.envfs.enable = true;
+      system.stateVersion = "22.11";
+      nixpkgs.config.allowUnfree = true;
+      nixpkgs.overlays = builtins.attrValues self.overlays;
 
       imports = [
         inputs.nur.nixosModules.nur

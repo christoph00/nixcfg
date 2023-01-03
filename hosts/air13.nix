@@ -75,7 +75,7 @@
     users.home-manager = true;
     network.enable = true;
     network.wireless = true;
-    network.tailscale.enable = true;
+    #network.tailscale.enable = true;
 
     fonts.enable = true;
     desktop = {
