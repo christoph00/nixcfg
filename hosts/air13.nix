@@ -7,13 +7,7 @@
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
       kernelModules = ["i915"];
-      #      systemd.enable = true;
     };
-    # make modules available to modprobe
-    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
-
-    # use latest kernel
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
   };
 
   boot.blacklistedKernelModules = ["nouveau"];

@@ -47,6 +47,7 @@
       ];
       laptop.imports = [
         self.nixosModules.desktop
+        ./laptop.nix
       ];
       headless.imports = [
         inputs.srvos.nixosmodules.server
