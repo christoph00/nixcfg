@@ -31,6 +31,21 @@
     VISUAL = "hx";
   };
 
+  systemd.user.startServices = "sd-switch";
+
+  home.persistence = {
+    "/persist/home/christoph" = {
+      directories = [
+        "Dokumente"
+        "Downloads"
+        "Bilder"
+        "Videos"
+        "Code"
+      ];
+      allowOther = true;
+    };
+  };
+
   programs = {
     bat.enable = true;
     autojump.enable = false;
@@ -38,6 +53,7 @@
     jq.enable = true;
     ssh.enable = true;
     git.enable = true;
+    home-manager.enable = true;
   };
 
   programs.fish = {

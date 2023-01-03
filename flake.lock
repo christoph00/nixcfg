@@ -174,6 +174,29 @@
         "type": "github"
       }
     },
+    "firefox-addons": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkgs/firefox-addons",
+        "lastModified": 1672718574,
+        "narHash": "sha256-o1AmBIZZEENfjYjEgzV4fkbRbeL0ghKjbKd5ru8V2f4=",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "rev": "34e69cfde6e1ffe609c2df0b31d1862e86ee23fc",
+        "type": "gitlab"
+      },
+      "original": {
+        "dir": "pkgs/firefox-addons",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "type": "gitlab"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -209,6 +232,21 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1629284811,
+        "narHash": "sha256-JHgasjPR0/J1J3DRm4KxM4zTyAj4IOJY8vIl75v/kPI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c5d161cc0af116a2e17f54316f0bf43f0819785c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     },
@@ -442,27 +480,13 @@
         "type": "github"
       }
     },
-    "nur": {
-      "locked": {
-        "lastModified": 1672768069,
-        "narHash": "sha256-vodnquhOQ1aZHl+hNbhDTsGnh8ZKp+RHQ2vDl9wx7ko=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "79f84fb68b67b2ffb8defca9a18e07bae32dc8e0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "base16": "base16",
         "base16-schemes": "base16-schemes",
         "disko": "disko",
+        "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",
         "hardware": "hardware",
         "helix": "helix",
@@ -471,7 +495,6 @@
         "hyprwm-contrib": "hyprwm-contrib",
         "impermanence": "impermanence",
         "nixpkgs": "nixpkgs",
-        "nur": "nur",
         "rust-overlay": "rust-overlay",
         "srvos": "srvos",
         "utils": "utils",
