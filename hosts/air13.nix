@@ -36,6 +36,38 @@
   ];
   boot.resumeDevice = "/dev/nvme0n1p2";
 
+  fileSystems = {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      options = ["defaults" "size=2G" "mode=755"];
+    };
+
+    "/nix" = {
+      device = "/dev/disk/by-label/air13";
+      fsType = "btrfs";
+      options = ["subvol=@nix" "noatime" "compress-force=zstd"];
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-label/UEFI";
+      fsType = "vfat";
+    };
+
+    "/persist" = {
+      device = "/dev/disk/by-label/air13";
+      fsType = "btrfs";
+      options = ["subvol=@persist" "noatime" "compress-force=zstd"];
+      neededForBoot = true;
+    };
+
+    "/home" = {
+      device = "/dev/disk/by-label/air13";
+      fsType = "btrfs";
+      options = ["subvol=@home" "noatime" "compress-force=zstd"];
+    };
+  };
+
   hardware.nvidia.modesetting.enable = false;
 
   nixpkgs.hostPlatform.system = "x86_64-linux";

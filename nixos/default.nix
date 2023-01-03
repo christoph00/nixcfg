@@ -43,6 +43,7 @@
         self.nixosModules.default
         self.nixosModules.home-manager
         inputs.srvos.nixosModules.desktop
+        ./desktop.nix
       ];
       laptop.imports = [
         self.nixosModules.desktop
