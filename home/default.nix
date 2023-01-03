@@ -9,11 +9,13 @@
       common = {
         home.stateVersion = "22.11";
         imports = [
+          inputs.impermanence.nixosModules.home-manager.impermanence
+          inputs.nix-colors.homeManagerModule
           ./cli
         ];
       };
       desktop.imports = [
-        self.homeModules.common
+        inputs.hyprland.homeManagerModules.default
         ./desktop
         ./applications
       ];

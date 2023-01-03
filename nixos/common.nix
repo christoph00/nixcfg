@@ -17,6 +17,8 @@
     };
   };
 
+programs.fuse.userAllowOther = true;
+
   users.users.christoph = {
     description = "Christoph";
     isNormalUser = true;

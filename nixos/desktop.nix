@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  system,
   ...
 }: {
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
@@ -56,6 +57,11 @@
       pkgs.xdg-desktop-portal-gtk
       #  inputs.xdg-portal-hyprland.packages.${pkgs.system}.default
     ];
+  };
+
+  programs.hyprland = {
+    enable = true;
+    package = null; # Managed by home manager
   };
 
   services.geoclue2.enable = true;

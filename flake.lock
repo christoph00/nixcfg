@@ -20,38 +20,18 @@
         "type": "github"
       }
     },
-    "base16": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1658847131,
-        "narHash": "sha256-X6Mml7cT0YR3WCD5fkUhpRVV5ZPcwdcDsND8r8xMqTE=",
-        "owner": "SenchoPens",
-        "repo": "base16.nix",
-        "rev": "6b404cda2e04ca3cf5ca7b877af9c469e1386acb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "SenchoPens",
-        "repo": "base16.nix",
-        "type": "github"
-      }
-    },
     "base16-schemes": {
       "flake": false,
       "locked": {
-        "lastModified": 1671208311,
-        "narHash": "sha256-U9pfie3qABp5sTr3M9ga/jX8C807FeiXlmEZnC4ZM58=",
-        "owner": "base16-project",
+        "lastModified": 1665690101,
+        "narHash": "sha256-J2ZvNaVFkqaTXzYO5L+jyRORfIOavFPKvWItP6UTMKs=",
+        "owner": "tinted-theming",
         "repo": "base16-schemes",
-        "rev": "cf6bc892a24af19e11383adedc6ce7901f133ea7",
+        "rev": "a3dc916cf90471a422c0bfe1bb4b1bdd12185ced",
         "type": "github"
       },
       "original": {
-        "owner": "base16-project",
+        "owner": "tinted-theming",
         "repo": "base16-schemes",
         "type": "github"
       }
@@ -446,6 +426,25 @@
         "type": "github"
       }
     },
+    "nix-colors": {
+      "inputs": {
+        "base16-schemes": "base16-schemes",
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
+        "lastModified": 1672236234,
+        "narHash": "sha256-dpBIuxcDEvJbLD8fTipE0A0JbQD1lZB94zYFPoh01PI=",
+        "owner": "misterio77",
+        "repo": "nix-colors",
+        "rev": "7e459f1d88ac54fc2f4b308adb5064863006e4b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "misterio77",
+        "repo": "nix-colors",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1672617983,
@@ -480,11 +479,24 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib_2": {
+      "locked": {
+        "lastModified": 1655599917,
+        "narHash": "sha256-kjZbt5WdTrnjMxL79okg9TCoRUdADG50x/TWozbyTsE=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "5fb55578aa2f1a502d636a8ac71aece57cb730bb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "base16": "base16",
-        "base16-schemes": "base16-schemes",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",
@@ -494,6 +506,7 @@
         "hyprland": "hyprland",
         "hyprwm-contrib": "hyprwm-contrib",
         "impermanence": "impermanence",
+        "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay",
         "srvos": "srvos",

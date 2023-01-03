@@ -1,5 +1,17 @@
 {
   description = "NIX CONFIG";
+  nixConfig = {
+    extra-substituters = [
+      "https://helix.cachix.org"
+      "https://nix-community.cachix.org"
+      "https://chr.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "chr.cachix.org-1:8Z0vNVd8hK8lVU53Y26GHDNc6gv3eFzBNwSYOcUvsgA="
+    ];
+  };
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     hardware.url = "github:NixOS/nixos-hardware";
@@ -38,14 +50,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };
+    nix-colors.url = "github:misterio77/nix-colors";
 
-    base16.url = "github:SenchoPens/base16.nix";
-    base16.inputs.nixpkgs.follows = "nixpkgs";
-
-    base16-schemes = {
-      url = "github:base16-project/base16-schemes";
-      flake = false;
-    };
     hyprland = {
       url = "github:hyprwm/hyprland/v0.19.2beta";
       inputs.nixpkgs.follows = "nixpkgs";

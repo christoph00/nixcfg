@@ -6,7 +6,7 @@
 }: {
   flake = {
     nixosModules = {
-      christoph = self.lib.mkHomeModule [] "christoph";
+      home-christoph = self.lib.mkHomeModule [self.homeModules.desktop] "christoph";
 
       home-manager.imports = [
         inputs.home-manager.nixosModules.home-manager
@@ -30,8 +30,6 @@
           inputs.srvos.nixosModules.common
           inputs.srvos.nixosModules.mixins-systemd-boot
 
-          self.nixosModules.christoph
-
           ./common.nix
         ];
         nixpkgs.overlays = builtins.attrValues self.overlays;
@@ -39,12 +37,13 @@
       };
       desktop.imports = [
         inputs.home-manager.nixosModule
-        inputs.base16.nixosModule
         inputs.hyprland.nixosModules.default
         self.nixosModules.default
         self.nixosModules.home-manager
         inputs.srvos.nixosModules.desktop
+        self.nixosModules.home-christoph
         ./desktop.nix
+        ./greetd.nix
       ];
       laptop.imports = [
         self.nixosModules.desktop

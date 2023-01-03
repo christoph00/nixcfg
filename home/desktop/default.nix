@@ -1,18 +1,19 @@
 {
-  config,
   pkgs,
   lib,
+  config,
+  system,
+  inputs,
+  ...
 }: {
   imports = [
     ./hyprland.nix
+    ./waybar.nix
   ];
 
-  scheme = "${inputs.base16-schemes}/tokyo-city-terminal-dark.yaml";
+  #scheme = "${inputs.base16-schemes}/tokyo-city-terminal-dark.yaml";
 
-  home.pointerCursor = {
-    name = "capitaine-cursors-white";
-    package = pkgs.capitaine-cursors;
-  };
+  colorScheme = inputs.nix-colors.colorSchemes.dracula;
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "true";
@@ -44,8 +45,7 @@
     settings = {
       effect-blur = "20x3";
       fade-in = 0.1;
-
-      font = config.conf.fonts.serif.name;
+      #font = config.conf.fonts.serif.name;
       font-size = 15;
 
       line-uses-inside = true;
@@ -53,26 +53,7 @@
       indicator-caps-lock = true;
       indicator-radius = 40;
       indicator-idle-visible = true;
-      image = "${config.conf.theme.wallpaper}";
-
-      ring-color = "${config.scheme.base02-hex}";
-      inside-wrong-color = "${config.scheme.base08-hex}";
-      ring-wrong-color = "${config.scheme.base08-hex}";
-      key-hl-color = "${config.scheme.base0B-hex}";
-      bs-hl-color = "${config.scheme.base08-hex}";
-      ring-ver-color = "${config.scheme.base09-hex}";
-      inside-ver-color = "${config.scheme.base09-hex}";
-      inside-color = "${config.scheme.base01-hex}";
-      text-color = "${config.scheme.base07-hex}";
-      text-clear-color = "${config.scheme.base01-hex}";
-      text-ver-color = "${config.scheme.base01-hex}";
-      text-wrong-color = "${config.scheme.base01-hex}";
-      text-caps-lock-color = "${config.scheme.base07-hex}";
-      inside-clear-color = "${config.scheme.base0C-hex}";
-      ring-clear-color = "${config.scheme.base0C-hex}";
-      inside-caps-lock-color = "${config.scheme.base09-hex}";
-      ring-caps-lock-color = "${config.scheme.base02-hex}";
-      separator-color = "${config.scheme.base02-hex}";
+      #image = "${config.conf.theme.wallpaper}";
     };
   };
 }

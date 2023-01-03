@@ -5,18 +5,14 @@
   pkgs,
   ...
 }: {
-  programs.hyprland = {
-    enable = true;
-    package = null; # Managed by home manager
-  };
-  wayland.windowManager.hyprland = with config.scheme; let
+  wayland.windowManager.hyprland = let
     makoctl = "${pkgs.mako}/bin/makoctl";
     pactl = "${pkgs.pulseaudio}/bin/pactl";
     swayidle = "${pkgs.swayidle}/bin/swayidle";
     swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
     systemctl = "${pkgs.systemd}/bin/systemctl";
     wofi = "${pkgs.wofi}/bin/wofi";
-    notifysend = "${libnotify}/bin/notify-send";
+    notifysend = "${pkgs.libnotify}/bin/notify-send";
 
     #eww = "${config.programs.eww.package}/bin/eww";
 
@@ -107,7 +103,7 @@
     );
   in {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.default;
+    #package = inputs.hyprland.packages.${pkgs.system}.default;
     systemdIntegration = true;
     extraConfig =
       mkHyprlandVariables {
@@ -124,8 +120,8 @@
           border_size = 1.7;
           gaps_in = 5;
           gaps_out = 10;
-          "col.active_border" = "0xff${base03}";
-          "col.inactive_border" = "0xff${base01}";
+          #"col.active_border" = "0xff${base03}";
+          #"col.inactive_border" = "0xff${base01}";
           cursor_inactive_timeout = 5;
           layout = "master";
         };
