@@ -23,6 +23,8 @@
           imports =
             [
               inputs.impermanence.nixosModules.home-manager.impermanence
+              inputs.base16.homeManagerModule
+
               self.homeModules.common
             ]
             ++ mod;

@@ -9,10 +9,14 @@
       common = {
         home.stateVersion = "22.11";
         imports = [
-          ./starship.nix
-          ./terminal.nix
+          ./cli
         ];
       };
+      desktop.imports = [
+        self.homeModules.common
+        ./desktop
+        ./applications
+      ];
     };
   };
 }
