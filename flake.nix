@@ -67,12 +67,8 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    ...
-  }:
-    inputs.flake-parts.lib.mkFlake {inherit (inputs) self;} {
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
         ./lib.nix

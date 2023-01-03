@@ -58,31 +58,4 @@
       libvdpau-va-gl
     ];
   };
-
-  conf = {
-    base.enable = true;
-    cli.enable = true;
-    cli.helix.enable = true;
-    theme.enable = true;
-    applications.enable = true;
-    applications.wezterm.enable = true;
-    profile.laptop = true;
-    filesystems.enable = true;
-    filesystems.swap = true;
-    boot.enable = true;
-    users.enable = true;
-    users.user = "christoph";
-    users.home-manager = true;
-    network.enable = true;
-    network.wireless = true;
-    #network.tailscale.enable = true;
-
-    fonts.enable = true;
-    desktop = {
-      enable = true;
-      # window-manager = "hyprland";
-      # login-manager = "greetd";
-      gaming = false;
-    };
-  };
 }

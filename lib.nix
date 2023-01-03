@@ -17,7 +17,7 @@
           modules = [mod];
         };
 
-      mkHome = mod: user: {
+      mkHomeModule = mod: user: {
         users.users.${user}.isNormalUser = true;
         home-manager.users.${user} = {
           imports =
