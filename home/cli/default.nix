@@ -19,8 +19,8 @@
     ranger
 
     nil
-    agenix
     cachix
+    inputs.agenix.defaultPackage.x86_64-linux
   ];
 
   home.sessionVariables = {
@@ -32,19 +32,6 @@
   };
 
   systemd.user.startServices = "sd-switch";
-
-  home.persistence = {
-    "/persist/home/christoph" = {
-      directories = [
-        "Dokumente"
-        "Downloads"
-        "Bilder"
-        "Videos"
-        "Code"
-      ];
-      allowOther = true;
-    };
-  };
 
   programs = {
     bat.enable = true;
@@ -132,7 +119,16 @@
   };
 
   home.persistence = {
-    "/persist/home/christoph".directories = [".ssh"];
-    "/persist/home/christoph".files = [".local/share/fish/fish_history"];
+    "/persist/home/christoph" = {
+      directories = [
+        "Dokumente"
+        "Downloads"
+        "Bilder"
+        "Videos"
+        "Code"
+      ];
+      allowOther = true;
+      files = [".local/share/fish/fish_history"];
+    };
   };
 }
