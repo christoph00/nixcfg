@@ -15,11 +15,12 @@
         ];
       };
       desktop.imports = [
+        inputs.plasma-manager.homeManagerModules.plasma-manager
         inputs.hyprland.homeManagerModules.default
         ./desktop
         ./applications
       ];
-      gaming.imports = [ ./gaming ];
+      gaming.imports = [./gaming];
     };
   };
 }
