@@ -26,7 +26,7 @@
     gnome.nautilus
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.dracula;
+  colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
 
   services.dunst = {
     enable = true;

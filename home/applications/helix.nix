@@ -28,11 +28,11 @@ in {
       }
     ];
 
-    # themes = import ./helix_theme.nix {inherit colorscheme;};
+    themes = import ./helix_theme.nix {inherit colorscheme;};
 
     settings = {
-      #theme = "${colorscheme.slug}";
-      theme = "catppuccin_mocha";
+      theme = "${colorscheme.slug}";
+      #theme = "catppuccin_mocha";
 
       editor.cursor-shape = {
         insert = "bar";

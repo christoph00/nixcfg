@@ -19,7 +19,7 @@
 
     terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
     #terminal = "${pkgs.wezterm}/bin/wezterm";
-    terminal = "$TERMINAL";
+    terminal = "${pkgs.kitty}/bin/kitty";
 
     eewScript = pkgs.writeShellScriptBin "eewScript" ''
       function handle {
