@@ -4,7 +4,6 @@
   config,
   system,
   inputs,
-  self,
   ...
 }: {
   imports = [
@@ -14,9 +13,9 @@
   ];
 
 
- home.packages = [
-    self.x86_64-linux.packages.gfn-electron
-  ];
+#  home.packages = [
+#     self.x86_64-linux.packages.gfn-electron
+#   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.dracula;
 
