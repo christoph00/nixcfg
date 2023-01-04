@@ -4,7 +4,6 @@
   config,
   system,
   inputs,
-  self',
   ...
 }: {
   imports = [
@@ -12,9 +11,6 @@
     ./waybar.nix
     ./gtk.nix
   ];
-
-
-  home.packages = [ self'.packages.gfn-electron  ];
 
   colorScheme = inputs.nix-colors.colorSchemes.dracula;
 
