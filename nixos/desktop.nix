@@ -48,7 +48,7 @@
     pam.services = {
       sddm.u2fAuth = false;
       sddm.enableGnomeKeyring = true;
-      swaylock.text = "auth include login";
+      gtklock.text = "auth include login";
     };
   };
 

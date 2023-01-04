@@ -10,6 +10,7 @@
     pactl = "${pkgs.pulseaudio}/bin/pactl";
     swayidle = "${pkgs.swayidle}/bin/swayidle";
     swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
+    lock = "${pkgs.gtklock}/bin/gtklock"
     systemctl = "${pkgs.systemd}/bin/systemctl";
     wofi = "${pkgs.wofi}/bin/wofi";
     notifysend = "${pkgs.libnotify}/bin/notify-send";
@@ -204,7 +205,7 @@
           ",XF86MonBrightnessUp" = "exec,${pkgs.brightnessctl}/bin/brightnessctl s +10%";
           ",XF86MonBrightnessDown" = "exec,${pkgs.brightnessctl}/bin/brightnessctl s 10%-";
           ## display control
-          ",XF86Display" = "exec,${pkgs.swaylock-effects}/bin/swaylock -fF";
+          ",XF86Display" = "exec,${lock}";
           ## killing application
           ",XF86RFKill" = "killactive,";
           # STARTERS
@@ -218,7 +219,7 @@
           "SUPER,C" = "killactive,";
           "SUPER,F" = "fullscreen,";
           "SUPER,V" = "togglefloating,e";
-          "SUPER,L" = "exec,${pkgs.swaylock-effects}/bin/swaylock -fF";
+          "SUPER,L" = "exec,${lock}";
 
           # switch between workspaces directly
           "SUPER, 1" = "workspace, 1";
@@ -250,7 +251,7 @@
           "SUPER,mouse:273" = "resizewindow";
         };
         bindl = {
-          ",switch:Lid Switch" = "exec,${pkgs.swaylock-effects}/bin/swaylock -fF && ${systemctl} hybrid-sleep";
+          ",switch:Lid Switch" = "exec,${lock} -fF && ${systemctl} hybrid-sleep";
         };
         windowrulev2 = [
           "float,class:Wofi"
@@ -268,7 +269,7 @@
         #];
         exec-once = [
           # Lock on Start
-          "${pkgs.swaylock-effects}/bin/swaylock -fF"
+          #"${pkgs.swaylock-effects}/bin/swaylock -fF"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         ];
         exec = [
