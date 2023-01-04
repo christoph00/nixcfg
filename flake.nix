@@ -63,8 +63,8 @@
     };
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs = inputs@{ self, nixpkgs, ... }:
+    inputs.flake-parts.lib.mkFlake { inherit (inputs) self; } {
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
         ./lib.nix
