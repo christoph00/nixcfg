@@ -5,12 +5,11 @@
 }: {
   boot = {
     initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
+      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
       kernelModules = ["i915"];
     };
   };
-i
-  boot.kernelModules = [ "kvm-intel" "acpi_call"] ;
+  boot.kernelModules = ["kvm-intel" "acpi_call"];
   boot.blacklistedKernelModules = ["dm_mod"];
   boot.kernelParams = [
     "quiet"

@@ -10,6 +10,12 @@
     };
   };
 
+  nix = {
+    maxJobs = 4;
+    systemFeatures = ["gccarch-skylake"];
+  };
+
+  boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi"];
   boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelParams = [
     "quiet"
@@ -29,6 +35,12 @@
     "mem_sleep_default=deep"
   ];
   boot.resumeDevice = "/dev/nvme0n1p2";
+  boot.extraModprobeConfig = ''
+    options bbswitch load_state=-1 unload_state=1
+    options cfg80211 ieee80211_regdom="DE"
+  '';
+
+  services.fstrim.enable = lib.mkDefault true;
 
   fileSystems = {
     "/" = {

@@ -6,6 +6,10 @@
 }: {
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "ohci_pci" "ehci_pci" "usb_storage" "usbhid" "sd_mod"];
 
+  nix = {
+    maxJobs = 2;
+  };
+
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
@@ -59,9 +63,8 @@
   powerManagement.cpuFreqGovernor = "powersave";
   hardware.cpu.amd.updateMicrocode = true;
 
-
   # ----------  Secrets  -----------------------------------------
-#  age.secrets.cloudflare-token.file = ../secrets/futro-cf;
-#  age.secrets.tailscale-preauthkey.file = ../secrets/tailscale-preauthkey;
-#  age.secrets.cf-acme.file = ../secrets/cf-acme;
+  #  age.secrets.cloudflare-token.file = ../secrets/futro-cf;
+  #  age.secrets.tailscale-preauthkey.file = ../secrets/tailscale-preauthkey;
+  #  age.secrets.cf-acme.file = ../secrets/cf-acme;
 }
