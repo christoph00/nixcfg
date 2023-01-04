@@ -17,8 +17,9 @@
 
     #eww = "${config.programs.eww.package}/bin/eww";
 
-    terminal = "${pkgs.wezterm}/bin/wezterm";
     terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
+    #terminal = "${pkgs.wezterm}/bin/wezterm";
+    terminal = "$TERMINAL";
 
     eewScript = pkgs.writeShellScriptBin "eewScript" ''
       function handle {

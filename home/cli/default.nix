@@ -24,6 +24,9 @@ in {
     nil
     cachix
     inputs.agenix.defaultPackage.x86_64-linux
+
+    rclone
+    rsync
   ];
 
   home.sessionVariables = {
