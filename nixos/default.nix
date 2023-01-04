@@ -26,7 +26,7 @@
       ];
       default = {
         imports = [
-          (modulesPath + "/installer/scan/not-detected.nix")
+          "${inputs.nixpkgs}/nixos/modules/installer/scan/not-detected.nix"
           inputs.agenix.nixosModules.age
           inputs.vscode-server.nixosModule
           inputs.impermanence.nixosModules.impermanence
@@ -57,6 +57,9 @@
       ];
       server.imports = [
         self.nixosModules.headless
+      ];
+      virtual.imports = [
+        "${inputs.nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
       ];
     };
   };
