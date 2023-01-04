@@ -12,8 +12,8 @@
   };
 
   nix = {
-    maxJobs = 4;
-    systemFeatures = ["gccarch-skylake"];
+    max-jobs = 4;
+    system-features = ["gccarch-skylake"];
   };
 
   boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi"];

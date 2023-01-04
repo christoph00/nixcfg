@@ -26,7 +26,7 @@
         system = "x86_64-linux";
         modules = [
           self.nixosModules.server
-          self.nixosModules.home-assistant
+          self.nixosModules.smart-home
           ./futro.nix
         ];
       };

@@ -45,6 +45,7 @@
         self.nixosModules.home-manager
         inputs.srvos.nixosModules.desktop
         ./desktop.nix
+        ./fonts.nix
         ./plasma.nix
       ];
       laptop.imports = [
@@ -61,7 +62,7 @@
       virtual.imports = [
         "${inputs.nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
       ];
-      home-assistant.imports = [./home-assistant];
+      smart-home.imports = [./home-assistant];
     };
   };
 }
