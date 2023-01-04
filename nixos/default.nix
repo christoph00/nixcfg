@@ -53,6 +53,7 @@
         ./laptop.nix
       ];
       headless.imports = [
+        self.nixosModules.default
         inputs.srvos.nixosModules.server
       ];
       server.imports = [
