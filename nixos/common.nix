@@ -10,7 +10,13 @@
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
-  i18n.defaultLocale = lib.mkDefault "de_DE.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = lib.mkDefault {
+    LC_TIME = "de_DE.UTF-8";
+    LC_MONETARY = "de_DE.UTF-8";
+    LC_PAPER = "de_DE.UTF-8";
+    LC_MEASUREMENT = "de_DE.UTF-8";
+  };
 
   nix = {
     settings = {
