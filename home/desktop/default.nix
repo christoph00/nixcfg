@@ -9,6 +9,7 @@
   imports = [
     ./hyprland.nix
     ./waybar.nix
+    ./gtk.nix
   ];
 
   #scheme = "${inputs.base16-schemes}/tokyo-city-terminal-dark.yaml";
