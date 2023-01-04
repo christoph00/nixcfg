@@ -10,7 +10,7 @@
     pactl = "${pkgs.pulseaudio}/bin/pactl";
     swayidle = "${pkgs.swayidle}/bin/swayidle";
     swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
-    lock = "${pkgs.gtklock}/bin/gtklock"
+    lock = "${pkgs.gtklock}/bin/gtklock";
     systemctl = "${pkgs.systemd}/bin/systemctl";
     wofi = "${pkgs.wofi}/bin/wofi";
     notifysend = "${pkgs.libnotify}/bin/notify-send";
