@@ -2,6 +2,7 @@
   self,
   inputs,
   config,
+  modulesPath,
   ...
 }: {
   flake = {
@@ -25,6 +26,7 @@
       ];
       default = {
         imports = [
+          (modulesPath + "/installer/scan/not-detected.nix")
           inputs.agenix.nixosModules.age
           inputs.vscode-server.nixosModule
           inputs.impermanence.nixosModules.impermanence
