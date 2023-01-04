@@ -28,7 +28,6 @@
     "vt.global_cursor_default=0"
     "mem_sleep_default=deep"
   ];
-  boot.resumeDevice = "/dev/nvme0n1p2";
 
   fileSystems = {
     "/" = {
@@ -38,7 +37,7 @@
     };
 
     "/nix" = {
-      device = "/dev/disk/by-label/air13";
+      device = "/dev/disk/by-label/tower";
       fsType = "btrfs";
       options = ["subvol=@nix" "noatime" "compress-force=zstd"];
     };
@@ -49,39 +48,26 @@
     };
 
     "/persist" = {
-      device = "/dev/disk/by-label/air13";
+      device = "/dev/disk/by-label/tower";
       fsType = "btrfs";
       options = ["subvol=@persist" "noatime" "compress-force=zstd"];
       neededForBoot = true;
     };
 
     # "/home" = {
-    #   device = "/dev/disk/by-label/air13";
+    #   device = "/dev/disk/by-label/tower";
     #   fsType = "btrfs";
     #   options = ["subvol=@home" "noatime" "compress-force=zstd"];
     # };
   };
 
-  hardware.nvidia.modesetting.enable = false;
 
   nixpkgs.hostPlatform.system = "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "powersave";
 
-  networking.hostName = "air13";
+  networking.hostName = "tower";
 
-  services.xserver.videoDrivers = ["intel"];
+  services.xserver.videoDrivers = ["amdgpu"];
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
-  };
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-  };
 }

@@ -10,7 +10,16 @@
         system = "x86_64-linux";
         modules = [
           self.nixosModules.laptop
+          self.nixosModules.home-laptop-christoph
           ./air13.nix
+        ];
+      };
+      tower = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.desktop
+          self.nixosModules.home-desktop-christoph
+          ./tower.nix
         ];
       };
     };

@@ -9,6 +9,7 @@ jobs:
       matrix:
         host:
         - air13
+        - tower
     steps:
     - name: Clone repository
       uses: actions/checkout@v3

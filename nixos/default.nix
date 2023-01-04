@@ -6,7 +6,9 @@
 }: {
   flake = {
     nixosModules = {
-      home-christoph = self.lib.mkHomeModule [self.homeModules.desktop] "christoph";
+      home-desktop-christoph = self.lib.mkHomeModule [self.homeModules.desktop] "christoph";
+      home-laptop-christoph = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.gaming] "christoph";
+
 
       home-manager.imports = [
         inputs.home-manager.nixosModules.home-manager
@@ -41,7 +43,6 @@
         self.nixosModules.default
         self.nixosModules.home-manager
         inputs.srvos.nixosModules.desktop
-        self.nixosModules.home-christoph
         ./desktop.nix
         ./greetd.nix
       ];

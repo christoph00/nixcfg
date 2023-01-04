@@ -19,6 +19,7 @@
         ./desktop
         ./applications
       ];
+      gaming.imports = [ ./gaming ];
     };
   };
 }
