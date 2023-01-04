@@ -4,6 +4,7 @@
   config,
   system,
   inputs,
+  self,
   ...
 }: {
   imports = [
@@ -12,7 +13,10 @@
     ./gtk.nix
   ];
 
-  #scheme = "${inputs.base16-schemes}/tokyo-city-terminal-dark.yaml";
+
+ home.packages = [
+    self.x86_64-linux.packages.gfn-electron
+  ];
 
   colorScheme = inputs.nix-colors.colorSchemes.dracula;
 
