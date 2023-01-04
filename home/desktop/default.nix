@@ -14,25 +14,19 @@
   ];
 
   home.packages = with pkgs; [
-      imv
-      libnotify
-      playerctl
-      wf-recorder
-      wl-clipboard
-      wlr-randr
-      wireplumber
-      wofi
+    imv
+    libnotify
+    playerctl
+    wf-recorder
+    wl-clipboard
+    wlr-randr
+    wireplumber
+    wofi
 
-      gnome.nautilus
-
-
-    ];
+    gnome.nautilus
+  ];
 
   colorScheme = inputs.nix-colors.colorSchemes.dracula;
-
-  
-
-
 
   services.dunst = {
     enable = true;

@@ -21,6 +21,9 @@
       llvm-vs-code-extensions.vscode-clangd
       stkb.rewrap
       shardulm94.trailing-spaces
+      tyriar.sort-lines
+      zhuangtongfa.material-theme
+      kamikillerto.vscode-colorize
     ];
     # ++ pkgs.lib.concatMap builtins.attrValues
     # (builtins.attrValues custom-extensions);

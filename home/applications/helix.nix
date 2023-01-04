@@ -28,10 +28,22 @@ in {
       }
     ];
 
-    themes = import ./helix_theme.nix {inherit colorscheme;};
+    # themes = import ./helix_theme.nix {inherit colorscheme;};
 
     settings = {
-      theme = "${colorscheme.slug}";
+      #theme = "${colorscheme.slug}";
+      theme = "catppuccin_mocha";
+
+      editor.cursor-shape = {
+        insert = "bar";
+        normal = "block";
+        select = "underline";
+      };
+
+      editor.file-picker = {
+        hidden = false;
+      };
+
       keys.normal = {
         n = "search_next";
         N = "search_prev";
