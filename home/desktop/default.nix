@@ -15,8 +15,6 @@
 
   home.packages = with pkgs; [
       imv
-      #hyprpaper
-      # hyprpicker
       libnotify
       playerctl
       wf-recorder

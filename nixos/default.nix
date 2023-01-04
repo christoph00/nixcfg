@@ -46,7 +46,8 @@
         inputs.srvos.nixosModules.desktop
         ./desktop.nix
         ./fonts.nix
-        ./plasma.nix
+        #./plasma.nix
+        ./greetd.nix
       ];
       laptop.imports = [
         self.nixosModules.desktop
