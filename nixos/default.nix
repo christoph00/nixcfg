@@ -10,7 +10,6 @@
       home-desktop-christoph = self.lib.mkHomeModule [self.homeModules.desktop] "christoph";
       home-laptop-christoph = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.gaming] "christoph";
 
-
       home-manager.imports = [
         inputs.home-manager.nixosModules.home-manager
         {
@@ -46,7 +45,7 @@
         self.nixosModules.home-manager
         inputs.srvos.nixosModules.desktop
         ./desktop.nix
-        ./greetd.nix
+        ./plasma.nix
       ];
       laptop.imports = [
         self.nixosModules.desktop
