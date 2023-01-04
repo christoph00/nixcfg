@@ -5,12 +5,13 @@
 }: {
   boot = {
     initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
+      availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
       kernelModules = ["i915"];
     };
   };
-
-  boot.blacklistedKernelModules = ["nouveau"];
+i
+  boot.kernelModules = [ "kvm-intel" "acpi_call"] ;
+  boot.blacklistedKernelModules = ["dm_mod"];
   boot.kernelParams = [
     "quiet"
     "pcie_port_pm=off"
@@ -28,6 +29,15 @@
     "vt.global_cursor_default=0"
     "mem_sleep_default=deep"
   ];
+
+  hardware.steam-hardware.enable = true;
+
+  services.fstrim.enable = lib.mkDefault true;
+
+  nix = {
+    maxJobs = 8;
+    systemFeatures = ["benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake"];
+  };
 
   fileSystems = {
     "/" = {
@@ -61,7 +71,6 @@
     # };
   };
 
-
   nixpkgs.hostPlatform.system = "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "powersave";
@@ -69,5 +78,4 @@
   networking.hostName = "tower";
 
   services.xserver.videoDrivers = ["amdgpu"];
-
 }
