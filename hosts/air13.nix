@@ -55,11 +55,11 @@
       neededForBoot = true;
     };
 
-    # "/home" = {
-    #   device = "/dev/disk/by-label/air13";
-    #   fsType = "btrfs";
-    #   options = ["subvol=@home" "noatime" "compress-force=zstd"];
-    # };
+    "/home" = {
+      device = "/dev/disk/by-label/air13";
+      fsType = "btrfs";
+      options = ["subvol=@home" "noatime" "compress-force=zstd"];
+    };
   };
 
   hardware.nvidia.modesetting.enable = false;

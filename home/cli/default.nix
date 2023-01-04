@@ -3,7 +3,10 @@
   inputs,
   system,
   ...
-}: {
+}: let
+  localeGerman = "de_DE.UTF-8";
+  localeEnglish = "en_US.UTF-8";
+in {
   home.packages = with pkgs; [
     ripgrep
     htop
@@ -31,7 +34,44 @@
     VISUAL = "hx";
   };
 
+  home.language = {
+    base = localeEnglish;
+    address = localeEnglish;
+    collate = localeEnglish;
+    ctype = localeEnglish;
+    measurement = localeGerman;
+    messages = localeEnglish;
+    monetary = localeEnglish;
+    name = localeEnglish;
+    numeric = localeEnglish;
+    paper = localeGerman;
+    telephone = localeEnglish;
+    time = localeGerman;
+  };
+
   systemd.user.startServices = "sd-switch";
+
+  programs.git = {
+    enable = true;
+    package = pkgs.gitAndTools.gitFull;
+    aliases = {
+      pushall = "!git remote | xargs -L1 git push --all";
+      graph = "log --decorate --oneline --graph";
+    };
+    userName = "Christoph Asche";
+    userEmail = "christoph@asche.co";
+    extraConfig = {
+      feature.manyFiles = true;
+      init.defaultBranch = "main";
+      url."https://github.com/".insteadOf = "git://github.com/";
+    };
+    lfs = {enable = true;};
+    ignores = [".direnv" "result"];
+    #signing = {
+    #  signByDefault = true;
+    #  key = "TODO";
+    #};
+  };
 
   programs = {
     bat.enable = true;
@@ -39,7 +79,6 @@
     fzf.enable = true;
     jq.enable = true;
     ssh.enable = true;
-    git.enable = true;
     home-manager.enable = true;
   };
 
@@ -126,6 +165,7 @@
         "Bilder"
         "Videos"
         "Code"
+        ".ssh"
       ];
       allowOther = true;
       files = [".local/share/fish/fish_history"];
