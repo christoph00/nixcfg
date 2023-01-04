@@ -12,7 +12,6 @@
   };
 
   nix = {
-    max-jobs = 4;
     system-features = ["gccarch-skylake"];
   };
 
