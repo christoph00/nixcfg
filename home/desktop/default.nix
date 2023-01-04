@@ -24,6 +24,12 @@
     wofi
 
     gnome.nautilus
+
+    nwg-menu
+    nwg-dock
+    nwg-panel
+    nwg-drawer
+    nwg-launchers
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.dracula;
