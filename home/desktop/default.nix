@@ -11,6 +11,7 @@
     #    ./waybar.nix
     ./gtk.nix
     ./plasma.nix
+    ./hyprland.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.dracula;
