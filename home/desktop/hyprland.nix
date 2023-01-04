@@ -105,6 +105,9 @@
     enable = true;
     #package = inputs.hyprland.packages.${pkgs.system}.default;
     systemdIntegration = true;
+    xwayland = {
+      enable = true;
+    };
     extraConfig =
       mkHyprlandVariables {
         input = {

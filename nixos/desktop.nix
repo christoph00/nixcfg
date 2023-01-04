@@ -44,10 +44,12 @@
   services.fwupd.enable = true;
 
   security = {
-    # allow wayland lockers to unlock the screen
-    pam.services.swaylock.text = "auth include login";
-    # userland niceness
     rtkit.enable = true;
+    pam.services = {
+      sddm.u2fAuth = false;
+      sddm.enableGnomeKeyring = true;
+      swaylock.text = "auth include login";
+    };
   };
 
   xdg.portal = {

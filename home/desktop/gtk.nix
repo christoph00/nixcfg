@@ -11,6 +11,9 @@
     x11.enable = true;
   };
 
+  qt.enable = true;
+  qt.platformTheme = "gtk";
+
   gtk = {
     enable = true;
 

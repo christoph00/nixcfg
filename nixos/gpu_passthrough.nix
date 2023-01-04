@@ -18,7 +18,6 @@
       done;
     '';
 in {
-
   environment.systemPackages = [
     iommuGroups
   ];
@@ -29,20 +28,7 @@ in {
   #   boot.kernelParams = ["video=efifb:off" "intel_iommu=on" "intel_iommu=pt" "hugepagesz=1G" "hugepages=16"];
 
   boot.extraModprobeConfig = "options vfio-pci ids=1002:67df,1002:aaf0";
-  # boot.kernelPatches = [
-  #   {
-  #     name = "vendor-reset";
-  #     patch = null;
-  #     extraConfig = ''
-  #       FTRACE y
-  #       KPROBES y
-  #       PCI_QUIRKS y
-  #       KALLSYMS y
-  #       KALLSYMS_ALL y
-  #       FUNCTION_TRACER y
-  #     '';
-  #   }
-  # ];
+
   boot.extraModulePackages = [config.boot.kernelPackages.vendor-reset];
   boot.initrd.availableKernelModules = ["vendor-reset" "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd"];
   boot.initrd.kernelModules = ["vendor-reset" "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd" "tun"];

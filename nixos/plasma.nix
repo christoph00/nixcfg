@@ -17,10 +17,5 @@
     };
   };
 
-  security.pam.services = {
-    sddm.u2fAuth = false;
-    sddm.enableGnomeKeyring = true;
-  };
-
   programs.kdeconnect.enable = true;
 }

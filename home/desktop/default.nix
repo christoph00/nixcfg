@@ -7,15 +7,31 @@
   ...
 }: {
   imports = [
-    #    ./hyprland.nix
-    #    ./waybar.nix
     ./gtk.nix
-    ./plasma.nix
+    #./plasma.nix
     ./hyprland.nix
+    ./waybar.nix
   ];
+
+  home.packages = with pkgs; [
+      imv
+      #hyprpaper
+      # hyprpicker
+      libnotify
+      playerctl
+      wf-recorder
+      wl-clipboard
+      wlr-randr
+      wireplumber
+      wofi
+    ];
 
   colorScheme = inputs.nix-colors.colorSchemes.dracula;
 
+
+  services.dunst = {
+    enable = true;
+  };
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "true";
     QT_QPA_PLATFORM = "wayland";

@@ -11,7 +11,6 @@
     };
   };
 
-
   boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi"];
   boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelParams = [
@@ -64,11 +63,11 @@
       neededForBoot = true;
     };
 
-    "/home" = {
-      device = "/dev/disk/by-label/air13";
-      fsType = "btrfs";
-      options = ["subvol=@home" "noatime" "compress-force=zstd"];
-    };
+    # "/home" = {
+    #   device = "/dev/disk/by-label/air13";
+    #   fsType = "btrfs";
+    #   options = ["subvol=@home" "noatime" "compress-force=zstd"];
+    # };
   };
 
   hardware.nvidia.modesetting.enable = false;
