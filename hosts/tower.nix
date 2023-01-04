@@ -34,10 +34,7 @@
 
   services.fstrim.enable = lib.mkDefault true;
 
-  nix = {
-    maxJobs = 8;
-    systemFeatures = ["benchmark" "nixos-test" "big-parallel" "kvm" "gccarch-skylake"];
-  };
+
 
   fileSystems = {
     "/" = {

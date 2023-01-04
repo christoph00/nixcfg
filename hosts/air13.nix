@@ -11,9 +11,6 @@
     };
   };
 
-  nix = {
-    system-features = ["gccarch-skylake"];
-  };
 
   boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi"];
   boot.blacklistedKernelModules = ["nouveau"];

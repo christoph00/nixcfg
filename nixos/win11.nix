@@ -4,13 +4,6 @@
   ...
 }: let
   ovmf = "${pkgs.OVMF.fd}/FV";
-  patchedRom = pkgs.requireFile {
-    name = "Sapphire.RX580.8192.170320.rom";
-    sha256 = "0z7g9cmy1432pgsshl7y5rg0swhfxca2y8f8p7f6cd95ipaifsi8";
-    message = ''
-      Add it to the store with nix-store --add-fixed sha256 GM204-new-patched.rom
-    '';
-  };
   qemu_args = [
     "-name guest=win11"
     "-sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny"
