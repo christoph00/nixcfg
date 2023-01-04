@@ -6,7 +6,8 @@
 	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
 	"features": {
 		"ghcr.io/devcontainers/features/nix:1": {
-			"packages": ["nil", "alejandra"]
+		//	"packages": "nil"
+		"extraNixConfig": "experimental-features = nix-command flakes"
 		}
 	}
 
