@@ -79,7 +79,16 @@
         inputs',
         ...
       }: {
+        _module.args.pkgs = import self.inputs.nixpkgs {
+          inherit system;
+          overlays = [self.overlays.default];
+          config.allowUnfree = true;
+        };
         formatter = pkgs.alejandra;
+
+        packages = import ./pkgs {
+          inherit pkgs;
+        };
       };
     };
 }

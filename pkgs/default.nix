@@ -1,6 +1,6 @@
-final: prev: {
-  xr6515dn = prev.callPackage ./xr6515dn {};
-  swww = prev.callPackage ./swww {};
-  wallpaper = prev.callPackage ./wallpaper {};
-  gfn-electron = prev.callPackage ./gfn-electron {};
+{pkgs, ...}: {
+  xr6515dn = pkgs.callPackage ./xr6515dn {};
+  swww = pkgs.callPackage ./swww {};
+  wallpaper = pkgs.callPackage ./wallpaper {};
+  gfn-electron = pkgs.callPackage ./gfn-electron {};
 }
