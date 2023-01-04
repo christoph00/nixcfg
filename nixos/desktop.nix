@@ -5,8 +5,7 @@
   system,
   ...
 }: {
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+
   # Disable mitigations on desktop
   boot.kernelParams = [
     "l1tf=off"

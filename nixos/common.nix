@@ -7,6 +7,9 @@
   system.stateVersion = "22.11";
   hardware.enableRedistributableFirmware = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+
   nix = {
     settings = {
       substituters = [
