@@ -18,8 +18,9 @@ in {
   programs.kitty = {
     enable = true;
     font = {
-      #  name = config.fontProfiles.monospace.family;
       size = 12;
+      name = "agave nerd font";
+      #name = config.fontProfiles.monospace.family;
     };
     settings = {
       window_padding_width = 15;
