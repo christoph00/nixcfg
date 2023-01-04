@@ -5,7 +5,6 @@
   system,
   ...
 }: {
-
   # Disable mitigations on desktop
   boot.kernelParams = [
     "l1tf=off"
@@ -21,6 +20,8 @@
     "tsx=on"
     "tsx_async_abort=off"
   ];
+
+  time.timeZone = "Europe/Berlin";
 
   services.dbus = {
     enable = true;

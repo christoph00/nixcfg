@@ -11,7 +11,6 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
   i18n.defaultLocale = lib.mkDefault "de_DE.UTF-8";
-  time.timeZone = lib.mkDefault "Europe/Berlin";
 
   nix = {
     settings = {
