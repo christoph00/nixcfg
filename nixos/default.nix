@@ -61,6 +61,7 @@
       virtual.imports = [
         "${inputs.nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
       ];
+      home-assistant.imports = [./home-assistant];
     };
   };
 }
