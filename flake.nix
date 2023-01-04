@@ -63,7 +63,11 @@
     };
   };
 
-  outputs = inputs:
+outputs = {
+    self,
+    flake-parts,
+    ...
+  } @ inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
@@ -77,13 +81,14 @@
         pkgs,
         config,
         inputs',
+        system,
         ...
       }: {
-        _module.args.pkgs = import self.inputs.nixpkgs {
-          inherit system;
-          overlays = [self.overlays.default];
-          config.allowUnfree = true;
-        };
+        # _module.args.pkgs = import self.inputs.nixpkgs {
+        #   inherit system;
+        #   overlays = [self.overlays.default];
+        #   config.allowUnfree = true;
+        # };
         formatter = pkgs.alejandra;
 
         packages = import ./pkgs {
