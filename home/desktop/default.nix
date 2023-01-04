@@ -22,9 +22,16 @@
       wlr-randr
       wireplumber
       wofi
+
+      gnome.nautilus
+
+
     ];
 
   colorScheme = inputs.nix-colors.colorSchemes.dracula;
+
+  
+
 
 
   services.dunst = {
