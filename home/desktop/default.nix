@@ -24,6 +24,9 @@
     wofi
 
     gnome.nautilus
+
+    gfn-electron
+    moonlight-qt
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
