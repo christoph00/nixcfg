@@ -33,7 +33,7 @@ in {
     obsidian
   ];
 
-  colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
+  colorscheme = inputs.nix-colors.colorSchemes.ayu-mirage;
   wallpaper = lib.mkDefault (nixWallpaperFromScheme
     {
       scheme = config.colorscheme;
