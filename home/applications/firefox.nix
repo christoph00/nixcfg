@@ -19,6 +19,7 @@ in {
       auto-tab-discard
       no-pdf-download
       save-page-we
+      privacy-redirect
     ];
     profiles.christoph = {
       bookmarks = {};
