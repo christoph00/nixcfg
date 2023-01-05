@@ -1,3 +1,3 @@
 {pkgs, ...}: {
-  better-thermostat = pkgs.callPackge ./better_thermostat.nix {};
+  better-thermostat = pkgs.callPackage ./better_thermostat.nix {};
 }
