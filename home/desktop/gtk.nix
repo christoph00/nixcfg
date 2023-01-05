@@ -1,37 +1,32 @@
 {
-  pkgs,
   config,
+  pkgs,
+  inputs,
   ...
-}: {
-  home.pointerCursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 24;
-    gtk.enable = true;
-    x11.enable = true;
-  };
-
-  qt.enable = true;
-  qt.platformTheme = "gtk";
-
+}: let
+  inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+in rec {
   gtk = {
     enable = true;
-
     font = {
-      name = "Roboto";
-      package = pkgs.roboto;
+      name = config.fontProfiles.regular.family;
+      size = 12;
     };
-
-    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-
+    theme = {
+      name = "${config.colorscheme.slug}";
+      package = gtkThemeFromScheme {scheme = config.colorscheme;};
+    };
     iconTheme = {
-      name = "Papirus-Dark";
+      name = "Papirus";
       package = pkgs.papirus-icon-theme;
     };
+  };
 
-    theme = {
-      name = "Catppuccin-Orange-Dark-Compact";
-      package = pkgs.catppuccin-gtk.override {size = "compact";};
+  services.xsettingsd = {
+    enable = true;
+    settings = {
+      "Net/ThemeName" = "${gtk.theme.name}";
+      "Net/IconThemeName" = "${gtk.iconTheme.name}";
     };
   };
 }
