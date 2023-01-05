@@ -39,7 +39,6 @@
 
     emanote.url = "github:srid/emanote";
     emanote.inputs.nixpkgs.follows = "nixpkgs";
-    emanote.inputs.flake-parts.follows = "flake-parts";
 
     helix = {
       url = "github:helix-editor/helix";
