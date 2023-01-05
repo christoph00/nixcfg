@@ -110,7 +110,7 @@
     xwayland = {
       enable = true;
     };
-    extraConfig =
+    extraConfig = with config.colorscheme.colors;
       mkHyprlandVariables {
         input = {
           kb_layout = "us";
@@ -125,8 +125,8 @@
           border_size = 2;
           gaps_in = 6;
           gaps_out = 12;
-          "col.active_border" = "0xff${config.colorscheme.base03}";
-          "col.inactive_border" = "0xff${config.colorscheme.base01}";
+          "col.active_border" = "0xff${base03}";
+          "col.inactive_border" = "0xff${base01}";
           cursor_inactive_timeout = 5;
           layout = "master";
         };
