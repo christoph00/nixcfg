@@ -43,11 +43,6 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
     nix-colors.url = "github:misterio77/nix-colors";
-    misterio-config = {
-      url = "github:Misterio77/nix-config";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nix-colors.follows = "nix-colors";
-    };
 
     hyprland = {
       url = "github:hyprwm/hyprland/v0.19.2beta";

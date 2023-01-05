@@ -8,11 +8,13 @@
     homeModules = {
       common = {
         home.stateVersion = "22.11";
-        imports = [
-          inputs.impermanence.nixosModules.home-manager.impermanence
-          inputs.nix-colors.homeManagerModule
-          ./cli
-        ];
+        imports =
+          [
+            inputs.impermanence.nixosModules.home-manager.impermanence
+            inputs.nix-colors.homeManagerModule
+            ./cli
+          ]
+          ++ (builtins.attrValues self.homeModules.custom);
       };
       desktop.imports = [
         inputs.plasma-manager.homeManagerModules.plasma-manager
