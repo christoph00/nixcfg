@@ -37,6 +37,10 @@
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
+    emanote.url = "github:srid/emanote";
+    emanote.inputs.nixpkgs.follows = "nixpkgs";
+    emanote.inputs.flake-parts.follows = "flake-parts";
+
     helix = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
