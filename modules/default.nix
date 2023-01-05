@@ -11,7 +11,7 @@
         ./nixos
       ];
     };
-    homeManagerModules = {
+    homeModules = {
       custom.imports = [./home-manager];
     };
   };
