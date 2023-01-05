@@ -29,6 +29,8 @@ in {
     rsync
 
     aerc
+
+    emanote
   ];
 
   home.sessionVariables = {
