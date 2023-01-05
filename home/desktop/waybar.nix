@@ -22,7 +22,7 @@
 
   systemMonitor = terminal-spawn btm;
 
-  styleCSS = with config.colorScheme.colors;
+  styleCSS = with config.colorscheme.colors;
     pkgs.writeText "style.css" ''
       * {
         border: none;

@@ -5,7 +5,9 @@
   system,
   inputs,
   ...
-}: {
+}: let
+  inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) nixWallpaperFromScheme;
+in {
   imports = [
     ./gtk.nix
     #./plasma.nix
@@ -32,6 +34,14 @@
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
+  wallpaper = lib.mkDefault (nixWallpaperFromScheme
+    {
+      scheme = config.colorscheme;
+      width = 1920;
+      height = 1080;
+      logoScale = 4;
+    });
+  home.file.".colorscheme".text = config.colorscheme.slug;
 
   services.dunst = {
     enable = true;
