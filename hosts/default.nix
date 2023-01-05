@@ -28,6 +28,7 @@
         modules = [
           self.nixosModules.server
           self.nixosModules.smart-home
+          self.nixosModules.home-server
           ./futro
         ];
       };
