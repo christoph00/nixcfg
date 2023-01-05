@@ -4,6 +4,6 @@
   #wallpaper = pkgs.callPackage ./wallpaper {};
   gfn-electron = pkgs.callPackage ./gfn-electron {};
 
-  ha-lovelace = pkgs.callPackage ./ha-lovelace {};
-  ha-components = pkgs.callPackage ./ha-components {};
+  # ha-lovelace = pkgs.callPackage ./ha-lovelace {};
+  #  ha-components = pkgs.callPackage ./ha-components {};
 }
