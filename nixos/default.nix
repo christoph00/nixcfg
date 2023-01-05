@@ -49,6 +49,7 @@
         ./fonts.nix
         #./plasma.nix
         ./greetd.nix
+        ./printing.nix
       ];
       laptop.imports = [
         self.nixosModules.desktop
