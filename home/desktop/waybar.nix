@@ -13,6 +13,7 @@
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   playerctld = "${pkgs.playerctl}/bin/playerctld";
   pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
+  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   btm = "${pkgs.bottom}/bin/btm";
   wofi = "${pkgs.wofi}/bin/wofi";
   #hyprctl = "${inputs.hyprland.packages.${pkgs.system}.default}/bin/hyprctl";
@@ -23,16 +24,19 @@
 
   styleCSS = with config.colorScheme.colors;
     pkgs.writeText "style.css" ''
-
       * {
-        transition: none;
-        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        min-height: 0;
+        font-family: Material Design Icons, monospace;
+        font-size: 13px;
       }
 
-      #waybar {
-        color: #${base04};
-        background: none;
-      }
+      window#waybar {
+        background-color: #${base00};
+        transition-property: background-color;
+        transition-duration: 0.5s;
+       }
 
       #workspaces {
         background-color: #${base01};
@@ -146,7 +150,7 @@ in {
           #    "custom/gpg-agent"
         ];
         modules-right = [
-          #"custom/gamemode"
+          "backlight"
           "network"
           #"custom/tailscale-ping"
           "battery"
@@ -207,6 +211,13 @@ in {
         };
         "sway/window" = {
           max-length = 20;
+        };
+        backlight = {
+          tooltip = false;
+          format = "{icon} {percent}%";
+          format-icons = ["󰋙" "󰫃" "󰫄" "󰫅" "󰫆" "󰫇" "󰫈"];
+          on-scroll-up = "${brightnessctl} s 1%-";
+          on-scroll-down = "${brightnessctl} s +1%";
         };
         network = {
           interval = 3;
