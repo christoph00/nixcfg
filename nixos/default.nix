@@ -30,6 +30,7 @@
           inputs.vscode-server.nixosModule
           inputs.impermanence.nixosModules.impermanence
           inputs.disko.nixosModules.disko
+          inputs.emanote.flakeModule
 
           inputs.srvos.nixosModules.common
           inputs.srvos.nixosModules.mixins-systemd-boot

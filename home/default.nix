@@ -11,6 +11,7 @@
         imports = [
           inputs.impermanence.nixosModules.home-manager.impermanence
           inputs.nix-colors.homeManagerModule
+          inputs.emanote.homeManagerModule
           ./cli
           ../modules/home-manager
         ];
