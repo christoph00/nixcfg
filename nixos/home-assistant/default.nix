@@ -7,7 +7,7 @@
 }: {
   imports = [
     #./postgres.nix
-    #./extentions.nix
+    ./extentions.nix
     ./systemmonitor.nix
     ./webserver.nix
   ];
