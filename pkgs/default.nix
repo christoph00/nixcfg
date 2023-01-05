@@ -4,6 +4,9 @@
   #wallpaper = pkgs.callPackage ./wallpaper {};
   gfn-electron = pkgs.callPackage ./gfn-electron {};
 
-  # ha-lovelace = pkgs.callPackage ./ha-lovelace {};
-  #  ha-components = pkgs.callPackage ./ha-components {};
+  ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
+  ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
+  ha-lovelace-mini-graph-card = pkgs.callPackage ./ha-lovelace/mini-graph-card.nix {};
+  ha-lovelace-card-mod = pkgs.callPackage ./ha-lovelace/card-mod.nix {};
+  ha-components-better-thermostat = pkgs.callPackage ./ha-components/better_thermostat.nix {};
 }

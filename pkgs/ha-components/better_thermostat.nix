@@ -1,8 +1,8 @@
 {
-  stdenv,
+  stdenvNoCC,
   fetchFromGitHub,
 }:
-stdenv.mkDerivation rec {
+stdenvNoCC.mkDerivation rec {
   pname = "ha-component-better-thermostat";
   version = "1.0.0-beta55";
 

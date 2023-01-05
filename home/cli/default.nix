@@ -27,6 +27,8 @@ in {
 
     rclone
     rsync
+
+    aerc
   ];
 
   home.sessionVariables = {
