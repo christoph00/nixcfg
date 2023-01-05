@@ -38,7 +38,7 @@
 
   disko.devices = {
     disk.main = {
-      device = "/dev/disk-by-id/xxxx";
+      device = "/dev/sda"; #FIXME
       type = "disk";
       content = {
         type = "table";
