@@ -35,6 +35,7 @@
           inputs.srvos.nixosModules.mixins-systemd-boot
 
           ./common.nix
+          ./tailscale.nix
         ];
         nixpkgs.overlays = builtins.attrValues self.overlays;
         nixpkgs.config.allowUnfree = true;

@@ -73,4 +73,7 @@
   networking.hostName = "tower";
 
   services.xserver.videoDrivers = ["amdgpu"];
+
+  # Secrets
+  age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
 }

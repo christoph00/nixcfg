@@ -92,4 +92,7 @@
       libvdpau-va-gl
     ];
   };
+
+  # Secrets
+  age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
 }
