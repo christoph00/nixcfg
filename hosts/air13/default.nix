@@ -38,36 +38,98 @@
 
   services.fstrim.enable = lib.mkDefault true;
 
-  fileSystems = {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      options = ["defaults" "size=2G" "mode=755"];
-    };
+  # fileSystems = {
+  #   "/" = {
+  #     device = "none";
+  #     fsType = "tmpfs";
+  #     options = ["defaults" "size=2G" "mode=755"];
+  #   };
 
-    "/nix" = {
-      device = "/dev/disk/by-label/air13";
-      fsType = "btrfs";
-      options = ["subvol=@nix" "noatime" "compress-force=zstd"];
-    };
+  #   "/nix" = {
+  #     device = "/dev/disk/by-label/air13";
+  #     fsType = "btrfs";
+  #     options = ["subvol=@nix" "noatime" "compress-force=zstd"];
+  #   };
 
-    "/boot" = {
-      device = "/dev/disk/by-label/UEFI";
-      fsType = "vfat";
-    };
+  #   "/boot" = {
+  #     device = "/dev/disk/by-label/UEFI";
+  #     fsType = "vfat";
+  #   };
 
-    "/persist" = {
-      device = "/dev/disk/by-label/air13";
-      fsType = "btrfs";
-      options = ["subvol=@persist" "noatime" "compress-force=zstd"];
-      neededForBoot = true;
-    };
+  #   "/persist" = {
+  #     device = "/dev/disk/by-label/air13";
+  #     fsType = "btrfs";
+  #     options = ["subvol=@persist" "noatime" "compress-force=zstd"];
+  #     neededForBoot = true;
+  #   };
 
-    # "/home" = {
-    #   device = "/dev/disk/by-label/air13";
-    #   fsType = "btrfs";
-    #   options = ["subvol=@home" "noatime" "compress-force=zstd"];
-    # };
+  #   # "/home" = {
+  #   #   device = "/dev/disk/by-label/air13";
+  #   #   fsType = "btrfs";
+  #   #   options = ["subvol=@home" "noatime" "compress-force=zstd"];
+  #   # };
+  # };
+
+  disko.devices = {
+    disk.main = {
+      device = "/dev/nvme0n1";
+      type = "disk";
+      content = {
+        type = "table";
+        format = "gpt";
+        partitions = [
+          {
+            type = "partition";
+            name = "UEFI";
+            start = "1MiB";
+            end = "128MiB";
+            bootable = true;
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+            };
+          }
+          {
+            name = "nixos";
+            type = "partition";
+            start = "128MiB";
+            end = "100%";
+            content = {
+              type = "btrfs";
+              extraArgs = "-f"; # Override existing partition
+              subvolumes = {
+                # "@root" = {
+                #   mountpoint = "/";
+                # };
+                "@home" = {
+                  mountpoint = "/home";
+                  mountOptions = ["compress-force=zstd" "noatime"];
+                };
+                "@nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = ["compress-force=zstd" "noatime"];
+                };
+                "@persist" = {
+                  mountpoint = "/persist";
+                  mountOptions = ["compress-force=zstd" "noatime"];
+                };
+              };
+            };
+          }
+        ];
+      };
+    };
+    disk.nodev = {
+      "/" = {
+        fsType = "tmpfs";
+        mountOptions = [
+          "defaults"
+          "size=2G"
+          "mode=755"
+        ];
+      };
+    };
   };
 
   hardware.nvidia.modesetting.enable = false;

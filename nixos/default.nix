@@ -29,6 +29,7 @@
           inputs.agenix.nixosModules.age
           inputs.vscode-server.nixosModule
           inputs.impermanence.nixosModules.impermanence
+          inputs.disko.nixosModules.disko
 
           inputs.srvos.nixosModules.common
           inputs.srvos.nixosModules.mixins-systemd-boot
