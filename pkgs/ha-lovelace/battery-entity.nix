@@ -3,7 +3,7 @@
   fetchFromGitHub,
 }:
 stdenv.mkDerivation rec {
-  pname = "hs-lovelace-module-battery-entity";
+  pname = "ha-lovelace-battery-entity";
   version = "0.2";
 
   src = fetchFromGitHub {

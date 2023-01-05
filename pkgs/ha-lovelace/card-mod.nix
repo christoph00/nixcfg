@@ -3,7 +3,7 @@
   fetchFromGitHub,
 }:
 stdenv.mkDerivation rec {
-  pname = "hs-lovelace-module-card-mod";
+  pname = "ha-lovelace-card-mod";
   version = "3.1.5";
 
   src = fetchFromGitHub {
