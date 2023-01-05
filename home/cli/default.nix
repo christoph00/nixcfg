@@ -56,6 +56,8 @@ in {
 
   systemd.user.startServices = "sd-switch";
 
+  services.syncthing.enable = true;
+
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
