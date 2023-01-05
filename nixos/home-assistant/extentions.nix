@@ -15,7 +15,7 @@ in {
 
     "d /nix/persist/hass/custom_components 0755 hass hass"
     #"L /nix/persist/hass/custom_components/ble_monitor - - - - ${ble_monitor}/custom_components/ble_monitor"
-    "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.ha-comonents-better-thermostat}/better_thermostat"
+    "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.ha-components-better-thermostat}/better_thermostat"
   ];
 
   services.nginx.virtualHosts.hass = {
