@@ -2,7 +2,7 @@
   home = {
     packages = with pkgs; [
       hunspell
-      hunspellDicts.de_DE-large
+      hunspellDicts.de_DE
       libreoffice-fresh
     ];
   };
