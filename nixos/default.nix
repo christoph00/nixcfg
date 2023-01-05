@@ -65,7 +65,7 @@
       virtual.imports = [
         "${inputs.nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
       ];
-      smart-home.imports = [./home-assistant];
+      smart-home.imports = [./smart-home.nix ./home-assistant];
 
       vm-win11.imports = [./gpu_passthrough.nix ./win11.nix];
     };
