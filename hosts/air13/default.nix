@@ -104,10 +104,10 @@
                 # "@root" = {
                 #   mountpoint = "/";
                 # };
-                "@home" = {
-                  mountpoint = "/home";
-                  mountOptions = ["compress-force=zstd" "noatime"];
-                };
+                #"@home" = {
+                #  mountpoint = "/home";
+                #  mountOptions = ["compress-force=zstd" "noatime"];
+                #};
                 "@nix" = {
                   mountpoint = "/nix";
                   mountOptions = ["compress-force=zstd" "noatime"];
