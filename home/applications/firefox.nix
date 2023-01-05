@@ -48,6 +48,8 @@ in {
     "x-scheme-handler/https" = ["firefox.desktop"];
   };
 
+  home.sessionVariables.BROWSER = "firefox";
+
   home.persistence = {
     "/persist/home/christoph".directories = [".mozilla/firefox"];
   };
