@@ -120,7 +120,7 @@
         ];
       };
     };
-    disk.nodev = {
+    nodev = {
       "/" = {
         fsType = "tmpfs";
         mountOptions = [
