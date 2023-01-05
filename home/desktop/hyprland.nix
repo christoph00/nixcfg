@@ -275,7 +275,7 @@
         ];
         exec = [
           "${lock}"
-          #"${pkgs.swaybg}/bin/swaybg -i ${config.conf.theme.wallpaper} --mode fill"
+          "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill"
         ];
       };
   };
