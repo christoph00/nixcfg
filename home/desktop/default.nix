@@ -27,6 +27,8 @@
 
     gfn-electron
     moonlight-qt
+
+    obsidian
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-dark;
