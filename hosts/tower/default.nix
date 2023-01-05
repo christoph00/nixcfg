@@ -34,7 +34,7 @@
 
   services.fstrim.enable = lib.mkDefault true;
 
-fileSystems."/persist".neededForBoot = true;
+  fileSystems."/persist".neededForBoot = true;
 
   disko.devices = {
     disk.main = {
@@ -46,7 +46,7 @@ fileSystems."/persist".neededForBoot = true;
         partitions = [
           {
             type = "partition";
-            name = "UEFI";
+            name = "ESP";
             start = "1MiB";
             end = "128MiB";
             bootable = true;

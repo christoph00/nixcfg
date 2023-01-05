@@ -70,7 +70,7 @@
   #   # };
   # };
 
- fileSystems."/persist".neededForBoot = true;
+  fileSystems."/persist".neededForBoot = true;
 
   disko.devices = {
     disk.main = {
