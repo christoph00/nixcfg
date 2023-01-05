@@ -1,5 +1,5 @@
 {self, ...}: {
   flake = {
-    homeModules.custom.imports = [./home-manager];
+    homeManagerModules.default.imports = [./home-manager];
   };
 }

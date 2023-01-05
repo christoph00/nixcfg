@@ -1,6 +1,8 @@
 {
-  fonts = import ./fonts.nix;
-  monitors = import ./monitors.nix;
-  shellcolor = import ./shellcolor.nix;
-  wallpaper = import ./wallpaper.nix;
+  imports = [
+    ./fonts.nix
+    ./monitors.nix
+    ./shellcolor.nix
+    ./wallpaper.nix
+  ];
 }
