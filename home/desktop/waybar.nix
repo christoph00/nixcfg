@@ -215,7 +215,7 @@ in {
         backlight = {
           tooltip = false;
           format = "{icon} {percent}%";
-          format-icons = ["󰋙" "󰫃" "󰫄" "󰫅" "󰫆" "󰫇" "󰫈"];
+          format-icons = ["" "" "" "" "" "" ""];
           on-scroll-up = "${brightnessctl} s 1%-";
           on-scroll-down = "${brightnessctl} s +1%";
         };

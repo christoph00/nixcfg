@@ -122,11 +122,11 @@
         };
         general = {
           main_mod = "SUPER";
-          border_size = 1.7;
-          gaps_in = 5;
-          gaps_out = 10;
-          #"col.active_border" = "0xff${base03}";
-          #"col.inactive_border" = "0xff${base01}";
+          border_size = 2;
+          gaps_in = 6;
+          gaps_out = 12;
+          "col.active_border" = "0xff${config.colorscheme.base03}";
+          "col.inactive_border" = "0xff${config.colorscheme.base01}";
           cursor_inactive_timeout = 5;
           layout = "master";
         };
