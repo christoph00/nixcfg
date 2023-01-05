@@ -80,7 +80,7 @@
       perSystem = {
         pkgs,
         config,
-        inputs',
+        self',
         ...
       }: {
         # _module.args.pkgs = import self.inputs.nixpkgs {
@@ -93,6 +93,9 @@
         packages = import ./pkgs {
           inherit pkgs;
         };
+      };
+      flake.overlays = {
+        default = final: prev: import ./pkgs {pkgs = final;};
       };
     };
 }
