@@ -11,7 +11,7 @@
         modules = [
           self.nixosModules.laptop
           self.nixosModules.home-laptop-christoph
-          ./air13.nix
+          ./air13
         ];
       };
       tower = inputs.nixpkgs.lib.nixosSystem {
@@ -20,7 +20,7 @@
           self.nixosModules.desktop
           self.nixosModules.home-desktop-christoph
           self.nixosModules.vm-win11
-          ./tower.nix
+          ./tower
         ];
       };
       futro = inputs.nixpkgs.lib.nixosSystem {
@@ -28,7 +28,7 @@
         modules = [
           self.nixosModules.server
           self.nixosModules.smart-home
-          ./futro.nix
+          ./futro
         ];
       };
     };
