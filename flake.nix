@@ -65,6 +65,7 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    inputs.nur.url = "github:nix-community/NUR";
   };
 
   outputs = inputs @ {flake-parts, ...}:
