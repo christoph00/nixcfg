@@ -74,7 +74,7 @@
         border-left: none;
       }
 
-      #mode, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature {
+      #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
         margin: 4px 2px;
         min-width: 20px;
         border-radius: 4px;
@@ -135,27 +135,19 @@ in {
         modules-left = [
           "custom/menu"
           "wlr/workspaces"
-          "idle_inhibitor"
-          #"custom/currentplayer"
-          #"custom/player"
+          "hyprland/submap"
         ];
         modules-center = [
           "hyprland/window"
-          #"cpu"
-          #    "custom/gpu"
-          #"memory"
-          #"pulseaudio"
-          #    "custom/unread-mail"
-          #"custom/gammastep"
-          #    "custom/gpg-agent"
         ];
         modules-right = [
           "backlight"
           "network"
-          #"custom/tailscale-ping"
+          "temperature"
+          "cpu"
+          "memory"
           "battery"
           "tray"
-          #"custom/hostname"
           "clock"
         ];
 
@@ -169,38 +161,10 @@ in {
           format = "  {usage}%";
           on-click = systemMonitor;
         };
-        "custom/gpu" = {
-          interval = 5;
-          return-type = "json";
-          exec = jsonOutput "gpu" {
-            text = "$(cat /sys/class/drm/card0/device/gpu_busy_percent)";
-            tooltip = "GPU Usage";
-          };
-          format = "力  {}%";
-          on-click = systemMonitor;
-        };
         memory = {
           format = " {}%";
           interval = 5;
           on-click = systemMonitor;
-        };
-        pulseaudio = {
-          format = "{icon}  {volume}%";
-          format-muted = "   0%";
-          format-icons = {
-            headphone = "";
-            headset = "";
-            portable = "";
-            default = ["" "" ""];
-          };
-          on-click = pavucontrol;
-        };
-        idle_inhibitor = {
-          format = "{icon}";
-          format-icons = {
-            activated = "零";
-            deactivated = "鈴";
-          };
         };
         battery = {
           bat = "BAT0";
@@ -209,13 +173,10 @@ in {
           format = "{icon} {capacity}%";
           format-charging = " {capacity}%";
         };
-        "sway/window" = {
-          max-length = 20;
-        };
         backlight = {
           tooltip = false;
           format = "{icon} {percent}%";
-          format-icons = ["" "" "" "" "" "" ""];
+          # format-icons = ["" "" "" "" "" "" ""];
           on-scroll-up = "${brightnessctl} s 1%-";
           on-scroll-down = "${brightnessctl} s +1%";
         };
@@ -250,71 +211,6 @@ in {
             tooltip = "Gamemode is active";
           };
           format = " ";
-        };
-        "custom/gammastep" = {
-          interval = 5;
-          return-type = "json";
-          exec = jsonOutput "gammastep" {
-            pre = ''
-              if unit_status="$(${systemctl} --user is-active gammastep)"; then
-                status="$unit_status ($(${journalctl} --user -u gammastep.service -g 'Period: ' | tail -1 | cut -d ':' -f6 | xargs))"
-              else
-                status="$unit_status"
-              fi
-            '';
-            alt = "\${status:-inactive}";
-            tooltip = "Gammastep is $status";
-          };
-          format = "{icon}";
-          format-icons = {
-            "activating" = " ";
-            "deactivating" = " ";
-            "inactive" = "? ";
-            "active (Night)" = " ";
-            "active (Nighttime)" = " ";
-            "active (Transition (Night)" = " ";
-            "active (Transition (Nighttime)" = " ";
-            "active (Day)" = " ";
-            "active (Daytime)" = " ";
-            "active (Transition (Day)" = " ";
-            "active (Transition (Daytime)" = " ";
-          };
-          on-click = "${systemctl} --user is-active gammastep && ${systemctl} --user stop gammastep || ${systemctl} --user start gammastep";
-        };
-        "custom/currentplayer" = {
-          interval = 2;
-          return-type = "json";
-          exec = jsonOutput "currentplayer" {
-            pre = ''player="$(${playerctl} status -f "{{playerName}}" 2>/dev/null || echo "No players found" | cut -d '.' -f1)"'';
-            alt = "$player";
-            tooltip = "$player";
-          };
-          format = "{icon}";
-          format-icons = {
-            "No players found" = "ﱘ";
-            "Celluloid" = "";
-            "spotify" = "阮";
-            "ncspot" = "阮";
-            "qutebrowser" = "爵";
-            "discord" = "ﭮ";
-            "sublimemusic" = "";
-          };
-          on-click = "${playerctld} shift";
-          on-click-right = "${playerctld} unshift";
-        };
-        "custom/player" = {
-          exec-if = "${playerctl} status";
-          exec = ''${playerctl} metadata --format '{"text": "{{artist}} - {{title}}", "alt": "{{status}}", "tooltip": "{{title}} ({{artist}} - {{album}})"}' '';
-          return-type = "json";
-          interval = 2;
-          max-length = 30;
-          format = "{icon} {}";
-          format-icons = {
-            "Playing" = "契";
-            "Paused" = " ";
-            "Stopped" = "栗";
-          };
-          on-click = "${playerctl} play-pause";
         };
       };
     };
