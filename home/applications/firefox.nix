@@ -55,6 +55,21 @@ in {
       };
       userChrome = ''
         @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
+
+        @media (prefers-color-scheme: dark) {
+         :root {
+           /* Accent */
+          --gnome-accent: #${config.colorscheme.colors.base08};
+
+          /* Buttons */
+          --gnome-button-suggested-action-background: linear-gradient(to top, rgb(36, 235, 195) 2px, #16A085);
+          --gnome-button-suggested-action-border-color: #16A085;
+          --gnome-button-suggested-action-border-accent-color: #004b3d;
+          --gnome-button-suggested-action-hover-background: linear-gradient(to top, rgb(36, 235, 195), #16A085 1px);
+          --gnome-button-suggested-action-active-background: rgb(16, 129, 107);
+          --gnome-button-suggested-action-active-border-color: rgb(13, 109, 90);
+         }
+        }
       '';
 
       userContent = ''
