@@ -74,6 +74,7 @@
         ./cloudflared.nix
         ./home-server.nix
         inputs.srvos.nixosModules.mixins-nginx
+        self.nixosModules.sftpgo
       ];
 
       vm-win11.imports = [

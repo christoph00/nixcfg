@@ -49,4 +49,18 @@
     '';
   };
   users.users.nginx.extraGroups = ["acme"];
+
+  users.users.sftpgo.extraGroups = ["media"];
+  services.sftpgo = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      data_provider = {
+        driver = "bolt";
+        name = "sftpgo.db";
+      };
+    };
+  };
+
+  environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar];
 }
