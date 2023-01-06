@@ -11,7 +11,7 @@
 with lib;
   buildGoModule rec {
     pname = "sftpgo";
-    version = "2.4.0";
+    version = "2.4.2";
 
     src = fetchFromGitHub {
       owner = "drakkan";
