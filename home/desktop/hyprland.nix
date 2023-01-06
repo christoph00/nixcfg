@@ -121,7 +121,6 @@
           };
         };
         general = {
-          main_mod = "SUPER";
           border_size = 2;
           gaps_in = 6;
           gaps_out = 12;
