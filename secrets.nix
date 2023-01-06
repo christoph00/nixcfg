@@ -14,4 +14,5 @@ in {
   "secrets/futro-cf".publicKeys = [christoph_air13 futro];
   "secrets/ha-serviceaccount".publicKeys = [christoph_air13 futro];
   "secrets/ha-secrets.yaml".publicKeys = [christoph_air13 futro];
+  "secrets/christoph-password.age".publicKeys = [christoph_air13 futro air13 tower];
 }

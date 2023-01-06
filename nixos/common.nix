@@ -53,6 +53,10 @@
 
   programs.fuse.userAllowOther = true;
 
+  users.mutableUsers = false;
+
+   age.secrets.christoph-password.file = ../secrets/christoph-password.age;
+
   users.users.christoph = {
     description = "Christoph";
     isNormalUser = true;
@@ -71,10 +75,10 @@
     ];
 
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7WLYIiZhnutMwzJx49O4i5QV2S4LndBeKeFJ914Zat christoph@air13"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX christoph@air13"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@nixTower"
     ];
-    password = "hallo009";
+    passwordFile = config.age.secrets.christoph-password.path
   };
 
   services.openssh = {
