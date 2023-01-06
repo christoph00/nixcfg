@@ -19,8 +19,7 @@ in {
     enable = true;
     font = {
       size = 12;
-      name = "agave nerd font";
-      #name = config.fontProfiles.monospace.family;
+      name = config.fontProfiles.monospace.family;
     };
     settings = {
       window_padding_width = 15;

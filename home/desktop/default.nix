@@ -50,12 +50,12 @@ in {
   fontProfiles = {
     enable = true;
     monospace = {
-      family = "FiraCode Nerd Font";
-      package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+      family = "Agave Nerd Font";
+      package = pkgs.nerdfonts.override {fonts = ["Agave"];};
     };
     regular = {
-      family = "Fira Sans";
-      package = pkgs.fira;
+      family = "Noto Sans";
+      package = pkgs.noto-fonts;
     };
   };
 
