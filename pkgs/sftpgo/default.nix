@@ -36,8 +36,8 @@ with lib;
     preBuildPhases = ["cpBundle"];
     cpBundle = "cp -r {openapi,static,templates} internal/bundle/";
 
-    vendorSha256 = lib.fakeSha256;
-    # vendorSha256 = "sha256-kwluXCkbclrfRsrdqSxb5+TCBpVPZmDmrbpzR+yuQdQ=";
+    #vendorSha256 = lib.fakeSha256;
+    vendorSha256 = "sha256-+i6jUImDMrsDnIPjIp8uM2BR1IYMqWG1OmvA2w/AfVQ=";
 
     doCheck = false;
 
