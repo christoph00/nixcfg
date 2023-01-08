@@ -7,8 +7,7 @@
 	"features": {
 		"ghcr.io/devcontainers/features/nix:1": {
 		"packages": "nil, alejandra",
-		"extraNixConfig": "experimental-features = nix-command flakes",
-		"flakeUri": "github:NixOS/nixpkgs?ref=nixos-unstable"
+		"extraNixConfig": "experimental-features = nix-command flakes"
 		}
 	}
 
