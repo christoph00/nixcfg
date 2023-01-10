@@ -12,6 +12,14 @@
 
   boot.loader.efi.canTouchEfiVariables = lib.mkForce true;
 
+  boot.kernel.sysctl = {
+    "max_user_watches" = 524288;
+    "kernel.dmesg_restrict" = true;
+    "kernel.unprivileged_bpf_disabled" = true;
+    "kernel.unprivileged_userns_clone" = 1;
+    "net.core.bpf_jit_harden" = true;
+  };
+
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = lib.mkDefault {
     LC_TIME = "de_DE.UTF-8";
