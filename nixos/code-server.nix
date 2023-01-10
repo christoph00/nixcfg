@@ -11,6 +11,6 @@ with lib; {
     group = "users";
     auth = mkDefault "none";
     host = mkDefault "0.0.0.0";
-    extraPackages = [pkgs.nil pkgs.alejandra];
+    extraPackages = [pkgs.nil pkgs.alejandra pkgs.git pkgs.fish];
   };
 }
