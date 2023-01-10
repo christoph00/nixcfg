@@ -7,15 +7,10 @@
 with lib; {
   services.code-server = {
     enable = true;
-    extensions = mkDefault config.home-manager.users.christoph.programs.vscode.extensions;
+    user = "christoph";
+    group = "users";
     auth = mkDefault "none";
-    bindAddr = mkDefault "0.0.0.0:8080";
-    userSettings = mkMerge [
-      config.home-manager.users.christoph.programs.vscode.userSettings
-      {
-        "terminal.integrated.shell.linux" = "${pkgs.fish}/bin/fish";
-        "breadcrumbs.enabled" = true;
-      }
-    ];
+    host = mkDefault "0.0.0.0";
+    extraPackages = [pkgs.nil pkgs.alejandra];
   };
 }
