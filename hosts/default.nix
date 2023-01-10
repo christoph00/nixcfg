@@ -19,7 +19,7 @@
         modules = [
           self.nixosModules.desktop
           self.nixosModules.home-desktop-christoph
-          self.nixosModules.vm-win11
+          #self.nixosModules.vm-win11
           ./tower
         ];
       };
