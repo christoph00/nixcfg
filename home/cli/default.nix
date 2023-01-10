@@ -25,6 +25,8 @@ in {
     cachix
     inputs.agenix.defaultPackage.x86_64-linux
 
+    vscode-cli
+
     rclone
     rsync
 
