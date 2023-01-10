@@ -10,6 +10,8 @@
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
+  boot.loader.efi.canTouchEfiVariables = lib.mkForce true;
+
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = lib.mkDefault {
     LC_TIME = "de_DE.UTF-8";
@@ -98,7 +100,7 @@
 
     hostKeys = [
       {
-        path = "/persist/etc/ssh/ssh_host_ed25519_key";
+        path = "/nix/persist/etc/ssh/ssh_host_ed25519_key";
         type = "ed25519";
       }
     ];
