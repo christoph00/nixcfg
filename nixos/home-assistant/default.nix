@@ -106,17 +106,17 @@
     # configWritable = true; # doesn't work atm
   };
 
-  # age.secrets.ha-secrets = {
-  #   file = ../../../secrets/ha-secrets.yaml;
-  #   path = "/nix/persist/hass/secrets.yaml";
-  #   owner = "hass";
-  #   group = "hass";
-  # };
+  age.secrets.ha-secrets = {
+    file = ../../secrets/ha-secrets.yaml;
+    path = "/nix/persist/hass/secrets.yaml";
+    owner = "hass";
+    group = "hass";
+  };
 
-  # age.secrets.ha-serviceaccount = {
-  #   file = ../../../secrets/ha-serviceaccount;
-  #   path = "/nix/persist/hass/serviceaccount.json";
-  #   owner = "hass";
-  #   group = "hass";
-  # };
+  age.secrets.ha-serviceaccount = {
+    file = ../../secrets/ha-serviceaccount;
+    path = "/nix/persist/hass/serviceaccount.json";
+    owner = "hass";
+    group = "hass";
+  };
 }
