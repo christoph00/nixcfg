@@ -10,7 +10,6 @@ in {
   home.packages = with pkgs; [
     ripgrep
     htop
-    alejandra
     pfetch
     bc # Calculator
     bottom # System viewer
@@ -22,6 +21,7 @@ in {
     ranger
 
     nil
+    alejandra
     cachix
     inputs.agenix.defaultPackage.x86_64-linux
 
@@ -30,7 +30,7 @@ in {
     rclone
     rsync
 
-    aerc
+    tmux
   ];
 
   home.sessionVariables = {
@@ -42,17 +42,17 @@ in {
   };
 
   home.language = {
-    base = localeEnglish;
-    address = localeEnglish;
+    base = localeGerman;
+    address = localeGerman;
     collate = localeEnglish;
     ctype = localeEnglish;
     measurement = localeGerman;
     messages = localeEnglish;
-    monetary = localeEnglish;
-    name = localeEnglish;
-    numeric = localeEnglish;
+    monetary = localeGerman;
+    name = localeGerman;
+    numeric = localeGerman;
     paper = localeGerman;
-    telephone = localeEnglish;
+    telephone = localeGerman;
     time = localeGerman;
   };
 
