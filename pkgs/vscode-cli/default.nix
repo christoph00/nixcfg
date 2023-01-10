@@ -28,7 +28,7 @@
     or throwSystem;
 in
   stdenv.mkDerivation rec {
-    pname = "vscode-vscode-cli";
+    pname = "vscode-cli";
     version = "1.74.2";
     src = fetchurl {
       name = "VSCode-CLI_${version}_${plat}.tar.tar.gz";
