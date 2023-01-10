@@ -8,8 +8,8 @@ let
   futro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkYJjXoEofN3Nb/b9Dxsc0+J2S5fUU7fZOs6hqZCvGT";
   tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH5CLg7gUc4TAu49l7wlRGS4v9JXY3CR0IJUQIlrQ4bl";
 in {
-  "secrets/cachix".publicKeys = [christoph_air13 air13 futro];
-  "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 air13 futro];
+  "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower];
+  "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 air13 futro tower];
   "secrets/cf-acme".publicKeys = [christoph_air13 futro];
   "secrets/futro-cf".publicKeys = [christoph_air13 futro];
   "secrets/ha-serviceaccount".publicKeys = [christoph_air13 futro];
