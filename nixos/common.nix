@@ -51,6 +51,8 @@
     };
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   programs.fuse.userAllowOther = true;
 
   users.mutableUsers = false;
@@ -81,6 +83,7 @@
     passwordFile = config.age.secrets.christoph-password.path;
   };
 
+  services.vscode-server.enable = true;
   services.openssh = {
     enable = true;
     # Harden
