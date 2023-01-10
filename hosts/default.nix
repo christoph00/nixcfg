@@ -20,6 +20,7 @@
           self.nixosModules.desktop
           self.nixosModules.home-desktop-christoph
           #self.nixosModules.vm-win11
+          self.nixosModules.code-server
           ./tower
         ];
       };

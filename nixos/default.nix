@@ -76,6 +76,8 @@
         self.nixosModules.sftpgo
       ];
 
+      code-server.imports = [./code-server.nix];
+
       vm-win11.imports = [
         ./gpu_passthrough.nix
         ./win11.nix
