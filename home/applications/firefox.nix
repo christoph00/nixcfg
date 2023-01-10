@@ -86,6 +86,6 @@ in {
   home.sessionVariables.BROWSER = "firefox";
 
   home.persistence = {
-    "/persist/home/christoph".directories = [".mozilla/firefox"];
+    "/nix/persist/home/christoph".directories = [".mozilla/firefox"];
   };
 }

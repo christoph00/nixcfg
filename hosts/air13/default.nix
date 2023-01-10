@@ -56,7 +56,7 @@
       fsType = "vfat";
     };
 
-    "/persist" = {
+    "/nix/persist" = {
       device = "/dev/disk/by-label/air13";
       fsType = "btrfs";
       options = ["subvol=@persist" "noatime" "compress-force=zstd"];

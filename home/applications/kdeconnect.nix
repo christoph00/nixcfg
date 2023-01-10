@@ -39,6 +39,6 @@ in {
   };
 
   home.persistence = {
-    "/persist/home/christoph".directories = [".config/kdeconnect"];
+    "/nix/persist/home/christoph".directories = [".config/kdeconnect"];
   };
 }

@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.persistence = {
-    "/persist/home/christoph".directories = [".config/Code" ".vscode"];
+    "/nix/persist/home/christoph".directories = [".config/Code" ".vscode"];
   };
 
   programs.vscode = {

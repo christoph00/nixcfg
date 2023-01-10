@@ -44,7 +44,7 @@ in {
   home.file.".colorscheme".text = config.colorscheme.slug;
 
   home.persistence = {
-    "/persist/home/christoph".directories = [".config/libreoffice" ".config/GeForce\ NOW"];
+    "/nix/persist/home/christoph".directories = [".config/libreoffice" ".config/GeForce\ NOW"];
   };
 
   fontProfiles = {

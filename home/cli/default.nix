@@ -167,7 +167,7 @@ in {
   };
 
   home.persistence = {
-    "/persist/home/christoph" = {
+    "/nix/persist/home/christoph" = {
       directories = [
         "Dokumente"
         "Downloads"

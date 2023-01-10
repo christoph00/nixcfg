@@ -52,7 +52,7 @@
       fsType = "vfat";
     };
 
-    "/persist" = {
+    "/nix/persist" = {
       device = "/dev/disk/by-label/tower";
       fsType = "btrfs";
       options = ["subvol=@persist" "noatime" "compress-force=zstd"];

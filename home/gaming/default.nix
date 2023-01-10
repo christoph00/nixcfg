@@ -26,7 +26,7 @@ in {
     protontricks
   ];
   home.persistence = {
-    "/persist/games/christoph" = {
+    "/nix/persist/games/christoph" = {
       allowOther = true;
       directories = [
         ".local/share/Paradox Interactive"

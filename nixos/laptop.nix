@@ -38,7 +38,7 @@
       update_config=1
     '';
   };
-  environment.persistence."/persist" = {
+  environment.persistence."/nix/persist" = {
     directories = [
       "/var/lib/iwd"
     ];

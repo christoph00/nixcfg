@@ -9,7 +9,7 @@ in {
   home.packages = with pkgs; [discord discocss];
 
   home.persistence = {
-    "/persist/home/christoph".directories = [".config/discord"];
+    "/nix/persist/home/christoph".directories = [".config/discord"];
   };
 
   xdg.configFile."discocss/custom.css".text = ''

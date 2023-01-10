@@ -39,7 +39,7 @@
     };
   };
 
-  # home.persistence."/persist/home/christoph/Plasma" = {
+  # home.persistence."/nix/persist/home/christoph/Plasma" = {
   #   removePrefixDirectory = false;
   #   allowOther = true;
   #   directories = [
