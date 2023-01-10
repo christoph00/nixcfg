@@ -5,6 +5,7 @@
   gfn-electron = pkgs.callPackage ./gfn-electron {};
   sftpgo = pkgs.callPackage ./sftpgo {};
   firefox-gnome-theme = pkgs.callPackage ./firefox-gnome-theme {};
+  vscode-cli = pkgs.callPackage ./vscode-cli {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
