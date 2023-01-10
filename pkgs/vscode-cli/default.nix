@@ -31,17 +31,16 @@
     or throwSystem;
 
   vscode-cli-unwrapped = stdenvNoCC.mkDerivation {
-    pname = "vscode-cli";
+    pname = "vscode-cli-unwrapped";
+    inherit version;
     src = fetchurl {
-      inherit version;
-      name = "VSCode-CLI_${version}_${plat}.tar.gz";
-
+      name = "VSCode-CLI_${version}_${plat}.tar..gz";
       url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
 
       inherit hash;
     };
-    nativeBuildInputs = [autoPatchelfHook];
-    buildInputs = [];
+    #nativeBuildInputs = [autoPatchelfHook];
+    #buildInputs = [];
     sourceRoot = ".";
     installPhase = ''install -m755 -D code $out/bin/code-cli '';
   };
