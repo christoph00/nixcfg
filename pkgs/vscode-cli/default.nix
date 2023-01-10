@@ -33,10 +33,11 @@ in
 
       url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
 
-      inherit sha2ssha256
+      inherit sha256;
 
     };
     nativeBuildInputs = [autoPatchelfHook];
     buildInputs = [];
     sourceRoot = ".";
+    installPhase = '' install -m755 -D code $out/bin/code-cli '';
   }
