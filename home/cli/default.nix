@@ -41,6 +41,8 @@ in {
     VISUAL = "hx";
   };
 
+  services.vscode-server.enable = true;
+
   home.language = {
     base = localeEnglish;
     address = localeEnglish;

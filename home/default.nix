@@ -11,6 +11,7 @@
         imports = [
           inputs.impermanence.nixosModules.home-manager.impermanence
           inputs.nix-colors.homeManagerModule
+          inputs.vscode-server.nixosModule.home
           ./cli
           ../modules/home-manager
         ];
