@@ -175,6 +175,7 @@ in {
         "Videos"
         "Code"
         ".ssh"
+        ".config/syncthing"
       ];
       allowOther = true;
       files = [".local/share/fish/fish_history"];

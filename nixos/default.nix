@@ -44,7 +44,6 @@
         inputs.hyprland.nixosModules.default
         self.nixosModules.default
         self.nixosModules.home-manager
-        self.nixosModules.syncthing
         inputs.srvos.nixosModules.desktop
         ./desktop.nix
         ./fonts.nix
