@@ -84,7 +84,7 @@
         ./gpu_passthrough.nix
         ./win11.nix
       ];
-      syncting.imports = [./syncthing.nix];
+      syncthing.imports = [./syncthing.nix];
     };
   };
 }
