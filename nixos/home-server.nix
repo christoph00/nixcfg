@@ -63,4 +63,48 @@
   };
 
   environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar];
+
+  users.users.jellyfin.extraGroups = ["media"];
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  services.nginx.virtualHosts."media.net.r505.de" = {
+    forceSSL = true;
+    serverName = "media.net.r505.de";
+    useACMEHost = "net.r505.de";
+    locations."/" = {
+      proxyPass = "http://localhost:8096";
+    };
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/jellyfin/media 0770 jellyfin media"
+    "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
+    "L /var/lib/jellyfin/media/TVShows - - - - /media/data-hdd/TVShows"
+
+    "d /var/lib/nzbget/media 0770 nzbget media"
+    "L /var/lib/nzbget/media/Movies - - - - /media/data-hdd/Movies"
+    "L /var/lib/nzbget/media/TVShows - - - - /media/data-hdd/TVShows"
+    "d /var/lib/nzbget/Downloads 0770 nzbget media"
+    "L /var/lib/nzbget/Downloads - - - - /media/data-ssd/Downloads"
+  ];
+
+  users.users.nzbget.extraGroups = ["media"];
+  services.nzbget = {
+    enable = true;
+    settings = {
+      MainDir = "/data";
+    };
+  };
+
+  services.nginx.virtualHosts."nzb.net.r505.de" = {
+    forceSSL = true;
+    serverName = "nzb.net.r505.de";
+    useACMEHost = "net.r505.de";
+    locations."/" = {
+      proxyPass = "http://localhost:6789";
+    };
+  };
 }
