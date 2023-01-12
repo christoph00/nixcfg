@@ -62,6 +62,15 @@
     };
   };
 
+  environment.persistence."/nix/persist" = {
+    directories = [
+      {
+        directory = "/var/lib/sftpgo";
+        inherit (config.services.sftpgo) user group;
+      }
+    ];
+  };
+
   environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar];
 
   users.users.jellyfin.extraGroups = ["media"];
