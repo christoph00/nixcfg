@@ -19,6 +19,7 @@ in {
     fd # Better find
     jq # JSON pretty printer and manipulator
     ranger
+    skim
 
     nil
     alejandra
