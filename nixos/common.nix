@@ -114,7 +114,6 @@
     ];
   };
 
-  {
   environment.persistence."/nix/persist" = {
     directories = [
       "/etc/nixos"
@@ -130,5 +129,4 @@
       "/etc/nix/id_rsa"
     ];
   };
-}
 }
