@@ -44,6 +44,7 @@
         inputs.hyprland.nixosModules.default
         self.nixosModules.default
         self.nixosModules.home-manager
+        self.nixosModules.syncthing
         inputs.srvos.nixosModules.desktop
         ./desktop.nix
         ./fonts.nix
@@ -74,6 +75,7 @@
         ./home-server.nix
         inputs.srvos.nixosModules.mixins-nginx
         self.nixosModules.sftpgo
+        self.nixosModules.syncthing
       ];
 
       code-server.imports = [./code-server.nix];
@@ -82,6 +84,7 @@
         ./gpu_passthrough.nix
         ./win11.nix
       ];
+      syncting.imports = [./syncthing.nix];
     };
   };
 }
