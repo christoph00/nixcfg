@@ -12,4 +12,5 @@
   ha-lovelace-mini-graph-card = pkgs.callPackage ./ha-lovelace/mini-graph-card.nix {};
   ha-lovelace-card-mod = pkgs.callPackage ./ha-lovelace/card-mod.nix {};
   ha-components-better-thermostat = pkgs.callPackage ./ha-components/better_thermostat.nix {};
+  ha-components-ble-monitor = pkgs.callPackage ./ha-components/ble_monitor.nix {};
 }
