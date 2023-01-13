@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
     sha256 = "1hm6yr63ky6lgr79bxmnwpyj695alx3rfzi0aas51a3wln92dy30";
   in
     fetchurl {
-      url = "https://github.com/${owner}/${repo}/releases/download/v${version}/better-thermostat-ui-card.js";
+      url = "https://github.com/${owner}/${repo}/releases/download/${version}/better-thermostat-ui-card.js";
       inherit sha256;
     };
 
