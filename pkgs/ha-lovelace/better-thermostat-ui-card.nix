@@ -4,7 +4,7 @@
 }:
 stdenv.mkDerivation rec {
   pname = "ha-lovelace-better-thermostat-ui-card";
-  version = "0.11.0";
+  version = "1.0.4";
 
   src = let
     owner = "KartoffelToby";
