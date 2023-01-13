@@ -11,6 +11,7 @@ jobs:
         - air13
         - tower
         - futro
+        - oca
     steps:
     - name: Clone repository
       uses: actions/checkout@v3
