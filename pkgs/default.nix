@@ -3,7 +3,7 @@
   swww = pkgs.callPackage ./swww {};
   #wallpaper = pkgs.callPackage ./wallpaper {};
   gfn-electron = pkgs.callPackage ./gfn-electron {};
-  sftpgo = pkgs.callPackage ./sftpgo {};
+  #sftpgo = pkgs.callPackage ./sftpgo {};
   firefox-gnome-theme = pkgs.callPackage ./firefox-gnome-theme {};
   vscode-cli = pkgs.callPackage ./vscode-cli {};
 
