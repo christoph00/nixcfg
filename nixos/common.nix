@@ -67,6 +67,8 @@
 
   users.mutableUsers = false;
 
+  users.groups.media.gid = 900;
+
   age.secrets.christoph-password.file = ../secrets/christoph-password.age;
 
   users.users.christoph = {
@@ -84,6 +86,7 @@
       "lp"
       "scanner"
       "sound"
+      "media"
     ];
 
     openssh.authorizedKeys.keys = [
@@ -93,7 +96,6 @@
     passwordFile = config.age.secrets.christoph-password.path;
   };
 
-  services.vscode-server.enable = true;
   services.openssh = {
     enable = true;
     # Harden
