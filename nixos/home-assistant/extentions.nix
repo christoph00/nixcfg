@@ -6,6 +6,7 @@
   ...
 }: let
   mini-graph-card = "${pkgs.ha-lovelace-mini-graph-card}/ha-lovelace-mini-graph-card.js";
+  better-thermostat-ui-card = "${pkgs.ha-lovelace-better-thermostat-ui-card}/ha-lovelace-better-thermostat-ui-card.js";
 in {
   systemd.tmpfiles.rules = [
     # "d /nix/persist/hass/www 0755 hass hass"
@@ -22,6 +23,9 @@ in {
     locations."= /local/mini-mini-graph-card.js" = {
       alias = mini-graph-card;
     };
+    locations."= /local/better-thermostat-ui-card.js" = {
+      alias = better-thermostat-ui-card;
+    };
   };
 
   ## Custom HA modules
@@ -33,6 +37,10 @@ in {
   services.home-assistant.config.lovelace.resources = [
     {
       url = "/local/mini-graph-card.js?v=${builtins.hashFile "md5" mini-graph-card}";
+      type = "module";
+    }
+    {
+      url = "/local/better-thermostat-ui-card.js?v=${builtins.hashFile "md5" better-thermostat-ui-card}";
       type = "module";
     }
   ];
