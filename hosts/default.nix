@@ -33,6 +33,14 @@
           ./futro
         ];
       };
+      oca = inputs.nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          self.nixosModules.server
+          self.nixosModules.virtual
+          ./oca
+        ];
+      };
     };
   };
 }
