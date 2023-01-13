@@ -6,6 +6,7 @@
 }: {
   boot.initrd.availableKernelModules = ["xhci_pci" "virtio_pci" "usbhid"];
   boot.kernelParams = ["net.ifnames=0"];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;
