@@ -32,6 +32,7 @@
 
           inputs.srvos.nixosModules.common
           inputs.srvos.nixosModules.mixins-systemd-boot
+          inputs.srvos.nixosModules.mixins-terminfo
 
           ./common.nix
           ./tailscale.nix
