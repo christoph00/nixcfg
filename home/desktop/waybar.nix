@@ -28,7 +28,7 @@
         border: none;
         border-radius: 0;
         min-height: 0;
-        font-family: Material Design Icons, monospace;
+        font-family: Material Design Icons, ${config.fontProfiles.monospace.family};
         font-size: 13px;
       }
 
@@ -140,7 +140,7 @@ in {
 
         #output = builtins.map (m: m.name) (builtins.filter (m: m.isSecondary == false) config.monitors);
         modules-left = [
-          "custom/menu"
+          #"custom/menu"
           "wlr/workspaces"
           "hyprland/submap"
         ];
