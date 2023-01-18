@@ -112,8 +112,20 @@ in {
     enable = true;
     settings = {
       main = {
-        font = "${config.fontProfiles.regular.family}:size=36";
+        dpi-aware = "no";
+        font = "${config.fontProfiles.regular.family}:size=24";
         fields = "name,generic,comment,categories,filename,keywords";
+        layer = "overlay";
+        lines = 5;
+      };
+      colors = with config.colorscheme.colors; {
+        background = "${base00}dd";
+        text = "${base05}ff";
+        match = "${base0D}ff";
+        selection = "${base05}dd";
+        selection-text = "${base00}ff";
+        selection-match = "${base0D}ff";
+        border = "${base03}ff";
       };
     };
   };
