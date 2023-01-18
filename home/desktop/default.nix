@@ -142,7 +142,20 @@ in {
     };
     settings = with config.colorscheme.colors; {
       global = {
+        width = 300;
+        origin = "top-center";
+        alignment = "left";
+        vertical_alignment = "center";
+        ellipsize = "middle";
+        offset = "15x15";
+        padding = 18;
+        horizontal_padding = 18;
+        text_icon_padding = 18;
         progress_bar = true;
+        progress_bar_height = 8;
+        progress_bar_frame_width = 1;
+        progress_bar_min_width = 150;
+        progress_bar_max_width = 300;
         format = "<span size='x-large' font_desc='${config.fontProfiles.monospace.family} 9' weight='bold' foreground='#${base04}'>%a</span>\\n%s\\n%b";
         frame_color = "#${base01}";
         font = "${config.fontProfiles.monospace.family} 11";
@@ -164,6 +177,11 @@ in {
         background = "#${base00}";
         foreground = "#${base04}";
         highlight = "#${base0C}";
+      };
+
+      brightness = {
+        summary = "󰃞 Light";
+        set_stack_tag = "brightness";
       };
     };
   };
