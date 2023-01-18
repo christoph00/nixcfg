@@ -66,7 +66,7 @@
         margin: 4px 2px;
         min-width: 20px;
         border-radius: 4px;
-        background-color: #${base00};
+        background-color: #${base01};
         padding: 0 6px;
       }
 
