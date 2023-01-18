@@ -28,6 +28,6 @@
 
   # ----------  Secrets  -----------------------------------------
   #age.secrets.cloudflared.file = ../../secrets/oca-cf;
-  #age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
+  age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
   #age.secrets.cf-acme.file = ../../secrets/cf-acme;
 }
