@@ -18,7 +18,6 @@ in {
     ripgrep # Better grep
     fd # Better find
     jq # JSON pretty printer and manipulator
-    ranger
     skim
 
     nil
@@ -91,6 +90,8 @@ in {
     ssh.enable = true;
     home-manager.enable = true;
     lazygit.enable = true;
+    nnn.enable = true;
+    zellij.enable = true;
   };
 
   programs.bash = {
