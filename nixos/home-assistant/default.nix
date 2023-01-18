@@ -74,7 +74,7 @@
         psycopg2
       ];
     extraComponents = [
-      "caldav"
+      #"caldav"
       "bluetooth"
       "calendar"
       "camera"
