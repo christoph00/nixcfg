@@ -134,8 +134,9 @@ in {
 
   programs.zsh = {
     enable = true;
-    enableCompletion = false;
+    enableCompletion = true;
     enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
 
     history = {
       size = 50000;
