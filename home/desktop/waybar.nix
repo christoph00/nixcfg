@@ -38,16 +38,6 @@
         transition-duration: 0.5s;
        }
 
-      #workspaces {
-        background-color: #${base01};
-        margin: 0 4px;
-        color: #${base04};
-        border-radius: 4px;
-        padding: 0 6px;
-      }
-
-      #workspaces button {
-      }
 
       #workspaces button.visible {
       }
@@ -74,7 +64,7 @@
         border-left: none;
       }
 
-      #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
+      #workspaces, #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
         margin: 4px 2px;
         min-width: 20px;
         border-radius: 4px;
@@ -90,10 +80,6 @@
         color: #${base0C};
       }
 
-      #clock {
-        margin-left: 12px;
-        margin-right: 4px;
-      }
 
       #temperature.critical {
         color: #${base0F};
