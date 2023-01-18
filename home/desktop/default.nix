@@ -51,6 +51,12 @@ in {
     wireplumber
     wofi
 
+    wlogout
+    clipman
+    wdisplays
+    kanshi
+    wob
+
     gnome3.nautilus
     gnome3.eog
 

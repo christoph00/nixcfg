@@ -122,8 +122,8 @@
         };
         general = {
           border_size = 2;
-          gaps_in = 6;
-          gaps_out = 12;
+          gaps_in = 4;
+          gaps_out = 10;
           "col.active_border" = "0xff${base03}";
           "col.inactive_border" = "0xff${base01}";
           cursor_inactive_timeout = 5;
@@ -152,7 +152,7 @@
         master = {
           new_is_master = false;
           new_on_top = false;
-          no_gaps_when_only = false;
+          no_gaps_when_only = true;
         };
         gestures = {
           workspace_swipe = true;
@@ -256,11 +256,9 @@
         windowrulev2 = [
           "float,class:Wofi"
           "tile,class:PPSSPPSDL"
-          "noborder,class:Wofi"
+          # "noborder,class:Wofi"
           "center,class:Wofi"
-          #"workspace special,class:KeePassXC"
           # no transparency for some windows
-          "opaque,class:KeePassXC"
           "opaque,class:PPSSPPSDL"
           "opaque,class:xournalpp"
         ];
