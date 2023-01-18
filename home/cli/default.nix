@@ -93,6 +93,7 @@ in {
     home-manager.enable = true;
     lazygit.enable = true;
     nnn.enable = true;
+    gh.enable = true;
   };
 
   xdg.configFile."zellij/themes/${slug}.kdl".text = ''
