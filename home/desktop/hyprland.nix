@@ -15,6 +15,37 @@
     wofi = "${pkgs.wofi}/bin/wofi";
     notifysend = "${pkgs.libnotify}/bin/notify-send";
 
+    notify-brightness = pkgs.writeShellScriptBin "notify-brightness" ''
+      getvalue() {
+        echo "$(${pkgs.brightnessctl}/bin/brightnessctl g) * 100 / $(${pkgs.brightnessctl}/bin/brightnessctl m)" | bc
+      }
+      geticon() {
+        if [ "$1" -eq 0 ]; then
+          echo "notification-display-brightness-off"
+        elif [ "$1" -lt 20 ]; then
+          echo "notification-display-brightness-low"
+        elif [ "$1" -lt 50 ]; then
+          echo "notification-display-brightness-medium"
+        elif [ "$1" -lt 100 ]; then
+          echo "notification-display-brightness-high"
+        else
+          echo "notification-display-brightness-full"
+        fi
+      }
+      ${pkgs.brightnessctl}/bin/brightnessctl "$@"
+      value="$(getvalue)"
+      # shellcheck disable=all
+      icon="$(geticon $value)"
+      ${pkgs.dunst}/bin/dunstify \
+        --appname=brightness \
+        --urgency=low \
+        --timeout=2000 \
+        --icon="$icon" \
+        --hints=int:value:"$value" \
+        --hints=string:x-dunst-stack-tag:brightness \
+        "Brightness: $value%"
+    '';
+
     #eww = "${config.programs.eww.package}/bin/eww";
 
     terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
@@ -202,8 +233,8 @@
           #  ",XF86AudioNext" = "exec,playerctl next";
           #  ",XF86AudioPrev" = "exec,playerctl previous";
           ## brightness control
-          ",XF86MonBrightnessUp" = "exec,${pkgs.brightnessctl}/bin/brightnessctl s +10%";
-          ",XF86MonBrightnessDown" = "exec,${pkgs.brightnessctl}/bin/brightnessctl s 10%-";
+          ",XF86MonBrightnessUp" = "exec,${notify-brightness}/bin/notify-brightness s +10%";
+          ",XF86MonBrightnessDown" = "exec,${notify-brightness}/bin/notify-brightness s 10%-";
           ## display control
           ",XF86Display" = "exec,${lock}";
           ## killing application
