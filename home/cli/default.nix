@@ -20,7 +20,6 @@ in {
     ripgrep # Better grep
     fd # Better find
     jq # JSON pretty printer and manipulator
-    skim
     fzf
 
     nil
@@ -34,6 +33,7 @@ in {
     rsync
 
     tmux
+    xplr
   ];
 
   home.sessionVariables = {
@@ -94,6 +94,7 @@ in {
     lazygit.enable = true;
     nnn.enable = true;
     gh.enable = true;
+    lf.enable = true;
   };
 
   programs.fzf = {
