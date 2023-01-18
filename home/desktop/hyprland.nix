@@ -45,6 +45,39 @@
         --hints=string:x-dunst-stack-tag:brightness \
         "Brightness: $value%"
     '';
+    notify-volume = pkgs.writeShellScriptBin "notify-volume" ''
+      getsink() {
+        ${pkgs.pamixer}/bin/pamixer --get-default-sink | tail -n1 | ${pkgs.perl}/bin/perl -pe 's/^[[:digit:]]+ ".*?" "(.*)"$/\1/'
+      }
+      geticon() {
+        if [ "$2" == "true" ]; then
+          echo "notification-audio-volume-muted"
+        elif [ "$1" -eq 0 ]; then
+          echo "notification-audio-volume-off"
+        elif [ "$1" -lt 20 ]; then
+          echo "notification-audio-volume-low"
+        elif [ "$1" -lt 50 ]; then
+          echo "notification-audio-volume-medium"
+        else
+          echo "notification-audio-volume-high"
+        fi
+      }
+      ${pkgs.pamixer}/bin/pamixer "$@"
+      value="$(${pkgs.pamixer}/bin/pamixer --get-volume || true)"
+      muted="$(${pkgs.pamixer}/bin/pamixer --get-mute || true)"
+      sink="$(getsink)"
+      # shellcheck disable=all
+      icon="$(geticon $value $muted)"
+      ${pkgs.dunst}/bin/dunstify \
+        --appname=volume \
+        --urgency=low \
+        --timeout=2000 \
+        --icon="$icon" \
+        --hints=int:value:"$value" \
+        --hints=string:x-dunst-stack-tag:volume \
+        "Volume: $value%" \
+        "$sink"
+    '';
 
     #eww = "${config.programs.eww.package}/bin/eww";
 
@@ -226,9 +259,9 @@
         };
         bind = {
           ## audio control
-          ",XF86AudioRaiseVolume" = "exec,pamixer -i 1";
-          ",XF86AudioLowerVolume" = "exec,pamixer -d 1";
-          ",XF86AudioMute" = "exec,pamixer -t";
+          ",XF86AudioRaiseVolume" = "exec,${notify-volume}/bin/notify-volume -i 1";
+          ",XF86AudioLowerVolume" = "exec,${notify-volume}/bin/notify-volume -d 1";
+          ",XF86AudioMute" = "exec,${notify-volume}/bin/notify-volume -t";
           #  ",XF86AudioPlay" = "exec,playerctl play-pause";
           #  ",XF86AudioNext" = "exec,playerctl next";
           #  ",XF86AudioPrev" = "exec,playerctl previous";
