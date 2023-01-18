@@ -90,6 +90,7 @@ in {
     jq.enable = true;
     ssh.enable = true;
     home-manager.enable = true;
+    lazygit.enable = true;
   };
 
   programs.fish = {
