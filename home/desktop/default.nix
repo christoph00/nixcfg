@@ -117,6 +117,7 @@ in {
         fields = "name,generic,comment,categories,filename,keywords";
         layer = "overlay";
         lines = 5;
+        prompt = "· ";
       };
       colors = with config.colorscheme.colors; {
         background = "${base00}dd";
@@ -127,6 +128,9 @@ in {
         selection-match = "${base0D}ff";
         border = "${base03}ff";
       };
+      border = {
+        width = 2;
+      };
     };
   };
 
@@ -135,6 +139,32 @@ in {
     iconTheme = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
+    };
+    settings = with config.colorscheme.colors; {
+      global = {
+        progress_bar = true;
+        format = "<span size='x-large' font_desc='${config.fontProfiles.monospace.family} 9' weight='bold' foreground='#${base04}'>%a</span>\\n%s\\n%b";
+        frame_color = "#${base01}";
+        font = "${config.fontProfiles.monospace.family} 11";
+      };
+      urgency_low = {
+        timeout = 3;
+        background = "#${base00}";
+        foreground = "#${base04}";
+        highlight = "#${base0E}";
+      };
+      urgency_normal = {
+        timeout = 6;
+        background = "#${base00}";
+        foreground = "#${base04}";
+        highlight = "#${base08}";
+      };
+      urgency_critical = {
+        timeout = 0;
+        background = "#${base00}";
+        foreground = "#${base04}";
+        highlight = "#${base0C}";
+      };
     };
   };
 
