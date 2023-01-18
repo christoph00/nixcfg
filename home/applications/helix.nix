@@ -31,8 +31,8 @@ in {
     #themes = import ./helix_theme.nix {inherit colorscheme;};
 
     settings = {
-      theme = "${colorscheme.slug}";
-      #theme = "rose-pine";
+      #theme = "${colorscheme.slug}";
+      theme = "rose-pine";
 
       editor.cursor-shape = {
         insert = "bar";

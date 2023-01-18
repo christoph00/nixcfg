@@ -12,10 +12,10 @@ in {
     settings = {
       main = {
         term = "xterm-256color";
-        font = "${mono-font}:style=Medium:size=11";
-        font-bold = "${mono-font}:style=Bold:size=11";
-        font-italic = "${mono-font}:style=Medium Italic:size=11";
-        font-bold-italic = "${mono-font}:style=Bold Italic:size=11";
+        font = "${mono-font}:style=Medium:size=9";
+        font-bold = "${mono-font}:style=Bold:size=9";
+        font-italic = "${mono-font}:style=Medium Italic:size=9";
+        font-bold-italic = "${mono-font}:style=Bold Italic:size=9";
         #dpi-aware = "yes";
         locked-title = "no";
         pad = "25x25";
