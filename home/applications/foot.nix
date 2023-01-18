@@ -1,7 +1,6 @@
-{pkgs, ...}:
-{
-programs.foot = {
-enable = true;
-server.enable = true;
-};
+{pkgs, ...}: {
+  programs.foot = {
+    enable = true;
+    server.enable = true;
+  };
 }

@@ -18,11 +18,11 @@
   };
   systemd.services.code-tunnel-autofix = {
     wantedBy = ["code-tunnel.service"];
-    name = "code-tunnel-autofix";    
+    name = "code-tunnel-autofix";
     serviceConfig = {
       ExecStart = "${pkgs.writeShellScript "${name}.sh" ''
         set -euo pipefail
-        PATH=${makeBinPath (with pkgs; [ coreutils findutils inotify-tools ])}
+        PATH=${makeBinPath (with pkgs; [coreutils findutils inotify-tools])}
         bin_dir=~/.vscode-cli/code-stable/bin
         # Fix any existing symlinks before we enter the inotify loop.
         if [[ -e $bin_dir ]]; then
@@ -46,6 +46,6 @@
           fi
         done < <(inotifywait -q -m -e CREATE,ISDIR -e DELETE_SELF --format '%w%f:%e' "$bin_dir")
       ''}";
-        };
+    };
   };
 }
