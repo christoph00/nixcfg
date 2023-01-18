@@ -216,6 +216,7 @@ in {
         "Code"
         ".ssh"
         ".config/syncthing"
+        ".config/gh"
       ];
       allowOther = true;
       files = [".local/share/fish/fish_history"];
