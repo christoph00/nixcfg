@@ -33,9 +33,7 @@
       }
 
       window#waybar {
-        background-color: #${base00};
-        transition-property: background-color;
-        transition-duration: 0.5s;
+        background-color: transparent;
        }
 
 
@@ -68,7 +66,7 @@
         margin: 4px 2px;
         min-width: 20px;
         border-radius: 4px;
-        background-color: #${base01};
+        background-color: #${base00};
         padding: 0 6px;
       }
 

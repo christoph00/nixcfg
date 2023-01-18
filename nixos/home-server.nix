@@ -93,15 +93,15 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /var/lib/jellyfin/media 0770 jellyfin media"
-    "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
-    "L /var/lib/jellyfin/media/TVShows - - - - /media/data-hdd/TVShows"
+    #  "d /var/lib/jellyfin/media 0770 jellyfin media"
+    #  "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
+    #  "L /var/lib/jellyfin/media/TVShows - - - - /media/data-hdd/TVShows"
 
-    "d /var/lib/nzbget/media 0770 nzbget media"
-    "L /var/lib/nzbget/media/Movies - - - - /media/data-hdd/Movies"
-    "L /var/lib/nzbget/media/TVShows - - - - /media/data-hdd/TVShows"
-    "d /var/lib/nzbget/Downloads 0770 nzbget media"
-    "L /var/lib/nzbget/Downloads - - - - /media/data-ssd/Downloads"
+    #  "d /var/lib/nzbget/media 0770 nzbget media"
+    #  "L /var/lib/nzbget/media/Movies - - - - /media/data-hdd/Movies"
+    #  "L /var/lib/nzbget/media/TVShows - - - - /media/data-hdd/TVShows"
+    # "d /var/lib/nzbget/Downloads 0770 nzbget media"
+    # "L /var/lib/nzbget/Downloads - - - - /media/data-ssd/Downloads"
   ];
 
   users.users.nzbget.extraGroups = ["media"];
