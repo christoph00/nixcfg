@@ -93,8 +93,12 @@ in {
     lazygit.enable = true;
   };
 
-  programs.fish = {
+  programs.bash = {
     enable = true;
+  };
+
+  programs.fish = {
+    enable = false;
     shellAbbrs = {
       ls = "exa";
     };
