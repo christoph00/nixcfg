@@ -259,7 +259,7 @@
           "tile,class:PPSSPPSDL"
           # "noborder,class:Wofi"
           "center,class:Wofi"
-          "center,classs:fuzzel"
+          "center,class:fuzzel"
           # no transparency for some windows
           "opaque,class:PPSSPPSDL"
           "opaque,class:xournalpp"
