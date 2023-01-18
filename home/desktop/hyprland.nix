@@ -233,8 +233,8 @@
           #  ",XF86AudioNext" = "exec,playerctl next";
           #  ",XF86AudioPrev" = "exec,playerctl previous";
           ## brightness control
-          ",XF86MonBrightnessUp" = "exec,${notify-brightness}/bin/notify-brightness s +10%";
-          ",XF86MonBrightnessDown" = "exec,${notify-brightness}/bin/notify-brightness s 10%-";
+          ",XF86MonBrightnessUp" = "exec,${notify-brightness}/bin/notify-brightness s +5%";
+          ",XF86MonBrightnessDown" = "exec,${notify-brightness}/bin/notify-brightness s 5%-";
           ## display control
           ",XF86Display" = "exec,${lock}";
           ## killing application
