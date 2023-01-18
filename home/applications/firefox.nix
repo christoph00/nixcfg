@@ -21,11 +21,16 @@ in {
       no-pdf-download
       save-page-we
       privacy-redirect
+      startpage-private-search
     ];
     profiles.christoph = {
       bookmarks = {};
       settings = {
-        "browser.startup.homepage" = "https://start.duckduckgo.com";
+        "browser.search.defaultenginename" = "Startpage.com - German";
+        "browser.search.selectedEngine" = "Startpage.com - German";
+        "browser.urlbar.placeholderName" = "Startpage.com - German";
+        "browser.search.region" = "DE";
+        "browser.startup.homepage" = "https://startpage.com";
         "identity.fxaccounts.enabled" = false;
         "privacy.trackingprotection.enabled" = true;
         "dom.security.https_only_mode" = true;
@@ -49,7 +54,9 @@ in {
         "media.rdd-ffmpeg.enabled" = true;
         "widget.dmabuf.force-enabled" = true;
         "widget.use-xdg-desktop-portal" = true;
-
+        "font.name.monospace.x-western" = "${config.fontProfiles.monospace.family}";
+        "font.name.sans-serif.x-western" = "${config.fontProfiles.regualar.family}";
+        "font.name.serif.x-western" = "${config.fontProfiles.regular.family}";
         "gnomeTheme.systemIcons" = true;
         "gnomeTheme.hideSingleTab" = true;
       };
