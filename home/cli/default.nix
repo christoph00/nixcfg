@@ -129,6 +129,42 @@ in {
 
   programs.bash = {
     enable = true;
+    historySize = 10000;
+    shellOptions = [
+      # Auto cd to directories
+      "autocd"
+
+      # Append to history file rather than replacing it.
+      "histappend"
+
+      # check the window size after each command and, if
+      # necessary, update the values of LINES and COLUMNS.
+      "checkwinsize"
+
+      # Extended globbing.
+      "extglob"
+      "globstar"
+
+      # Warn if closing shell with running jobs.
+      "checkjobs"
+    ];
+
+    initExtra = ''
+      # --- Vi mode ---
+      set -o vi
+      bind -m vi-insert 'Control-l: clear-screen'
+      . "${pkgs.fzf}/share/fzf/completion.bash"
+      . "${pkgs.fzf}/share/fzf/key-bindings.bash"
+      bind -x '"\t": fzf_bash_completion'
+      # --- Colored man pages ---
+      export LESS_TERMCAP_mb=$'\e[1;32m'
+      export LESS_TERMCAP_md=$'\e[1;32m'
+      export LESS_TERMCAP_me=$'\e[0m'
+      export LESS_TERMCAP_se=$'\e[0m'
+      export LESS_TERMCAP_so=$'\e[01;33m'
+      export LESS_TERMCAP_ue=$'\e[0m'
+      export LESS_TERMCAP_us=$'\e[1;4;31m'
+    '';
   };
 
   programs.fish = {
