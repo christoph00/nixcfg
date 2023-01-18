@@ -50,9 +50,9 @@
   };
   users.users.nginx.extraGroups = ["acme"];
 
-  users.users.sftpgo.extraGroups = ["media"];
+  #users.users.sftpgo.extraGroups = ["media"];
   services.sftpgo = {
-    enable = true;
+    enable = false;
     openFirewall = true;
     settings = {
       data_provider = {
@@ -64,10 +64,10 @@
 
   environment.persistence."/nix/persist" = {
     directories = [
-      {
-        directory = "/var/lib/sftpgo";
-        inherit (config.services.sftpgo) user group;
-      }
+      #{
+      #  directory = "/var/lib/sftpgo";
+      #  inherit (config.services.sftpgo) user group;
+      #}
       {
         directory = "/var/lib/jellyfin";
         inherit (config.services.jellyfin) user group;
