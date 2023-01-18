@@ -98,7 +98,7 @@ in {
 
   programs.fzf = {
     enable = true;
-    enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 
   xdg.configFile."zellij/themes/${slug}.kdl".text = ''
