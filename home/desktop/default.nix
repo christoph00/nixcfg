@@ -108,6 +108,16 @@ in {
     };
   };
 
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        font = "${config.fontProfiles.regular.family}:size=36";
+        fields = "name,generic,comment,categories,filename,keywords";
+      };
+    };
+  };
+
   services.dunst = {
     enable = true;
     iconTheme = {
