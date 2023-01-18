@@ -255,9 +255,11 @@
         };
         windowrulev2 = [
           "float,class:Wofi"
+          "float,class:fuzzel"
           "tile,class:PPSSPPSDL"
           # "noborder,class:Wofi"
           "center,class:Wofi"
+          "center,classs:fuzzel"
           # no transparency for some windows
           "opaque,class:PPSSPPSDL"
           "opaque,class:xournalpp"
