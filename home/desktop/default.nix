@@ -22,11 +22,11 @@
     "application/xhtml+xml" = browser;
     "application/x-extension-xhtml" = browser;
     "application/x-extension-xht" = browser;
-    #"image/*" = "org.gnome.eog.desktop";
+    "image/*" = "org.gnome.eog.desktop";
 
     #"text/*" = [ "emacs.desktop" ];
-    #"audio/*" = ["vlc.desktop"];
-    #"video/*" = ["vlc.dekstop"];
+    "audio/*" = ["vlc.desktop"];
+    "video/*" = ["vlc.dekstop"];
     #"image/*" = [ "ahoviewer.desktop" ];
     #"text/calendar" = [ "thunderbird.desktop" ]; # ".ics"  iCalendar format
     "application/json" = browser; # ".json"  JSON format
@@ -51,7 +51,12 @@ in {
     wireplumber
     wofi
 
-    gnome.nautilus
+    gnome3.nautilus
+    gnome3.eog
+
+    pavucontrol
+
+    vlc
 
     gfn-electron
     moonlight-qt
