@@ -115,6 +115,7 @@
       }
     ];
   };
+  programs.mosh.enable = true;
 
   environment.persistence."/nix/persist" = {
     directories = [
