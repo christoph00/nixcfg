@@ -75,6 +75,7 @@
   nixpkgs.hostPlatform.system = "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "powersave";
+  services.thermald.enable = true;
 
   networking.hostName = "air13";
 
