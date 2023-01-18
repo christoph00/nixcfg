@@ -66,7 +66,7 @@ in {
     xdg-utils
   ];
 
-  colorscheme = inputs.nix-colors.colorSchemes.ayu-mirage;
+  colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
   wallpaper = lib.mkDefault (nixWallpaperFromScheme
     {
       scheme = config.colorscheme;
