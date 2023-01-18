@@ -132,7 +132,7 @@ in {
     };
   };
 
-  zsh = {
+  programs.zsh = {
     enable = true;
     enableCompletion = false;
     enableAutosuggestions = true;
