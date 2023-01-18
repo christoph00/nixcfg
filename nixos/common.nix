@@ -75,7 +75,7 @@
     description = "Christoph";
     isNormalUser = true;
     createHome = true;
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
     extraGroups = [
       "wheel"
       "video"
