@@ -1,4 +1,8 @@
-{config, ...}:
+{
+  config,
+  pkgs,
+  ...
+}:
 with config.colorscheme.colors; {
   home.packages = with pkgs; [
     obsidian
