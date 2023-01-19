@@ -49,10 +49,10 @@ in {
   home.language = {
     base = localeGerman;
     address = localeGerman;
-    collate = localeEnglish;
+    collate = localeGerman;
     ctype = localeEnglish;
     measurement = localeGerman;
-    messages = localeEnglish;
+    messages = localeGerman;
     monetary = localeGerman;
     name = localeGerman;
     numeric = localeGerman;

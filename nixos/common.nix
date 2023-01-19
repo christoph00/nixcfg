@@ -20,7 +20,7 @@
     "net.core.bpf_jit_harden" = true;
   };
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "de_DE.UTF-8";
   i18n.extraLocaleSettings = lib.mkDefault {
     LC_TIME = "de_DE.UTF-8";
     LC_MONETARY = "de_DE.UTF-8";
