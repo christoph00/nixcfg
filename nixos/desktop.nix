@@ -55,6 +55,13 @@
     };
   };
 
+  services.mingetty.autologinUser = "christoph";
+
+  environment.loginShellInit = ''
+    [[ "$(tty)" == /dev/tty? ]] && ${pkgs.vlock}/bin/vlock -c
+    [[ "$(tty)" == /dev/tty1 ]] && Hyprland
+  '';
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;
