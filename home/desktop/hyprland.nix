@@ -70,8 +70,8 @@ in {
           # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
           input {
               kb_layout = us
-              kb_variant =
-              kb_model =
+              kb_options = caps:escape,compose:menu
+              kb_variant = altgr-intl
               kb_options =
               kb_rules =
 
@@ -166,7 +166,8 @@ in {
           bind = $mainMod, M, exit,
           bind = $mainMod, E, exec, dolphin
           bind = $mainMod, V, togglefloating,
-          bind = $mainMod, R, exec, ${pkgs.wofi}/bin/wofi --show drun
+          bind = $mainMod, F, fullscreen, 1
+          bind = $mainMod, R, exec, ${pkgs.wofi}/bin/wofi -S drun -iIGa
           bind = $mainMod, P, pseudo, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
 
