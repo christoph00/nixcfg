@@ -8,7 +8,6 @@
 in {
   gtk = {
     enable = true;
-    preferDark = true;
     font = {
       name = config.fontProfiles.regular.family;
       size = 12;
