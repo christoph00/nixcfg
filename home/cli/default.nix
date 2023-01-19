@@ -34,6 +34,8 @@ in {
 
     tmux
     xplr
+
+    comma
   ];
 
   home.sessionVariables = {
