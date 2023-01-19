@@ -332,7 +332,7 @@
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         ];
         exec = [
-          "${lock}"
+          #"${lock}"
           "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill"
         ];
       };
