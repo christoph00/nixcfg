@@ -55,7 +55,7 @@
     };
   };
 
-  services.mingetty.autologinUser = "christoph";
+  services.getty.autologinUser = "christoph";
 
   environment.loginShellInit = ''
     [[ "$(tty)" == /dev/tty? ]] && ${pkgs.vlock}/bin/vlock -c
