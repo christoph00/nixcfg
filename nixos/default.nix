@@ -49,6 +49,7 @@
         ./desktop.nix
         ./fonts.nix
         #./plasma.nix
+        ./xfce.nix
         ./greetd.nix
         ./printing.nix
       ];
