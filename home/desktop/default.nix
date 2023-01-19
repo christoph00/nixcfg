@@ -225,13 +225,6 @@ in {
     };
   };
 
-  xfconf.settings = {
-    xfce4-session = {
-      "startup/ssh-agent/enabled" = false;
-      "general/LockCommand" = "${pkgs.lightdm}/bin/dm-tool lock";
-    };
-  };
-
   services.gammastep = {
     enable = true;
     provider = "manual";
