@@ -47,11 +47,6 @@
         color: rgba(238, 46, 36, 1);
       }
 
-      #tray {
-        margin: 4px 2px;
-        border-radius: 2px;
-        background-color: #${base02};
-      }
 
       #tray * {
         padding: 0 6px;
@@ -62,7 +57,7 @@
         border-left: none;
       }
 
-      #workspaces, #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
+      #tray, #workspaces, #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
         margin: 4px 2px;
         min-width: 20px;
         border-radius: 2px;
@@ -124,7 +119,6 @@ in {
 
         #output = builtins.map (m: m.name) (builtins.filter (m: m.isSecondary == false) config.monitors);
         modules-left = [
-          "custom/menu"
           "wlr/workspaces"
           "hyprland/submap"
         ];
@@ -143,6 +137,7 @@ in {
         ];
 
         "wlr/workspaces" = {
+          format = "{icon}";
           on-click = "activate";
         };
         clock = {

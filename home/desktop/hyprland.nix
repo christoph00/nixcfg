@@ -89,7 +89,7 @@ in {
 
               gaps_in = 4
               gaps_out = 10
-              border_size = 2
+              border_size = 4
               col.active_border = 0xff${base03}
               col.inactive_border = 0xff${base01}
 
