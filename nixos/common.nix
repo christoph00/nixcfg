@@ -71,6 +71,8 @@
 
   age.secrets.christoph-password.file = ../secrets/christoph-password.age;
 
+  programs.command-not-found.enable = false;
+
   users.users.christoph = {
     description = "Christoph";
     isNormalUser = true;
