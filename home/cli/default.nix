@@ -37,7 +37,6 @@ in {
     xplr
 
     comma
-    nix-index
   ];
 
   home.sessionVariables = {
