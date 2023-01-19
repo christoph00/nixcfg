@@ -17,7 +17,6 @@ in {
     bc # Calculator
     bottom # System viewer
     ncdu # TUI disk usage
-    exa # Better ls
     ripgrep # Better grep
     fd # Better find
     jq # JSON pretty printer and manipulator
@@ -98,6 +97,11 @@ in {
     nnn.enable = true;
     gh.enable = true;
     lf.enable = true;
+  };
+
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
   };
 
   programs.fzf = {
