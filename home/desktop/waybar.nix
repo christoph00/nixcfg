@@ -29,7 +29,7 @@
         border-radius: 0;
         min-height: 0;
         font-family: Material Design Icons, ${config.fontProfiles.monospace.family};
-        font-size: 13px;
+        font-size: 14px;
       }
 
       window#waybar {
@@ -48,8 +48,8 @@
       }
 
       #tray {
-        margin: 4px 16px 4px 4px;
-        border-radius: 4px;
+        margin: 4px 2px;
+        border-radius: 2px;
         background-color: #${base02};
       }
 
@@ -65,7 +65,7 @@
       #workspaces, #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
         margin: 4px 2px;
         min-width: 20px;
-        border-radius: 4px;
+        border-radius: 2px;
         background-color: #${base01};
         padding: 0 6px;
       }
@@ -118,13 +118,13 @@ in {
     settings = {
       primary = {
         layer = "top";
-        height = 28;
-        margin = "6";
+        height = 32;
+        margin = "2";
         position = "top";
 
         #output = builtins.map (m: m.name) (builtins.filter (m: m.isSecondary == false) config.monitors);
         modules-left = [
-          #"custom/menu"
+          "custom/menu"
           "wlr/workspaces"
           "hyprland/submap"
         ];
@@ -188,7 +188,7 @@ in {
           exec = jsonOutput "menu" {
             text = "";
           };
-          on-click = "${wofi} -S drun -x 10 -y 10 -W 25% -H 60%";
+          on-click = "${pkgs.fuzzel}/bin/fuzzel";
         };
         "custom/hostname" = {
           exec = "echo $USER@$(hostname)";
