@@ -29,6 +29,7 @@
     "udev.log-priority=3"
     "vt.global_cursor_default=0"
     "mem_sleep_default=deep"
+    "ahci.mobile_lpm_policy=3"
   ];
   boot.resumeDevice = "/dev/nvme0n1p2";
   boot.extraModprobeConfig = ''

@@ -130,6 +130,12 @@ in {
       pane_frames = true;
       scrollback_editor = "hx";
       theme = "${slug}";
+      plugins = {
+        "tab-bar" = {path = "tab-bar";};
+        "status-bar" = {path = "status-bar";};
+        "strider" = {path = "strider";};
+        "compact-bar" = {path = "compact-bar";};
+      };
     };
   };
 
