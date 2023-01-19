@@ -7,8 +7,8 @@
 }: {
   flake = {
     nixosModules = {
-      home-desktop-christoph = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.gaming] "christoph";
-      home-laptop-christoph = self.lib.mkHomeModule [self.homeModules.desktop] "christoph";
+      home-desktop-christoph = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-desktop self.homeModules.gaming] "christoph";
+      home-laptop-christoph = self.lib.mkHomeModule [self.homeModules.laptop self.homeModules.laptop] "christoph";
 
       home-manager.imports = [
         inputs.home-manager.nixosModules.home-manager
