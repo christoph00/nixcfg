@@ -62,9 +62,6 @@ in {
 
       (
         with config.colorscheme.colors; ''
-          # See https://wiki.hyprland.org/Configuring/Monitors/
-          # monitor=name,resolution,position,scale
-
           exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
