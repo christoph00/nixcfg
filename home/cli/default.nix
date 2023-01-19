@@ -102,7 +102,11 @@ in {
 
   programs.fzf = {
     enable = true;
-    enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
+
+  programs.bash = {
+    enable = true;
   };
 
   xdg.configFile."zellij/themes/${slug}.kdl".text = ''
@@ -139,40 +143,6 @@ in {
         "strider" = {path = "strider";};
         "compact-bar" = {path = "compact-bar";};
       };
-    };
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
-
-    history = {
-      size = 50000;
-      save = 500000;
-      path = "/nix/persist/home/christoph/.history";
-      ignoreDups = true;
-      share = true;
-      extended = true;
-    };
-
-    sessionVariables = {
-      LEDGER_COLOR = "true";
-      LESS = "-FRSXM";
-      LESSCHARSET = "utf-8";
-      PAGER = "less";
-      PROMPT = "%m %~ $ ";
-      PROMPT_DIRTRIM = "2";
-      RPROMPT = "";
-      TINC_USE_NIX = "yes";
-      WORDCHARS = "";
-    };
-
-    shellAliases = {
-      ls = "${pkgs.coreutils}/bin/ls --color=auto";
-      nm = "${pkgs.findutils}/bin/find . -name";
-      scp = "${pkgs.rsync}/bin/rsync -aP --inplace";
     };
   };
 
