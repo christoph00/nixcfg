@@ -4,337 +4,200 @@
   config,
   pkgs,
   ...
-}: {
-  wayland.windowManager.hyprland = let
-    lock = "${pkgs.gtklock}/bin/gtklock";
-    systemctl = "${pkgs.systemd}/bin/systemctl";
-
-    notify-brightness = pkgs.writeShellScriptBin "notify-brightness" ''
-      getvalue() {
-        echo "$(${pkgs.brightnessctl}/bin/brightnessctl g) * 100 / $(${pkgs.brightnessctl}/bin/brightnessctl m)" | bc
-      }
-      geticon() {
-        if [ "$1" -eq 0 ]; then
-          echo "notification-display-brightness-off"
-        elif [ "$1" -lt 20 ]; then
-          echo "notification-display-brightness-low"
-        elif [ "$1" -lt 50 ]; then
-          echo "notification-display-brightness-medium"
-        elif [ "$1" -lt 100 ]; then
-          echo "notification-display-brightness-high"
-        else
-          echo "notification-display-brightness-full"
-        fi
-      }
-      ${pkgs.brightnessctl}/bin/brightnessctl "$@"
-      value="$(getvalue)"
-      # shellcheck disable=all
-      icon="$(geticon $value)"
-      ${pkgs.dunst}/bin/dunstify \
-        --appname=brightness \
-        --urgency=low \
-        --timeout=2000 \
-        --icon="$icon" \
-        --hints=int:value:"$value" \
-        --hints=string:x-dunst-stack-tag:brightness \
-        "Brightness: $value%"
-    '';
-    notify-volume = pkgs.writeShellScriptBin "notify-volume" ''
-      getsink() {
-        ${pkgs.pamixer}/bin/pamixer --get-default-sink | tail -n1 | ${pkgs.perl}/bin/perl -pe 's/^[[:digit:]]+ ".*?" "(.*)"$/\1/'
-      }
-      geticon() {
-        if [ "$2" == "true" ]; then
-          echo "notification-audio-volume-muted"
-        elif [ "$1" -eq 0 ]; then
-          echo "notification-audio-volume-off"
-        elif [ "$1" -lt 20 ]; then
-          echo "notification-audio-volume-low"
-        elif [ "$1" -lt 50 ]; then
-          echo "notification-audio-volume-medium"
-        else
-          echo "notification-audio-volume-high"
-        fi
-      }
-      ${pkgs.pamixer}/bin/pamixer "$@"
-      value="$(${pkgs.pamixer}/bin/pamixer --get-volume || true)"
-      muted="$(${pkgs.pamixer}/bin/pamixer --get-mute || true)"
-      sink="$(getsink)"
-      # shellcheck disable=all
-      icon="$(geticon $value $muted)"
-      ${pkgs.dunst}/bin/dunstify \
-        --appname=volume \
-        --urgency=low \
-        --timeout=2000 \
-        --icon="$icon" \
-        --hints=int:value:"$value" \
-        --hints=string:x-dunst-stack-tag:volume \
-        "Volume: $value%" \
-        "$sink"
-    '';
-
-    #eww = "${config.programs.eww.package}/bin/eww";
-
-    terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
-    #terminal = "${pkgs.wezterm}/bin/wezterm";
-    terminal = "${pkgs.foot}/bin/footclient";
-
-    eewScript = pkgs.writeShellScriptBin "eewScript" ''
-      function handle {
-        if [[ ''${1:0:9} == "workspace" ]]; then #set focused workspace
-          hyperctl update 'workspace="''${1:11}"'
-
-        elif [[ ''${1:0:15} == "createworkspace" ]]; then #set Occupied workspace
-          num=''${1:17}
-          export o"$num"="$num"
-          export f"$num"="$num"
-
-        elif [[ ''${1:0:16} == "destroyworkspace" ]]; then #unset unoccupied workspace
-          num=''${1:18}
-          unset -v o"$num" f"$num"
-        fi
-      }
-      ${pkgs.socat}/bin/socat - UNIX-CONNECT:/tmp/hypr/$(echo $HYPRLAND_INSTANCE_SIGNATURE)/.socket2.sock | while read line; do handle $line; done
-    '';
-
-    mkValueString = value: (
-      if builtins.isBool value
-      then
-        (
-          if value
-          then "true"
-          else "false"
-        )
-      else if (builtins.isFloat value || builtins.isInt value)
-      then
-        (
-          builtins.toString value
-        )
-      else if builtins.isString value
-      then value
-      else if
-        (
-          (builtins.isList value)
-          && ((builtins.length value) == 2)
-          && ((builtins.isFloat (builtins.elemAt value 0)) || (builtins.isFloat (builtins.elemAt value 0)))
-          && ((builtins.isFloat (builtins.elemAt value 1)) || (builtins.isFloat (builtins.elemAt value 1)))
-        )
-      then
-        (
-          builtins.toString (builtins.elemAt value 0) + " " + builtins.toString (builtins.elemAt value 1)
-        )
-      else abort "Unhandled value type ${builtins.typeOf value}"
-    );
-
-    concatAttrs = arg: func: (
-      assert builtins.isAttrs arg;
-        builtins.concatStringsSep "\n" (lib.attrsets.mapAttrsToList func arg)
-    );
-
-    mkHyprlandVariables = arg: (
-      concatAttrs arg (
-        name: value:
-          name
-          + (
-            if builtins.isAttrs value
-            then
-              (
-                " {\n" + (mkHyprlandVariables value) + "\n}"
-              )
-            else " = " + mkValueString value
-          )
-      )
-    );
-
-    mkHyprlandBinds = arg: (
-      concatAttrs arg (
-        name: value: (
-          if builtins.isList value
-          then
-            (
-              builtins.concatStringsSep "\n" (builtins.map (x: name + " = " + x) value)
-            )
-          else
-            concatAttrs value (
-              name2: value2: name + " = " + name2 + "," + (assert builtins.isString value2; value2)
-            )
-        )
-      )
-    );
-  in {
+}: let
+  notify-brightness = pkgs.writeShellScriptBin "notify-brightness" ''
+    getvalue() {
+      echo "$(${pkgs.brightnessctl}/bin/brightnessctl g) * 100 / $(${pkgs.brightnessctl}/bin/brightnessctl m)" | bc
+    }
+    geticon() {
+      if [ "$1" -eq 0 ]; then
+        echo "notification-display-brightness-off"
+      elif [ "$1" -lt 20 ]; then
+        echo "notification-display-brightness-low"
+      elif [ "$1" -lt 50 ]; then
+        echo "notification-display-brightness-medium"
+      elif [ "$1" -lt 100 ]; then
+        echo "notification-display-brightness-high"
+      else
+        echo "notification-display-brightness-full"
+      fi
+    }
+    ${pkgs.brightnessctl}/bin/brightnessctl "$@"
+    value="$(getvalue)"
+    # shellcheck disable=all
+    icon="$(geticon $value)"
+    ${pkgs.dunst}/bin/dunstify \
+      --appname=brightness \
+      --urgency=low \
+      --timeout=2000 \
+      --icon="$icon" \
+      --hints=int:value:"$value" \
+      --hints=string:x-dunst-stack-tag:brightness \
+      "Brightness: $value%"
+  '';
+in {
+  wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
     systemdIntegration = true;
     xwayland = {
       enable = true;
+      hidpi = false;
     };
-    extraConfig = with config.colorscheme.colors;
-      mkHyprlandVariables {
-        input = {
-          kb_layout = "us";
-          #kb_variant = "nodeadkeys";
-          follow_mouse = true;
-          touchpad = {
-            natural_scroll = true;
-          };
-        };
-        general = {
-          border_size = 2;
-          gaps_in = 4;
-          gaps_out = 10;
-          "col.active_border" = "0xff${base03}";
-          "col.inactive_border" = "0xff${base01}";
-          cursor_inactive_timeout = 5;
-          layout = "master";
-        };
-        decoration = {
-          rounding = 2;
-          multisample_edges = true;
-          active_opacity = 0.9;
-          inactive_opacity = 0.65;
-          fullscreen_opacity = 1.0;
-          blur = true;
-          blur_size = 6;
-          blur_passes = 3;
-          blur_new_optimizations = true;
-          blur_ignore_opacity = true;
-          drop_shadow = false;
-          shadow_range = 12;
-          shadow_offset = "3 3";
-          "col.shadow" = "0x44000000";
-          "col.shadow_inactive" = "0x66000000";
-        };
-        animations = {
-          enabled = true;
-        };
-        master = {
-          new_is_master = false;
-          new_on_top = false;
-          no_gaps_when_only = true;
-        };
-        gestures = {
-          workspace_swipe = true;
-        };
-      }
-      + "\n"
-      + mkHyprlandBinds {
-        bezier = {
-          linear = "0,0,1,1";
-        };
-      }
-      + "\n"
-      + mkHyprlandBinds {
-        monitor = {
-          eDP-1 = "preferred,0x0,1";
-        };
-        workspace = {
-          eDP-1 = "1";
-        };
-        animation = {
-          windows = "1,1,linear,slide";
-          windowsIn = "1,1,linear,popin";
-          windowsOut = "1,1,linear,popin";
-          fade = "1,3,linear";
-          workspaces = "1,1,linear,slide";
-          specialWorkspace = "1,2,linear,slidevert";
-        };
-        wsbind = {
-          # 1-10 ws to screen 1
-          "1" = "eDP-1";
-          "2" = "eDP-1";
-          "3" = "eDP-1";
-          "4" = "eDP-1";
-          "5" = "eDP-1";
-          "6" = "eDP-1";
-          "7" = "eDP-1";
-          "8" = "eDP-1";
-          "9" = "eDP-1";
-          "10" = "eDP-1";
-        };
-        bind = {
-          ## audio control
-          ",XF86AudioRaiseVolume" = "exec,${notify-volume}/bin/notify-volume -i 1";
-          ",XF86AudioLowerVolume" = "exec,${notify-volume}/bin/notify-volume -d 1";
-          ",XF86AudioMute" = "exec,${notify-volume}/bin/notify-volume -t";
-          #  ",XF86AudioPlay" = "exec,playerctl play-pause";
-          #  ",XF86AudioNext" = "exec,playerctl next";
-          #  ",XF86AudioPrev" = "exec,playerctl previous";
-          ## brightness control
-          ",XF86MonBrightnessUp" = "exec,${notify-brightness}/bin/notify-brightness s +5%";
-          ",XF86MonBrightnessDown" = "exec,${notify-brightness}/bin/notify-brightness s 5%-";
-          ## display control
-          ",XF86Display" = "exec,${lock}";
-          ## killing application
-          ",XF86RFKill" = "killactive,";
-          # STARTERS
-          "SUPER,Return" = "exec,${terminal}";
-          #  "SUPER,B" = "exec,${chromium}";
-          #"SUPER,d" = "exec,";
-          "SUPER,space" = "exec,${pkgs.wofi}/bin/wofi -S drun -x 10 -y 10 -W 25% -H 60% -iI";
-          #"SUPER,space" = "exec,${pkgs.fuzzel}/bin/fuzzel";
-          "SUPER,k" = "togglespecialworkspace,";
-          "SUPER,o" = "toggleopaque,";
-          # SHORTCUT KEYS
-          "SUPER,C" = "killactive,";
-          "SUPER,F" = "fullscreen,";
-          "SUPER,V" = "togglefloating,e";
-          "SUPER,L" = "exec,${lock}";
+    extraConfig = with config.colorscheme.colors; ''
+      # See https://wiki.hyprland.org/Configuring/Monitors/
+      monitor=,preferred,auto,auto
 
-          # switch between workspaces directly
-          "SUPER, 1" = "workspace, 1";
-          "SUPER, 2" = "workspace, 2";
-          "SUPER, 3" = "workspace, 3";
-          "SUPER, 4" = "workspace, 4";
-          "SUPER, 5" = "workspace, 5";
-          "SUPER, 6" = "workspace, 6";
-          "SUPER, 7" = "workspace, 7";
-          "SUPER, 8" = "workspace, 8";
-          "SUPER, 9" = "workspace, 9";
-          "SUPER, 0" = "workspace, 10";
+      exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+      exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
-          # move containers between workspaces directly
-          "SUPER SHIFT, 1" = "movetoworkspace, 1";
-          "SUPER SHIFT, 2" = "movetoworkspace, 2";
-          "SUPER SHIFT, 3" = "movetoworkspace, 3";
-          "SUPER SHIFT, 4" = "movetoworkspace, 4";
-          "SUPER SHIFT, 5" = "movetoworkspace, 5";
-          "SUPER SHIFT, 6" = "movetoworkspace, 6";
-          "SUPER SHIFT, 7" = "movetoworkspace, 7";
-          "SUPER SHIFT, 8" = "movetoworkspace, 8";
-          "SUPER SHIFT, 9" = "movetoworkspace, 9";
-          "SUPER SHIFT, 0" = "movetoworkspace, 10";
-          "SUPER,mouse:274" = "killactive";
-        };
-        bindm = {
-          "SUPER,mouse:272" = "movewindow";
-          "SUPER,mouse:273" = "resizewindow";
-        };
-        bindl = {
-          ",switch:Lid Switch" = "exec,${lock} -fF && ${systemctl} hybrid-sleep";
-        };
-        windowrulev2 = [
-          "float,class:Wofi"
-          "float,class:fuzzel"
-          "tile,class:PPSSPPSDL"
-          # "noborder,class:Wofi"
-          "center,class:Wofi"
-          "center,class:fuzzel"
-          # no transparency for some windows
-          "opaque,class:PPSSPPSDL"
-          "opaque,class:xournalpp"
-        ];
-        #blurls = [
-        #  "waybar"
-        #];
-        exec-once = [
-          # Lock on Start
-          #"${pkgs.swaylock-effects}/bin/swaylock -fF"
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-        ];
-        exec = [
-          #"${lock}"
-          "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill"
-        ];
-      };
+      exec = ${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill
+
+      # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
+      input {
+          kb_layout = us
+          kb_variant =
+          kb_model =
+          kb_options =
+          kb_rules =
+
+          follow_mouse = 1
+
+          touchpad {
+              natural_scroll = no
+          }
+
+          sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+      }
+
+      general {
+          # See https://wiki.hyprland.org/Configuring/Variables/ for more
+
+          gaps_in = 4
+          gaps_out = 10
+          border_size = 2
+          col.active_border = 0xff${base03}
+          col.inactive_border = 0xff${base01}
+
+          layout = dwindle
+      }
+
+      decoration {
+          # See https://wiki.hyprland.org/Configuring/Variables/ for more
+
+          rounding = 10
+          blur = yes
+          blur_size = 3
+          blur_passes = 1
+          blur_new_optimizations = on
+
+          drop_shadow = yes
+          shadow_range = 4
+          shadow_render_power = 3
+          col.shadow = rgba(1a1a1aee)
+      }
+
+      animations {
+          enabled = yes
+
+          # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+
+          bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+
+          animation = windows, 1, 7, myBezier
+          animation = windowsOut, 1, 7, default, popin 80%
+          animation = border, 1, 10, default
+          animation = fade, 1, 7, default
+          animation = workspaces, 1, 6, default
+      }
+
+      dwindle {
+          # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+          pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+          preserve_split = yes # you probably want this
+      }
+
+      master {
+          # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+          new_is_master = true
+      }
+
+      gestures {
+          # See https://wiki.hyprland.org/Configuring/Variables/ for more
+          workspace_swipe = on
+      }
+
+      # Example per-device config
+      # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
+      device:epic mouse V1 {
+          sensitivity = -0.5
+      }
+
+      # Example windowrule v1
+      # windowrule = float, ^(kitty)$
+      # Example windowrule v2
+      # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
+      # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+
+      windowrulev2 = float,class:Wofi
+      windowrulev2 = center,class:Wofi
+
+
+      # See https://wiki.hyprland.org/Configuring/Keywords/ for more
+      $mainMod = SUPER
+
+      # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+      bind = $mainMod, Q, exec, ${pkgs.foot}/bin/footclient
+      bind = $mainMod, C, killactive,
+      bind = $mainMod, M, exit,
+      bind = $mainMod, E, exec, dolphin
+      bind = $mainMod, V, togglefloating,
+      bind = $mainMod, R, exec, ${pkgs.wofi}/bin/wofi --show drun
+      bind = $mainMod, P, pseudo, # dwindle
+      bind = $mainMod, J, togglesplit, # dwindle
+
+      # Move focus with mainMod + arrow keys
+      bind = $mainMod, left, movefocus, l
+      bind = $mainMod, right, movefocus, r
+      bind = $mainMod, up, movefocus, u
+      bind = $mainMod, down, movefocus, d
+
+      # Switch workspaces with mainMod + [0-9]
+      bind = $mainMod, 1, workspace, 1
+      bind = $mainMod, 2, workspace, 2
+      bind = $mainMod, 3, workspace, 3
+      bind = $mainMod, 4, workspace, 4
+      bind = $mainMod, 5, workspace, 5
+      bind = $mainMod, 6, workspace, 6
+      bind = $mainMod, 7, workspace, 7
+      bind = $mainMod, 8, workspace, 8
+      bind = $mainMod, 9, workspace, 9
+      bind = $mainMod, 0, workspace, 10
+
+      # Move active window to a workspace with mainMod + SHIFT + [0-9]
+      bind = $mainMod SHIFT, 1, movetoworkspace, 1
+      bind = $mainMod SHIFT, 2, movetoworkspace, 2
+      bind = $mainMod SHIFT, 3, movetoworkspace, 3
+      bind = $mainMod SHIFT, 4, movetoworkspace, 4
+      bind = $mainMod SHIFT, 5, movetoworkspace, 5
+      bind = $mainMod SHIFT, 6, movetoworkspace, 6
+      bind = $mainMod SHIFT, 7, movetoworkspace, 7
+      bind = $mainMod SHIFT, 8, movetoworkspace, 8
+      bind = $mainMod SHIFT, 9, movetoworkspace, 9
+      bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+      # Scroll through existing workspaces with mainMod + scroll
+      bind = $mainMod, mouse_down, workspace, e+1
+      bind = $mainMod, mouse_up, workspace, e-1
+
+      # Media Keys
+      bind = ,XF86MonBrightnessUp, exec,${notify-brightness}/bin/notify-brightness s +5%
+      bind = ,XF86MonBrightnessDown, exec,${notify-brightness}/bin/notify-brightness s 5%-
+
+      # Move/resize windows with mainMod + LMB/RMB and dragging
+      bindm = $mainMod, mouse:272, movewindow
+      bindm = $mainMod, mouse:273, resizewindow
+
+    '';
   };
 }
