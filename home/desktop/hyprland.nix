@@ -270,8 +270,8 @@
           "SUPER,Return" = "exec,${terminal}";
           #  "SUPER,B" = "exec,${chromium}";
           #"SUPER,d" = "exec,";
-          #"SUPER,space" = "exec,${wofi} -S drun -x 10 -y 10 -W 25% -H 60%";
-          "SUPER,space" = "exec,${pkgs.fuzzel}/bin/fuzzel";
+          "SUPER,space" = "exec,${wofi} -S drun -x 10 -y 10 -W 25% -H 60% -iI";
+          #"SUPER,space" = "exec,${pkgs.fuzzel}/bin/fuzzel";
           "SUPER,k" = "togglespecialworkspace,";
           "SUPER,o" = "toggleopaque,";
           # SHORTCUT KEYS
