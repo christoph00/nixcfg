@@ -64,7 +64,7 @@ in {
           follow_mouse = 1
 
           touchpad {
-              natural_scroll = no
+              natural_scroll = yes
           }
 
           sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
@@ -85,7 +85,7 @@ in {
       decoration {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-          rounding = 10
+          rounding = 4
           blur = yes
           blur_size = 3
           blur_passes = 1
