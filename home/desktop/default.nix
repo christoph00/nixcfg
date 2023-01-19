@@ -106,8 +106,6 @@ in {
     gfn-electron
     moonlight-qt
 
-    obsidian
-
     xdg-utils
   ];
 
@@ -222,6 +220,13 @@ in {
         summary = "󰃞 Light";
         set_stack_tag = "brightness";
       };
+    };
+  };
+
+  xfconf.settings = {
+    xfce4-session = {
+      "startup/ssh-agent/enabled" = false;
+      "general/LockCommand" = "${pkgs.lightdm}/bin/dm-tool lock";
     };
   };
 
