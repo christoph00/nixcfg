@@ -41,15 +41,16 @@ in {
         #in "${pkgs.cage}/bin/cage -s ${pkgs.greetd.gtkgreet}/bin/gtkgreet -- -l -s ${gtkgreetStyle}";
       in
         sway-kiosk "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l &>/dev/null -s ${gtkgreetStyle} -l";
-      initial_session = {
-        command = "Hyprland";
-        user = "christoph";
-      };
+      #initial_session = {
+      #  command = "Hyprland";
+      #  user = "christoph";
+      #};
     };
   };
 
   environment.etc."greetd/environments".text = ''
     Hyprland
     fish
+    startxfce4
   '';
 }
