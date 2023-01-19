@@ -11,6 +11,7 @@
         imports = [
           inputs.impermanence.nixosModules.home-manager.impermanence
           inputs.nix-colors.homeManagerModule
+          inputs.nix-index-database.hmModules.nix-index
           ./cli
           ../modules/home-manager
         ];

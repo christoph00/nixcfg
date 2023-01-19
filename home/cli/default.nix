@@ -105,6 +105,9 @@ in {
     enableBashIntegration = true;
   };
 
+  programs.nix-index.enable = true;
+  programs.nix-index.enableBashIntegration = true;
+
   programs.bash = {
     enable = true;
   };
@@ -157,6 +160,7 @@ in {
         ".ssh"
         ".config/syncthing"
         ".config/gh"
+        ".cache/nix-index"
       ];
       allowOther = true;
     };
