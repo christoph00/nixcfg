@@ -25,7 +25,7 @@ in {
       package = pkgs.whitesur-icon-theme;
     };
     cursorTheme = {
-      name = "macOSBigSur-White";
+      name = "macOS-Monterey";
       package = pkgs.apple-cursor;
       size = 48;
     };
