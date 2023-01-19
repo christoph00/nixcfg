@@ -2,6 +2,8 @@
   self,
   inputs,
   config,
+  pkgs,
+  lib,
   ...
 }: {
   flake = {
@@ -27,6 +29,20 @@
             ++ mod;
         };
       };
+      mkCSS = file: let
+        fileName = lib.removeSuffix ".scss" (baseNameOf file);
+        compiledStyles =
+          pkgs.runCommand "compileScssFile"
+          {buildInputs = [pkgs.sass];} ''
+            mkdir "$out"
+            scss --sourcemap=none \
+                 --no-cache \
+                 --style compressed \
+                 --default-encoding utf-8 \
+                 "${file}" \
+                 >>"$out/${fileName}.css"
+          '';
+      in "${compiledStyles}/${fileName}.css";
     };
   };
 }
