@@ -107,6 +107,8 @@ in {
     moonlight-qt
 
     xdg-utils
+
+    google-chrome
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
