@@ -8,7 +8,7 @@ with config.colorscheme.colors; {
     obsidian
   ];
   home.file."Obsidian-base16-default" = {
-    target = "~/Dokumente/.obsidian/themes/base16-default.css";
+    target = "Dokumente/.obsidian/themes/base16-default.css";
     text = ''
       /* Credits to @gammons */
       /* https://github.com/gammons/base16-obsidian /*
