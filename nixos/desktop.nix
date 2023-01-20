@@ -60,6 +60,8 @@
     allowedUDPPorts = [21027 22000];
   };
 
+  programs.kdeconnect.enable = true;
+
   services.getty.autologinUser = "christoph";
 
   environment.loginShellInit = ''
