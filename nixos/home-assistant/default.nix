@@ -14,9 +14,11 @@
 
   services.home-assistant = {
     enable = true;
-    package = (pkgs.home-assistant.override {
-      })
-    .overridePythonAttrs {doCheck = false;};
+    package = pkgs.home-assistant.overrideAttrs (old: {
+      doCheck = false;
+      checkPhase = ":";
+      installCheckPhase = ":";
+    });
     openFirewall = true;
     configDir = "/nix/persist/hass";
     config = {
