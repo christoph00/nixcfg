@@ -62,6 +62,6 @@ in {
   xdg.configFile."geary/account_01/geary.ini".source = configFile;
 
   home.persistence = {
-    "/persist/home/christoph".directories = [".local/share/geary/account_01"];
+    "/nix/persist/home/christoph".directories = [".local/share/geary/account_01"];
   };
 }
