@@ -6,19 +6,6 @@
   networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443];
   networking.firewall.allowedUDPPorts = [53];
 
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "christoph@asche.co";
-    };
-    certs."net.r505.de" = {
-      domain = "*.net.r505.de";
-      dnsProvider = "cloudflare";
-      credentialsFile = config.age.secrets.cf-acme.path;
-      dnsResolver = "1.1.1.1:53";
-    };
-  };
-
   services.nginx = {
     enable = true;
     statusPage = true;

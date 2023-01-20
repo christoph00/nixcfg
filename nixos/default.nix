@@ -73,6 +73,7 @@
         ./home-assistant
       ];
       home-server.imports = [
+        ./acme.nix
         ./cloudflared.nix
         ./home-server.nix
         inputs.srvos.nixosModules.mixins-nginx
@@ -91,6 +92,7 @@
       syncthing.imports = [./syncthing.nix];
 
       gamestream.imports = [
+        ./acme.nix
         ./sunshine.nix
       ];
     };

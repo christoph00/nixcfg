@@ -88,4 +88,5 @@
     owner = "christoph";
     mode = "660";
   };
+  age.secrets.cf-acme.file = ../../secrets/cf-acme;
 }

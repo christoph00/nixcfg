@@ -12,7 +12,7 @@ let
 in {
   "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca oc1];
   "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 air13 futro tower oca oc1];
-  "secrets/cf-acme".publicKeys = [christoph_air13 futro oca oc1];
+  "secrets/cf-acme".publicKeys = [christoph_air13 futro oca oc1 tower];
   "secrets/futro-cf".publicKeys = [christoph_air13 futro];
   "secrets/ha-serviceaccount".publicKeys = [christoph_air13 futro];
   "secrets/ha-secrets.yaml".publicKeys = [christoph_air13 futro];
