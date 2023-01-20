@@ -65,10 +65,8 @@
   programs.kdeconnect.enable = true;
 
   programs.steam.enable = true;
-  hardware = {
-    xone.enable = true;
-  };
-  hardware.steam-hardware.enable = true;
+  
+  #hardware.steam-hardware.enable = true;
   #services.getty.autologinUser = "christoph";
 
   #environment.loginShellInit = ''
