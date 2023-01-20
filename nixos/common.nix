@@ -83,6 +83,7 @@
       "video"
       "audio"
       "input"
+      "uinput"
       "dbus"
       "adbusers"
       "lp"

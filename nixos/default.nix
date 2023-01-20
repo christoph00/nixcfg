@@ -89,6 +89,10 @@
         ./win11.nix
       ];
       syncthing.imports = [./syncthing.nix];
+
+      gamestream.imports = [
+        ./sunshine.nix
+      ];
     };
   };
 }

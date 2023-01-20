@@ -28,6 +28,7 @@
     implementation = "broker";
     packages = [pkgs.gcr pkgs.dconf];
   };
+  hardware.uinput.enable = true;
 
   hardware.pulseaudio.enable = false;
   services.pipewire = {
