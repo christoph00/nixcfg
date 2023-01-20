@@ -107,7 +107,7 @@ in {
     gfn-electron
     moonlight-qt
 
-    gtk-vnc
+    tigervnc
 
     xdg-utils
 
