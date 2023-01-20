@@ -5,8 +5,8 @@
   ...
 }: let
   config = ''
-    cert = "${config.security.acme.certs."net.r505.de".directory}/fullchain.pem";
-    pkey = "${config.security.acme.certs."net.r505.de".directory}/key.pem";
+    cert = "/var/lib/acme/net.r505.de/cert.pem";
+    pkey = "/var/lib/acme/net.r505.de/key.pem";
     origin_web_ui_allowed = wan
     origin_pin_allowed = wan
     adapter_name = /dev/dri/renderD128
