@@ -5,9 +5,23 @@
   ...
 }: let
   config = ''
-    origin_web_ui_allowed = lan
+    origin_web_ui_allowed = wan
+    origin_pin_allowed = wan
     adapter_name = /dev/dri/renderD128
     hevc_mode = 1
+    fps = [30, 60]
+    resolutions = [
+      352x240,
+    480x360,
+    858x480,
+    1280x720,
+    1920x1080,
+    2560x1080,
+    3440x1440,
+    1920x1200,
+    3860x2160,
+    3840x1600,
+    ]
   '';
   configFile = pkgs.writeTextFile {
     name = "sunshine.conf";
@@ -16,7 +30,7 @@
 in {
   systemd.services.sunshine = {
     description = "Sunshine Gamestream host";
-    wantedBy = ["multi-user.target"];
+    wantedBy = ["graphical-session.target"];
 
     serviceConfig = {
       Type = "simple";
