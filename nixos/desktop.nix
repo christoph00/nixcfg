@@ -65,8 +65,11 @@
   services.getty.autologinUser = "christoph";
 
   environment.loginShellInit = ''
-    [[ "$(tty)" == /dev/tty? ]] && ${pkgs.vlock}/bin/vlock -c
-    [[ "$(tty)" == /dev/tty1 ]] && Hyprland
+    if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+        exec Hyprland
+    elif [ -z $DISPLAY ] && [ "$(tty)" != "/dev/tty1" ]; then
+        ${pkgs.vlock}/bin/vlock -c
+    fi
   '';
 
   xdg.portal = {
