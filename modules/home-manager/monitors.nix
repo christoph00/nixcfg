@@ -47,7 +47,7 @@ in {
         scale = mkOption {
           type = types.str;
           default = "1";
-        }
+        };
       };
     });
   };
