@@ -62,15 +62,21 @@
 
   programs.kdeconnect.enable = true;
 
-  services.getty.autologinUser = "christoph";
+  #services.getty.autologinUser = "christoph";
 
-  environment.loginShellInit = ''
-    if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-        exec Hyprland
-    elif [ -z $DISPLAY ] && [ "$(tty)" != "/dev/tty1" ]; then
-        ${pkgs.vlock}/bin/vlock -c
-    fi
-  '';
+  #environment.loginShellInit = ''
+  #  if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+  #      exec Hyprland
+  #  elif [ -z $DISPLAY ] && [ "$(tty)" != "/dev/tty1" ]; then
+  #      ${pkgs.vlock}/bin/vlock -c
+  #  fi
+  #'';
+
+  autologin-graphical-session = {
+    enable = true;
+    user = "christoph";
+    sessionScript = "Hyprland";
+  };
 
   xdg.portal = {
     enable = true;

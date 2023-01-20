@@ -45,6 +45,7 @@
         inputs.hyprland.nixosModules.default
         self.nixosModules.default
         self.nixosModules.home-manager
+        self.nixosModules.autologin-graphical-session
         inputs.srvos.nixosModules.desktop
         ./desktop.nix
         ./fonts.nix
