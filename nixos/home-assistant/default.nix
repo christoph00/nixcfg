@@ -102,7 +102,7 @@
       "wake_on_lan"
       "cast"
       #  "wled"
-      "xiaomi_miio"
+      #"xiaomi_miio"
       "xiaomi_ble"
       "openweathermap"
       "weather"
