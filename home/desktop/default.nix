@@ -107,6 +107,8 @@ in {
     gfn-electron
     moonlight-qt
 
+    tigervnc
+
     xdg-utils
 
     google-chrome
