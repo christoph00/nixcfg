@@ -48,14 +48,15 @@ in {
       (
         builtins.concatStringsSep "\n" (
           map
-          (m: ''
-            monitor=${m.name},${toString m.width}x${toString m.height}@${toString m.refreshRate},${toString m.x}x${toString m.y},${
-              if m.enabled
-              then "1"
-              else "0"
-            }
-            ${lib.optionalString (m.workspace != null) "workspace=${m.name},${m.workspace}"}
-          '')
+          (m:
+            if m.enabled
+            then ''
+              monitor=${m.name},${toString m.width}x${toString m.height}@${toString m.refreshRate},${toString m.x}x${toString m.y},${toString m.scale}
+              ${lib.optionalString (m.workspace != null) "workspace=${m.name},${m.workspace}"}
+            ''
+            else ''
+              monitor=${m.name},disabled
+            '')
           config.monitors
         )
       )
@@ -79,6 +80,7 @@ in {
 
               touchpad {
                   natural_scroll = yes
+                  drag_lock = true
               }
 
               sensitivity = 0 # -1.0 - 1.0, 0 means no modification.

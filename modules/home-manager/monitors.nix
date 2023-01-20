@@ -44,6 +44,10 @@ in {
           type = types.nullOr types.str;
           default = null;
         };
+        scale = mkOption {
+          type = types.str;
+          default = "1";
+        }
       };
     });
   };
