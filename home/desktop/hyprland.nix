@@ -219,7 +219,7 @@ in {
       )
 
       (
-        if config.networking.hostname == "tower"
+        if config.networking.hostName == "tower"
         then ''
           # tower
           exec-once=steam
