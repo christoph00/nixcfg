@@ -38,6 +38,7 @@
         modules = [
           self.nixosModules.server
           self.nixosModules.virtual
+          self.nixosModules.webmail
           ./oca
         ];
       };

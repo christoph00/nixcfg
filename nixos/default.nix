@@ -81,6 +81,8 @@
 
       code-server.imports = [./code-server.nix];
 
+      webmail.imports = [./webmail.nix];
+
       vm-win11.imports = [
         ./gpu_passthrough.nix
         ./win11.nix
