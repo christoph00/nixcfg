@@ -64,18 +64,7 @@
 
   programs.kdeconnect.enable = true;
 
-  #programs.steam.enable = true;
-  
-  #hardware.steam-hardware.enable = true;
-  #services.getty.autologinUser = "christoph";
-
-  #environment.loginShellInit = ''
-  #  if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-  #      exec Hyprland
-  #  elif [ -z $DISPLAY ] && [ "$(tty)" != "/dev/tty1" ]; then
-  #      ${pkgs.vlock}/bin/vlock -c
-  #  fi
-  #'';
+  programs.steam.enable = true;
 
   autologin-graphical-session = {
     enable = true;
