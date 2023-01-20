@@ -25,6 +25,7 @@ in {
     gamescope
     protontricks
     sunshine
+    wayvnc
   ];
   home.persistence = {
     "/nix/persist/games/christoph" = {
