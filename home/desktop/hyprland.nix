@@ -217,18 +217,6 @@ in {
 
         ''
       )
-
-      (
-        if config.networking.hostName == "tower"
-        then ''
-          # tower
-          exec-once=steam
-          exec-onnce=wayvnc -g 0.0.0.0
-        ''
-        else ''
-          # other hosts
-        ''
-      )
     ];
   };
 }
