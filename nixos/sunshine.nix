@@ -46,9 +46,4 @@ in {
   networking.firewall.allowedUDPPorts = [47998 47999 48000 48002];
 
   environment.persistence."/nix/persist".directories = ["/var/lib/sunshine"];
-
-  programs.steam.enable = true;
-  hardware = {
-    xone.enable = true;
-  };
 }
