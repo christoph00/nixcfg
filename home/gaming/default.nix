@@ -24,8 +24,6 @@ in {
     steam-with-pkgs
     gamescope
     protontricks
-    sunshine
-    wayvnc
   ];
   home.persistence = {
     "/nix/persist/games/christoph" = {
