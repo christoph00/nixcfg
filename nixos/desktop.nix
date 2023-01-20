@@ -68,8 +68,7 @@
   hardware = {
     xone.enable = true;
   };
-  hardware.steam.enable = true;
-
+  hardware.steam-hardware.enable = true;
   #services.getty.autologinUser = "christoph";
 
   #environment.loginShellInit = ''
