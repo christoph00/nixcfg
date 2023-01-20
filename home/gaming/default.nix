@@ -40,4 +40,14 @@ in {
       ];
     };
   };
+
+  # Start Steam on Login
+  systemd.user.services.steam = {
+    Unit.Description = "Steam Client";
+    Install.WantedBy = ["graphical-session.target"];
+    Unit.PartOf = ["graphical-session.target"];
+    Service.Type = "simple";
+    Service.ExecStart = "${steam-with-pkgs}/bin/steam -silent";
+    Service.Restart = "on-failure";
+  };
 }
