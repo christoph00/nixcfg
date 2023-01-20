@@ -56,8 +56,8 @@
   };
 
   networking.firewall = {
-    allowedTCPPorts = [22000];
-    allowedUDPPorts = [21027 22000];
+    allowedTCPPorts = [22000 47989 47990 5901];
+    allowedUDPPorts = [21027 22000 47989 47990 5901];
   };
 
   programs.kdeconnect.enable = true;
