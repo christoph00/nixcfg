@@ -55,6 +55,11 @@
     };
   };
 
+  networking.firewall = {
+    allowedTCPPorts = [22000];
+    allowedUDPPorts = [21027 22000];
+  };
+
   services.getty.autologinUser = "christoph";
 
   environment.loginShellInit = ''
