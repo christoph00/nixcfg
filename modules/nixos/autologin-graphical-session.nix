@@ -15,7 +15,7 @@ in {
     };
 
     sessionScript = lib.mkOption {
-      type = lib.types.path;
+      type = lib.types.str;
     };
   };
 
