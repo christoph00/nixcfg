@@ -16,7 +16,7 @@
 in {
   systemd.services.sunshine = {
     description = "Sunshine Gamestream host";
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = ["multi-user.target"];
 
     serviceConfig = {
       Type = "simple";
@@ -26,8 +26,8 @@ in {
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 47984 47989 47990 48010 ];
-  networking.firewall.allowedUDPPorts = [ 47998 47999 48000 48002 ];
+  networking.firewall.allowedTCPPorts = [47984 47989 47990 48010];
+  networking.firewall.allowedUDPPorts = [47998 47999 48000 48002];
 
-  environment.persistence."/persist/nix".directories = [ "/var/lib/sunshine" ];  security.wrappers.sunshine = {
+  environment.persistence."/persist/nix".directories = ["/var/lib/sunshine"];
 }
