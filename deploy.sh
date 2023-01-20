@@ -20,6 +20,6 @@ if [ $target == $local_hostname ]; then
 	sudo nixos-rebuild --flake .# "${command?}" ${extra_args}
 else
 	set -x
-	NIX_SSHOPTS=-A nixos-rebuild "${command?}" --flake ".#${target?}" --target-host "${target?}.lan.net.r505.de" --use-remote-sudo --use-substitutes ${extra_args}
+	NIX_SSHOPTS=-A nixos-rebuild "${command?}" --flake ".#${target?}" --target-host "${target?}" --use-remote-sudo --use-substitutes ${extra_args}
 fi
 
