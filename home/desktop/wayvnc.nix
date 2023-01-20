@@ -24,7 +24,7 @@
     Service = {
       Restart = "on-failure";
       ExecStart = ''
-        ${pkgs.wayvnc}/bin/wayvnc
+        ${pkgs.wayvnc}/bin/wayvnc -g -o HDMI-A-1
       '';
     };
 
