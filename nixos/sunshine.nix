@@ -5,10 +5,9 @@
   ...
 }: let
   certname = "net.lan.r505.de";
-  certs = config.security.acme.certs;
   config = ''
-    cert = "${certs.${certname}.directory}/fullchain.pem";
-    pkey = "${certs.${certname}.directory}/key.pem";
+    cert = "${config.security.acme.certs.${certname}.directory}/fullchain.pem";
+    pkey = "${config.security.acme.certs.${certname}.directory}/key.pem";
     origin_web_ui_allowed = wan
     origin_pin_allowed = wan
     adapter_name = /dev/dri/renderD128
