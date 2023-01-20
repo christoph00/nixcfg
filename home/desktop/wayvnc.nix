@@ -7,7 +7,11 @@
   home.packages = [pkgs.wayvnc];
 
   xdg.configFile."wayvnc/config".text = ''
+    enable_auth=false
+    address=0.0.0.0
     port=5901
+    private_key_file=/etc/wayvnc/key.pem
+    certificate_file=/etc/wayvnc/cert.pem
   '';
 
   systemd.user.services.wayvnc = {
@@ -19,7 +23,8 @@
 
     Service = {
       Restart = "on-failure";
-      ExecStart = ''        ${pkgs.wayvnc}/bin/wayvnc 0.0.0.0
+      ExecStart = ''
+        ${pkgs.wayvnc}/bin/wayvnc
       '';
     };
 

@@ -76,4 +76,16 @@
 
   # Secrets
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
+  age.secrets.wayvnc-key = {
+    file = ../../secrets/wayvnc-key;
+    path = "/etc/wayvnc/key.pem";
+    owner = "christoph";
+    mode = "660";
+  };
+  age.secrets.wayvnc-cert = {
+    file = ../../secrets/wayvnc-cert;
+    path = "/etc/wayvnc/cert.pem";
+    owner = "christoph";
+    mode = "660";
+  };
 }
