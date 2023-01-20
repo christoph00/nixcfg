@@ -4,5 +4,15 @@
   lib,
   ...
 }: {
-  imports = [./firefox.nix ./helix.nix ./vscode.nix ./office.nix ./discord.nix ./kdeconnect.nix ./foot.nix ./obsidian.nix ./geary.nix];
+  imports = [
+    ./firefox.nix
+    ./helix.nix
+    #./vscode.nix
+    ./office.nix
+    ./discord.nix
+    ./kdeconnect.nix
+    ./foot.nix
+    ./obsidian.nix
+    ./geary.nix
+  ];
 }
