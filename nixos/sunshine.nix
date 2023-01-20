@@ -5,7 +5,7 @@
   ...
 }: let
   certname = "net.lan.r505.de";
-  inherit (config.security.acme) certs;
+  certs = config.security.acme.certs;
   config = ''
     cert = "${certs.${certname}.directory}/fullchain.pem";
     pkey = "${certs.${certname}.directory}/key.pem";
