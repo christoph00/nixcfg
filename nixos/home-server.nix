@@ -62,7 +62,7 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar sftpgo bottom];
+  environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar my-sftpgo bottom];
 
   users.users.jellyfin.extraGroups = ["media"];
   services.jellyfin = {
