@@ -23,6 +23,7 @@ in {
       privacy-redirect
       startpage-private-search
       violentmonkey
+      user-agent-string-switcher
     ];
     profiles.christoph = {
       bookmarks = {};
