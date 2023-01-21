@@ -22,6 +22,7 @@ in {
       save-page-we
       privacy-redirect
       startpage-private-search
+      violentmonkey
     ];
     profiles.christoph = {
       bookmarks = {};

@@ -22,7 +22,7 @@ in {
     theme = with config.colorscheme.colors; {
       "*" = {
         text-color = mkLiteral "#${base05}";
-        background-color = "transparent";
+        background-color = mkLiteral "#${base00}";
 
         margin = 0;
         padding = 0;
@@ -31,7 +31,6 @@ in {
 
       "window" = {
         background-color = mkLiteral "#${base00}";
-        width = mkLiteral "50px";
         border-radius = mkLiteral "16px";
       };
 
@@ -56,7 +55,7 @@ in {
       };
 
       "entry" = {
-        placeholder = mkLiteral "Search";
+        placeholder = "Search";
         placeholder-color = mkLiteral "#${base03}";
       };
 
@@ -84,7 +83,7 @@ in {
       "element" = {
         padding = mkLiteral "8px 16px";
         spacing = mkLiteral "8px";
-        border-radius = mkLiteral "16px";
+        border-radius = mkLiteral "8px";
       };
 
       "element normal active" = {
