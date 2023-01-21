@@ -110,6 +110,10 @@
   };
   programs.mosh.enable = true;
 
+  environment.shellAliases = {
+    nrb = "nixos-rebuild --flake github:christoph00/nixcfg --use-remote-sudo boot";
+    nrs = "nixos-rebuild --flake github:christoph00/nixcfg --use-remote-sudo switch";
+  };
   environment.persistence."/nix/persist" = {
     directories = [
       "/etc/nixos"
