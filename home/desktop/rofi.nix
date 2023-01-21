@@ -57,6 +57,7 @@ in {
       "entry" = {
         placeholder = "Search";
         placeholder-color = mkLiteral "#${base03}";
+        background-color = mkLiteral "inherit";
       };
 
       "message" = {
