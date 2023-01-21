@@ -16,7 +16,7 @@ in {
         font-bold = "${mono-font}:style=Bold:size=9";
         font-italic = "${mono-font}:style=Medium Italic:size=9";
         font-bold-italic = "${mono-font}:style=Bold Italic:size=9";
-        #dpi-aware = "yes";
+        dpi-aware = "yes";
         locked-title = "no";
         pad = "25x25";
       };
