@@ -78,7 +78,8 @@ in {
     #./plasma.nix
     ./hyprland.nix
     ./waybar.nix
-    ./wayvnc.nix
+    #./wayvnc.nix
+    ./rofi.nix
   ];
 
   home.packages = with pkgs; [

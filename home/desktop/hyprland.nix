@@ -155,8 +155,8 @@ in {
           # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
           # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 
-          windowrulev2 = float,class:Wofi
-          windowrulev2 = center,class:Wofi
+          windowrulev2 = float,class:rofi
+          windowrulev2 = center,class:rofi
 
 
           # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -169,7 +169,7 @@ in {
           bind = $mainMod, E, exec, ${pkgs.cinnamon.nemo}/bin/nemo
           bind = $mainMod, V, togglefloating,
           bind = $mainMod, F, fullscreen, 0
-          bind = $mainMod, R, exec, ${pkgs.wofi}/bin/wofi -S drun -iIGa
+          bind = $mainMod, R, exec, ${config.programs.rofi.finalPackage}/bin/rofi -show drun
           bind = $mainMod, P, pseudo, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
 
