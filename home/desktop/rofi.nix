@@ -17,50 +17,91 @@ in {
       display-drun = "";
       drun-display-format = "{name}";
       show-icons = true;
+      hover-select = true;
     };
     theme = with config.colorscheme.colors; {
       "*" = {
         text-color = mkLiteral "#${base05}";
+        background-color = "transparent";
+
+        margin = 0;
+        padding = 0;
+        spacing = 0;
+      };
+
+      "window" = {
         background-color = mkLiteral "#${base00}";
+        width = mkLiteral "50px";
+        border-radius = mkLiteral "16px";
       };
 
-      "#window" = {
-        transparency = "background";
+      "mainbox" = {
+        padding = mkLiteral "12px";
       };
 
-      "#mainbox" = {
-        padding = mkLiteral "20px 0px 20px 0px";
-        background-color = mkLiteral "#${base05}";
-        border = mkLiteral "0px";
+      "inputbar" = {
+        background-color = mkLiteral "#${base01}";
+
         border-color = mkLiteral "#${base03}";
-        border-radius = mkLiteral "0px";
-        children = map mkLiteral ["inputbar" "message" "listview"];
+        border = mkLiteral "2px";
+        border-radius = mkLiteral "6px";
+
+        padding = mkLiteral "8px 16px";
+        spacing = mkLiteral "8px";
+        children = map mkLiteral ["prompt" "entry"];
       };
 
-      "#inputbar" = {margin = mkLiteral "0px 0px 20px 20px";};
+      "prompt" = {
+        text-color = mkLiteral "#${base06}";
+      };
 
-      "#element" = {padding = mkLiteral "12px 12px 12px 12px";};
+      "entry" = {
+        placeholder = mkLiteral "Search";
+        placeholder-color = mkLiteral "#${base03}";
+      };
 
-      "#element-icon" = {
-        horizontal-align = mkLiteral "0.5";
+      "message" = {
+        margin = mkLiteral "12px 0 0";
+        border-radius = mkLiteral "16px";
+        border-color = mkLiteral "#${base03}";
+        background-color = mkLiteral "#${base02}";
+      };
+
+      "textbox" = {
+        padding = mkLiteral "8px 24px";
+      };
+
+      "listview" = {
+        background-color = mkLiteral "transparent";
+
+        margin = mkLiteral "12px 0 0";
+        lines = mkLiteral "8";
+        columns = mkLiteral "1";
+
+        fixed-height = mkLiteral "false";
+      };
+
+      "element" = {
+        padding = mkLiteral "8px 16px";
+        spacing = mkLiteral "8px";
+        border-radius = mkLiteral "16px";
+      };
+
+      "element normal active" = {
+        text-color = mkLiteral "#${base09}";
+      };
+
+      "element selected normal, element selected active" = {
+        background-color = mkLiteral "#${base01}";
+      };
+
+      "element-icon" = {
+        size = mkLiteral "1em";
         vertical-align = mkLiteral "0.5";
-        padding = mkLiteral "0px 10px 0px 5px";
       };
 
-      "#element selected" = {
-        background-color = mkLiteral "#${base00}";
-        text-color = mkLiteral "#${base08}";
-      };
-
-      "#inputbar" = {
-        children = map mkLiteral ["textbox-prompt-colon" "entry"];
-      };
-
-      "#textbox-prompt-colon" = {
-        expand = false;
-        str = " ";
-        text-color = mkLiteral "#${base08}";
-        margin = mkLiteral "0px 0.3em 0em 0em";
+      "element-text" = {
+        text-color = mkLiteral "inherit";
       };
     };
   };
