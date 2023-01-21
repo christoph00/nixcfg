@@ -90,15 +90,13 @@ in {
     wl-clipboard
     wlr-randr
     wireplumber
-    wofi
+    wtype
 
     wlogout
     clipman
     wdisplays
     kanshi
-    wob
 
-    gnome3.nautilus
     gnome3.eog
 
     pavucontrol

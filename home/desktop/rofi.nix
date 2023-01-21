@@ -3,21 +3,22 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  inherit (config.lib.formats.rasi) mkLiteral;
+in {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
     font = "${config.fontProfiles.monospace.family} 12";
     plugins = [pkgs.rofi-calc pkgs.rofi-emoji];
     terminal = "${pkgs.foot}/bin/footclient";
+    location = "center";
     extraConfig = {
       display-drun = "";
       drun-display-format = "{name}";
       show-icons = true;
     };
-    theme = with config.colorscheme.colors; let
-      inherit (config.lib.formats.rasi) mkLiteral;
-    in {
+    theme = with config.colorscheme.colors; {
       "*" = {
         text-color = mkLiteral "#${base05}";
         background-color = mkLiteral "#${base00}";
