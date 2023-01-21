@@ -84,6 +84,8 @@ in {
         padding = mkLiteral "8px 16px";
         spacing = mkLiteral "8px";
         border-radius = mkLiteral "8px";
+        background = mkLiteral "inherit";
+        text-color = mkLiteral "inherit";
       };
 
       "element normal active" = {
@@ -101,6 +103,7 @@ in {
 
       "element-text" = {
         text-color = mkLiteral "inherit";
+        background-color = mkLiteral "inherit";
       };
     };
   };
