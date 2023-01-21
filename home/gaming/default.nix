@@ -21,7 +21,7 @@
   };
 in {
   home.packages = with pkgs; [
-    steam-with-pkgs
+    steam-with-packages
     gamescope
     protontricks
   ];
@@ -42,7 +42,7 @@ in {
     Install.WantedBy = ["graphical-session.target"];
     Unit.PartOf = ["graphical-session.target"];
     Service.Type = "simple";
-    Service.ExecStart = "${steam-with-pkgs}/bin/steam -silent";
+    Service.ExecStart = "${pkgs.steam-with-packages}/bin/steam -silent";
     Service.Restart = "on-failure";
   };
 }

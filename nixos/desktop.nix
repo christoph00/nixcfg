@@ -65,6 +65,7 @@
   programs.kdeconnect.enable = true;
 
   programs.steam.enable = true;
+  programs.steam.package = pkgs.steam-with-packages;
 
   autologin-graphical-session = {
     enable = true;

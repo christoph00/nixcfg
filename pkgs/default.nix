@@ -14,4 +14,21 @@
   ha-lovelace-better-thermostat-ui-card = pkgs.callPackage ./ha-lovelace/better-thermostat-ui-card.nix {};
   ha-components-better-thermostat = pkgs.callPackage ./ha-components/better_thermostat.nix {};
   ha-components-ble-monitor = pkgs.callPackage ./ha-components/ble_monitor.nix {};
+
+  steam-with-packages = pkgs.steam.override {
+    extraPkgs = pkgs:
+      with pkgs; [
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
+        gamescope
+      ];
+  };
 }
