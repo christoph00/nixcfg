@@ -37,10 +37,9 @@
   };
   users.users.nginx.extraGroups = ["acme"];
 
-  #users.users.sftpgo.extraGroups = ["media"];
+  users.users.sftpgo.extraGroups = ["media"];
   services.sftpgo = {
-    enable = false;
-    openFirewall = true;
+    enable = true;
     settings = {
       data_provider = {
         driver = "bolt";
