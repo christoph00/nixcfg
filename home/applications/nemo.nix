@@ -23,7 +23,19 @@
     done
   '';
 in {
-  home.packages = [pkgs.gnome.file-roller gvfs];
+  home.packages = [
+    pkgs.gnome.file-roller
+    gvfs
+    pkgs.cinnamon.nemo
+  ];
+
+  dconf.settings."org/nemo/window-state" = {
+    start-with-menu-bar = false;
+  };
+
+  xdg.mimeApps.defaultApplications = {
+    "inode/directory" = ["nemo.desktop"];
+  };
 
   xdg.dataFile."nemo/actions/extract-here.nemo_action".text = ''
     [Nemo Action]
