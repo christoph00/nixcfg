@@ -166,9 +166,9 @@ in {
           bind = $mainMod, Q, exec, ${pkgs.foot}/bin/footclient
           bind = $mainMod, C, killactive,
           bind = $mainMod, M, exit,
-          bind = $mainMod, E, exec, dolphin
+          bind = $mainMod, E, exec, ${pkgs.cinnamon.nemo}/bin/nemo
           bind = $mainMod, V, togglefloating,
-          bind = $mainMod, F, fullscreen, 1
+          bind = $mainMod, F, fullscreen, 0
           bind = $mainMod, R, exec, ${pkgs.wofi}/bin/wofi -S drun -iIGa
           bind = $mainMod, P, pseudo, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle

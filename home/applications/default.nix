@@ -11,6 +11,7 @@
     ./office.nix
     ./discord.nix
     ./kdeconnect.nix
+    ./nemo.nix
     ./foot.nix
     ./obsidian.nix
     ./geary.nix
