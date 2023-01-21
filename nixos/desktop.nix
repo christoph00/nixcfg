@@ -84,6 +84,7 @@
   programs.hyprland = {
     enable = true;
     package = null; # Managed by home manager
+    xwayland.enable = true;
   };
 
   # Udev Rules
