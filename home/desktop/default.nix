@@ -97,8 +97,6 @@ in {
     wdisplays
     kanshi
 
-    gnome3.eog
-
     pavucontrol
 
     vlc
