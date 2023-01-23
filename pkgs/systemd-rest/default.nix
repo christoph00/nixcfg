@@ -8,13 +8,13 @@
 with lib;
   buildGoModule rec {
     pname = "systemd-rest";
-    version = "1.0.0";
+    version = "1.0.1";
 
     src = fetchFromGitHub {
       owner = "christoph00";
       repo = pname;
       rev = "v${version}";
-      sha256 = "1x9js5syyrw4arr4g8y63mjjn0f4mlss31crng53dyfcaa50fbn0";
+      sha256 = "1d85lnffi6klxf02caq25zq8g98p7m9kn6hwl34wpqb23c8kzqdn";
     };
 
     ldflags = [
@@ -23,7 +23,7 @@ with lib;
       "-extldflags '-static'"
     ];
 
-    subPackages = ["."];
+    subPackages = ["./cmd/systemd-rest"];
 
     #vendorSha256 = lib.fakeSha256;
     vendorSha256 = "sha256-qQ3QrbeHgnYFHSwGjDkviIf2Nj+fZQsYr91yTfzOcMA=";
