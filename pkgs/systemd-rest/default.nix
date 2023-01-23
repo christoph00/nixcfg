@@ -13,7 +13,7 @@ with lib;
     src = fetchFromGitHub {
       owner = "christoph00";
       repo = pname;
-      rev = "${version}";
+      rev = "v${version}";
       sha256 = "1x9js5syyrw4arr4g8y63mjjn0f4mlss31crng53dyfcaa50fbn0";
     };
 
