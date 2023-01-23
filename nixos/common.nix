@@ -110,6 +110,8 @@
   };
   programs.mosh.enable = true;
 
+  environment.systemPackages = [pkgs.git];
+
   environment.shellAliases = {
     nrb = "nixos-rebuild --flake github:christoph00/nixcfg --use-remote-sudo boot";
     nrs = "nixos-rebuild --flake github:christoph00/nixcfg --use-remote-sudo switch";
