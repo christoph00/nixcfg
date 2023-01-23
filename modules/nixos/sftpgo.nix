@@ -2,381 +2,156 @@
   config,
   lib,
   pkgs,
-  utils,
   ...
 }:
 with lib; let
   cfg = config.services.sftpgo;
+  format = pkgs.formats.json {};
+  configFile = format.generate "config.json" cfg.settings;
   defaultUser = "sftpgo";
-  settingsFormat = pkgs.formats.json {};
-  configFile = settingsFormat.generate "sftpgo.json" cfg.settings;
-  hasPrivilegedPorts = any (port: port > 0 && port < 1024) (
-    catAttrs "port" (
-      cfg.settings.httpd.bindings
-      ++ cfg.settings.ftpd.bindings
-      ++ cfg.settings.sftpd.bindings
-      ++ cfg.settings.webdavd.bindings
-    )
-  );
+  defaultGroup = defaultUser;
 in {
-  options.services.sftpgo = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-      description = mdDoc "sftpgo";
-    };
+  options = {
+    services.sftpgo = {
+      enable = mkEnableOption "sftpgo";
+      openFirewall = mkOption {
+        type = types.bool;
+        default = false;
+        description = lib.mdDoc ''
+          Open ports in the firewall for sftpgo.
+        '';
+      };
+      user = mkOption {
+        type = types.str;
+        default = defaultUser;
+        example = "yourUser";
+        description = mdDoc ''
+          The user to run sftpgo as.
+          By default, a user named `${defaultUser}` will be created whose home
+          directory is [dataDir](#opt-services.sftpgo.dataDir).
+        '';
+      };
 
-    package = mkOption {
-      type = types.package;
-      default = pkgs.sftpgo;
-      defaultText = literalExpression "pkgs.sftpgo";
-      description = mdDoc ''
-        Which SFTPGo package to use.
-      '';
-    };
+      group = mkOption {
+        type = types.str;
+        default = defaultGroup;
+        example = "yourGroup";
+        description = mdDoc ''
+          The group to run sftpgo under.
+          By default, a group named `${defaultGroup}` will be created.
+        '';
+      };
 
-    extraArgs = mkOption {
-      type = with types; listOf str;
-      default = [];
-      description = mdDoc ''
-        Additional command line arguments to pass to the sftpgo daemon.
-      '';
-      example = ["--log-level" "info"];
-    };
+      package = mkOption {
+        type = types.package;
+        default = pkgs.sftpgo;
+        defaultText = literalExpression "pkgs.sftpgo";
+        description = mdDoc ''
+          Which SFTPGo package to use.
+        '';
+      };
 
-    dataDir = mkOption {
-      type = types.str;
-      default = "/var/lib/sftpgo";
-      description = mdDoc ''
-        The directory where SFTPGo stores its data files.
-      '';
-    };
+      settings = mkOption {
+        type = format.type;
+        description = lib.mdDoc ''
+            Sftpgo config
+          `${configFile}`
+        '';
+        default = {};
+      };
+      tls = mkOption {
+        type = types.bool;
+        default = false;
+        description = lib.mdDoc ''
+          to be configured via [](#opt-security.acme.certs).
+        '';
+      };
+      domain = mkOption {
+        type = types.str;
+        example = "dav.example.com";
+        description = lib.mdDoc "Domain for webdav.";
+      };
 
-    user = mkOption {
-      type = types.str;
-      default = defaultUser;
-      description = mdDoc ''
-        User account name under which SFTPGo runs.
-      '';
-    };
-
-    group = mkOption {
-      type = types.str;
-      default = defaultUser;
-      description = mdDoc ''
-        Group name under which SFTPGo runs.
-      '';
-    };
-
-    loadDataFile = mkOption {
-      default = null;
-      type = with types; nullOr path;
-      description = mdDoc ''
-        Path to a json file containing users and folders to load (or update) on startup.
-        Check the [documentation](https://github.com/drakkan/sftpgo/blob/main/docs/full-configuration.md)
-        for the `--loaddata-from` command line argument for more info.
-      '';
-    };
-
-    settings = mkOption {
-      default = {};
-      description = mdDoc ''
-        The primary sftpgo configuration. See the
-        [configuration reference](https://github.com/drakkan/sftpgo/blob/main/docs/full-configuration.md)
-        for possible values.
-      '';
-      type = with types;
-        submodule {
-          freeformType = settingsFormat.type;
-          options = {
-            httpd.bindings = mkOption {
-              default = [];
-              description = mdDoc ''
-                Configure listen addresses and ports for httpd.
-              '';
-              type = types.listOf (types.submodule {
-                freeformType = settingsFormat.type;
-                options = {
-                  address = mkOption {
-                    type = types.str;
-                    default = "127.0.0.1";
-                    description = mdDoc ''
-                      Network listen address. Leave blank to listen on all available network interfaces.
-                      On *NIX you can specify an absolute path to listen on a Unix-domain socket.
-                    '';
-                  };
-
-                  port = mkOption {
-                    type = types.port;
-                    default = 8080;
-                    description = mdDoc ''
-                      The port for serving HTTP(S) requests.
-
-                      Setting the port to `0` disables listening on this interface binding.
-                    '';
-                  };
-
-                  enable_web_admin = mkOption {
-                    type = types.bool;
-                    default = true;
-                    description = mdDoc ''
-                      Enable the built-in web admin for this interface binding.
-                    '';
-                  };
-
-                  enable_web_client = mkOption {
-                    type = types.bool;
-                    default = true;
-                    description = mdDoc ''
-                      Enable the built-in web client for this interface binding.
-                    '';
-                  };
-                };
-              });
-            };
-
-            ftpd.bindings = mkOption {
-              default = [];
-              description = mdDoc ''
-                Configure listen addresses and ports for ftpd.
-              '';
-              type = types.listOf (types.submodule {
-                freeformType = settingsFormat.type;
-                options = {
-                  address = mkOption {
-                    type = types.str;
-                    default = "127.0.0.1";
-                    description = mdDoc ''
-                      Network listen address. Leave blank to listen on all available network interfaces.
-                      On *NIX you can specify an absolute path to listen on a Unix-domain socket.
-                    '';
-                  };
-
-                  port = mkOption {
-                    type = types.port;
-                    default = 0;
-                    description = mdDoc ''
-                      The port for serving FTP requests.
-
-                      Setting the port to `0` disables listening on this interface binding.
-                    '';
-                  };
-                };
-              });
-            };
-
-            sftpd.bindings = mkOption {
-              default = [];
-              description = mdDoc ''
-                Configure listen addresses and ports for sftpd.
-              '';
-              type = types.listOf (types.submodule {
-                freeformType = settingsFormat.type;
-                options = {
-                  address = mkOption {
-                    type = types.str;
-                    default = "127.0.0.1";
-                    description = mdDoc ''
-                      Network listen address. Leave blank to listen on all available network interfaces.
-                      On *NIX you can specify an absolute path to listen on a Unix-domain socket.
-                    '';
-                  };
-
-                  port = mkOption {
-                    type = types.port;
-                    default = 0;
-                    description = mdDoc ''
-                      The port for serving SFTP requests.
-
-                      Setting the port to `0` disables listening on this interface binding.
-                    '';
-                  };
-                };
-              });
-            };
-
-            webdavd.bindings = mkOption {
-              default = [];
-              description = mdDoc ''
-                Configure listen addresses and ports for webdavd.
-              '';
-              type = types.listOf (types.submodule {
-                freeformType = settingsFormat.type;
-                options = {
-                  address = mkOption {
-                    type = types.str;
-                    default = "127.0.0.1";
-                    description = mdDoc ''
-                      Network listen address. Leave blank to listen on all available network interfaces.
-                      On *NIX you can specify an absolute path to listen on a Unix-domain socket.
-                    '';
-                  };
-
-                  port = mkOption {
-                    type = types.port;
-                    default = 0;
-                    description = mdDoc ''
-                      The port for serving WebDAV requests.
-
-                      Setting the port to `0` disables listening on this interface binding.
-                    '';
-                  };
-                };
-              });
-            };
-
-            smtp = mkOption {
-              default = {};
-              description = mdDoc ''
-                SMTP configuration section.
-              '';
-              type = types.submodule {
-                freeformType = settingsFormat.type;
-                options = {
-                  host = mkOption {
-                    type = types.str;
-                    default = "";
-                    description = mdDoc ''
-                      Location of SMTP email server. Leave empty to disable email sending capabilities.
-                    '';
-                  };
-
-                  port = mkOption {
-                    type = types.port;
-                    default = 465;
-                    description = mdDoc "Port of the SMTP Server.";
-                  };
-
-                  encryption = mkOption {
-                    type = types.enum [0 1 2];
-                    default = 1;
-                    description = mdDoc ''
-                      Encryption scheme:
-                      - `0`: No encryption
-                      - `1`: TLS
-                      - `2`: STARTTLS
-                    '';
-                  };
-
-                  auth_type = mkOption {
-                    type = types.enum [0 1 2];
-                    default = 0;
-                    description = mdDoc ''
-                      - `0`: Plain
-                      - `1`: Login
-                      - `2`: CRAM-MD5
-                    '';
-                  };
-
-                  user = mkOption {
-                    type = types.str;
-                    default = "sftpgo";
-                    description = mdDoc "SMTP username.";
-                  };
-
-                  from = mkOption {
-                    type = types.str;
-                    default = "SFTPGo <sftpgo@example.com>";
-                    description = mdDoc ''
-                      From address.
-                    '';
-                  };
-                };
-              };
-            };
-          };
-        };
+      dataDir = mkOption {
+        type = types.path;
+        default = "/var/lib/sftpgo";
+        example = "/home/yourUser";
+        description = lib.mdDoc ''
+          The path where sftpgo data will exist.
+        '';
+      };
     };
   };
 
   config = mkIf cfg.enable {
-    services.sftpgo.settings = mapAttrs (name: mkDefault) {
-      ftpd.bindings = [{port = 0;}];
-      httpd.bindings = [{port = 0;}];
-      sftpd.bindings = [{port = 0;}];
-      webdavd.bindings = [{port = 0;}];
-      httpd.openapi_path = "${cfg.package}/openapi";
-      httpd.templates_path = "${cfg.package}/templates";
-      httpd.static_files_path = "${cfg.package}/static";
+    networking.firewall = mkIf cfg.openFirewall {
+      allowedTCPPorts = [2022 8080];
     };
-
-    users = optionalAttrs (cfg.user == defaultUser) {
-      users = {
-        ${defaultUser} = {
-          description = "SFTPGo system user";
-          isSystemUser = true;
-          group = defaultUser;
-          home = cfg.dataDir;
-          createHome = true;
-        };
-      };
-
-      groups = {
-        ${defaultUser} = {
-          members = [defaultUser];
-        };
+    users.users = mkIf (cfg.user == defaultUser) {
+      ${defaultUser} = {
+        group = cfg.group;
+        home = cfg.dataDir;
+        createHome = true;
+        uid = 256;
+        description = "sftpgo daemon user";
+        isSystemUser = true;
       };
     };
 
-    systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0750 ${cfg.user} ${cfg.group} -"
-    ];
-
+    users.groups = mkIf (cfg.group == defaultGroup) {
+      ${defaultGroup}.gid =
+        256;
+    };
     systemd.services.sftpgo = {
-      description = "SFTPGo daemon";
+      description = "Fully featured and highly configurable SFTP server";
+      wants = ["network.target"];
       after = ["network.target"];
       wantedBy = ["multi-user.target"];
 
       environment = {
-        SFTPGO_CONFIG_FILE = mkDefault configFile;
-        SFTPGO_LOG_FILE_PATH = mkDefault ""; # log to journal
-        SFTPGO_LOADDATA_FROM = mkIf (cfg.loadDataFile != null) cfg.loadDataFile;
+        SFTPGO_LOG_LEVEL = "info";
+        SFTPGO_LOG_FILE_PATH = "";
+        SFTPGO_DATA_PROVIDER__DRIVER = "bolt";
+        SFTPGO_DATA_PROVIDER__NAME = "${cfg.dataDir}/sftpgo.db";
       };
+      serviceConfig = {
+        StateDirectory = cfg.dataDir;
+        WorkingDirectory = cfg.dataDir;
+        ExecStart = "${cfg.package}/bin/sftpgo serve";
+        User = cfg.user;
+        Group = cfg.group;
 
-      serviceConfig = mkMerge [
-        ({
-            Type = "simple";
-            User = cfg.user;
-            Group = cfg.group;
-            ReadWritePaths = [cfg.dataDir];
-            LimitNOFILE = 8192; # taken from upstream
-            KillMode = "mixed";
-            ExecStart = "${cfg.package}/bin/sftpgo serve ${utils.escapeSystemdExecArgs cfg.extraArgs}";
-            ExecReload = "${pkgs.util-linux}/bin/kill -s HUP $MAINPID";
+        MemoryDenyWriteExecute = true;
+        NoNewPrivileges = true;
+        PrivateDevices = true;
+        PrivateMounts = true;
+        PrivateTmp = true;
+        PrivateUsers = true;
+        ProtectControlGroups = true;
+        ProtectHostname = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        RestrictNamespaces = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+        CapabilityBoundingSet = [
+          "~CAP_SYS_PTRACE"
+          "~CAP_SYS_ADMIN"
+          "~CAP_SETGID"
+          "~CAP_SETUID"
+          "~CAP_SETPCAP"
+          "~CAP_SYS_TIME"
+          "~CAP_KILL"
+        ];
 
-            # Service hardening
-            CapabilityBoundingSet = optional hasPrivilegedPorts "CAP_NET_BIND_SERVICE";
-            DevicePolicy = "closed";
-            LockPersonality = true;
-            NoNewPrivileges = true;
-            PrivateDevices = true;
-            PrivateTmp = true;
-            ProcSubset = "pid";
-            ProtectClock = true;
-            ProtectControlGroups = true;
-            ProtectHome = true;
-            ProtectHostname = true;
-            ProtectKernelLogs = true;
-            ProtectKernelModules = true;
-            ProtectKernelTunables = true;
-            ProtectProc = "invisible";
-            ProtectSystem = "strict";
-            RemoveIPC = true;
-            RestrictAddressFamilies = "AF_INET AF_INET6 AF_UNIX";
-            RestrictNamespaces = true;
-            RestrictRealtime = true;
-            RestrictSUIDSGID = true;
-            SystemCallArchitectures = "native";
-            SystemCallFilter = "~@clock @cpu-emulation @debug @mount @obsolete @reboot @swap @privileged @resources";
-            UMask = "0077";
-          }
-          // optionalAttrs hasPrivilegedPorts {
-            AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-          })
-        (mkIf (cfg.dataDir == "/var/lib/sftpgo") {
-          StateDirectory = "sftpgo";
-        })
-      ];
+        # Required to bind on ports lower than 1024.
+        AmbientCapabilities = "CAP_NET_BIND_SERVICE";
+
+        # Restart server on any problem.
+        Restart = "on-failure";
+        # ... Unless it is a configuration problem.
+        RestartPreventExitStatus = 2;
+      };
     };
   };
 }
