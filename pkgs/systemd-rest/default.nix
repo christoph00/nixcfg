@@ -28,19 +28,19 @@ with lib;
 
     CGO_ENABLED = 1;
 
-    subPackages = ["./cmd/systemd-rest"];
+    #subPackages = ["./cmd/systemd-rest"];
 
     #vendorSha256 = lib.fakeSha256;
     vendorSha256 = "sha256-44TbwYX1QGwGUjnL9TY8DKqZNNAI9A+CptoH1xtV7No=";
 
     doCheck = false;
 
-    #buildPhase = ''
-    #  go build -o systemd-rest ./cmd/systemd-rest
-    #'';
+    buildPhase = ''
+      go build -o systemd-rest ./cmd/systemd-rest
+    '';
 
     installPhase = ''
-      install -Dm755 systemd-rest -t $out/bin/systemd-rest
+      install -Dm755 systemd-rest -t $out/bin
     '';
 
     meta = {
