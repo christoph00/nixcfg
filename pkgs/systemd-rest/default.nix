@@ -26,7 +26,7 @@ with lib;
     subPackages = ["./cmd/systemd-rest"];
 
     #vendorSha256 = lib.fakeSha256;
-    vendorSha256 = "sha256-qQ3QrbeHgnYFHSwGjDkviIf2Nj+fZQsYr91yTfzOcMA=";
+    vendorSha256 = "sha256-44TbwYX1QGwGUjnL9TY8DKqZNNAI9A+CptoH1xtV7No=";
 
     #doCheck = false;
 
