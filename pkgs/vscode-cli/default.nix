@@ -18,7 +18,7 @@
     .${system}
     or throwSystem;
 
-  hash =
+  sha256 =
     {
       x86_64-linux = "sha256-JZWDLGXy6QG6bOUoFu9uPtY1vk3yvs5sUioMYuqywNc=";
 
@@ -35,7 +35,7 @@ in
 
       url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
 
-      inherit hash;
+      inherit sha256;
     };
     nativeBuildInputs = [autoPatchelfHook];
     buildInputs = [];
