@@ -12,6 +12,7 @@
   btm = "${pkgs.bottom}/bin/btm";
   terminal = "${pkgs.wezterm}/bin/wezterm";
   terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
+  launcher = "${config.programs.rofi.finalPackage}/bin/rofi -show drun";
 
   systemMonitor = terminal-spawn btm;
 
@@ -103,8 +104,9 @@ in {
 
         #output = builtins.map (m: m.name) (builtins.filter (m: m.isSecondary == false) config.monitors);
         modules-left = [
+          "custom/menu"
           "wlr/workspaces"
-          "wrl/taskbar"
+          #"wrl/taskbar"
         ];
         modules-center = [
           "hyprland/window"
@@ -167,7 +169,7 @@ in {
           exec = jsonOutput "menu" {
             text = "";
           };
-          on-click = "${pkgs.fuzzel}/bin/fuzzel";
+          on-click = "${launcher}";
         };
         "custom/hostname" = {
           exec = "echo $USER@$(hostname)";
