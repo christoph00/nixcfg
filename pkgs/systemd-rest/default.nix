@@ -3,6 +3,7 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
+  systemd,
   ...
 }:
 with lib;
@@ -16,6 +17,8 @@ with lib;
       rev = "v${version}";
       sha256 = "1d85lnffi6klxf02caq25zq8g98p7m9kn6hwl34wpqb23c8kzqdn";
     };
+
+    buildInputs = [systemd];
 
     ldflags = [
       "-s"
