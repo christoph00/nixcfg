@@ -8,15 +8,8 @@
   # Dependencies
   jq = "${pkgs.jq}/bin/jq";
   gamemoded = "${pkgs.gamemode}/bin/gamemoded";
-  systemctl = "${pkgs.systemd}/bin/systemctl";
-  journalctl = "${pkgs.systemd}/bin/journalctl";
-  playerctl = "${pkgs.playerctl}/bin/playerctl";
-  playerctld = "${pkgs.playerctl}/bin/playerctld";
-  pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   btm = "${pkgs.bottom}/bin/btm";
-  wofi = "${pkgs.wofi}/bin/wofi";
-  #hyprctl = "${inputs.hyprland.packages.${pkgs.system}.default}/bin/hyprctl";
   terminal = "${pkgs.wezterm}/bin/wezterm";
   terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
 
@@ -48,16 +41,7 @@
       }
 
 
-      #tray * {
-        padding: 0 6px;
-        border-left: 1px solid #${base00};
-      }
-
-      #tray *:first-child {
-        border-left: none;
-      }
-
-      #tray, #workspaces, #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
+      #taskbar, #tray, #workspaces, #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
         margin: 4px 2px;
         min-width: 20px;
         border-radius: 2px;
@@ -120,7 +104,7 @@ in {
         #output = builtins.map (m: m.name) (builtins.filter (m: m.isSecondary == false) config.monitors);
         modules-left = [
           "wlr/workspaces"
-          "hyprland/submap"
+          "wrl/taskbar"
         ];
         modules-center = [
           "hyprland/window"
