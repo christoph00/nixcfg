@@ -20,7 +20,7 @@
 
   sha256 =
     {
-      x86_64-linux = "sha256-JZWDLGXy6QG6bOUoFu9uPtY1vk3yvs5sUioMYuqywNc=";
+      x86_64-linux = "sha256-8phu17dn1sR6/n+Lj+ADjetobvSucf19BGnXOp8PqsA=";
 
       aarch64-linux = "05b9rphq69gra07gcpd1blmak1dgdspgdvm7vrvsbnz7nxyz3gdg";
     }
