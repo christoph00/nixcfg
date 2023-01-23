@@ -50,7 +50,7 @@
         ./desktop.nix
         ./fonts.nix
         #./plasma.nix
-        #./xfce.nix
+        ./xfce.nix
         #./greetd.nix
         ./printing.nix
       ];

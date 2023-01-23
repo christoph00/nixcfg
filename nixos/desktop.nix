@@ -68,7 +68,7 @@
   programs.steam.package = pkgs.steam-with-packages;
 
   autologin-graphical-session = {
-    enable = true;
+    enable = false;
     user = "christoph";
     sessionScript = "Hyprland";
   };

@@ -6,8 +6,15 @@
 }: {
   services.xserver = {
     enable = true;
-    desktopManager = {
-      xfce.enable = true;
+    layout = "us";
+    xkbOptions = "eurosign:e";
+    desktopManager.xfce = {
+      enable = true;
+    };
+    displayManager.lightdm = {
+      enable = true;
+      #autoLogin.enable = true;
+      #autoLogin.user = "christoph";
     };
   };
 }
