@@ -26,7 +26,7 @@ with lib;
     subPackages = ["."];
 
     vendorSha256 = lib.fakeSha256;
-    #vendorSha256 = "sha256-+i6jUImDMrsDnIPjIp8uM2BR1IYMqWG1OmvA2w/AfVQ=";
+    vendorSha256 = "sha256-qQ3QrbeHgnYFHSwGjDkviIf2Nj+fZQsYr91yTfzOcMA=";
 
     #doCheck = false;
 
