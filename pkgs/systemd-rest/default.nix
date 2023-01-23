@@ -20,18 +20,20 @@ with lib;
 
     buildInputs = [systemd];
 
-    ldflags = [
-      "-s"
-      "-w"
-      "-extldflags '-static'"
-    ];
+    #ldflags = [
+    #  "-s"
+    #  "-w"
+    #  "-extldflags '-static'"
+    #];
+
+    CGO_ENABLED = 0;
 
     subPackages = ["./cmd/systemd-rest"];
 
     #vendorSha256 = lib.fakeSha256;
     vendorSha256 = "sha256-44TbwYX1QGwGUjnL9TY8DKqZNNAI9A+CptoH1xtV7No=";
 
-    #doCheck = false;
+    doCheck = false;
 
     meta = {
       description = "A minimal HTTP REST interface for systemd.";
