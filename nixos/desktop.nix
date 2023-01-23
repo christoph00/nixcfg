@@ -20,7 +20,7 @@
     "tsx=on"
     "tsx_async_abort=off"
   ];
-  boot.plymouth.enable = true;
+  #boot.plymouth.enable = true;
 
   time.timeZone = "Europe/Berlin";
 
