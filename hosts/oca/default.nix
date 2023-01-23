@@ -41,6 +41,8 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
+  environment.systemPackages = [pkgs.vscode-cli];
+
   # ----------  Secrets  -----------------------------------------
   #age.secrets.cloudflared.file = ../../secrets/oca-cf;
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
