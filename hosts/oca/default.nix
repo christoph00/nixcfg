@@ -41,7 +41,7 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
-  environment.systemPackages = [pkgs.vscode-cli pkgs.nodejs-slim-14];
+  environment.systemPackages = [pkgs.vscode-cli pkgs.nodejs-slim-14_x];
 
   # ----------  Secrets  -----------------------------------------
   #age.secrets.cloudflared.file = ../../secrets/oca-cf;
