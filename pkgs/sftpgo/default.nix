@@ -25,7 +25,7 @@ with lib;
       "-w"
       "-extldflags '-static'"
     ];
-    tags = ["nopgxregisterdefaulttypes" "bundle"];
+    tags = ["nopgxregisterdefaulttypes" "bundle" "nosqlite"];
 
     #proxyVendor = false;
 
