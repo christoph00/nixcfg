@@ -3,9 +3,6 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
-  makeWrapper,
-  go,
-  git,
   ...
 }:
 with lib;
@@ -17,7 +14,7 @@ with lib;
       owner = "christoph00";
       repo = pname;
       rev = "${version}";
-      sha256 = "0a7w2qm80gj39c95sbd57lyq0dkyrdrrjmybbifjnr0jvbi6qqng";
+      sha256 = "1x9js5syyrw4arr4g8y63mjjn0f4mlss31crng53dyfcaa50fbn0";
     };
 
     ldflags = [
