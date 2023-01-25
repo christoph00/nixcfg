@@ -37,6 +37,8 @@ in {
     xplr
 
     comma
+
+    unrar
   ];
 
   home.sessionVariables = {
