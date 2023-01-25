@@ -85,6 +85,8 @@ in {
 
           }
 
+
+          # air13 keyboard
           device:at-translated-set-2-keyboard {
             kb_layout = us
             kb_options = caps:escape,compose:menu
@@ -93,7 +95,6 @@ in {
 
           general {
               # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
               gaps_in = 4
               gaps_out = 10
               border_size = 4

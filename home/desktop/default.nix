@@ -139,7 +139,7 @@ in {
   xdg.mimeApps.defaultApplications = associations;
 
   home.persistence = {
-    "/nix/persist/home/christoph".directories = [".config/libreoffice" ".config/GeForce\ NOW"];
+    "/nix/persist/home/christoph".directories = [".config/libreoffice" ".config/GeForce\ NOW" ".config/easyeffects"];
   };
 
   fontProfiles = {
@@ -227,4 +227,8 @@ in {
   };
 
   dconf.enable = true;
+
+  services.easyeffects = {
+    enable = true;
+  };
 }
