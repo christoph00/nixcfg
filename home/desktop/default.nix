@@ -215,6 +215,7 @@ in {
       day = 5500;
       night = 3700;
     };
+    tray = true;
     settings = {
       general.adjustment-method = "wayland";
     };
@@ -226,7 +227,7 @@ in {
     LIBSEAT_BACKEND = "logind";
     GTK_THEME = "${config.gtk.theme.name}";
     XCURSOR_THEME = "${config.gtk.cursorTheme.name}";
-    XCURSOR_SIZE = "${config.gtk.cursorTheme.size}";
+    XCURSOR_SIZE = "${toString config.gtk.cursorTheme.size}";
   };
 
   dconf.enable = true;
