@@ -75,12 +75,13 @@
 in {
   imports = [
     ./gtk.nix
-    ./plasma.nix
-    #./hyprland.nix
-    #./waybar.nix
+    #./plasma.nix
+    ./hyprland.nix
+    ./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
     #./xfce.nix
+    ./labwc.nix
   ];
 
   home.packages = with pkgs; [
@@ -128,9 +129,9 @@ in {
     NIXPKGS_ALLOW_UNFREE = 1;
   };
 
-  #xdg.mimeApps.enable = true;
-  #xdg.mimeApps.associations.added = associations;
-  #xdg.mimeApps.defaultApplications = associations;
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps.associations.added = associations;
+  xdg.mimeApps.defaultApplications = associations;
 
   home.persistence = {
     "/nix/persist/home/christoph".directories = [".config/libreoffice" ".config/GeForce\ NOW"];
@@ -175,7 +176,7 @@ in {
   };
 
   services.dunst = {
-    enable = false;
+    enable = true;
     iconTheme = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
@@ -227,7 +228,7 @@ in {
   };
 
   services.gammastep = {
-    enable = false;
+    enable = true;
     provider = "manual";
     duskTime = "18:35-20:15";
     dawnTime = "6:00-7:45";
@@ -235,15 +236,15 @@ in {
       day = 5500;
       night = 3700;
     };
-    # settings = {
-    #   general.adjustment-method = "wayland";
-    # };
+    settings = {
+      general.adjustment-method = "wayland";
+    };
   };
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "true";
     QT_QPA_PLATFORM = "wayland";
-    #   LIBSEAT_BACKEND = "logind";
+    LIBSEAT_BACKEND = "logind";
   };
 
   dconf.enable = true;
