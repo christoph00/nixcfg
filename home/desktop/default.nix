@@ -82,6 +82,7 @@ in {
     ./rofi.nix
     #./xfce.nix
     ./labwc.nix
+    ./river.nix
   ];
 
   home.packages = with pkgs; [
