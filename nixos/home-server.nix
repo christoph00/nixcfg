@@ -50,10 +50,10 @@
 
   environment.persistence."/nix/persist" = {
     directories = [
-      #{
-      #  directory = "/var/lib/sftpgo";
-      #  inherit (config.services.sftpgo) user group;
-      #}
+      {
+        directory = "/var/lib/sftpgo";
+        inherit (config.services.sftpgo) user group;
+      }
       {
         directory = "/var/lib/jellyfin";
         inherit (config.services.jellyfin) user group;

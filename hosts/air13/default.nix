@@ -7,11 +7,10 @@
   boot = {
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
-      kernelModules = ["i915"];
     };
   };
 
-  boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi"];
+  boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi" "i915"];
   boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelParams = [
     "quiet"
@@ -82,9 +81,9 @@
 
   services.xserver.videoDrivers = ["intel"];
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
-  };
+  #nixpkgs.config.packageOverrides = pkgs: {
+  #  vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
+  #};
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
