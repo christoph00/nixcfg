@@ -38,6 +38,8 @@ in {
 
     comma
 
+    tree
+
     unrar
   ];
 
