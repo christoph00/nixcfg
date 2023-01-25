@@ -7,7 +7,7 @@
   boot = {
     initrd = {
       availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
-      kernelModules = ["i915"];
+      kernelModules = ["amdgpu"];
     };
   };
   boot.kernelModules = ["kvm-intel" "acpi_call"];
