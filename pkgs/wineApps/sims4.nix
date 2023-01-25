@@ -1,5 +1,9 @@
-{pkgs, ...}: let
-  bin = pkgs.wrapWine {
+{
+  pkgs,
+  mkWineApp,
+  ...
+}: let
+  bin = mkWineApp {
     name = "sims4";
     is64bits = true;
     executable = "~/Games/Sims4/Game/Bin/TS4_x64.exe";

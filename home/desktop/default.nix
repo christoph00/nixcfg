@@ -224,6 +224,9 @@ in {
     MOZ_ENABLE_WAYLAND = "true";
     QT_QPA_PLATFORM = "wayland";
     LIBSEAT_BACKEND = "logind";
+    GTK_THEME = "${config.gtk.theme.name}";
+    XCURSOR_THEME = "${config.gtk.cursorTheme.name}";
+    XCURSOR_SIZE = "${config.gtk.cursorTheme.size}";
   };
 
   dconf.enable = true;
