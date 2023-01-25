@@ -53,7 +53,7 @@
         ./fonts.nix
         #./plasma.nix
         #./xfce.nix
-        ./gnome.nix
+        #./gnome.nix
         #./greetd.nix
         ./printing.nix
       ];
