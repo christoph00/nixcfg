@@ -75,12 +75,12 @@
 in {
   imports = [
     ./gtk.nix
-    #./plasma.nix
+    ./plasma.nix
     #./hyprland.nix
     #./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
-    ./xfce.nix
+    #./xfce.nix
   ];
 
   home.packages = with pkgs; [
@@ -175,7 +175,7 @@ in {
   };
 
   services.dunst = {
-    enable = true;
+    enable = false;
     iconTheme = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
@@ -227,7 +227,7 @@ in {
   };
 
   services.gammastep = {
-    enable = true;
+    enable = false;
     provider = "manual";
     duskTime = "18:35-20:15";
     dawnTime = "6:00-7:45";
@@ -240,11 +240,11 @@ in {
     # };
   };
 
-  # home.sessionVariables = {
-  #   MOZ_ENABLE_WAYLAND = "true";
-  #   QT_QPA_PLATFORM = "wayland";
-  #   LIBSEAT_BACKEND = "logind";
-  # };
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "true";
+    QT_QPA_PLATFORM = "wayland";
+    #   LIBSEAT_BACKEND = "logind";
+  };
 
   dconf.enable = true;
 }
