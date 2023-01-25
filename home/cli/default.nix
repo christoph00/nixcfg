@@ -41,6 +41,8 @@ in {
     tree
 
     unrar
+    p7zip
+    cabextract
   ];
 
   home.sessionVariables = {
