@@ -8,6 +8,7 @@
   vscode-cli = pkgs.callPackage ./vscode-cli {};
   systemd-rest = pkgs.callPackage ./systemd-rest {};
   proton-ge = pkgs.callPackage ./proton-ge {};
+  sfwbar = pkgs.callPackage ./sfwbar {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
