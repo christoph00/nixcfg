@@ -4,6 +4,7 @@
   callPackage,
   ...
 }: {
+  programs.xfconf.enable = true;
   services.xserver = {
     enable = true;
     layout = "us";

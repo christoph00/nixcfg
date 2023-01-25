@@ -76,10 +76,11 @@ in {
   imports = [
     ./gtk.nix
     #./plasma.nix
-    ./hyprland.nix
-    ./waybar.nix
+    #./hyprland.nix
+    #./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
+    ./xfce.nix
   ];
 
   home.packages = with pkgs; [
@@ -148,7 +149,7 @@ in {
   };
 
   programs.fuzzel = {
-    enable = true;
+    enable = false;
     settings = {
       main = {
         dpi-aware = "no";
@@ -234,16 +235,16 @@ in {
       day = 5500;
       night = 3700;
     };
-    settings = {
-      general.adjustment-method = "wayland";
-    };
+    # settings = {
+    #   general.adjustment-method = "wayland";
+    # };
   };
 
-  home.sessionVariables = {
-    MOZ_ENABLE_WAYLAND = "true";
-    QT_QPA_PLATFORM = "wayland";
-    LIBSEAT_BACKEND = "logind";
-  };
+  # home.sessionVariables = {
+  #   MOZ_ENABLE_WAYLAND = "true";
+  #   QT_QPA_PLATFORM = "wayland";
+  #   LIBSEAT_BACKEND = "logind";
+  # };
 
   dconf.enable = true;
 }
