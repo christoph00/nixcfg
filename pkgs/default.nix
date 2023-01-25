@@ -18,6 +18,7 @@
   ha-components-ble-monitor = pkgs.callPackage ./ha-components/ble_monitor.nix {};
 
   mkWineApp = pkgs.callPackage ./wineApps/mkWineApp.nix {};
+  wineSims4 = pkgs.callPackge ./wineApps/sims4.nix {};
 
   steam-with-packages = pkgs.steam.override {
     extraPkgs = pkgs:
