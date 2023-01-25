@@ -149,32 +149,6 @@ in {
     };
   };
 
-  fontProfiles.fuzzel = {
-    enable = false;
-    settings = {
-      main = {
-        dpi-aware = "no";
-        font = "${config.fontProfiles.regular.family}:size=24";
-        fields = "name,generic,comment,categories,filename,keywords";
-        layer = "overlay";
-        lines = 5;
-        prompt = "· ";
-      };
-      colors = with config.colorscheme.colors; {
-        background = "${base00}dd";
-        text = "${base05}ff";
-        match = "${base0D}ff";
-        selection = "${base05}dd";
-        selection-text = "${base00}ff";
-        selection-match = "${base0D}ff";
-        border = "${base03}ff";
-      };
-      border = {
-        width = 2;
-      };
-    };
-  };
-
   services.dunst = {
     enable = true;
     iconTheme = {
