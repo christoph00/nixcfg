@@ -69,7 +69,7 @@
   programs.steam.package = pkgs.steam-with-packages;
 
   autologin-graphical-session = {
-    enable = true;
+    enable = false;
     user = "christoph";
     sessionScript = "Hyprland";
   };
@@ -84,7 +84,7 @@
   };
 
   programs.hyprland = {
-    enable = true;
+    enable = false;
     package = null; # Managed by home manager
     xwayland.enable = true;
   };
