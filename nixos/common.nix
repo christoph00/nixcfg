@@ -99,6 +99,8 @@
     passwordFile = config.age.secrets.christoph-password.path;
   };
 
+  users.users.root.passwordFile = config.age.secrets.christoph-password.path;
+
   services.openssh = {
     enable = true;
     hostKeys = [

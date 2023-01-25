@@ -21,6 +21,7 @@ in {
     fd # Better find
     jq # JSON pretty printer and manipulator
     fzf
+    wget
 
     nil
     alejandra

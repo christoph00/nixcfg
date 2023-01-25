@@ -30,15 +30,15 @@
     "mem_sleep_default=deep"
   ];
 
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  #boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+
+  #boot.zfs.extraPools = ["zdata"];
+
+  networking.hostId = "007f0200";
 
   hardware.steam-hardware.enable = true;
 
   services.fstrim.enable = lib.mkDefault true;
-
-  networking.hostId = "007f0200";
-
-  boot.supportedFilesystems = ["btrfs" "zfs"];
 
   fileSystems = {
     "/" = {
@@ -64,12 +64,28 @@
       options = ["subvol=@persist" "noatime" "compress-force=zstd"];
       neededForBoot = true;
     };
+    "/nix/persist/games" = {
+      device = "/dev/disk/by-label/ssd-data";
+      fsType = "btrfs";
+      options = ["subvol=@games" "noatime" "compress-force=zstd"];
+    };
 
+    "/media/ssd-data" = {
+      device = "/dev/disk/by-label/ssd-data";
+      fsType = "btrfs";
+      options = ["subvol=@data" "noatime" "compress-force=zstd"];
+    };
     # "/home" = {
     #   device = "/dev/disk/by-label/tower";
     #   fsType = "btrfs";
     #   options = ["subvol=@home" "noatime" "compress-force=zstd"];
     # };
+
+    "/media/hdd-data" = {
+      device = "/dev/disk/by-uuid/25fc5836-72df-4881-8760-af49333fa485";
+      fsType = "btrfs";
+      options = ["subvol=@data" "noatime" "compress-force=zstd"];
+    };
   };
 
   nixpkgs.hostPlatform.system = "x86_64-linux";

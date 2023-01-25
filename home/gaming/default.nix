@@ -24,6 +24,7 @@ in {
     steam-with-packages
     gamescope
     protontricks
+    proton-caller
   ];
   home.persistence = {
     "/nix/persist/games/christoph" = {
@@ -32,6 +33,7 @@ in {
         ".local/share/Paradox Interactive"
         ".paradoxlauncher"
         ".local/share/Steam"
+        "Games"
       ];
     };
   };
@@ -39,7 +41,7 @@ in {
   # Start Steam on Login
   systemd.user.services.steam = {
     Unit.Description = "Steam Client";
-    # Install.WantedBy = ["graphical-session.target"];
+    Install.WantedBy = ["graphical-session.target"];
     Unit.PartOf = ["graphical-session.target"];
     Service.Type = "simple";
     Service.ExecStart = "${pkgs.steam-with-packages}/bin/steam -silent";
