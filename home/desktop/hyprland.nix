@@ -84,6 +84,11 @@ in {
               }
 
               sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+
+              device:sigmachip-trust-keyboard {
+                kb_layout = de
+                kb_variant = nodeadkeys
+              }
           }
 
           general {
