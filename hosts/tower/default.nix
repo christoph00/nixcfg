@@ -30,9 +30,15 @@
     "mem_sleep_default=deep"
   ];
 
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+
   hardware.steam-hardware.enable = true;
 
   services.fstrim.enable = lib.mkDefault true;
+
+  networking.hostId = "007f0200";
+
+  boot.supportedFilesystems = ["btrfs" "zfs"];
 
   fileSystems = {
     "/" = {

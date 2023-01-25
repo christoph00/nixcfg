@@ -40,6 +40,7 @@
   users.users.sftpgo.extraGroups = ["media"];
   services.sftpgo = {
     enable = true;
+    package = pkgs.my-sftpgo;
     settings = {
       data_provider = {
         driver = "bolt";
