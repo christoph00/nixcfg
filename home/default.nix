@@ -48,18 +48,16 @@
               isPrimary = true;
               refreshRate = 60;
               x = 0;
-              workspace = "1";
               scale = "1.25";
             }
             {
-              enabled = true;
+              enabled = false;
               name = "HDMI-A-1";
               width = 1920;
               height = 1080;
               isPrimary = false;
               refreshRate = 60;
               scale = "1";
-              workspace = "2";
             }
           ];
         }
