@@ -70,9 +70,9 @@ in {
 
           # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
           input {
-              kb_layout = us
-              kb_options = caps:escape,compose:menu
-              kb_variant = altgr-intl
+              kb_layout=de
+              #kb_options = caps:escape,compose:menu
+              #kb_variant = altgr-intl
               kb_options =
               kb_rules =
 
@@ -85,10 +85,6 @@ in {
 
               sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
 
-              device:sigmachip-trust-keyboard {
-                kb_layout = de
-                kb_variant = nodeadkeys
-              }
           }
 
           general {
@@ -148,17 +144,6 @@ in {
               workspace_swipe = on
           }
 
-          # Example per-device config
-          # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-          device:epic mouse V1 {
-              sensitivity = -0.5
-          }
-
-          # Example windowrule v1
-          # windowrule = float, ^(kitty)$
-          # Example windowrule v2
-          # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-          # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 
           windowrulev2 = float,class:rofi
           windowrulev2 = center,class:rofi

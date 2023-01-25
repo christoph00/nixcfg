@@ -43,6 +43,12 @@ in {
     unrar
     p7zip
     cabextract
+    innoextract
+
+    wineWowPackages.staging
+
+    # winetricks (all versions)
+    winetricks
   ];
 
   home.sessionVariables = {

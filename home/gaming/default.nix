@@ -2,30 +2,17 @@
   pkgs,
   lib,
   ...
-}: let
-  steam-with-pkgs = pkgs.steam.override {
-    extraPkgs = pkgs:
-      with pkgs; [
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXinerama
-        xorg.libXScrnSaver
-        libpng
-        libpulseaudio
-        libvorbis
-        stdenv.cc.cc.lib
-        libkrb5
-        keyutils
-        gamescope
-      ];
-  };
-in {
+}: {
   home.packages = with pkgs; [
     steam-with-packages
     gamescope
     protontricks
     proton-caller
+    proton-ge
   ];
+
+  home.sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
+
   home.persistence = {
     "/nix/persist/games/christoph" = {
       allowOther = true;
