@@ -71,8 +71,6 @@ in {
           # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
           input {
               kb_layout=de
-              #kb_options = caps:escape,compose:menu
-              #kb_variant = altgr-intl
               kb_options =
               kb_rules =
 
@@ -85,6 +83,12 @@ in {
 
               sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
 
+          }
+
+          device:at-translated-set-2-keyboard {
+            kb_layout = us
+            kb_options = caps:escape,compose:menu
+            kb_variant = altgr-intl
           }
 
           general {
