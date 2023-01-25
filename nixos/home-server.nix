@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443];
+  networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443 2022];
   networking.firewall.allowedUDPPorts = [53];
 
   services.nginx = {
