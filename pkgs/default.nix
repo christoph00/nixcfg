@@ -17,6 +17,8 @@
   ha-components-better-thermostat = pkgs.callPackage ./ha-components/better_thermostat.nix {};
   ha-components-ble-monitor = pkgs.callPackage ./ha-components/ble_monitor.nix {};
 
+  mkWineApp = pkgs.callPackage ./wineApps/mkWineApp.nix {};
+
   steam-with-packages = pkgs.steam.override {
     extraPkgs = pkgs:
       with pkgs; [
