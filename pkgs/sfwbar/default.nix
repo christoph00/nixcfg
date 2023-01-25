@@ -5,9 +5,11 @@
   meson,
   ninja,
   pkg-config,
+  wrapGAppsHook,
   gtk3,
   gtk-layer-shell,
   json_c,
+  glib,
 }:
 stdenv.mkDerivation rec {
   pname = "sfwbar";
@@ -24,12 +26,17 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
+    wrapGAppsHook
   ];
-  buildInputs = [gtk3 gtk-layer-shell json_c];
+  buildInputs = [gtk3 gtk-layer-shell json_c glib];
 
   #mesonFlags = [];
 
   doCheck = false;
+
+  postPatch = ''
+    sed -i 's|gio/gdesktopappinfo.h|gio-unix-2.0/gio/gdesktopappinfo.h|' src/scaleimage.c
+  '';
 
   meta = with lib; {
     description = "Sway Floating Window Bar";

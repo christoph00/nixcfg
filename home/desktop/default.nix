@@ -80,6 +80,7 @@ in {
     ./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
+    ./sfwbar.nix
     #./xfce.nix
     ./labwc.nix
     ./river.nix
