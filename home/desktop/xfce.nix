@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  xconf.settings = {
+  xfconf.settings = {
     xfce4-session = {
       "startup/ssh-agent/enabled" = false;
       "general/LockCommand" = "${pkgs.lightdm}/bin/dm-tool lock";
