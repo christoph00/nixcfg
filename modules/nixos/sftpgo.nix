@@ -108,16 +108,10 @@ in {
       after = ["network.target"];
       wantedBy = ["multi-user.target"];
 
-      environment = {
-        SFTPGO_LOG_LEVEL = "info";
-        SFTPGO_LOG_FILE_PATH = "";
-        SFTPGO_DATA_PROVIDER__DRIVER = "bolt";
-        SFTPGO_DATA_PROVIDER__NAME = "${cfg.dataDir}/sftpgo.db";
-      };
       serviceConfig = {
         StateDirectory = cfg.dataDir;
         WorkingDirectory = cfg.dataDir;
-        ExecStart = "${cfg.package}/bin/sftpgo serve";
+        ExecStart = "${cfg.package}/bin/sftpgo serve --config-file ${configFile}";
         User = cfg.user;
         Group = cfg.group;
 
