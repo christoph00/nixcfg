@@ -46,14 +46,29 @@
         driver = "bolt";
         name = "sftpgo.db";
       };
-      branding = {
-        web_client = {
-          name = "NAS";
-        };
+      httpd = {
+        bindings = [
+          {
+            branding = {
+              web_client = {
+                name = "NAS";
+                short_name = "NAS";
+              };
+            };
+          }
+        ];
       };
     };
   };
 
+  services.nginx.virtualHosts."nas.net.r505.de" = {
+    forceSSL = true;
+    serverName = "nas.net.r505.de";
+    useACMEHost = "net.r505.de";
+    locations."/" = {
+      proxyPass = "http://localhost:8080";
+    };
+  };
   environment.persistence."/nix/persist" = {
     directories = [
       {
