@@ -210,6 +210,9 @@ in {
           bindm = $mainMod, mouse:272, movewindow
           bindm = $mainMod, mouse:273, resizewindow
 
+          #bindm = ALT, TAB, exec,${pkgs.killall}/bin/killall -SIGUSR1 sfwbar
+
+
         ''
       )
     ];
