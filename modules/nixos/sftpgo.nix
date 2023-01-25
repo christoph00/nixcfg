@@ -109,11 +109,12 @@ in {
       wantedBy = ["multi-user.target"];
 
       serviceConfig = {
-        StateDirectory = cfg.dataDir;
-        WorkingDirectory = cfg.dataDir;
         ExecStart = "${cfg.package}/bin/sftpgo serve --config-file ${configFile}";
         User = cfg.user;
         Group = cfg.group;
+
+        WorkingDirectory = "${cfg.dataDir}";
+        StateDirectory = "sftpgo";
 
         MemoryDenyWriteExecute = true;
         NoNewPrivileges = true;

@@ -46,6 +46,11 @@
         driver = "bolt";
         name = "sftpgo.db";
       };
+      branding = {
+        web_client = {
+          name = "NAS";
+        };
+      };
     };
   };
 
