@@ -51,8 +51,8 @@
         inputs.srvos.nixosModules.desktop
         ./desktop.nix
         ./fonts.nix
-        #./plasma.nix
-        ./xfce.nix
+        ./plasma.nix
+        #./xfce.nix
         #./gnome.nix
         #./greetd.nix
         ./printing.nix

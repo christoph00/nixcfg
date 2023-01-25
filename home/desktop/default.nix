@@ -128,9 +128,9 @@ in {
     NIXPKGS_ALLOW_UNFREE = 1;
   };
 
-  xdg.mimeApps.enable = true;
-  xdg.mimeApps.associations.added = associations;
-  xdg.mimeApps.defaultApplications = associations;
+  #xdg.mimeApps.enable = true;
+  #xdg.mimeApps.associations.added = associations;
+  #xdg.mimeApps.defaultApplications = associations;
 
   home.persistence = {
     "/nix/persist/home/christoph".directories = [".config/libreoffice" ".config/GeForce\ NOW"];
