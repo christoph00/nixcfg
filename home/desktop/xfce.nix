@@ -12,4 +12,7 @@
       "backdrop/screen0/monitorLVDS-1/workspace0/last-image" = "${config.wallpaper}";
     };
   };
+  home.persistence = {
+    "/nix/persist/home/christoph".directories = [".config/xfce4"];
+  };
 }

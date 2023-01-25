@@ -52,7 +52,7 @@
         ./desktop.nix
         ./fonts.nix
         #./plasma.nix
-        ./xfce.nix
+        #./xfce.nix
         #./gnome.nix
         #./greetd.nix
         ./printing.nix
