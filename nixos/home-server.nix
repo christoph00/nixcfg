@@ -49,6 +49,7 @@
       httpd = {
         bindings = [
           {
+            proxy_allowed = "127.0.0.1";
             branding = {
               web_client = {
                 name = "NAS";
