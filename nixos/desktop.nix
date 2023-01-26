@@ -55,7 +55,23 @@
       sddm.enableGnomeKeyring = true;
       gtklock.text = "auth include login";
     };
+    pam.loginLimits = [
+      {
+        domain = "*";
+        item = "nofile";
+        type = "-";
+        value = "32768";
+      }
+      {
+        domain = "*";
+        item = "memlock";
+        type = "-";
+        value = "32768";
+      }
+    ];
   };
+
+  systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
 
   networking.firewall = {
     allowedTCPPorts = [22000 47989 47990 5901];
