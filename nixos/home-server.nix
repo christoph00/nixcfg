@@ -85,6 +85,10 @@
         directory = "/var/lib/jellyfin";
         inherit (config.services.jellyfin) user group;
       }
+      {
+        directory = "/var/lib/sabnzbd";
+        inherit (config.services.sabnzbd) user group;
+      }
     ];
   };
 
@@ -110,19 +114,16 @@
     "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
     "L /var/lib/jellyfin/media/TVShows - - - - /media/data-hdd/TVShows"
 
-    "d /var/lib/nzbget/media 0770 nzbget media"
-    "L /var/lib/nzbget/media/Movies - - - - /media/data-hdd/Movies"
-    "L /var/lib/nzbget/media/TVShows - - - - /media/data-hdd/TVShows"
-    "d /var/lib/nzbget/Downloads 0770 nzbget media"
-    "L /var/lib/nzbget/Downloads - - - - /media/data-ssd/Downloads"
+    "d /var/lib/sabnzbd/media 0770 sabnzbd media"
+    "L /var/lib/sabnzbd/media/Movies - - - - /media/data-hdd/Movies"
+    "L /var/lib/sabnzbd/media/TVShows - - - - /media/data-hdd/TVShows"
+    "d /var/lib/sabnzbd/Downloads 0770 sabnzbdmedia"
+    "L /var/lib/sabnzbd/Downloads - - - - /media/data-ssd/Downloads"
   ];
 
-  users.users.nzbget.extraGroups = ["media"];
-  services.nzbget = {
+  users.users.sabnzbd.extraGroups = ["media"];
+  services.sabnzbd = {
     enable = true;
-    settings = {
-      MainDir = "/data";
-    };
   };
 
   services.nginx.virtualHosts."nzb.net.r505.de" = {
