@@ -78,6 +78,13 @@ in {
 
   #services.syncthing.enable = true;
 
+  # programs.aria2 = {
+  #   enable = true;
+  #   settings = {
+
+  #   };
+  # };
+
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;

@@ -114,11 +114,11 @@
     "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
     "L /var/lib/jellyfin/media/TVShows - - - - /media/data-hdd/TVShows"
 
-    "d /var/lib/sabnzbd/media 0770 sabnzbd media"
-    "L /var/lib/sabnzbd/media/Movies - - - - /media/data-hdd/Movies"
-    "L /var/lib/sabnzbd/media/TVShows - - - - /media/data-hdd/TVShows"
-    "d /var/lib/sabnzbd/Downloads 0770 sabnzbd media"
-    "L /var/lib/sabnzbd/Downloads - - - - /media/data-ssd/Downloads"
+    # "d /var/lib/sabnzbd/media 0770 sabnzbd media"
+    # "L /var/lib/sabnzbd/media/Movies - - - - /media/data-hdd/Movies"
+    # "L /var/lib/sabnzbd/media/TVShows - - - - /media/data-hdd/TVShows"
+    # "d /var/lib/sabnzbd/Downloads 0770 sabnzbd media"
+    # "L /var/lib/sabnzbd/Downloads - - - - /media/data-ssd/Downloads"
   ];
 
   # users.users.sabnzbd.extraGroups = ["media"];
