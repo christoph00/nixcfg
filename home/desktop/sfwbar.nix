@@ -257,7 +257,7 @@
          # add a taskbar
          taskbar {
            icons = true     # display icons
-           labels = false # display titles
+           labels = true # display titles
            rows = 1        # stack window buttons across two rows
            action[3] = Menu "winops"
          }
