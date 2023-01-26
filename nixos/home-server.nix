@@ -42,6 +42,10 @@
     enable = true;
     package = pkgs.my-sftpgo;
     settings = {
+      common = {
+        proxy_allowed = "127.0.0.1/32";
+        proxy_protocol = 1;
+      };
       data_provider = {
         driver = "bolt";
         name = "sftpgo.db";
@@ -49,7 +53,8 @@
       httpd = {
         bindings = [
           {
-            proxy_allowed = "127.0.0.1";
+            proxy_allowed = "127.0.0.1/32";
+            client_ip_proxy_header = "X-Real-IP";
             branding = {
               web_client = {
                 name = "NAS";
@@ -67,7 +72,7 @@
     serverName = "nas.net.r505.de";
     useACMEHost = "net.r505.de";
     locations."/" = {
-      proxyPass = "http://localhost:8080";
+      proxyPass = "http://127.0.0.1:8080";
     };
   };
   environment.persistence."/nix/persist" = {
