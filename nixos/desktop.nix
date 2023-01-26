@@ -71,7 +71,7 @@
     ];
   };
 
-  systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
+  #systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
 
   networking.firewall = {
     allowedTCPPorts = [22000 47989 47990 5901];
