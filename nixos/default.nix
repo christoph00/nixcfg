@@ -81,7 +81,7 @@
         ./home-server.nix
         inputs.srvos.nixosModules.mixins-nginx
         self.nixosModules.sftpgo
-        self.nixosModules.syncthing
+        #self.nixosModules.syncthing
       ];
 
       code-server.imports = [./code-server.nix];
