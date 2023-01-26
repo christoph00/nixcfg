@@ -4,13 +4,13 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "ha-component-ble-monitor";
-  version = "11.3.1";
+  version = "11.5.0";
 
   src = fetchFromGitHub {
     owner = "custom-components";
     repo = "ble_monitor";
     rev = version;
-    sha256 = "1npdm20as9pv8r2sims5akmlvni7mhaalj8psas334zsj68j2rra";
+    sha256 = "0dqccinmvlji1jry0w5rnj1fffrykhq6pz4fm6c25lqqyr237s0a";
   };
 
   installPhase = ''
