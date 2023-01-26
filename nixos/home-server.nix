@@ -95,6 +95,10 @@
 
   environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar bottom systemd-rest];
 
+  environment.shellAliases = {
+    unrar-all = ''for file in *.rar; do ${pkgs.unrar}/bin/unrar e "$file"; done'';
+  };
+
   users.users.jellyfin.extraGroups = ["media"];
   services.jellyfin = {
     enable = true;
