@@ -46,7 +46,7 @@
       mobile_app = {};
       discovery = {};
       zeroconf = {};
-      #zha = {};
+      zha = {};
       ssdp = {};
       mqtt = {};
       google_assistant = {
@@ -61,7 +61,6 @@
       #   circuit = "700";
       # };
       lovelace.mode = "yaml";
-      feedreader.urls = ["https://nixos.org/blogs.xml"];
     };
     extraPackages = python3Packages:
       with python3Packages; [
@@ -102,7 +101,7 @@
       "wake_on_lan"
       "cast"
       #  "wled"
-      #"xiaomi_miio"
+      "xiaomi_miio"
       "xiaomi_ble"
       "openweathermap"
       "weather"
