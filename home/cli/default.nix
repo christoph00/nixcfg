@@ -41,6 +41,7 @@ in {
     tree
 
     unrar
+    unzip
     p7zip
     cabextract
     innoextract

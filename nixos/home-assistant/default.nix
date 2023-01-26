@@ -27,7 +27,9 @@
         latitude = "!secret latitude";
         longitude = "!secret longitude";
         elevation = 52;
+        country = "DE";
         unit_system = "metric";
+        time_zone = "Europe/Berlin";
         temperature_unit = "C";
         external_url = "https://ha.r505.de";
         internal_url = "https://ha.net.r505.de";
