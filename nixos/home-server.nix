@@ -85,10 +85,10 @@
         directory = "/var/lib/jellyfin";
         inherit (config.services.jellyfin) user group;
       }
-      {
-        directory = "/var/lib/sabnzbd";
-        inherit (config.services.sabnzbd) user group;
-      }
+      # {
+      #   directory = "/var/lib/sabnzbd";
+      #   inherit (config.services.sabnzbd) user group;
+      # }
     ];
   };
 
@@ -117,21 +117,21 @@
     "d /var/lib/sabnzbd/media 0770 sabnzbd media"
     "L /var/lib/sabnzbd/media/Movies - - - - /media/data-hdd/Movies"
     "L /var/lib/sabnzbd/media/TVShows - - - - /media/data-hdd/TVShows"
-    "d /var/lib/sabnzbd/Downloads 0770 sabnzbdmedia"
+    "d /var/lib/sabnzbd/Downloads 0770 sabnzbd media"
     "L /var/lib/sabnzbd/Downloads - - - - /media/data-ssd/Downloads"
   ];
 
-  users.users.sabnzbd.extraGroups = ["media"];
-  services.sabnzbd = {
-    enable = true;
-  };
+  # users.users.sabnzbd.extraGroups = ["media"];
+  # services.sabnzbd = {
+  #   enable = true;
+  # };
 
-  services.nginx.virtualHosts."nzb.net.r505.de" = {
-    forceSSL = true;
-    serverName = "nzb.net.r505.de";
-    useACMEHost = "net.r505.de";
-    locations."/" = {
-      proxyPass = "http://localhost:6789";
-    };
-  };
+  # services.nginx.virtualHosts."nzb.net.r505.de" = {
+  #   forceSSL = true;
+  #   serverName = "nzb.net.r505.de";
+  #   useACMEHost = "net.r505.de";
+  #   locations."/" = {
+  #     proxyPass = "http://localhost:6789";
+  #   };
+  # };
 }
