@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443 2022];
@@ -118,7 +119,6 @@
     "L /home/christoph/media/Movies - - - - /media/data-hdd/Movies"
     "L /home/christoph/media/TVShows - - - - /media/data-hdd/TVShows"
 
-    "d /home/christoph/Downloads 0770 christoph media"
     "L /home/christoph/Downloads - - - - /media/data-ssd/Downloads"
 
     # "d /var/lib/sabnzbd/media 0770 sabnzbd media"
@@ -143,6 +143,7 @@
   # };
 
   users.users.aria2.extraGroups = ["media"];
+  users.users.christoph.extraGroups = ["aria2"];
   services.aria2 = {
     enable = true;
     #openPorts = true;
