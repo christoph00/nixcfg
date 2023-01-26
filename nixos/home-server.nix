@@ -134,4 +134,20 @@
   #     proxyPass = "http://localhost:6789";
   #   };
   # };
+
+  users.users.aria2.extraGroups = ["media"];
+  services.aria2 = {
+    enable = true;
+    #openPorts = true;
+    downloadDir = "/media/data-ssd/Downloads";
+    extraArguments = "--rpc-listen-all --remote-time=true";
+  };
+  services.nginx.virtualHosts."dl.net.r505.de" = {
+    forceSSL = true;
+    serverName = "dl.net.r505.de";
+    useACMEHost = "net.r505.de";
+    locations."/" = {
+      proxyPass = "http://localhost:6800";
+    };
+  };
 }

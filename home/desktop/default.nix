@@ -108,6 +108,8 @@ in {
     gfn-electron
     moonlight-qt
 
+    persepolis # aria2 gui
+
     tigervnc
 
     xdg-utils
