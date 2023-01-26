@@ -114,11 +114,11 @@
     "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
     "L /var/lib/jellyfin/media/TVShows - - - - /media/data-hdd/TVShows"
 
-    "d /home/christoph/media 0770 christoph users"
+    "d /home/christoph/media 0770 christoph media"
     "L /home/christoph/media/Movies - - - - /media/data-hdd/Movies"
     "L /home/christoph/media/TVShows - - - - /media/data-hdd/TVShows"
 
-    "d /home/christoph/Downloads 0770 christoph users"
+    "d /home/christoph/Downloads 0770 christoph media"
     "L /home/christoph/Downloads - - - - /media/data-ssd/Downloads"
 
     # "d /var/lib/sabnzbd/media 0770 sabnzbd media"
