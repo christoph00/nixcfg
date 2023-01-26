@@ -12,13 +12,9 @@ stdenvNoCC.mkDerivation rec {
     url =
       "https://github.com/mayswind/${pname}"
       + "/releases/download/${version}/${pname}-${version}-AllInOne.zip";
-    sha256 = "11qwgj0ndhiyl8yx43v0wz60km1gh5q0hcm8ydnj100gilan25vq";
+    hash = "sha256-Rxhxoe/1Nm1OXLw4S6VZ99RXxZ5ANegoVeTragDTHgs=";
   };
-
-  phases = ["installPhase"];
-  installPhase = ''
-    outdir=$out/share/AriaNg
-    mkdir -p $outdir
-    cp -r $src/* $outdir/
-  '';
+  nativeBuildInputs = [unzip];
+  unpackPhase = "unzip ${src}";
+  installPhase = "mkdir -p $out && cp * $_";
 }

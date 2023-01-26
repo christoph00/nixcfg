@@ -146,8 +146,20 @@
     forceSSL = true;
     serverName = "dl.net.r505.de";
     useACMEHost = "net.r505.de";
-    locations."/" = {
-      proxyPass = "http://localhost:6800";
+    locations = {
+      "/".root = "${pkgs.ariaNg}";
+      "/jsonrpc" = {
+        proxyPass = "http://localhost:6800/jsonrpc";
+        extraConfig = ''
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header Host $host;
+          proxy_set_header X-Forwarded-Host $host:$server_port;
+          proxy_set_header X-Forwarded-Server $host;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        '';
+      };
     };
   };
 }
