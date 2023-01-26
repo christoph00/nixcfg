@@ -77,10 +77,10 @@ in {
     ./gtk.nix
     #./plasma.nix
     ./hyprland.nix
-    #./waybar.nix
+    ./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
-    ./sfwbar.nix
+    #./sfwbar.nix
     #./xfce.nix
     ./labwc.nix
     ./river.nix
