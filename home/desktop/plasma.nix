@@ -7,6 +7,7 @@
     [
       kate
       konsole
+      libsForQt5.bismuth
     ]
     ++ (with plasma5Packages; [
       kmail
@@ -52,6 +53,7 @@
       # ".config/akregatorrc"
       # ".config/baloofileinformationrc"
       ".config/baloofilerc"
+      ".config/breezerc"
       # ".config/bluedevilglobalrc"
       # ".config/device_automounter_kcmrc"
       ".config/dolphinrc"
@@ -76,7 +78,7 @@
       # ".config/kglobalshortcutsrc"
       # ".config/khotkeysrc"
       # ".config/kmixrc"
-      # ".config/konsolerc"
+      ".config/konsolerc"
       # ".config/kscreenlockerrc"
       # ".config/ksmserverrc"
       # ".config/ksplashrc"

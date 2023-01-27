@@ -10,7 +10,7 @@
         system = "x86_64-linux";
         modules = [
           self.nixosModules.laptop
-          #self.nixosModules.home-laptop-christoph
+          self.nixosModules.home-laptop-christoph
           ./air13
         ];
       };
