@@ -92,11 +92,11 @@
   programs.steam.package = pkgs.steam-with-packages;
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
-  autologin-graphical-session = {
-    enable = true;
-    user = "christoph";
-    sessionScript = "Hyprland";
-  };
+  # autologin-graphical-session = {
+  #   enable = true;
+  #   user = "christoph";
+  #   sessionScript = "Hyprland";
+  # };
 
   xdg.portal = {
     enable = true;

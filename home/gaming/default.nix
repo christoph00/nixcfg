@@ -9,6 +9,9 @@
     protontricks
     proton-caller
     proton-ge
+    lutris
+    vulkan-loader
+    vulkan-tools
   ];
 
   home.sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
