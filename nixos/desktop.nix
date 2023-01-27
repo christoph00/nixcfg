@@ -56,7 +56,7 @@
       gtklock.text = "auth include login";
     };
 
-    security.pam.loginLimits = [
+    pam.loginLimits = [
       {
         domain = "*";
         item = "memlock";
