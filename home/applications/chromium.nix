@@ -5,9 +5,9 @@
 }: {
   programs.chromium = {
     enable = true;
-    #package = pkgs.ungoogled-chromium;
+    package = pkgs.brave;
     extensions = [
-      {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
+      #{id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
       {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
       {id = "nngceckbapebfimnlniiiahkandclblb";} # Bitwarden
       {
@@ -20,6 +20,6 @@
   nixpkgs.config.chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
 
   home.persistence = {
-    "/nix/persist/home/christoph".directories = [".config/chromium/Default"];
+    "/nix/persist/home/christoph".directories = [".config/chromium/Default" ".config/BraveSoftware/Brave-Browser/Default"];
   };
 }
