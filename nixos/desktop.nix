@@ -20,7 +20,7 @@
     "tsx=on"
     "tsx_async_abort=off"
   ];
-  #boot.plymouth.enable = true;
+  boot.plymouth.enable = true;
 
   time.timeZone = "Europe/Berlin";
 
@@ -55,18 +55,25 @@
       sddm.enableGnomeKeyring = true;
       gtklock.text = "auth include login";
     };
-    pam.loginLimits = [
-      {
-        domain = "*";
-        item = "nofile";
-        type = "-";
-        value = "32768";
-      }
+
+    security.pam.loginLimits = [
       {
         domain = "*";
         item = "memlock";
         type = "-";
-        value = "32768";
+        value = "unlimited";
+      }
+      {
+        domain = "*";
+        item = "nofile";
+        type = "soft";
+        value = "unlimited";
+      }
+      {
+        domain = "*";
+        item = "nofile";
+        type = "hard";
+        value = "unlimited";
       }
     ];
   };
@@ -83,6 +90,7 @@
 
   programs.steam.enable = true;
   programs.steam.package = pkgs.steam-with-packages;
+  systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
   autologin-graphical-session = {
     enable = true;
@@ -92,15 +100,15 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      #  inputs.xdg-portal-hyprland.packages.${pkgs.system}.default
-    ];
+    # wlr.enable = true;
+    # extraPortals = [
+    #   pkgs.xdg-desktop-portal-gtk
+    #   #  inputs.xdg-portal-hyprland.packages.${pkgs.system}.default
+    # ];
   };
 
   programs.hyprland = {
-    enable = true;
+    enable = false;
     package = null; # Managed by home manager
     xwayland.enable = true;
   };
