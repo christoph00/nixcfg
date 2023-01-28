@@ -10,6 +10,7 @@
   proton-ge = pkgs.callPackage ./proton-ge {};
   sfwbar = pkgs.callPackage ./sfwbar {};
   ariaNg = pkgs.callPackage ./ariaNg {};
+  matcha = pkgs.callPackage ./matcha {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};

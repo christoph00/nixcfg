@@ -218,5 +218,5 @@ in {
     "/nix/persist/home/christoph".directories = [".config/obsidian"];
   };
 
-  home.file."Dokumente/.obsidian/snippets/base16-theme.css".text = theme-css;
+  home.file.".config/obsidian/snippets/base16-theme.css".text = theme-css;
 }

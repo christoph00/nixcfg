@@ -6,6 +6,7 @@
 }: {
   systemd.services.rclone-christoph = {
     serviceConfig.Type = "oneshot";
+    serviceConfig.User = "christoph";
     script = ''${pkgs.rclone}/bin/rclone --config ${config.age.secrets.rclone-conf.path} bisync snas:Dokumente ~/Dokumente'';
   };
   systemd.timers.rclone-christoph = {

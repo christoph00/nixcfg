@@ -173,6 +173,7 @@ in {
         ".config/gh"
         ".config/rclone"
         ".cache/nix-index"
+        ".cache/rclone"
       ];
       allowOther = true;
     };
