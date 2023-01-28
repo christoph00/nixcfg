@@ -10,11 +10,11 @@
 }:
 with lib;
   buildGoModule rec {
-    pname = "piqoni";
+    pname = "matcha";
     version = "0.4.1";
 
     src = fetchFromGitHub {
-      owner = "drakkan";
+      owner = "piqoni";
       repo = pname;
       rev = "v${version}";
       sha256 = "0chhcgam7x9v3c3f1crab41dlrhhy3li3vqmfzvzig0ygmmh7q0z";
@@ -30,8 +30,8 @@ with lib;
 
     subPackages = ["."];
 
-    vendorSha256 = lib.fakeSha256;
-    #vendorSha256 = "sha256-+i6jUImDMrsDnIPjIp8uM2BR1IYMqWG1OmvA2w/AfVQ=";
+    #vendorSha256 = lib.fakeSha256;
+    vendorSha256 = "sha256-3LgCIC1/5uThPJAEPoLqfhPW6qVFZc/TlkKxawTpbyk=";
 
     doCheck = false;
 
