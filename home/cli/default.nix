@@ -160,8 +160,6 @@ in {
     }
   '';
 
-  services.ssh-agent.enable = true;
-
   home.persistence = {
     "/nix/persist/home/christoph" = {
       directories = [

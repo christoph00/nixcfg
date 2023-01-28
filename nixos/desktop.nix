@@ -41,7 +41,9 @@
   };
 
   hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  services.blueman.enable = false;
+
+  services.ssh-agent.enable = true;
 
   programs.dconf.enable = true;
 
