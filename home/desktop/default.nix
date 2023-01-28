@@ -130,7 +130,7 @@ in {
       logoScale = 4;
     });
   xdg.dataFile."colorscheme".text = config.colorscheme.slug;
-  xdg.dataFile."wallpaper".source = config.wallpaper;
+  xdg.dataFile."wallpaper.png".source = config.wallpaper;
 
   home.sessionVariables = {
     BROWSER = "firefox";
