@@ -44,6 +44,8 @@ in {
 
     matcha
 
+    flyctl
+
     unrar
     unzip
     p7zip
