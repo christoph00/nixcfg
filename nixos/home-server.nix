@@ -51,6 +51,14 @@
         driver = "bolt";
         name = "sftpgo.db";
       };
+      webdavd = {
+        bindings = [
+          {
+            port = 8033;
+            proxy_allowed = "127.0.0.1/32";
+          }
+        ];
+      };
       httpd = {
         bindings = [
           {
@@ -76,6 +84,15 @@
       proxyPass = "http://127.0.0.1:8080";
     };
   };
+  services.nginx.virtualHosts."dav.net.r505.de" = {
+    forceSSL = true;
+    serverName = "dav.net.r505.de";
+    useACMEHost = "net.r505.de";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8033";
+    };
+  };
+
   environment.persistence."/nix/persist" = {
     directories = [
       {
