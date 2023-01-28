@@ -129,8 +129,8 @@ in {
       height = 1080;
       logoScale = 4;
     });
-  home.xdg.dataFile."colorscheme".text = config.colorscheme.slug;
-  home.xdg.dataFile."wallpaper".source = config.wallaper;
+  xdg.dataFile."colorscheme".text = config.colorscheme.slug;
+  xdg.dataFile."wallpaper".source = config.wallpaper;
 
   home.sessionVariables = {
     BROWSER = "firefox";

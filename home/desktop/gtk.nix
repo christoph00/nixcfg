@@ -21,8 +21,8 @@ in {
     #  package = pkgs.papirus-icon-theme;
     #};
     iconTheme = {
-      name = "WhiteSur-dark";
-      package = pkgs.whitesur-icon-theme;
+      name = "vimi-black";
+      package = pkgs.vimix-icon-theme;
     };
     cursorTheme = {
       name = "macOS-Monterey";
