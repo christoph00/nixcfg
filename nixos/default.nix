@@ -80,6 +80,7 @@
         ./acme.nix
         ./cloudflared.nix
         ./home-server.nix
+        ./matcha.nix
         inputs.srvos.nixosModules.mixins-nginx
         self.nixosModules.sftpgo
         #self.nixosModules.syncthing

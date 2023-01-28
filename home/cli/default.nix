@@ -176,6 +176,7 @@ in {
         ".config/rclone"
         ".cache/nix-index"
         ".cache/rclone"
+        ".config/brew" # matcha
       ];
       allowOther = true;
     };
