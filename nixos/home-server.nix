@@ -110,7 +110,7 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar bottom systemd-rest];
+  environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar bottom systemd-rest xplr unzip];
 
   environment.shellAliases = {
     unrar-all = ''for file in *.rar; do ${pkgs.unrar}/bin/unrar e "$file"; done'';

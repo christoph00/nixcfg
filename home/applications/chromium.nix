@@ -15,6 +15,7 @@
         updateUrl = "https://raw.githubusercontent.com/iamadamdev/bypass-paywalls-chrome/master/updates.xml";
       }
       {id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
+      {id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
     ];
   };
 

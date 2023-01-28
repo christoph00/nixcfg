@@ -38,6 +38,8 @@ in {
 
     comma
 
+    gopls
+
     tree
 
     unrar
