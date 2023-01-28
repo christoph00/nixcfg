@@ -3,7 +3,7 @@
     packages = with pkgs; [
       hunspell
       hunspellDicts.de_DE
-      libreoffice-fresh
+      libreoffice-qt
     ];
   };
 }
