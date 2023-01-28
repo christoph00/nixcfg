@@ -19,4 +19,5 @@ in {
   "secrets/christoph-password.age".publicKeys = [christoph_air13 futro air13 tower oca oc1];
   "secrets/wayvnc-key".publicKeys = [christoph_air13 tower christoph_tower];
   "secrets/wayvnc-cert".publicKeys = [christoph_air13 tower christoph_tower];
+  "secrets/rclone.conf".publicKeys = [christoph_air13 tower air13];
 }

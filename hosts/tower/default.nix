@@ -110,5 +110,11 @@
     owner = "christoph";
     mode = "660";
   };
+  age.secrets.rclone-conf = {
+    file = ../../secrets/rclone.conf;
+    #path = "/home/christoph/.config/rclone/rclone.conf";
+    owner = "christoph";
+    mode = "660";
+  };
   age.secrets.cf-acme.file = ../../secrets/cf-acme;
 }
