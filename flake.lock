@@ -36,6 +36,27 @@
         "type": "github"
       }
     },
+    "click-n-load": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1672249153,
+        "narHash": "sha256-Hc2QULyyzMbUQlrqfuSb6YzT0BJdbFpvh+QBcFx1eFY=",
+        "owner": "markus1189",
+        "repo": "click-n-load",
+        "rev": "33df56d4c580d06991d63306f99ef386b0b15421",
+        "type": "github"
+      },
+      "original": {
+        "owner": "markus1189",
+        "repo": "click-n-load",
+        "type": "github"
+      }
+    },
     "crane": {
       "flake": false,
       "locked": {
@@ -155,7 +176,7 @@
     },
     "firefox-addons": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -215,6 +236,21 @@
       }
     },
     "flake-utils": {
+      "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
       "locked": {
         "lastModified": 1629284811,
         "narHash": "sha256-JHgasjPR0/J1J3DRm4KxM4zTyAj4IOJY8vIl75v/kPI=",
@@ -544,6 +580,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "click-n-load": "click-n-load",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",

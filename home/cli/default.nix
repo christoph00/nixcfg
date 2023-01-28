@@ -30,7 +30,7 @@ in {
 
     vscode-cli
 
-    nodejs
+    inputs.click-n-load.defaultPackage.x86_64-linux
 
     rclone
     rsync

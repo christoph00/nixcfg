@@ -30,6 +30,9 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    click-n-load.url = "github:markus1189/click-n-load";
+    click-n-load.inputs.nixpkgs.follows = "nixpkgs";
+
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
