@@ -43,12 +43,12 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = false;
 
-  services.ssh-agent.enable = true;
-
   programs.dconf.enable = true;
 
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   services.fwupd.enable = true;
+
+  programs.ssh.startAgent = true;
 
   security = {
     rtkit.enable = true;
