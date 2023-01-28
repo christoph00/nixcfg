@@ -42,6 +42,8 @@ in {
 
     tree
 
+    matcha
+
     unrar
     unzip
     p7zip
