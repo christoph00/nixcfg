@@ -30,8 +30,6 @@ in {
 
     vscode-cli
 
-    inputs.click-n-load.defaultPackage.x86_64-linux
-
     rclone
     rsync
 
@@ -120,6 +118,7 @@ in {
     nnn.enable = true;
     gh.enable = true;
     lf.enable = true;
+    go.enable = true;
   };
 
   programs.exa = {
