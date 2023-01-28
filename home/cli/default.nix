@@ -160,24 +160,7 @@ in {
     }
   '';
 
-  programs.zellij = {
-    enable = true;
-    settings = {
-      default_mode = "normal";
-      ui.pane_frames.rounded_corners = true;
-      default_layout = "compact";
-      simplified_ui = true;
-      pane_frames = true;
-      scrollback_editor = "hx";
-      theme = "${slug}";
-      plugins = {
-        "tab-bar" = {path = "tab-bar";};
-        "status-bar" = {path = "status-bar";};
-        "strider" = {path = "strider";};
-        "compact-bar" = {path = "compact-bar";};
-      };
-    };
-  };
+  services.ssh-agent.enable = true;
 
   home.persistence = {
     "/nix/persist/home/christoph" = {
@@ -190,6 +173,7 @@ in {
         ".ssh"
         ".config/syncthing"
         ".config/gh"
+        ".config/rclone"
         ".cache/nix-index"
       ];
       allowOther = true;
