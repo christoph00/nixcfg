@@ -114,8 +114,6 @@ in {
 
     xdg-utils
 
-    google-chrome
-
     xdg-desktop-portal-wlr
     xdg-desktop-portal
     xdg-desktop-portal-gtk

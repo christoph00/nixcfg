@@ -30,6 +30,8 @@ in {
 
     vscode-cli
 
+    nodejs
+
     rclone
     rsync
 
@@ -128,6 +130,7 @@ in {
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
+    changeDirWidgetCommand = "fd --type d";
   };
 
   programs.command-not-found.enable = false;
