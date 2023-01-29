@@ -9,6 +9,8 @@
       command = ["${pkgs.nil}/bin/nil"];
       url = "https://github.com/oxalica/nil";
       highlightingModeRegex = "^Nix$";
+      rootIndicationFileNames = ["flake.nix"];
+     # settings.nil.formatting.command = ["${pkgs.alejandra}/bin/alejandra" "-q"];
     };
   };
 in {
