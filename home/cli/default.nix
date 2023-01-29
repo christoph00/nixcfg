@@ -33,6 +33,8 @@ in {
     rclone
     rsync
 
+    nodejs
+
     tmux
     xplr
 
