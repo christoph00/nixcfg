@@ -34,6 +34,7 @@
       ".config/KDE"
       ".config/kde.org"
       ".config/plasma-workspace"
+      ".config/kate"
       # ".config/xsettingsd"
       ".kde"
 
@@ -48,6 +49,7 @@
       ".local/share/kxmlgui5"
       ".local/share/RecentDocuments"
       ".local/share/sddm"
+      ".local/share/color-schemes"
     ];
     files = [
       ".config/akregatorrc"
