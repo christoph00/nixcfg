@@ -16,6 +16,7 @@
       }
       {id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
       {id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
+      {id = "ncgbkkljbaojkhljombpjejedphfhdjj";} # User Agent Switcher
     ];
   };
 

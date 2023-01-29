@@ -183,6 +183,7 @@ in {
         ".cache/nix-index"
         ".cache/rclone"
         ".config/brew" # matcha
+        ".cargo"
       ];
       allowOther = true;
     };

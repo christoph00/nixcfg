@@ -102,6 +102,16 @@
   programs.steam.package = pkgs.steam-with-packages;
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
+  systemd.user.services.x11-ownership = rec {
+    serviceConfig.Type = "oneshot";
+    script = ''
+      chown christoph /tmp/.X11-unix
+    '';
+    after = ["graphical-session.target"];
+    wants = after;
+    wantedBy = ["graphical-session-pre.target"];
+  };
+
   # autologin-graphical-session = {
   #   enable = true;
   #   user = "christoph";
