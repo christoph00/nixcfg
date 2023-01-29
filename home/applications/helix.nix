@@ -66,6 +66,7 @@ in {
         color-modes = true;
         true-color = true;
         mouse = true;
+        auto-pairs = true;
       };
     };
   };

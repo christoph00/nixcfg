@@ -8,7 +8,7 @@
   flake = {
     nixosModules = {
       home-desktop-christoph = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-desktop self.homeModules.gaming] "christoph";
-      home-laptop-christoph = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-laptop] "christoph";
+      home-laptop-christoph = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-laptop self.homeModules.gaming] "christoph";
       home-desktop-nina = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-desktop self.homeModules.gaming] "nina";
       home-laptop-nina = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-laptop] "nina";
 

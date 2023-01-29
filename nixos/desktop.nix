@@ -54,8 +54,7 @@
     rtkit.enable = true;
     pam.services = {
       sddm.u2fAuth = false;
-      sddm.enableGnomeKeyring = true;
-      gtklock.text = "auth include login";
+      sddm.enableKwallet = true;
     };
 
     pam.loginLimits = [
@@ -91,6 +90,9 @@
   programs.kdeconnect.enable = true;
 
   programs.steam.enable = true;
+  programs.steam.gamemode = {
+    enable = true;
+  };
   programs.steam.package = pkgs.steam-with-packages;
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
