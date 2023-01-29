@@ -7,32 +7,6 @@
   ...
 }: let
   inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) nixWallpaperFromScheme;
-  browser = ["firefox.desktop"];
-  associations = {
-    "text/html" = browser;
-    "x-scheme-handler/http" = browser;
-    "x-scheme-handler/https" = browser;
-    "x-scheme-handler/ftp" = browser;
-    "x-scheme-handler/chrome" = browser;
-    "x-scheme-handler/about" = browser;
-    "x-scheme-handler/unknown" = browser;
-    "application/x-extension-htm" = browser;
-    "application/x-extension-html" = browser;
-    "application/x-extension-shtml" = browser;
-    "application/xhtml+xml" = browser;
-    "application/x-extension-xhtml" = browser;
-    "application/x-extension-xht" = browser;
-    "image/*" = "org.gnome.eog.desktop";
-
-    #"text/*" = [ "emacs.desktop" ];
-    "audio/*" = ["vlc.desktop"];
-    "video/*" = ["vlc.dekstop"];
-    #"image/*" = [ "ahoviewer.desktop" ];
-    #"text/calendar" = [ "thunderbird.desktop" ]; # ".ics"  iCalendar format
-    "application/json" = browser; # ".json"  JSON format
-    "application/pdf" = browser; # ".pdf"  Adobe Portable Document Format (PDF)
-    #"x-scheme-handler/tg" = "userapp-Telegram Desktop-95VAQ1.desktop";
-  };
   mkWallpaper = {
     scheme,
     width,
@@ -117,6 +91,8 @@ in {
     xdg-desktop-portal-wlr
     xdg-desktop-portal
     xdg-desktop-portal-gtk
+
+    xdg-open
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
@@ -131,12 +107,12 @@ in {
   xdg.dataFile."wallpaper.png".source = config.wallpaper;
 
   home.sessionVariables = {
-    BROWSER = "firefox";
-    TERMINAL = "footclient";
+    #BROWSER = "firefox";
+    #TERMINAL = "footclient";
     NIXPKGS_ALLOW_UNFREE = 1;
   };
 
-  #xdg.mimeApps.enable = true;
+  xdg.mimeApps.enable = true;
   #xdg.mimeApps.associations.added = associations;
   #xdg.mimeApps.defaultApplications = associations;
 

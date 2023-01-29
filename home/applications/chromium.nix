@@ -27,6 +27,18 @@
       font-family: ${config.fontProfiles.regular.family};
     }
 
+    #browser, #browser + div, #browser + div + div {
+     font-size: 15px;
+    }
+
+    .bookmark-bar .observer button {
+       font-size: 14px;
+       font-weight: bold;
+    }
+    .tab-strip .tab-header {
+     font-size: 15px;
+    }
+
   '';
 in {
   programs.chromium = {
