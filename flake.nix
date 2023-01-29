@@ -33,6 +33,9 @@
     click-n-load.url = "github:markus1189/click-n-load";
     click-n-load.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-init.url = "github:nix-community/nix-init";
+    nix-init.inputs.nixpkgs.follows = "nixpkgs";
+
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";

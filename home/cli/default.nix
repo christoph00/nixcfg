@@ -27,6 +27,7 @@ in {
     alejandra
     cachix
     inputs.agenix.defaultPackage.x86_64-linux
+    inputs.nix-init.defaultPackage.x86_64-linux
 
     vscode-cli
 
