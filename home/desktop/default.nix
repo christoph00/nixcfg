@@ -91,8 +91,6 @@ in {
     xdg-desktop-portal-wlr
     xdg-desktop-portal
     xdg-desktop-portal-gtk
-
-    xdg-open
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
@@ -112,7 +110,7 @@ in {
     NIXPKGS_ALLOW_UNFREE = 1;
   };
 
-  xdg.mimeApps.enable = true;
+  #xdg.mimeApps.enable = true;
   #xdg.mimeApps.associations.added = associations;
   #xdg.mimeApps.defaultApplications = associations;
 
