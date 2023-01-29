@@ -90,8 +90,14 @@
   programs.kdeconnect.enable = true;
 
   programs.steam.enable = true;
-  programs.steam.gamemode = {
+  programs.gamemode = {
     enable = true;
+    settings = {
+      custom = {
+        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+      };
+    };
   };
   programs.steam.package = pkgs.steam-with-packages;
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
