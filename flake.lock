@@ -505,6 +505,26 @@
         "type": "github"
       }
     },
+    "nix-init": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1674945239,
+        "narHash": "sha256-SAs9cyO2i7Z8aiRncDWTZP8zVvfRX9bjnE1+wL3IVDI=",
+        "owner": "nix-community",
+        "repo": "nix-init",
+        "rev": "65f7b44f6f69f7b416a454948a5b0dd6e0ce17cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-init",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1674459583,
@@ -592,6 +612,7 @@
         "impermanence": "impermanence",
         "nix-colors": "nix-colors",
         "nix-index-database": "nix-index-database",
+        "nix-init": "nix-init",
         "nixpkgs": "nixpkgs",
         "plasma-manager": "plasma-manager",
         "rust-overlay": "rust-overlay",
