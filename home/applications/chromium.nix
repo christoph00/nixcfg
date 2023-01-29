@@ -5,7 +5,7 @@
 }: {
   programs.chromium = {
     enable = true;
-    package = pkgs.brave;
+    package = pkgs.chromium;
     extensions = [
       #{id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
       {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
@@ -17,6 +17,11 @@
       {id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
       {id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
       {id = "ncgbkkljbaojkhljombpjejedphfhdjj";} # User Agent Switcher
+    ];
+    commandLineArgs = [
+      "--enable-features=UseOzonePlatform"
+      "--ozone-platform=wayland"
+      "--ignore-gpu-blocklist"
     ];
   };
 
