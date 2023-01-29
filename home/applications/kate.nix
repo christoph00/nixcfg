@@ -12,5 +12,5 @@
     };
   };
 in {
-  xdg.configFile."Signal/ephemeral.json".text = lib.generators.toJSON {} lspSettings;
+  xdg.configFile."kate/lspclient/settings.json".text = lib.generators.toJSON {} lspSettings;
 }
