@@ -4,39 +4,96 @@
   ...
 }: let
   vivaldi-css = with config.colorscheme.colors; ''
-    :root {
-      --base00: #${base00}; # ----
-      --base01: #${base01}; # ---
-      --base02: #${base02}; # --
-      --base03: #${base03}; # -
-      --base04: #${base04}; # +
-      --base05: #${base05}; # ++
-      --base06: #${base06}; # +++
-      --base07: #${base07}; # ++++
-      --base08: #${base08}; # red
-      --base09: #${base09}; # orange
-      --base0A: #${base0A}; # yellow
-      --base0B: #${base0B}; # green
-      --base0C: #${base0C}; # aqua
-      --base0D: #${base0D}; # blue
-      --base0E: #${base0E}; # purple
-      --base0F: #${base0F}; # brown
+      :root {
+        --base00: #${base00}; # ----
+        --base01: #${base01}; # ---
+        --base02: #${base02}; # --
+        --base03: #${base03}; # -
+        --base04: #${base04}; # +
+        --base05: #${base05}; # ++
+        --base06: #${base06}; # +++
+        --base07: #${base07}; # ++++
+        --base08: #${base08}; # red
+        --base09: #${base09}; # orange
+        --base0A: #${base0A}; # yellow
+        --base0B: #${base0B}; # green
+        --base0C: #${base0C}; # aqua
+        --base0D: #${base0D}; # blue
+        --base0E: #${base0E}; # purple
+        --base0F: #${base0F}; # brown
+      }
+
+      * {
+        font-family: ${config.fontProfiles.regular.family};
+      }
+
+      #browser, #browser + div, #browser + div + div {
+       font-size: 15px;
+      }
+
+      .bookmark-bar .observer button {
+         font-size: 14px;
+         font-weight: bold;
+      }
+      .tab-strip .tab-header {
+       font-size: 15px;
+      }
+
+      .button-toolbar.home { display: none }
+
+      /*
+      * Remove the gradient from the titlebar, keeping only the lighter color.
+      * Better CSS thanks to potmeklecbohdan - https://forum.vivaldi.net/post/268276
+      */
+
+      .tabs-top.color-behind-tabs-on #tabs-container {
+        background: var(--colorAccentBg) !important;
+      }
+
+      .toolbar-mainbar.toolbar-wrap {
+        /* makes the extensions popup look better */
+        border-radius: 10px;
+        position: absolute !important;
+        background-color: var(--colorAccentBg);
+      }
+      button[title="Speed Dial Generator"], button[title="Modern scrollbar"], button[title="Charcoal: Dark Mode for Messenger"], button[title="Cookie Notice Blocker"], button[title="Angular DevTools"] {
+        /* hides the extensions of the given title */
+        display: none !important;
+      }
+
+      .button-toolbar>button {
+        border-radius: var(--radius) !important;
+        /* adaptes the border of the toolbar buttons to the selected theme */
+      }
+
+      .toolbar-insideinput>.pageload>div {
+        display: none;
+        /* hides the loading progress */
+      }
+
+      /* use correct accent color */
+    .tab-indicator.active {
+      background-color: var(--colorAccentBg) !important;
     }
 
-    * {
-      font-family: ${config.fontProfiles.regular.family};
+    .tab.active {
+      font-weight: bold;
     }
 
-    #browser, #browser + div, #browser + div + div {
-     font-size: 15px;
+    #switch {
+      background-color: var(--colorBorder);
     }
 
-    .bookmark-bar .observer button {
-       font-size: 14px;
-       font-weight: bold;
+    .tab .close {
+      border-radius: 100%;
     }
-    .tab-strip .tab-header {
-     font-size: 15px;
+
+    #webview-container:has(#webpage-stack .mosaic.visible) {
+      box-shadow: 0 0 0 8px var(--colorBorder), inset 0 0 0 4px var(--colorBorder);
+    }
+
+    .mosaic-split .mosaic-split-line, .mosaic-split .mosaic-split-line::before, .mosaic-split .mosaic-split-line::after {
+      background-color: var(--colorBorder)
     }
 
   '';
