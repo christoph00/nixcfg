@@ -172,6 +172,7 @@ in {
         "Bilder"
         "Videos"
         "Code"
+        "Desktop"
         ".ssh"
         ".config/syncthing"
         ".config/gh"
