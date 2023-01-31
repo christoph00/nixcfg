@@ -36,6 +36,8 @@
           inputs.srvos.nixosModules.mixins-systemd-boot
           inputs.srvos.nixosModules.mixins-terminfo
 
+          self.nixosModules.tailscale-tls
+
           ./common.nix
           ./tailscale.nix
         ];
@@ -100,6 +102,8 @@
         ./acme.nix
         ./sunshine.nix
       ];
+
+      reverse-proxy-server.imports = [./reverse-proxy-server.nix];
     };
   };
 }
