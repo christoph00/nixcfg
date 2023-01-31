@@ -10,8 +10,6 @@
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
   boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
-  boot.loader.efi.canTouchEfiVariables = lib.mkForce true;
-
   boot.kernel.sysctl = {
     "max_user_watches" = 524288;
     "kernel.dmesg_restrict" = true;
@@ -52,7 +50,7 @@
   };
 
   # TODO: Check if Home Net
-  networking.domain = "lan.net.r505.de";
+  #networking.domain = "lan.net.r505.de";
 
   systemd.network.networks = {
     lan = {

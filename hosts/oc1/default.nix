@@ -4,23 +4,25 @@
   pkgs,
   ...
 }: {
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = ["defaults" "size=2G" "mode=755"];
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+    device = "nodev";
   };
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi"];
+  boot.initrd.kernelModules = ["nvme"];
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/0C57-60FD";
+    device = "/dev/sda1";
     fsType = "vfat";
   };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/8521cf96-09fd-43f8-a1e7-82b853ac0320";
-    fsType = "ext4";
+  fileSystems."/" = {
+    device = "/dev/sda3";
+    fsType = "xfs";
   };
-
-  swapDevices = [];
+  swapDevices = [{device = "/dev/sda2";}];
 
   networking.hostName = "oc1";
 
