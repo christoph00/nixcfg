@@ -50,6 +50,14 @@
           ./oc1
         ];
       };
+      oc2 = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.server
+          self.nixosModules.virtual
+          ./oc2
+        ];
+      };
     };
   };
 }
