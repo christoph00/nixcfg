@@ -25,6 +25,7 @@
         ".local/share/Steam"
         "Games"
       ];
+      files = [".steam/steam.token" ".steam/registry.vdf"];
     };
   };
 
