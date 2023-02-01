@@ -1,0 +1,25 @@
+{ lib
+, buildGoModule
+, fetchFromGitHub
+}:
+
+buildGoModule rec {
+  pname = "sftpgo";
+  version = "2.4.3";
+
+  src = fetchFromGitHub {
+    owner = "drakkan";
+    repo = "sftpgo";
+    rev = "v${version}";
+    hash = "sha256-cSA7ndpIV3VvIZTBa9NCIlJn57EtT1qxrB0UsMENUS0=";
+  };
+
+  vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+
+  meta = with lib; {
+    description = "Fully featured and highly configurable SFTP server with optional HTTP/S, FTP/S and WebDAV support - S3, Google Cloud Storage, Azure Blob";
+    homepage = "https://github.com/drakkan/sftpgo";
+    license = licenses.agpl3Only;
+    maintainers = with maintainers; [ ];
+  };
+}

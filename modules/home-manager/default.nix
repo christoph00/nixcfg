@@ -5,5 +5,6 @@
     ./shellcolor.nix
     ./wallpaper.nix
     ./fuzzel.nix
+    ./rclone.nix
   ];
 }
