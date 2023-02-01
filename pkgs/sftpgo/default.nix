@@ -17,8 +17,10 @@ with lib;
       owner = "drakkan";
       repo = pname;
       rev = "v${version}";
-      sha256 = "14iyh1clgs3ycs16lmlccyy7nyxzvvjsf8ir44fbm8nmij4hi3kc";
+      hash = "sha256-cSA7ndpIV3VvIZTBa9NCIlJn57EtT1qxrB0UsMENUS0=";
     };
+
+    vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
 
     ldflags = [
       "-s"
@@ -35,9 +37,6 @@ with lib;
 
     preBuildPhases = ["cpBundle"];
     cpBundle = "cp -r {openapi,static,templates} internal/bundle/";
-
-    #vendorSha256 = lib.fakeSha256;
-    vendorSha256 = "sha256-+i6jUImDMrsDnIPjIp8uM2BR1IYMqWG1OmvA2w/AfVQ=";
 
     doCheck = false;
 
