@@ -38,4 +38,10 @@
         gamescope
       ];
   };
+
+  sftpgo = pkgs.sftpgo.overrideAttrs (old: {
+    tags = ["nopgxregisterdefaulttypes" "bundle" "nosqlite"];
+    preBuildPhases = ["cpBundle"];
+    cpBundle = "cp -r {openapi,static,templates} internal/bundle/";
+  });
 }
