@@ -99,7 +99,7 @@
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
   age.secrets.rclone-conf = {
     file = ../../secrets/rclone.conf;
-    # path = "/home/christoph/.config/rclone/rclone.conf";
+    path = "/home/christoph/.config/rclone/rclone.conf";
     owner = "christoph";
     mode = "660";
   };

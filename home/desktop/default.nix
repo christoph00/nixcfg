@@ -118,6 +118,16 @@ in {
     "/nix/persist/home/christoph".directories = [".config/libreoffice" ".config/GeForce\ NOW" ".config/easyeffects"];
   };
 
+  services.rclone = {
+    enable = true;
+    mounts = {
+      nas = {
+        from = "nas:";
+        to = "/home/christoph/NAS";
+      };
+    };
+  };
+
   fontProfiles = {
     enable = true;
     monospace = {

@@ -57,7 +57,7 @@ in {
         ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${mapping.to}";
         ExecStart = ''
           ${pkgs.rclone}/bin/rclone mount \
-            --config=${config} \
+            --config=${cfg.config} \
             --vfs-cache-mode full \
             --buffer-size 5M \
             --vfs-read-ahead 10M \
