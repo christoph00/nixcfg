@@ -47,6 +47,7 @@
         modules = [
           self.nixosModules.server
           self.nixosModules.virtual
+          self.nixosModules.reverse-proxy-server
           ./oc1
         ];
       };
@@ -55,6 +56,7 @@
         modules = [
           self.nixosModules.server
           self.nixosModules.virtual
+          self.nixosModules.reverse-proxy-server
           ./oc2
         ];
       };
