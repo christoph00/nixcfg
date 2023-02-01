@@ -120,6 +120,7 @@ in {
 
   services.rclone = {
     enable = true;
+    config = "/run/agenix/rclone-conf";
     mounts = {
       nas = {
         from = "nas:";

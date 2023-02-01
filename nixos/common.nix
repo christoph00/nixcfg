@@ -110,7 +110,7 @@
   };
   programs.mosh.enable = true;
 
-  environment.systemPackages = [pkgs.git pkgs.vim];
+  environment.systemPackages = [pkgs.git pkgs.vim pkgs.crowdsec];
 
   environment.shellAliases = {
     nrb = "nixos-rebuild --flake github:christoph00/nixcfg --use-remote-sudo boot";
