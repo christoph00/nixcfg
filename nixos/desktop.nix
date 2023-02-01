@@ -105,7 +105,7 @@
   systemd.user.services.x11-ownership = rec {
     serviceConfig.Type = "oneshot";
     script = ''
-      chown christoph /tmp/.X11-unix
+      sudo chown christoph /tmp/.X11-unix
     '';
     after = ["graphical-session.target"];
     wants = after;
