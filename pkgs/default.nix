@@ -3,7 +3,7 @@
   swww = pkgs.callPackage ./swww {};
   #wallpaper = pkgs.callPackage ./wallpaper {};
   gfn-electron = pkgs.callPackage ./gfn-electron {};
-  my-sftpgo = pkgs.callPackage ./sftpgo {};
+  #my-sftpgo = pkgs.callPackage ./sftpgo {};
   firefox-gnome-theme = pkgs.callPackage ./firefox-gnome-theme {};
   vscode-cli = pkgs.callPackage ./vscode-cli {};
   systemd-rest = pkgs.callPackage ./systemd-rest {};
@@ -39,7 +39,7 @@
       ];
   };
 
-  sftpgo = pkgs.sftpgo.overrideAttrs (old: {
+  my-sftpgo = pkgs.sftpgo.overrideAttrs (old: {
     tags = ["nopgxregisterdefaulttypes" "bundle" "nosqlite"];
     preBuildPhases = ["cpBundle"];
     cpBundle = "cp -r {openapi,static,templates} internal/bundle/";
