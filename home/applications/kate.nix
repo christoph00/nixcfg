@@ -10,7 +10,7 @@
       url = "https://github.com/oxalica/nil";
       highlightingModeRegex = "^Nix$";
       rootIndicationFileNames = ["flake.nix"];
-     # settings.nil.formatting.command = ["${pkgs.alejandra}/bin/alejandra" "-q"];
+      # settings.nil.formatting.command = ["${pkgs.alejandra}/bin/alejandra" "-q"];
     };
   };
 in {

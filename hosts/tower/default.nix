@@ -46,6 +46,11 @@
       fsType = "tmpfs";
       options = ["defaults" "size=2G" "mode=755"];
     };
+    "/home/christoph" = {
+      device = "none";
+      fsType = "tmpfs";
+      options = ["defaults" "size=2G" "mode=777"];
+    };
 
     "/nix" = {
       device = "/dev/disk/by-label/tower";

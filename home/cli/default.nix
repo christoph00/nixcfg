@@ -177,11 +177,8 @@ in {
         "Code"
         "Desktop"
         ".ssh"
-        ".config/syncthing"
         ".config/gh"
-        ".config/rclone"
         ".cache/nix-index"
-        ".cache/rclone"
         ".config/brew" # matcha
         ".cargo"
       ];

@@ -45,6 +45,12 @@
       options = ["defaults" "size=2G" "mode=755"];
     };
 
+    "/home/christoph" = {
+      device = "none";
+      fsType = "tmpfs"; # Can be stored on normal drive or on tmpfs as well
+      options = ["size=2G" "mode=777"];
+    };
+
     "/nix" = {
       device = "/dev/disk/by-label/air13";
       fsType = "btrfs";
