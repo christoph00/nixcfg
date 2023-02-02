@@ -69,11 +69,21 @@
             tls = {certResolver = "cloudflare";};
             service = "home-assistant";
           };
+          nas-dav = {
+            rule = "Host(`dav.r505.de`)";
+            tls = {certResolver = "cloudflare";};
+            service = "nas-dav";
+          };
         };
         services = {
           home-assistant = {
             loadBalancer = {
               servers = [{url = "http://futro.cama-boa.ts.net:8123";}];
+            };
+          };
+          nas-dav = {
+            loadBalancer = {
+              servers = [{url = "http://futro.cama-boa.ts.net:8033";}];
             };
           };
         };

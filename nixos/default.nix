@@ -83,7 +83,7 @@
         ./cloudflared.nix
         ./home-server.nix
         ./matcha.nix
-        inputs.srvos.nixosModules.mixins-nginx
+        #inputs.srvos.nixosModules.mixins-nginx
         self.nixosModules.sftpgo
         #self.nixosModules.syncthing
       ];
