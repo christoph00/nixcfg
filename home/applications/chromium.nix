@@ -100,7 +100,7 @@
 in {
   programs.chromium = {
     enable = true;
-    package = pkgs.chromium;
+    package = pkgs.brave;
     # package = pkgs.vivaldi.override {
     #   proprietaryCodecs = true;
     #   enableWidevine = true;
