@@ -29,13 +29,7 @@
   };
   environment.persistence."/nix/persist" = {
     directories = [
-      "/var/lib/home-assistant"
       "/var/lib/zigbee2mqtt"
-      {
-        directory = "/var/lib/hass";
-        user = "hass";
-        group = "hass";
-      }
     ];
   };
 }

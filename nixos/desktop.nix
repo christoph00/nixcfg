@@ -52,11 +52,6 @@
 
   security = {
     rtkit.enable = true;
-    pam.services = {
-      sddm.u2fAuth = false;
-      sddm.enableKwallet = true;
-    };
-
     pam.loginLimits = [
       {
         domain = "*";
@@ -102,15 +97,15 @@
   programs.steam.package = pkgs.steam-with-packages;
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
-  systemd.user.services.x11-ownership = rec {
-    serviceConfig.Type = "oneshot";
-    script = ''
-      sudo chown christoph /tmp/.X11-unix
-    '';
-    after = ["graphical-session.target"];
-    wants = after;
-    wantedBy = ["graphical-session-pre.target"];
-  };
+  # systemd.user.services.x11-ownership = rec {
+  #   serviceConfig.Type = "oneshot";
+  #   script = ''
+  #     ${pkgs.sudo}/bin/sudo chown christoph /tmp/.X11-unix
+  #   '';
+  #   after = ["graphical-session.target"];
+  #   wants = after;
+  #   wantedBy = ["graphical-session-pre.target"];
+  # };
 
   # autologin-graphical-session = {
   #   enable = true;

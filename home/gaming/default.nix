@@ -25,17 +25,17 @@
         ".local/share/Steam"
         "Games"
       ];
-      files = [".steam/steam.token" ".steam/registry.vdf"];
+      #files = [".steam/steam.token" ".steam/registry.vdf"];
     };
   };
 
   # Start Steam on Login
-  systemd.user.services.steam = {
-    Unit.Description = "Steam Client";
-    Install.WantedBy = ["graphical-session.target"];
-    Unit.PartOf = ["graphical-session.target"];
-    Service.Type = "simple";
-    Service.ExecStart = "${pkgs.steam-with-packages}/bin/steam -silent";
-    Service.Restart = "on-failure";
-  };
+  # systemd.user.services.steam = {
+  #   Unit.Description = "Steam Client";
+  #   Install.WantedBy = ["graphical-session.target"];
+  #   Unit.PartOf = ["graphical-session.target"];
+  #   Service.Type = "simple";
+  #   Service.ExecStart = "${pkgs.steam-with-packages}/bin/steam -silent";
+  #   Service.Restart = "on-failure";
+  # };
 }

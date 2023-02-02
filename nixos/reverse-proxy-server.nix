@@ -21,6 +21,8 @@
 
   networking.firewall.allowedTCPPorts = [9090 8082 443 80];
 
+  environment.systemPackages = [pkgs.crowdsec pkgs.cs-firewall-bouncer];
+
   age.secrets.traefik = {
     file = ../secrets/traefik.env;
     owner = config.systemd.services.traefik.serviceConfig.User;

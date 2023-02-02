@@ -9,11 +9,12 @@
   better-thermostat-ui-card = "${pkgs.ha-lovelace-better-thermostat-ui-card}/ha-lovelace-better-thermostat-ui-card.js";
   vacuum-card = "${pkgs.ha-lovelace-vacuum-card}/ha-lovelace-vacuum-card.js";
 in {
+  services.home-assistant.config.default_config.whitelist_external_dirs = ["/nix/persist/hass/www"];
   systemd.tmpfiles.rules = [
     "d /nix/persist/hass/www 0755 hass hass"
-    "L /nix/persist/hass/www/vacuum-card.js - - - - ${vacuum-card}"
-    "L /nix/persist/hass/www/mini-graph-card.js - - - - ${mini-graph-card}"
-    "L /nix/persist/hass/www/better-thermostat-ui-card.js - - - - ${better-thermostat-ui-card}"
+    "C /nix/persist/hass/www/vacuum-card.js 0755 hass hass - ${vacuum-card}"
+    "C /nix/persist/hass/www/mini-graph-card.js 0755 hass hass - ${mini-graph-card}"
+    "C /nix/persist/hass/www/better-thermostat-ui-card.js 0755 hass hass - ${better-thermostat-ui-card}"
 
     "d /nix/persist/hass/custom_components 0755 hass hass"
     "L /nix/persist/hass/custom_components/ble_monitor - - - - ${pkgs.ha-components-ble-monitor}/ble_monitor"
@@ -31,12 +32,6 @@ in {
       alias = vacuum-card;
     };
   };
-
-  ## Custom HA modules
-  ##system.activationScripts.hassLovelaceModules = ''
-  ##  cp --remove-destination ${valetudoMapCard}/valetudo-map-card.js /storage/home-assistant/www/valetudo-map-card.js
-  ##  cp --remove-destination ${miniMediaPlayerCard} /storage/home-assistant/www/mini-media-player-bundle.js
-  ##'';
 
   services.home-assistant.config.lovelace.resources = [
     {
