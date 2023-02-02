@@ -75,7 +75,7 @@
     description = "Christoph";
     isNormalUser = true;
     createHome = true;
-    shell = pkgs.bash;
+    shell = pkgs.fish;
     extraGroups = [
       "wheel"
       "video"

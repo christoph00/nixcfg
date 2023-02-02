@@ -63,8 +63,6 @@ in {
 
   home.sessionVariables = {
     PF_INFO = "ascii title os kernel uptime shell term desktop scheme palette";
-
-    MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     EDITOR = "hx";
     VISUAL = "hx";
   };
@@ -86,21 +84,13 @@ in {
 
   systemd.user.startServices = "sd-switch";
 
-  #services.syncthing.enable = true;
-
-  # programs.aria2 = {
-  #   enable = true;
-  #   settings = {
-
-  #   };
-  # };
-
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
     aliases = {
       pushall = "!git remote | xargs -L1 git push --all";
       graph = "log --decorate --oneline --graph";
+      nc = ''commit -a --allow-empty-message -m \"\"'';
     };
     userName = "Christoph Asche";
     userEmail = "christoph@asche.co";
@@ -108,13 +98,14 @@ in {
       feature.manyFiles = true;
       init.defaultBranch = "main";
       url."https://github.com/".insteadOf = "git://github.com/";
+      merge.conflictstyle = "diff3";
+      pull.rebase = true;
+      rebase.autosquash = true;
+      rebase.autostash = true;
+      color.ui = true;
     };
     lfs = {enable = true;};
     ignores = [".direnv" "result"];
-    #signing = {
-    #  signByDefault = true;
-    #  key = "TODO";
-    #};
   };
 
   programs = {
@@ -135,17 +126,10 @@ in {
     enableAliases = true;
   };
 
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    changeDirWidgetCommand = "fd --type d";
-  };
-
   programs.command-not-found.enable = false;
   programs.nix-index.enable = true;
-  programs.nix-index.enableBashIntegration = true;
 
-  programs.bash = {
+  programs.fish = {
     enable = true;
   };
 
