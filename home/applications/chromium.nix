@@ -100,13 +100,13 @@
 in {
   programs.chromium = {
     enable = true;
-    #package = pkgs.vivaldi;
-    package = pkgs.vivaldi.override {
-      proprietaryCodecs = true;
-      enableWidevine = true;
-      vivaldi-ffmpeg-codecs = pkgs.vivaldi-ffmpeg-codecs;
-      vivaldi-widevine = pkgs.vivaldi-widevine;
-    };
+    package = pkgs.chromium;
+    # package = pkgs.vivaldi.override {
+    #   proprietaryCodecs = true;
+    #   enableWidevine = true;
+    #   vivaldi-ffmpeg-codecs = pkgs.vivaldi-ffmpeg-codecs;
+    #   vivaldi-widevine = pkgs.vivaldi-widevine;
+    # };
     extensions = [
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
       {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
@@ -126,10 +126,10 @@ in {
     ];
   };
 
-  home.packages = [pkgs.vivaldi-widevine pkgs.vivaldi-ffmpeg-codecs];
+  #home.packages = [pkgs.vivaldi-widevine pkgs.vivaldi-ffmpeg-codecs];
 
   home.persistence = {
     "/nix/persist/home/christoph".directories = [".config/chromium/Default" ".config/BraveSoftware/Brave-Browser/Default" ".config/vivaldi/Default"];
   };
-  home.file.".config/vivaldi/UserCSS/theme.css".text = vivaldi-css;
+  #home.file.".config/vivaldi/UserCSS/theme.css".text = vivaldi-css;
 }
