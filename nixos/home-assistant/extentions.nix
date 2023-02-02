@@ -10,10 +10,10 @@
   vacuum-card = "${pkgs.ha-lovelace-vacuum-card}/ha-lovelace-vacuum-card.js";
 in {
   systemd.tmpfiles.rules = [
-    # "d /nix/persist/hass/www 0755 hass hass"
-    # "L /nix/persist/hass/www/valetudo-map-card.js - - - - ${valetudo-map-card}"
-    # "L /nix/persist/hass/www/mini-media-player-bundle.js - - - - ${miniMediaPlayerCard}"
-    # "L /nix/persist/hass/www/better-thermostat-ui-card.js - - - - ${better-thermostat-card}"
+    "d /nix/persist/hass/www 0755 hass hass"
+    "L /nix/persist/hass/www/vacuum-card.js - - - - ${vacuum-card}"
+    "L /nix/persist/hass/www/mini-graph-card.js - - - - ${mini-graph-card}"
+    "L /nix/persist/hass/www/better-thermostat-ui-card.js - - - - ${better-thermostat-ui-card}"
 
     "d /nix/persist/hass/custom_components 0755 hass hass"
     "L /nix/persist/hass/custom_components/ble_monitor - - - - ${pkgs.ha-components-ble-monitor}/ble_monitor"
