@@ -74,6 +74,11 @@
             tls = {certResolver = "cloudflare";};
             service = "nas-dav";
           };
+          webmail = {
+            rule = "Host(`webmail.r505.de`)";
+            tls = {certResolver = "cloudflare";};
+            service = "webmail";
+          };
         };
         services = {
           home-assistant = {
@@ -84,6 +89,11 @@
           nas-dav = {
             loadBalancer = {
               servers = [{url = "http://futro.cama-boa.ts.net:8033";}];
+            };
+          };
+          webmail = {
+            loadBalancer = {
+              servers = [{url = "http://oca.cama-boa.ts.net:8077";}];
             };
           };
         };
