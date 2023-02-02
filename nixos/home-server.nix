@@ -85,6 +85,11 @@
         tls = {certResolver = "cloudflare";};
         service = "aira2rpc";
       };
+      nas = {
+        rule = "Host(`nas.net.r505.de`)";
+        tls = {certResolver = "cloudflare";};
+        service = "sftpgo-web";
+      };
       # aria2web = {
       #   rule = "Host(`dl.net.r505.de`)";
       #   tls = {certResolver = "cloudflare";};
@@ -100,6 +105,11 @@
       aria2rpc = {
         loadBalancer = {
           servers = [{url = "http://localhost:6800/jsonrpc";}];
+        };
+      };
+      sftpgo-web = {
+        loadBalancer = {
+          servers = [{url = "http://localhost:8080/jsonrpc";}];
         };
       };
     };
