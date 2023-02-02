@@ -61,7 +61,7 @@
         routers = {
           traefik = {
             entryPoints = ["api"];
-            rule = "Host(`${config.networking.hostName}`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))";
+            rule = "Host(`${config.networking.hostName}.dash.net.r505.de`)";
             service = "api@internal";
           };
           home-assistant = {

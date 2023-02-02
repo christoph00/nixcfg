@@ -12,6 +12,7 @@
   ariaNg = pkgs.callPackage ./ariaNg {};
   matcha = pkgs.callPackage ./matcha {};
   cs-firewall-bouncer = pkgs.callPackage ./cs-firewall-bouncer {};
+  media-sort = pkgs.callPackage ./media-sort {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};

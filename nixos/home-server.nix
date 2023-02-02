@@ -73,6 +73,38 @@
     openFirewall = true;
   };
 
+  services.traefik.dynamicConfigOptions.http = {
+    routers = {
+      media = {
+        rule = "Host(`media.net.r505.de`)";
+        tls = {certResolver = "cloudflare";};
+        service = "jellyfin";
+      };
+      aria2rpc = {
+        rule = "Host(`dl.net.r505.de`) && Path(`jsonrpc`)";
+        tls = {certResolver = "cloudflare";};
+        service = "aira2rpc";
+      };
+      # aria2web = {
+      #   rule = "Host(`dl.net.r505.de`)";
+      #   tls = {certResolver = "cloudflare";};
+      #   service = "aira2web";
+      # };
+    };
+    services = {
+      jellyfin = {
+        loadBalancer = {
+          servers = [{url = "http://localhost:8096";}];
+        };
+      };
+      aria2rpc = {
+        loadBalancer = {
+          servers = [{url = "http://localhost:6800/jsonrpc";}];
+        };
+      };
+    };
+  };
+
   systemd.tmpfiles.rules = [
     "d /var/lib/jellyfin/media 0770 jellyfin media"
     "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
@@ -90,20 +122,6 @@
     # "d /var/lib/sabnzbd/Downloads 0770 sabnzbd media"
     # "L /var/lib/sabnzbd/Downloads - - - - /media/data-ssd/Downloads"
   ];
-
-  # users.users.sabnzbd.extraGroups = ["media"];
-  # services.sabnzbd = {
-  #   enable = true;
-  # };
-
-  # services.nginx.virtualHosts."nzb.net.r505.de" = {
-  #   forceSSL = true;
-  #   serverName = "nzb.net.r505.de";
-  #   useACMEHost = "net.r505.de";
-  #   locations."/" = {
-  #     proxyPass = "http://localhost:6789";
-  #   };
-  # };
 
   users.users.aria2.extraGroups = ["media"];
   users.users.christoph.extraGroups = ["aria2"];
