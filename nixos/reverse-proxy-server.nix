@@ -19,6 +19,8 @@
   #   };
   # };
 
+  networking.firewall.allowedTCPPorts = [9090 8082 443 80];
+
   age.secrets.traefik = {
     file = ../secrets/traefik.env;
     owner = config.systemd.services.traefik.serviceConfig.User;
