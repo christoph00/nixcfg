@@ -38,7 +38,7 @@
       config = {};
       http = {
         use_x_forwarded_for = true;
-        trusted_proxies = ["::1" "127.0.0.1"];
+        trusted_proxies = ["::1" "127.0.0.1" "100.0.0.0/8"];
       };
       "automation editor" = "!include automations.yaml";
       "scene editor" = "!include scenes.yaml";
