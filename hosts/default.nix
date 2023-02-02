@@ -40,6 +40,7 @@
           self.nixosModules.server
           self.nixosModules.virtual
           self.nixosModules.webmail
+          self.nixosModules.caldav
           ./oca
         ];
       };
