@@ -4,58 +4,76 @@
   lib,
   ...
 }: {
-  services.tailscale-tls.enable = true;
+  #services.tailscale-tls.enable = true;
 
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "christoph@asche.co";
-    };
-    certs."r505.de" = {
-      domain = "*.r505.de";
-      dnsProvider = "cloudflare";
-      credentialsFile = config.age.secrets.cf-acme.path;
-      dnsResolver = "1.1.1.1:53";
-    };
+  # security.acme = {
+  #   acceptTerms = true;
+  #   defaults = {
+  #     email = "christoph@asche.co";
+  #   };
+  #   certs."r505.de" = {
+  #     domain = "*.r505.de";
+  #     dnsProvider = "cloudflare";
+  #     credentialsFile = config.age.secrets.cf-acme.path;
+  #     dnsResolver = "1.1.1.1:53";
+  #   };
+  # };
+
+  age.secrets.traefik = {
+    file = ../secrets/traefik.env;
+    owner = config.systemd.services.traefik.serviceConfig.User;
+    mode = "0440";
   };
 
-  services.nginx = {
+  systemd.services.traefik.serviceConfig.EnvironmentFile = config.age.secrets.traefik.path;
+  services.traefik = {
     enable = true;
-    statusPage = true;
-    commonHttpConfig = ''
-      set_real_ip_from 103.21.244.0/22;
-      set_real_ip_from 103.22.200.0/22;
-      set_real_ip_from 103.31.4.0/22;
-      set_real_ip_from 104.16.0.0/13;
-      set_real_ip_from 104.24.0.0/14;
-      set_real_ip_from 108.162.192.0/18;
-      set_real_ip_from 131.0.72.0/22;
-      set_real_ip_from 141.101.64.0/18;
-      set_real_ip_from 162.158.0.0/15;
-      set_real_ip_from 172.64.0.0/13;
-      set_real_ip_from 173.245.48.0/20;
-      set_real_ip_from 188.114.96.0/20;
-      set_real_ip_from 190.93.240.0/20;
-      set_real_ip_from 197.234.240.0/22;
-      set_real_ip_from 198.41.128.0/17;
-      set_real_ip_from 2400:cb00::/32;
-      set_real_ip_from 2606:4700::/32;
-      set_real_ip_from 2803:f800::/32;
-      set_real_ip_from 2405:b500::/32;
-      set_real_ip_from 2405:8100::/32;
-      set_real_ip_from 2c0f:f248::/32;
-      set_real_ip_from 2a06:98c0::/29;
-      real_ip_header CF-Connecting-IP;
-    '';
-  };
-  users.users.nginx.extraGroups = ["acme" "tailscale-tls"];
-
-  services.nginx.virtualHosts."dav.r505.de" = {
-    forceSSL = true;
-    serverName = "dav.r505.de";
-    useACMEHost = "r505.de";
-    locations."/" = {
-      proxyPass = "http://futro:8033";
+    staticConfigOptions = {
+      api = {dashboard = true;};
+      entryPoints = {
+        http = {address = ":80";};
+        https = {address = ":443";};
+        api = {address = ":9090";};
+        metrics = {address = ":8082";};
+      };
+      certificatesResolvers.cloudflare.acme = {
+        email = "christoph@asche.co";
+        storage = "/var/lib/traefik/acme.json";
+        dnsChallenge = {
+          provider = "cloudflare";
+        };
+      };
+      accessLog = {};
+      metrics = {
+        prometheus = {
+          addEntryPointsLabels = true;
+          entryPoint = "metrics";
+        };
+      };
+    };
+    dynamicConfigOptions = {
+      http = {
+        serversTransports = {unsafe_tls = {insecureSkipVerify = true;};};
+        routers = {
+          traefik = {
+            entryPoints = ["api"];
+            rule = "Host(`${config.networking.hostName}`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))";
+            service = "api@internal";
+          };
+          home-assistant = {
+            rule = "Host(`ha.r505.de`) || host(`ha2.r505.de`)";
+            tls = {certResolver = "cloudflare";};
+            service = "home-assistant";
+          };
+        };
+        services = {
+          home-assistant = {
+            loadBalancer = {
+              servers = [{url = "http://futro.cama-boa.ts.net:8123";}];
+            };
+          };
+        };
+      };
     };
   };
 }
