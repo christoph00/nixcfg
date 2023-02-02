@@ -79,6 +79,11 @@
             tls = {certResolver = "cloudflare";};
             service = "webmail";
           };
+          caldav = {
+            rule = "Host(`caldav.net.r505.de`)";
+            tls = {certResolver = "cloudflare";};
+            service = "caldav";
+          };
         };
         services = {
           home-assistant = {
@@ -94,6 +99,11 @@
           webmail = {
             loadBalancer = {
               servers = [{url = "http://oca.cama-boa.ts.net:8077";}];
+            };
+          };
+          caldav = {
+            loadBalancer = {
+              servers = [{url = "http://oca.cama-boa.ts.net:5232";}];
             };
           };
         };
