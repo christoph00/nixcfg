@@ -297,6 +297,8 @@
             };
             idle_timeout = "60s";
             label_structured_data = true;
+            use_incoming_timestamp = true;
+            use_rfc5424_message = true;
           };
           relabel_configs = [
             {

@@ -26,6 +26,8 @@
     LC_MEASUREMENT = "de_DE.UTF-8";
   };
 
+  time.timeZone = "Europe/Berlin";
+
   nix = {
     settings = {
       substituters = [

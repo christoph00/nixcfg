@@ -22,8 +22,6 @@
   ];
   boot.plymouth.enable = true;
 
-  time.timeZone = "Europe/Berlin";
-
   services.dbus = {
     enable = true;
     implementation = "broker";
