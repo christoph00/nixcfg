@@ -113,7 +113,7 @@
           };
           grafana = {
             loadBalancer = {
-              servers = [{url = "http://localhost:2342";}];
+              servers = [{url = "http://oca.cama-boa.ts.net:2342";}];
             };
           };
         };
