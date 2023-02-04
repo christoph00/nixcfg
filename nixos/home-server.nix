@@ -292,10 +292,30 @@
           syslog = {
             listen_address = "0.0.0.0:1514";
             listen_protocol = "udp";
-            labels.job = "syslog";
+            labels = {
+              job = "syslog";
+            };
             idle_timeout = "60s";
             label_structured_data = true;
           };
+          relabel_configs = [
+            {
+              source_labels = ["__syslog_message_hostname"];
+              target_label = "host";
+            }
+            {
+              source_labels = ["__syslog_connection_ip_address"];
+              target_label = "ip";
+            }
+            {
+              source_labels = ["__syslog_message_app_name"];
+              target_label = "app";
+            }
+            {
+              source_labels = ["__syslog_message_severity"];
+              target_label = "level";
+            }
+          ];
         }
       ];
     };
