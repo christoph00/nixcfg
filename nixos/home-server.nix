@@ -4,8 +4,8 @@
   lib,
   ...
 }: {
-  networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443 2022 9100];
-  networking.firewall.allowedUDPPorts = [53];
+  networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443 2022 9100 1514];
+  networking.firewall.allowedUDPPorts = [53 1514];
 
   users.users.sftpgo.extraGroups = ["media"];
   services.sftpgo = {
@@ -62,6 +62,11 @@
         directory = "/var/lib/prometheus2";
         user = "prometheus";
         group = "prometheus";
+      }
+      {
+        directory = "/var/lib/loki";
+        user = "loki";
+        group = "loki";
       }
     ];
   };
@@ -200,5 +205,96 @@
         ];
       }
     ];
+  };
+
+  services.loki = {
+    enable = true;
+    configuration = {
+      auth_enabled = false;
+      server = {
+        http_listen_port = 9005;
+        log_level = "warn";
+      };
+      ingester = {
+        lifecycler = {
+          address = "127.0.0.1";
+          ring = {
+            kvstore.store = "inmemory";
+            replication_factor = 1;
+          };
+          final_sleep = "0s";
+        };
+        chunk_idle_period = "5m";
+        chunk_retain_period = "30s";
+      };
+      schema_config = {
+        configs = [
+          {
+            from = "2022-05-06";
+            store = "boltdb";
+            object_store = "filesystem";
+            schema = "v11";
+            index = {
+              prefix = "index_";
+              period = "48h";
+            };
+          }
+        ];
+      };
+      storage_config = {
+        boltdb.directory = "/var/lib/loki/index";
+        filesystem.directory = "/var/lib/loki/chunks";
+      };
+      limits_config = {
+        enforce_metric_name = false;
+        reject_old_samples = true;
+        reject_old_samples_max_age = "168h";
+      };
+      # ruler = {
+      #   alertmanager_url = "http://localhost:9093";
+      # };
+      analytics = {
+        reporting_enabled = false;
+      };
+    };
+  };
+  services.promtail = {
+    enable = true;
+    configuration = {
+      server = {
+        http_listen_port = 28183;
+        grpc_listen_port = 0;
+        log_level = "warn";
+      };
+      positions.filename = "/tmp/positions.yaml";
+      clients = [
+        {url = "http://127.0.0.1:9005/loki/api/v1/push";}
+      ];
+      scrape_configs = [
+        {
+          job_name = "journal";
+          journal = {
+            max_age = "24h";
+            labels = {
+              job = "systemd-journal";
+              host = "127.0.0.1";
+            };
+          };
+          relabel_configs = [
+            {
+              source_labels = ["__journal__systemd_unit"];
+              target_label = "unit";
+            }
+          ];
+        }
+        {
+          job_name = "syslog";
+          syslog = {
+            listen_address = "0.0.0.0:1514";
+            labels.job = "syslog";
+          };
+        }
+      ];
+    };
   };
 }
