@@ -230,7 +230,7 @@
       schema_config = {
         configs = [
           {
-            from = "2022-05-06";
+            from = "2023-01-30";
             store = "boltdb";
             object_store = "filesystem";
             schema = "v11";
@@ -291,7 +291,10 @@
           job_name = "syslog";
           syslog = {
             listen_address = "0.0.0.0:1514";
+            listen_protocol = "udp";
             labels.job = "syslog";
+            idle_timeout = "60s";
+            label_structured_data = true;
           };
         }
       ];
