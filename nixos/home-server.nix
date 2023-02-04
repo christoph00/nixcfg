@@ -145,5 +145,31 @@
   services.prometheus = {
     enable = true;
     port = 9001;
+    scrapeConfigs = [
+      {
+        job_name = "erx";
+        static_configs = [
+          {
+            targets = ["erx.lan.net.r505.de:9200"];
+          }
+        ];
+      }
+      {
+        job_name = "uap";
+        static_configs = [
+          {
+            targets = ["uap.lan.net.r505.de:9200"];
+          }
+        ];
+      }
+      {
+        job_name = "futro";
+        static_configs = [
+          {
+            targets = ["127.0.0.1:9200"];
+          }
+        ];
+      }
+    ];
   };
 }
