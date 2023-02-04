@@ -8,6 +8,15 @@
     enable = true;
     domain = "graf.r505.de";
     port = 2342;
-    addr = "127.0.0.1";
+    addr = "0.0.0.0";
+  };
+  environment.persistence."/nix/persist" = {
+    directories = [
+      {
+        directory = "/var/lib/grafana";
+        user = "grafana";
+        group = "grafana";
+      }
+    ];
   };
 }

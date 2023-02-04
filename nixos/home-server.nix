@@ -155,7 +155,7 @@
         job_name = "erx";
         static_configs = [
           {
-            targets = ["erx.lan.net.r505.de:9200"];
+            targets = ["erx.lan.net.r505.de:9100"];
           }
         ];
       }
@@ -163,7 +163,7 @@
         job_name = "uap";
         static_configs = [
           {
-            targets = ["uap.lan.net.r505.de:9200"];
+            targets = ["uap.lan.net.r505.de:9100"];
           }
         ];
       }
@@ -171,7 +171,7 @@
         job_name = "futro";
         static_configs = [
           {
-            targets = ["127.0.0.1:9200"];
+            targets = ["127.0.0.1:9002"];
           }
         ];
       }
