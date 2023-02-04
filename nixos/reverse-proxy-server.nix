@@ -84,6 +84,11 @@
             tls = {certResolver = "cloudflare";};
             service = "caldav";
           };
+          grafana = {
+            rule = "Host(`graf.r505.de`)";
+            tls = {certResolver = "cloudflare";};
+            service = "grafana";
+          };
         };
         services = {
           home-assistant = {
@@ -104,6 +109,11 @@
           caldav = {
             loadBalancer = {
               servers = [{url = "http://oca.cama-boa.ts.net:5232";}];
+            };
+          };
+          grafana = {
+            loadBalancer = {
+              servers = [{url = "http://localhost:2342";}];
             };
           };
         };
