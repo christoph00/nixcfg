@@ -171,7 +171,31 @@
         job_name = "futro";
         static_configs = [
           {
-            targets = ["127.0.0.1:9002"];
+            targets = ["127.0.0.1:9002" "127.0.0.1:8082"];
+          }
+        ];
+      }
+      {
+        job_name = "oc1";
+        static_configs = [
+          {
+            targets = ["oc1.cama-boa.ts.net:9002" "oc1.cama-boa.ts.net:8082"];
+          }
+        ];
+      }
+      {
+        job_name = "oc2";
+        static_configs = [
+          {
+            targets = ["oc2.cama-boa.ts.net:9002" "oc2.cama-boa.ts.net:8082"];
+          }
+        ];
+      }
+      {
+        job_name = "oca";
+        static_configs = [
+          {
+            targets = ["oca.cama-boa.ts.net:9002"];
           }
         ];
       }
