@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443 2022];
+  networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443 2022 9100];
   networking.firewall.allowedUDPPorts = [53];
 
   users.users.sftpgo.extraGroups = ["media"];
@@ -58,6 +58,11 @@
       #   directory = "/var/lib/sabnzbd";
       #   inherit (config.services.sabnzbd) user group;
       # }
+      {
+        directory = "/var/lib/prometheus2";
+        user = "prometheus";
+        group = "prometheus";
+      }
     ];
   };
 
