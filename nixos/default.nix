@@ -105,6 +105,7 @@
       ];
 
       reverse-proxy-server.imports = [./reverse-proxy-server.nix];
+      remote-server.imports = [./remote-server.nix];
     };
   };
 }
