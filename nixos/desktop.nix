@@ -80,7 +80,9 @@
     allowedTCPPorts = [22000 47989 47990 5901];
     allowedUDPPorts = [21027 22000 47989 47990 5901];
   };
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
+
+  networking.networkmanager.enable = true;
 
   programs.kdeconnect.enable = true;
 

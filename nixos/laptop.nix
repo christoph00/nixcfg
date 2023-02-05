@@ -25,8 +25,14 @@
 
   networking.wireless = {
     enable = false;
-    iwd.enable = true;
     fallbackToWPA2 = false;
+    iwd = {
+      enable = true;
+      settings = {
+        General.AddressRandomization = "once";
+        General.AddressRandomizationRange = "full";
+      };
+    };
 
     # Imperative
     allowAuxiliaryImperativeNetworks = true;
@@ -43,6 +49,8 @@
       "/var/lib/iwd"
     ];
   };
+
+  networking.networkmanager.wifi.backend = "iwd";
 
   systemd.user.timers.notify-on-low-battery = {
     timerConfig.OnBootSec = "2m";
