@@ -147,154 +147,154 @@
     extraArguments = "--rpc-listen-all --remote-time=true";
   };
 
-  services.prometheus = {
-    enable = true;
-    port = 9001;
-    scrapeConfigs = [
-      {
-        job_name = "erx";
-        static_configs = [
-          {
-            targets = ["erx.lan.net.r505.de:9100"];
-          }
-        ];
-      }
-      {
-        job_name = "uap";
-        static_configs = [
-          {
-            targets = ["uap.lan.net.r505.de:9100"];
-          }
-        ];
-      }
-      {
-        job_name = "futro";
-        static_configs = [
-          {
-            targets = ["127.0.0.1:9002" "127.0.0.1:8082"];
-          }
-        ];
-      }
-      {
-        job_name = "oc1";
-        static_configs = [
-          {
-            targets = ["oc1.cama-boa.ts.net:9002" "oc1.cama-boa.ts.net:8082"];
-          }
-        ];
-      }
-      {
-        job_name = "oc2";
-        static_configs = [
-          {
-            targets = ["oc2.cama-boa.ts.net:9002" "oc2.cama-boa.ts.net:8082"];
-          }
-        ];
-      }
-      {
-        job_name = "oca";
-        static_configs = [
-          {
-            targets = ["oca.cama-boa.ts.net:9002"];
-          }
-        ];
-      }
-    ];
-  };
+  # services.prometheus = {
+  #   enable = true;
+  #   port = 9001;
+  #   scrapeConfigs = [
+  #     {
+  #       job_name = "erx";
+  #       static_configs = [
+  #         {
+  #           targets = ["erx.lan.net.r505.de:9100"];
+  #         }
+  #       ];
+  #     }
+  #     {
+  #       job_name = "uap";
+  #       static_configs = [
+  #         {
+  #           targets = ["uap.lan.net.r505.de:9100"];
+  #         }
+  #       ];
+  #     }
+  #     {
+  #       job_name = "futro";
+  #       static_configs = [
+  #         {
+  #           targets = ["127.0.0.1:9002" "127.0.0.1:8082"];
+  #         }
+  #       ];
+  #     }
+  #     {
+  #       job_name = "oc1";
+  #       static_configs = [
+  #         {
+  #           targets = ["oc1.cama-boa.ts.net:9002" "oc1.cama-boa.ts.net:8082"];
+  #         }
+  #       ];
+  #     }
+  #     {
+  #       job_name = "oc2";
+  #       static_configs = [
+  #         {
+  #           targets = ["oc2.cama-boa.ts.net:9002" "oc2.cama-boa.ts.net:8082"];
+  #         }
+  #       ];
+  #     }
+  #     {
+  #       job_name = "oca";
+  #       static_configs = [
+  #         {
+  #           targets = ["oca.cama-boa.ts.net:9002"];
+  #         }
+  #       ];
+  #     }
+  #   ];
+  # };
 
-  services.loki = {
-    enable = true;
-    configuration = {
-      auth_enabled = false;
-      server = {
-        http_listen_port = 9005;
-        log_level = "warn";
-      };
-      ingester = {
-        lifecycler = {
-          address = "127.0.0.1";
-          ring = {
-            kvstore.store = "inmemory";
-            replication_factor = 1;
-          };
-          final_sleep = "0s";
-        };
-        chunk_idle_period = "5m";
-        chunk_retain_period = "30s";
-      };
-      schema_config = {
-        configs = [
-          {
-            from = "2023-02-04";
-            store = "boltdb";
-            object_store = "filesystem";
-            schema = "v11";
-            index = {
-              prefix = "index_";
-              period = "48h";
-            };
-          }
-        ];
-      };
-      storage_config = {
-        boltdb.directory = "index";
-        filesystem.directory = "chunks";
-      };
-      limits_config = {
-        enforce_metric_name = false;
-        reject_old_samples = true;
-        reject_old_samples_max_age = "168h";
-      };
-      # ruler = {
-      #   alertmanager_url = "http://localhost:9093";
-      # };
-      analytics = {
-        reporting_enabled = false;
-      };
-    };
-  };
-  services.promtail = {
-    enable = true;
-    configuration = {
-      server = {
-        http_listen_port = 28183;
-        grpc_listen_port = 0;
-        log_level = "warn";
-      };
-      positions.filename = "/tmp/positions.yaml";
-      clients = [
-        {url = "http://127.0.0.1:9005/loki/api/v1/push";}
-      ];
-      scrape_configs = [
-        {
-          job_name = "journal";
-          journal = {
-            max_age = "24h";
-            labels = {
-              job = "systemd-journal";
-              host = "127.0.0.1";
-            };
-          };
-          relabel_configs = [
-            {
-              source_labels = ["__journal__systemd_unit"];
-              target_label = "unit";
-            }
-          ];
-        }
-        {
-          job_name = "remote";
-          static_configs = [
-            {
-              labels = {
-                __path__ = "/var/log/remote/*";
-              };
-            }
-          ];
-        }
-      ];
-    };
-  };
+  # services.loki = {
+  #   enable = true;
+  #   configuration = {
+  #     auth_enabled = false;
+  #     server = {
+  #       http_listen_port = 9005;
+  #       log_level = "warn";
+  #     };
+  #     ingester = {
+  #       lifecycler = {
+  #         address = "127.0.0.1";
+  #         ring = {
+  #           kvstore.store = "inmemory";
+  #           replication_factor = 1;
+  #         };
+  #         final_sleep = "0s";
+  #       };
+  #       chunk_idle_period = "5m";
+  #       chunk_retain_period = "30s";
+  #     };
+  #     schema_config = {
+  #       configs = [
+  #         {
+  #           from = "2023-02-04";
+  #           store = "boltdb";
+  #           object_store = "filesystem";
+  #           schema = "v11";
+  #           index = {
+  #             prefix = "index_";
+  #             period = "48h";
+  #           };
+  #         }
+  #       ];
+  #     };
+  #     storage_config = {
+  #       boltdb.directory = "index";
+  #       filesystem.directory = "chunks";
+  #     };
+  #     limits_config = {
+  #       enforce_metric_name = false;
+  #       reject_old_samples = true;
+  #       reject_old_samples_max_age = "168h";
+  #     };
+  #     # ruler = {
+  #     #   alertmanager_url = "http://localhost:9093";
+  #     # };
+  #     analytics = {
+  #       reporting_enabled = false;
+  #     };
+  #   };
+  # };
+  # services.promtail = {
+  #   enable = true;
+  #   configuration = {
+  #     server = {
+  #       http_listen_port = 28183;
+  #       grpc_listen_port = 0;
+  #       log_level = "warn";
+  #     };
+  #     positions.filename = "/tmp/positions.yaml";
+  #     clients = [
+  #       {url = "http://127.0.0.1:9005/loki/api/v1/push";}
+  #     ];
+  #     scrape_configs = [
+  #       {
+  #         job_name = "journal";
+  #         journal = {
+  #           max_age = "24h";
+  #           labels = {
+  #             job = "systemd-journal";
+  #             host = "127.0.0.1";
+  #           };
+  #         };
+  #         relabel_configs = [
+  #           {
+  #             source_labels = ["__journal__systemd_unit"];
+  #             target_label = "unit";
+  #           }
+  #         ];
+  #       }
+  #       {
+  #         job_name = "remote";
+  #         static_configs = [
+  #           {
+  #             labels = {
+  #               __path__ = "/var/log/remote/*";
+  #             };
+  #           }
+  #         ];
+  #       }
+  #     ];
+  #   };
+  # };
 
   services.syslog-ng = {
     enable = true;

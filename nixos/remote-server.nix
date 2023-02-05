@@ -4,12 +4,12 @@
   lib,
   ...
 }: {
-  services.grafana = {
-    enable = true;
-    domain = "graf.r505.de";
-    port = 2342;
-    addr = "0.0.0.0";
-  };
+  # services.grafana = {
+  #   enable = true;
+  #   domain = "graf.r505.de";
+  #   port = 2342;
+  #   addr = "0.0.0.0";
+  # };
   environment.persistence."/nix/persist" = {
     directories = [
       {
