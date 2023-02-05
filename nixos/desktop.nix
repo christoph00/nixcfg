@@ -29,6 +29,8 @@
   };
   hardware.uinput.enable = true;
 
+  virtualisation.podman.enable = true;
+
   hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
