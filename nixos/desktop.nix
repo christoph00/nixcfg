@@ -82,7 +82,8 @@
   };
   networking.firewall.enable = true;
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = lib.mkForce true;
+  systemd.network.enable = lib.mkForce false;
 
   programs.kdeconnect.enable = true;
 
