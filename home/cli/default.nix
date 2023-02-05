@@ -165,6 +165,7 @@ in {
         ".cache/nix-index"
         ".config/brew" # matcha
         ".cargo"
+        ".local/share/containers"
       ];
       allowOther = true;
     };
