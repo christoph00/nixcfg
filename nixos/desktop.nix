@@ -21,6 +21,7 @@
     "tsx_async_abort=off"
   ];
   boot.plymouth.enable = true;
+  boot.loader.timeout = lib.mkForce 0;
 
   services.dbus = {
     enable = true;
