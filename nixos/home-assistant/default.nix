@@ -63,6 +63,27 @@
       #   circuit = "700";
       # };
       lovelace.mode = "yaml";
+      sensor = [
+        {
+          platform = "netdata";
+          name = "futro";
+          resources = {
+            load = {
+              data_group = "system.load";
+              element = "load15";
+              icon = "mdi:chip";
+            };
+            data-ssd_avail = {
+              data_group = "disk_space._media_data-ssd";
+              element = "avail";
+            };
+            data-ssd_used = {
+              data_group = "disk_space._media_data-ssd";
+              element = "used";
+            };
+          };
+        }
+      ];
     };
     extraPackages = python3Packages:
       with python3Packages; [
