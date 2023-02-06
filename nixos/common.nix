@@ -140,8 +140,32 @@
     config = {
       global = {
         "error log" = "syslog";
+        "bind to" = "0.0.0.0:19999 [::]:19999";
+        "update every" = "5";
+      };
+      plugins = {
+        "tc" = "no";
+        "idlejitter" = "no";
+        "checks" = "no";
+        "apps" = "no";
+        "charts.d" = "no";
+        "node.d" = "no";
+        "python.d" = "no";
+        "go.d" = "no";
+      };
+      "plugin:proc" = {
+        "/proc/interrupts" = "no";
+        "/proc/softirqs" = "no";
       };
     };
+    # configDir = {
+    #   "go.d/web_log.conf" = pkgs.writeTextFile {
+    #     name = "web_log.conf";
+    #     text = lib.generators.toYAML {} {
+    #       dd = "dd";
+    #     };
+    #   };
+    # };
   };
 
   # services.prometheus.exporters.node = {
