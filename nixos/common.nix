@@ -123,6 +123,7 @@
       "/etc/nixos"
       "/var/lib/containers"
       "/var/lib/tailscale"
+      "/var/lib/netdata"
     ];
     files = [
       "/etc/machine-id"
@@ -132,6 +133,15 @@
       "/etc/ssh/ssh_host_ed25519_key.pub"
       "/etc/nix/id_rsa"
     ];
+  };
+
+  services.netdata = {
+    enable = true;
+    config = {
+      global = {
+        "error log" = "syslog";
+      };
+    };
   };
 
   # services.prometheus.exporters.node = {
