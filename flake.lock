@@ -640,6 +640,7 @@
         "plasma-manager": "plasma-manager",
         "rust-overlay": "rust-overlay",
         "srvos": "srvos",
+        "uboot": "uboot",
         "utils": "utils",
         "vscode-server": "vscode-server",
         "xdg-portal-hyprland": "xdg-portal-hyprland"
@@ -685,6 +686,22 @@
       "original": {
         "owner": "numtide",
         "repo": "srvos",
+        "type": "github"
+      }
+    },
+    "uboot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675788146,
+        "narHash": "sha256-OjS0Gv0hG2d4xCzLeohhZPr30Cul/VEULPYpXXXTrIE=",
+        "owner": "u-boot",
+        "repo": "u-boot",
+        "rev": "b69026c91f2e98b247120e217a986f5056724baf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "u-boot",
+        "repo": "u-boot",
         "type": "github"
       }
     },

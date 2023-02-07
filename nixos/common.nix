@@ -158,14 +158,31 @@
         "/proc/softirqs" = "no";
       };
     };
-    # configDir = {
-    #   "go.d/web_log.conf" = pkgs.writeTextFile {
-    #     name = "web_log.conf";
-    #     text = lib.generators.toYAML {} {
-    #       dd = "dd";
-    #     };
-    #   };
-    # };
+    configDir = {
+      "go.d.conf" = pkgs.writeTextFile {
+        name = "go.d.conf";
+        text = lib.generators.toYAML {} {
+          modules = {
+            systemdunits = "yes";
+          };
+        };
+      };
+      "go.d/systemdunits.conf" = pkgs.writeTextFile {
+        name = "systemdunits.conf";
+        text = lib.generators.toYAML {} {
+          jobs = [
+            {
+              name = "service-units";
+              include = ["*.service"];
+            }
+            {
+              name = "socket-units";
+              include = ["*.socket"];
+            }
+          ];
+        };
+      };
+    };
   };
 
   # services.prometheus.exporters.node = {
