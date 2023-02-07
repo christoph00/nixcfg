@@ -17,7 +17,9 @@ jobs:
         - tower
         - futro
         - oca
-       # - oc1
+        - oc1
+        - oc2
+        - router
     steps:
     - run: |
          DEBIAN_FRONTEND=noninteractive
