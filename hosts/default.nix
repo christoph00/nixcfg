@@ -34,6 +34,13 @@
           ./futro
         ];
       };
+      router = inputs.nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          self.nixosModules.server
+          ./router
+        ];
+      };
       oca = inputs.nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
