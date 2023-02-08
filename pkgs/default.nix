@@ -14,6 +14,7 @@
   cs-firewall-bouncer = pkgs.callPackage ./cs-firewall-bouncer {};
   media-sort = pkgs.callPackage ./media-sort {};
   uboot-r2s = pkgs.callPackage ./uboot-r2s {};
+  coredhcp = pkgs.callPackage ./coredhcp {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
