@@ -1,8 +1,8 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
 }:
-
 buildGoModule rec {
   pname = "nextdhcp";
   version = "0.6.0";
@@ -14,14 +14,11 @@ buildGoModule rec {
     hash = "sha256-73i43LkJjm+Sf1E7LwIE1cMOPlAeOMWx+32vVhl5lT0=";
   };
 
-  vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-
-  subPackages = ["./cmds/coredhcp" "./cmds/exdhcp/dhclient"]
+  vendorHash = "sha256-Ox+aV09YH9zuWULExx7bYU1+SpBw1XsuVU6Bav2ZVsQ=";
 
   meta = with lib; {
     description = "A DHCP server chaining middlewares. Similar to CoreDNS and Caddy";
     homepage = "https://github.com/nextdhcp/nextdhcp";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
   };
 }
