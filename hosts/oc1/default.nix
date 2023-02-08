@@ -25,6 +25,7 @@
   swapDevices = [{device = "/dev/sda2";}];
 
   networking.hostName = "oc1";
+  networking.interfaces.ens3.useDHCP = true;
 
   powerManagement.cpuFreqGovernor = "performance";
 

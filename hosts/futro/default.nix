@@ -41,7 +41,7 @@
     }
   ];
 
-  networking.useDHCP = true;
+  #networking.useDHCP = true;
   # networking.interfaces.enp3s0f0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp3s0f1.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp4s0f0.useDHCP = lib.mkDefault true;
@@ -50,12 +50,15 @@
 
   networking.hostName = "futro";
 
-  systemd.network.networks."40-enp3s0f0" = {
-    networkConfig = {
-      MulticastDNS = true;
+  systemd.network.networks = {
+    lan = {
+      DHCP = "yes";
+      matchConfig.Name = "en*";
+      networkConfig = {
+        MulticastDNS = true;
+      };
     };
   };
-
   powerManagement.cpuFreqGovernor = "powersave";
   hardware.cpu.amd.updateMicrocode = true;
 

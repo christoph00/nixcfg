@@ -54,13 +54,6 @@
   # TODO: Check if Home Net
   #networking.domain = "lan.net.r505.de";
 
-  systemd.network.networks = {
-    lan = {
-      DHCP = "yes";
-      matchConfig.Name = "en*";
-    };
-  };
-
   security.sudo.wheelNeedsPassword = false;
 
   programs.fuse.userAllowOther = true;
