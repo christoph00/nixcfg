@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./firefox.nix
+    #./firefox.nix
     ./helix.nix
     ./chromium.nix
     #./vscode.nix
