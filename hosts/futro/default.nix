@@ -53,7 +53,7 @@
   systemd.network.networks = {
     lan = {
       DHCP = "yes";
-      matchConfig.Name = "en*";
+      matchConfig.Name = "enp3s0f0";
       networkConfig = {
         MulticastDNS = true;
       };
