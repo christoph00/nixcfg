@@ -52,11 +52,18 @@
 
   systemd.network.networks = {
     lan = {
+      enable = true;
       DHCP = "yes";
       matchConfig.Name = "enp3s0f0";
       networkConfig = {
+        Description = "LAN";
         MulticastDNS = true;
+        DHCP = "yes";
       };
+    };
+
+    wan = {
+      matchConfig.Name = "enp5s0";
     };
   };
   powerManagement.cpuFreqGovernor = "powersave";
