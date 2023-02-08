@@ -61,9 +61,13 @@
         DHCP = "yes";
       };
     };
-
+  };
+  systemd.network.links = {
     wan = {
       matchConfig.Name = "enp5s0";
+    };
+    lan = {
+      matchConfig.Name = "enp3s0f0";
     };
   };
   powerManagement.cpuFreqGovernor = "powersave";

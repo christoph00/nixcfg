@@ -15,6 +15,24 @@
     "net.ipv4.ip_forward" = true;
     "net.ipv6.conf.all.forwarding" = true;
   };
+
+  systemd.network = {
+    networks.wan = {
+      dhcpV4Config = {
+        UseDNS = false;
+        UseDomains = false;
+      };
+      dhcpV6Config = {
+        PrefixDelegationHint = "::/56";
+        UseDNS = false;
+      };
+      ipv6AcceptRAConfig = {
+        UseDNS = false;
+        UseDomains = false;
+      };
+    };
+  };
+
   services.pppd = {
     enable = true;
     peers = {
@@ -63,4 +81,6 @@
     ];
     before = lib.mkForce [];
   };
+
+  services.lldpd.enable = true;
 }
