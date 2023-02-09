@@ -20,7 +20,7 @@ jobs:
         - oca
         - oc1
         - oc2
-        - router
+        - r2s1
     steps:
     - run: |
          DEBIAN_FRONTEND=noninteractive
