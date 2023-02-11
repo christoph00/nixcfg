@@ -10,7 +10,7 @@
   version = "0.18.1";
   src = fetchurl {
     url = "https://github.com/LizardByte/Sunshine/releases/download/v${version}/sunshine.AppImage";
-    sha256 = "1n7ja87c4kzaf4vvikfyka3i6zfab21isy8jk2mmqpp0k98jmqmp";
+    sha256 = "0qr473xmj7355cif68z7l4vidvx7wq8i7qxx4xa3fz0dbabvb2az";
   };
   appimage = appimageTools.wrapType2 {inherit version pname src;};
 in
