@@ -39,18 +39,25 @@
       telekom = {
         config = ''
           plugin pppoe.so
+          eth0.7
           ifname ppp0
           nic-eno1
           lcp-echo-failure 5
           lcp-echo-interval 1
-          maxfail 1
+          maxfail 0
           mru 1492
           mtu 1492
+          persist
           user anonymous@t-online.de
           password 123456789
+          noauth
           defaultroute
+          +ipv6
+          up_sdnotify
+          defaultroute6
         '';
-        autostart = false;
+        autostart = true;
+        enable = true;
       };
     };
   };

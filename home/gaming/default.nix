@@ -9,7 +9,6 @@
     protontricks
     proton-caller
     proton-ge
-    lutris
     vulkan-loader
     vulkan-tools
   ];
