@@ -38,7 +38,7 @@ in {
       Type = "simple";
       Environment = "HOME=/var/lib/sunshine";
       ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p /var/lib/sunshine/.config";
-      ExecStart = "${pkgs.sunshine}/bin/sunshine ${configFile}";
+      ExecStart = "${pkgs.sunshine-bin}/bin/sunshine ${configFile}";
     };
   };
 
