@@ -28,7 +28,7 @@
     steam-with-packages.run
   ];
 
-  sessionEnvironment = "RADV_PERFTEST=GPL WINEDLLOVERRIDES=dxgi=n";
+  sessionEnvironment = "RADV_PERFTEST=gpl WINEDLLOVERRIDES=dxgi=n";
 
   # Shim that runs steam and associated services.
   steam-shim = writeShellScript "steam-shim" ''
