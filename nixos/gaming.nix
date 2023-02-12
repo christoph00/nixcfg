@@ -21,11 +21,68 @@
     writeShellScriptBin
     ;
 
+  # The sudo wrapper doesn't work in FHS environments. For our purposes
+  # we add a passthrough sudo command that does not actually escalate
+  # privileges.
+  #
+  # <https://github.com/NixOS/nixpkgs/issues/42117>
+  passthroughSudo = writeShellScriptBin "sudo" ''
+    declare -a final
+    positional=""
+    for value in "$@"; do
+      if [[ -n "$positional" ]]; then
+        final+=("$value")
+      elif [[ "$value" == "-n" ]]; then
+        :
+      else
+        positional="y"
+        final+=("$value")
+      fi
+    done
+    exec "''${final[@]}"
+  '';
+
+  # Null SteamOS updater that does nothing
+  #
+  # This gets us past the OS update step in the OOBE wizard.
+  nullOsUpdater = writeShellScriptBin "steamos-update" ''
+    >&2 echo "steamos-update: Not supported on NixOS - Doing nothing"
+    exit 7;
+  '';
+
+  # Null Steam Deck BIOS updater that does nothing
+  nullBiosUpdater = writeShellScriptBin "jupiter-biosupdate" ''
+    >&2 echo "jupiter-biosupdate: Doing nothing"
+  '';
+
+  # A very simplistic "session switcher." All it does is kill gamescope.
+  sessionSwitcher = writeShellScriptBin "steamos-session-select" ''
+    session="''${1:-gamescope}"
+    >>~/gamescope.log echo "steamos-session-select: switching to $session"
+    if [[ "$session" != "plasma" ]]; then
+      >&2 echo "!! Unsupported session '$session'"
+      >&2 echo "Currently this can only be called by Steam to switch to Desktop Mode"
+      exit 1
+    fi
+    mkdir -p ~/.local/state
+    >~/.local/state/steamos-session-select echo "$session"
+    if [[ -n "$gamescope_pid" ]]; then
+      kill "$gamescope_pid"
+    else
+      >&2 echo "!! Don't know how to kill gamescope"
+      exit 1
+    fi
+  '';
+
   sessionPath = lib.makeBinPath [
     mangohud
     systemd
     steam-with-packages
     steam-with-packages.run
+    nullOsUpdater
+    nullBiosUpdater
+    sessionSwitcher
+    passthroughSudo
   ];
 
   sessionEnvironment = builtins.concatStringsSep " " (lib.mapAttrsToList (k: v: "${k}=${v}") {
@@ -107,7 +164,7 @@
       --setenv=MANGOHUD_CONFIGFILE \
       -- \
       mangoapp
-    exec steam -steamos3 -steampal -steamdeck -gamepadui -language german "$@"
+    exec steam -steamos3 -steampal -gamepadui -language german "$@"
   '';
 
   # Shim that runs gamescope, with a specific environment.
@@ -130,8 +187,8 @@
   # TODO: pass down unhandled arguments
   # Script that launches the gamescope shim within a systemd scope.
   steam-session = writeShellScriptBin "steam-session" ''
-    GAMESCOPE_WIDTH=''${GAMESCOPE_WIDTH:-1920}
-    GAMESCOPE_HEIGHT=''${GAMESCOPE_HEIGHT:-1080}
+    #GAMESCOPE_WIDTH=''${GAMESCOPE_WIDTH:-1920}
+    #GAMESCOPE_HEIGHT=''${GAMESCOPE_HEIGHT:-1080}
     SLICE="steam-session"
     runtime_dir="$XDG_RUNTIME_DIR/$SLICE.run"
     mkdir -p "$runtime_dir"
@@ -164,7 +221,8 @@
       # TODO[Jovian]: verify assertion
       --xwayland-count 2
       #-w $GAMESCOPE_WIDTH -h $GAMESCOPE_HEIGHT
-      #-Y
+      -w 1920 -h 1080 -W 3440 -H 1440
+      -Y
       --fullscreen
       --prefer-output HDMI-A-1
       --generate-drm-mode fixed
