@@ -16,7 +16,6 @@
     mangohud
     systemd
     steam-with-packages
-    steamdeck-hw-theme
     writeTextFile
     writeShellScript
     writeShellScriptBin
