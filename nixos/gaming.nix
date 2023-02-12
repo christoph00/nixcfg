@@ -114,11 +114,6 @@
       #--default-touch-mode 4
       --hide-cursor-delay 3000
       --fade-out-duration 200
-      # TODO[Jovian]: Provide our own cursor for FOSS steam-less gamescope
-      #               -> adwaita or similar
-      #--cursor ${steamdeck-hw-theme}/share/steamos/steamos-cursor.png
-      #--cursor-hotspot 5,3
-      # TODO[Jovian]: only add when running steam
       --steam
       # Steam uses this
       # TODO[Jovian]: document how it's used?
