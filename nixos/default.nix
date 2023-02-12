@@ -103,6 +103,7 @@
         ./acme.nix
         ./sunshine.nix
       ];
+      gaming.imports = [./gaming.nix];
 
       reverse-proxy-server.imports = [./reverse-proxy-server.nix];
       remote-server.imports = [./remote-server.nix];
