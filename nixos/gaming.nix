@@ -3,15 +3,31 @@
   pkgs,
   lib,
   ...
-}:
-with lib; let
-  sessionPath = with pkgs;
-    lib.makeBinPath [
-      mangohud
-      systemd
-      steam-with-packages
-      steam-with-packages.run
-    ];
+}: let
+  inherit
+    (lib)
+    mkDefault
+    ;
+
+  # Note that we override Steam in our overlay
+  inherit
+    (pkgs)
+    gamescope
+    mangohud
+    systemd
+    steam-with-packages
+    steamdeck-hw-theme
+    writeTextFile
+    writeShellScript
+    writeShellScriptBin
+    ;
+
+  sessionPath = lib.makeBinPath [
+    mangohud
+    systemd
+    steam-with-packages
+    steam-with-packages.run
+  ];
 
   sessionEnvironment = "RADV_PERFTEST=GPL WINEDLLOVERRIDES=dxgi=n";
 
