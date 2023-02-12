@@ -61,20 +61,10 @@ in {
   ];
 
   home.packages = with pkgs; [
-    imv
     libnotify
     playerctl
-    wf-recorder
-    wl-clipboard
-    wlr-randr
     wireplumber
     wtype
-
-    wlogout
-    clipman
-    wdisplays
-    kanshi
-
     pavucontrol
 
     vlc
@@ -82,13 +72,10 @@ in {
     gfn-electron
     moonlight-qt
 
-    persepolis # aria2 gui
-
     tigervnc
 
     xdg-utils
 
-    xdg-desktop-portal-wlr
     xdg-desktop-portal
     xdg-desktop-portal-gtk
   ];
@@ -141,80 +128,13 @@ in {
     };
   };
 
-  services.dunst = {
-    enable = false;
-    iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus-Dark";
-    };
-    settings = with config.colorscheme.colors; {
-      global = {
-        width = 300;
-        origin = "top-center";
-        alignment = "left";
-        vertical_alignment = "center";
-        ellipsize = "middle";
-        offset = "15x15";
-        padding = 18;
-        horizontal_padding = 18;
-        text_icon_padding = 18;
-        progress_bar = true;
-        progress_bar_height = 8;
-        progress_bar_frame_width = 1;
-        progress_bar_min_width = 150;
-        progress_bar_max_width = 300;
-        format = "<span size='x-large' font_desc='${config.fontProfiles.monospace.family} 9' weight='bold' foreground='#${base04}'>%a</span>\\n%s\\n%b";
-        frame_color = "#${base01}";
-        font = "${config.fontProfiles.monospace.family} 11";
-      };
-      urgency_low = {
-        timeout = 3;
-        background = "#${base00}";
-        foreground = "#${base04}";
-        highlight = "#${base0E}";
-      };
-      urgency_normal = {
-        timeout = 6;
-        background = "#${base00}";
-        foreground = "#${base04}";
-        highlight = "#${base08}";
-      };
-      urgency_critical = {
-        timeout = 0;
-        background = "#${base00}";
-        foreground = "#${base04}";
-        highlight = "#${base0C}";
-      };
-
-      brightness = {
-        summary = "󰃞 Light";
-        set_stack_tag = "brightness";
-      };
-    };
-  };
-
-  services.gammastep = {
-    enable = false;
-    provider = "manual";
-    duskTime = "18:35-20:15";
-    dawnTime = "6:00-7:45";
-    temperature = {
-      day = 5500;
-      night = 3700;
-    };
-    tray = true;
-    settings = {
-      general.adjustment-method = "wayland";
-    };
-  };
-
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "true";
     QT_QPA_PLATFORM = "wayland";
     # LIBSEAT_BACKEND = "logind";
-    # GTK_THEME = "${config.gtk.theme.name}";
-    # XCURSOR_THEME = "${config.gtk.cursorTheme.name}";
-    # XCURSOR_SIZE = "${toString config.gtk.cursorTheme.size}";
+    GTK_THEME = "${config.gtk.theme.name}";
+    XCURSOR_THEME = "${config.gtk.cursorTheme.name}";
+    XCURSOR_SIZE = "${toString config.gtk.cursorTheme.size}";
   };
 
   dconf.enable = true;
