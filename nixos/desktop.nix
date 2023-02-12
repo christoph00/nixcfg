@@ -64,7 +64,6 @@
   networking.firewall.enable = true;
 
   networking.networkmanager.enable = lib.mkForce true;
-  systemd.network.enable = lib.mkForce false;
 
   programs.kdeconnect.enable = true;
 
@@ -75,12 +74,6 @@
     #   pkgs.xdg-desktop-portal-gtk
     #   #  inputs.xdg-portal-hyprland.packages.${pkgs.system}.default
     # ];
-  };
-
-  programs.hyprland = {
-    enable = false;
-    package = null; # Managed by home manager
-    xwayland.enable = true;
   };
 
   # Udev Rules
