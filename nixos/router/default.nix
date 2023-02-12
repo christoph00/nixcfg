@@ -11,7 +11,7 @@
 
   boot.kernel.sysctl = {
     "net.ipv4.ip_dynaddr" = "1";
-    "net.ipv4.tcp_congestion_control" = "bbr";
+    #    "net.ipv4.tcp_congestion_control" = "bbr";
     "net.ipv4.ip_forward" = true;
     "net.ipv6.conf.all.forwarding" = true;
   };
