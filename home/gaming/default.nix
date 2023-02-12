@@ -19,6 +19,8 @@
     };
   };
 
+  home.packages = [pkgs.ddccontrol pkgs.steam-with-packages];
+
   # Start Steam on Login
   # systemd.user.services.steam = {
   #   Unit.Description = "Steam Client";
