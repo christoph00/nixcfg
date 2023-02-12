@@ -3,16 +3,6 @@
   lib,
   ...
 }: {
-  home.packages = with pkgs; [
-    steam-with-packages
-    gamescope
-    protontricks
-    proton-caller
-    proton-ge
-    vulkan-loader
-    vulkan-tools
-  ];
-
   home.sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
 
   home.persistence = {
@@ -23,6 +13,7 @@
         ".paradoxlauncher"
         ".local/share/Steam"
         "Games"
+        ".config/gamescope"
       ];
       #files = [".steam/steam.token" ".steam/registry.vdf"];
     };
