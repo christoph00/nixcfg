@@ -196,10 +196,23 @@
     ${sessionEnvironment} "''${gamescope_incantation[@]}"
   '';
 
-  steam-session-desktop =
+  steam-session-desktop = writeTextFile {
+    name = "steam-session-desktop";
+    destination = "/share/applications/steam-wayland.desktop";
+    text = ''
+      [Desktop Entry]
+      Encoding=UTF-8
+      Name=Steam UI
+      Exec=${steam-session}/bin/steam-session
+      Icon=steamicon.png
+      Type=Application
+      DesktopNames=steamui
+    '';
+  };
+  steam-session-wayland =
     (writeTextFile {
       name = "steam-session-desktop";
-      destination = "/share/applications/steam-wayland.desktop";
+      destination = "/share/wayland-sessions/steam-wayland.desktop";
       text = ''
         [Desktop Entry]
         Encoding=UTF-8
@@ -240,7 +253,7 @@ in {
     }
   ];
 
-  environment.systemPackages = [steam-session gamescope];
+  environment.systemPackages = [gamescope steam-session-desktop];
   programs.steam.enable = true;
   programs.gamemode = {
     enable = true;
@@ -254,7 +267,7 @@ in {
   programs.steam.package = pkgs.steam-with-packages;
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
-  services.xserver.displayManager.sessionPackages = [steam-session-desktop];
+  services.xserver.displayManager.sessionPackages = [steam-session-wayland];
   systemd.user.services.x11-ownership = rec {
     serviceConfig.Type = "oneshot";
     script = ''
