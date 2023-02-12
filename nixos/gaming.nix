@@ -63,6 +63,9 @@
     # gamescope_pid is used by the `steamos-session-select` script.
     # TODO[Jovian]: Explore other ways to stop the session?
     #               -> `systemctl --user stop steam-session.slice`?
+
+    ${pkgs.sudo}/bin/sudo chown -R christoph:users /tmp/.X11-unix
+
     exec ${gamescope}/bin/gamescope "$@"
   '';
 
@@ -155,11 +158,60 @@
       providedSessions = ["steam-wayland"];
     };
 in {
+  boot.kernel.sysctl."vm.max_map_count" = 262144;
+
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
   hardware.steam-hardware.enable = mkDefault true;
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      item = "memlock";
+      type = "-";
+      value = "unlimited";
+    }
+    {
+      domain = "*";
+      item = "nofile";
+      type = "soft";
+      value = "unlimited";
+    }
+    {
+      domain = "*";
+      item = "nofile";
+      type = "hard";
+      value = "unlimited";
+    }
+  ];
 
   environment.systemPackages = [steam-session];
+  programs.steam.enable = true;
+  programs.gamemode = {
+    enable = true;
+    settings = {
+      custom = {
+        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+      };
+    };
+  };
+  programs.steam.package = pkgs.steam-with-packages;
+  systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
   services.xserver.displayManager.sessionPackages = [steam-session-desktop];
+  # systemd.user.services.x11-ownership = rec {
+  #   serviceConfig.Type = "oneshot";
+  #   script = ''
+  #     ${pkgs.sudo}/bin/sudo chown christoph /tmp/.X11-unix
+  #   '';
+  #   after = ["graphical-session.target"];
+  #   wants = after;
+  #   wantedBy = ["graphical-session-pre.target"];
+  # };
+
+  # autologin-graphical-session = {
+  #   enable = true;
+  #   user = "christoph";
+  #   sessionScript = "Hyprland";
+  # };
 }

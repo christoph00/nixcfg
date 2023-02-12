@@ -53,26 +53,6 @@
 
   security = {
     rtkit.enable = true;
-    pam.loginLimits = [
-      {
-        domain = "*";
-        item = "memlock";
-        type = "-";
-        value = "unlimited";
-      }
-      {
-        domain = "*";
-        item = "nofile";
-        type = "soft";
-        value = "unlimited";
-      }
-      {
-        domain = "*";
-        item = "nofile";
-        type = "hard";
-        value = "unlimited";
-      }
-    ];
   };
 
   #systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
@@ -87,35 +67,6 @@
   systemd.network.enable = lib.mkForce false;
 
   programs.kdeconnect.enable = true;
-
-  programs.steam.enable = true;
-  programs.gamemode = {
-    enable = true;
-    settings = {
-      custom = {
-        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
-        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
-      };
-    };
-  };
-  programs.steam.package = pkgs.steam-with-packages;
-  systemd.extraConfig = "DefaultLimitNOFILE=1048576";
-
-  # systemd.user.services.x11-ownership = rec {
-  #   serviceConfig.Type = "oneshot";
-  #   script = ''
-  #     ${pkgs.sudo}/bin/sudo chown christoph /tmp/.X11-unix
-  #   '';
-  #   after = ["graphical-session.target"];
-  #   wants = after;
-  #   wantedBy = ["graphical-session-pre.target"];
-  # };
-
-  # autologin-graphical-session = {
-  #   enable = true;
-  #   user = "christoph";
-  #   sessionScript = "Hyprland";
-  # };
 
   xdg.portal = {
     enable = true;
