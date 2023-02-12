@@ -107,7 +107,7 @@
       --setenv=MANGOHUD_CONFIGFILE \
       -- \
       mangoapp
-    exec steam -tenfoot -language german "$@"
+    exec steam -steamos3 -steampal -steamdeck -gamepadui -language german "$@"
   '';
 
   # Shim that runs gamescope, with a specific environment.
@@ -163,11 +163,10 @@
       # game, and the other for its overlay UI.
       # TODO[Jovian]: verify assertion
       --xwayland-count 2
-      -w $GAMESCOPE_WIDTH -h $GAMESCOPE_HEIGHT
-      -Y
+      #-w $GAMESCOPE_WIDTH -h $GAMESCOPE_HEIGHT
+      #-Y
       --fullscreen
-      # TODO[Jovian]: document why '*' here
-      --prefer-output '*',HDMI-A-1
+      --prefer-output HDMI-A-1
       --generate-drm-mode fixed
       --max-scale 2
       #--default-touch-mode 4
