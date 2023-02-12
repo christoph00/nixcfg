@@ -28,7 +28,63 @@
     steam-with-packages.run
   ];
 
-  sessionEnvironment = "RADV_PERFTEST=gpl WINEDLLOVERRIDES=dxgi=n";
+  sessionEnvironment = builtins.concatStringsSep " " (lib.mapAttrsToList (k: v: "${k}=${v}") {
+    # Set input method modules for Qt/GTK that will show the Steam keyboard
+    QT_IM_MODULE = "steam";
+    GTK_IM_MODULE = "Steam";
+
+    # Enable volume key management via steam for this session
+    STEAM_ENABLE_VOLUME_HANDLER = "1";
+
+    # Have SteamRT's xdg-open send http:// and https:// URLs to Steam
+    SRT_URLOPEN_PREFER_STEAM = "1";
+
+    # Disable automatic audio device switching in steam, now handled by wireplumber
+    STEAM_DISABLE_AUDIO_DEVICE_SWITCHING = "1";
+
+    # Enable support for xwayland isolation per-game in Steam
+    STEAM_MULTIPLE_XWAYLANDS = "1";
+
+    # We have the Mesa integration for the fifo-based dynamic fps-limiter
+    STEAM_GAMESCOPE_DYNAMIC_FPSLIMITER = "1";
+
+    # We have gamma/degamma exponent support
+    STEAM_GAMESCOPE_COLOR_TOYS = "1";
+
+    # We have NIS support
+    STEAM_GAMESCOPE_NIS_SUPPORTED = "1";
+
+    # Support for gamescope tearing with GAMESCOPE_ALLOW_TEARING atom (3.11.44+)
+    STEAM_GAMESCOPE_HAS_TEARING_SUPPORT = "1";
+
+    # Enable tearing controls in steam
+    STEAM_GAMESCOPE_TEARING_SUPPORTED = "1";
+
+    # When set to 1, a toggle will show up in the steamui to control whether dynamic refresh rate is applied to the steamui
+    STEAM_GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM_SUPPORTED = "1";
+
+    # Enable VRR controls in steam
+    STEAM_GAMESCOPE_VRR_SUPPORTED = "1";
+
+    # Set refresh rate range and enable refresh rate switching
+    STEAM_DISPLAY_REFRESH_LIMITS = "40,60";
+
+    # We no longer need to set GAMESCOPE_EXTERNAL_OVERLAY from steam, mangoapp now does it itself
+    STEAM_DISABLE_MANGOAPP_ATOM_WORKAROUND = "1";
+
+    # Enable horizontal mangoapp bar
+    STEAM_MANGOAPP_HORIZONTAL_SUPPORTED = "1";
+
+    STEAM_USE_DYNAMIC_VRS = "1";
+
+    # Don't wait for buffers to idle on the client side before sending them to gamescope
+    vk_xwayland_wait_ready = "false";
+
+    # To expose vram info from radv's patch we're including
+    WINEDLLOVERRIDES = "dxgi=n";
+
+    SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS = "0";
+  });
 
   # Shim that runs steam and associated services.
   steam-shim = writeShellScript "steam-shim" ''
@@ -51,7 +107,7 @@
       --setenv=MANGOHUD_CONFIGFILE \
       -- \
       mangoapp
-    exec steam -steampal -bigpicture -gamepadui "$@"
+    exec steam -tenfoot -language german "$@"
   '';
 
   # Shim that runs gamescope, with a specific environment.
@@ -143,15 +199,15 @@
   steam-session-desktop =
     (writeTextFile {
       name = "steam-session-desktop";
-      destination = "/share/wayland-sessions/steam-wayland.desktop";
+      destination = "/share/applications/steam-wayland.desktop";
       text = ''
         [Desktop Entry]
         Encoding=UTF-8
-        Name=Gaming Mode
+        Name=Steam UI
         Exec=${steam-session}/bin/steam-session
         Icon=steamicon.png
         Type=Application
-        DesktopNames=gamescope
+        DesktopNames=steamui
       '';
     })
     // {
@@ -184,7 +240,7 @@ in {
     }
   ];
 
-  environment.systemPackages = [steam-session];
+  environment.systemPackages = [steam-session gamescope];
   programs.steam.enable = true;
   programs.gamemode = {
     enable = true;
@@ -199,15 +255,15 @@ in {
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
   services.xserver.displayManager.sessionPackages = [steam-session-desktop];
-  # systemd.user.services.x11-ownership = rec {
-  #   serviceConfig.Type = "oneshot";
-  #   script = ''
-  #     ${pkgs.sudo}/bin/sudo chown christoph /tmp/.X11-unix
-  #   '';
-  #   after = ["graphical-session.target"];
-  #   wants = after;
-  #   wantedBy = ["graphical-session-pre.target"];
-  # };
+  systemd.user.services.x11-ownership = rec {
+    serviceConfig.Type = "oneshot";
+    script = ''
+      ${pkgs.sudo}/bin/sudo chown -R christoph:users /tmp/.X11-unix
+    '';
+    after = ["graphical-session.target"];
+    wants = after;
+    wantedBy = ["graphical-session-pre.target"];
+  };
 
   # autologin-graphical-session = {
   #   enable = true;
