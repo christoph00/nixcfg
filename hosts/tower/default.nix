@@ -86,11 +86,11 @@
     #   options = ["subvol=@home" "noatime" "compress-force=zstd"];
     # };
 
-    "/media/hdd-data" = {
-      device = "/dev/disk/by-uuid/25fc5836-72df-4881-8760-af49333fa485";
-      fsType = "btrfs";
-      options = ["subvol=@data" "noatime" "compress-force=zstd"];
-    };
+    # "/media/hdd-data" = {
+    #   device = "/dev/disk/by-uuid/25fc5836-72df-4881-8760-af49333fa485";
+    #   fsType = "btrfs";
+    #   options = ["subvol=@data" "noatime" "compress-force=zstd"];
+    # };
   };
 
   nixpkgs.hostPlatform.system = "x86_64-linux";
