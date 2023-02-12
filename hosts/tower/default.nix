@@ -10,7 +10,7 @@
       kernelModules = ["amdgpu"];
     };
   };
-  boot.kernelModules = ["kvm-intel" "acpi_call"];
+  boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev"];
   boot.blacklistedKernelModules = ["dm_mod"];
   boot.kernelParams = [
     "quiet"
