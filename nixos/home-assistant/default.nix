@@ -10,6 +10,7 @@
     ./extentions.nix
     #./systemmonitor.nix
     #./webserver.nix
+    ./commands.nix
   ];
 
   services.home-assistant = {
