@@ -17,6 +17,7 @@
   nextdhcp = pkgs.callPackage ./nextdhcp {};
   coredhcp = pkgs.callPackage ./coredhcp {};
   sunshine-bin = pkgs.callPackage ./sunshine-bin {};
+  olivetin = pkgs.callPackage ./olivetin {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
