@@ -15,19 +15,7 @@
       users = ["agent"];
       commands = [
         {
-          command = "/run/current-system/sw/bin/systemctl suspend";
-          options = ["NOPASSWD"];
-        }
-        {
-          command = "/run/current-system/sw/bin/systemctl start";
-          options = ["NOPASSWD"];
-        }
-        {
-          command = "/run/current-system/sw/bin/systemctl reboot";
-          options = ["NOPASSWD"];
-        }
-        {
-          command = "/run/current-system/sw/bin/systemctl status";
+          command = "/run/current-system/sw/bin/systemctl";
           options = ["NOPASSWD"];
         }
       ];
