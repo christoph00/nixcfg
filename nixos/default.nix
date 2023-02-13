@@ -40,6 +40,7 @@
 
           ./common.nix
           ./tailscale.nix
+          ./agent.nix
         ];
         nixpkgs.overlays = builtins.attrValues self.overlays;
         nixpkgs.config.allowUnfree = true;

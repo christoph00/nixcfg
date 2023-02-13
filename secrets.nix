@@ -22,4 +22,5 @@ in {
   "secrets/wayvnc-cert".publicKeys = [christoph_air13 tower christoph_tower];
   "secrets/rclone.conf".publicKeys = [christoph_air13 tower air13];
   "secrets/traefik.env".publicKeys = [christoph_air13 oca oc1 oc2 futro];
+  "secrets/agent-key".publicKeys = [christoph_air13 futro];
 }
