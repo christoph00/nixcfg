@@ -65,6 +65,13 @@
       #   circuit = "700";
       # };
       lovelace.mode = "yaml";
+      sensor = [
+        {
+        platform = "ping";
+        host = "tower.lan.net.r505.de";
+        name = "tower";
+        }
+      ];
       switch = [
         {
           name = "WOL Tower";
