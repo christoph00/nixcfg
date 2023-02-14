@@ -65,15 +65,15 @@
       #   circuit = "700";
       # };
       lovelace.mode = "yaml";
-    # binary_sensor = [
-    #   {
-    #     platform = "ping";
-    #     host = "tower.lan.net.r505.de";
-    #     name = "tower";
-    #     count = 2;
-    #     scan_interval = 15;
-    #   }
-    # ];
+     binary_sensor = [
+       {
+         platform = "ping";
+         host = "192.168.1.1";
+         name = "router";
+         count = 2;
+         scan_interval = 15;
+       }
+     ];
       switch = [
         {
           name = "Tower";
