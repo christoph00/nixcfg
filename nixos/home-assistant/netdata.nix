@@ -1,6 +1,6 @@
 {pkgs, ...}:
 {
-  services.home-manager.config.sensor = [
+  services.home-assistant.config.sensor = [
         {
           platform = "netdata";
           name = "futro";
