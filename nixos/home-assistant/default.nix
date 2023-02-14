@@ -65,18 +65,21 @@
       #   circuit = "700";
       # };
       lovelace.mode = "yaml";
-      sensor = [
-        {
-        platform = "ping";
-        host = "tower.lan.net.r505.de";
-        name = "tower";
-        }
-      ];
+    # binary_sensor = [
+    #   {
+    #     platform = "ping";
+    #     host = "tower.lan.net.r505.de";
+    #     name = "tower";
+    #     count = 2;
+    #     scan_interval = 15;
+    #   }
+    # ];
       switch = [
         {
-          name = "WOL Tower";
+          name = "Tower";
           platform = "wake_on_lan";
           mac = "d0:50:99:82:42:04";
+          host = "tower.lan.net.r505.de";
           turn_off = {
             service = "shell_command.suspend_host";
             data.host = "tower.lan.net.r505.de";
