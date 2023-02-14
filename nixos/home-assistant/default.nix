@@ -70,6 +70,10 @@
           name = "WOL Tower";
           platform = "wake_on_lan";
           mac = "d0:50:99:82:42:04";
+          turn_off = {
+            service = "shell_command.suspend_host";
+            data.host = "tower.lan.net.r505.de";
+          };
         }
       ];
     };
