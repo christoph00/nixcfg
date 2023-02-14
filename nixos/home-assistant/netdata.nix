@@ -46,11 +46,11 @@
       name = "router";
       host = "192.168.1.1";
       resources = {
-        network_download = {
+        wan_download = {
           data_group = "net.pppoe_wan";
           element = "received";
         };
-        network_upload = {
+        wan_upload = {
           data_group = "net.pppoe_wan";
           element = "sent";
           invert = true;
