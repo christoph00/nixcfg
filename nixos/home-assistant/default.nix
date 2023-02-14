@@ -65,7 +65,13 @@
       #   circuit = "700";
       # };
       lovelace.mode = "yaml";
-
+      switch = [
+        {
+          name = "WOL Tower";
+          platform = "wake_on_lan";
+          mac = "d0:50:99:82:42:04";
+        }
+      ];
     };
     extraPackages = python3Packages:
       with python3Packages; [
