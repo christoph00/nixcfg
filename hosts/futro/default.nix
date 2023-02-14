@@ -80,6 +80,6 @@
   age.secrets.agent-key = {
     file = ../../secrets/agent-key;
     owner = "hass";
-    mode = "660";
+    mode = "600";
   };
 }

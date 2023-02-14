@@ -101,7 +101,7 @@
       syncthing.imports = [./syncthing.nix];
 
       gamestream.imports = [
-        ./acme.nix
+        #./acme.nix
         ./sunshine.nix
       ];
       gaming.imports = [./gaming.nix];
