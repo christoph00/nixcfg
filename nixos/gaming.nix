@@ -130,7 +130,7 @@
     STEAM_DISABLE_MANGOAPP_ATOM_WORKAROUND = "1";
 
     # Enable horizontal mangoapp bar
-    STEAM_MANGOAPP_HORIZONTAL_SUPPORTED = "1";
+    STEAM_MANGOAPP_HORIZONTAL_SUPPORTED = "0";
 
     STEAM_USE_DYNAMIC_VRS = "1";
 
@@ -221,7 +221,8 @@
       # TODO[Jovian]: verify assertion
       --xwayland-count 2
       #-w $GAMESCOPE_WIDTH -h $GAMESCOPE_HEIGHT
-      -w 1920 -h 1080 -W 3440 -H 1440
+      #-w 1920 -h 1080 -W 3440 -H 1440
+      -w 1920 -h 1080 -W 2560 -H 1440
       -Y
       --fullscreen
       --prefer-output HDMI-A-1
