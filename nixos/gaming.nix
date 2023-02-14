@@ -276,7 +276,7 @@
         Encoding=UTF-8
         Name=Steam UI
         Exec=${steam-session}/bin/steam-session
-        Icon=steamicon.png
+        Icon=steam
         Type=Application
         DesktopNames=steamui
       '';
