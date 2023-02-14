@@ -221,8 +221,8 @@
       # TODO[Jovian]: verify assertion
       --xwayland-count 2
       #-w $GAMESCOPE_WIDTH -h $GAMESCOPE_HEIGHT
-      #-w 1920 -h 1080 -W 3440 -H 1440
-      -w 1920 -h 1080 -W 2560 -H 1440
+      -w 1920 -h 1080 -W 3840 -H 2160
+      #-w 1920 -h 1080 -W 2560 -H 1440
       -Y
       --fullscreen
       --prefer-output HDMI-A-1
