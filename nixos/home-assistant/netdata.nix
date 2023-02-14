@@ -42,5 +42,20 @@
             };
           };
         }
+        {
+        platform = "netdata";
+        name = "router";
+        resources = {
+        network_download = {
+              data_group = "net.pppoe_wan";
+              element = "received";
+            };
+            network_upload = {
+              data_group = "net.pppoe_wan";
+              element = "sent";
+              invert = true;
+            };
+        };
+        }
       ];
 }
