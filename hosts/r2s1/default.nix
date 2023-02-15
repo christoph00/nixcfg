@@ -84,6 +84,8 @@
 
   networking.hostName = "r2s1";
 
+  sdImage.compressImage = false;
+
   # ----------  Secrets  -----------------------------------------
   #age.secrets.cloudflared.file = ../../secrets/oca-cf;
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
