@@ -58,11 +58,11 @@
 
   powerManagement.cpuFreqGovernor = "schedutil";
 
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = ["defaults" "size=512M" "mode=755"];
-  };
+ # fileSystems."/" = {
+ #   device = "none";
+ #   fsType = "tmpfs";
+ #   options = ["defaults" "size=512M" "mode=755"];
+ # };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/BOOT";
