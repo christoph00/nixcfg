@@ -38,11 +38,14 @@
       r2s1 = inputs.nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
+          self.nixosModules.sdImage
           self.nixosModules.server
           self.nixosModules.router
           ./r2s1
         ];
       };
+     sd-r2s1 = self.nixosConfigurations.r2s1.config.system.build.sdImage;
+
       oca = inputs.nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [

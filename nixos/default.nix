@@ -89,6 +89,10 @@
         #self.nixosModules.syncthing
       ];
 
+      sdImage.imports = [
+       "${inputs.nixpkgs}/nixos/modules/nstaller/sd-card/sd-image.nix"
+      ];
+
       code-server.imports = [./code-server.nix];
 
       webmail.imports = [./webmail.nix];
