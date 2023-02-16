@@ -91,15 +91,14 @@
     #   fsType = "btrfs";
     #   options = ["subvol=@data" "noatime" "compress-force=zstd"];
     # };
-
-    swapDevices = [
-      {
-        device = "/nix/persist/swapfile";
-        size = 34360;
-      }
-    ];
   };
 
+  swapDevices = [
+    {
+      device = "/nix/persist/swapfile";
+      size = 34360;
+    }
+  ];
   nixpkgs.hostPlatform.system = "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "powersave";
