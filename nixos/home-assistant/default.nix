@@ -76,7 +76,7 @@
         {
           platform = "ping";
           host = "tower.lan.net.r505.de";
-          name = "toweer";
+          name = "tower";
           count = 2;
           scan_interval = 15;
         }

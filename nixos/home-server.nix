@@ -85,11 +85,11 @@
         tls = {certResolver = "cloudflare";};
         service = "jellyfin";
       };
-      aria2rpc = {
-        rule = "Host(`dl.net.r505.de`) && Path(`jsonrpc`)";
-        tls = {certResolver = "cloudflare";};
-        service = "aira2rpc";
-      };
+      # aria2rpc = {
+      #   rule = "Host(`dl.net.r505.de`) && Path(`jsonrpc`)";
+      #   tls = {certResolver = "cloudflare";};
+      #   service = "aira2rpc";
+      # };
       nas = {
         rule = "Host(`nas.net.r505.de`)";
         tls = {certResolver = "cloudflare";};
@@ -107,11 +107,11 @@
           servers = [{url = "http://localhost:8096";}];
         };
       };
-      aria2rpc = {
-        loadBalancer = {
-          servers = [{url = "http://localhost:6800/jsonrpc";}];
-        };
-      };
+      # aria2rpc = {
+      #   loadBalancer = {
+      #     servers = [{url = "http://localhost:6800/jsonrpc";}];
+      #   };
+      # };
       sftpgo-web = {
         loadBalancer = {
           servers = [{url = "http://localhost:8080/jsonrpc";}];
