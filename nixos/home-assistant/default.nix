@@ -9,9 +9,9 @@
     ./postgres.nix
     ./extentions.nix
     ./systemmonitor.nix
-    #./webserver.nix
     ./commands.nix
     ./network_sensors.nix
+    #./netdata.nix
   ];
 
   services.home-assistant = {
