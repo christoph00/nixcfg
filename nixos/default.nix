@@ -90,8 +90,8 @@
       ];
 
       sdImage.imports = [
-       "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
-       ./sd.nix
+        "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
+        ./sd.nix
       ];
 
       code-server.imports = [./code-server.nix];

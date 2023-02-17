@@ -20,7 +20,7 @@
     wantedBy = ["code-tunnel.service"];
     name = "code-tunnel-autofix";
     serviceConfig = {
-      ExecStart = "${pkgs.writeShellScript "${name}.sh" ''
+      ExecStart = "${pkgs.writeShellScript "tunnel.sh" ''
         set -euo pipefail
         PATH=${makeBinPath (with pkgs; [coreutils findutils inotify-tools])}
         bin_dir=~/.vscode-cli/code-stable/bin

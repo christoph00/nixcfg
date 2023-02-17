@@ -39,7 +39,6 @@
 
   networking.interfaces.eth0.useDHCP = true;
 
-
   boot.kernelParams = [
     "console=ttyS2,1500000"
     "earlycon=uart8250,mmio32,0xff130000"
@@ -62,11 +61,11 @@
 
   powerManagement.cpuFreqGovernor = "schedutil";
 
- # fileSystems."/" = {
- #   device = "none";
- #   fsType = "tmpfs";
- #   options = ["defaults" "size=512M" "mode=755"];
- # };
+  # fileSystems."/" = {
+  #   device = "none";
+  #   fsType = "tmpfs";
+  #   options = ["defaults" "size=512M" "mode=755"];
+  # };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/BOOT";

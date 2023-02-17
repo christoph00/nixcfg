@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   configTxt = pkgs.writeText "config.txt" ''
     [pi3]
     kernel=u-boot-rpi3.bin
@@ -21,8 +24,7 @@ let
     # when attempting to show low-voltage or overtemperature warnings.
     avoid_warnings=1
   '';
-in
-{
+in {
   sdImage = {
     compressImage = false;
     populateFirmwareCommands = ''
