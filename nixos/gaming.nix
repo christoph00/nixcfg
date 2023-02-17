@@ -326,19 +326,21 @@ in {
   systemd.extraConfig = "DefaultLimitNOFILE=1048576";
 
   services.xserver.displayManager.sessionPackages = [steam-session-wayland];
-  systemd.user.services.x11-ownership = rec {
-    serviceConfig.Type = "oneshot";
-    script = ''
-      ${pkgs.sudo}/bin/sudo chown -R christoph:users /tmp/.X11-unix
-    '';
-    after = ["graphical-session.target"];
-    wants = after;
-    wantedBy = ["graphical-session-pre.target"];
+  # systemd.user.services.x11-ownership = rec {
+  #   serviceConfig.Type = "oneshot";
+  #   script = ''
+  #     ${pkgs.sudo}/bin/sudo chown -R christoph:users /tmp/.X11-unix
+  #   '';
+  #   after = ["graphical-session.target"];
+  #   wants = after;
+  #   wantedBy = ["graphical-session-pre.target"];
+  # };
+
+  systemd.user.services.steamui = {
+    description = "Steam UI";
+    partOf = ["graphical-session.target"];
+    script = "${steam-session}/bin/steam-session";
   };
 
-  # autologin-graphical-session = {
-  #   enable = true;
-  #   user = "christoph";
-  #   sessionScript = "Hyprland";
-  # };
+
 }
