@@ -37,10 +37,14 @@
     };
   };
 
+  networking.interfaces.eth0.useDHCP = true;
+
+
   boot.kernelParams = [
     "console=ttyS2,1500000"
     "earlycon=uart8250,mmio32,0xff130000"
     "mitigations=off"
+    "net.ifnames=0"
   ];
   boot.initrd = {
     includeDefaultModules = false;
