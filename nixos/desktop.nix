@@ -76,6 +76,13 @@
     # ];
   };
 
+  services.xserver.displayManager = {
+    # sddm.enable = true;
+    lightdm.enable = true;
+    defaultSession = "plasmawayland";
+    autoLogin.user = "christoph";
+  };
+
   # Udev Rules
   services.udev.extraRules = ''
 
