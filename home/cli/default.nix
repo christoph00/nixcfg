@@ -59,6 +59,8 @@ in {
 
     # winetricks (all versions)
     winetricks
+
+    tio
   ];
 
   home.sessionVariables = {
