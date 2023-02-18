@@ -35,6 +35,7 @@
         temperature_unit = "C";
         external_url = "https://ha.r505.de";
         internal_url = "https://ha.net.r505.de";
+        packages = "!include_dir_named pkgs";
       };
       default_config = {};
       config = {};
@@ -65,22 +66,6 @@
       #   circuit = "700";
       # };
       lovelace.mode = "yaml";
-      binary_sensor = [
-        {
-          platform = "ping";
-          host = "192.168.1.1";
-          name = "router";
-          count = 2;
-          scan_interval = 15;
-        }
-        {
-          platform = "ping";
-          host = "tower.lan.net.r505.de";
-          name = "tower";
-          count = 2;
-          scan_interval = 15;
-        }
-      ];
       switch = [
         {
           name = "Tower";
