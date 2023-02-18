@@ -13,8 +13,8 @@ in {
       (mkPingSensor "shield.lan.net.r505.de" "shield")
       (mkPingSensor "air13.lan.net.r505.de" "air13")
       (mkPingSensor "192.168.1.15" "uap")
-      (mkPingSensor "1.1.1.1" "Internet IP")
-      (mkPingSensor "telekom.de" "Internet DNS")
+      (mkPingSensor "193.110.81.0" "Internet IP")
+      (mkPingSensor "dns0.eu" "Internet DNS")
     ];
     device_tracker = [
       {
