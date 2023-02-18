@@ -11,7 +11,12 @@
     #./systemmonitor.nix
     #./webserver.nix
     ./commands.nix
+<<<<<<< HEAD
     ./netdata.nix
+||||||| parent of fd7b908 ()
+=======
+    ./network_sensors.nix
+>>>>>>> fd7b908 ()
   ];
 
   services.home-assistant = {
