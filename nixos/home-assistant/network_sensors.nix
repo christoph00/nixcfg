@@ -8,17 +8,17 @@
   };
 in {
   services.home-assistant.config = {
-    sensor = [(mkPingSensor "192.168.1.1" "router")];
-    device_tracker = [
-      {
-        platform = "ping";
-        hosts = {
-          tower = "tower.lan.net.r505.de";
-          shield = "shield.lan.net.r505.de";
-          magentatv = "magentatv.lan.net.r505.de";
-          air13 = "air13.lan.net.r505.de";
-        };
-      }
-    ];
+    binary_sensor = [(mkPingSensor "tower.lan.net.r505.de" "tower")];
+    # device_tracker = [
+    #   {
+    #     platform = "ping";
+    #     hosts = {
+    #       tower = "tower.lan.net.r505.de";
+    #       shield = "shield.lan.net.r505.de";
+    #       magentatv = "magentatv.lan.net.r505.de";
+    #       air13 = "air13.lan.net.r505.de";
+    #     };
+    #   }
+    # ];
   };
 }
