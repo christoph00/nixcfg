@@ -30,6 +30,7 @@ in {
       {
         platform = "template";
         switches.tower = {
+          unique_id = "8e86b540-f94c-4177-93a3-1146a9396494";
           value_template = "{{ is_state('binary_sensor.tower', 'on') }}";
           turn_on.service = "script.pc_ein";
           turn_off.service = "script.pc_aus";
