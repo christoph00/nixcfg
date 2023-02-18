@@ -26,5 +26,15 @@ in {
         };
       }
     ];
+    switch = [
+      {
+        platform = "template";
+        switches.tower = {
+          value_template = "{{ is_state('binary_sensor.tower', 'on') }}";
+          turn_on.service = "script.pc_ein";
+          turn_off.service = "script.pc_aus";
+        };
+      }
+    ];
   };
 }
