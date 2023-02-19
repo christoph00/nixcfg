@@ -57,6 +57,8 @@
 
   #systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
 
+  hardware.logitech.wireless.enable = true;
+
   networking.firewall = {
     allowedTCPPorts = [22000 47989 47990 5901];
     allowedUDPPorts = [21027 22000 47989 47990 5901];
