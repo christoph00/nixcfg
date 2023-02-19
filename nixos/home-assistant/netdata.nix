@@ -43,6 +43,17 @@
     }
     {
       platform = "netdata";
+      name = "tower";
+      host = "tower.lan.net.r505.de";
+      resources = {
+        load5 = {
+          data_group = "system.load";
+          element = "load5";
+        };
+      };
+    }
+    {
+      platform = "netdata";
       name = "router";
       host = "192.168.1.1";
       resources = {
