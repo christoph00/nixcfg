@@ -80,7 +80,7 @@ in {
     xdg-desktop-portal-gtk
 
     solaar
-    etcher
+    usbimager
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
