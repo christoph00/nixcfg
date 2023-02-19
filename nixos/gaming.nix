@@ -141,6 +141,8 @@
     WINEDLLOVERRIDES = "dxgi=n";
 
     SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS = "0";
+
+    RADV_PERFTEST = "gpl";
   });
 
   # Shim that runs steam and associated services.
@@ -164,7 +166,7 @@
       --setenv=MANGOHUD_CONFIGFILE \
       -- \
       mangoapp
-    exec steam -steamos3 -steampal -gamepadui -language german "$@"
+    exec steam -tenfoot -language german "$@"
   '';
 
   # Shim that runs gamescope, with a specific environment.
