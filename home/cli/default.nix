@@ -61,6 +61,7 @@ in {
     winetricks
 
     tio
+    picocom
   ];
 
   home.sessionVariables = {

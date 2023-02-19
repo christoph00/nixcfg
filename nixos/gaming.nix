@@ -178,8 +178,7 @@
     #               -> `systemctl --user stop steam-session.slice`?
 
     ${pkgs.sudo}/bin/sudo chown -R christoph:users /tmp/.X11-unix
-
-    exec ${gamescope}/bin/gamescope "$@"
+    exec ${pkgs.kde-cli-tools}/bin/kde-inhibit --power --colorCorrect -- ${gamescope}/bin/gamescope "$@"
   '';
 
   # TODO: consume width/height script input params
@@ -341,6 +340,4 @@ in {
     partOf = ["graphical-session.target"];
     script = "${steam-session}/bin/steam-session";
   };
-
-
 }

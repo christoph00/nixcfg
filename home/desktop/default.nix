@@ -78,6 +78,9 @@ in {
 
     xdg-desktop-portal
     xdg-desktop-portal-gtk
+
+    solaar
+    etcher
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
