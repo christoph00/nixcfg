@@ -8,10 +8,10 @@
   imports = [
     ./postgres.nix
     ./extentions.nix
-    ./systemmonitor.nix
+    #./systemmonitor.nix
     ./commands.nix
     ./network_sensors.nix
-    #./netdata.nix
+    ./netdata.nix
   ];
 
   services.home-assistant = {

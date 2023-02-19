@@ -222,13 +222,13 @@
       # TODO[Jovian]: verify assertion
       --xwayland-count 2
       #-w $GAMESCOPE_WIDTH -h $GAMESCOPE_HEIGHT
-      -w 1920 -h 1080 -W 3840 -H 2160
+      #-w 1920 -h 1080 -W 3840 -H 2160
       #-w 1920 -h 1080 -W 2560 -H 1440
-      -Y
+      #-Y
       --fullscreen
       --prefer-output HDMI-A-1
       --generate-drm-mode fixed
-      --max-scale 2
+      #--max-scale 2
       #--default-touch-mode 4
       --hide-cursor-delay 3000
       --fade-out-duration 200
@@ -341,5 +341,17 @@ in {
     description = "Steam UI";
     partOf = ["graphical-session.target"];
     script = "${steam-session}/bin/steam-session";
+  };
+  systemd.user.services.steam = {
+    description = "Steam";
+    partOf = ["graphical-session.target"];
+
+    environment = {
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
+      RADV_PERFTEST = "gpl";
+    };
+    script = ''
+      ${pkgs.steam-with-packages}/bin/steam -language german -silent
+    '';
   };
 }

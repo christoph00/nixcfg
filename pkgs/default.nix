@@ -42,6 +42,8 @@
         libkrb5
         keyutils
         gamescope
+        gamemode
+        mangohud
       ];
   };
 }
