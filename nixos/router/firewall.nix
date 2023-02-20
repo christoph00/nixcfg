@@ -3,8 +3,8 @@
   config,
   ...
 }: let
-  wan = config.networking.nat.externalInterface;
-  lan = config.networking.nat.internalInterfaces;
+  wan = "ppp0";
+  lan = "eth1";
 in {
   networking = {
     firewall.enable = false;
@@ -17,6 +17,13 @@ in {
             hook ingress priority 0
             devices = { ${wan}, ${lan} }
           }
+
+        # allow from this device
+        chain output {
+          type filter hook output priority filter
+          policy accept
+          counter accept
+        }
       '';
     };
   };

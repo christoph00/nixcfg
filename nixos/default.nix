@@ -84,7 +84,7 @@
         ./cloudflared.nix
         ./home-server.nix
         ./matcha.nix
-        ./adguardhome.nix
+        #./adguardhome.nix
         #inputs.srvos.nixosModules.mixins-nginx
         self.nixosModules.sftpgo
         #self.nixosModules.syncthing
