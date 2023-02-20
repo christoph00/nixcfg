@@ -16,30 +16,12 @@
     "net.ipv6.conf.all.forwarding" = true;
   };
 
-  systemd.network = {
-    networks.wan = {
-      dhcpV4Config = {
-        UseDNS = false;
-        UseDomains = false;
-      };
-      dhcpV6Config = {
-        PrefixDelegationHint = "::/56";
-        UseDNS = false;
-      };
-      ipv6AcceptRAConfig = {
-        UseDNS = false;
-        UseDomains = false;
-      };
-    };
-  };
-
   services.pppd = {
     enable = true;
     peers = {
       telekom = {
         config = ''
-          plugin pppoe.so
-          eth0.7
+          plugin pppoe.so eth0.7
           ifname ppp0
           nic-eno1
           lcp-echo-failure 5
@@ -90,4 +72,14 @@
   };
 
   services.lldpd.enable = true;
+
+  services.dnsmasq = {
+    enable = true;
+    servers = ["193.110.81.0" "185.253.5.0"];
+    settings = {
+      domain = "lan.net.r505.de";
+      interface = ["eth1"];
+      dhcp-range = ["192.168.1.51,192.168.1.249,24h"];
+    };
+  };
 }
