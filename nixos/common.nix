@@ -28,6 +28,8 @@
 
   time.timeZone = "Europe/Berlin";
 
+  services.resolved.enable = lib.mkForce false;
+
   nix = {
     settings = {
       substituters = [
