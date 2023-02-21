@@ -337,21 +337,21 @@ in {
   #   wantedBy = ["graphical-session-pre.target"];
   # };
 
-  systemd.user.services.steamui = {
-    description = "Steam UI";
-    partOf = ["graphical-session.target"];
-    script = "${steam-session}/bin/steam-session";
-  };
-  systemd.user.services.steam = {
-    description = "Steam";
-    partOf = ["graphical-session.target"];
+  # systemd.user.services.steamui = {
+  #   description = "Steam UI";
+  #   partOf = ["graphical-session.target"];
+  #   script = "${steam-session}/bin/steam-session";
+  # };
+  # systemd.user.services.steam = {
+  #   description = "Steam";
+  #   partOf = ["graphical-session.target"];
 
-    environment = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
-      RADV_PERFTEST = "gpl";
-    };
-    script = ''
-      ${pkgs.steam-with-packages}/bin/steam -language german -silent
-    '';
-  };
+  #   environment = {
+  #     STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
+  #     RADV_PERFTEST = "gpl";
+  #   };
+  #   script = ''
+  #     ${pkgs.steam-with-packages}/bin/steam -language german -silent
+  #   '';
+  # };
 }
