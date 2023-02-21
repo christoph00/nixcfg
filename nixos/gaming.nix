@@ -342,16 +342,19 @@ in {
   #   partOf = ["graphical-session.target"];
   #   script = "${steam-session}/bin/steam-session";
   # };
-  # systemd.user.services.steam = {
-  #   description = "Steam";
-  #   partOf = ["graphical-session.target"];
+  systemd.user.services.steam = {
+    description = "Steam";
+    partOf = ["graphical-session.target"];
 
-  #   environment = {
-  #     STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
-  #     RADV_PERFTEST = "gpl";
-  #   };
-  #   script = ''
-  #     ${pkgs.steam-with-packages}/bin/steam -language german -silent
-  #   '';
-  # };
+    after = ["graphical-session.target"];
+    wantedBy = ["graphical-session-pre.target"];
+
+    environment = {
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
+      RADV_PERFTEST = "gpl";
+    };
+    script = ''
+      ${pkgs.steam-with-packages}/bin/steam -language german -silent
+    '';
+  };
 }
