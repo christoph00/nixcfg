@@ -154,6 +154,7 @@
         ".config/kde.org"
         ".config/plasma-workspace"
         ".config/kate"
+        ".config/kdeconnect"
         # ".config/xsettingsd"
         ".kde"
 
