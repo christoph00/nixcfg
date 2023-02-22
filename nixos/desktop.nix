@@ -101,7 +101,7 @@
   '';
 
   services.geoclue2.enable = true;
-
+/*
   environment.persistence."/nix/persist" = {
     hideMounts = true;
     users.christoph = {
@@ -238,4 +238,6 @@
       ];
     };
   };
+*/
+
 }
