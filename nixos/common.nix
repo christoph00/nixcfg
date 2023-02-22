@@ -89,8 +89,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX christoph@air13"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower"
     ];
-    #passwordFile = config.age.secrets.christoph-password.path;
-    password = "hallo";
+    passwordFile = config.age.secrets.christoph-password.path;
   };
 
   users.users.root.passwordFile = config.age.secrets.christoph-password.path;
@@ -106,82 +105,37 @@
   };
   programs.mosh.enable = true;
 
-  environment.systemPackages = [pkgs.git pkgs.vim pkgs.crowdsec];
+  environment.systemPackages = [pkgs.git];
 
   environment.shellAliases = {
     nrb = "nixos-rebuild --flake github:christoph00/nixcfg --use-remote-sudo boot";
     nrs = "nixos-rebuild --flake github:christoph00/nixcfg --use-remote-sudo switch";
   };
   environment.persistence."/nix/persist" = {
+    hideMounts = true;
     directories = [
-      "/etc/nixos"
       "/var/lib/containers"
       "/var/lib/tailscale"
       "/var/lib/netdata"
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
     ];
     files = [
       "/etc/machine-id"
       "/etc/ssh/ssh_host_rsa_key"
       "/etc/ssh/ssh_host_rsa_key.pub"
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
+      #"/etc/ssh/ssh_host_ed25519_key"
+      #"/etc/ssh/ssh_host_ed25519_key.pub"
       "/etc/nix/id_rsa"
     ];
   };
 
-  services.netdata = {
-    enable = true;
-    config = {
-      global = {
-        "error log" = "syslog";
-        "bind to" = "0.0.0.0:19999 [::]:19999";
-        "update every" = "5";
-      };
-      plugins = {
-        "tc" = "no";
-        "idlejitter" = "no";
-        "checks" = "no";
-        "apps" = "no";
-        "charts.d" = "no";
-        "node.d" = "no";
-        "python.d" = "no";
-        "go.d" = "no";
-      };
-      "plugin:proc" = {
-        "/proc/interrupts" = "no";
-        "/proc/softirqs" = "no";
-      };
-    };
-    configDir = {
-      "go.d.conf" = pkgs.writeTextFile {
-        name = "go.d.conf";
-        text = lib.generators.toYAML {} {
-          modules = {
-            systemdunits = "yes";
-          };
-        };
-      };
-      "go.d/systemdunits.conf" = pkgs.writeTextFile {
-        name = "systemdunits.conf";
-        text = lib.generators.toYAML {} {
-          jobs = [
-            {
-              name = "service-units";
-              include = ["*.service"];
-            }
-            {
-              name = "socket-units";
-              include = ["*.socket"];
-            }
-          ];
-        };
-      };
-    };
-  };
 
-  # services.prometheus.exporters.node = {
-  #   enable = true;
-  #   enabledCollectors = ["systemd"];
-  #   port = 9002;
-  # };
+  services.prometheus.exporters.node = {
+     enable = true;
+     enabledCollectors = ["systemd"];
+     port = 9002;
+  };
 }
