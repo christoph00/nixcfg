@@ -20,7 +20,6 @@
     "tsx=on"
     "tsx_async_abort=off"
   ];
-  boot.plymouth.enable = true;
   boot.loader.timeout = lib.mkForce 0;
 
   services.dbus = {
@@ -101,9 +100,12 @@
   '';
 
   services.geoclue2.enable = true;
-/*
+
   environment.persistence."/nix/persist" = {
-    hideMounts = true;
+    directories = [
+      "/etc/NetworkManager/system-connections"
+    ];
+/*
     users.christoph = {
       directories = [
         "Downloads"
@@ -237,7 +239,8 @@
         ".steam/registry.vdf"
       ];
     };
+    */
+
   };
-*/
 
 }
