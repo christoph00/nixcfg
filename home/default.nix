@@ -9,7 +9,6 @@
       common = {
         home.stateVersion = "22.11";
         imports = [
-          inputs.impermanence.nixosModules.home-manager.impermanence
           inputs.nix-colors.homeManagerModule
           inputs.nix-index-database.hmModules.nix-index
           ./cli

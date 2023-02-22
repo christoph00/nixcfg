@@ -5,20 +5,6 @@
 }: {
   home.sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
 
-  home.persistence = {
-    "/nix/persist/games/christoph" = {
-      allowOther = true;
-      directories = [
-        ".local/share/Paradox Interactive"
-        ".paradoxlauncher"
-        ".local/share/Steam"
-        "Games"
-        ".config/gamescope"
-      ];
-      #files = [".steam/steam.token" ".steam/registry.vdf"];
-    };
-  };
-
   home.packages = [pkgs.ddccontrol pkgs.steam-with-packages pkgs.gamehub pkgs.gamescope pkgs.gamemode pkgs.proton-ge];
 
   # Start Steam on Login

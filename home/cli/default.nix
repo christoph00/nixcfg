@@ -153,24 +153,4 @@ in {
       }
     }
   '';
-
-  home.persistence = {
-    "/nix/persist/home/christoph" = {
-      directories = [
-        "Dokumente"
-        "Downloads"
-        "Bilder"
-        "Videos"
-        "Code"
-        "Desktop"
-        ".ssh"
-        ".config/gh"
-        ".cache/nix-index"
-        ".config/brew" # matcha
-        ".cargo"
-        ".local/share/containers"
-      ];
-      allowOther = true;
-    };
-  };
 }

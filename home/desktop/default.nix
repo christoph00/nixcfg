@@ -104,10 +104,6 @@ in {
   #xdg.mimeApps.associations.added = associations;
   #xdg.mimeApps.defaultApplications = associations;
 
-  home.persistence = {
-    "/nix/persist/home/christoph".directories = [".config/libreoffice" ".config/GeForce\ NOW" ".config/easyeffects"];
-  };
-
   services.rclone = {
     enable = true;
     config = "/run/agenix/rclone-conf";

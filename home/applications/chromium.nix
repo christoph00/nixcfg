@@ -128,8 +128,5 @@ in {
 
   #home.packages = [pkgs.vivaldi-widevine pkgs.vivaldi-ffmpeg-codecs];
 
-  home.persistence = {
-    "/nix/persist/home/christoph".directories = [".config/chromium/Default" ".config/BraveSoftware/Brave-Browser/Default" ".config/vivaldi/Default"];
-  };
   #home.file.".config/vivaldi/UserCSS/theme.css".text = vivaldi-css;
 }
