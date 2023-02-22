@@ -46,14 +46,14 @@
       fsType = "tmpfs";
       options = ["defaults" "size=2G" "mode=755"];
     };
-    "/home/christoph" = {
-      device = "none";
-      fsType = "tmpfs";
-      options = ["defaults" "size=2G" "mode=777"];
-    };
+    # "/home/christoph" = {
+    #   device = "none";
+    #   fsType = "tmpfs";
+    #   options = ["defaults" "size=2G" "mode=777"];
+    # };
 
     "/nix" = {
-      device = "/dev/disk/by-label/tower";
+      device = "/dev/disk/by-label/NIXOS";
       fsType = "btrfs";
       options = ["subvol=@nix" "noatime" "compress-force=zstd"];
     };
@@ -64,12 +64,12 @@
     };
 
     "/nix/persist" = {
-      device = "/dev/disk/by-label/tower";
+      device = "/dev/disk/by-label/NIXOS";
       fsType = "btrfs";
       options = ["subvol=@persist" "noatime" "compress-force=zstd"];
       neededForBoot = true;
     };
-    "/home/christoph/Games" = {
+    "/media/Games" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
       options = ["subvol=@games" "noatime" "compress-force=zstd"];
@@ -80,11 +80,11 @@
       fsType = "btrfs";
       options = ["subvol=@data" "noatime" "compress-force=zstd"];
     };
-    # "/home" = {
-    #   device = "/dev/disk/by-label/tower";
-    #   fsType = "btrfs";
-    #   options = ["subvol=@home" "noatime" "compress-force=zstd"];
-    # };
+    "/home" = {
+      device = "/dev/disk/by-label/NIXOS";
+      fsType = "btrfs";
+      options = ["subvol=@home" "noatime" "compress-force=zstd"];
+    };
 
     # "/media/hdd-data" = {
     #   device = "/dev/disk/by-uuid/25fc5836-72df-4881-8760-af49333fa485";
@@ -93,12 +93,7 @@
     # };
   };
 
-  swapDevices = [
-    {
-      device = "/nix/persist/swapfile";
-      size = 34360;
-    }
-  ];
+  swapDevices = [{device = "/dev/nvme0n1p2";}];
   nixpkgs.hostPlatform.system = "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = true;
   powerManagement.cpuFreqGovernor = "powersave";
