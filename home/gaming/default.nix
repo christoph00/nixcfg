@@ -19,7 +19,7 @@
     };
   };
 
-  home.packages = [pkgs.ddccontrol pkgs.steam-with-packages pkgs.gamehub pkgs.gamescope pkgs.gamemode];
+  home.packages = [pkgs.ddccontrol pkgs.steam-with-packages pkgs.gamehub pkgs.gamescope pkgs.gamemode pkgs.proton-ge];
 
   # Start Steam on Login
   # systemd.user.services.steam = {
