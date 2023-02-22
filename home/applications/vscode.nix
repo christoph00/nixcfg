@@ -1,8 +1,4 @@
 {pkgs, ...}: {
-  home.persistence = {
-    "/nix/persist/home/christoph".directories = [".config/Code" ".vscode"];
-  };
-
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;

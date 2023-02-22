@@ -214,9 +214,5 @@ in {
   home.packages = with pkgs; [
     obsidian
   ];
-  home.persistence = {
-    "/nix/persist/home/christoph".directories = [".config/obsidian"];
-  };
-
   home.file.".config/obsidian/snippets/base16-theme.css".text = theme-css;
 }
