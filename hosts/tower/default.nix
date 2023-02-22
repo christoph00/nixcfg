@@ -69,7 +69,7 @@
       options = ["subvol=@persist" "noatime" "compress-force=zstd"];
       neededForBoot = true;
     };
-    "/nix/persist/games" = {
+    "/home/christoph/Games" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
       options = ["subvol=@games" "noatime" "compress-force=zstd"];
