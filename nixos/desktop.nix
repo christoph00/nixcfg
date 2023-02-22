@@ -102,10 +102,6 @@
 
   services.geoclue2.enable = true;
 
-  home.persistence = {
-    "/nix/persist/home/christoph".directories = [".config/libreoffice" ".config/GeForce\ NOW" ".config/easyeffects"];
-  };
-
   environment.persistence."/nix/persist" = {
     hideMounts = true;
     users.christoph = {
