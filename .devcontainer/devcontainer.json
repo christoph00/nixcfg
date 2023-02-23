@@ -9,7 +9,7 @@
 		"packages": "nil, alejandra",
 		"extraNixConfig": "experimental-features = nix-command flakes"
 		},
-			"ghcr.io/tailscale/codespace/tailscale": {}
+		"ghcr.io/tailscale/codespace/tailscale": {}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
