@@ -8,6 +8,7 @@
       kate
       konsole
       libsForQt5.bismuth
+      latte-dock
     ]
     ++ (with plasma5Packages; [
       kmail
