@@ -17,8 +17,10 @@ in {
     "C /nix/persist/hass/www/better-thermostat-ui-card.js 0755 hass hass - ${better-thermostat-ui-card}"
 
     "d /nix/persist/hass/custom_components 0755 hass hass"
-    "L /nix/persist/hass/custom_components/ble_monitor - - - - ${pkgs.ha-components-ble-monitor}/ble_monitor"
-    "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.ha-components-better-thermostat}/better_thermostat"
+    "L /nix/persist/hass/custom_components/ble_monitor - - - - ${pkgs.ha-component-ble-monitor}/ble_monitor"
+    "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.ha-component-better-thermostat}/better_thermostat"
+    "L /nix/persist/hass/custom_components/promql - - - - ${pkgs.ha-component-promql}/promql"
+
   ];
 
   services.nginx.virtualHosts.hass = {
