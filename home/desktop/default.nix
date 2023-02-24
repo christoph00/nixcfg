@@ -81,6 +81,13 @@ in {
 
     solaar
     usbimager
+
+    uefitoolPackages.old-engine
+
+    pciutils
+
+    hdparm
+
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
