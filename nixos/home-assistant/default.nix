@@ -8,10 +8,10 @@
   imports = [
     ./postgres.nix
     ./extentions.nix
-    #./systemmonitor.nix
+    ./systemmonitor.nix
     ./commands.nix
     ./network_sensors.nix
-    ./netdata.nix
+    #./netdata.nix
   ];
 
   services.home-assistant = {
@@ -60,11 +60,6 @@
         report_state = true;
         exposed_domains = ["switch" "light"];
       };
-
-      # ebusd = {
-      #   host = "127.0.0.1";
-      #   circuit = "700";
-      # };
       lovelace.mode = "yaml";
       switch = [
         {
@@ -101,7 +96,7 @@
       "camera"
       "androidtv"
       "open_meteo"
-      #"adguard"
+      "adguard"
       "speedtestdotnet"
       "cups"
       "device_sun_light_trigger"
@@ -125,8 +120,8 @@
       "weather"
       "rest"
       "ping"
+      "snmp"
     ];
-    # configWritable = true; # doesn't work atm
   };
 
   age.secrets.ha-secrets = {
