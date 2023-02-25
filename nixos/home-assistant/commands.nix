@@ -24,7 +24,7 @@ in {
       service_user_restart = ''${sshCmd} "sudo /run/current-system/sw/bin/systemctl --user --machine {{ user }}@ restart {{ unit }}"'';
       service_user_status = ''${sshCmd} "sudo /run/current-system/sw/bin/systemctl --user --machine {{ user }}@ status {{ unit }}"'';
 
-      start_steam_game = ''${sshCmd} sudo -u christoph steam steam://rungameid/{{ gameid }}'';
+      start_steam_game = ''${sshCmd} "sudo /run/current-system/sw/bin/systemctl --user --machine {{ user }}@ steam steam://rungameid/{{ gameid }}"'';
     };
   };
 }
