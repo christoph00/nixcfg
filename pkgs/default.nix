@@ -26,7 +26,7 @@
   ha-lovelace-better-thermostat-ui-card = pkgs.callPackage ./ha-lovelace/better-thermostat-ui-card.nix {};
   ha-lovelace-vacuum-card = pkgs.callPackage ./ha-lovelace/vacuum-card.nix {};
   ha-component-better-thermostat = pkgs.callPackage ./ha-components/better_thermostat.nix {};
-  ha-component-ble-monitor = pkgs.callPackage ./ha-components/ble_monitor.nix {};\
+  ha-component-ble-monitor = pkgs.callPackage ./ha-components/ble_monitor.nix {};
   ha-component-promql = pkgs.callPackage ./ha-components/promql.nix {};
 
 
