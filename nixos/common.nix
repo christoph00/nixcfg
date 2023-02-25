@@ -54,6 +54,16 @@
   # TODO: Check if Home Net
   #networking.domain = "lan.net.r505.de";
 
+  networking.useHostResolvConf = false;
+  services.resolved = {
+    enable = true;
+    dnssec = "false";
+    llmnr = "true";
+    extraConfig = ''
+    DNSStubListenerExtra=[::1]:53
+    '';
+  };
+
   security.sudo.wheelNeedsPassword = false;
 
   programs.fuse.userAllowOther = true;
