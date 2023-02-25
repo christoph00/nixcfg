@@ -60,7 +60,7 @@
     dnssec = "false";
     llmnr = "true";
     extraConfig = ''
-    DNSStubListenerExtra=[::1]:53
+      DNSStubListenerExtra=[::1]:53
     '';
   };
 
@@ -142,10 +142,9 @@
     ];
   };
 
-
   services.prometheus.exporters.node = {
-     enable = true;
-     enabledCollectors = ["systemd"];
-     port = 9002;
+    enable = true;
+    enabledCollectors = ["systemd"];
+    port = 9002;
   };
 }

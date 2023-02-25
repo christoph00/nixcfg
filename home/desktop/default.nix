@@ -87,7 +87,6 @@ in {
     pciutils
 
     hdparm
-
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;

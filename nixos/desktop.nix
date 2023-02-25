@@ -54,6 +54,8 @@
     rtkit.enable = true;
   };
 
+  environment.systemPackages = [pkgs.fan2go];
+
   #systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
 
   hardware.logitech.wireless.enable = true;
@@ -105,7 +107,7 @@
     directories = [
       "/etc/NetworkManager/system-connections"
     ];
-/*
+    /*
     users.christoph = {
       directories = [
         "Downloads"
@@ -240,7 +242,5 @@
       ];
     };
     */
-
   };
-
 }
