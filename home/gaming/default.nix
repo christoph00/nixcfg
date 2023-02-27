@@ -12,30 +12,29 @@
     terminal = false;
   };
 in {
-  home.sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = pkgs.proton-ge;
-
   home.packages = with pkgs; [
     steam-with-packages
     gamehub
     gamescope
     gamemode
-    proton-ge
-    lutris
+    protontricks
+    radeontop
+
+    rare
+    heroic
+    gogdl
 
     desktopSteam
   ];
+
+  # home.file.".steam/root/compatibilitytools.d/Proton-GE".source = "${pkgs.proton-ge}";
+  # home.sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = ["$HOME/.steam/root/compatibilitytools.d"];
 
   systemd.user.services = {
     steam = {
       Unit.Description = "Steam Client";
       Install.WantedBy = ["graphical-session.target"];
       Unit.PartOf = ["graphical-session.target"];
-      Unit.Environment = ''
-        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${pkgs.proton-ge}";
-
-      '';
-      #RADV_PERFTEST = "gpl";
-
       Service = {
         StartLimitInterval = 5;
         StartLimitBurst = 1;

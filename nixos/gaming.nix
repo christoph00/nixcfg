@@ -30,7 +30,11 @@
     }
   ];
 
-  environment.systemPackages = [pkgs.gamescope];
+  environment.systemPackages = [pkgs.gamescope pkgs.proton-ge];
+  environment.sessionVariables = {
+    PRESSURE_VESSEL_FILESYSTEMS_RO = "${pkgs.proton-ge}";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = ["${pkgs.proton-ge}"];
+  };
   programs = {
     steam.enable = true;
     steam.package = pkgs.steam-with-packages;
