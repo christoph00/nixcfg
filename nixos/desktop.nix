@@ -54,14 +54,14 @@
     rtkit.enable = true;
   };
 
-  environment.systemPackages = [pkgs.fan2go];
+  environment.systemPackages = [pkgs.fan2go pkgs.httplz];
 
   #systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
 
   hardware.logitech.wireless.enable = true;
 
   networking.firewall = {
-    allowedTCPPorts = [22000 47989 47990 5901];
+    allowedTCPPorts = [22000 47989 47990 5901 8000];
     allowedUDPPorts = [21027 22000 47989 47990 5901];
   };
   networking.firewall.enable = true;

@@ -28,6 +28,8 @@
     "udev.log-priority=3"
     "vt.global_cursor_default=0"
     "mem_sleep_default=deep"
+    "amdgpu.gartsize=4096"
+    "adgpu.ignore_crat=1"
   ];
 
   #boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
