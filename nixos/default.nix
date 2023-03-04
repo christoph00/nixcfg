@@ -106,7 +106,10 @@
       ];
       syncthing.imports = [./syncthing.nix];
 
-      mailserver.imports = [./mailserver.nix];
+      mailserver.imports = [
+        self.nixosModules.stalwart
+        ./mailserver.nix
+      ];
 
       gamestream.imports = [
         #./acme.nix
