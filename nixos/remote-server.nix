@@ -4,6 +4,11 @@
   lib,
   ...
 }: {
+  environment.systemPackages = with pkgs; [
+    vmt
+    vomit-sync
+    tmux
+  ];
   # services.grafana = {
   #   enable = true;
   #   domain = "graf.r505.de";
