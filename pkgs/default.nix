@@ -21,6 +21,8 @@
   stalwart-imap = pkgs.callPackage ./stalwart-imap {};
   stalwart-jmap = pkgs.callPackage ./stalwart-jmap {};
   stalwart-smtp = pkgs.callPackage ./stalwart-smpt {};
+  vmt = pkgs.callPackage ./vmt {};
+  vomit-sync = pkgs.callPackage ./vomit-sync {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
