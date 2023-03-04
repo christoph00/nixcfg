@@ -24,19 +24,9 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-rTOcong1F3+gM6Adi6pB1wvS/fiGoKHz+FyTb/edVhg=";
   };
 
-  cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  cargoHash = "sha256-NnHlkXv3y3+QcogDc3bLKAbBlITaNq5z7d1qFfbnpgM=";
 
   cargoPatches = [./fix-cargo.patch];
-
-  # cargoDeps = rustPlatform.importCargoLock {
-  #   lockFile = ./Cargo.lock;
-  #   cargoVendorNoMergeSources = true;
-  # };
-
-  # postPatch = ''
-  #   patchShebangs .
-  #    cp ${./Cargo.lock} Cargo.lock
-  # '';
 
   nativeBuildInputs = [
     cmake
