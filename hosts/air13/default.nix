@@ -15,11 +15,11 @@
   boot.kernelParams = [
     "quiet"
     "pcie_port_pm=off"
-    #"i915.i915_enable_rc6=1"
-    #"i915.i915_enable_fbc=1"
-    #"i915.enable_psr=2"
-    #"i915.lvds_downclock=1"
-    #"i915.perf_stream_paranoid=0"
+    "i915.i915_enable_rc6=1"
+    "i915.i915_enable_fbc=1"
+    "i915.enable_psr=2"
+    "i915.lvds_downclock=1"
+    "i915.perf_stream_paranoid=0"
     "i915.semaphores=1"
     "rcutree.rcu_idle_gp_delay=1"
     "splash"
@@ -45,11 +45,11 @@
       options = ["defaults" "size=2G" "mode=755"];
     };
 
-    "/home/christoph" = {
-      device = "none";
-      fsType = "tmpfs"; # Can be stored on normal drive or on tmpfs as well
-      options = ["size=2G" "mode=777"];
-    };
+    # "/home/christoph" = {
+    #   device = "none";
+    #   fsType = "tmpfs"; # Can be stored on normal drive or on tmpfs as well
+    #   options = ["size=2G" "mode=777"];
+    # };
 
     "/nix" = {
       device = "/dev/disk/by-label/air13";
@@ -69,11 +69,11 @@
       neededForBoot = true;
     };
 
-    # "/home" = {
-    #   device = "/dev/disk/by-label/air13";
-    #   fsType = "btrfs";
-    #   options = ["subvol=@home" "noatime" "compress-force=zstd"];
-    # };
+    "/home" = {
+      device = "/dev/disk/by-label/air13";
+      fsType = "btrfs";
+      options = ["subvol=@home" "noatime" "compress-force=zstd"];
+    };
   };
 
   hardware.nvidia.modesetting.enable = false;

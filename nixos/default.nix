@@ -106,6 +106,8 @@
       ];
       syncthing.imports = [./syncthing.nix];
 
+      mailserver.imports = [./mailserver.nix];
+
       gamestream.imports = [
         #./acme.nix
         ./sunshine.nix
