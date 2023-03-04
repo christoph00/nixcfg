@@ -89,6 +89,7 @@ in {
       ${defaultUser} = {
         description = "stalwart user";
         isSystemUser = true;
+        group = cfg.group;
       };
     };
 
