@@ -87,7 +87,6 @@ in {
     users.users = mkIf (cfg.user == defaultUser) {
       ${defaultUser} = {
         group = cfg.group;
-        uid = 676;
         description = "stalwart user";
         isSystmUser = true;
       };
@@ -95,10 +94,6 @@ in {
 
     environment.systemPackages = [pkgs.stalwart-cli];
 
-    users.groups = mkIf (cfg.group == defaultGroup) {
-      ${defaultGroup}.gid =
-        676;
-    };
     systemd.services.stalwart-jmap = mkIf cfg.jmap.enable {
       description = "stalwart jmap server";
       wants = ["network.target"];
