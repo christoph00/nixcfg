@@ -89,6 +89,11 @@
             tls = {certResolver = "cloudflare";};
             service = "grafana";
           };
+          jmap = {
+            rule = "Host(`jmap.r505.de`)";
+            tls = {certResolver = "cloudflare";};
+            service = "stalwart-jmap";
+          };
         };
         services = {
           home-assistant = {
@@ -114,6 +119,11 @@
           grafana = {
             loadBalancer = {
               servers = [{url = "http://oca.cama-boa.ts.net:2342";}];
+            };
+          };
+          stalwart-jmap = {
+            loadBalancer = {
+              servers = [{url = "http://oc1.cama-boa.ts.net:8033";}];
             };
           };
         };
