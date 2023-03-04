@@ -6,9 +6,11 @@
 }:
 with lib; let
   cfg = config.services.stalwart;
-  jmapConfig = pkgs.formats.yaml.generate "config-jmap.yaml" cfg.jmap.settings;
-  imapConfig = pkgs.formats.yaml.generate "config-imap.yaml" cfg.imap.settings;
-  smptConfig = pkgs.formats.toml.generate "config-smtp.toml" cfg.smtp.settings;
+  yaml = pkgs.formats.yaml {};
+  toml = pkgs.formats.toml {};
+  jmapConfig = yaml.generate "config-jmap.yaml" cfg.jmap.settings;
+  imapConfig = yaml.generate "config-imap.yaml" cfg.imap.settings;
+  smptConfig = toml.generate "config-smtp.toml" cfg.smtp.settings;
   defaultUser = "stalwart";
   defaultGroup = defaultUser;
 in {
@@ -43,10 +45,10 @@ in {
         enable = mkEnableOption "stalwart-jmap";
 
         settings = mkOption {
-          type = format.type;
+          type = yaml.type;
           description = lib.mdDoc ''
               stalwart jmap config
-            `${configFile}`
+            `${jmapConfig}`
           '';
           default = {};
         };
@@ -55,10 +57,10 @@ in {
         enable = mkEnableOption "stalwart-imap";
 
         settings = mkOption {
-          type = format.type;
+          type = yaml.type;
           description = lib.mdDoc ''
               stalwart imap config
-            `${configFile}`
+            `${imapConfig}`
           '';
           default = {};
         };
@@ -67,13 +69,12 @@ in {
         enable = mkEnableOption "stalwart-smtp";
 
         settings = mkOption {
-          type = format.type;
+          type = toml.type;
           description = lib.mdDoc ''
               stalwart smtp config
-            `${jmapConfig}`
+            `${smtpConfig}`
           '';
           default = {
-            jmap-port = 8099;
           };
         };
       };
