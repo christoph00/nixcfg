@@ -2158,13 +2158,6 @@ dependencies = [
  "zip",
 ]
 
-[[package]]
-name = "mail-builder"
-version = "0.2.5"
-source = "git+https://github.com/stalwartlabs/mail-builder#589dc325508c905c6248d13596a82cd1e89e8315"
-dependencies = [
- "gethostname",
-]
 
 [[package]]
 name = "mail-parser"
