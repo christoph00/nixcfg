@@ -3,6 +3,7 @@
   lib,
   ...
 }: {
+  environment.systemPackages = [pkgs.vmt pkgs.vomit-sync];
   services.stalwart = {
     enable = true;
     jmap = {
