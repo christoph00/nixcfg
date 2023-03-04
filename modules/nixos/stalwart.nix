@@ -87,7 +87,6 @@ in {
     };
     users.users = mkIf (cfg.user == defaultUser) {
       ${defaultUser} = {
-        group = cfg.group;
         description = "stalwart user";
         isSystemUser = true;
       };
@@ -104,7 +103,6 @@ in {
       serviceConfig = {
         ExecStart = "${pkgs.stalwart-jmap}/bin/stalwart-jmap --config=${jmapConfig}";
         User = cfg.user;
-        Group = cfg.group;
 
         MemoryDenyWriteExecute = true;
         NoNewPrivileges = true;

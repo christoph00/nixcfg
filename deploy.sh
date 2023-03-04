@@ -17,9 +17,9 @@ extra_args=$*
 
 if [ $target == $local_hostname ]; then
 	set -x
-	sudo nixos-rebuild --flake .# "${command?}" ${extra_args}
+	nixos-rebuild --flake .# --use-remote-sudo --fast "${command?}" ${extra_args}
 else
 	set -x
-	NIX_SSHOPTS=-A nixos-rebuild "${command?}" --flake ".#${target?}" --target-host "${target?}.lan.net.r505.de" --use-remote-sudo --use-substitutes --fast ${extra_args}
+	NIX_SSHOPTS=-A nixos-rebuild "${command?}" --flake ".#${target?}" --target-host "${target?}.lan.net.r505.de" --use-remote-sudo --use-substitutes ${extra_args}
 fi
 
