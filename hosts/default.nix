@@ -63,6 +63,7 @@
           self.nixosModules.server
           self.nixosModules.virtual
           self.nixosModules.reverse-proxy-server
+          self.nixosModules.mailserver
           ./oc1
         ];
       };

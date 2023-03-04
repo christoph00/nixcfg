@@ -17,7 +17,10 @@
   nextdhcp = pkgs.callPackage ./nextdhcp {};
   coredhcp = pkgs.callPackage ./coredhcp {};
   sunshine-bin = pkgs.callPackage ./sunshine-bin {};
-  olivetin = pkgs.callPackage ./olivetin {};
+  stalwart-cli = pkgs.callPackage ./stalwart-cli {};
+  stalwart-imap = pkgs.callPackage ./stalwart-imap {};
+  stalwart-jmap = pkgs.callPackage ./stalwart-jmap {};
+  stalwart-smtp = pkgs.callPackage ./stalwart-smpt {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
