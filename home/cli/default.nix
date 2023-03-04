@@ -62,6 +62,9 @@ in {
 
     tio
     picocom
+
+    vomit-sync
+    vmt
   ];
 
   home.sessionVariables = {
