@@ -123,7 +123,7 @@
           };
           stalwart-jmap = {
             loadBalancer = {
-              servers = [{url = "http://oc1:8033";}];
+              servers = [{url = "http://oc1:8055";}];
             };
           };
         };

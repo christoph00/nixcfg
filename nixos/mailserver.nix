@@ -10,7 +10,7 @@
       enable = true;
       settings = {
         jmap-url = "https://jmap.r505.de";
-        jmap-port = 8033;
+        jmap-port = 8055;
       };
     };
   };
