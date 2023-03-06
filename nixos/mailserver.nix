@@ -6,9 +6,13 @@
 }: let
   certDir = config.security.acme.certs."mx.r505.de".directory;
 in {
-  environment.systemPackages = [pkgs.vmt pkgs.vomit-sync pkgs.meli];
+  environment.systemPackages = [pkgs.vmt pkgs.vomit-sync pkgs.meli pkgs.mujmap];
 
   security.acme = {
+    acceptTerms = true;
+    defaults = {
+      email = "christoph@asche.co";
+    };
     certs."mx.r505.de" = {
       domain = "mx.r505.de";
       dnsProvider = "cloudflare";
