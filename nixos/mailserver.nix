@@ -34,7 +34,7 @@ in {
       enable = true;
       settings = {
         cert-path = "${certDir}/cert.pem";
-        key-path = "${certDir}/key.pem";
+        key-path = "${certDir}/priv.key";
         jmap-url = "https://localhost:8055";
         bind-port-tls = 993;
         bind-addr = "0.0.0.0";
