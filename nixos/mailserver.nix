@@ -37,6 +37,7 @@ in {
         jmap-url = "https://localhost:8055";
         bind-port-tls = 993;
         bind-addr = "0.0.0.0";
+        cache-dir = "/usr/local/stalwart-jmap/data";
       };
     };
   };
