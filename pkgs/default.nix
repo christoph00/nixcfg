@@ -34,6 +34,10 @@
   ha-component-ble-monitor = pkgs.callPackage ./ha-components/ble_monitor.nix {};
   ha-component-promql = pkgs.callPackage ./ha-components/promql.nix {};
 
+  meli = pkgs.meli.override {
+    cargoBuildFlags = ["--features jmap"];
+  };
+
   steam-with-packages = pkgs.steam.override {
     extraPkgs = pkgs:
       with pkgs; [
