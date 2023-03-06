@@ -6,7 +6,7 @@
 }: let
   certDir = config.security.acme.certs."mx.r505.de".directory;
 in {
-  environment.systemPackages = [pkgs.vmt pkgs.vomit-sync pkgs.meli pkgs.mujmap];
+  environment.systemPackages = [pkgs.vmt pkgs.vomit-sync pkgs.meli pkgs.mujmap pkgs.openssl];
 
   security.acme = {
     acceptTerms = true;
@@ -18,7 +18,6 @@ in {
       dnsProvider = "cloudflare";
       credentialsFile = config.age.secrets.cf-acme.path;
       dnsResolver = "1.1.1.1:53";
-      keyType = "rsa4096";
     };
   };
   users.users.stalwart.extraGroups = ["acme"];
