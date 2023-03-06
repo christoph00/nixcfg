@@ -92,6 +92,9 @@ in {
         group = cfg.group;
       };
     };
+    users.groups = mkIf (cfg.group == defaultGroup) {
+      ${defaultGroup} = {};
+    };
 
     environment.systemPackages = [pkgs.stalwart-cli];
 

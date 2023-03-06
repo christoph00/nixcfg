@@ -20,6 +20,7 @@ in {
       dnsResolver = "1.1.1.1:53";
     };
   };
+  users.users.stalwart.extraGroups = ["acme"];
   services.stalwart = {
     enable = true;
     jmap = {
