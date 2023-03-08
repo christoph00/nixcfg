@@ -34,8 +34,9 @@ in {
     imap = {
       enable = true;
       settings = {
+        log-level = "debug";
         cert-path = "${certDir}/cert.pem";
-        key-path = "${certDir}/priv.key";
+        key-path = "${certDir}/key.pem";
         jmap-url = "https://localhost:8055";
         bind-port-tls = 993;
         bind-addr = "0.0.0.0";
