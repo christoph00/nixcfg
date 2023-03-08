@@ -137,18 +137,18 @@ in {
         User = cfg.user;
 
         MemoryDenyWriteExecute = true;
-        NoNewPrivileges = true;
-        PrivateDevices = true;
-        PrivateMounts = true;
-        PrivateTmp = true;
-        PrivateUsers = true;
-        ProtectControlGroups = true;
-        ProtectHostname = true;
+        #NoNewPrivileges = true;
+        #PrivateDevices = true;
+        #PrivateMounts = true;
+        #PrivateTmp = true;
+        #PrivateUsers = true;
+        #ProtectControlGroups = true;
+        #ProtectHostname = true;
         ProtectKernelModules = true;
         ProtectKernelTunables = true;
         RestrictNamespaces = true;
         RestrictRealtime = true;
-        RestrictSUIDSGID = true;
+        #RestrictSUIDSGID = true;
         AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];
         CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE"];
         Restart = "on-failure";
