@@ -149,7 +149,7 @@ in {
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
-        #AmbientCapabilities = "CAP_NET_BIND_SERVICE";
+        AmbientCapabilities = "CAP_NET_BIND_SERVICE";
         Restart = "on-failure";
         RestartPreventExitStatus = 2;
       };
