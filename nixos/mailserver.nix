@@ -18,9 +18,7 @@ in {
       dnsProvider = "cloudflare";
       credentialsFile = config.age.secrets.cf-acme.path;
       dnsResolver = "1.1.1.1:53";
-      postRun = ''
-        ${pkgs.openssl}/bin/openssl pkcs8 -topk8 -inform PEM -outform DER -in key.pem -out priv.key -nocrypt
-      '';
+      keyType = "rsa4096";
     };
   };
   users.users.stalwart.extraGroups = ["acme"];
