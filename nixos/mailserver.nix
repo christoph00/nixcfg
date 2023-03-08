@@ -46,4 +46,11 @@ in {
       };
     };
   };
+
+  services.alps = {
+    enable = true;
+    port = 8077;
+  };
+
+  systemd.services.alps.serviceConfig.ExecStart = lib.mkForce "${pkgs.alps}/bin/alps -addr 0.0.0.0:8077 -theme sourcehut imaps://mx.r505.de:993 smtps://mx.r505.de:465 https://cal.r505.de/dav.php";
 }

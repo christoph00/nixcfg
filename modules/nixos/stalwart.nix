@@ -83,7 +83,7 @@ in {
 
   config = mkIf cfg.enable {
     networking.firewall = mkIf cfg.openFirewall {
-      allowedTCPPorts = [25];
+      allowedTCPPorts = [25 993];
     };
     users.users = mkIf (cfg.user == defaultUser) {
       ${defaultUser} = {

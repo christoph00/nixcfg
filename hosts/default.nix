@@ -51,7 +51,6 @@
         modules = [
           self.nixosModules.server
           self.nixosModules.virtual
-          self.nixosModules.webmail
           self.nixosModules.caldav
           self.nixosModules.remote-server
           ./oca
@@ -73,6 +72,7 @@
           self.nixosModules.server
           self.nixosModules.virtual
           self.nixosModules.reverse-proxy-server
+          self.nixosModules.mailserver
           ./oc2
         ];
       };
