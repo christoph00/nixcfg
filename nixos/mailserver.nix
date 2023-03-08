@@ -41,7 +41,7 @@ in {
         key-path = "${certDir}/key.pem";
         jmap-url = "https://localhost:8055";
         bind-port-tls = 993;
-        bind-addr = "0.0.0.0";
+        bind-addr = "127.0.0.1";
         cache-dir = "/usr/local/stalwart-imap/data";
       };
     };
