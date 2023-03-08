@@ -131,8 +131,7 @@ in {
       wants = ["network.target"];
       after = ["network.target"];
       wantedBy = ["multi-user.target"];
-
-      requires = "imap.socket";
+      requires = ["imap.socket"];
       serviceConfig = {
         ExecStart = "${pkgs.stalwart-imap}/bin/stalwart-imap --config=${imapConfig}";
         User = cfg.user;
