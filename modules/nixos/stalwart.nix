@@ -136,6 +136,8 @@ in {
         ExecStart = "${pkgs.stalwart-imap}/bin/stalwart-imap --config=${imapConfig}";
         User = cfg.user;
 
+        requires = "imap.socket";
+
         MemoryDenyWriteExecute = true;
         NoNewPrivileges = true;
         PrivateDevices = true;
@@ -153,6 +155,9 @@ in {
         Restart = "on-failure";
         RestartPreventExitStatus = 2;
       };
+    };
+    systemd.sockets.imap = {
+      listenStreams = ["0.0.0.0:993"];
     };
   };
 }

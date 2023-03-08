@@ -18,6 +18,9 @@ in {
       dnsProvider = "cloudflare";
       credentialsFile = config.age.secrets.cf-acme.path;
       dnsResolver = "1.1.1.1:53";
+      postRun = ''
+        sed -i 's/EC\ PRIVATE/PRIVATE/g' key.pem
+      '';
     };
   };
   users.users.stalwart.extraGroups = ["acme"];
