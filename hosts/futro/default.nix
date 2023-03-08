@@ -5,6 +5,7 @@
   ...
 }: {
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "ohci_pci" "ehci_pci" "usb_storage" "usbhid" "sd_mod"];
+  boot.kernelParams = ["radeon.cik_support=0" "amdgpu.cik_support=1"];
 
   fileSystems."/" = {
     device = "none";
