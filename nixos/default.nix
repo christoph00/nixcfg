@@ -97,7 +97,6 @@
 
       code-server.imports = [./code-server.nix];
 
-      webmail.imports = [./webmail.nix];
       caldav.imports = [./caldav.nix];
 
       vm-win11.imports = [
