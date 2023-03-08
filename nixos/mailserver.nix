@@ -26,6 +26,7 @@ in {
   users.users.stalwart.extraGroups = ["acme"];
   services.stalwart = {
     enable = true;
+    openFirewall = true;
     jmap = {
       enable = true;
       settings = {
