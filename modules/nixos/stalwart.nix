@@ -131,7 +131,7 @@ in {
       wants = ["network.target"];
       after = ["network.target"];
       wantedBy = ["multi-user.target"];
-      requires = ["imap.socket"];
+      # requires = ["imap.socket"];
       serviceConfig = {
         ExecStart = "${pkgs.stalwart-imap}/bin/stalwart-imap --config=${imapConfig}";
         User = cfg.user;
@@ -149,13 +149,14 @@ in {
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
-        AmbientCapabilities = "CAP_NET_BIND_SERVICE";
+        AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];
+        CapabilityBoundingSet = ["CAP_NET_BIND_SERVICE"];
         Restart = "on-failure";
         RestartPreventExitStatus = 2;
       };
     };
-    systemd.sockets.imap = {
-      listenStreams = ["0.0.0.0:993"];
-    };
+    # systemd.sockets.imap = {
+    #   listenStreams = ["0.0.0.0:993"];
+    # };
   };
 }
