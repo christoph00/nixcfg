@@ -78,11 +78,7 @@
     xplr
     unzip
     media-sort
-    (ffmpeg-full.override {
-      nonfreeLicensing = true;
-      fdkaacExtlib = true;
-      samba = null;
-    })
+    ffmpeg-full
   ];
 
   environment.shellAliases = {
