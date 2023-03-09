@@ -54,5 +54,16 @@ in {
         Type = "oneshot";
       };
     };
+    "steam-bigpicture" = {
+      Unit.Description = "Steam Big Picture";
+      Unit.PartOf = ["steam.service"];
+
+      Service = {
+        StartLimitInterval = 5;
+        StartLimitBurst = 1;
+        ExecStart = "${pkgs.steam-with-packages}/bin/steam -start steam://open/bigpicture";
+        Type = "oneshot";
+      };
+    };
   };
 }
