@@ -60,14 +60,14 @@
   my-ffmpeg = pkgs.ffmpeg-full.override {
     nonfreeLicensing = true;
     fdkaacExtlib = true;
-    qtFaststartProgram = false;
-    enableLto = true;
-    dav1d = true;
-    libxcbshmExtlib = false;
-    libxcbxfixesExtlib = false;
-    libxcbshapeExtlib = false;
-    rav1e = true;
-    x264 = true;
-    x265 = true;
+    # qtFaststartProgram = false;
+    # enableLto = true;
+    # dav1d = true;
+    # libxcbshmExtlib = false;
+    # libxcbxfixesExtlib = false;
+    # libxcbshapeExtlib = false;
+    # rav1e = true;
+    # x264 = true;
+    # x265 = true;
   };
 }
