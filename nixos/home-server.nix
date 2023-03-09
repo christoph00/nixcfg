@@ -3,8 +3,7 @@
   config,
   lib,
   ...
-  }
-{
+}: {
   networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443 2022 9100 1514 514];
   networking.firewall.allowedUDPPorts = [53 1514 514];
 
