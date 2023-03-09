@@ -3,7 +3,11 @@
   config,
   lib,
   ...
-}: {
+}: let
+  mkvtoolnix-nox = pkgs.mkvtoolnix.override {
+    withGUI = false;
+  };
+in {
   networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443 2022 9100 1514 514];
   networking.firewall.allowedUDPPorts = [53 1514 514];
 
@@ -66,7 +70,7 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar bottom systemd-rest xplr unzip media-sort jellyfin-ffmpeg mkvtoolnix];
+  environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar bottom systemd-rest xplr unzip media-sort jellyfin-ffmpeg mkvtoolnix-nox];
 
   environment.shellAliases = {
     unrar-all = ''for file in *.rar; do ${pkgs.unrar}/bin/unrar e "$file"; done'';
