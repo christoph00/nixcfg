@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/${version}/${version}.tar.gz";
-    sha256 = "1jznryfs622m8592q2w17v8vdpcljqxk48h8dqnvwcq387c7inj0";
+    hash = "sha256-lMvb3yvFRYA9cl3JStkCuceZvv1dyC4OgdOGfdyzlrc=";
   };
 
   installPhase = ''
