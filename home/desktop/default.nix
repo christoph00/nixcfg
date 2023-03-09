@@ -87,6 +87,8 @@ in {
     pciutils
 
     hdparm
+
+    mkvtoolnix
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
