@@ -65,6 +65,8 @@ in {
 
     vomit-sync
     vmt
+
+    jellyfin-ffmpeg
   ];
 
   home.sessionVariables = {
