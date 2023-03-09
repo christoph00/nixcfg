@@ -3,39 +3,8 @@
   config,
   lib,
   ...
-}: let
-  recode_video =
-    pkgs.writeShellScriptBin "recode_audio"
-    ''
-      set -eu
-      name=$1
-      case "$name" in
-          avc) acodec=ac3;;
-          *) echo "Select acodec: ac3" >&2 ; exit 1
-      esac
-      shift
-      for video in "$@"; do
-          ${pkgs.jellyfin-ffmpeg}/bin/ffmpeg -n -i "$video" -map 0 -vcodec copy -scodec copy -acodec $acodec -b:a 640k \
-                   "''${video%.*}.$name.''${video##*.}"
-      done
-    '';
-  recode_audio =
-    pkgs.writeShellScriptBin "recode_video"
-    ''
-      set -eu
-      name=$1
-      case "$name" in
-          avc) vcodec=libx264 ;;
-          hevc) vcodec=libx265 ;;
-          *) echo "Select vcodec: avc, hevc" >&2 ; exit 1
-      esac
-      shift
-      for video in "$@"; do
-          ${pkgs.jellyfin-ffmpeg}/bin/ffmpeg -n -i "$video" -vcodec "$vcodec" -crf 23 \
-                   "''${video%.*}.$name.''${video##*.}"
-      done
-    '';
-in {
+  }
+{
   networking.firewall.allowedTCPPorts = [1883 53 8096 8030 80 443 2022 9100 1514 514];
   networking.firewall.allowedUDPPorts = [53 1514 514];
 
@@ -98,7 +67,7 @@ in {
     ];
   };
 
-  environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar bottom systemd-rest xplr unzip media-sort jellyfin-ffmpeg recode_audio recode_video];
+  environment.systemPackages = with pkgs; [rclone git tmux wget btrfs-progs unrar bottom systemd-rest xplr unzip media-sort jellyfin-ffmpeg mkvtoolnix];
 
   environment.shellAliases = {
     unrar-all = ''for file in *.rar; do ${pkgs.unrar}/bin/unrar e "$file"; done'';
