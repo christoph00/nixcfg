@@ -11,6 +11,7 @@
   services.sftpgo = {
     enable = true;
     package = pkgs.my-sftpgo;
+    openFirewall = true;
     settings = {
       common = {
         proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
