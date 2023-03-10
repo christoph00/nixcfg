@@ -29,7 +29,11 @@
   };
   hardware.uinput.enable = true;
 
-  virtualisation.podman.enable = true;
+  virtualisation = {
+    waydroid.enable = true;
+    lxd.enable = true;
+    podman.enable = true;
+  };
 
   hardware.pulseaudio.enable = false;
   services.pipewire = {
