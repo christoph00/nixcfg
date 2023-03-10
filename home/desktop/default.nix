@@ -48,7 +48,7 @@
     };
 in {
   imports = [
-    ./gtk.nix
+    #./gtk.nix
     ./plasma.nix
     #./hyprland.nix
     #./waybar.nix

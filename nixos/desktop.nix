@@ -110,6 +110,7 @@
   environment.persistence."/nix/persist" = {
     directories = [
       "/etc/NetworkManager/system-connections"
+      "/var/lib/waydroid"
     ];
     /*
     users.christoph = {
