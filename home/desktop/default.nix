@@ -88,6 +88,8 @@ in {
 
     hdparm
 
+    lapce
+
     mkvtoolnix
   ];
 
