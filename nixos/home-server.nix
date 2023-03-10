@@ -128,7 +128,7 @@
       # };
       sftpgo-web = {
         loadBalancer = {
-          servers = [{url = "http://localhost:8080/jsonrpc";}];
+          servers = [{url = "http://localhost:8080";}];
         };
       };
     };
@@ -152,14 +152,14 @@
     # "L /var/lib/sabnzbd/Downloads - - - - /media/data-ssd/Downloads"
   ];
 
-  users.users.aria2.extraGroups = ["media"];
-  users.users.christoph.extraGroups = ["aria2"];
-  services.aria2 = {
-    enable = true;
-    #openPorts = true;
-    downloadDir = "/media/data-ssd/Downloads";
-    extraArguments = "--rpc-listen-all --remote-time=true";
-  };
+  # users.users.aria2.extraGroups = ["media"];
+  # users.users.christoph.extraGroups = ["aria2"];
+  # services.aria2 = {
+  #   enable = true;
+  #   #openPorts = true;
+  #   downloadDir = "/media/data-ssd/Downloads";
+  #   extraArguments = "--rpc-listen-all --remote-time=true";
+  # };
 
   # services.prometheus = {
   #   enable = true;
