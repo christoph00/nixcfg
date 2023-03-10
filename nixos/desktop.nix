@@ -111,6 +111,8 @@
     directories = [
       "/etc/NetworkManager/system-connections"
       "/var/lib/waydroid"
+      "/var/lib/lxd"
+      "/var/lib/lxc"
     ];
     /*
     users.christoph = {
