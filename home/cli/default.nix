@@ -57,8 +57,6 @@ in {
     #innoextract
 
     wineWowPackages.staging
-
-    # winetricks (all versions)
     winetricks
 
     tio
@@ -68,6 +66,8 @@ in {
     #    vmt
 
     jellyfin-ffmpeg
+
+    conda
   ];
 
   home.sessionVariables = {
