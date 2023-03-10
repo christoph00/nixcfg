@@ -15,7 +15,7 @@
     settings = {
       common = {
         proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
-        proxy_protocol = 1;
+        #proxy_protocol = 1;
       };
       data_provider = {
         driver = "bolt";
