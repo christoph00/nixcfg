@@ -13,10 +13,10 @@
     package = pkgs.my-sftpgo;
     openFirewall = true;
     settings = {
-      common = {
-        proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
-        #proxy_protocol = 1;
-      };
+      # common = {
+      #   proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
+      #   #proxy_protocol = 1;
+      # };
       data_provider = {
         driver = "bolt";
         name = "sftpgo.db";
@@ -25,14 +25,16 @@
         bindings = [
           {
             port = 8033;
+            client_ip_proxy_header = "X-Forwarded-For";
+            proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
           }
         ];
       };
       httpd = {
         bindings = [
           {
-            proxy_allowed = "127.0.0.1/32";
-            client_ip_proxy_header = "X-Real-IP";
+            client_ip_proxy_header = "X-Forwarded-For";
+            proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
             branding = {
               web_client = {
                 name = "NAS";
@@ -81,10 +83,6 @@
     media-sort
     ffmpeg-full
   ];
-
-  environment.shellAliases = {
-    unrar-all = ''for file in *.rar; do ${pkgs.unrar}/bin/unrar e "$file"; done'';
-  };
 
   users.users.jellyfin.extraGroups = ["media"];
   services.jellyfin = {
