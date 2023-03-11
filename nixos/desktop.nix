@@ -30,7 +30,7 @@
   hardware.uinput.enable = true;
 
   virtualisation = {
-    waydroid.enable = true;
+    #   waydroid.enable = true;
     lxd.enable = true;
     podman.enable = true;
   };
