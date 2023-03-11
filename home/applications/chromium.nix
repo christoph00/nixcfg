@@ -117,7 +117,7 @@ in {
       }
       {id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
       {id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
-      {id = "ncgbkkljbaojkhljombpjejedphfhdjj";} # User Agent Switcher
+      {id = "jofbglonpbndadajbafmmaklbfbkggpo";} # Bing Chat for all Browers
     ];
     commandLineArgs = [
       "--enable-features=UseOzonePlatform"
