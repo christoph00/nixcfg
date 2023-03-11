@@ -71,8 +71,6 @@ in {
       # ----------------------------------------------------------------------------
       # SMTP endpoints + message routing
 
-      hostname $(hostname)
-
       table.chain local_rewrites {
           optional_step regexp "(.+)\+(.+)@(.+)" "$1@$3"
           optional_step static {
