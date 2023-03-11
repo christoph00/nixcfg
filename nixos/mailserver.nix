@@ -7,6 +7,7 @@
   certDir = config.security.acme.certs."mx.r505.de".directory;
 in {
   environment.systemPackages = [pkgs.vmt pkgs.vomit-sync pkgs.openssl pkgs.maddy pkgs.imapsync];
+  networking.firewall.allowedTCPPorts = [25 143 587 993];
 
   security.acme = {
     acceptTerms = true;
