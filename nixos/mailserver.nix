@@ -6,7 +6,7 @@
 }: let
   certDir = config.security.acme.certs."mx.r505.de".directory;
 in {
-  environment.systemPackages = [pkgs.vmt pkgs.vomit-sync pkgs.openssl pkgs.maddy];
+  environment.systemPackages = [pkgs.vmt pkgs.vomit-sync pkgs.openssl pkgs.maddy pkgs.imapsync];
 
   security.acme = {
     acceptTerms = true;
