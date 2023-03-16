@@ -1,8 +1,8 @@
 name: Build Host
 
 on:
-  push:
-    branches: [ main ]
+  #push:
+  #  branches: [ main ]
   pull_request:
   workflow_dispatch:
   
@@ -20,7 +20,7 @@ jobs:
         - oca
         - oc1
         - oc2
-        - r2s1
+  #      - r2s1
     steps:
     - run: |
          DEBIAN_FRONTEND=noninteractive
@@ -28,11 +28,9 @@ jobs:
     - name: Clone repository
       uses: actions/checkout@v3
     - name: Install nix
-      uses: cachix/install-nix-action@v20
+      uses: DeterminateSystems/nix-installer-action@v1
       with:
-        install_url: https://nixos.org/nix/install
-        extra_nix_config: |
-          auto-optimise-store = true
+        extra-conf: |
           experimental-features = nix-command flakes
           extra-platforms = aarch64-linux arm-linux i686-linux
     - uses: cachix/cachix-action@v12
