@@ -23,6 +23,14 @@ jobs:
         - oc2
   #      - r2s1
     steps:
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+        root-reserve-mb: 512
+        swap-size-mb: 1024
+        remove-dotnet: 'true'
+        remove-android: 'true'
+        build-mount-path: '/nix'
     - run: |
          DEBIAN_FRONTEND=noninteractive
          sudo apt-get update -q -y && sudo apt-get install -q -y qemu-system-aarch64 qemu-efi binfmt-support qemu-user-static
