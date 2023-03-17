@@ -66,13 +66,9 @@ in {
     wireplumber
     wtype
     pavucontrol
-
     vlc
 
-    gfn-electron
-    moonlight-qt
-
-    tigervnc
+   
 
     xdg-utils
 
@@ -80,17 +76,10 @@ in {
     xdg-desktop-portal-gtk
 
     solaar
-    usbimager
-
-    uefitoolPackages.old-engine
 
     pciutils
 
     hdparm
-
-    lapce
-
-    mkvtoolnix
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
