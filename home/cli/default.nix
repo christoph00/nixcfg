@@ -29,7 +29,7 @@ in {
     inputs.agenix.packages.x86_64-linux.default
     inputs.nix-init.packages.x86_64-linux.default
 
-    vscode-cli
+    #vscode-cli
 
     rclone
     rsync
@@ -50,10 +50,10 @@ in {
     flyctl
 
     unrar
-    unzip
+    #unzip
     p7zip
-    cabextract
-    innoextract
+    #cabextract
+    #innoextract
 
     wineWowPackages.staging
 
@@ -61,9 +61,9 @@ in {
     winetricks
 
     tio
-    picocom
+    #picocom
 
-    vomit-sync
+    #vomit-sync
     #    vmt
 
     jellyfin-ffmpeg
