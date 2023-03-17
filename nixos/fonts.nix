@@ -11,7 +11,7 @@
     lato
     league-of-moveable-type
     libertine
-    (nerdfonts.override {fonts = ["Agave" "FiraCode" "Iosevka"];})
+    (nerdfonts.override {fonts = ["Agave" "FiraCode"];})
     twitter-color-emoji
     yanone-kaffeesatz
     inriafonts
