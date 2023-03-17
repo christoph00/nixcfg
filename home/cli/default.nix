@@ -64,7 +64,7 @@ in {
     picocom
 
     vomit-sync
-    vmt
+    #    vmt
 
     jellyfin-ffmpeg
   ];
