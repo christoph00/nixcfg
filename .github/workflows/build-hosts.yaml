@@ -11,7 +11,7 @@ jobs:
     name: "Build Host"
     runs-on: ubuntu-latest
     strategy:
-      #fail-fast: false
+      fail-fast: false
       #max-parallel: 3
       matrix:
         host:
@@ -26,7 +26,6 @@ jobs:
     - run: |
          DEBIAN_FRONTEND=noninteractive
          sudo apt-get update -q -y && sudo apt-get install -q -y qemu-system-aarch64 qemu-efi binfmt-support qemu-user-static
-         sudo mkdir /nix
     - name: Maximize build space
       uses: easimon/maximize-build-space@master
       with:
@@ -34,9 +33,6 @@ jobs:
         swap-size-mb: 1024
         remove-dotnet: 'true'
         remove-android: 'true'
-        build-mount-path: '/nix'
-    - run : |
-        sudo chown -R root:root /nix
     - name: Clone repository
       uses: actions/checkout@v3
     - name: Install nix
