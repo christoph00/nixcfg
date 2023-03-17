@@ -34,14 +34,14 @@ jobs:
         swap-size-mb: 1024
         remove-dotnet: 'true'
         remove-android: 'true'
-        build-mount-path: '/home/runner/work'
+        # build-mount-path: '/home/runner/work'
     - name: Clone repository
       uses: actions/checkout@v3
     - name: Restore Nix store
       uses: actions/cache@v3
       id: nix-cache
       with:
-        path: /home/runner/work/nix-cache
+        path: ./nix-cache
         key: nix-${{ matrix.host }}-${{ hashFiles('**/flake.*') }}
         restore-keys: |
           nix-${{ matrix.host }}-
@@ -54,7 +54,7 @@ jobs:
           extra-platforms = aarch64-linux arm-linux i686-linux
     - name: Imports Nix store cache
       continue-on-error: true
-      run: nix-store --import < /home/runner/work/nix-cache
+      run: nix-store --import < ./nix-cache
     - uses: cachix/cachix-action@v12
       with:
         name: chr
@@ -63,4 +63,4 @@ jobs:
       run: nix build .#nixosConfigurations.${{ matrix.host}}.config.system.build.toplevel --print-build-logs
     - name: Exports Nix store cache
       continue-on-error: true
-      run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > /home/runner/work/nix-cache
+      run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > ./nix-cache
