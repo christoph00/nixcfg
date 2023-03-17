@@ -116,7 +116,7 @@
       #  "wled"
       "xiaomi_miio"
       "xiaomi_ble"
-      "openweathermap"
+      #      "openweathermap"
       "weather"
       "rest"
       "ping"
