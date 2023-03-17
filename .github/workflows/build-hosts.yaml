@@ -37,11 +37,14 @@ jobs:
     - name: Clone repository
       uses: actions/checkout@v3
     - name: Restore Nix store
-      uses: actions/cache/restore@v3
+      uses: actions/cache@v3
       id: nix-cache
       with:
         path: /tmp/nix-cache
-        key: nix-${{ hashFiles('**/flake.*') }}
+        key: nix-${{ matrix.host }}-${{ hashFiles('**/flake.*') }}
+        restore-keys: |
+          nix-${{ matrix.host }}
+          nix-
     - name: Install nix
       uses: DeterminateSystems/nix-installer-action@v1
       with:
