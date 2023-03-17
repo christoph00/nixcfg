@@ -43,7 +43,7 @@ jobs:
         path: /tmp/nix-cache
         key: nix-${{ matrix.host }}-${{ hashFiles('**/flake.*') }}
         restore-keys: |
-          nix-${{ matrix.host }}
+          nix-${{ matrix.host }}-
           nix-
     - name: Install nix
       uses: DeterminateSystems/nix-installer-action@v1
@@ -52,7 +52,7 @@ jobs:
           experimental-features = nix-command flakes
           extra-platforms = aarch64-linux arm-linux i686-linux
     - name: Imports Nix store cache
-      if: ${{ steps.nix-cache.outputs.cache-hit == 'true' }}
+      continue-on-error: true
       run: nix-store --import < /tmp/nix-cache
     - uses: cachix/cachix-action@v12
       with:
@@ -61,11 +61,5 @@ jobs:
     - name: Build Host ${{ matrix.host }} 
       run: nix build .#nixosConfigurations.${{ matrix.host}}.config.system.build.toplevel --print-build-logs
     - name: Exports Nix store cache
-      if: ${{ steps.nix-cache.outputs.cache-hit != 'true' }}
+      continue-on-error: true
       run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > /tmp/nix-cache
-    - name: Save Store
-      id: save-store
-      uses: actions/cache/save@v3
-      with:
-        path: /tmp/nix-cache
-        key: ${{ steps.nix-cache.outputs.cache-primary-key }}
