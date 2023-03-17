@@ -26,22 +26,31 @@ jobs:
     - run: |
          DEBIAN_FRONTEND=noninteractive
          sudo apt-get update -q -y && sudo apt-get install -q -y qemu-system-aarch64 qemu-efi binfmt-support qemu-user-static
-    - name: Maximize build space
-      uses: easimon/maximize-build-space@master
-      with:
-        root-reserve-mb: 512
-        swap-size-mb: 1024
-        remove-dotnet: 'true'
-        remove-android: 'true'
-        build-mount-path: '/home/runner/work'
+    # - name: Maximize build space
+    #   uses: easimon/maximize-build-space@master
+    #   with:
+    #     root-reserve-mb: 512
+    #     swap-size-mb: 1024
+    #     remove-dotnet: 'true'
+    #     remove-android: 'true'
+    #     build-mount-path: '/home/runner/work'
     - name: Clone repository
       uses: actions/checkout@v3
+    - name: Caches Nix store
+      uses: actions/cache@v3
+      id: nix-cache
+      with:
+        path: /tmp/nix-cache
+        key: nix-${{ hashFiles('**/flake.*') }}
     - name: Install nix
       uses: DeterminateSystems/nix-installer-action@v1
       with:
         extra-conf: |
           experimental-features = nix-command flakes
           extra-platforms = aarch64-linux arm-linux i686-linux
+    - name: Imports Nix store cache
+      if: ${{ steps.nix-cache.outputs.cache-hit == 'true' }}
+      run: nix-store --import < /tmp/nix-cache
     - uses: cachix/cachix-action@v12
       with:
         name: chr
