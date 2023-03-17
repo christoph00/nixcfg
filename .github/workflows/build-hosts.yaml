@@ -36,8 +36,8 @@ jobs:
     #     build-mount-path: '/home/runner/work'
     - name: Clone repository
       uses: actions/checkout@v3
-    - name: Caches Nix store
-      uses: actions/cache@v3
+    - name: Restore Nix store
+      uses: actions/cache/restore@v3
       id: nix-cache
       with:
         path: /tmp/nix-cache
@@ -60,3 +60,9 @@ jobs:
     - name: Exports Nix store cache
       if: ${{ steps.nix-cache.outputs.cache-hit != 'true' }}
       run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > /tmp/nix-cache
+    - name: Save Store
+      id: save-store
+      uses: actions/cache/save@v3
+      with:
+        path: /tmp/nix-cache
+        key: ${{ steps.nix-cache.outputs.cache-primary-key }}
