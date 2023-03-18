@@ -40,7 +40,7 @@ jobs:
       uses: actions/cache@v3
       id: nix-cache
       with:
-        path: /tmp/nix-cache
+        path: /mnt/nix-cache
         key: nix-${{ matrix.host }}-${{ hashFiles('**/flake.*') }}
         restore-keys: |
           nix-${{ matrix.host }}-
@@ -54,8 +54,8 @@ jobs:
     - name: Imports Nix store cache
       continue-on-error: true
       run: |
-        nix-store --import < /tmp/nix-cache
-        sudo rm -rf /tmp/nix-cache 
+        nix-store --import < /mnt/nix-cache
+        sudo rm -rf /mnt/nix-cache 
     - uses: cachix/cachix-action@v12
       with:
         name: chr
@@ -64,4 +64,4 @@ jobs:
       run: nix build .#nixosConfigurations.${{ matrix.host}}.config.system.build.toplevel --print-build-logs
     - name: Exports Nix store cache
       continue-on-error: true
-      run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > /tmp/nix-cache
+      run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > /mnt/nix-cache
