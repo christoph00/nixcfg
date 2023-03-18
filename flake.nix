@@ -30,9 +30,6 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    click-n-load.url = "github:markus1189/click-n-load";
-    click-n-load.inputs.nixpkgs.follows = "nixpkgs";
-
     nix-init.url = "github:nix-community/nix-init";
     nix-init.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -41,10 +38,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "utils";
     };
-
-    plasma-manager.url = "github:pjones/plasma-manager";
-    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
-    plasma-manager.inputs.home-manager.follows = "home-manager";
 
     helix = {
       url = "github:helix-editor/helix";
@@ -74,6 +67,7 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    inputs.nixneovim.url = "github:nixneovim/nixneovim";
   };
 
   outputs = inputs @ {flake-parts, ...}:

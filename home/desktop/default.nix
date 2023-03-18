@@ -80,6 +80,8 @@ in {
 
     lapce
 
+    foot
+
     kanshi
   ];
 

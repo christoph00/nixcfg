@@ -16,7 +16,6 @@
         ];
       };
       desktop.imports = [
-        inputs.plasma-manager.homeManagerModules.plasma-manager
         inputs.hyprland.homeManagerModules.default
         ./desktop
         ./applications
