@@ -30,18 +30,17 @@ jobs:
     - name: Maximize build space
       uses: easimon/maximize-build-space@master
       with:
-        root-reserve-mb: 512
+        root-reserve-mb: 4820
         swap-size-mb: 1024
         remove-dotnet: 'true'
         remove-android: 'true'
-        # build-mount-path: '/home/runner/work'
     - name: Clone repository
       uses: actions/checkout@v3
     - name: Restore Nix store
       uses: actions/cache@v3
       id: nix-cache
       with:
-        path: ./nix-cache
+        path: /tmp/nix-cache
         key: nix-${{ matrix.host }}-${{ hashFiles('**/flake.*') }}
         restore-keys: |
           nix-${{ matrix.host }}-
@@ -54,7 +53,7 @@ jobs:
           extra-platforms = aarch64-linux arm-linux i686-linux
     - name: Imports Nix store cache
       continue-on-error: true
-      run: nix-store --import < ./nix-cache
+      run: nix-store --import < /tmp/nix-cache
     - uses: cachix/cachix-action@v12
       with:
         name: chr
@@ -63,4 +62,4 @@ jobs:
       run: nix build .#nixosConfigurations.${{ matrix.host}}.config.system.build.toplevel --print-build-logs
     - name: Exports Nix store cache
       continue-on-error: true
-      run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > ./nix-cache
+      run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > /tmp/nix-cache
