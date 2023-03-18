@@ -137,7 +137,7 @@ in {
   programs.command-not-found.enable = false;
   programs.nix-index.enable = true;
 
-  programs.fish = {
+  programs.nushell = {
     enable = true;
   };
 

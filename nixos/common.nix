@@ -80,7 +80,7 @@
     description = "Christoph";
     isNormalUser = true;
     createHome = true;
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
     extraGroups = [
       "wheel"
       "video"
