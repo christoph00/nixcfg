@@ -53,7 +53,9 @@ jobs:
           extra-platforms = aarch64-linux arm-linux i686-linux
     - name: Imports Nix store cache
       continue-on-error: true
-      run: nix-store --import < /tmp/nix-cache
+      run: |
+        nix-store --import < /tmp/nix-cache
+        sudo rm -rf /tmp/nix-cache 
     - uses: cachix/cachix-action@v12
       with:
         name: chr
