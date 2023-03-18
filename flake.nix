@@ -67,7 +67,7 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    inputs.nixneovim.url = "github:nixneovim/nixneovim";
+    nixneovim.url = "github:nixneovim/nixneovim";
   };
 
   outputs = inputs @ {flake-parts, ...}:
