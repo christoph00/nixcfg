@@ -44,7 +44,6 @@ jobs:
         key: nix-${{ matrix.host }}-${{ hashFiles('**/flake.*') }}
         restore-keys: |
           nix-${{ matrix.host }}-
-          nix-
     - name: Install nix
       uses: DeterminateSystems/nix-installer-action@v1
       with:
@@ -53,6 +52,7 @@ jobs:
           extra-platforms = aarch64-linux arm-linux i686-linux
     - name: Imports Nix store cache
       continue-on-error: true
+      if: steps.nix-cache.outputs.cache-hit == 'true'
       run: |
         nix-store --import < nix-cache
         sudo rm -rf nix-cache 
