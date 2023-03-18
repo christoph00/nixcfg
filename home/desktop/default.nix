@@ -68,10 +68,7 @@ in {
     pavucontrol
     vlc
 
-   
-
     xdg-utils
-
     xdg-desktop-portal
     xdg-desktop-portal-gtk
 
@@ -80,6 +77,10 @@ in {
     pciutils
 
     hdparm
+
+    lapce
+
+    kanshi
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
