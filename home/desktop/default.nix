@@ -79,6 +79,8 @@ in {
     hdparm
 
     lapce
+
+    kanshi
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
