@@ -42,7 +42,7 @@
           ./tailscale.nix
           ./agent.nix
         ];
-        nixpkgs.overlays = builtins.attrValues self.overlays;
+        nixpkgs.overlays = [inputs.nixneovim.overlays.default] ++ builtins.attrValues self.overlays;
         nixpkgs.config.allowUnfree = true;
       };
       desktop.imports = [
