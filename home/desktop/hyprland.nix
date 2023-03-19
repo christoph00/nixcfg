@@ -164,7 +164,7 @@ in {
           bind = $mainMod, E, exec, ${pkgs.cinnamon.nemo}/bin/nemo
           bind = $mainMod, V, togglefloating,
           bind = $mainMod, F, fullscreen, 0
-          bind = $mainMod, R, exec, ${config.programs.rofi.finalPackage}/bin/rofi -show drun
+          bind = $mainMod, R, exec, ${pkgs.rofi}/bin/rofi -show drun
           bind = $mainMod, P, pseudo, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
 
