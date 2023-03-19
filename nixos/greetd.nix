@@ -50,7 +50,6 @@ in {
 
   environment.etc."greetd/environments".text = ''
     Hyprland
-    fish
     startxfce4
   '';
 }
