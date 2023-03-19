@@ -50,7 +50,7 @@ in {
   imports = [
     #./gtk.nix
     ./plasma.nix
-    #./hyprland.nix
+    ./hyprland.nix
     #./waybar.nix
     #./wayvnc.nix
     #./rofi.nix
