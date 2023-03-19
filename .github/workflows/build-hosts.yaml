@@ -24,7 +24,6 @@ jobs:
   #      - r2s1
     steps:
     - run: |
-        sudo mkdir -p /nix
         sudo rm -rf $AGENT_TOOLSDIRECTORY
         sudo rm -rf /usr/local/.ghcup
         sudo rm -rf /usr/local/share/powershell
@@ -44,9 +43,9 @@ jobs:
         remove-android: 'true'
         remove-dotnet: 'true'
         remove-haskell: 'true'
-        build-mount-path: /nix
+        #build-mount-path: /nix
         swap-size-mb: 1024
-        root-reserve-mb: 8192
+        root-reserve-mb: 50192
        
     - name: Clone repository
       uses: actions/checkout@v3
