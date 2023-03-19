@@ -13,13 +13,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "sfwbar";
-  version = "1.0_beta9";
+  version = "1.0_beta10";
 
   src = fetchFromGitHub {
     owner = "LBCrion";
     repo = pname;
     rev = "v${version}";
-    sha256 = "1f10wxl9v38wzbx3arvp84pwn2skwinfah79y4ckz05l2ycbsy15";
+    sha256 = "1q7hxaqdk80y7s259ikwg3swz7hgp1qcp3q2nxnb81z3rk8qjvaq";
   };
 
   nativeBuildInputs = [
