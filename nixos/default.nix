@@ -56,7 +56,7 @@
         ./fonts.nix
         ./plasma.nix
         ./hyprland.nix
-        #./xfce.nix
+        ./xfce.nix
         #./gnome.nix
         #./greetd.nix
         ./printing.nix
