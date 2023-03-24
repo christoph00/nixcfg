@@ -1,5 +1,4 @@
-{pkgs}: {
-  environment.systemPackages = with pkgs; [qt5.qtwayland];
+{}: {
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
