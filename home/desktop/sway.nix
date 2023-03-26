@@ -3,22 +3,6 @@
     enable = true;
     systemdIntegration = true;
     xwayland = true;
-    extraPackages = with pkgs; [
-      waybar
-      swaybg
-      wofi
-      imv
-      kanshi
-      swaylock
-      swayidle
-      slurp
-      clipman
-      wl-clipboard
-      grim
-      wlr-randr
-      libinput
-      wev
-    ];
     config = {
       modifier = "Mod4";
       terminal = "foot";
@@ -33,6 +17,7 @@
           "command" = "${pkgs.waybar}/bin/waybar";
         }
       ];
+      menu = "${pkgs.rofi}/bin/rofi -show drun -modi drun";
     };
   };
 }

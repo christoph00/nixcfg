@@ -59,7 +59,7 @@ in {
     #./xfce.nix
     #./labwc.nix
     #./river.nix
-    #./ironbar.nix
+    ./ironbar.nix
   ];
 
   home.packages = with pkgs; [
