@@ -42,13 +42,14 @@ in {
       in
         sway-kiosk "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l &>/dev/null -s ${gtkgreetStyle} -l";
       initial_session = {
-        command = "Hyprland";
+        command = "sway";
         user = "christoph";
       };
     };
   };
 
   environment.etc."greetd/environments".text = ''
+    sway
     Hyprland
     startxfce4
   '';
