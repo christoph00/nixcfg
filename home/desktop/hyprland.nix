@@ -68,7 +68,6 @@ in {
 
           exec = ${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill
 
-          exec = ${pkgs.nm-applet}/bin/nm-applet --indicator
 
           # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
           input {

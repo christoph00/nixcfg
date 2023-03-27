@@ -73,6 +73,7 @@
   networking.networkmanager.enable = lib.mkForce true;
 
   programs.kdeconnect.enable = true;
+  programs.nm-applet.enable = true;
 
   xdg.portal = {
     enable = true;
