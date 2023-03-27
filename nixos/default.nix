@@ -61,7 +61,7 @@
         ./greetd.nix
         ./printing.nix
         #./rclone-christoph.nix
-        ./sway.nix
+        #./sway.nix
       ];
       laptop.imports = [
         self.nixosModules.desktop

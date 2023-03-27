@@ -49,17 +49,17 @@
 in {
   imports = [
     #./gtk.nix
-    ./plasma.nix
-    #./hyprland.nix
-    ./sway.nix
-    ./waybar.nix
+    #./plasma.nix
+    ./hyprland.nix
+    #./sway.nix
+    #./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
     #./sfwbar.nix
     #./xfce.nix
     #./labwc.nix
     #./river.nix
-    ./ironbar.nix
+    #./ironbar.nix
   ];
 
   home.packages = with pkgs; [
