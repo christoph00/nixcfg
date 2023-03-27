@@ -48,11 +48,11 @@
     };
 in {
   imports = [
-    #./gtk.nix
+    ./gtk.nix
     #./plasma.nix
     ./hyprland.nix
     #./sway.nix
-    #./waybar.nix
+    ./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
     #./sfwbar.nix
