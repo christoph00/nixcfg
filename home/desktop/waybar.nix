@@ -31,37 +31,6 @@
        }
 
 
-      #workspaces button.visible {
-      }
-
-      #workspaces button.active {
-      }
-
-      #workspaces button.urgent {
-        color: rgba(238, 46, 36, 1);
-      }
-
-
-      #taskbar, #tray, #workspaces, #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
-        margin: 4px 2px;
-        min-width: 20px;
-        border-radius: 2px;
-        background-color: #${base01};
-        padding: 0 6px;
-      }
-
-      #pulseaudio.muted {
-        color: #${base0F};
-      }
-
-      #pulseaudio.bluetooth {
-        color: #${base0C};
-      }
-
-
-      #temperature.critical {
-        color: #${base0F};
-      }
 
     '';
 
@@ -87,7 +56,7 @@
 in {
   programs.waybar = {
     enable = true;
-    #style = styleCSS;
+    style = styleCSS;
     package = pkgs.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
       patchPhase = ''
@@ -107,7 +76,7 @@ in {
         #output = builtins.map (m: m.name) (builtins.filter (m: m.isSecondary == false) config.monitors);
         modules-left = [
           "custom/menu"
-          "hyprland/workspaces"
+          "wlr/workspaces"
           # "wlr/taskbar"
         ];
         modules-center = [
@@ -115,7 +84,6 @@ in {
         ];
         modules-right = [
           "backlight"
-          "network"
           "temperature"
           "cpu"
           "memory"
