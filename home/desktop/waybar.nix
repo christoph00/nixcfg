@@ -94,7 +94,10 @@ in {
     #     substituteInPlace src/modules/wlr/workspace_manager.cpp --replace "zext_workspace_handle_v1_activate(workspace_handle_);" "const std::string command = \"${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch workspace \" + name_; system(command.c_str());"
     #   '';
     # });
-    # systemd.enable = true;
+    systemd = {
+      enable = true;
+      target = "sway-session.target";
+    };
     settings = {
       primary = {
         layer = "top";
@@ -105,11 +108,11 @@ in {
         #output = builtins.map (m: m.name) (builtins.filter (m: m.isSecondary == false) config.monitors);
         modules-left = [
           "custom/menu"
-          "wlr/workspaces"
-          "wrl/taskbar"
+          "sway/workspaces"
+          "wlr/taskbar"
         ];
         modules-center = [
-          "hyprland/window"
+          #"sway/window"
         ];
         modules-right = [
           "backlight"

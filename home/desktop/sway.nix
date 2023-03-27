@@ -1,17 +1,17 @@
 {
   pkgs,
-  inputs,
   lib,
   ...
 }: let
-  modifier = lib.mkDefault "Mod4";
+  mod = lib.mkDefault "Mod4";
 in {
   wayland.windowManager.sway = {
     enable = true;
     systemdIntegration = true;
     xwayland = true;
+    wrapperFeatures.gtk = true;
     config = {
-      modifier = modifier;
+      modifier = mod;
       terminal = "${pkgs.foot}/bin/foot";
       menu = "${pkgs.rofi}/bin/rofi -show drun -modi drun";
       gaps = {
@@ -19,8 +19,8 @@ in {
         outer = 2;
       };
       window.border = 4;
-      window.titlebar = true;
-      floating.modifier = modifier;
+      window.titlebar = false;
+      floating.modifier = mod;
 
       input = {
         "type:touchpad" = {
@@ -43,17 +43,16 @@ in {
           }
         ];
       };
-      bars = [
-        # {
-        #   "command" = "${inputs.ironbar.packages.x86_64-linux.default}/bin/ironbar";
-        # }
-      ];
+      bars = [];
       keybindings = {
-        "${modifier}+Shift+q" = "kill";
-
-        "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 20";
-        "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 20";
+        # Screen brightness controls
+        "--locked XF86MonBrightnessUp" = "exec ${pkgs.light} -A 10";
+        "--locked XF86MonBrightnessDown" = "exec ${pkgs.light} -U 10";
       };
     };
+    extraConfig = ''
+      bindgesture swipe:3:left workspace next
+      bindgesture swipe:3:right workspace prev
+    '';
   };
 }
