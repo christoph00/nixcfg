@@ -72,15 +72,10 @@ in {
 
     xdg-utils
     xdg-desktop-portal
-    xdg-desktop-portal-gtk
-
+    xdg-desktop-portal-wlr
     solaar
 
     pciutils
-
-    hdparm
-
-    lapce
 
     foot
 

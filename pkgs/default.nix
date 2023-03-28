@@ -23,6 +23,7 @@
   stalwart-smtp = pkgs.callPackage ./stalwart-smpt {};
   vmt = pkgs.callPackage ./vmt {};
   vomit-sync = pkgs.callPackage ./vomit-sync {};
+  wl-gammarelay-rs = pkgs.callPackage ./wl-gammarelay-rs {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
