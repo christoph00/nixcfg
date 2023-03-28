@@ -31,37 +31,6 @@
        }
 
 
-      #workspaces button.visible {
-      }
-
-      #workspaces button.active {
-      }
-
-      #workspaces button.urgent {
-        color: rgba(238, 46, 36, 1);
-      }
-
-
-      #taskbar, #tray, #workspaces, #submap, #clock, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-menu, #clock, #temperature, #tray {
-        margin: 4px 2px;
-        min-width: 20px;
-        border-radius: 2px;
-        background-color: #${base01};
-        padding: 0 6px;
-      }
-
-      #pulseaudio.muted {
-        color: #${base0F};
-      }
-
-      #pulseaudio.bluetooth {
-        color: #${base0C};
-      }
-
-
-      #temperature.critical {
-        color: #${base0F};
-      }
 
     '';
 
@@ -88,32 +57,33 @@ in {
   programs.waybar = {
     enable = true;
     style = styleCSS;
-    # package = pkgs.waybar.overrideAttrs (oldAttrs: {
-    #   mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-    #   patchPhase = ''
-    #     substituteInPlace src/modules/wlr/workspace_manager.cpp --replace "zext_workspace_handle_v1_activate(workspace_handle_);" "const std::string command = \"${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch workspace \" + name_; system(command.c_str());"
-    #   '';
-    # });
-    # systemd.enable = true;
+    package = pkgs.waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+      patchPhase = ''
+        substituteInPlace src/modules/wlr/workspace_manager.cpp --replace "zext_workspace_handle_v1_activate(workspace_handle_);" "const std::string command = \"${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch workspace \" + name_; system(command.c_str());"
+      '';
+    });
+    systemd = {
+      enable = true;
+    };
     settings = {
       primary = {
         layer = "top";
         height = 32;
         margin = "2";
-        position = "top";
+        position = "bottom";
 
         #output = builtins.map (m: m.name) (builtins.filter (m: m.isSecondary == false) config.monitors);
         modules-left = [
           "custom/menu"
           "wlr/workspaces"
-          "wrl/taskbar"
+          # "wlr/taskbar"
         ];
         modules-center = [
           "hyprland/window"
         ];
         modules-right = [
           "backlight"
-          "network"
           "temperature"
           "cpu"
           "memory"

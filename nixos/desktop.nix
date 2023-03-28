@@ -73,22 +73,23 @@
   networking.networkmanager.enable = lib.mkForce true;
 
   programs.kdeconnect.enable = true;
+  programs.nm-applet.enable = true;
 
   xdg.portal = {
     enable = true;
-    # wlr.enable = true;
+    wlr.enable = true;
     # extraPortals = [
     #   pkgs.xdg-desktop-portal-gtk
     #   #  inputs.xdg-portal-hyprland.packages.${pkgs.system}.default
     # ];
   };
 
-  services.xserver.displayManager = {
-    # sddm.enable = true;
-    lightdm.enable = true;
-    defaultSession = "plasmawayland";
-    autoLogin.user = "christoph";
-  };
+  # services.xserver.displayManager = {
+  #   # sddm.enable = true;
+  #   lightdm.enable = true;
+  #   defaultSession = "plasmawayland";
+  #   autoLogin.user = "christoph";
+  # };
 
   # Udev Rules
   services.udev.extraRules = ''

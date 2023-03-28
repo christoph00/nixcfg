@@ -48,10 +48,10 @@
     };
 in {
   imports = [
-    #./gtk.nix
-    ./plasma.nix
-    #./hyprland.nix
-    ./sway.nix
+    ./gtk.nix
+    #./plasma.nix
+    ./hyprland.nix
+    #./sway.nix
     ./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
@@ -59,7 +59,7 @@ in {
     #./xfce.nix
     #./labwc.nix
     #./river.nix
-    ./ironbar.nix
+    #./ironbar.nix
   ];
 
   home.packages = with pkgs; [
@@ -72,15 +72,10 @@ in {
 
     xdg-utils
     xdg-desktop-portal
-    xdg-desktop-portal-gtk
-
+    xdg-desktop-portal-wlr
     solaar
 
     pciutils
-
-    hdparm
-
-    lapce
 
     foot
 
