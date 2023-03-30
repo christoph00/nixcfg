@@ -1,8 +1,8 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
 }:
-
 buildGoModule rec {
   pname = "eww-ws";
   version = "unstable-2023-01-21";
@@ -14,14 +14,14 @@ buildGoModule rec {
     hash = "sha256-i3fvydiTepNkZuuEZ9GapRB0GpvFAcQgg6eucyQTy2o=";
   };
 
-  vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  vendorHash = "sha256-Ds78icxEE5DRlNJx8//ME5t3hP/FZQAHA4ZjVMK9h9Y=";
 
-  ldflags = [ "-s" "-w" ];
+  ldflags = ["-s" "-w"];
 
   meta = with lib; {
     description = "A simple Daemon to provide workspace variables to EWW ( Elkowars Wacky Widgets";
     homepage = "https://github.com/dlasky/eww-ws";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }
