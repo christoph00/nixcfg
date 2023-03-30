@@ -52,7 +52,7 @@ in {
     #./plasma.nix
     ./hyprland.nix
     #./sway.nix
-    ./waybar.nix
+    #./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
     #./sfwbar.nix
@@ -60,6 +60,7 @@ in {
     #./labwc.nix
     #./river.nix
     #./ironbar.nix
+    ./eww.nix
   ];
 
   home.packages = with pkgs; [

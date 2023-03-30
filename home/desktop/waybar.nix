@@ -10,9 +10,9 @@
   gamemoded = "${pkgs.gamemode}/bin/gamemoded";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   btm = "${pkgs.bottom}/bin/btm";
-  terminal = "${pkgs.wezterm}/bin/wezterm";
+  terminal = "${pkgs.foot}/bin/foot";
   terminal-spawn = cmd: "${terminal} $SHELL -i -c ${cmd}";
-  launcher = "${config.programs.rofi.finalPackage}/bin/rofi -show drun";
+  launcher = "${config.programs.rofi.package}/bin/rofi -show drun";
 
   systemMonitor = terminal-spawn btm;
 
