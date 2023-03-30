@@ -140,6 +140,16 @@ in {
 
   programs.nushell = {
     enable = true;
+    configFile.text = ''
+      let-env config = {
+        edit_mode: vi
+        rm_always_trash: true
+        completion_algorithm: fuzzy
+        show_banner: false
+      }
+      alias cat = bat
+      alias nix-shell = nix-shell --run nu
+    '';
   };
 
   xdg.configFile."zellij/themes/${slug}.kdl".text = ''
