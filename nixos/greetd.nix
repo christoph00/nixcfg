@@ -42,7 +42,7 @@ in {
       in
         sway-kiosk "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l &>/dev/null -s ${gtkgreetStyle} -l";
       initial_session = {
-        command = "sway";
+        command = "Hyprland";
         user = "christoph";
       };
     };

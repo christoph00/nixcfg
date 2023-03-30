@@ -1,0 +1,3 @@
+{...}: {
+  programs.eww.enable = true;
+}
