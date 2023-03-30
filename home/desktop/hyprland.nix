@@ -98,9 +98,9 @@ in {
               # See https://wiki.hyprland.org/Configuring/Variables/ for more
               gaps_in = 4
               gaps_out = 10
-              border_size = 4
+              border_size = 3
               col.active_border = 0xff${base03}
-              col.inactive_border = 0xff${base01}
+              col.inactive_border = 0xff${base04}
 
               layout = dwindle
           }
@@ -108,7 +108,7 @@ in {
           decoration {
               # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
-              rounding = 4
+              rounding = 2
               blur = yes
               blur_size = 3
               blur_passes = 1
@@ -210,9 +210,6 @@ in {
           # Move/resize windows with mainMod + LMB/RMB and dragging
           bindm = $mainMod, mouse:272, movewindow
           bindm = $mainMod, mouse:273, resizewindow
-
-          #bindm = ALT, TAB, exec,${pkgs.killall}/bin/killall -SIGUSR1 sfwbar
-
 
         ''
       )

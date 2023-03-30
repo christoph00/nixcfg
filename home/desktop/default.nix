@@ -83,7 +83,7 @@ in {
     kanshi
   ];
 
-  colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
+  colorscheme = inputs.nix-colors.colorSchemes.rose-pine-dawn;
   wallpaper = lib.mkDefault (mkWallpaper
     {
       scheme = config.colorscheme;
@@ -140,5 +140,11 @@ in {
 
   services.easyeffects = {
     enable = true;
+  };
+
+  services.gammastep = {
+    enable = true;
+    latitude = "52.3";
+    longitude = "9.7";
   };
 }

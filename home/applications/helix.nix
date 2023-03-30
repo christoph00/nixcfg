@@ -32,7 +32,7 @@ in {
 
     settings = {
       #theme = "${colorscheme.slug}";
-      theme = "rose_pine";
+      theme = "rose_pine_dawn";
 
       editor.cursor-shape = {
         insert = "bar";
