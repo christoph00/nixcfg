@@ -142,13 +142,16 @@ in {
     enable = true;
     configFile.text = ''
       let-env config = {
-        edit_mode: vi
-        rm_always_trash: true
-        completion_algorithm: fuzzy
-        show_banner: false
+      show_banner: false
+
+        ls: {
+          use_ls_colors: true # use the LS_COLORS environment variable to colorize output
+          clickable_links: true # enable or disable clickable links. Your terminal has to support links.
+        }
+        completions: {
+          algorithm: "fuzzy"
+        }
       }
-      alias cat = bat
-      alias nix-shell = nix-shell --run nu
     '';
   };
 

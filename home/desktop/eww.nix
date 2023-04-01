@@ -1,119 +1,81 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}: let
+  dependencies = with pkgs; [
+    brightnessctl
+    pamixer
+    coreutils
+    inputs.hyprland.packages.${pkgs.system}.default
+  ];
+
   eww-yuck = pkgs.writeText "eww.yuck" ''
     ;; VARS /////////////////
-    (defpoll clock-time :interval "10s" "date +'%H:%M'")
-    (deflisten spaces :initial "{\"active\":0, \"workspaces\":[]}"
-    `${pkgs.eww-ws}/bin/eww-ws`)
-    (defvar volume 100)
+    (defpoll HYPRWINDOW :interval "1s" `hyprctl activewindow -j`)
+    (defpoll CLOCK :interval "5s" `date "+%H:%M"`)
+    (defvar  VOLUME 80)
+    (defvar  BRIGHTNESS 25)
 
 
-    ;; /////////////////////
-    (defwidget metric [label value onchange]
-    (box :orientation "h"
-       :class "metric"
-       :space-evenly false
-    (box :class "label" label)
-    (scale :min 0
-           :max 101
-           :active {onchange != ""}
-           :value value
-           :onchange onchange)))
 
-    ;; ///////////////////////
+    ;; WIDGETS
 
-    (defwidget workspaces []
-    (box :class "workspaces"
-       :orientation "h"
-       :space-evenly true
-       :halign "start"
-       :spacing 10
-      (for entry in "''${spaces.workspaces}"
-        (button :onclick "hyprctl dispatch workspace ''${entry.id}" "''${entry.name}"))
-      ))
-
-    (defwidget time []
-    (box :class "time"
-       :orientation "h"
-       :space-evenly false
-       :halign "center"
-    clock-time))
-
-    (defwidget sysinfo []
-    (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (metric :label "󰕾"
-            :value volume
-            :onchange "")
-    (metric :label ""
-            :value {EWW_RAM.used_mem_perc}
-            :onchange "")
-    (metric :label "󰆓"
-            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-            :onchange "")
+    (defwidget app [name icon command]
+    (button :onclick "''${command} &"
+      (image  :image-width 15
+              :image-height 15
+              :path "${pkgs.papirus-icon-theme}/share/icons/Papirus/48x48/apps/''${icon}.svg")
     ))
+
+    (defwidget left []
+      (box :orientation "h" :spacing 10 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "workspace" :halign "start" :text "''${HYPRWINDOW.workspace.name}")
+        (app :icon "chromium-browser" :command "${pkgs.chromium}/bin/chromium-browser" :name "Chromium")
+        (app :icon "foot" :command "${pkgs.foot}/bin/foot" :name "Foot")
+    ))
+    (defwidget center []
+      (box :orientation "h" :spacing 10 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "clock" :halign "start" :text CLOCK)
+    ))
+    (defwidget right []
+      (box :orientation "h" :spacing 10 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "volume" :halign "start" :text VOLUME)
+        (label :class "battery" :halign "start" :text "''${EWW_BATTERY["BAT0"].capacity}")
+    ))
+
 
     (defwidget bar []
     (centerbox :orientation "h"
-      (workspaces)
-      (time)
-      (sysinfo)
-    ))
+      (left)
+      (center)
+      (right)))
 
-    ;;     󰓓    󰝰       
+    ;; WINDOWS
 
     (defwindow bar
       :monitor 0
-      :geometry (geometry :x "0%"
-    		:y "0%"
-    		:height "4%"
-    		:width "100%"
-    		:anchor "center bottom")
-     :stacking "fg"
-     :exclusive true
-      (bar)
-    )
+      :geometry (geometry :x "0"
+                          :y "0"
+                          :width "100%"
+                          :height "30px"
+                          :anchor "bottom center")
+      :exclusive true
+      :stacking "bg"
+      (bar))
+
+
+      ;; (label :class "workspace" :halign "start" :text "''${WORKSPACES.active}")
+      ;; (for entry in "''${spaces.workspaces}"
+      ;; (button :onclick "hyprctl dispatch workspace ''${entry.id}" "''${entry.name}"))
+      ;;     󰓓    󰝰       
+
+
   '';
 
   eww-scss = pkgs.writeText "eww.scss" ''
-
-        .sidestuff slider {
-          all: unset;
-          color: #ffd5cd;
-        }
-
-        .workspaces button:hover {
-          color: #D35D6E;
-        }
-
-        .metric scale trough highlight {
-      all: unset;
-      background-color: #D35D6E;
-      color: #000000;
-      border-radius: 10px;
-    }
-    .metric scale trough {
-      all: unset;
-      background-color: #4e4e4e;
-      border-radius: 50px;
-      min-height: 3px;
-      min-width: 50px;
-      margin-left: 10px;
-      margin-right: 20px;
-    }
-    .metric scale trough highlight {
-      all: unset;
-      background-color: #D35D6E;
-      color: #000000;
-      border-radius: 10px;
-    }
-    .metric scale trough {
-      all: unset;
-      background-color: #4e4e4e;
-      border-radius: 50px;
-      min-height: 3px;
-      min-width: 50px;
-      margin-left: 10px;
-      margin-right: 20px;
-    }
 
 
   '';
@@ -132,4 +94,17 @@ in {
   programs.eww.enable = true;
   programs.eww.configDir = eww-config;
   programs.eww.package = pkgs.eww-wayland;
+
+  systemd.user.services.eww = {
+    Unit = {
+      Description = "Eww daemon";
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
+      ExecStart = "${config.programs.eww.package}/bin/eww daemon --no-daemonize";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = ["graphical-session.target"];
+  };
 }
