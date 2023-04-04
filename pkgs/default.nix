@@ -26,7 +26,7 @@
   wl-gammarelay-rs = pkgs.callPackage ./wl-gammarelay-rs {};
   eww-ws = pkgs.callPackage ./eww-ws {};
   hypr-taskbar = pkgs.callPackage ./hypr-taskbar {};
-
+  anyrun = pkgs.callPackage ./anyrun {};
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
   ha-lovelace-mini-graph-card = pkgs.callPackage ./ha-lovelace/mini-graph-card.nix {};
