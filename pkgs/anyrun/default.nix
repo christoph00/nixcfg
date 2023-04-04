@@ -1,19 +1,20 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, pkg-config
-, atk
-, cairo
-, gdk-pixbuf
-, glib
-, gtk3
-, openssl
-, pango
-, stdenv
-, darwin
-, wayland
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  pkg-config,
+  gtk-layer-shell,
+  atk,
+  cairo,
+  gdk-pixbuf,
+  glib,
+  gtk3,
+  openssl,
+  pango,
+  stdenv,
+  darwin,
+  wayland,
 }:
-
 rustPlatform.buildRustPackage rec {
   pname = "anyrun";
   version = "unstable-2023-02-12";
@@ -31,25 +32,29 @@ rustPlatform.buildRustPackage rec {
     pkg-config
   ];
 
-  buildInputs = [
-    atk
-    cairo
-    gdk-pixbuf
-    glib
-    gtk3
-    openssl
-    pango
-  ] ++ lib.optionals stdenv.isDarwin [
-    darwin.apple_sdk.frameworks.CoreFoundation
-    darwin.apple_sdk.frameworks.Security
-  ] ++ lib.optionals stdenv.isLinux [
-    wayland
-  ];
+  buildInputs =
+    [
+      atk
+      cairo
+      gdk-pixbuf
+      glib
+      gtk3
+      openssl
+      gtk-layer-shell
+      pango
+    ]
+    ++ lib.optionals stdenv.isDarwin [
+      darwin.apple_sdk.frameworks.CoreFoundation
+      darwin.apple_sdk.frameworks.Security
+    ]
+    ++ lib.optionals stdenv.isLinux [
+      wayland
+    ];
 
   meta = with lib; {
     description = "A wayland native, highly customizable runner";
     homepage = "https://github.com/Kirottu/anyrun";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }
