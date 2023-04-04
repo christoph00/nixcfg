@@ -76,11 +76,12 @@
 
   programs.command-not-found.enable = false;
 
+  programs.zsh.enable = true;
   users.users.christoph = {
     description = "Christoph";
     isNormalUser = true;
     createHome = true;
-    shell = pkgs.nushell;
+    shell = pkgs.zsh;
     extraGroups = [
       "wheel"
       "video"

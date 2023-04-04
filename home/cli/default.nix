@@ -128,6 +128,7 @@ in {
     gh.enable = true;
     lf.enable = true;
     go.enable = true;
+    zsh.enable = true;
   };
 
   programs.exa = {
@@ -137,23 +138,6 @@ in {
 
   programs.command-not-found.enable = false;
   programs.nix-index.enable = true;
-
-  programs.nushell = {
-    enable = true;
-    configFile.text = ''
-      let-env config = {
-      show_banner: false
-
-        ls: {
-          use_ls_colors: true # use the LS_COLORS environment variable to colorize output
-          clickable_links: true # enable or disable clickable links. Your terminal has to support links.
-        }
-        completions: {
-          algorithm: "fuzzy"
-        }
-      }
-    '';
-  };
 
   xdg.configFile."zellij/themes/${slug}.kdl".text = ''
     themes {
