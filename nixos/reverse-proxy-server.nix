@@ -81,12 +81,12 @@
         services = {
           home-assistant = {
             loadBalancer = {
-              servers = [{url = "http://100.105.177.207:8123";}];
+              servers = [{url = "http://100.102.159.142:8123";}];
             };
           };
           nas-dav = {
             loadBalancer = {
-              servers = [{url = "http://100.105.177.207:8033";}];
+              servers = [{url = "http://100.102.159.142:8033";}];
             };
           };
           webmail = {
