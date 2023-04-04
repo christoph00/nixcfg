@@ -25,6 +25,7 @@
   vomit-sync = pkgs.callPackage ./vomit-sync {};
   wl-gammarelay-rs = pkgs.callPackage ./wl-gammarelay-rs {};
   eww-ws = pkgs.callPackage ./eww-ws {};
+  hypr-taskbar = pkgs.callPackage ./hypr-taskbar {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
