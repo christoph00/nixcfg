@@ -17,5 +17,6 @@
     ./foot.nix
     ./obsidian.nix
     #./geary.nix
+    ./wezterm.nix
   ];
 }

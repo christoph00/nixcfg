@@ -75,6 +75,7 @@
   age.secrets.christoph-password.file = ../secrets/christoph-password.age;
 
   programs.command-not-found.enable = false;
+  programs.zsh.enable = true;
 
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
