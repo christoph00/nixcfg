@@ -18,5 +18,6 @@
     ./obsidian.nix
     #./geary.nix
     ./wezterm.nix
+    ./firefox.nix
   ];
 }
