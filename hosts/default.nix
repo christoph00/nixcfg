@@ -77,6 +77,6 @@
         ];
       };
     };
-    images.rpi2 = self.nixosConfigurations.r2s1.config.system.build.sdImage;
+    images.r2s1 = self.nixosConfigurations.r2s1.config.system.build.sdImage;
   };
 }
