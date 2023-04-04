@@ -77,6 +77,10 @@
   programs.command-not-found.enable = false;
 
   programs.zsh.enable = true;
+  programs.zsh.enableCompletion = true;
+  # do this in private dotfiles
+  programs.zsh.enableGlobalCompInit = false;
+
   users.users.christoph = {
     description = "Christoph";
     isNormalUser = true;
