@@ -59,8 +59,8 @@ in {
     #./xfce.nix
     #./labwc.nix
     #./river.nix
-    #./ironbar.nix
-    ./eww.nix
+    ./ironbar.nix
+    #./eww.nix
   ];
 
   home.packages = with pkgs; [
