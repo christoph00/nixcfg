@@ -36,6 +36,8 @@
 
   #boot.zfs.extraPools = ["zdata"];
 
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
   networking.hostId = "007f0200";
 
   hardware.steam-hardware.enable = true;
