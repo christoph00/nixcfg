@@ -138,10 +138,6 @@ in {
 
   dconf.enable = true;
 
-  services.easyeffects = {
-    enable = true;
-  };
-
   services.gammastep = {
     enable = true;
     latitude = "52.3";
