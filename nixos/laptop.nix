@@ -16,6 +16,8 @@
 
   services.power-profiles-daemon.enable = true;
 
+  environment.systemPackages = [pkgs.powertop pkgs.powerstat];
+
   systemd.network.networks = {
     wifi = {
       DHCP = "yes";
