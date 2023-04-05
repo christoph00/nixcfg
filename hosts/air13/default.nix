@@ -34,6 +34,9 @@
   boot.extraModprobeConfig = ''
     options bbswitch load_state=-1 unload_state=1
     options cfg80211 ieee80211_regdom="DE"
+    options snd_hda_intel power_save=1
+    options snd_ac97_codec power_save=1
+    options iwlwifi power_save=Y
   '';
 
   services.fstrim.enable = lib.mkDefault true;
