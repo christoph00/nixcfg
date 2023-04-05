@@ -11,7 +11,7 @@
   };
 
   boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi" "i915"];
-  boot.blacklistedKernelModules = ["nouveau"];
+  # boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelParams = [
     "quiet"
     "pcie_port_pm=off"
@@ -37,9 +37,26 @@
     options snd_hda_intel power_save=1
     options snd_ac97_codec power_save=1
     options iwlwifi power_save=Y
+    blacklist nouveau
+    options nouveau modeset=0
   '';
 
-  services.fstrim.enable = lib.mkDefault true;
+  services.udev.extraRules = ''
+    # Remove NVIDIA USB xHCI Host Controller devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
+
+    # Remove NVIDIA USB Type-C UCSI devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
+
+    # Remove NVIDIA Audio devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
+
+    # Remove NVIDIA VGA/3D controller devices
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
+  '';
+  boot.blacklistedKernelModules = ["nouveau" "nvidia"];
+
+  services.fstrim.enable = true;
 
   fileSystems = {
     "/" = {
@@ -79,7 +96,7 @@
     };
   };
 
-  hardware.nvidia.modesetting.enable = false;
+  # hardware.nvidia.modesetting.enable = false;
 
   nixpkgs.hostPlatform.system = "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = true;
