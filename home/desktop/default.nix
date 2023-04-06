@@ -52,15 +52,16 @@ in {
     #./plasma.nix
     ./hyprland.nix
     #./sway.nix
-    #./waybar.nix
     #./wayvnc.nix
     ./rofi.nix
-    #./sfwbar.nix
     #./xfce.nix
     #./labwc.nix
     #./river.nix
-    ./ironbar.nix
+    ./idle.nix
+    # ./ironbar.nix
     #./eww.nix
+    #./sfwbar.nix
+    ./waybar.nix
   ];
 
   home.packages = with pkgs; [

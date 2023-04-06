@@ -66,7 +66,7 @@ in {
           exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
-          # exec =  ${config.programs.eww.package}/bin/eww open bar
+          exec =  ${config.programs.waybar.package}/bin/waybar
 
           exec = ${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill
 
@@ -167,7 +167,7 @@ in {
           bind = $mainMod, E, exec, ${pkgs.cinnamon.nemo}/bin/nemo
           bind = $mainMod, V, togglefloating,
           bind = $mainMod, F, fullscreen, 0
-          bind = $mainMod, R, exec, ${pkgs.rofi}/bin/rofi -show drun
+          bind = $mainMod, R, exec, ${config.programs.rofi.package}/bin/rofi -show drun
           bind = $mainMod, P, pseudo, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
 

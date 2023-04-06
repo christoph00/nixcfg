@@ -5,9 +5,6 @@
   inputs,
   ...
 }: let
-  # Dependencies
-  jq = "${pkgs.jq}/bin/jq";
-  gamemoded = "${pkgs.gamemode}/bin/gamemoded";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   btm = "${pkgs.bottom}/bin/btm";
   terminal = "${pkgs.foot}/bin/foot";
@@ -33,26 +30,6 @@
 
 
     '';
-
-  # Function to simplify making waybar outputs
-  jsonOutput = name: {
-    pre ? "",
-    text ? "",
-    tooltip ? "",
-    alt ? "",
-    class ? "",
-    percentage ? "",
-  }: "${pkgs.writeShellScriptBin "waybar-${name}" ''
-    set -euo pipefail
-    ${pre}
-    ${jq} -cn \
-      --arg text "${text}" \
-      --arg tooltip "${tooltip}" \
-      --arg alt "${alt}" \
-      --arg class "${class}" \
-      --arg percentage "${percentage}" \
-      '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
-  ''}/bin/waybar-${name}";
 in {
   programs.waybar = {
     enable = true;
@@ -63,15 +40,14 @@ in {
         substituteInPlace src/modules/wlr/workspace_manager.cpp --replace "zext_workspace_handle_v1_activate(workspace_handle_);" "const std::string command = \"${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch workspace \" + name_; system(command.c_str());"
       '';
     });
-    systemd = {
-      enable = true;
-    };
+    systemd.enable = false;
     settings = {
       primary = {
         layer = "top";
         height = 32;
         margin = "2";
         position = "bottom";
+        spacing = 5;
 
         #output = builtins.map (m: m.name) (builtins.filter (m: m.isSecondary == false) config.monitors);
         modules-left = [
@@ -80,7 +56,7 @@ in {
           # "wlr/taskbar"
         ];
         modules-center = [
-          "hyprland/window"
+          # "hyprland/window"
         ];
         modules-right = [
           "backlight"
@@ -135,24 +111,8 @@ in {
           on-click = "";
         };
         "custom/menu" = {
-          return-type = "json";
-          exec = jsonOutput "menu" {
-            text = "";
-          };
+          format = " ";
           on-click = "${launcher}";
-        };
-        "custom/hostname" = {
-          exec = "echo $USER@$(hostname)";
-          on-click = terminal;
-        };
-        "custom/gamemode" = {
-          exec-if = "${gamemoded} --status | grep 'is active' -q";
-          interval = 2;
-          return-type = "json";
-          exec = jsonOutput "gamemode" {
-            tooltip = "Gamemode is active";
-          };
-          format = " ";
         };
       };
     };
