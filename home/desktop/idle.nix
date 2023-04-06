@@ -10,12 +10,10 @@
       {
         event = "before-sleep";
         command = "${pkgs.swaylock}/bin/swaylock -f -e -k -l -c 000000";
-        # command = "${pkgs.swaylock-effects}/bin/swaylock -fF";
       }
       {
         event = "lock";
         command = "${pkgs.swaylock}/bin/swaylock -f -e -k -l -c 000000";
-        # command = "${pkgs.swaylock-effects}/bin/swaylock -fF";
       }
     ];
     timeouts = [
