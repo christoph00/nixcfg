@@ -11,7 +11,7 @@ in {
     package = pkgs.rofi-wayland;
     font = "${config.fontProfiles.monospace.family} 12";
     plugins = [pkgs.rofi-calc pkgs.rofi-emoji];
-    terminal = "${pkgs.foot}/bin/footclient";
+    terminal = "${pkgs.foot}/bin/foot";
     location = "center";
     extraConfig = {
       display-drun = "";
