@@ -58,7 +58,7 @@
         ./hyprland.nix
         ./xfce.nix
         #./gnome.nix
-        ./greetd.nix
+        #./greetd.nix
         ./printing.nix
         #./rclone-christoph.nix
         #./sway.nix

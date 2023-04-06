@@ -54,6 +54,16 @@
 
   programs.ssh.startAgent = true;
 
+  # Greeter
+  programs.regreet.enable = true;
+  services.greetd.settings.initial_session = {
+    command = "Hyprland";
+    user = "christoph";
+  };
+  environment.etc."greetd/environments".text = ''
+    Hyprland
+  '';
+
   security = {
     rtkit.enable = true;
   };
