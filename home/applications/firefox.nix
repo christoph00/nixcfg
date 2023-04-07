@@ -5,34 +5,29 @@
   config,
   ...
 }: let
-  addons = inputs.firefox-addons.packages.${pkgs.system};
+  # addons = inputs.firefox-addons.packages.${pkgs.system};
   inherit (config.colorscheme) colors;
 in {
   programs.browserpass.enable = true;
   programs.firefox = {
     enable = true;
     #   package = pkgs.librewolf;
-    extensions = with addons; [
-      ublock-origin
-      bitwarden
-      bypass-paywalls-clean
-      i-dont-care-about-cookies
-      auto-tab-discard
-      no-pdf-download
-      save-page-we
-      privacy-redirect
-      startpage-private-search
-      violentmonkey
-      user-agent-string-switcher
-    ];
+    # extensions = with addons; [
+    #   ublock-origin
+    #   bitwarden
+    #   bypass-paywalls-clean
+    #   i-dont-care-about-cookies
+    #   auto-tab-discard
+    #   no-pdf-download
+    #   save-page-we
+    #   privacy-redirect
+    #   startpage-private-search
+    #   violentmonkey
+    #   user-agent-string-switcher
+    # ];
     profiles.christoph = {
       bookmarks = {};
       settings = {
-        #  "browser.search.defaultenginename" = "Startpage.com - English";
-        #  "browser.search.selectedEngine" = "Startpage.com - English";
-        #  "browser.urlbar.placeholderName" = "Startpage.com - English";
-        #  "browser.search.region" = "DE";
-        "browser.startup.homepage" = "https://www.startpage.com/do/mypage.pl?prfe=c4c2ccf1e58b0f22b47e301bfe7c441392f33167428c28680d636dc2a424166d6e712c02f082a97c0107b9a7056212cdd71dbd7d34d40581d8e1afb99b5a45ffcd21d1fc3c5955a79e36306699";
         "identity.fxaccounts.enabled" = false;
         "privacy.trackingprotection.enabled" = true;
         "dom.security.https_only_mode" = true;
@@ -93,8 +88,4 @@ in {
   # };
 
   # home.sessionVariables.BROWSER = "firefox";
-
-  home.persistence = {
-    "/nix/persist/home/christoph".directories = [".mozilla/firefox"];
-  };
 }
