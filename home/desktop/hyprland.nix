@@ -63,12 +63,20 @@ in {
 
       (
         with config.colorscheme.colors; ''
-          exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+          exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
-          exec =  ${config.programs.waybar.package}/bin/waybar
+          exec-once =  ${config.programs.waybar.package}/bin/waybar
 
           exec = ${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill
+
+          env = GDK_SCALE,1
+          env = XDG_SESSION_DESKTOP,Hyprland
+          env = QT_QPA_PLATFORM,wayland;xcb
+          env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+          env = SDL_VIDEODRIVER,wayland
+          env = CLUTTER_BACKEND,wayland
+          env = GDK_BACKEND,wayland,x11
 
 
           # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
@@ -112,11 +120,11 @@ in {
 
               rounding = 2
               blur = yes
-              blur_size = 3
-              blur_passes = 1
+              blur_size = 8
+              blur_passes = 3
               blur_new_optimizations = on
 
-              drop_shadow = yes
+              drop_shadow = false
               shadow_range = 4
               shadow_render_power = 3
               col.shadow = rgba(1a1a1aee)

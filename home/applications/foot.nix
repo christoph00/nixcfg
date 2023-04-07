@@ -26,7 +26,7 @@ in {
         blink = "no";
       };
       colors = {
-        alpha = 1.0;
+        alpha = 0.8;
         background = "${base00}";
         foreground = "${base05}";
 

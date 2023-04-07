@@ -72,6 +72,12 @@ in {
           format = "{icon}";
           on-click = "activate";
         };
+        "wlr/taskbar" = {
+          format = "{icon}";
+          icon-size = 14;
+          icon-theme = "Papirus";
+        };
+
         clock = {
           format = "{:%H:%M}";
         };
