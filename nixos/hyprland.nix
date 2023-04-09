@@ -1,8 +1,8 @@
 {
   pkgs,
   config,
-  ...
-}: {
-  programs.hyprland.enable = true;
+  lib,
+  ...}: {
+  programs.hyprland.enable = lib.mkDefault true;
   programs.hyprland.package = null;
 }
