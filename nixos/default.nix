@@ -47,7 +47,7 @@
       };
       desktop.imports = [
         inputs.home-manager.nixosModule
-        inputs.hyprland.nixosModules.default
+        #inputs.hyprland.nixosModules.default
         self.nixosModules.default
         self.nixosModules.home-manager
         self.nixosModules.autologin-graphical-session
