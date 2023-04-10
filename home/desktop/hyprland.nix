@@ -65,9 +65,6 @@ in {
         with config.colorscheme.colors; ''
           exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-
-          exec-once =  ${config.programs.waybar.package}/bin/waybar
-
           exec = ${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill
 
           env = GDK_SCALE,1
