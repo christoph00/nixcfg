@@ -1,16 +1,16 @@
 {
   config,
   pkgs,
-  inputs,
-  lib,
+  # inputs,
+  # lib,
   ...
 }: let
-  helixUnstable = inputs.helix.outputs.packages.${pkgs.system}.helix;
+  # helixUnstable = inputs.helix.outputs.packages.${pkgs.system}.helix;
   inherit (config) colorscheme;
 in {
   programs.helix = {
     enable = true;
-    package = helixUnstable;
+    # package = helixUnstable;
     languages = [
       {
         name = "bash";
@@ -32,7 +32,7 @@ in {
 
     settings = {
       #theme = "${colorscheme.slug}";
-      theme = "rose_pine_dawn";
+      theme = "rose_pine";
 
       editor.cursor-shape = {
         insert = "bar";

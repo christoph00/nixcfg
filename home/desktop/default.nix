@@ -84,7 +84,7 @@ in {
     kanshi
   ];
 
-  colorscheme = inputs.nix-colors.colorSchemes.rose-pine-dawn;
+  colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
   wallpaper = lib.mkDefault (mkWallpaper
     {
       scheme = config.colorscheme;

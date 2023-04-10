@@ -39,31 +39,31 @@
       inputs.flake-utils.follows = "utils";
     };
 
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
+    # helix = {
+    #   url = "github:helix-editor/helix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.rust-overlay.follows = "rust-overlay";
+    # };
     nix-colors.url = "github:misterio77/nix-colors";
 
     hyprland = {
       url = "github:hyprwm/hyprland/v0.24.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprwm-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    xdg-portal-hyprland = {
-      url = "github:hyprwm/xdg-desktop-portal-hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprwm-contrib = {
+    #   url = "github:hyprwm/contrib";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # xdg-portal-hyprland = {
+    #   url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    ironbar = {
-      url = "github:JakeStanger/ironbar";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
+    # ironbar = {
+    #   url = "github:JakeStanger/ironbar";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.rust-overlay.follows = "rust-overlay";
+    # };
 
     vscode-server = {
       url = "github:msteen/nixos-vscode-server";
@@ -73,7 +73,7 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixneovim.url = "github:nixneovim/nixneovim";
+    # nixneovim.url = "github:nixneovim/nixneovim";
   };
 
   outputs = inputs @ {flake-parts, ...}:

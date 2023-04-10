@@ -11,14 +11,14 @@
         imports = [
           inputs.nix-colors.homeManagerModule
           inputs.nix-index-database.hmModules.nix-index
-          inputs.nixneovim.nixosModules.default
+          # inputs.nixneovim.nixosModules.default
           ./cli
           ../modules/home-manager
         ];
       };
       desktop.imports = [
         inputs.hyprland.homeManagerModules.default
-        inputs.ironbar.homeManagerModules.default
+        # inputs.ironbar.homeManagerModules.default
         ./desktop
         ./applications
       ];
