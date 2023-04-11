@@ -52,7 +52,7 @@
             }
             {
               enabled = false;
-              name = "HDMI-A-1";
+              name = "DP-1";
               width = 1920;
               height = 1080;
               isPrimary = false;
