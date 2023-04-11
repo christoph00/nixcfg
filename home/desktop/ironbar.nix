@@ -38,8 +38,8 @@ in {
         type = "sys_info";
       };
       battery = {
-        type = "script";
-        cmd = "${battery_status}";
+        type = "label";
+        label = "100%";
       };
     in {
       position = "bottom";
