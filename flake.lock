@@ -305,6 +305,29 @@
         "type": "github"
       }
     },
+    "ironbar": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ]
+      },
+      "locked": {
+        "lastModified": 1681154278,
+        "narHash": "sha256-41/NoQ77mY0u7IKY3S5POeOD4FsR4FV6J+ARsaf+Ob8=",
+        "owner": "JakeStanger",
+        "repo": "ironbar",
+        "rev": "2815cef44037af810db931a1701e562a3a50968c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JakeStanger",
+        "repo": "ironbar",
+        "type": "github"
+      }
+    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -408,6 +431,7 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "impermanence": "impermanence",
+        "ironbar": "ironbar",
         "nix-colors": "nix-colors",
         "nix-index-database": "nix-index-database",
         "nix-init": "nix-init",
