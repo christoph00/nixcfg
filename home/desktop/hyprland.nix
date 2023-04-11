@@ -67,7 +67,6 @@ in {
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
           exec = ${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill
 
-          env = GDK_SCALE,1
           env = XDG_SESSION_DESKTOP,Hyprland
           env = QT_QPA_PLATFORM,wayland;xcb
           env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
@@ -99,6 +98,10 @@ in {
             kb_layout = us
             kb_options = caps:escape,compose:menu
             kb_variant = altgr-intl
+          }
+
+          device:cm-storm-coolermaster-novatouch-tkl-keyboard {
+            kb_layout = us
           }
 
           general {
