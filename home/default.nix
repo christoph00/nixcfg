@@ -48,7 +48,7 @@
               isPrimary = true;
               refreshRate = 60;
               x = 0;
-              scale = "1.25";
+              scale = "1.5";
             }
             {
               enabled = false;
