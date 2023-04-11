@@ -38,7 +38,7 @@ in {
       Service = {
         StartLimitInterval = 5;
         StartLimitBurst = 1;
-        ExecStart = "${pkgs.steam-with-packages}/bin/steam -language german -silent -newbigpicture"; #-pipewire
+        ExecStart = "${pkgs.steam-with-packages}/bin/steam -language german -silent -newbigpicture -pipewire"; #
         Type = "simple";
         Restart = "on-failure";
       };
