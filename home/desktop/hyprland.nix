@@ -77,7 +77,7 @@ in {
 
           # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
           input {
-              kb_layout=de
+              kb_layout=us
               kb_options =
               kb_rules =
 
