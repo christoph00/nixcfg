@@ -9,7 +9,7 @@
     brightnessctl
     pamixer
     coreutils
-    inputs.hyprland.packages.${pkgs.system}.default
+    hyprland
   ];
 
   eww-yuck = pkgs.writeText "eww.yuck" ''
@@ -33,9 +33,6 @@
     (defwidget left []
       (box :orientation "h" :spacing 10 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
         (label :class "workspace" :halign "start" :text "''${HYPRWINDOW.workspace.name}")
-        (app :icon "chromium-browser" :command "${pkgs.chromium}/bin/chromium-browser" :name "Chromium")
-        (app :icon "foot" :command "${pkgs.foot}/bin/footclient -D ~" :name "Terminal")
-        (app :icon "nemo" :command "${pkgs.cinnamon.nemo}/bin/nemo" :name "Dateien" )
     ))
     (defwidget center []
       (box :orientation "h" :spacing 10 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
@@ -44,7 +41,7 @@
     (defwidget right []
       (box :orientation "h" :spacing 10 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
         (label :class "volume" :halign "start" :text VOLUME)
-        (label :class "battery" :halign "start" :text "''${EWW_BATTERY["BAT0"].capacity}")
+        (label :class "battery" :halign "start" :text "''${EWW_BATTERY["BAT0"].capacity}%")
     ))
 
 
