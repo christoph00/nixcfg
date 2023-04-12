@@ -4,48 +4,20 @@
   ...
 }: let
   battery_status = pkgs.writeShellScript "battery_status" ''
-#!/bin/sh
+battery() {
+	BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
+	cat /sys/class/power_supply/''${BAT}/capacity
+}
+battery_stat() {
+	BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
+	cat /sys/class/power_supply/''${BAT}/status
+}
 
-bat=/sys/class/power_supply/BAT0/
-per="$(cat "$bat/capacity")"
-
-icon() {
-
-[ $(cat "$bat/status") = Charging ] && echo "" && exit
-
-if [ "$per" -gt "90" ]; then
-	icon=""
-elif [ "$per" -gt "80" ]; then
-	icon=""
-elif [ "$per" -gt "70" ]; then
-	icon=""
-elif [ "$per" -gt "60" ]; then
-	icon=""
-elif [ "$per" -gt "50" ]; then
-	icon=""
-elif [ "$per" -gt "40" ]; then
-	icon=""
-elif [ "$per" -gt "30" ]; then
-	icon=""
-elif [ "$per" -gt "20" ]; then
-	icon=""
-elif [ "$per" -gt "10" ]; then
-	icon=""
-elif [ "$per" -gt "0" ]; then
-	icon=""
-else
-        echo  && exit
+if [[ "$1" == "--bat" ]]; then
+	battery
+elif [[ "$1" == "--bat-st" ]]; then
+	battery_stat
 fi
-echo "$icon"
-}
-
-percent() {
-echo $per
-}
-
-[ "$1" = "icon" ] && icon && exit
-[ "$1" = "percent" ] && percent && exit
-exit
   '';
 in {
   programs.ironbar = {
@@ -80,13 +52,13 @@ in {
       };
       battery = {
         type = "label";
-        label = "10000:${battery_status}";
+        label = "{{5000:${battery_status} --bat}}";
       };
     in {
       position = "bottom";
       anchor_to_edges = true;
-      start = [workspaces];
-      end = [sys-info battery tray clock];
+      start = [launcher workspaces];
+      end = [battery tray clock];
     };
   };
 }
