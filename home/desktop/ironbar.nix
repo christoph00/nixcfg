@@ -40,8 +40,8 @@
     in {
       position = "bottom";
       anchor_to_edges = true;
-      start = [launcher workspaces];
-      end = [battery tray clock];
+      start = [workspaces];
+      end = [tray clock];
     };
   };
 }
