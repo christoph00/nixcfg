@@ -2,24 +2,8 @@
   inputs,
   pkgs,
   ...
-}: let
-  battery_status = pkgs.writeShellScript "battery_status" ''
-battery() {
-	BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
-	cat /sys/class/power_supply/''${BAT}/capacity
-}
-battery_stat() {
-	BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
-	cat /sys/class/power_supply/''${BAT}/status
-}
-
-if [[ "$1" == "--bat" ]]; then
-	battery
-elif [[ "$1" == "--bat-st" ]]; then
-	battery_stat
-fi
-  '';
-in {
+}:
+{
   programs.ironbar = {
     enable = true;
     package = inputs.ironbar.packages.x86_64-linux.default;
@@ -52,7 +36,7 @@ in {
       };
       battery = {
         type = "label";
-        label = "{{5000:${battery_status} --bat}}";
+        label = "{{5000:cat /sys/class/power_supply/BAT0/capacity}}";
       };
     in {
       position = "bottom";
