@@ -51,7 +51,7 @@
   };
   systemd.network.links = {
     wan = {
-      matchConfig.Name = "enp0s18u1u3";
+      matchConfig.Name = "enp0s18u1u3c2";
     };
     lan = {
       matchConfig.Name = "enp1s0";
@@ -68,9 +68,4 @@
   age.secrets.cloudflared.file = ../../secrets/futro-cf;
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
   age.secrets.cf-acme.file = ../../secrets/cf-acme;
-  age.secrets.agent-key = {
-    file = ../../secrets/agent-key;
-    owner = "hass";
-    mode = "600";
-  };
 }
