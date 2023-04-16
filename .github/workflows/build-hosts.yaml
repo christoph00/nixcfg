@@ -22,6 +22,7 @@ jobs:
         - oc1
         - oc2
   #      - r2s1
+        - cube
     steps:
     - run: |
         sudo rm -rf $AGENT_TOOLSDIRECTORY
