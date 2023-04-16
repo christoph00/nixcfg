@@ -83,7 +83,7 @@
       chain postrouting {
         type filter hook postrouting priority mangle
         policy accept
-        oifname { ppp0 } meta l4proto tcp tcp flags & (syn|rst) == syn tcp option maxseg size set rt mtu
+        oifname { telekom } meta l4proto tcp tcp flags & (syn|rst) == syn tcp option maxseg size set rt mtu
       }
     }
     table ip nat {
@@ -115,7 +115,7 @@ in {
 
   networking = {
     vlans = {
-      "telekom" = {
+      "ppp0" = {
         id = 7;
         interface = wanIF;
       };
@@ -157,7 +157,7 @@ in {
       enable = true;
       ruleset = nftRuleset;
     };
-    namespaces.enable = true;
+    namespaces.enable = true;`
   };
 
   services.pppd = {
@@ -165,8 +165,8 @@ in {
     peers = {
       telekom = {
         config = ''
-          plugin pppoe.so wan
-          ifname telekom
+          plugin pppoe.so telekom
+          ifname ppp0
           nic-eno1
           lcp-echo-failure 5
           lcp-echo-interval 1
@@ -200,7 +200,7 @@ in {
     before = ["network-online.target"];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${config.systemd.package}/lib/systemd/systemd-networkd-wait-online -i ppp0";
+      ExecStart = "${config.systemd.package}/lib/systemd/systemd-networkd-wait-online -i telekom";
       RemainAfterExit = true;
     };
   };
