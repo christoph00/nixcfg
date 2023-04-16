@@ -1,104 +1,10 @@
-# https://github.com/vkleen/machines
 {
   pkgs,
   lib,
   config,
   ...
 }: let
-  lanIF = "enp1s0";
-  wanIF = "enp0s18u1u3c2";
-
-  nftRuleset = let
-    globalTcpPorts =
-      lib.lists.map builtins.toString config.networking.firewall.allowedTCPPorts
-      ++ lib.lists.map ({
-        from,
-        to,
-      }: "${builtins.toString from}-${builtins.toString to}")
-      config.networking.firewall.allowedTCPPortRanges;
-    globalUdpPorts =
-      lib.lists.map builtins.toString config.networking.firewall.allowedUDPPorts
-      ++ lib.lists.map ({
-        from,
-        to,
-      }: "${builtins.toString from}-${builtins.toString to}")
-      config.networking.firewall.allowedUDPPortRanges;
-
-    interfaceTcpPorts = i: lib.lists.map builtins.toString config.networking.firewall.interfaces.${i}.allowedTCPPorts;
-    interfaceUdpPorts = i: lib.lists.map builtins.toString config.networking.firewall.interfaces.${i}.allowedUDPPorts;
-  in ''
-    define icmp_protos = { ipv6-icmp, icmp, igmp }
-
-    table inet filter {
-      chain input {
-        type filter hook input priority filter
-        policy drop
-
-        iifname { lo } accept
-        ct state { related, established} accept
-
-        meta l4proto ipv6-icmp icmpv6 type nd-redirect drop
-        meta l4proto $icmp_protos accept
-
-        ${lib.strings.concatStringsSep "\n" (lib.attrsets.mapAttrsToList
-      (i: _: ''
-        ${lib.strings.optionalString (interfaceUdpPorts i != [])
-          "iifname { ${i} } meta l4proto udp udp dport { ${lib.strings.concatStringsSep "," (interfaceUdpPorts i)} } accept"}
-        ${lib.strings.optionalString (interfaceTcpPorts i != [])
-          "iifname { ${i} } meta l4proto tcp tcp dport { ${lib.strings.concatStringsSep "," (interfaceTcpPorts i)} } accept"}
-      '')
-      config.networking.firewall.interfaces)}
-
-        meta l4proto tcp tcp dport { ${lib.strings.concatStringsSep "," globalTcpPorts} } accept
-        meta l4proto udp udp dport { ${lib.strings.concatStringsSep "," globalUdpPorts} } accept
-
-        meta l4proto udp ip6 daddr fe80::/64 udp dport 546 accept
-      }
-
-      chain forward {
-        type filter hook forward priority filter
-        policy drop
-        iifname { lan } accept
-        ct state { related, established } accept
-
-        meta l4proto ipv6-icmp icmpv6 type nd-redirect drop
-        meta l4proto $icmp_protos accept
-      }
-    }
-
-    table inet raw {
-      chain rpfilter {
-        fib saddr . mark oif != 0 return
-        meta nfproto ipv4 meta l4proto udp udp sport 67 udp dport 68 return
-        meta nfproto ipv4 meta l4proto udp ip saddr 0.0.0.0 ip daddr 255.255.255.255 udp sport 68 udp dport 67 return
-        counter drop
-      }
-      chain prerouting {
-        type filter hook prerouting priority raw
-        policy accept
-        jump rpfilter
-      }
-    }
-    table ip mss_clamp {
-      chain postrouting {
-        type filter hook postrouting priority mangle
-        policy accept
-        oifname { telekom } meta l4proto tcp tcp flags & (syn|rst) == syn tcp option maxseg size set rt mtu
-      }
-    }
-    table ip nat {
-      chain prerouting {
-        type nat hook prerouting priority dstnat
-        policy accept
-
-        iifname { lan } meta mark set 0x1
-      }
-      chain postrouting {
-        type nat hook postrouting priority srcnat
-        policy accept
-      }
-    }
-  '';
+  netIF = "enp1s0";
 in {
   boot.kernelModules = [
     "ppp_generic"
@@ -114,21 +20,19 @@ in {
 
 
   networking = {
+    useNetworkd = true;
     vlans = {
       "ppp0" = {
         id = 7;
-        interface = wanIF;
+        interface = netIF;
       };
       "lan" = {
         id = 10;
-        interface = lanIF;
+        interface = netIF;
       };
     };
     interfaces = {
-      "${lanIF}" = {
-        useDHCP = false;
-      };
-      "${wanIF}" = {
+      "${netIF}" = {
         useDHCP = false;
       };
 
@@ -144,18 +48,68 @@ in {
     };
 
     firewall = {
-      enable = false;
+      enable = lib.mkForce false;
       allowPing = true;
-      interfaces = {
-        "lan" = {
-          allowedUDPPorts = [53 69];
-          allowedTCPPorts = [53 69 22];
-        };
-      };
     };
     nftables = {
       enable = true;
-      ruleset = nftRuleset;
+      ruleset = ''
+         table inet filter {
+            # enable flow offloading for better throughput
+            flowtable f {
+              hook ingress priority 0;
+              devices = { lan, ppp0 };
+            }
+
+            chain output {
+              type filter hook output priority 100; policy accept;
+            }
+
+            chain input {
+              type filter hook input priority filter; policy accept;
+
+              # Allow trusted networks to access the router
+              iifname {
+                "lan",
+              } counter accept
+
+
+              # Allow returning traffic from wan and drop everthing else
+              iifname "ppp0" ct state { established, related } counter accept
+            }
+            chain forward {
+              type filter hook forward priority filter; policy accept;
+
+              # enable flow offloading for better throughput
+              ip protocol { tcp, udp } flow offload @f
+
+              # Allow trusted network WAN access
+              iifname {
+                  "lan",
+              } oifname {
+                  "ppp0",
+              } counter accept comment "Allow trusted LAN to WAN"
+
+              # Allow established WAN to return
+              iifname {
+                  "ppp0",
+              } oifname {
+                  "lan",
+              } ct state established,related counter accept comment "Allow established back to LANs"
+            }
+          }
+          table ip nat {
+            chain prerouting {
+              type nat hook output priority filter; policy accept;
+            }
+
+            # Setup NAT masquerading on the ppp0 interface
+            chain postrouting {
+              type nat hook postrouting priority filter; policy accept;
+              oifname "ppp0" masquerade
+            }
+          }
+      '';
     };
     namespaces.enable = true;`
   };
@@ -165,7 +119,7 @@ in {
     peers = {
       telekom = {
         config = ''
-          plugin pppoe.so telekom
+          plugin pppoe.so
           ifname ppp0
           nic-eno1
           lcp-echo-failure 5
