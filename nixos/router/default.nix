@@ -21,7 +21,7 @@
     peers = {
       telekom = {
         config = ''
-          plugin pppoe.so eth0.7
+          plugin pppoe.so wan
           ifname ppp0
           nic-eno1
           lcp-echo-failure 5
