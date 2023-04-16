@@ -45,32 +45,12 @@
   #networking.useDHCP = true;
   # networking.interfaces.enp3s0f0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp3s0f1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp4s0f0.useDHCP = lib.mkDefault true;
+  networking.interfaces.enp4s0f0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp4s0f1.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
 
   networking.hostName = "futro";
 
-  systemd.network.networks = {
-    lan = {
-      enable = true;
-      DHCP = "yes";
-      matchConfig.Name = "enp3s0f0";
-      networkConfig = {
-        Description = "LAN";
-        MulticastDNS = true;
-        DHCP = "yes";
-      };
-    };
-  };
-  systemd.network.links = {
-    wan = {
-      matchConfig.Name = "enp5s0";
-    };
-    lan = {
-      matchConfig.Name = "enp3s0f0";
-    };
-  };
   powerManagement.cpuFreqGovernor = "powersave";
   hardware.cpu.amd.updateMicrocode = true;
 

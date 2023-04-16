@@ -1,8 +1,16 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
-}: {
+}: let
+  dependencies = with pkgs; [
+    brightnessctl
+    pamixer
+    coreutils
+    hyprland
+  ];
+in {
   programs.ironbar = {
     enable = true;
     package = inputs.ironbar.packages.x86_64-linux.default;
@@ -35,13 +43,14 @@
       };
       battery = {
         type = "label";
-        label = "{{5000:cat /sys/class/power_supply/BAT0/capacity}}";
+        label = "BAT: {{500:cat /sys/class/power_supply/BAT0/capacity}}";
       };
     in {
       position = "bottom";
       anchor_to_edges = true;
       start = [workspaces];
-      end = [tray clock];
+      end = [tray battery clock];
     };
   };
+  systemd.user.services.ironbar.Service.Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
 }
