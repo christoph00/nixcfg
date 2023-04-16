@@ -32,7 +32,7 @@
 
 
   swapDevices = [
-"/dev/sda2"
+{device = "/dev/sda2"; }
   ];
 
 
