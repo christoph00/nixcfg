@@ -1,10 +1,10 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, stdenv
-, darwin
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  stdenv,
+  darwin,
 }:
-
 rustPlatform.buildRustPackage rec {
   pname = "stalwart-imap";
   version = "0.2.0";
@@ -27,6 +27,6 @@ rustPlatform.buildRustPackage rec {
     homepage = "https://github.com/stalwartlabs/imap-server";
     changelog = "https://github.com/stalwartlabs/imap-server/blob/${src.rev}/CHANGELOG";
     license = licenses.agpl3Only;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }

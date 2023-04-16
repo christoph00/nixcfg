@@ -1,8 +1,8 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
 }:
-
 rustPlatform.buildRustPackage rec {
   pname = "hypr-taskbar";
   version = "unstable-2023-02-08";
@@ -25,7 +25,7 @@ rustPlatform.buildRustPackage rec {
   meta = with lib; {
     description = "A taskbar module for hyprland designed for eww";
     homepage = "https://github.com/horriblename/hypr-taskbar";
-    license = with licenses; [ ];
-    maintainers = with maintainers; [ ];
+    license = with licenses; [];
+    maintainers = with maintainers; [];
   };
 }

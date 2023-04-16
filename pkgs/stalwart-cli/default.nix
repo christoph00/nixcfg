@@ -1,10 +1,10 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, stdenv
-, darwin
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  stdenv,
+  darwin,
 }:
-
 rustPlatform.buildRustPackage rec {
   pname = "stalwart-cli";
   version = "0.2.0";
@@ -26,6 +26,6 @@ rustPlatform.buildRustPackage rec {
     description = "Stalwart Mail Server Command Line Interface";
     homepage = "https://github.com/stalwartlabs/cli";
     license = licenses.agpl3Only;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }

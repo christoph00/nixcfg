@@ -1,11 +1,11 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, pkg-config
-, stdenv
-, wayland
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  pkg-config,
+  stdenv,
+  wayland,
 }:
-
 rustPlatform.buildRustPackage rec {
   pname = "wl-gammarelay-rs";
   version = "0.3.0";
@@ -31,6 +31,6 @@ rustPlatform.buildRustPackage rec {
     description = "A simple program that provides DBus interface to control display temperature and brightness under wayland without flickering";
     homepage = "https://github.com/MaxVerevkin/wl-gammarelay-rs";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }
