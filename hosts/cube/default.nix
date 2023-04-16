@@ -37,26 +37,6 @@
 
   networking.hostName = "cube";
 
-  systemd.network.networks = {
-    lan = {
-      enable = true;
-      DHCP = "yes";
-      matchConfig.Name = "enp1s0";
-      networkConfig = {
-        Description = "LAN";
-        MulticastDNS = true;
-        DHCP = "yes";
-      };
-    };
-  };
-  systemd.network.links = {
-    wan = {
-      matchConfig.Name = "enp0s18u1u3c2";
-    };
-    lan = {
-      matchConfig.Name = "enp1s0";
-    };
-  };
   powerManagement.cpuFreqGovernor = "powersave";
   hardware.cpu.amd.updateMicrocode = true;
 
