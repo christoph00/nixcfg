@@ -18,6 +18,8 @@ in {
     "net.ipv4.conf.default.forwarding" = true;
   };
 
+  environment.systemPackages = [pkgs.vnstat];
+
   networking = {
     useNetworkd = true;
     vlans = {
@@ -32,8 +34,10 @@ in {
     };
     interfaces = {
       "${netIF}" = {
-        useDHCP = true;
+        useDHCP = false;
       };
+
+      "ppp0".useDHCP = false;
 
       "lan" = {
         ipv4.addresses = [
@@ -53,62 +57,66 @@ in {
     nftables = {
       enable = true;
       ruleset = ''
-        table inet filter {
-           # enable flow offloading for better throughput
-           # flowtable f {
-           #   hook ingress priority 0;
-           #   devices = { lan, ppp0 };
-           # }
+        table ip filter {
+          chain output {
+            type filter hook output priority 100; policy accept;
+          }
+          chain input {
+            type filter hook input priority filter; policy drop;
+            ip saddr 10.0.0.0/8 tcp dport 53 accept;
+            ip saddr 10.0.0.0/8 udp dport 53 accept;
+            ip saddr 10.0.0.0/8 tcp dport 22 accept;
+            ip protocol icmp accept;
 
-           chain output {
-             type filter hook output priority 100; policy accept;
-           }
+            iifname { "lo", "lan"} counter accept
+            ip protocol igmp accept comment "accept IGMP"
+            ip saddr 224.0.0.0/4 accept
+            iifname "pppoe-wan" ct state { established, related } counter accept
+            iifname "pppoe-wan" drop
+          }
 
-           chain input {
-             type filter hook input priority filter; policy accept;
+          chain forward {
+            meta oiftype ppp tcp flags syn tcp option maxseg size set 1452
+            type filter hook forward priority filter; policy drop;
 
-             # Allow trusted networks to access the router
-             iifname {
-               "lan",
-             } counter accept
+            iifname { "lan" } oifname { "pppoe-wan" } counter accept
 
+            iifname { "pppoe-wan" } oifname { "lan" } ct state established,related counter accept
+          }
+        }
+        table ip nat {
+          chain prerouting {
+            type nat hook prerouting priority -100; policy accept;
+          }
 
-             # Allow returning traffic from wan and drop everthing else
-             iifname "ppp0" ct state { established, related } counter accept
-           }
-           chain forward {
-             type filter hook forward priority filter; policy accept;
-
-             # enable flow offloading for better throughput
-             # ip protocol { tcp, udp } flow offload @f
-
-             # Allow trusted network WAN access
-             iifname {
-                 "lan",
-             } oifname {
-                 "ppp0",
-             } counter accept comment "Allow trusted LAN to WAN"
-
-             # Allow established WAN to return
-             iifname {
-                 "ppp0",
-             } oifname {
-                 "lan",
-             } ct state established,related counter accept comment "Allow established back to LANs"
-           }
-         }
-         table ip nat {
-           chain prerouting {
-             type nat hook output priority filter; policy accept;
-           }
-
-           # Setup NAT masquerading on the ppp0 interface
-           chain postrouting {
-             type nat hook postrouting priority filter; policy accept;
-             oifname "ppp0" masquerade
-           }
-         }
+          chain postrouting {
+            type nat hook postrouting priority filter; policy accept;
+            oifname "pppoe-wan" masquerade
+          }
+        }
       '';
+    };
+  };
+
+  systemd.network = {
+    networks."10-pppoe-wan" = {
+      matchConfig = {
+        Name = "pppoe-wan";
+      };
+      networkConfig = {
+        IPv6AcceptRA = true;
+        KeepConfiguration = true;
+        LinkLocalAddressing = "no";
+      };
+      DHCP = "ipv6";
+      dhcpV6Config = {
+        WithoutRA = "solicit";
+      };
+      #      dhcpPrefixDelegationConfig = {
+      #  #        UplinkInterface = ":self";
+      #        SubnetId = 0;
+      #        Announce = false;
+      #      };
     };
   };
 
@@ -117,21 +125,34 @@ in {
     peers = {
       telekom = {
         config = ''
-          plugin pppoe.so
-          ifname ppp0
+          logfile /dev/null
+          noipdefault
+          noaccomp
+          nopcomp
+          nocrtscts
+          lock
+          maxfail 0
           lcp-echo-failure 5
           lcp-echo-interval 1
-          maxfail 0
-          mru 1492
-          mtu 1492
-          persist
-          user anonymous@t-online.de
-          password 123456789
-          noauth
+
+          nodetach
+          ipparam wan
+          ifname pppoe-wan
+          #nodefaultroute
           defaultroute
-          +ipv6
-          up_sdnotify
           defaultroute6
+          usepeerdns
+          maxfail 1
+          mtu 1492
+          mru 1492
+          plugin rp-pppoe.so
+          # name of the network interface. pppd sometimes claims that this is an invalid
+          # option. I assume because the interface doesn't exist at that time.
+          nic-ppp0
+          user anonymous@t-online.de
+          password 12345567
+          +ipv6
+
         '';
         autostart = true;
         enable = true;
@@ -151,7 +172,7 @@ in {
     before = ["network-online.target"];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${config.systemd.package}/lib/systemd/systemd-networkd-wait-online -i telekom";
+      ExecStart = "${config.systemd.package}/lib/systemd/systemd-networkd-wait-online -i pppoe-wan";
       RemainAfterExit = true;
     };
   };
@@ -174,6 +195,10 @@ in {
     settings = {
       interfaces = [
         {
+          name = "pppoe-wan";
+          monitor = true;
+        }
+        {
           name = "lan";
           advertise = true;
           prefix = [{prefix = "::/64";}];
@@ -182,6 +207,8 @@ in {
       ];
     };
   };
+
+  services.vnstat.enable = true;
 
   services.dnsmasq = {
     enable = true;
