@@ -32,7 +32,7 @@ in {
     };
     interfaces = {
       "${netIF}" = {
-        useDHCP = false;
+        useDHCP = true;
       };
 
       "lan" = {
@@ -55,10 +55,10 @@ in {
       ruleset = ''
         table inet filter {
            # enable flow offloading for better throughput
-           flowtable f {
-             hook ingress priority 0;
-             devices = { lan, ppp0 };
-           }
+           # flowtable f {
+           #   hook ingress priority 0;
+           #   devices = { lan, ppp0 };
+           # }
 
            chain output {
              type filter hook output priority 100; policy accept;
@@ -80,7 +80,7 @@ in {
              type filter hook forward priority filter; policy accept;
 
              # enable flow offloading for better throughput
-             ip protocol { tcp, udp } flow offload @f
+             # ip protocol { tcp, udp } flow offload @f
 
              # Allow trusted network WAN access
              iifname {
@@ -119,7 +119,6 @@ in {
         config = ''
           plugin pppoe.so
           ifname ppp0
-          nic-eno1
           lcp-echo-failure 5
           lcp-echo-interval 1
           maxfail 0
@@ -168,6 +167,7 @@ in {
   };
 
   services.lldpd.enable = true;
+  services.resolved.enable = lib.mkForce false;
 
   services.corerad = {
     enable = true;
