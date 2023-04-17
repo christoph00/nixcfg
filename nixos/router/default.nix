@@ -18,7 +18,6 @@ in {
     "net.ipv4.conf.default.forwarding" = true;
   };
 
-
   networking = {
     useNetworkd = true;
     vlans = {
@@ -54,64 +53,63 @@ in {
     nftables = {
       enable = true;
       ruleset = ''
-         table inet filter {
-            # enable flow offloading for better throughput
-            flowtable f {
-              hook ingress priority 0;
-              devices = { lan, ppp0 };
-            }
+        table inet filter {
+           # enable flow offloading for better throughput
+           flowtable f {
+             hook ingress priority 0;
+             devices = { lan, ppp0 };
+           }
 
-            chain output {
-              type filter hook output priority 100; policy accept;
-            }
+           chain output {
+             type filter hook output priority 100; policy accept;
+           }
 
-            chain input {
-              type filter hook input priority filter; policy accept;
+           chain input {
+             type filter hook input priority filter; policy accept;
 
-              # Allow trusted networks to access the router
-              iifname {
-                "lan",
-              } counter accept
+             # Allow trusted networks to access the router
+             iifname {
+               "lan",
+             } counter accept
 
 
-              # Allow returning traffic from wan and drop everthing else
-              iifname "ppp0" ct state { established, related } counter accept
-            }
-            chain forward {
-              type filter hook forward priority filter; policy accept;
+             # Allow returning traffic from wan and drop everthing else
+             iifname "ppp0" ct state { established, related } counter accept
+           }
+           chain forward {
+             type filter hook forward priority filter; policy accept;
 
-              # enable flow offloading for better throughput
-              ip protocol { tcp, udp } flow offload @f
+             # enable flow offloading for better throughput
+             ip protocol { tcp, udp } flow offload @f
 
-              # Allow trusted network WAN access
-              iifname {
-                  "lan",
-              } oifname {
-                  "ppp0",
-              } counter accept comment "Allow trusted LAN to WAN"
+             # Allow trusted network WAN access
+             iifname {
+                 "lan",
+             } oifname {
+                 "ppp0",
+             } counter accept comment "Allow trusted LAN to WAN"
 
-              # Allow established WAN to return
-              iifname {
-                  "ppp0",
-              } oifname {
-                  "lan",
-              } ct state established,related counter accept comment "Allow established back to LANs"
-            }
-          }
-          table ip nat {
-            chain prerouting {
-              type nat hook output priority filter; policy accept;
-            }
+             # Allow established WAN to return
+             iifname {
+                 "ppp0",
+             } oifname {
+                 "lan",
+             } ct state established,related counter accept comment "Allow established back to LANs"
+           }
+         }
+         table ip nat {
+           chain prerouting {
+             type nat hook output priority filter; policy accept;
+           }
 
-            # Setup NAT masquerading on the ppp0 interface
-            chain postrouting {
-              type nat hook postrouting priority filter; policy accept;
-              oifname "ppp0" masquerade
-            }
-          }
+           # Setup NAT masquerading on the ppp0 interface
+           chain postrouting {
+             type nat hook postrouting priority filter; policy accept;
+             oifname "ppp0" masquerade
+           }
+         }
       '';
     };
-    namespaces.enable = true;`
   };
 
   services.pppd = {
@@ -171,19 +169,19 @@ in {
 
   services.lldpd.enable = true;
 
-   services.corerad = {
+  services.corerad = {
     enable = true;
     settings = {
       interfaces = [
-        { name = "lan";
+        {
+          name = "lan";
           advertise = true;
-          prefix = [{ prefix = "::/64"; }];
-          route = [{ prefix = "::/0"; }];
+          prefix = [{prefix = "::/64";}];
+          route = [{prefix = "::/0";}];
         }
       ];
     };
   };
-
 
   services.dnsmasq = {
     enable = true;
