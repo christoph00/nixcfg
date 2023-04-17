@@ -160,6 +160,20 @@ in {
     };
   };
 
+  services.udev.packages = [
+    (pkgs.writeTextFile rec {
+      name = "accept_ra_for_pppoe.rules";
+      destination = "/etc/udev/rules.d/99-${name}";
+      # test with: nixos-rebuild test && udevadm control --log-priority=debug && udevadm trigger /sys/devices/virtual/net/pppoe-wan --action=add
+      text = ''
+        #
+        ACTION=="add|change|move", SUBSYSTEM=="net", ENV{INTERFACE}=="pppoe-wan", RUN+="${pkgs.procps}/bin/sysctl net.ipv6.conf.pppoe-wan.accept_ra=2"
+      '';
+    })
+  ];
+
+  systemd.services.pppd-telekom.serviceConfig.ReadWritePaths = ["/etc/ppp"];
+
   systemd.services."ppp-wait-online" = {
     requires = [
       "systemd-networkd.service"
