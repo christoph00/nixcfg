@@ -118,6 +118,12 @@ in {
       #        Announce = false;
       #      };
     };
+<<<<<<< Updated upstream
+||||||| Stash base
+    namespaces.enable = true;`
+=======
+    namespaces.enable = true;
+>>>>>>> Stashed changes
   };
 
   services.pppd = {
