@@ -22,6 +22,11 @@ in {
 
   networking = {
     useNetworkd = true;
+    nat.enable = false;
+    firewall = {
+      enable = lib.mkForce false;
+      allowPing = true;
+    };
     vlans = {
       "ppp0" = {
         id = 7;
@@ -50,10 +55,6 @@ in {
       };
     };
 
-    firewall = {
-      enable = lib.mkForce false;
-      allowPing = true;
-    };
     nftables = {
       enable = true;
       ruleset = ''
@@ -105,18 +106,21 @@ in {
       };
       networkConfig = {
         IPv6AcceptRA = true;
-        KeepConfiguration = true;
         LinkLocalAddressing = "no";
+        DNS = "127.0.0.1";
+        DHCP = "ipv6";
+        IPForward = "yes";
+        IPv6PrivacyExtensions = "kernel";
+        IPv6DuplicateAddressDetection = 1;
+        KeepConfiguration = "static";
       };
       DHCP = "ipv6";
       dhcpV6Config = {
+        UseDNS = false;
+        UseNTP = false;
         WithoutRA = "solicit";
+        PrefixDelegationHint = "::/56";
       };
-      #      dhcpPrefixDelegationConfig = {
-      #  #        UplinkInterface = ":self";
-      #        SubnetId = 0;
-      #        Announce = false;
-      #      };
     };
   };
 
