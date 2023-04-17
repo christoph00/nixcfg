@@ -7,10 +7,16 @@
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "ohci_pci" "ehci_pci" "usb_storage" "usbhid" "sd_mod"];
   boot.kernelParams = ["radeon.cik_support=0" "amdgpu.cik_support=1"];
 
+  # fileSystems."/" = {
+  #   device = "/dev/disk/by-uuid/32f9120a-1ab8-428e-805a-e52b2ee8d9b0";
+  #   fsType = "btrfs";
+  #   options = ["subvol=@root" "discard=async" "compress-force=zstd"];
+  # };
+
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/32f9120a-1ab8-428e-805a-e52b2ee8d9b0";
-    fsType = "btrfs";
-    options = ["subvol=@root" "discard=async" "compress-force=zstd"];
+    device = "none";
+    fsType = "tmpfs";
+    options = ["defaults" "size=2G" "mode=755"];
   };
 
   fileSystems."/nix" = {
