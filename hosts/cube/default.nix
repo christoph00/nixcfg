@@ -45,7 +45,7 @@
   };
 
   # ----------  Secrets  -----------------------------------------
-  age.secrets.cloudflared.file = ../../secrets/futro-cf;
+  # age.secrets.cloudflared.file = ../../secrets/futro-cf;
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
-  age.secrets.cf-acme.file = ../../secrets/cf-acme;
+  # age.secrets.cf-acme.file = ../../secrets/cf-acme;
 }
