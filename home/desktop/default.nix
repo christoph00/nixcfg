@@ -82,6 +82,8 @@ in {
     foot
 
     kanshi
+
+    usbimager
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
