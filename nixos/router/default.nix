@@ -68,6 +68,10 @@ in {
           }
           chain input {
             type filter hook input priority filter; policy drop;
+
+            meta nfproto ipv6 udp sport 547 accept
+            ip6 nexthdr ipv6-icmp accept
+
             ip saddr 10.0.0.0/8 tcp dport 53 accept;
             ip saddr 10.0.0.0/8 udp dport 53 accept;
             ip saddr 10.0.0.0/8 tcp dport 22 accept;
@@ -83,6 +87,7 @@ in {
           chain forward {
             meta oiftype ppp tcp flags syn tcp option maxseg size set 1452
             type filter hook forward priority filter; policy drop;
+            meta l4proto ipv6-icmp accept
 
             iifname { "lan" } oifname { "pppoe-wan" } counter accept
 
@@ -133,18 +138,21 @@ in {
         };
       };
       "40-lan" = {
-
-         networkConfig.
-      dhcpServerConfig = {
-        EmitRouter = true;
-        Router = "192.168.100.2";
-      };
-
+        matchConfig.Name = "lan";
         networkConfig = {
           DHCPServer = true;
+          MulticastDNS = true;
           EmitLLDP = true;
           IPv6SendRA = true;
         };
+        dhcpServerConfig = {
+          EmitRouter = true;
+          EmitDNS = true;
+          PoolOffset = 50;
+          PoolSize = 120;
+          DNS="_server_address";
+        };
+
         dhcpPrefixDelegationConfig = {
           SubnetId = "0x1";
         };
