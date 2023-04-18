@@ -20,7 +20,6 @@ in {
     "net.ipv6.conf.all.accept_ra" = 0;
     "net.ipv6.conf.all.autoconf" = 0;
     "net.ipv6.conf.all.use_tempaddr" = 0;
-
   };
 
   environment.systemPackages = [pkgs.vnstat];
@@ -239,13 +238,35 @@ in {
     enable = true;
     resolveLocalQueries = true;
     settings = {
-      server = ["193.110.81.0" "185.253.5.0"];
+      port = 5300;
       domain = "lan.net.r505.de";
       domain-needed = true;
-      local = [ "/lan.net.r505.de/" ];
+      local = ["/lan.net.r505.de/"];
       interface = ["lan"];
       dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
       dhcp-authoritative = true;
+      dhcp-option= ["option:dns-server,0.0.0.0"];
+    };
+  };
+
+  services.blocky = {
+    enable = true;
+    settings = {
+      upstream.default = ["1.1.1.1"];
+      startVerifyUpstream = true;
+      blocking = {
+        blackLists.default = [
+          "https://adaway.org/hosts.txt"
+          "https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser"
+        ];
+        clientGroupsBlock.default = ["default"];
+      };
+      caching.maxTime = "30m";
+      prometheus.enable = true;
+      port = "0.0.0.0:53";
+      httpPort = 4000;
+      bootstrapDns = "tcp+udp:1.1.1.1";
+      ede.enable = true;
     };
   };
 }
