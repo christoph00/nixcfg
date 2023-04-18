@@ -105,19 +105,20 @@ in {
 
   systemd.network = {
     networks = {
-      "10-pppoe-wan" = {
+      "40-pppoe-wan" = {
         matchConfig = {
           Name = "pppoe-wan";
         };
         networkConfig = {
           IPv6AcceptRA = true;
-          LinkLocalAddressing = "no";
+          LinkLocalAddressing = "ipv6";
           DNS = "127.0.0.1";
           DHCP = "ipv6";
           IPForward = "yes";
           IPv6PrivacyExtensions = "kernel";
           IPv6DuplicateAddressDetection = 1;
           KeepConfiguration = "static";
+          DefaultRouteOnDevice = true;
         };
         DHCP = "ipv6";
         dhcpV6Config = {
@@ -125,6 +126,21 @@ in {
           UseNTP = false;
           WithoutRA = "solicit";
           PrefixDelegationHint = "::/56";
+          ForceDHCPv6PDOtherInformation = true;
+        };
+        cakeConfig = {
+          OverheadBytes = 65;
+          Bandwidth = "40M";
+        };
+      };
+      "40-lan" = {
+        networkConfig = {
+          DHCPv6PrefixDelegation = true;
+          EmitLLDP = true;
+          IPv6SendRA = true;
+        };
+        dhcpPrefixDelegationConfig = {
+          SubnetId = "0x1";
         };
       };
     };
@@ -211,28 +227,7 @@ in {
     before = lib.mkForce [];
   };
 
-  services.lldpd.enable = true;
   services.resolved.enable = lib.mkForce false;
-
-  services.corerad = {
-    enable = true;
-    settings = {
-      interfaces = [
-        {
-          name = "pppoe-wan";
-          monitor = true;
-        }
-        {
-          name = "lan";
-          advertise = true;
-          prefix = [{prefix = "::/64";}];
-          route = [{prefix = "::/0";}];
-        }
-      ];
-    };
-  };
-
-  services.vnstat.enable = true;
 
   services.dnsmasq = {
     enable = true;
@@ -245,14 +240,19 @@ in {
       interface = ["lan"];
       dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
       dhcp-authoritative = true;
-      dhcp-option= ["option:dns-server,0.0.0.0"];
+      dhcp-option = ["option:dns-server,0.0.0.0"];
     };
   };
 
   services.blocky = {
     enable = true;
     settings = {
-      upstream.default = ["1.1.1.1"];
+      upstream.default = [
+        "tcp-tls:fdns1.dismail.de:853"
+        "https://dns.telekom.de/dns-query"
+        "https://dns.digitale-gesellschaft.ch/dns-query"
+        "https://dnsforge.de/dns-query"
+      ];
       startVerifyUpstream = true;
       blocking = {
         blackLists.default = [
@@ -267,6 +267,12 @@ in {
       httpPort = 4000;
       bootstrapDns = "tcp+udp:1.1.1.1";
       ede.enable = true;
+      fqdnOnly = true;
+      conditional = {
+        mapping = {
+          "lan.net.r505.de" = "127.0.0.1:5300";
+        };
+      };
     };
   };
 }

@@ -46,10 +46,6 @@
   powerManagement.cpuFreqGovernor = "powersave";
   hardware.cpu.amd.updateMicrocode = true;
 
-  hardware.opengl = {
-    driSupport = true;
-  };
-
   # ----------  Secrets  -----------------------------------------
   # age.secrets.cloudflared.file = ../../secrets/futro-cf;
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;

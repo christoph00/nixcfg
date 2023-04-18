@@ -6,11 +6,7 @@
 }: let
   inherit (config.colorscheme) colors;
 in {
-  home.packages = with pkgs; [discord discocss];
-
-  home.persistence = {
-    "/nix/persist/home/christoph".directories = [".config/discord"];
-  };
+  home.packages = with pkgs; [discord-ptb discocss];
 
   xdg.configFile."discocss/custom.css".text = ''
     .theme-dark {
