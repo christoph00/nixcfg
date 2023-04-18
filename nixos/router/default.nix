@@ -328,6 +328,9 @@ in {
       dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
       dhcp-authoritative = true;
       dhcp-option = ["option:dns-server,0.0.0.0"];
+       dhcp-host = [
+      "00:24:81:7d:05:c9,10.10.10.80" # futro
+    ];
     };
   };
 
@@ -375,6 +378,11 @@ in {
       conditional = {
         mapping = {
           "lan.net.r505.de" = "127.0.0.1:5300";
+        };
+      };
+      customDNS = {
+          mapping = {
+          "net.r505.de" = "10.10.10.80";
         };
       };
     };
