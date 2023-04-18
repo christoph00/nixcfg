@@ -126,7 +126,6 @@ in {
           UseNTP = false;
           WithoutRA = "solicit";
           PrefixDelegationHint = "::/56";
-          ForceDHCPv6PDOtherInformation = true;
         };
         cakeConfig = {
           OverheadBytes = 65;
@@ -134,8 +133,15 @@ in {
         };
       };
       "40-lan" = {
+
+         networkConfig.
+      dhcpServerConfig = {
+        EmitRouter = true;
+        Router = "192.168.100.2";
+      };
+
         networkConfig = {
-          DHCPv6PrefixDelegation = true;
+          DHCPServer = true;
           EmitLLDP = true;
           IPv6SendRA = true;
         };
@@ -229,20 +235,20 @@ in {
 
   services.resolved.enable = lib.mkForce false;
 
-  services.dnsmasq = {
-    enable = true;
-    resolveLocalQueries = true;
-    settings = {
-      port = 5300;
-      domain = "lan.net.r505.de";
-      domain-needed = true;
-      local = ["/lan.net.r505.de/"];
-      interface = ["lan"];
-      dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
-      dhcp-authoritative = true;
-      dhcp-option = ["option:dns-server,0.0.0.0"];
-    };
-  };
+  # services.dnsmasq = {
+  #   enable = true;
+  #   resolveLocalQueries = true;
+  #   settings = {
+  #     port = 5300;
+  #     domain = "lan.net.r505.de";
+  #     domain-needed = true;
+  #     local = ["/lan.net.r505.de/"];
+  #     interface = ["lan"];
+  #     dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
+  #     dhcp-authoritative = true;
+  #     dhcp-option = ["option:dns-server,0.0.0.0"];
+  #   };
+  # };
 
   services.blocky = {
     enable = true;
@@ -267,7 +273,6 @@ in {
       httpPort = 4000;
       bootstrapDns = "tcp+udp:1.1.1.1";
       ede.enable = true;
-      fqdnOnly = true;
       conditional = {
         mapping = {
           "lan.net.r505.de" = "127.0.0.1:5300";
