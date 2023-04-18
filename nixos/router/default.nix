@@ -62,6 +62,10 @@ in {
       enable = true;
       ruleset = ''
         table inet filter {
+        # flowtable f {
+        #         hook ingress priority 0; devices = { "${netIF}" };
+        # }
+
           chain output {
             type filter hook output priority 100; policy accept;
           }
@@ -127,7 +131,7 @@ in {
               parameter-problem,
             } limit rate 1000/second accept comment "Allow ICMPv6 Forward"
 
-            #meta l4proto { tcp, udp } flow offload @f
+            # meta l4proto { tcp, udp } flow offload @f
 
             meta l4proto esp accept comment "Allow IPSec ESP"
             udp dport 500 accept comment "Allow ISAKMP"
@@ -168,7 +172,7 @@ in {
         matchConfig = {
           Name = "pppoe-wan";
         };
-         linkConfig = {
+        linkConfig = {
           RequiredForOnline = "routable";
         };
 
@@ -225,15 +229,15 @@ in {
       telekom = {
         config = ''
           plugin rp-pppoe.so ppp0
-          
+
           ifname pppoe-wan
-          
+
           user anonymous@t-online.de
           password 12345567
-        
+
           mtu 1500
           mru 1500
-          
+
           lcp-echo-interval 15
           lcp-echo-failure 3
           lcp-max-configure 10
@@ -322,7 +326,7 @@ in {
     };
   };
 
-   services.corerad = {
+  services.corerad = {
     enable = true;
     settings = {
       interfaces = [
