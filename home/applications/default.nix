@@ -3,16 +3,15 @@
     ./firefox.nix
     ./helix.nix
     ./chromium.nix
-    #./vscode.nix
+    ./vscode.nix
     #./kate.nix
     ./office.nix
-    #./discord.nix
+    ./discord.nix
     #./kdeconnect.nix
     ./nemo.nix
     ./foot.nix
-    ./obsidian.nix
+    #./obsidian.nix
     #./geary.nix
     ./wezterm.nix
-    # ./firefox.nix
   ];
 }
