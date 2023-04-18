@@ -100,26 +100,28 @@ in {
   };
 
   systemd.network = {
-    networks."10-pppoe-wan" = {
-      matchConfig = {
-        Name = "pppoe-wan";
-      };
-      networkConfig = {
-        IPv6AcceptRA = true;
-        LinkLocalAddressing = "no";
-        DNS = "127.0.0.1";
+    networks = {
+      "10-pppoe-wan" = {
+        matchConfig = {
+          Name = "pppoe-wan";
+        };
+        networkConfig = {
+          IPv6AcceptRA = true;
+          LinkLocalAddressing = "no";
+          DNS = "127.0.0.1";
+          DHCP = "ipv6";
+          IPForward = "yes";
+          IPv6PrivacyExtensions = "kernel";
+          IPv6DuplicateAddressDetection = 1;
+          KeepConfiguration = "static";
+        };
         DHCP = "ipv6";
-        IPForward = "yes";
-        IPv6PrivacyExtensions = "kernel";
-        IPv6DuplicateAddressDetection = 1;
-        KeepConfiguration = "static";
-      };
-      DHCP = "ipv6";
-      dhcpV6Config = {
-        UseDNS = false;
-        UseNTP = false;
-        WithoutRA = "solicit";
-        PrefixDelegationHint = "::/56";
+        dhcpV6Config = {
+          UseDNS = false;
+          UseNTP = false;
+          WithoutRA = "solicit";
+          PrefixDelegationHint = "::/56";
+        };
       };
     };
   };
