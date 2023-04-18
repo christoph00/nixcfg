@@ -146,10 +146,15 @@ in {
         table ip6 filter {
           chain input {
             type filter hook input priority 0; policy drop;
+            iifname "pppoe-wan" ct state { established, related }  counter accept comment "Allow established traffic"
+            iifname "pppoe-wan" counter drop comment "Drop all other unsolicited from wan"
+           
           }
 
           chain forward {
             type filter hook forward priority 0; policy drop;
+            iifname { "lan" } oifname { "pppoe-wan" } counter accept
+            iifname { "pppoe-wan" } oifname { "lan" } ct state established,related counter accept
           }
         }
       '';
@@ -180,7 +185,7 @@ in {
           DNS = "127.0.0.1";
           DHCP = "ipv6";
           IPv6DuplicateAddressDetection = 1;
-          KeepConfiguration = "yes";
+          KeepConfiguration = "static";
           DefaultRouteOnDevice = true;
         };
         dhcpV6Config = {
@@ -242,7 +247,6 @@ in {
           ifname pppoe-wan
           #nodefaultroute
           defaultroute
-          # defaultroute6
           maxfail 1
           mtu 1492
           mru 1492
@@ -252,7 +256,6 @@ in {
           nic-ppp0
           user anonymous@t-online.de
           password 12345567
-          # +ipv6
 
         '';
         autostart = true;
@@ -268,7 +271,7 @@ in {
       # test with: nixos-rebuild test && udevadm control --log-priority=debug && udevadm trigger /sys/devices/virtual/net/pppoe-wan --action=add
       text = ''
         #
-        ACTION=="add|change|move", SUBSYSTEM=="net", ENV{INTERFACE}=="pppoe-wan", RUN+="${pkgs.procps}/bin/sysctl net.ipv6.conf.pppoe-wan.accept_ra=2 && ${pkgs.procps}/bin/sysctl net.ipv6.conf.pppoe-wan.addr_gen_mode=1"
+        ACTION=="add|change|move", SUBSYSTEM=="net", ENV{INTERFACE}=="pppoe-wan", RUN+="${pkgs.procps}/bin/sysctl net.ipv6.conf.pppoe-wan.accept_ra=2"
       '';
     })
   ];
