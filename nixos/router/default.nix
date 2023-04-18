@@ -62,38 +62,76 @@ in {
     nftables = {
       enable = true;
       ruleset = ''
-        table ip filter {
+        table inet filter {
           chain output {
             type filter hook output priority 100; policy accept;
           }
           chain input {
             type filter hook input priority filter; policy drop;
 
-            meta nfproto ipv6 udp sport 547 accept
-            ip6 nexthdr ipv6-icmp accept
+            icmp type echo-request accept comment "Allow ping"
+
+            ip6 saddr fc00::/6 ip6 daddr fc00::/6 udp dport 546 accept comment "Allow DHCPv6"
+            ip6 saddr fe80::/10 icmpv6 type {
+              mld-listener-query,
+              mld-listener-report,
+              mld-listener-done,
+              mld-listener-reduction,
+              mld2-listener-report,
+            } accept comment "Allow MLD"
+
+            icmpv6 type {
+              echo-request,
+              echo-reply,
+              destination-unreachable,
+              packet-too-big,
+              time-exceeded,
+              parameter-problem,
+              nd-router-solicit,
+              nd-router-advert,
+              nd-neighbor-solicit,
+              nd-neighbor-advert,
+            } limit rate 1000/second accept comment "Allow ICMPv6"
+
+            iifname "lo" accept
+            iifname "lo" ip saddr != 127.0.0.0/8 drop
 
             ip saddr 10.0.0.0/8 tcp dport 53 accept;
             ip saddr 10.0.0.0/8 udp dport 53 accept;
             ip saddr 10.0.0.0/8 tcp dport 22 accept;
-            ip protocol icmp accept;
 
-            iifname { "lo", "lan"} counter accept
+
+            iifname "lan" counter accept
             ip protocol igmp accept comment "accept IGMP"
             ip saddr 224.0.0.0/4 accept
-            iifname "pppoe-wan" ct state { established, related } counter accept
-            iifname "pppoe-wan" drop
+            iifname "pppoe-wan" ct state { established, related }  counter accept comment "Allow established traffic"
+            iifname "pppoe-wan" counter drop comment "Drop all other unsolicited from wan"
           }
 
           chain forward {
             meta oiftype ppp tcp flags syn tcp option maxseg size set 1452
             type filter hook forward priority filter; policy drop;
-            meta l4proto ipv6-icmp accept
+            icmpv6 type {
+              echo-request,
+              echo-reply,
+              destination-unreachable,
+              packet-too-big,
+              time-exceeded,
+              parameter-problem,
+            } limit rate 1000/second accept comment "Allow ICMPv6 Forward"
+
+            #meta l4proto { tcp, udp } flow offload @f
+
+            meta l4proto esp accept comment "Allow IPSec ESP"
+            udp dport 500 accept comment "Allow ISAKMP"
+            ct status dnat accept comment "Allow port forwards"
 
             iifname { "lan" } oifname { "pppoe-wan" } counter accept
 
             iifname { "pppoe-wan" } oifname { "lan" } ct state established,related counter accept
           }
         }
+
         table ip nat {
           chain prerouting {
             type nat hook prerouting priority -100; policy accept;
@@ -102,6 +140,16 @@ in {
           chain postrouting {
             type nat hook postrouting priority filter; policy accept;
             oifname "pppoe-wan" masquerade
+          }
+        }
+
+        table ip6 filter {
+          chain input {
+            type filter hook input priority 0; policy drop;
+          }
+
+          chain forward {
+            type filter hook forward priority 0; policy drop;
           }
         }
       '';
@@ -114,18 +162,18 @@ in {
         matchConfig = {
           Name = "pppoe-wan";
         };
+        linkConfig = {
+          RequiredForOnline = "routable";
+        };
         networkConfig = {
-          IPv6AcceptRA = true;
-          LinkLocalAddressing = "ipv6";
+          IPv6AcceptRA = false;
+          LinkLocalAddressing = "no";
           DNS = "127.0.0.1";
           DHCP = "ipv6";
-          IPForward = "yes";
-          IPv6PrivacyExtensions = "kernel";
           IPv6DuplicateAddressDetection = 1;
           KeepConfiguration = "static";
           DefaultRouteOnDevice = true;
         };
-        DHCP = "ipv6";
         dhcpV6Config = {
           UseDNS = false;
           UseNTP = false;
@@ -142,19 +190,24 @@ in {
         networkConfig = {
           DHCPServer = true;
           MulticastDNS = true;
-          EmitLLDP = true;
-          IPv6SendRA = true;
+          # IPv6DuplicateAddressDetection = 1;
+          # IPv6AcceptRA = true;
+          # DHCPPrefixDelegation = true;
+          # IPv6SendRA = true;
         };
         dhcpServerConfig = {
           EmitRouter = true;
           EmitDNS = true;
           PoolOffset = 50;
           PoolSize = 120;
-          DNS="_server_address";
+          DNS = "_server_address";
         };
 
         dhcpPrefixDelegationConfig = {
-          SubnetId = "0x1";
+          SubnetId = "10";
+          UplinkInterface = "pppoe-wan";
+            Assign = true;
+            Announce = true;
         };
       };
     };
@@ -258,6 +311,24 @@ in {
   #   };
   # };
 
+   services.corerad = {
+    enable = true;
+    settings = {
+      interfaces = [
+        {
+          name = "pppoe-wan";
+          monitor = true;
+        }
+        {
+          name = "lan";
+          advertise = true;
+          prefix = [{prefix = "::/64";}];
+          route = [{prefix = "::/0";}];
+        }
+      ];
+    };
+  };
+
   services.blocky = {
     enable = true;
     settings = {
@@ -277,15 +348,24 @@ in {
       };
       caching.maxTime = "30m";
       prometheus.enable = true;
-      port = "0.0.0.0:53";
-      httpPort = 4000;
+      ports.dns = "0.0.0.0:53";
+      ports.http = 4000;
       bootstrapDns = "tcp+udp:1.1.1.1";
       ede.enable = true;
-      conditional = {
-        mapping = {
-          "lan.net.r505.de" = "127.0.0.1:5300";
-        };
-      };
+      # conditional = {
+      #   mapping = {
+      #     "lan.net.r505.de" = "127.0.0.1:5300";
+      #   };
+      # };
     };
+  };
+    systemd.services.blocky = {
+    requires = [
+      "ppp-wait-online.service"
+    ];
+    after = [
+      "ppp-wait-online.service"
+    ];
+    before = lib.mkForce [];
   };
 }
