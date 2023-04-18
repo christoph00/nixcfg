@@ -188,19 +188,11 @@ in {
       "40-lan" = {
         matchConfig.Name = "lan";
         networkConfig = {
-          DHCPServer = true;
           MulticastDNS = true;
           # IPv6DuplicateAddressDetection = 1;
           # IPv6AcceptRA = true;
           # DHCPPrefixDelegation = true;
           # IPv6SendRA = true;
-        };
-        dhcpServerConfig = {
-          EmitRouter = true;
-          EmitDNS = true;
-          PoolOffset = 50;
-          PoolSize = 120;
-          DNS = "_server_address";
         };
 
         dhcpPrefixDelegationConfig = {
@@ -296,38 +288,38 @@ in {
 
   services.resolved.enable = lib.mkForce false;
 
-  # services.dnsmasq = {
-  #   enable = true;
-  #   resolveLocalQueries = true;
-  #   settings = {
-  #     port = 5300;
-  #     domain = "lan.net.r505.de";
-  #     domain-needed = true;
-  #     local = ["/lan.net.r505.de/"];
-  #     interface = ["lan"];
-  #     dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
-  #     dhcp-authoritative = true;
-  #     dhcp-option = ["option:dns-server,0.0.0.0"];
-  #   };
-  # };
-
-   services.corerad = {
+  services.dnsmasq = {
     enable = true;
+    resolveLocalQueries = true;
     settings = {
-      interfaces = [
-        {
-          name = "pppoe-wan";
-          monitor = true;
-        }
-        {
-          name = "lan";
-          advertise = true;
-          prefix = [{prefix = "::/64";}];
-          route = [{prefix = "::/0";}];
-        }
-      ];
+      port = 5300;
+      domain = "lan.net.r505.de";
+      domain-needed = true;
+      local = ["/lan.net.r505.de/"];
+      interface = ["lan"];
+      dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
+      dhcp-authoritative = true;
+      dhcp-option = ["option:dns-server,0.0.0.0"];
     };
   };
+
+  #  services.corerad = {
+  #   enable = true;
+  #   settings = {
+  #     interfaces = [
+  #       {
+  #         name = "pppoe-wan";
+  #         monitor = true;
+  #       }
+  #       {
+  #         name = "lan";
+  #         advertise = true;
+  #         prefix = [{prefix = "::/64";}];
+  #         route = [{prefix = "::/0";}];
+  #       }
+  #     ];
+  #   };
+  # };
 
   services.blocky = {
     enable = true;
@@ -352,11 +344,11 @@ in {
       ports.http = 4000;
       bootstrapDns = "tcp+udp:1.1.1.1";
       ede.enable = true;
-      # conditional = {
-      #   mapping = {
-      #     "lan.net.r505.de" = "127.0.0.1:5300";
-      #   };
-      # };
+      conditional = {
+        mapping = {
+          "lan.net.r505.de" = "127.0.0.1:5300";
+        };
+      };
     };
   };
     systemd.services.blocky = {
