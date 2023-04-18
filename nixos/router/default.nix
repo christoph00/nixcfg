@@ -16,6 +16,11 @@ in {
     "net.ipv6.conf.default.forwarding" = true;
     "net.ipv4.conf.all.forwarding" = true;
     "net.ipv4.conf.default.forwarding" = true;
+
+    "net.ipv6.conf.all.accept_ra" = 0;
+    "net.ipv6.conf.all.autoconf" = 0;
+    "net.ipv6.conf.all.use_tempaddr" = 0;
+
   };
 
   environment.systemPackages = [pkgs.vnstat];
@@ -232,11 +237,13 @@ in {
 
   services.dnsmasq = {
     enable = true;
-    servers = ["193.110.81.0" "185.253.5.0"];
+    resolveLocalQueries = true;
     settings = {
+      server = ["193.110.81.0" "185.253.5.0"];
       domain = "lan.net.r505.de";
       interface = ["lan"];
       dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
+      dhcp-authoritative = true;
     };
   };
 }
