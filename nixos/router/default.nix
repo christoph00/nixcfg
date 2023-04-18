@@ -42,11 +42,10 @@ in {
       };
     };
     interfaces = {
-      "${netIF}" = {
-        useDHCP = false;
+      "ppp0" = {
+        ipv4.addresses = [];
+        ipv6.addresses = [];
       };
-
-      "ppp0".useDHCP = false;
 
       "lan" = {
         ipv4.addresses = [
@@ -69,16 +68,22 @@ in {
           chain input {
             type filter hook input priority filter; policy drop;
 
-            icmp type echo-request accept comment "Allow ping"
+            icmp type echo-request limit rate 100/second accept comment "Allow ping"
 
-            ip6 saddr fc00::/6 ip6 daddr fc00::/6 udp dport 546 accept comment "Allow DHCPv6"
-            ip6 saddr fe80::/10 icmpv6 type {
+            udp dport dhcpv6-client accept
+
+            ip6 daddr fe80::/64 udp dport 546 udp sport 547 counter accept comment "WAN DHCPv6"
+
+            icmpv6 type {
               mld-listener-query,
               mld-listener-report,
               mld-listener-done,
               mld-listener-reduction,
               mld2-listener-report,
-            } accept comment "Allow MLD"
+            } limit rate 1000/second accept comment "Allow MLD"
+
+            ip6 nexthdr icmpv6 icmpv6 type nd-router-solicit counter accept
+
 
             icmpv6 type {
               echo-request,
@@ -92,6 +97,8 @@ in {
               nd-neighbor-solicit,
               nd-neighbor-advert,
             } limit rate 1000/second accept comment "Allow ICMPv6"
+
+            ip protocol icmp icmp type { echo-request, router-advertisement } accept
 
             iifname "lo" accept
             iifname "lo" ip saddr != 127.0.0.0/8 drop
@@ -142,21 +149,6 @@ in {
             oifname "pppoe-wan" masquerade
           }
         }
-
-        table ip6 filter {
-          chain input {
-            type filter hook input priority 0; policy drop;
-            iifname "pppoe-wan" ct state { established, related }  counter accept comment "Allow established traffic"
-            iifname "pppoe-wan" counter drop comment "Drop all other unsolicited from wan"
-           
-          }
-
-          chain forward {
-            type filter hook forward priority 0; policy drop;
-            iifname { "lan" } oifname { "pppoe-wan" } counter accept
-            iifname { "pppoe-wan" } oifname { "lan" } ct state established,related counter accept
-          }
-        }
       '';
     };
   };
@@ -176,27 +168,31 @@ in {
         matchConfig = {
           Name = "pppoe-wan";
         };
-        linkConfig = {
+         linkConfig = {
           RequiredForOnline = "routable";
         };
+
         networkConfig = {
-          IPv6AcceptRA = true;
-          LinkLocalAddressing = "no";
           DNS = "127.0.0.1";
+
+          IPv6AcceptRA = true;
           DHCP = "ipv6";
+
+          IPForward = "yes";
+
+          IPv6PrivacyExtensions = "kernel";
           IPv6DuplicateAddressDetection = 1;
+
           KeepConfiguration = "static";
-          DefaultRouteOnDevice = true;
         };
+
         dhcpV6Config = {
           UseDNS = false;
           UseNTP = false;
+
           WithoutRA = "solicit";
+
           PrefixDelegationHint = "::/56";
-        };
-        ipv6AcceptRAConfig = {
-          DHCPv6Client = "always";
-          UseDNS = false;
         };
         cakeConfig = {
           OverheadBytes = 65;
@@ -218,7 +214,6 @@ in {
         };
 
         dhcpPrefixDelegationConfig = {
-          SubnetId = "10";
           UplinkInterface = "pppoe-wan";
           Assign = true;
           Announce = true;
@@ -232,31 +227,38 @@ in {
     peers = {
       telekom = {
         config = ''
-          logfile /dev/null
-          noipdefault
-          noaccomp
-          nopcomp
-          nocrtscts
-          lock
-          maxfail 0
-          lcp-echo-failure 5
-          lcp-echo-interval 1
-
-          nodetach
-          ipparam wan
+          plugin rp-pppoe.so ppp0
+          
           ifname pppoe-wan
-          #nodefaultroute
-          defaultroute
-          maxfail 1
-          mtu 1492
-          mru 1492
-          plugin rp-pppoe.so
-          # name of the network interface. pppd sometimes claims that this is an invalid
-          # option. I assume because the interface doesn't exist at that time.
-          nic-ppp0
+          
           user anonymous@t-online.de
           password 12345567
+        
+          mtu 1500
+          mru 1500
+          
+          lcp-echo-interval 15
+          lcp-echo-failure 3
+          lcp-max-configure 10
 
+          hide-password
+
+          default-asyncmap
+
+          maxfail 0
+          holdoff 5
+
+          noauth
+          noproxyarp
+          noaccomp
+
+          nomultilink
+          novj
+
+          defaultroute
+          persist
+
+          +ipv6 ipv6cp-use-ipaddr
         '';
         autostart = true;
         enable = true;
