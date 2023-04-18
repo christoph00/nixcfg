@@ -241,6 +241,8 @@ in {
     settings = {
       server = ["193.110.81.0" "185.253.5.0"];
       domain = "lan.net.r505.de";
+      domain-needed = true;
+      local = [ "/lan.net.r505.de/" ];
       interface = ["lan"];
       dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
       dhcp-authoritative = true;
