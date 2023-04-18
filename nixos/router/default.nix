@@ -166,12 +166,12 @@ in {
           RequiredForOnline = "routable";
         };
         networkConfig = {
-          IPv6AcceptRA = false;
+          IPv6AcceptRA = true;
           LinkLocalAddressing = "no";
           DNS = "127.0.0.1";
           DHCP = "ipv6";
           IPv6DuplicateAddressDetection = 1;
-          KeepConfiguration = "static";
+          KeepConfiguration = "yes";
           DefaultRouteOnDevice = true;
         };
         dhcpV6Config = {
@@ -180,9 +180,14 @@ in {
           WithoutRA = "solicit";
           PrefixDelegationHint = "::/56";
         };
+        ipv6AcceptRAConfig = {
+          DHCPv6Client = "always";
+          UseDNS = false;
+        };
         cakeConfig = {
           OverheadBytes = 65;
           Bandwidth = "40M";
+          NAT = "yes";
         };
       };
       "40-lan" = {
@@ -198,8 +203,8 @@ in {
         dhcpPrefixDelegationConfig = {
           SubnetId = "10";
           UplinkInterface = "pppoe-wan";
-            Assign = true;
-            Announce = true;
+          Assign = true;
+          Announce = true;
         };
       };
     };
@@ -225,8 +230,7 @@ in {
           ifname pppoe-wan
           #nodefaultroute
           defaultroute
-          defaultroute6
-          usepeerdns
+          # defaultroute6
           maxfail 1
           mtu 1492
           mru 1492
@@ -236,7 +240,7 @@ in {
           nic-ppp0
           user anonymous@t-online.de
           password 12345567
-          +ipv6
+          # +ipv6
 
         '';
         autostart = true;
@@ -351,7 +355,7 @@ in {
       };
     };
   };
-    systemd.services.blocky = {
+  systemd.services.blocky = {
     requires = [
       "ppp-wait-online.service"
     ];
