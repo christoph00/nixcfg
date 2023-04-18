@@ -20,6 +20,11 @@ in {
     "net.ipv6.conf.all.accept_ra" = 0;
     "net.ipv6.conf.all.autoconf" = 0;
     "net.ipv6.conf.all.use_tempaddr" = 0;
+
+    "net.ipv4.tcp_rmem" = "4096 87380 33554432";
+    "net.ipv4.tcp_wmem" = "4096 65536 33554432";
+    "net.core.rmem_max" = 67108864;
+    "net.core.wmem_max" = 67108864;
   };
 
   environment.systemPackages = [pkgs.vnstat];
