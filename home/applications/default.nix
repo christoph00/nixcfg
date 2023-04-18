@@ -3,8 +3,8 @@
     ./firefox.nix
     ./helix.nix
     ./chromium.nix
-    ./vscode.nix
-    ./kate.nix
+    #./vscode.nix
+    #./kate.nix
     ./office.nix
     #./discord.nix
     #./kdeconnect.nix
