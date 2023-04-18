@@ -158,6 +158,15 @@ in {
 
   systemd.network = {
     networks = {
+      "40-${netIF}" = {
+        matchConfig = {
+          Name = netIF;
+        };
+        networkConfig = {
+          LinkLocalAddressing = "no";
+        };
+      };
+
       "40-pppoe-wan" = {
         matchConfig = {
           Name = "pppoe-wan";
@@ -188,12 +197,15 @@ in {
           OverheadBytes = 65;
           Bandwidth = "40M";
           NAT = "yes";
+          PriorityQueueingPreset = "diffserv4";
         };
       };
       "40-lan" = {
         matchConfig.Name = "lan";
         networkConfig = {
           MulticastDNS = true;
+          LinkLocalAddressing = "no";
+
           # IPv6DuplicateAddressDetection = 1;
           # IPv6AcceptRA = true;
           # DHCPPrefixDelegation = true;
@@ -256,7 +268,7 @@ in {
       # test with: nixos-rebuild test && udevadm control --log-priority=debug && udevadm trigger /sys/devices/virtual/net/pppoe-wan --action=add
       text = ''
         #
-        ACTION=="add|change|move", SUBSYSTEM=="net", ENV{INTERFACE}=="pppoe-wan", RUN+="${pkgs.procps}/bin/sysctl net.ipv6.conf.pppoe-wan.accept_ra=2"
+        ACTION=="add|change|move", SUBSYSTEM=="net", ENV{INTERFACE}=="pppoe-wan", RUN+="${pkgs.procps}/bin/sysctl net.ipv6.conf.pppoe-wan.accept_ra=2 && ${pkgs.procps}/bin/sysctl net.ipv6.conf.pppoe-wan.addr_gen_mode=1"
       '';
     })
   ];
