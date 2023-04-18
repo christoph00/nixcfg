@@ -205,12 +205,9 @@ in {
         matchConfig.Name = "lan";
         networkConfig = {
           MulticastDNS = true;
-          LinkLocalAddressing = "no";
-
-          # IPv6DuplicateAddressDetection = 1;
-          # IPv6AcceptRA = true;
-          # DHCPPrefixDelegation = true;
-          # IPv6SendRA = true;
+          ConfigureWithoutCarrier = true;
+          DHCPPrefixDelegation = true;
+          IPv6AcceptRA = false;
         };
 
         dhcpPrefixDelegationConfig = {
@@ -256,6 +253,7 @@ in {
           novj
 
           defaultroute
+          defaultroute6
           persist
 
           +ipv6 ipv6cp-use-ipaddr
@@ -324,23 +322,23 @@ in {
     };
   };
 
-  #  services.corerad = {
-  #   enable = true;
-  #   settings = {
-  #     interfaces = [
-  #       {
-  #         name = "pppoe-wan";
-  #         monitor = true;
-  #       }
-  #       {
-  #         name = "lan";
-  #         advertise = true;
-  #         prefix = [{prefix = "::/64";}];
-  #         route = [{prefix = "::/0";}];
-  #       }
-  #     ];
-  #   };
-  # };
+   services.corerad = {
+    enable = true;
+    settings = {
+      interfaces = [
+        {
+          name = "pppoe-wan";
+          monitor = true;
+        }
+        {
+          name = "lan";
+          advertise = true;
+          prefix = [{prefix = "::/64";}];
+          route = [{prefix = "::/0";}];
+        }
+      ];
+    };
+  };
 
   services.blocky = {
     enable = true;
