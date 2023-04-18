@@ -62,12 +62,14 @@ in {
     tio
     #picocom
 
+    simple-http-server
+
     #vomit-sync
     #    vmt
 
     jellyfin-ffmpeg
 
-    conda
+    #conda
   ];
 
   home.sessionVariables = {
