@@ -34,11 +34,13 @@
         "https://hyprland.cachix.org"
         "https://nix-community.cachix.org"
         "https://chr.cachix.org"
+        "https://cache.garnix.io"
       ];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "chr.cachix.org-1:8Z0vNVd8hK8lVU53Y26GHDNc6gv3eFzBNwSYOcUvsgA="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
       trusted-users = ["root" "@wheel"];
       auto-optimise-store = lib.mkDefault true;
