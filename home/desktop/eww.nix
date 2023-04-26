@@ -14,7 +14,7 @@
 
   eww-yuck = pkgs.writeText "eww.yuck" ''
     ;; VARS /////////////////
-    (defpoll HYPRWINDOW :interval "1s" `hyprctl activewindow -j`)
+    (defpoll HYPRWINDOW :interval "1s" `${pkgs.hyprland}/bin/hyprctl activewindow -j`)
     (defpoll CLOCK :interval "5s" `date "+%H:%M"`)
     (defvar  VOLUME 80)
     (defvar  BRIGHTNESS 25)
