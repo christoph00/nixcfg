@@ -45,9 +45,9 @@
   #networking.useDHCP = true;
   # networking.interfaces.enp3s0f0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp3s0f1.useDHCP = lib.mkDefault true;
-  networking.interfaces.enp4s0f0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp4s0f0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp4s0f1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
+  networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
 
   networking.hostName = "futro";
 
