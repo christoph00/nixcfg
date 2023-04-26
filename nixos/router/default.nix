@@ -27,7 +27,7 @@ in {
     "net.core.wmem_max" = 67108864;
   };
 
-  environment.systemPackages = [pkgs.vnstat];
+  environment.systemPackages = [pkgs.nftables];
 
   networking = {
     useNetworkd = true;
@@ -328,9 +328,9 @@ in {
       dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
       dhcp-authoritative = true;
       dhcp-option = ["option:dns-server,0.0.0.0"];
-       dhcp-host = [
-      "00:24:81:7d:05:c9,10.10.10.80" # futro
-    ];
+      dhcp-host = [
+        "00:24:81:7d:05:c9,10.10.10.80" # futro
+      ];
     };
   };
 
@@ -364,7 +364,7 @@ in {
       startVerifyUpstream = true;
       blocking = {
         blackLists.default = [
-          "https://adaway.org/hosts.txt"
+          # "https://adaway.org/hosts.txt"
           "https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser"
         ];
         clientGroupsBlock.default = ["default"];
@@ -381,7 +381,7 @@ in {
         };
       };
       customDNS = {
-          mapping = {
+        mapping = {
           "net.r505.de" = "10.10.10.80";
         };
       };

@@ -10,6 +10,9 @@
     coreutils
     hyprland
   ];
+  script-battery = pkgs.writeShellScript "battery.sh" ''
+    print 98
+  '';
 in {
   programs.ironbar = {
     enable = true;
@@ -43,7 +46,7 @@ in {
       };
       battery = {
         type = "label";
-        label = "BAT: {{500:cat /sys/class/power_supply/BAT0/capacity}}";
+        label = "BAT: {{5000:${script-battery}}}%";
       };
     in {
       position = "bottom";

@@ -67,6 +67,10 @@ in {
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
           exec = ${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill
 
+          exec-once = hyprctl setcursor ${config.gtk.cursorTheme.name} 24
+
+          exec = ${pkgs.eww-wayland}/bin/eww open bar
+
           env = XDG_SESSION_DESKTOP,Hyprland
           env = QT_QPA_PLATFORM,wayland;xcb
           env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
