@@ -257,7 +257,7 @@
           +ipv6 ipv6cp-use-ipaddr
         '';
         autostart = true;
-        enable = true;
+        enable = false;
       };
     };
   };
