@@ -60,7 +60,7 @@
     };
 
     nftables = {
-      enable = true;
+      enable = false;
       ruleset = ''
         table inet filter {
           chain output {
