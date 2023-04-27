@@ -18,15 +18,6 @@ in {
     enable = true;
     package = inputs.ironbar.packages.x86_64-linux.default;
     systemd = false;
-    features = [
-      "http"
-      "config+json"
-      "clipboard"
-      "clock"
-      "sys_info"
-      "tray"
-      "workspaces+hyprland"
-    ];
     config = let
       launcher = {
         type = "launcher";
