@@ -3,9 +3,7 @@
   lib,
   config,
   ...
-}: let
-  netIF = "enp1s0";
-in {
+}: {
   boot.kernelModules = [
     "ppp_generic"
     "tcp_bbr"
@@ -39,13 +37,11 @@ in {
     vlans = {
       "ppp0" = {
         id = 7;
-        interface = netIF;
-      };
-      "lan" = {
-        id = 10;
-        interface = netIF;
+        interface = "enp5s0";
       };
     };
+
+    bridges.lan.interfaces = ["enp3s0f0" "enp3s0f1" "enp4s0f0" "enp4s0f1"];
     interfaces = {
       "ppp0" = {
         ipv4.addresses = [];
@@ -55,7 +51,7 @@ in {
       "lan" = {
         ipv4.addresses = [
           {
-            address = "10.10.10.1";
+            address = "192.168.10.1";
             prefixLength = 24;
           }
         ];
@@ -67,10 +63,6 @@ in {
       enable = true;
       ruleset = ''
         table inet filter {
-        # flowtable f {
-        #         hook ingress priority 0; devices = { "${netIF}" };
-        # }
-
           chain output {
             type filter hook output priority 100; policy accept;
           }
@@ -112,12 +104,18 @@ in {
             iifname "lo" accept
             iifname "lo" ip saddr != 127.0.0.0/8 drop
 
-            ip saddr 10.0.0.0/8 tcp dport 53 accept;
-            ip saddr 10.0.0.0/8 udp dport 53 accept;
-            ip saddr 10.0.0.0/8 tcp dport 22 accept;
+            ip saddr 192.168.10.0/24 tcp dport 53 accept;
+            ip saddr 192.168.10.0/24 udp dport 53 accept;
+            ip saddr 192.168.10.0/24 tcp dport 22 accept;
+
+            ip saddr 10.10.10.0/24 tcp dport 53 accept;
+            ip saddr 10.10.10.0/24 udp dport 53 accept;
+            ip saddr 10.10.10.0/24 tcp dport 22 accept;
 
 
             iifname "lan" counter accept
+            iifname "tailscale0" counter accept
+
             ip protocol igmp accept comment "accept IGMP"
             ip saddr 224.0.0.0/4 accept
             iifname "pppoe-wan" ct state { established, related }  counter accept comment "Allow established traffic"
@@ -158,21 +156,23 @@ in {
             oifname "pppoe-wan" masquerade
           }
         }
+
+        table bridge filter {
+
+        chain forward {
+          type filter hook forward priority 0;
+          ct state established,related accept
+          forward iifname { lan } oifname pppoe-wan ct state new accept
+        }
+
+
+        }
       '';
     };
   };
 
   systemd.network = {
     networks = {
-      "40-${netIF}" = {
-        matchConfig = {
-          Name = netIF;
-        };
-        networkConfig = {
-          LinkLocalAddressing = "no";
-        };
-      };
-
       "40-pppoe-wan" = {
         matchConfig = {
           Name = "pppoe-wan";
@@ -325,11 +325,11 @@ in {
       domain-needed = true;
       local = ["/lan.net.r505.de/"];
       interface = ["lan"];
-      dhcp-range = ["10.10.10.51,10.10.10.249,24h"];
+      dhcp-range = ["192.168.10.51,192.168.10.249,24h"];
       dhcp-authoritative = true;
       dhcp-option = ["option:dns-server,0.0.0.0"];
       dhcp-host = [
-        "00:24:81:7d:05:c9,10.10.10.80" # futro
+        # "00:24:81:7d:05:c9,10.10.10.80" # futro - lan4
       ];
     };
   };
@@ -382,7 +382,7 @@ in {
       };
       customDNS = {
         mapping = {
-          "net.r505.de" = "10.10.10.80";
+          "net.r505.de" = "192.168.10.1";
         };
       };
     };
