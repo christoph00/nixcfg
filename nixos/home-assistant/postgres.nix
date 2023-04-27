@@ -8,7 +8,7 @@
     requires = ["postgresql.service"];
     after = ["postgresql.service"];
   };
-  services.home-assistant.config.recorder.db_url = "postgresql://@/ha";
+  services.home-assistant.config.recorder.db_url = "postgresql://@/hass";
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_15;
