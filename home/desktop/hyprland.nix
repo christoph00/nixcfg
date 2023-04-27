@@ -69,7 +69,7 @@ in {
 
           exec-once = hyprctl setcursor ${config.gtk.cursorTheme.name} 24
 
-          exec = ${config.ironbar.package}/bin/ironbar
+          exec = ${config.programs.ironbar.package}/bin/ironbar
 
           env = XDG_SESSION_DESKTOP,Hyprland
           env = QT_QPA_PLATFORM,wayland;xcb
