@@ -58,7 +58,7 @@
 
   networking.useHostResolvConf = false;
   services.resolved = {
-    enable = true;
+    enable = lib.mkDefault true;
     dnssec = "false";
     llmnr = "true";
     extraConfig = ''
@@ -78,7 +78,6 @@
 
   programs.command-not-found.enable = false;
   programs.fish.enable = true;
-  programs.fish.enableCompletion = true;
 
 
   users.users.christoph = {
