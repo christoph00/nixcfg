@@ -17,6 +17,15 @@ in {
   programs.ironbar = {
     enable = true;
     package = inputs.ironbar.packages.x86_64-linux.default;
+    features = [
+      "http"
+      "config+json"
+      "clipboard"
+      "clock"
+      "sys_info"
+      "tray"
+      "workspaces+hyprland"
+    ];
     config = let
       launcher = {
         type = "launcher";
@@ -28,8 +37,12 @@ in {
 
       workspaces = {
         type = "workspaces";
+        all_monitors = false;
+        name_map = let
+          workspaces = lib.genAttrs (map (n: builtins.toString n) [1 2 3 4 5 6 7 8 9 10]);
+        in
+          workspaces (_: "●");
       };
-
       tray = {type = "tray";};
       clock = {type = "clock";};
       sys-info = {
@@ -46,7 +59,7 @@ in {
       };
       battery = {
         type = "label";
-        label = "BAT: {{5000:${script-battery}}}%";
+        label = "BAT: {{5000:cat /sys/class/power_supply/BAT0/capacity}}%";
       };
     in {
       position = "bottom";
