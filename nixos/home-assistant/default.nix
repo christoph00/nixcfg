@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    # ./postgres.nix
+    ./postgres.nix
     ./extentions.nix
     ./systemmonitor.nix
     ./commands.nix
