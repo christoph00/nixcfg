@@ -4,19 +4,20 @@
   lib,
   ...
 }: {
+  systemd.services.home-assistant = {
+    requires = ["postgresql.service"];
+    after = ["postgresql.service"];
+  };
   services.home-assistant.config.recorder.db_url = "postgresql://@/ha";
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_15;
-    extraPlugins = with pkgs.postgresql15Packages; [
-      timescaledb
-    ];
-    ensureDatabases = ["ha"];
+    ensureDatabases = ["hass"];
     dataDir = "/nix/persist/postgresql/${config.services.postgresql.package.psqlSchema}";
     ensureUsers = [
       {
-        name = "ha";
-        ensurePermissions."DATABASE ha" = "ALL PRIVILEGES";
+        name = "hass";
+        ensurePermissions."DATABASE hass" = "ALL PRIVILEGES";
       }
     ];
   };
