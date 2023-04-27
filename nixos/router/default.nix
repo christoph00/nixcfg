@@ -162,7 +162,9 @@
         chain forward {
           type filter hook forward priority 0;
           ct state established,related accept
-          forward iifname { lan } oifname pppoe-wan ct state new accept
+          iifname { "lan" } oifname { "pppoe-wan" } counter accept
+
+          iifname { "pppoe-wan" } oifname { "lan" } ct state established,related counter accept
         }
 
 
