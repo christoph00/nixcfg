@@ -17,6 +17,7 @@ in {
   programs.ironbar = {
     enable = true;
     package = inputs.ironbar.packages.x86_64-linux.default;
+    systemd = false;
     features = [
       "http"
       "config+json"
@@ -68,5 +69,4 @@ in {
       end = [tray battery clock];
     };
   };
-  systemd.user.services.ironbar.Service.Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
 }
