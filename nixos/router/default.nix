@@ -156,19 +156,6 @@
             oifname "pppoe-wan" masquerade
           }
         }
-
-        table bridge filter {
-
-        chain forward {
-          type filter hook forward priority 0;
-          ct state established,related accept
-          iifname { "lan" } oifname { "pppoe-wan" } counter accept
-
-          iifname { "pppoe-wan" } oifname { "lan" } ct state established,related counter accept
-        }
-
-
-        }
       '';
     };
   };
