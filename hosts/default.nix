@@ -32,7 +32,7 @@
           self.nixosModules.smart-home
           self.nixosModules.home-server
           self.nixosModules.reverse-proxy-server
-          self.nixosModukes.router
+          self.nixosModules.router
           ./futro
         ];
       };
