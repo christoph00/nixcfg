@@ -77,16 +77,15 @@
   age.secrets.christoph-password.file = ../secrets/christoph-password.age;
 
   programs.command-not-found.enable = false;
-  programs.zsh.enable = true;
-  programs.zsh.enableCompletion = true;
-  # do this in private dotfiles
-  programs.zsh.enableGlobalCompInit = false;
+  programs.fish.enable = true;
+  programs.fish.enableCompletion = true;
+
 
   users.users.christoph = {
     description = "Christoph";
     isNormalUser = true;
     createHome = true;
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     extraGroups = [
       "wheel"
       "video"
