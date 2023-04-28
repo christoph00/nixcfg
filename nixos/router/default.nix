@@ -381,7 +381,7 @@
       domain = "lan.net.r505.de";
       domain-needed = true;
       local = ["/lan.net.r505.de/"];
-      interface = ["lan"];
+      interface = ["br-lan0"];
       dhcp-range = ["192.168.10.51,192.168.10.249,24h"];
       dhcp-authoritative = true;
       dhcp-option = ["option:dns-server,0.0.0.0"];
@@ -400,7 +400,7 @@
           monitor = true;
         }
         {
-          name = "lan";
+          name = "br-lan0";
           advertise = true;
           prefix = [{prefix = "::/64";}];
           route = [{prefix = "::/0";}];
