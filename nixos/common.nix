@@ -18,8 +18,6 @@
     "net.core.bpf_jit_harden" = true;
   };
 
-  boot.loader.systemd-boot.configurationLimit = 5;
-
   i18n.defaultLocale = "de_DE.UTF-8";
   i18n.extraLocaleSettings = lib.mkDefault {
     LC_TIME = "de_DE.UTF-8";
