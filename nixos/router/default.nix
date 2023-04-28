@@ -41,7 +41,7 @@
       };
     };
 
-    bridges.lan.interfaces = ["enp3s0f0" "enp3s0f1" "enp4s0f0" "enp4s0f1"];
+    # bridges.lan.interfaces = ["enp3s0f0" "enp3s0f1" "enp4s0f0" "enp4s0f1"];
     interfaces = {
       "ppp0" = {
         ipv4.addresses = [];
@@ -161,6 +161,43 @@
   };
 
   systemd.network = {
+    links = {
+      # "40-wan0" = {
+      #   linkConfig.Name = "wan0";
+      #   matchConfig.MACAddress = "";
+      # };
+      "40-lan0" = {
+        linkConfig.Name = "lan0";
+        matchConfig.MACAddress = "00:24:81:7d:05:c9";
+      };
+      "40-lan1" = {
+        linkConfig.Name = "lan1";
+        matchConfig.MACAddress = "00:24:81:7d:05:c8";
+      };
+      "40-lan2" = {
+        linkConfig.Name = "lan2";
+        matchConfig.MACAddress = "00:24:81:7d:05:cb";
+      };
+      "40-lan3" = {
+        linkConfig.Name = "lan3";
+        matchConfig.MACAddress = "00:24:81:7d:05";
+      };
+    };
+    netdevs = {
+      br-lan0 = {
+        netdevConfig = {
+          Name = "br-lan0";
+          Kind = "bridge";
+        };
+      };
+
+      wg0 = {
+        netdevConfig = {
+          Name = "wg0";
+          Kind = "wireguard";
+        };
+      };
+    };
     networks = {
       "40-pppoe-wan" = {
         matchConfig = {
@@ -199,8 +236,33 @@
           PriorityQueueingPreset = "diffserv4";
         };
       };
-      "40-lan" = {
-        matchConfig.Name = "lan";
+      "40-lan0" = {
+        name = "lan0";
+        DHCP = "no";
+        bridge = ["br-lan0"];
+        linkConfig.RequiredForOnline = false;
+      };
+      "40-lan1" = {
+        name = "lan1";
+        DHCP = "no";
+        bridge = ["br-lan0"];
+        linkConfig.RequiredForOnline = false;
+      };
+
+      "40-lan2" = {
+        name = "lan2";
+        DHCP = "no";
+        bridge = ["br-lan0"];
+        linkConfig.RequiredForOnline = false;
+      };
+      "40-lan3" = {
+        name = "lan3";
+        DHCP = "no";
+        bridge = ["br-lan0"];
+        linkConfig.RequiredForOnline = false;
+      };
+      "40-br-lan0" = {
+        name = "br-lan0";
         networkConfig = {
           MulticastDNS = true;
           ConfigureWithoutCarrier = true;
@@ -213,6 +275,12 @@
           Assign = true;
           Announce = true;
         };
+      };
+      "40-wg0" = {
+        name = "wg0";
+        DHCP = "no";
+        address = ["10.90.0.1/24"];
+        linkConfig.RequiredForOnline = false;
       };
     };
   };
