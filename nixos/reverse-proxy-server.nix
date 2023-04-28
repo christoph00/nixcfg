@@ -81,32 +81,32 @@
         services = {
           home-assistant = {
             loadBalancer = {
-              servers = [{url = "http://100.94.251.48:8123";}];
+              servers = [{url = "http://futro:8123";}];
             };
           };
           nas-dav = {
             loadBalancer = {
-              servers = [{url = "http://100.94.251.48:8033";}];
+              servers = [{url = "http://futro:8033";}];
             };
           };
           webmail = {
             loadBalancer = {
-              servers = [{url = "http://oca.cama-boa.ts.net:8077";}];
+              servers = [{url = "http://oca:8077";}];
             };
           };
           caldav = {
             loadBalancer = {
-              servers = [{url = "http://oca.cama-boa.ts.net:5232";}];
+              servers = [{url = "http://oca:5232";}];
             };
           };
           grafana = {
             loadBalancer = {
-              servers = [{url = "http://oca.cama-boa.ts.net:2342";}];
+              servers = [{url = "http://oca:2342";}];
             };
           };
           stalwart-jmap = {
             loadBalancer = {
-              servers = [{url = "http://100.67.176.239:8055";}];
+              servers = [{url = "http://oc2:8055";}];
             };
           };
         };
