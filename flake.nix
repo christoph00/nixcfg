@@ -94,6 +94,7 @@
         ./nixos
         ./home
         ./hosts
+        ./hosts/deploy.nix
         ./devshells.nix
       ];
 
