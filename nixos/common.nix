@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   pkgs,
   lib,
   ...
@@ -118,7 +119,14 @@
   };
   programs.mosh.enable = true;
 
-  environment.systemPackages = [pkgs.git pkgs.killall pkgs.dnsutils pkgs.htop];
+  environment.systemPackages = [
+    pkgs.git
+    pkgs.killall
+    pkgs.dnsutils
+    pkgs.htop
+
+    inputs.deploy-rs.defaultPackage.${pkgs.system}
+  ];
 
   environment.shellAliases = {
     nrb = "nixos-rebuild --flake github:christoph00/nixcfg --use-remote-sudo boot";
