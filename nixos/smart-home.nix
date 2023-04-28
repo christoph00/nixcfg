@@ -27,6 +27,7 @@
       legacy_api = false;
     };
   };
+
   environment.persistence."/nix/persist" = {
     directories = [
       "/var/lib/zigbee2mqtt"

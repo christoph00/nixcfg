@@ -106,6 +106,11 @@
 
   services.xserver.videoDrivers = ["amdgpu"];
 
+  services.esphome = {
+    enable = true;
+    address = "0.0.0.0";
+  };
+
   # Secrets
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
   age.secrets.wayvnc-key = {
