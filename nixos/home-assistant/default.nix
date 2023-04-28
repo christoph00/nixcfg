@@ -125,7 +125,6 @@
       "snmp"
       "google"
       "spotify"
-      "xiaomi_gateway"
       "accuweather"
     ];
   };
