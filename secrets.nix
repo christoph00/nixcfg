@@ -1,7 +1,7 @@
 let
   # Users
   christoph_air13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX christoph@air13";
-  christoph_tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower";
+  christoph_tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF7QwZVVocxNvcmc0A81jyA/PYG3IGFH2bHb5q9e5b22 christoph@tower";
 
   # Hosts
   air13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaQ1qn7oju1z6X2mumCSg+bsTCNlgzE5KahvO2BxKtg";
@@ -13,7 +13,7 @@ let
   oc2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIND8HbngVMLrM3sfnr8tz3moOlahHFgA0BliQREX6toe";
 in {
   "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca cube];
-  "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 air13 futro cube tower oca oc1 oc2];
+  "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2];
   "secrets/cf-acme".publicKeys = [christoph_air13 futro cube oca oc1 oc2 tower];
   "secrets/futro-cf".publicKeys = [christoph_air13 futro];
   "secrets/ha-serviceaccount".publicKeys = [christoph_air13 futro];
