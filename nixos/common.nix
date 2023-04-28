@@ -79,7 +79,6 @@
   programs.command-not-found.enable = false;
   programs.fish.enable = true;
 
-
   users.users.christoph = {
     description = "Christoph";
     isNormalUser = true;
@@ -119,7 +118,7 @@
   };
   programs.mosh.enable = true;
 
-  environment.systemPackages = [pkgs.git pkgs.killall];
+  environment.systemPackages = [pkgs.git pkgs.killall pkgs.dnsutils pkgs.htop];
 
   environment.shellAliases = {
     nrb = "nixos-rebuild --flake github:christoph00/nixcfg --use-remote-sudo boot";
@@ -146,9 +145,9 @@
     ];
   };
 
-  services.prometheus.exporters.node = {
-    enable = true;
-    enabledCollectors = ["systemd"];
-    port = 9002;
-  };
+  # services.prometheus.exporters.node = {
+  #   enable = true;
+  #   enabledCollectors = ["systemd"];
+  #   port = 9002;
+  # };
 }
