@@ -122,6 +122,7 @@
       "rest"
       "ping"
       "snmp"
+      "google"
     ];
   };
 
