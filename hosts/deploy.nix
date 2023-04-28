@@ -2,36 +2,6 @@
   self,
   inputs,
   ...
-<<<<<<< HEAD
-}: let
-  activateFor = system: inputs.deploy-rs.lib.${system}.activate.nixos;
-in {
-  flake.deploy.nodes = {
-    futro = {
-      hostname = "10.10.10.66";
-      sshUser = "christoph";
-      profiles.system.path = (activateFor "x86_64-linux") self.nixosConfigurations.futro;
-    };
-  };
-
-  flake.checks =
-    builtins.mapAttrs
-    (system: deployLib: deployLib.deployChecks self.deploy)
-    inputs.deploy-rs.lib;
-
-||||||| parent of b34a42b ()
-}: let
-  activateFor = system: inputs.deploy-rs.lib.${system}.activate.nixos;
-in {
-  flake.deploy.nodes = {
-    futro = {
-      hostname = "10.10.10.66";
-      sshUser = "christoph";
-      profiles.system.path = (activateFor "x86_64-linux") self.nixosConfigurations.futro;
-    };
-  };
-
-=======
 }: {
   flake.deploy.nodes = (
     builtins.mapAttrs
@@ -52,7 +22,6 @@ in {
     )
     self.nixosConfigurations
   );
->>>>>>> b34a42b ()
   perSystem = {
     self',
     inputs',
