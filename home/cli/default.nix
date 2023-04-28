@@ -29,7 +29,6 @@ in {
     cachix
     inputs.agenix.packages.x86_64-linux.default
     inputs.nix-init.packages.x86_64-linux.default
-    inputs.deploy-rs.packages.x86_64.deploy-rs.default
 
     #vscode-cli
 
