@@ -113,8 +113,7 @@
             ip saddr 10.10.10.0/24 tcp dport 22 accept;
 
 
-            iifname "lan" counter accept
-            iifname "tailscale0" counter accept
+            iifname { "br-lan0", "tailscale0", "wg0" } counter accept
 
             ip protocol igmp accept comment "accept IGMP"
             ip saddr 224.0.0.0/4 accept
@@ -140,9 +139,9 @@
             udp dport 500 accept comment "Allow ISAKMP"
             ct status dnat accept comment "Allow port forwards"
 
-            iifname { "lan" } oifname { "pppoe-wan" } counter accept
+            iifname { "br-lan0" } oifname { "pppoe-wan" } counter accept
 
-            iifname { "pppoe-wan" } oifname { "lan" } ct state established,related counter accept
+            iifname { "pppoe-wan" } oifname { "br-lan0" } ct state established,related counter accept
           }
         }
 
@@ -374,7 +373,7 @@
   services.resolved.enable = lib.mkForce false;
 
   services.dnsmasq = {
-    enable = true;
+    enable = false;
     resolveLocalQueries = true;
     settings = {
       port = 5300;
@@ -392,7 +391,7 @@
   };
 
   services.corerad = {
-    enable = true;
+    enable = false;
     settings = {
       interfaces = [
         {
