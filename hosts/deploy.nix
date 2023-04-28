@@ -13,6 +13,11 @@ in {
     };
   };
 
+  flake.checks =
+    builtins.mapAttrs
+    (system: deployLib: deployLib.deployChecks self.deploy)
+    inputs.deploy-rs.lib;
+
   perSystem = {
     self',
     inputs',
@@ -22,7 +27,6 @@ in {
     pkgs,
     ...
   }: {
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
     apps = {
       default = {
         type = "app";
