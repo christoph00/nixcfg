@@ -89,6 +89,7 @@
         zeroconf
         # psycopg2
         google-api-core
+        protobuf
       ];
     extraComponents = [
       "caldav"
