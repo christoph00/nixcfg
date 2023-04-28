@@ -31,6 +31,8 @@ in {
     inputs.nix-init.packages.x86_64-linux.default
     inputs.deploy-rs.defaultPackage.${pkgs.system}
 
+    #inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
+
     #vscode-cli
 
     rclone
