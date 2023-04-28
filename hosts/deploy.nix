@@ -9,7 +9,7 @@ in {
     futro = {
       hostname = "10.10.10.66";
       sshUser = "christoph";
-      profiles.system.path = (activateFor "x86_64-linux") self.nixosConfigurations.alpha;
+      profiles.system.path = (activateFor "x86_64-linux") self.nixosConfigurations.futro;
     };
   };
 
