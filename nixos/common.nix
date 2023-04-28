@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   pkgs,
   lib,
   ...
@@ -124,8 +123,6 @@
     pkgs.killall
     pkgs.dnsutils
     pkgs.htop
-
-    inputs.deploy-rs.defaultPackage.${pkgs.system}
   ];
 
   environment.shellAliases = {
