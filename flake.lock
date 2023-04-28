@@ -4,7 +4,7 @@
       "inputs": {
         "darwin": "darwin",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -94,7 +94,7 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "utils": [
           "utils"
@@ -118,7 +118,7 @@
     "disko": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -163,7 +163,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -201,7 +201,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -269,7 +269,7 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -290,7 +290,7 @@
       "inputs": {
         "hyprland-protocols": "hyprland-protocols",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "wlroots": "wlroots",
         "xdph": "xdph"
@@ -349,7 +349,7 @@
     "ironbar": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "rust-overlay": [
           "rust-overlay"
@@ -391,7 +391,7 @@
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -414,7 +414,7 @@
         "fenix": "fenix",
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -432,18 +432,22 @@
       }
     },
     "nixpkgs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
       "locked": {
-        "lastModified": 1682526928,
-        "narHash": "sha256-2cKh4O6t1rQ8Ok+v16URynmb0rV7oZPEbXkU0owNLQs=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d6b863fd9b7bb962e6f9fdf292419a775e772891",
+        "lastModified": 1678282698,
+        "narHash": "sha256-QX1GFxsV1WS0bEgOvMZUnZbZVOWPMpgefjCNMM9DY04=",
+        "owner": "numtide",
+        "repo": "nixpkgs-unfree",
+        "rev": "2708e517eff25a904f914d2368feef0dccc2a969",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
+        "owner": "numtide",
+        "repo": "nixpkgs-unfree",
         "type": "github"
       }
     },
@@ -459,6 +463,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1682526928,
+        "narHash": "sha256-2cKh4O6t1rQ8Ok+v16URynmb0rV7oZPEbXkU0owNLQs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d6b863fd9b7bb962e6f9fdf292419a775e772891",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -478,6 +498,7 @@
         "nix-index-database": "nix-index-database",
         "nix-init": "nix-init",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "rust-overlay": "rust-overlay",
         "srvos": "srvos",
         "utils": "utils",
@@ -490,7 +511,7 @@
           "utils"
         ],
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -510,7 +531,7 @@
     "srvos": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -578,7 +599,7 @@
     "vscode-server": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
