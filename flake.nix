@@ -1,44 +1,44 @@
 {
   description = "NIX CONFIG";
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:numtide/nixpkgs-unfree";
-    nixpkgs.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:numtide/nixpkgs-unfree";
+    # nixpkgs.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     hardware.url = "github:NixOS/nixos-hardware";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-unstable";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     utils = {
       url = "github:numtide/flake-utils";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     srvos.url = "github:numtide/srvos";
-    srvos.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    srvos.inputs.nixpkgs.follows = "nixpkgs";
 
     disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
 
     agenix = {
       url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     impermanence.url = "github:nix-community/impermanence";
 
     nix-index-database.url = "github:Mic92/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-init.url = "github:nix-community/nix-init";
-    nix-init.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nix-init.inputs.nixpkgs.follows = "nixpkgs";
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "utils";
     };
 
@@ -48,7 +48,7 @@
       owner = "serokell";
       repo = "deploy-rs";
       ref = "rvem/%23202-add-workaround-for-derivations-store-paths-interpolation";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "utils";
     };
 
@@ -61,7 +61,7 @@
 
     hyprland = {
       url = "github:hyprwm/hyprland/v0.24.1";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # hyprwm-contrib = {
     #   url = "github:hyprwm/contrib";
@@ -74,17 +74,17 @@
 
     ironbar = {
       url = "github:JakeStanger/ironbar";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
     vscode-server = {
       url = "github:msteen/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # nixneovim.url = "github:nixneovim/nixneovim";
   };
@@ -99,25 +99,23 @@
         ./home
         ./hosts
         ./hosts/deploy.nix
-        ./devshells.nix
+        # ./devshells.nix
       ];
 
       perSystem = {
-        pkgs,
-        config,
         self',
+        inputs',
+        system,
+        lib,
+        config,
+        pkgs,
         ...
       }: {
-        # _module.args.pkgs = import self.inputs.nixpkgs {
-        #   inherit system;
-        #   overlays = [self.overlays.default];
-        #   config.allowUnfree = true;
-        # };
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
         formatter = pkgs.alejandra;
-
-        # packages = import ./pkgs {
-        #   inherit pkgs;
-        # };
       };
       flake.overlays = {
         default = final: prev: import ./pkgs {pkgs = final;};
