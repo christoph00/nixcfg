@@ -21,7 +21,7 @@
     serviceConfig.Type = "oneshot";
 
     script = ''
-      ${pkgs.tailscale}/bin/tailscale up --authkey="$(cat ${config.age.secrets.tailscale-preauthkey.path})" --accept-dns=false
+      ${pkgs.tailscale}/bin/tailscale up --authkey="$(cat ${config.age.secrets.tailscale-preauthkey.path})" --accept-dns=true
     '';
   };
 }
