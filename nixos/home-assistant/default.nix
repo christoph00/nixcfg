@@ -124,6 +124,9 @@
       "ping"
       "snmp"
       "google"
+      "spotify"
+      "xiaomi_gateway"
+      "accuweather"
     ];
   };
 
