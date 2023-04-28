@@ -19,7 +19,7 @@
         modules = [
           self.nixosModules.desktop
           self.nixosModules.home-desktop-christoph
-          self.nixosModules.gamestream
+          # self.nixosModules.gamestream
           self.nixosModules.gaming
           #self.nixosModules.code-server
           ./tower
