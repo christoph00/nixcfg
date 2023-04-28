@@ -179,7 +179,7 @@
       };
       "40-lan3" = {
         linkConfig.Name = "lan3";
-        matchConfig.MACAddress = "00:24:81:7d:05";
+        matchConfig.MACAddress = "00:24:81:7d:05:ca";
       };
     };
     netdevs = {
