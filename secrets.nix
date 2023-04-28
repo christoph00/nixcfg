@@ -1,7 +1,7 @@
 let
   # Users
   christoph_air13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX christoph@air13";
-  christoph_tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF7QwZVVocxNvcmc0A81jyA/PYG3IGFH2bHb5q9e5b22 christoph@tower";
+  christoph_tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower";
 
   # Hosts
   air13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaQ1qn7oju1z6X2mumCSg+bsTCNlgzE5KahvO2BxKtg";
