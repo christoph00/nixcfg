@@ -120,7 +120,7 @@
       "google"
       "spotify"
       # "accuweather"
-      "metno"
+      "pymetno"
     ];
   };
 
