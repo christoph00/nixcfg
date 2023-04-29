@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.chromium = {
     enable = true;
-    package = pkgs.brave;
+    package = pkgs.chromium;
     extensions = [
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
       {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
