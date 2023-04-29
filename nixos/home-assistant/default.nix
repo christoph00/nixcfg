@@ -85,6 +85,9 @@
         google-api-core
         protobuf
         pymetno
+        pyxiaomigateway
+        pyiqvia
+        pyipp
       ];
     extraComponents = [
       "caldav"
