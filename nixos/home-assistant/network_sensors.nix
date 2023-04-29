@@ -9,12 +9,12 @@
 in {
   services.home-assistant.config = {
     binary_sensor = [
-      (mkPingSensor "tower" "tower")
+      (mkPingSensor "tower" "tower.ts")
       (mkPingSensor "shield.lan.net.r505.de" "shield")
-      (mkPingSensor "air13" "air13")
-      (mkPingSensor "oc1" "oc1")
-      (mkPingSensor "oc2" "oc2")
-      (mkPingSensor "oca" "oca")
+      (mkPingSensor "air13" "air13.ts")
+      (mkPingSensor "oc1" "oc1.ts")
+      (mkPingSensor "oc2" "oc2.ts")
+      (mkPingSensor "oca" "oca.ts")
       (mkPingSensor "192.168.1.15" "uap")
       (mkPingSensor "193.110.81.0" "Internet IP")
       (mkPingSensor "dns0.eu" "Internet DNS")
