@@ -17,7 +17,10 @@
     ensureUsers = [
       {
         name = "hass";
-        ensurePermissions."DATABASE hass" = "ALL PRIVILEGES";
+        ensurePermissions = {
+          "DATABASE hass" = "ALL PRIVILEGES";
+          "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
+        };
       }
     ];
   };
