@@ -328,6 +328,26 @@
         "type": "github"
       }
     },
+    "hyprland-plugins": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ]
+      },
+      "locked": {
+        "lastModified": 1682692059,
+        "narHash": "sha256-YItzdqCUsVPKtG/xYTbG3xd7+uDJRROqUh6w/5q5hZg=",
+        "owner": "hyprwm",
+        "repo": "hyprland-plugins",
+        "rev": "5c383dc5bc91afabe7dbcafdfd17f577fe4dcf96",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hyprwm",
+        "repo": "hyprland-plugins",
+        "type": "github"
+      }
+    },
     "hyprland-protocols": {
       "inputs": {
         "nixpkgs": [
@@ -490,6 +510,7 @@
         "hardware": "hardware",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "hyprland-plugins": "hyprland-plugins",
         "impermanence": "impermanence",
         "ironbar": "ironbar",
         "nix-colors": "nix-colors",
