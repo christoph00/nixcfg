@@ -81,7 +81,7 @@
         pybluez
         ifaddr
         zeroconf
-        # psycopg2
+        psycopg2
         google-api-core
         protobuf
       ];
