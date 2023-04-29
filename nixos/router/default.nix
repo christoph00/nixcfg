@@ -432,8 +432,12 @@
       bootstrapDns = "tcp+udp:1.1.1.1";
       ede.enable = true;
       conditional = {
+        rewrite = {
+          "ts" = "christoph00.github.beta.tailscale.net";
+        };
         mapping = {
           "lan.net.r505.de" = "127.0.0.1:5300";
+          "christoph00.github.beta.tailscale.net" = "100.100.100.100";
         };
       };
       customDNS = {
