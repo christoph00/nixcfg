@@ -63,6 +63,10 @@
       url = "github:hyprwm/hyprland/v0.24.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
     # hyprwm-contrib = {
     #   url = "github:hyprwm/contrib";
     #   inputs.nixpkgs.follows = "nixpkgs";
