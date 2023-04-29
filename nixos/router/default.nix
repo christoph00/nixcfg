@@ -425,8 +425,13 @@
         ];
         clientGroupsBlock.default = ["default"];
       };
+      whiteLists.default = [
+        "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt"
+        "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/referral-sites.txt"
+        "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt"
+      ];
       caching.maxTime = "30m";
-      prometheus.enable = true;
+      prometheus.enable = false;
       ports.dns = "0.0.0.0:53";
       ports.http = 4000;
       bootstrapDns = "tcp+udp:1.1.1.1";
