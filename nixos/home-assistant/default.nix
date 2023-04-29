@@ -1,12 +1,6 @@
-{
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
-    # ./postgres.nix
+    ./postgres.nix
     ./extentions.nix
     ./systemmonitor.nix
     ./commands.nix
