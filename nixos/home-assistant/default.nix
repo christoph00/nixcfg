@@ -119,7 +119,8 @@
       "snmp"
       "google"
       "spotify"
-      "accuweather"
+      # "accuweather"
+      "metno"
     ];
   };
 
