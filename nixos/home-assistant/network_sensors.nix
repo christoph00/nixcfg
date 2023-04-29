@@ -19,16 +19,16 @@ in {
       (mkPingSensor "193.110.81.0" "Internet IP")
       (mkPingSensor "dns0.eu" "Internet DNS")
     ];
-    device_tracker = [
-      {
-        platform = "ping";
-        hosts = {
-          s21 = "s21.lan.net.r505.de";
-          s22u = "s22u.lan.net.r505.de";
-          s8 = "s8.lan.net.r505.de";
-        };
-      }
-    ];
+    # device_tracker = [
+    #   {
+    #     platform = "ping";
+    #     hosts = {
+    #       s21 = "s21.lan.net.r505.de";
+    #       s22u = "s22u.lan.net.r505.de";
+    #       s8 = "s8.lan.net.r505.de";
+    #     };
+    #   }
+    # ];
     switch = [
       {
         platform = "template";
