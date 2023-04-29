@@ -84,6 +84,7 @@
         psycopg2
         google-api-core
         protobuf
+        pymetno
       ];
     extraComponents = [
       "caldav"
@@ -112,15 +113,13 @@
       #  "wled"
       "xiaomi_miio"
       "xiaomi_ble"
-      #      "openweathermap"
       "weather"
       "rest"
       "ping"
       "snmp"
       "google"
       "spotify"
-      # "accuweather"
-      "pymetno"
+      "python_script"
     ];
   };
 
