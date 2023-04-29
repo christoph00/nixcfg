@@ -431,7 +431,7 @@
         "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt"
       ];
       caching.maxTime = "30m";
-      prometheus.enable = false;
+      prometheus.enable = true;
       ports.dns = "0.0.0.0:53";
       ports.http = 4000;
       bootstrapDns = "tcp+udp:1.1.1.1";
