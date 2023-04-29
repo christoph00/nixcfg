@@ -424,12 +424,12 @@
           "https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser"
         ];
         clientGroupsBlock.default = ["default"];
+        whiteLists.default = [
+          "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt"
+          "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/referral-sites.txt"
+          "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt"
+        ];
       };
-      whiteLists.default = [
-        "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt"
-        "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/referral-sites.txt"
-        "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt"
-      ];
       caching.maxTime = "30m";
       prometheus.enable = true;
       ports.dns = "0.0.0.0:53";
