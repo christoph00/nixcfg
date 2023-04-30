@@ -47,9 +47,8 @@
       zeroconf = {};
       zha = {
         enable_quirks = true;
-        custom_quirks_path = "zha_quirks/";
+        custom_quirks_path = "./zha_quirks/";
       };
-      zha_toolkit = {};
       ssdp = {};
       mqtt = {};
       google_assistant = {
