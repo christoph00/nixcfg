@@ -4,13 +4,13 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "ha-component-better-thermostat";
-  version = "1.0.0";
+  version = "1.0.2";
 
   src = fetchFromGitHub {
     owner = "KartoffelToby";
     repo = "better_thermostat";
     rev = version;
-    sha256 = "009ajl7jwl3wsph78vc45lmjf43ipnzyfq0dx9w2a0ya6903n349";
+    sha256 = "1x2g7zzsfg565vvn1kja4x8wpbqxas45w9g5f5caj6iq9d99slkv";
   };
 
   installPhase = ''
