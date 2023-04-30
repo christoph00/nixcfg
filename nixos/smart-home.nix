@@ -10,7 +10,7 @@
     ];
   };
   users.users.zigbee2mqtt.extraGroups = ["dialout"];
-  services.zigbee2mqtt.enable = true;
+  services.zigbee2mqtt.enable = false;
   services.zigbee2mqtt.settings = {
     homeassistant = true;
     frontend = {
@@ -33,4 +33,6 @@
       "/var/lib/zigbee2mqtt"
     ];
   };
+
+  environment.systemPackages = [pkgs.mqttui];
 }
