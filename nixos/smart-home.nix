@@ -9,7 +9,7 @@
       }
     ];
   };
-  users.users.zigbee2mqtt.extraGroups = ["dialout"];
+  # users.users.zigbee2mqtt.extraGroups = ["dialout"];
   services.zigbee2mqtt.enable = false;
   services.zigbee2mqtt.settings = {
     homeassistant = true;
