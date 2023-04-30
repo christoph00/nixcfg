@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./postgres.nix
     ./extentions.nix
@@ -47,7 +51,14 @@
       zeroconf = {};
       zha = {
         enable_quirks = true;
-        custom_quirks_path = "./zha_quirks/";
+        custom_quirks_path = "${config.services.home-assistant.configDir}/zha_quirks/";
+        device_config = {
+          "a4:c1:38:35:dd:d5:77:cc-1".type = "switch";
+          "a4:c1:38:35:dd:d5:77:cc-2".type = "switch";
+          "a4:c1:38:35:dd:d5:77:cc-3".type = "switch";
+          "a4:c1:38:35:dd:d5:77:cc-4".type = "switch";
+          "a4:c1:38:35:dd:d5:77:cc-5".type = "switch";
+        };
       };
       ssdp = {};
       mqtt = {};
