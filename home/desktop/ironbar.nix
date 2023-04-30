@@ -50,8 +50,8 @@ in {
         type = "sys_info";
       };
       battery = {
-        type = "label";
-        label = "BAT: {{5000:cat /sys/class/power_supply/BAT0/capacity}}%";
+        type = "upower";
+        format = "{percentage}%";
       };
     in {
       position = "bottom";
