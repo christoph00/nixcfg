@@ -11,7 +11,7 @@
     settings.bind_host = "0.0.0.0";
   };
 
-  environment.persistence."/nix/persist" = {
-    directories = ["/var/lib/private/AdGuardHome"];
-  };
+  # environment.persistence."/nix/persist" = {
+  #   directories = ["/var/lib/private/AdGuardHome"];
+  # };
 }
