@@ -25,7 +25,7 @@
     "net.core.wmem_max" = 67108864;
   };
 
-  environment.systemPackages = [pkgs.nftables];
+  environment.systemPackages = [pkgs.nftables pkgs.speedtest-cli];
 
   networking = {
     useNetworkd = true;
