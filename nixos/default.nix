@@ -120,7 +120,7 @@
 
       reverse-proxy-server.imports = [./reverse-proxy-server.nix];
       remote-server.imports = [./remote-server.nix];
-      router.imports = [./router];
+      router.imports = [./router ./adguardhome.nix];
     };
   };
 }
