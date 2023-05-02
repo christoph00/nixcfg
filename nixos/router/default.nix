@@ -49,7 +49,7 @@
         ipv6.addresses = [];
       };
 
-      "lan" = {
+      "br-lan0" = {
         ipv4.addresses = [
           {
             address = "192.168.10.1";
@@ -270,11 +270,11 @@
           IPv6AcceptRA = false;
         };
 
-        dhcpPrefixDelegationConfig = {
-          UplinkInterface = "pppoe-wan";
-          Assign = true;
-          Announce = true;
-        };
+        # dhcpPrefixDelegationConfig = {
+        #   UplinkInterface = "pppoe-wan";
+        #   Assign = true;
+        #   Announce = true;
+        # };
       };
       "40-wg0" = {
         name = "wg0";
