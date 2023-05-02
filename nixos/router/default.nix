@@ -382,7 +382,7 @@
   services.resolved.enable = lib.mkForce false;
 
   services.dnsmasq = {
-    enable = true;
+    enable = false;
     resolveLocalQueries = true;
     settings = {
       port = 5300;
