@@ -60,6 +60,7 @@
           "a4:c1:38:35:dd:d5:77:cc-5".type = "switch";
         };
       };
+      zha_toolkit = {};
       ssdp = {};
       mqtt = {};
       google_assistant = {
