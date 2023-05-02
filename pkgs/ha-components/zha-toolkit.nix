@@ -13,6 +13,9 @@ stdenvNoCC.mkDerivation rec {
     sha256 = "1s1ldj5kp6z0898i52sjmknhav1qbknnryr8jb55q12384r0x5ah";
   };
 
+  dontConfigure = true;
+  dontBuild = true;
+
   installPhase = ''
     mkdir -p $out
     cp -r custom_components/zha_toolkit $out/
