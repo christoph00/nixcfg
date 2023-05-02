@@ -231,7 +231,7 @@
         };
         cakeConfig = {
           OverheadBytes = 65;
-          Bandwidth = "40M";
+          Bandwidth = "37M";
           NAT = "yes";
           PriorityQueueingPreset = "diffserv4";
         };
@@ -270,11 +270,11 @@
           IPv6AcceptRA = false;
         };
 
-        # dhcpPrefixDelegationConfig = {
-        #   UplinkInterface = "pppoe-wan";
-        #   Assign = true;
-        #   Announce = true;
-        # };
+        dhcpPrefixDelegationConfig = {
+          UplinkInterface = "pppoe-wan";
+          Assign = true;
+          Announce = true;
+        };
       };
       "40-wg0" = {
         name = "wg0";
