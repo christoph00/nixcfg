@@ -20,6 +20,7 @@ in {
     "L /nix/persist/hass/custom_components/ble_monitor - - - - ${pkgs.ha-component-ble-monitor}/ble_monitor"
     "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.ha-component-better-thermostat}/better_thermostat"
     "L /nix/persist/hass/custom_components/promql - - - - ${pkgs.ha-component-promql}/promql"
+    "L /nix/persist/hass/custom_components/zha_toolkit - - - - ${pkgs.ha-component-zha-toolkit}/zha_toolkit"
   ];
 
   services.nginx.virtualHosts.hass = {
