@@ -461,13 +461,13 @@
       };
     };
   };
-  systemd.services.blocky = {
-    requires = [
-      "ppp-wait-online.service"
-    ];
-    after = [
-      "ppp-wait-online.service"
-    ];
-    before = lib.mkForce [];
-  };
+  # systemd.services.blocky = {
+  #   requires = [
+  #     "ppp-wait-online.service"
+  #   ];
+  #   after = [
+  #     "ppp-wait-online.service"
+  #   ];
+  #   before = lib.mkForce [];
+  # };
 }
