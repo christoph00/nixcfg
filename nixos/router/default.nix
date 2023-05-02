@@ -325,7 +325,7 @@
           +ipv6 ipv6cp-use-ipaddr
         '';
         autostart = true;
-        enable = false;
+        enable = true;
       };
     };
   };
