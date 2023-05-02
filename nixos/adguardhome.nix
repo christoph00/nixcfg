@@ -12,6 +12,6 @@
   };
 
   environment.persistence."/nix/persist" = {
-    directories = ["/var/lib/AdGuardHome"];
+    directories = ["/var/lib/private/AdGuardHome"];
   };
 }
