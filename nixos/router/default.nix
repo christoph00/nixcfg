@@ -418,7 +418,7 @@
   };
 
   services.blocky = {
-    enable = true;
+    enable = false;
     settings = {
       upstream.default = [
         "tcp-tls:fdns1.dismail.de:853"
