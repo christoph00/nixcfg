@@ -60,7 +60,7 @@
     };
 
     nftables = {
-      enable = false;
+      enable = true;
       ruleset = ''
         table inet filter {
           chain output {
@@ -285,7 +285,7 @@
   };
 
   services.pppd = {
-    enable = false;
+    enable = true;
     peers = {
       telekom = {
         config = ''
@@ -343,37 +343,37 @@
 
   systemd.services.pppd-telekom.serviceConfig.ReadWritePaths = ["/etc/ppp"];
 
-  # systemd.services."ppp-wait-online" = {
-  #   requires = [
-  #     "systemd-networkd.service"
-  #     "pppd-telekom.service"
-  #   ];
-  #   after = [
-  #     "systemd-networkd.service"
-  #     "pppd-telekom.service"
-  #   ];
-  #   before = ["network-online.target"];
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     ExecStart = "${config.systemd.package}/lib/systemd/systemd-networkd-wait-online -i pppoe-wan";
-  #     RemainAfterExit = true;
-  #   };
-  # };
+  systemd.services."ppp-wait-online" = {
+    requires = [
+      "systemd-networkd.service"
+      "pppd-telekom.service"
+    ];
+    after = [
+      "systemd-networkd.service"
+      "pppd-telekom.service"
+    ];
+    before = ["network-online.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${config.systemd.package}/lib/systemd/systemd-networkd-wait-online -i pppoe-wan";
+      RemainAfterExit = true;
+    };
+  };
 
-  # systemd.services.nftables = {
-  #   requires = [
-  #     "ppp-wait-online.service"
-  #   ];
-  #   after = [
-  #     "ppp-wait-online.service"
-  #   ];
-  #   before = lib.mkForce [];
-  # };
+  systemd.services.nftables = {
+    requires = [
+      "ppp-wait-online.service"
+    ];
+    after = [
+      "ppp-wait-online.service"
+    ];
+    before = lib.mkForce [];
+  };
 
   services.resolved.enable = lib.mkForce false;
 
   services.dnsmasq = {
-    enable = false;
+    enable = true;
     resolveLocalQueries = true;
     settings = {
       port = 5300;
@@ -391,7 +391,7 @@
   };
 
   services.corerad = {
-    enable = false;
+    enable = true;
     settings = {
       interfaces = [
         {
@@ -452,13 +452,13 @@
       };
     };
   };
-  # systemd.services.blocky = {
-  #   requires = [
-  #     "ppp-wait-online.service"
-  #   ];
-  #   after = [
-  #     "ppp-wait-online.service"
-  #   ];
-  #   before = lib.mkForce [];
-  # };
+  systemd.services.blocky = {
+    requires = [
+      "ppp-wait-online.service"
+    ];
+    after = [
+      "ppp-wait-online.service"
+    ];
+    before = lib.mkForce [];
+  };
 }
