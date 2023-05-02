@@ -37,6 +37,7 @@
   ha-component-better-thermostat = pkgs.callPackage ./ha-components/better_thermostat.nix {};
   ha-component-ble-monitor = pkgs.callPackage ./ha-components/ble_monitor.nix {};
   ha-component-promql = pkgs.callPackage ./ha-components/promql.nix {};
+  ha-component-zha-toolkit = pkgs.callPackage ./ha-components/zha-toolkit.nix {};
 
   # meli = pkgs.meli.override {
   #   cargoBuildFlags = ["--features jmap"];
