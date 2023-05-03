@@ -54,7 +54,7 @@
         inputs.srvos.nixosModules.desktop
         ./desktop.nix
         ./fonts.nix
-        #./plasma.nix
+        ./plasma.nix
         ./hyprland.nix
         ./xfce.nix
         #./gnome.nix
@@ -86,7 +86,6 @@
         # ./cloudflared.nix
         ./home-server.nix
         ./matcha.nix
-        #./adguardhome.nix
         #inputs.srvos.nixosModules.mixins-nginx
         self.nixosModules.sftpgo
         #self.nixosModules.syncthing

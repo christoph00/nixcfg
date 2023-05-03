@@ -55,14 +55,14 @@
   programs.ssh.startAgent = true;
 
   # Greeter
-  programs.regreet.enable = true;
-  services.greetd.settings.initial_session = {
-    command = "Hyprland";
-    user = "christoph";
-  };
-  environment.etc."greetd/environments".text = ''
-    Hyprland
-  '';
+  # programs.regreet.enable = true;
+  # services.greetd.settings.initial_session = {
+  #   command = "Hyprland";
+  #   user = "christoph";
+  # };
+  # environment.etc."greetd/environments".text = ''
+  #   Hyprland
+  # '';
 
   security = {
     rtkit.enable = true;
@@ -94,12 +94,12 @@
     # ];
   };
 
-  # services.xserver.displayManager = {
-  #   # sddm.enable = true;
-  #   lightdm.enable = true;
-  #   defaultSession = "plasmawayland";
-  #   autoLogin.user = "christoph";
-  # };
+  services.xserver.displayManager = {
+    # sddm.enable = true;
+    sddm.enable = true;
+    defaultSession = "plasmawayland";
+    # autoLogin.user = "christoph";
+  };
 
   # Udev Rules
   services.udev.extraRules = ''
