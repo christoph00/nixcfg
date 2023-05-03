@@ -123,6 +123,7 @@
       #"hyperion"
       "jellyfin"
       "androidtv"
+      "openai_conversation"
       "lovelace"
       "mobile_app"
       "nzbget"
