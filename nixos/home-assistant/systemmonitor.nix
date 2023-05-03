@@ -21,7 +21,8 @@ in {
           "ipv4_address"
           "throughput_network_in"
           "throughput_network_out"
-        ]);
+        ])
+        ++ (createResourcesWithArgs ["dnsmasq" "mqtt" "blocky"] ["process"]);
     }
     # {
     #   platform = "command_line";
