@@ -14,8 +14,10 @@ in {
       platform = "systemmonitor";
       resources =
         (createResources ["last_boot" "memory_use_percent" "processor_use" "processor_temperature"])
-        ++ (createResourcesWithArgs (lib.attrNames config.fileSystems) ["disk_use_percent"])
-        ++ (createResourcesWithArgs (lib.attrNames config.networking.interfaces) [
+        # ++ (createResourcesWithArgs (lib.attrNames config.fileSystems) ["disk_use_percent"])
+        # ++ (createResourcesWithArgs (lib.attrNames config.networking.interfaces) [
+        ++ (createResourcesWithArgs ["/" "/nix" "/media/data-hdd" "/media/data-ssd"] ["disk_use_percent"])
+        ++ (createResourcesWithArgs ["pppoe-wan" "br-lan0"] [
           "ipv4_address"
           "throughput_network_in"
           "throughput_network_out"
