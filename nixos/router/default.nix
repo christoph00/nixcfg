@@ -305,8 +305,8 @@
           user anonymous@t-online.de
           password 12345567
 
-          mtu 1500
-          mru 1500
+          mtu 1492
+          mru 1492
 
           lcp-echo-interval 15
           lcp-echo-failure 3
@@ -382,7 +382,7 @@
   services.resolved.enable = lib.mkForce false;
 
   services.dnsmasq = {
-    enable = false;
+    enable = true;
     resolveLocalQueries = true;
     settings = {
       port = 5300;
@@ -418,7 +418,7 @@
   };
 
   services.blocky = {
-    enable = false;
+    enable = true;
     settings = {
       upstream.default = [
         "tcp-tls:fdns1.dismail.de:853"
