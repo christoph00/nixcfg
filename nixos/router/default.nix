@@ -298,7 +298,7 @@
     peers = {
       telekom = {
         config = ''
-          plugin rp-pppoe.so ppp0
+          plugin pppoe.so ppp0
 
           ifname pppoe-wan
 
