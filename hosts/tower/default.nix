@@ -111,7 +111,6 @@
     address = "0.0.0.0";
   };
 
-  services.netdata.enable = true;
   # Secrets
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
   age.secrets.wayvnc-key = {
