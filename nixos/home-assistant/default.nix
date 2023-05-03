@@ -36,7 +36,6 @@
         packages = "!include_dir_named pkgs";
       };
       default_config = {};
-      config = {};
       http = {
         use_x_forwarded_for = true;
         trusted_proxies = ["::1" "127.0.0.1" "100.0.0.0/8"];
@@ -63,6 +62,8 @@
       zha_toolkit = {};
       ssdp = {};
       mqtt = {};
+      dhcp = {};
+      conversation = {};
       google_assistant = {
         project_id = "!secret google_projectid";
         service_account = "!include serviceaccount.json";
