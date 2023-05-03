@@ -28,6 +28,8 @@
   # hypr-taskbar = pkgs.callPackage ./hypr-taskbar {};
   anyrun = pkgs.callPackage ./anyrun {};
   dlm = pkgs.callPackage ./dlm {};
+  systemd2mqtt = pkgs.callPackage ./systemd2mqtt {};
+
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
   ha-lovelace-mini-graph-card = pkgs.callPackage ./ha-lovelace/mini-graph-card.nix {};
