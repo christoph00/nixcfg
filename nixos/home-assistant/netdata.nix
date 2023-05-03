@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   services.home-assistant.config.sensor = [
     {
       platform = "netdata";
@@ -31,42 +31,26 @@
           icon = "mdi:thermometer-low";
         };
         network_download = {
-          data_group = "net.enp3s0f0";
+          data_group = "net.pppoe-wan";
           element = "received";
         };
         network_upload = {
-          data_group = "net.enp3s0f0";
+          data_group = "net.pppoe-wan";
           element = "sent";
           invert = true;
         };
       };
     }
-    {
-      platform = "netdata";
-      name = "tower";
-      host = "tower.lan.net.r505.de";
-      resources = {
-        load5 = {
-          data_group = "system.load";
-          element = "load5";
-        };
-      };
-    }
-    {
-      platform = "netdata";
-      name = "router";
-      host = "192.168.1.1";
-      resources = {
-        wan_download = {
-          data_group = "net.pppoe_wan";
-          element = "received";
-        };
-        wan_upload = {
-          data_group = "net.pppoe_wan";
-          element = "sent";
-          invert = true;
-        };
-      };
-    }
+    # {
+    #   platform = "netdata";
+    #   name = "tower";
+    #   host = "tower.lan.net.r505.de";
+    #   resources = {
+    #     load5 = {
+    #       data_group = "system.load";
+    #       element = "load5";
+    #     };
+    #   };
+    # }
   ];
 }
