@@ -47,7 +47,7 @@
   # networking.interfaces.enp3s0f1.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp4s0f0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp4s0f1.useDHCP = lib.mkDefault true;
-  networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
 
   networking.hostName = "futro";
 
@@ -57,6 +57,8 @@
   # hardware.opengl = {
   # driSupport = true;
   # };
+
+  services.netdata.enable = true;
 
   # ----------  Secrets  -----------------------------------------
   age.secrets.cloudflared.file = ../../secrets/futro-cf;
