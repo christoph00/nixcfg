@@ -323,7 +323,6 @@
           noproxyarp
           noaccomp
 
-          nomultilink
           novj
 
           defaultroute
