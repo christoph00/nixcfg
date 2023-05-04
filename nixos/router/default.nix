@@ -278,6 +278,15 @@
           IPv6AcceptRA = false;
         };
 
+        # adresses = [
+        #   {
+        #     adressConfig = {
+        #       AutoJoin = true;
+        #       FastLeave = true;
+        #     };
+        #   }
+        # ];
+
         dhcpPrefixDelegationConfig = {
           UplinkInterface = "pppoe-wan";
           Assign = true;
@@ -477,6 +486,9 @@
       phyint pppoe-wan upstream ratelimit 0 threshold 1
         altnet 87.141.0.0/16
         altnet 239.0.0.0/8
+        altnet 224.0.0.0/4
+        altnet 193.158.0.0/15
+
 
       phyint br-lan0 downstream ratelimit 0 threshold 1
         altnet 192.168.10.0/24
