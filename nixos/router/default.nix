@@ -285,7 +285,7 @@
 
         addresses = [
           {
-            adressConfig = {
+            addressConfig = {
               AutoJoin = true;
             };
           }
