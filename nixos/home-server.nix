@@ -83,7 +83,7 @@
     media-sort
     ffmpeg-full
     dlm
-    systemd2mqtt
+   
   ];
 
   users.users.jellyfin.extraGroups = ["media"];
