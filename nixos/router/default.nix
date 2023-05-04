@@ -469,4 +469,23 @@
   #   ];
   #   before = lib.mkForce [];
   # };
+
+  systemd.services.igmpproxy = let
+    cfgFile = pkgs.writeText "igmpproxy.conf" ''
+      quickleave
+
+      phyint pppoe-wan upstream ratelimit 0 threshold 1
+        altnet 87.141.0.0/16
+        altnet 239.0.0.0/8
+
+      phyint br-lan0 downstream ratelimit 0 threshold 1
+        altnet 192.168.10.0/24
+    '';
+  in {
+    description = "igmpproxy";
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.igmpproxy}/bin/igmpproxy ${cfgFile} -n -v";
+    };
+  };
 }
