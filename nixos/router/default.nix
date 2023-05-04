@@ -140,7 +140,6 @@
           chain forward {
             meta oiftype ppp tcp flags syn tcp option maxseg size set 1452
             type filter hook forward priority filter; policy drop;
-            log
             icmpv6 type {
               echo-request,
               echo-reply,
