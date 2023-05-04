@@ -131,11 +131,16 @@
             ip saddr 224.0.0.0/4 accept
             iifname "pppoe-wan" ct state { established, related }  counter accept comment "Allow established traffic"
             iifname "pppoe-wan" counter drop comment "Drop all other unsolicited from wan"
+
+            log prefix "[nftables] Input Denied: " counter drop
           }
+
+
 
           chain forward {
             meta oiftype ppp tcp flags syn tcp option maxseg size set 1452
             type filter hook forward priority filter; policy drop;
+            log
             icmpv6 type {
               echo-request,
               echo-reply,
@@ -156,6 +161,9 @@
             iifname { "br-lan0" } oifname { "pppoe-wan" } counter accept
 
             iifname { "pppoe-wan" } oifname { "br-lan0" } ct state established,related counter accept
+
+            log prefix "[nftables] Forward Denied: " counter drop
+
           }
         }
 
