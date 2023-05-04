@@ -283,13 +283,13 @@
           IPv6AcceptRA = false;
         };
 
-        addresses = [
-          {
-            addressConfig = {
-              AutoJoin = true;
-            };
-          }
-        ];
+        # addresses = [
+        #   {
+        #     addressConfig = {
+        #       AutoJoin = true;
+        #     };
+        #   }
+        # ];
 
         bridgeConfig = {
           FastLeave = true;
