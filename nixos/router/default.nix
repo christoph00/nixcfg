@@ -125,6 +125,9 @@
             iifname { "br-lan0", "tailscale0", "wg0" } counter accept
 
             ip protocol igmp accept comment "accept IGMP"
+            # ip saddr 87.141.0.0/16 accept
+            ip saddr 239.0.0.0/8 accept
+            # ip saddr 193.158.0.0/15 accept
             ip saddr 224.0.0.0/4 accept
             iifname "pppoe-wan" ct state { established, related }  counter accept comment "Allow established traffic"
             iifname "pppoe-wan" counter drop comment "Drop all other unsolicited from wan"
@@ -147,6 +150,8 @@
             meta l4proto esp accept comment "Allow IPSec ESP"
             udp dport 500 accept comment "Allow ISAKMP"
             ct status dnat accept comment "Allow port forwards"
+
+
 
             iifname { "br-lan0" } oifname { "pppoe-wan" } counter accept
 
@@ -278,14 +283,18 @@
           IPv6AcceptRA = false;
         };
 
-        # adresses = [
-        #   {
-        #     adressConfig = {
-        #       AutoJoin = true;
-        #       FastLeave = true;
-        #     };
-        #   }
-        # ];
+        addresses = [
+          {
+            adressConfig = {
+              AutoJoin = true;
+            };
+          }
+        ];
+
+        bridgeConfig = {
+          FastLeave = true;
+          MulticastToUnicast = true;
+        };
 
         dhcpPrefixDelegationConfig = {
           UplinkInterface = "pppoe-wan";
@@ -316,6 +325,8 @@
 
           mtu 1492
           mru 1492
+
+          usepeerdns
 
           lcp-echo-interval 15
           lcp-echo-failure 3
@@ -438,7 +449,7 @@
           "1.1.1.1:53"
           "9.9.9.9:53"
         ];
-        "192.168.10.134" = ["8.8.8.8"];
+        "192.168.10.134" = ["217.237.149.142" "217.237.150.205"];
       };
       startVerifyUpstream = false;
       blocking = {
