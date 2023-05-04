@@ -403,6 +403,7 @@
       dhcp-option = ["option:dns-server,0.0.0.0"];
       dhcp-host = [
         # "00:24:81:7d:05:c9,10.10.10.80" # futro - lan4
+        "20:89:8a:9c:0d:f3,192.168.10.134" # MagentaTV One
       ];
     };
   };
@@ -428,24 +429,32 @@
   services.blocky = {
     enable = true;
     settings = {
-      upstream.default = [
-        "tcp-tls:fdns1.dismail.de:853"
-        "https://dns.telekom.de/dns-query"
-        "https://dns.digitale-gesellschaft.ch/dns-query"
-        "https://dnsforge.de/dns-query"
-      ];
+      upstream = {
+        default = [
+          # "tcp-tls:fdns1.dismail.de:853"
+          # "https://dns.telekom.de/dns-query"
+          # "https://dns.digitale-gesellschaft.ch/dns-query"
+          # "https://dnsforge.de/dns-query"
+          "1.1.1.1:53"
+          "9.9.9.9:53"
+        ];
+        "192.168.10.134" = ["8.8.8.8"];
+      };
       startVerifyUpstream = false;
       blocking = {
         blackLists.default = [
           # "https://adaway.org/hosts.txt"
           "https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser"
         ];
-        clientGroupsBlock.default = ["default"];
         whiteLists.default = [
           "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt"
           "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/referral-sites.txt"
           "https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/optional-list.txt"
         ];
+        clientGroupsBlock = {
+          default = ["default"];
+          "192.168.10.134" = [""];
+        };
       };
       caching.maxTime = "30m";
       prometheus.enable = true;
