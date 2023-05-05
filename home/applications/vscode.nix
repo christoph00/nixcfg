@@ -13,8 +13,8 @@
       bungcip.better-toml
       haskell.haskell
       justusadam.language-haskell
-      ms-python.python
-      llvm-vs-code-extensions.vscode-clangd
+      # ms-python.python
+      # llvm-vs-code-extensions.vscode-clangd
       stkb.rewrap
       shardulm94.trailing-spaces
       tyriar.sort-lines
