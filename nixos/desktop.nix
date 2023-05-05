@@ -33,6 +33,7 @@
     #   waydroid.enable = true;
     lxd.enable = true;
     podman.enable = true;
+    podman.dockerSocket.enable = true;
   };
 
   hardware.pulseaudio.enable = false;
