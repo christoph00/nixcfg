@@ -70,9 +70,13 @@ in {
     #vomit-sync
     #    vmt
 
-    jellyfin-ffmpeg
+    # jellyfin-ffmpeg
 
     #conda
+
+    wrangler
+    flyctl
+    deno
   ];
 
   home.sessionVariables = {
