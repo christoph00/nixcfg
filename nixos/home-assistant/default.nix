@@ -121,6 +121,7 @@
       "esphome"
       "frontend"
       "html5"
+      "wyoming"
       "http"
       #"hyperion"
       "jellyfin"
