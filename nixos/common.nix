@@ -96,6 +96,7 @@
       "scanner"
       "sound"
       "media"
+      "podman"
     ];
 
     openssh.authorizedKeys.keys = [
