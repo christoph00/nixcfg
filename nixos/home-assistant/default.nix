@@ -12,6 +12,7 @@
     # ./netdata.nix
   ];
 
+  users.users.hass.extraGroups = ["dialout"];
   services.home-assistant = {
     enable = true;
     package = pkgs.home-assistant.overrideAttrs (old: {
