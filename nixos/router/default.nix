@@ -155,6 +155,11 @@
             udp dport 500 accept comment "Allow ISAKMP"
             ct status dnat accept comment "Allow port forwards"
 
+            ip protocol igmp accept comment "accept IGMP"
+            # ip saddr 87.141.0.0/16 accept
+            ip saddr 239.0.0.0/8 accept
+            # ip saddr 193.158.0.0/15 accept
+            ip saddr 224.0.0.0/4 accept
 
 
             iifname { "br-lan0" } oifname { "pppoe-wan" } counter accept
@@ -366,12 +371,13 @@
 
   services.udev.packages = [
     (pkgs.writeTextFile rec {
-      name = "accept_ra_for_pppoe.rules";
+      name = "network-interface.rules";
       destination = "/etc/udev/rules.d/99-${name}";
       # test with: nixos-rebuild test && udevadm control --log-priority=debug && udevadm trigger /sys/devices/virtual/net/pppoe-wan --action=add
       text = ''
         #
         ACTION=="add|change|move", SUBSYSTEM=="net", ENV{INTERFACE}=="pppoe-wan", RUN+="${pkgs.procps}/bin/sysctl net.ipv6.conf.pppoe-wan.accept_ra=2"
+        ACTION=="add|change|move", SUBSYSTEM=="net", ENV{INTERFACE}=="br-lan0", RUN+="${pkgs.procps}/bin/sysctl net.ipv4.conf.br-lan0.force_igmp_version=3"
       '';
     })
   ];
@@ -449,12 +455,12 @@
     settings = {
       upstream = {
         default = [
-          # "tcp-tls:fdns1.dismail.de:853"
-          # "https://dns.telekom.de/dns-query"
-          # "https://dns.digitale-gesellschaft.ch/dns-query"
-          # "https://dnsforge.de/dns-query"
-          "1.1.1.1:53"
-          "9.9.9.9:53"
+          "tcp-tls:fdns1.dismail.de:853"
+          "https://dns.telekom.de/dns-query"
+          "https://dns.digitale-gesellschaft.ch/dns-query"
+          "https://dnsforge.de/dns-query"
+          "217.237.149.142"
+          "217.237.150.205"
         ];
         "192.168.10.134" = ["217.237.149.142" "217.237.150.205"];
       };
@@ -491,7 +497,8 @@
       };
       customDNS = {
         mapping = {
-          "net.r505.de" = "192.168.10.1";
+          "media.r505.de" = "192.168.10.1";
+          "ngiss.t-online.de" = "62.157.128.171";
         };
       };
     };
