@@ -31,6 +31,7 @@
   # systemd2mqtt = pkgs.callPackage ./systemd2mqtt {};
 
   wyoming-piper = pkgs.callPackage ./wyoming-piper {};
+  wyoming = pkgs.callPackage ./wyoming {};
 
   ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
