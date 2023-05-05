@@ -34,5 +34,5 @@
     ];
   };
 
-  environment.systemPackages = [pkgs.mqttui];
+  environment.systemPackages = [pkgs.mqttui pkgs.wyoming-piper];
 }
