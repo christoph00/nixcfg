@@ -10,6 +10,7 @@
     ./commands.nix
     ./network_sensors.nix
     # ./netdata.nix
+    ./piper.nix
   ];
 
   users.users.hass.extraGroups = ["dialout"];
