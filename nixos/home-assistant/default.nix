@@ -106,6 +106,7 @@
         pyxiaomigateway
         pyiqvia
         pyipp
+        wyoming
       ];
     extraComponents = [
       "caldav"
