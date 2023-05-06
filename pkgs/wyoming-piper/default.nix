@@ -1,10 +1,10 @@
 {
+  buildPythonApplication,
   lib,
-  python3,
   fetchPypi,
-  pkgs,
+  wyoming,
 }:
-python3.pkgs.buildPythonApplication rec {
+buildPythonApplication rec {
   pname = "wyoming-piper";
   version = "0.0.2";
   format = "setuptools";
@@ -15,7 +15,7 @@ python3.pkgs.buildPythonApplication rec {
     hash = "sha256-uS6BHysRGnY4MO1HnU+GIyqTD2RNT/B4f1jXivI325E=";
   };
 
-  propagatedBuildInputs = with pkgs; [
+  propagatedBuildInputs = [
     wyoming
   ];
 
@@ -25,6 +25,5 @@ python3.pkgs.buildPythonApplication rec {
     description = "Wyoming Server for Piper";
     homepage = "https://pypi.org/project/wyoming-piper/";
     license = licenses.mit;
-    maintainers = with maintainers; [];
   };
 }
