@@ -39,6 +39,7 @@ in {
     rsync
 
     nodejs
+    python
 
     tmux
     xplr
