@@ -6,26 +6,19 @@ in {
   pythonPackagesOverlays =
     (prev.pythonPackagesOverlays or [])
     ++ [
-      (final.callPackage ./python {})
+      (python-final: python-prev: {
+        wyoming = python-final.callPackage ./python/wyoming.nix {};
+      })
     ];
-
-  python = let
-    self = prev.python.override {
-      inherit self;
-      packageOverrides = lib.composeManyExtensions final.pythonPackagesOverlays;
-    };
-  in
-    self;
 
   python3 = let
     self = prev.python3.override {
       inherit self;
-      packageOverrides = lib.composeManyExtensions final.pythonPackagesOverlays;
+      packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
     };
   in
     self;
 
-  pythonPackages = final.python.pkgs;
   python3Packages = final.python3.pkgs;
 
   xr6515dn = final.callPackage ./xr6515dn {};

@@ -87,7 +87,7 @@
       ];
     };
     extraPackages = python3Packages:
-      with python3Packages; [
+      with pkgs.python3Packages; [
         aiodiscover
         aiogithubapi
         scapy
