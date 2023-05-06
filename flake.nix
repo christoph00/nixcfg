@@ -122,7 +122,7 @@
         formatter = pkgs.alejandra;
       };
       flake.overlays = {
-        default = final: prev: import ./pkgs {pkgs = final;};
+        default = import ./pkgs;
       };
     };
 }
