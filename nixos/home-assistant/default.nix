@@ -107,6 +107,7 @@
         pyiqvia
         pyipp
         wyoming
+        wyoming-piper
       ];
     extraComponents = [
       "caldav"
