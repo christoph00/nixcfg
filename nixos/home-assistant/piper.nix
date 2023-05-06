@@ -10,6 +10,8 @@
       cmd = [
         "--voice"
         "de-kerstin-low"
+        "--uri"
+        "'tcp://0.0.0.0:10200'"
       ];
     };
   };
