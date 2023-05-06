@@ -8,7 +8,8 @@
         "--network=host"
       ];
       cmd = [
-        "--voice de-kerstin-low"
+        "--voice"
+        "de-kerstin-low"
       ];
     };
   };
