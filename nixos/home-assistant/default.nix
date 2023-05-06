@@ -127,6 +127,7 @@
       "wyoming"
       "http"
       #"hyperion"
+      "assist_pipeline"
       "jellyfin"
       "androidtv"
       "openai_conversation"
