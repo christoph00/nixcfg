@@ -4,6 +4,7 @@ final: prev: {
     ++ [
       (python-final: python-prev: {
         wyoming = python-final.callPackage ./python/wyoming.nix {};
+        wyoming-piper = python-final.callPackage ./python/wyoming-piper.nix {};
       })
     ];
   python3 = let
@@ -46,7 +47,7 @@ final: prev: {
   anyrun = final.callPackage ./anyrun {};
   dlm = final.callPackage ./dlm {};
   # systemd2mqtt = pkgs.callPackage ./systemd2mqtt {};
-  wyoming-piper = final.callPackage ./wyoming-piper {};
+  piper-bin = final.callPackage ./piper-bin {};
 
   ha-lovelace-battery-entity = final.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = final.callPackage ./ha-lovelace/fold-entity-row.nix {};
