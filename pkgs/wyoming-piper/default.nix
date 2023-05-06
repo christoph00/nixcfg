@@ -2,7 +2,6 @@
   # buildPythonApplication,
   lib,
   fetchPypi,
-  wyoming,
   python3,
 }:
 python3.pkgs.buildPythonApplication rec {
@@ -17,7 +16,7 @@ python3.pkgs.buildPythonApplication rec {
   };
 
   propagatedBuildInputs = [
-    wyoming
+    python3.pkgs.wyoming
   ];
 
   pythonImportsCheck = ["wyoming_piper"];
