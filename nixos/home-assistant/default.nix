@@ -108,6 +108,7 @@
         pyipp
         wyoming
         wyoming-piper
+        androidtvremote2
       ];
     extraComponents = [
       "caldav"
