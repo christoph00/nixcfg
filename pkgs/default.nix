@@ -1,54 +1,80 @@
-{pkgs, ...}: {
-  xr6515dn = pkgs.callPackage ./xr6515dn {};
+final: prev: let
+  lib = prev.lib;
+in {
+  inherit lib;
+
+  pythonPackagesOverlays =
+    (prev.pythonPackagesOverlays or [])
+    ++ [
+      (final.callPackage ./python {})
+    ];
+
+  python = let
+    self = prev.python.override {
+      inherit self;
+      packageOverrides = lib.composeManyExtensions final.pythonPackagesOverlays;
+    };
+  in
+    self;
+
+  python3 = let
+    self = prev.python3.override {
+      inherit self;
+      packageOverrides = lib.composeManyExtensions final.pythonPackagesOverlays;
+    };
+  in
+    self;
+
+  pythonPackages = final.python.pkgs;
+  python3Packages = final.python3.pkgs;
+
+  xr6515dn = final.callPackage ./xr6515dn {};
   # swww = pkgs.callPackage ./swww {};
   #wallpaper = pkgs.callPackage ./wallpaper {};
   # gfn-electron = pkgs.callPackage ./gfn-electron {};
-  my-sftpgo = pkgs.callPackage ./sftpgo {};
-  firefox-gnome-theme = pkgs.callPackage ./firefox-gnome-theme {};
-  vscode-cli = pkgs.callPackage ./vscode-cli {};
-  systemd-rest = pkgs.callPackage ./systemd-rest {};
-  proton-ge = pkgs.callPackage ./proton-ge {};
+  my-sftpgo = final.callPackage ./sftpgo {};
+  firefox-gnome-theme = final.callPackage ./firefox-gnome-theme {};
+  vscode-cli = final.callPackage ./vscode-cli {};
+  systemd-rest = final.callPackage ./systemd-rest {};
+  proton-ge = final.callPackage ./proton-ge {};
   # sfwbar = pkgs.callPackage ./sfwbar {};
   # ariaNg = pkgs.callPackage ./ariaNg {};
-  matcha = pkgs.callPackage ./matcha {};
+  matcha = final.callPackage ./matcha {};
   # cs-firewall-bouncer = pkgs.callPackage ./cs-firewall-bouncer {};
-  media-sort = pkgs.callPackage ./media-sort {};
+  media-sort = final.callPackage ./media-sort {};
   # uboot-r2s = pkgs.callPackage ./uboot-r2s {};
-  nextdhcp = pkgs.callPackage ./nextdhcp {};
-  coredhcp = pkgs.callPackage ./coredhcp {};
+  nextdhcp = final.callPackage ./nextdhcp {};
+  coredhcp = final.callPackage ./coredhcp {};
   # sunshine-bin = pkgs.callPackage ./sunshine-bin {};
   # stalwart-cli = pkgs.callPackage ./stalwart-cli {};
   # stalwart-imap = pkgs.callPackage ./stalwart-imap {};
   # stalwart-jmap = pkgs.callPackage ./stalwart-jmap {};
   # stalwart-smtp = pkgs.callPackage ./stalwart-smpt {};
-  vmt = pkgs.callPackage ./vmt {};
-  vomit-sync = pkgs.callPackage ./vomit-sync {};
+  vmt = final.callPackage ./vmt {};
+  vomit-sync = final.callPackage ./vomit-sync {};
   # wl-gammarelay-rs = pkgs.callPackage ./wl-gammarelay-rs {};
   # eww-ws = pkgs.callPackage ./eww-ws {};
   # hypr-taskbar = pkgs.callPackage ./hypr-taskbar {};
-  anyrun = pkgs.callPackage ./anyrun {};
-  dlm = pkgs.callPackage ./dlm {};
+  anyrun = final.callPackage ./anyrun {};
+  dlm = final.callPackage ./dlm {};
   # systemd2mqtt = pkgs.callPackage ./systemd2mqtt {};
 
-  wyoming-piper = pkgs.callPackage ./wyoming-piper {};
-  wyoming = pkgs.callPackage ./wyoming {};
-
-  ha-lovelace-battery-entity = pkgs.callPackage ./ha-lovelace/battery-entity.nix {};
-  ha-lovelace-fold-entity-row = pkgs.callPackage ./ha-lovelace/fold-entity-row.nix {};
-  ha-lovelace-mini-graph-card = pkgs.callPackage ./ha-lovelace/mini-graph-card.nix {};
-  ha-lovelace-card-mod = pkgs.callPackage ./ha-lovelace/card-mod.nix {};
-  ha-lovelace-better-thermostat-ui-card = pkgs.callPackage ./ha-lovelace/better-thermostat-ui-card.nix {};
-  ha-lovelace-vacuum-card = pkgs.callPackage ./ha-lovelace/vacuum-card.nix {};
-  ha-component-better-thermostat = pkgs.callPackage ./ha-components/better_thermostat.nix {};
-  ha-component-ble-monitor = pkgs.callPackage ./ha-components/ble_monitor.nix {};
-  ha-component-promql = pkgs.callPackage ./ha-components/promql.nix {};
-  ha-component-zha-toolkit = pkgs.callPackage ./ha-components/zha-toolkit.nix {};
+  ha-lovelace-battery-entity = final.callPackage ./ha-lovelace/battery-entity.nix {};
+  ha-lovelace-fold-entity-row = final.callPackage ./ha-lovelace/fold-entity-row.nix {};
+  ha-lovelace-mini-graph-card = final.callPackage ./ha-lovelace/mini-graph-card.nix {};
+  ha-lovelace-card-mod = final.callPackage ./ha-lovelace/card-mod.nix {};
+  ha-lovelace-better-thermostat-ui-card = final.callPackage ./ha-lovelace/better-thermostat-ui-card.nix {};
+  ha-lovelace-vacuum-card = final.callPackage ./ha-lovelace/vacuum-card.nix {};
+  ha-component-better-thermostat = final.callPackage ./ha-components/better_thermostat.nix {};
+  ha-component-ble-monitor = final.callPackage ./ha-components/ble_monitor.nix {};
+  ha-component-promql = final.callPackage ./ha-components/promql.nix {};
+  ha-component-zha-toolkit = final.callPackage ./ha-components/zha-toolkit.nix {};
 
   # meli = pkgs.meli.override {
   #   cargoBuildFlags = ["--features jmap"];
   # };
 
-  steam-with-packages = pkgs.steam.override {
+  steam-with-packages = final.steam.override {
     extraPkgs = pkgs:
       with pkgs; [
         xorg.libXcursor
