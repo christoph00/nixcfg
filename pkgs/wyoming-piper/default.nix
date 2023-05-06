@@ -2,6 +2,7 @@
   lib,
   python3,
   fetchPypi,
+  pkgs,
 }:
 python3.pkgs.buildPythonApplication rec {
   pname = "wyoming-piper";
