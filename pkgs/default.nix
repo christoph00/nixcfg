@@ -5,6 +5,7 @@ final: prev: {
       (python-final: python-prev: {
         wyoming = python-final.callPackage ./python/wyoming.nix {};
         wyoming-piper = python-final.callPackage ./python/wyoming-piper.nix {};
+        androidtvremote2 = python-final.callPackage ./python/androidtvremote2.nix {};
       })
     ];
   python3 = let
