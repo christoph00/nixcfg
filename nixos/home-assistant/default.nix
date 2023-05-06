@@ -4,13 +4,13 @@
   ...
 }: {
   imports = [
-    ./postgres.nix
+    # ./postgres.nix
     ./extentions.nix
     ./systemmonitor.nix
     ./commands.nix
     ./network_sensors.nix
     # ./netdata.nix
-    ./piper.nix
+    # ./piper.nix
   ];
 
   users.users.hass.extraGroups = ["dialout"];
