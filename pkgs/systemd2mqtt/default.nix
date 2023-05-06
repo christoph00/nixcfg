@@ -1,12 +1,12 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, pkg-config
-, openssl
-, stdenv
-, darwin
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  pkg-config,
+  openssl,
+  stdenv,
+  darwin,
 }:
-
 rustPlatform.buildRustPackage rec {
   pname = "systemd2mqtt";
   version = "unstable-2022-12-19";
@@ -24,16 +24,18 @@ rustPlatform.buildRustPackage rec {
     pkg-config
   ];
 
-  buildInputs = [
-    openssl
-  ] ++ lib.optionals stdenv.isDarwin [
-    darwin.apple_sdk.frameworks.Security
-  ];
+  buildInputs =
+    [
+      openssl
+    ]
+    ++ lib.optionals stdenv.isDarwin [
+      darwin.apple_sdk.frameworks.Security
+    ];
 
   meta = with lib; {
     description = "Expose systemd services to mqtt";
     homepage = "https://github.com/arcnmx/systemd2mqtt";
-    license = with licenses; [ ];
-    maintainers = with maintainers; [ ];
+    license = with licenses; [];
+    maintainers = with maintainers; [];
   };
 }
