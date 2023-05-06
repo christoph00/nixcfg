@@ -9,8 +9,6 @@ final: prev: {
   python3 = let
     self = prev.python3.override {
       inherit self;
-      enableOptimizations = true;
-      reproducibleBuild = false;
       packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
     };
   in
@@ -48,6 +46,7 @@ final: prev: {
   anyrun = final.callPackage ./anyrun {};
   dlm = final.callPackage ./dlm {};
   # systemd2mqtt = pkgs.callPackage ./systemd2mqtt {};
+  wyoming-piper = final.callPackage ./wyoming-piper {};
 
   ha-lovelace-battery-entity = final.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = final.callPackage ./ha-lovelace/fold-entity-row.nix {};
