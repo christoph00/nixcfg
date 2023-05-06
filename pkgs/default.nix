@@ -1,8 +1,4 @@
-final: prev: let
-  lib = prev.lib;
-in {
-  inherit lib;
-
+final: prev: {
   pythonPackagesOverlays =
     (prev.pythonPackagesOverlays or [])
     ++ [
@@ -10,10 +6,11 @@ in {
         wyoming = python-final.callPackage ./python/wyoming.nix {};
       })
     ];
-
   python3 = let
     self = prev.python3.override {
       inherit self;
+      enableOptimizations = true;
+      reproducibleBuild = false;
       packageOverrides = prev.lib.composeManyExtensions final.pythonPackagesOverlays;
     };
   in
