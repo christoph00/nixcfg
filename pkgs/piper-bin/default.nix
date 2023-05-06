@@ -39,6 +39,16 @@ in
     };
     nativeBuildInputs = [autoPatchelfHook];
     buildInputs = [];
+    postUnpack = ''
+      mv piper/* $out/lib
+
+      addAutoPatchelfSearchPath "$out/lib"
+      addAutoPatchelfSearchPath "$out/bin"
+    '';
     sourceRoot = ".";
-    installPhase = ''install -m755 -D code $out/bin/code-cli '';
+    installPhase = ''
+
+      install -m755 -D piper/piper $out/bin/piper
+
+    '';
   }
