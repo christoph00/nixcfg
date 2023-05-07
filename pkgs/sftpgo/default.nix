@@ -17,15 +17,17 @@ with lib;
       owner = "drakkan";
       repo = pname;
       rev = "v${version}";
-      hash = "sha256-gB3r7Q4M4pXHB9cfCRU8hMccWaJ170es0CJfbo/7lsg=";
+      hash = "sha256-UL/CSNRvT9e+WAmE7nwd/EU7YOJ1mwMSnOIrd0dQJrk=";
     };
 
-    vendorHash = "sha256-og3mn0iYl6aubcSAUohqG4ZSqdBB4AQYZtpKfbp7kcQ=";
+    vendorHash = "sha256-q6GgaMlmBPjovCpLku9/ENlEc0lF8gck1fM+fpptti4=";
 
     ldflags = [
       "-s"
       "-w"
       "-extldflags '-static'"
+      "-X github.com/drakkan/sftpgo/v2/internal/version.commit=${src.rev}"
+      "-X github.com/drakkan/sftpgo/v2/internal/version.date=1970-01-01T00:00:00Z"
     ];
     tags = ["nopgxregisterdefaulttypes" "bundle" "nosqlite"];
 
