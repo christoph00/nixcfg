@@ -78,6 +78,8 @@ in {
     wrangler
     flyctl
     deno
+
+    homeassistant-cli
   ];
 
   home.sessionVariables = {
