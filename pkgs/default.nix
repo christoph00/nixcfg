@@ -57,6 +57,7 @@ final: prev: {
   ha-lovelace-card-mod = final.callPackage ./ha-lovelace/card-mod.nix {};
   ha-lovelace-better-thermostat-ui-card = final.callPackage ./ha-lovelace/better-thermostat-ui-card.nix {};
   ha-lovelace-vacuum-card = final.callPackage ./ha-lovelace/vacuum-card.nix {};
+  ha-lovelace-mushroom = final.callPackage ./ha-lovelace/mushroom.nix {};
   ha-lovelace-button-card = final.callPackage ./ha-lovelace/button-card.nix {};
   ha-component-better-thermostat = final.callPackage ./ha-components/better_thermostat.nix {};
   ha-component-ble-monitor = final.callPackage ./ha-components/ble_monitor.nix {};
