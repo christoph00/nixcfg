@@ -9,6 +9,8 @@
   better-thermostat-ui-card = "${pkgs.ha-lovelace-better-thermostat-ui-card}/ha-lovelace-better-thermostat-ui-card.js";
   vacuum-card = "${pkgs.ha-lovelace-vacuum-card}/ha-lovelace-vacuum-card.js";
   button-card = "${pkgs.ha-lovelace-button-card}/ha-lovelace-button-card.js";
+  layout-card = "${pkgs.ha-lovelace-layout-card}/ha-lovelace-layout-card.js";
+
   mushroom = "${pkgs.ha-lovelace-mushroom}/ha-lovelace-mushroom.js";
 
 in {
@@ -17,6 +19,8 @@ in {
     "d /nix/persist/hass/www 0755 hass hass"
     "C /nix/persist/hass/www/vacuum-card.js 0755 hass hass - ${vacuum-card}"
     "C /nix/persist/hass/www/button-card.js 0755 hass hass - ${button-card}"
+    "C /nix/persist/hass/www/layout-card.js 0755 hass hass - ${layout-card}"
+
     "C /nix/persist/hass/www/mini-graph-card.js 0755 hass hass - ${mini-graph-card}"
     "C /nix/persist/hass/www/better-thermostat-ui-card.js 0755 hass hass - ${better-thermostat-ui-card}"
     "C /nix/persist/hass/www/mushroom.js 0755 hass hass - ${mushroom}"
@@ -56,6 +60,10 @@ in {
     }
     {
       url = "/local/button-card.js?v=${builtins.hashFile "md5" button-card}";
+      type = "module";
+    }
+        {
+      url = "/local/layout-card.js?v=${builtins.hashFile "md5" layout-card}";
       type = "module";
     }
     {
