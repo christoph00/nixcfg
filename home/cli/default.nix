@@ -79,7 +79,7 @@ in {
     flyctl
     deno
 
-    homeassistant-cli
+    home-assistant-cli
   ];
 
   home.sessionVariables = {
