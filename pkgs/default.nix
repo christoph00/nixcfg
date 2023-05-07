@@ -59,6 +59,8 @@ final: prev: {
   ha-lovelace-vacuum-card = final.callPackage ./ha-lovelace/vacuum-card.nix {};
   ha-lovelace-mushroom = final.callPackage ./ha-lovelace/mushroom.nix {};
   ha-lovelace-button-card = final.callPackage ./ha-lovelace/button-card.nix {};
+  ha-lovelace-layout-card = final.callPackage ./ha-lovelace/layout-card.nix {};
+
   ha-component-better-thermostat = final.callPackage ./ha-components/better_thermostat.nix {};
   ha-component-ble-monitor = final.callPackage ./ha-components/ble_monitor.nix {};
   ha-component-promql = final.callPackage ./ha-components/promql.nix {};
