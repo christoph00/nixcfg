@@ -9,7 +9,7 @@
   better-thermostat-ui-card = "${pkgs.ha-lovelace-better-thermostat-ui-card}/ha-lovelace-better-thermostat-ui-card.js";
   vacuum-card = "${pkgs.ha-lovelace-vacuum-card}/ha-lovelace-vacuum-card.js";
   button-card = "${pkgs.ha-lovelace-button-card}/ha-lovelace-button-card.js";
-  mushroom = "${pkgs.ha-lovelace-button-card}/ha-lovelace-mushroom.js";
+  mushroom = "${pkgs.ha-lovelace-mushroom}/ha-lovelace-mushroom.js";
 
 in {
   services.home-assistant.config.default_config.whitelist_external_dirs = ["/nix/persist/hass/www"];
