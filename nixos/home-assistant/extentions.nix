@@ -9,6 +9,8 @@
   better-thermostat-ui-card = "${pkgs.ha-lovelace-better-thermostat-ui-card}/ha-lovelace-better-thermostat-ui-card.js";
   vacuum-card = "${pkgs.ha-lovelace-vacuum-card}/ha-lovelace-vacuum-card.js";
   button-card = "${pkgs.ha-lovelace-button-card}/ha-lovelace-button-card.js";
+  mushroom = "${pkgs.ha-lovelace-button-card}/ha-lovelace-mushroom.js";
+
 in {
   services.home-assistant.config.default_config.whitelist_external_dirs = ["/nix/persist/hass/www"];
   systemd.tmpfiles.rules = [
@@ -17,6 +19,8 @@ in {
     "C /nix/persist/hass/www/button-card.js 0755 hass hass - ${button-card}"
     "C /nix/persist/hass/www/mini-graph-card.js 0755 hass hass - ${mini-graph-card}"
     "C /nix/persist/hass/www/better-thermostat-ui-card.js 0755 hass hass - ${better-thermostat-ui-card}"
+    "C /nix/persist/hass/www/mushroom.js 0755 hass hass - ${mushroom}"
+
 
     "d /nix/persist/hass/custom_components 0755 hass hass"
     "L /nix/persist/hass/custom_components/ble_monitor - - - - ${pkgs.ha-component-ble-monitor}/ble_monitor"
@@ -52,6 +56,10 @@ in {
     }
     {
       url = "/local/button-card.js?v=${builtins.hashFile "md5" button-card}";
+      type = "module";
+    }
+    {
+      url = "/local/mushroom.js?v=${builtins.hashFile "md5" mushroom}";
       type = "module";
     }
   ];
