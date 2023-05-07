@@ -81,7 +81,7 @@
           #host = "tower.lan.net.r505.de";
           turn_off = {
             service = "shell_command.suspend_host";
-            data.host = "tower.lan.net.r505.de";
+            data.host = "tower.speedport.ip";
           };
         }
       ];
