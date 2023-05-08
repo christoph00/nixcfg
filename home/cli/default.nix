@@ -44,8 +44,6 @@ in {
     tmux
     xplr
 
-    comma
-
     gopls
 
     tree
