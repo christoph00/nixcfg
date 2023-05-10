@@ -13,6 +13,7 @@ final: prev: {
             (o.patches or [])
             ++ [
               ./patches/python-androidtv-01-add-magentatv-one.patch
+              ./patches/python-androidtv-02-add-magentatv-one.patch
             ];
         });
       })
