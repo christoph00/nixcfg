@@ -119,6 +119,8 @@
 
   services.geoclue2.enable = true;
 
+  programs.adb.enable = true;
+
   environment.persistence."/nix/persist" = {
     directories = [
       "/etc/NetworkManager/system-connections"

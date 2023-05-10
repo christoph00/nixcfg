@@ -20,6 +20,7 @@
       "scanner"
       "sound"
       "media"
+      "adbusers"
     ];
 
     passwordFile = config.age.secrets.nina-password.path;
