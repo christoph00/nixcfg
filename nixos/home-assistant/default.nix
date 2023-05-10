@@ -110,6 +110,7 @@
         wyoming-piper
         androidtvremote2
         # faster-whisper
+        androidtv
       ];
     extraComponents = [
       "caldav"
