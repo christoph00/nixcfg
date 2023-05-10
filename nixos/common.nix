@@ -97,6 +97,7 @@
       "sound"
       "media"
       "podman"
+      "adbusers"
     ];
 
     openssh.authorizedKeys.keys = [
