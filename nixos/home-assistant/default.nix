@@ -117,7 +117,6 @@
       "bluetooth"
       "calendar"
       "camera"
-      "androidtv"
       "open_meteo"
       "adguard"
       "speedtestdotnet"
