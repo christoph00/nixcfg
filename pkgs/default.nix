@@ -8,7 +8,7 @@ final: prev: {
         androidtvremote2 = python-final.callPackage ./python/androidtvremote2.nix {};
         faster-whisper = python-final.callPackage ./python/faster-whisper.nix {};
 
-        python-androidtv = prev.python-androidtv.overrideAttrs (o: {
+        androidtv = prev.androidtv.overrideAttrs (o: {
           patches =
             (o.patches or [])
             ++ [
