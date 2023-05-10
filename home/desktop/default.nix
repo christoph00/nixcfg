@@ -86,6 +86,7 @@ in {
     usbimager
 
     gimp-with-plugins
+    inkscape
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
