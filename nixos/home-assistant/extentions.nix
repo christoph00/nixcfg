@@ -12,7 +12,6 @@
   layout-card = "${pkgs.ha-lovelace-layout-card}/ha-lovelace-layout-card.js";
 
   mushroom = "${pkgs.ha-lovelace-mushroom}/ha-lovelace-mushroom.js";
-
 in {
   services.home-assistant.config.default_config.whitelist_external_dirs = ["/nix/persist/hass/www"];
   systemd.tmpfiles.rules = [
@@ -24,7 +23,6 @@ in {
     "C /nix/persist/hass/www/mini-graph-card.js 0755 hass hass - ${mini-graph-card}"
     "C /nix/persist/hass/www/better-thermostat-ui-card.js 0755 hass hass - ${better-thermostat-ui-card}"
     "C /nix/persist/hass/www/mushroom.js 0755 hass hass - ${mushroom}"
-
 
     "d /nix/persist/hass/custom_components 0755 hass hass"
     "L /nix/persist/hass/custom_components/ble_monitor - - - - ${pkgs.ha-component-ble-monitor}/ble_monitor"
@@ -62,7 +60,7 @@ in {
       url = "/local/button-card.js?v=${builtins.hashFile "md5" button-card}";
       type = "module";
     }
-        {
+    {
       url = "/local/layout-card.js?v=${builtins.hashFile "md5" layout-card}";
       type = "module";
     }

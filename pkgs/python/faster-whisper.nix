@@ -1,18 +1,18 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, av
-, ctranslate2
-, huggingface-hub
-, onnxruntime
-, tokenizers
-, transformers
-, black
-, flake8
-, isort
-, pytest
+{
+  lib,
+  buildPythonPackage,
+  fetchPypi,
+  av,
+  ctranslate2,
+  huggingface-hub,
+  onnxruntime,
+  tokenizers,
+  transformers,
+  black,
+  flake8,
+  isort,
+  pytest,
 }:
-
 buildPythonPackage rec {
   pname = "faster-whisper";
   version = "0.5.1";
@@ -43,12 +43,12 @@ buildPythonPackage rec {
     ];
   };
 
-  pythonImportsCheck = [ "faster_whisper" ];
+  pythonImportsCheck = ["faster_whisper"];
 
   meta = with lib; {
     description = "Faster Whisper transcription with CTranslate2";
     homepage = "https://pypi.org/project/faster-whisper/";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }
