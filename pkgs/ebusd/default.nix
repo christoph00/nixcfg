@@ -26,9 +26,15 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace CMakeLists.txt \
-      --replace "DESTINATION /etc" "DESTINATION $out/etc" \
+      --replace "DESTINATION /etc" "DESTINATION etc" \
   '';
 
+  installPhase = ''
+    mkdir $out/bin
+    install -Dm755 bin/* -t $out/bin
+    mkdir $out/etc
+    cp -r etc/ebusd $out/etc
+  '';
 
 
   meta = with lib; {
