@@ -40,6 +40,8 @@ final: prev: {
   # sfwbar = pkgs.callPackage ./sfwbar {};
   # ariaNg = pkgs.callPackage ./ariaNg {};
   matcha = final.callPackage ./matcha {};
+  ebusd = final.callPackage ./ebusd {};
+
   # cs-firewall-bouncer = pkgs.callPackage ./cs-firewall-bouncer {};
   media-sort = final.callPackage ./media-sort {};
   # uboot-r2s = pkgs.callPackage ./uboot-r2s {};

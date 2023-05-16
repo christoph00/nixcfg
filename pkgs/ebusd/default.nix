@@ -3,6 +3,7 @@
   stdenv,
   fetchFromGitHub,
   cmake,
+  mosquitto,
 }:
 stdenv.mkDerivation rec {
   pname = "ebusd";
@@ -17,6 +18,8 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     cmake
+    mosquitto
+    openssl
   ];
 
   meta = with lib; {
