@@ -13,7 +13,13 @@
     #./piper.nix
   ];
 
-  users.users.hass.extraGroups = ["dialout"];
+  users.users.hass = {
+    extraGroups = ["dialout"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX christoph@air13"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower"
+    ];
+  };
   services.home-assistant = {
     enable = true;
     package = pkgs.home-assistant.overrideAttrs (old: {
@@ -34,7 +40,7 @@
         time_zone = "Europe/Berlin";
         temperature_unit = "C";
         external_url = "https://ha.r505.de";
-        internal_url = "https://ha.net.r505.de";
+        internal_url = "http://futro.speedport.ip:8123";
         packages = "!include_dir_named pkgs";
       };
       default_config = {};
@@ -62,6 +68,10 @@
         };
       };
       zha_toolkit = {};
+      # ebusd = {
+      #   host = "127.0.0.1";
+      #   circuit = "bai";
+      # };
       ssdp = {};
       mqtt = {};
       dhcp = {};
@@ -111,7 +121,7 @@
         androidtvremote2
         # faster-whisper
         androidtv
-        # pyebus
+        #pyebus
       ];
     extraComponents = [
       "caldav"
