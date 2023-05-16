@@ -23,6 +23,11 @@ stdenv.mkDerivation rec {
     openssl
   ];
 
+  installPhase = ''
+            cmake --install ./build --prefix $out
+          '';
+
+
   meta = with lib; {
     description = "Daemon for communication with eBUS heating systems";
     homepage = "https://github.com/john30/ebusd";
