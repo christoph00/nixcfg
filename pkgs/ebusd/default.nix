@@ -30,11 +30,8 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    mkdir $out
-    mkdir $out/bin
-    install -Dm755 bin/* -t $out/bin
-    mkdir $out/etc
-    cp -r etc/ebusd $out/etc
+     mkdir -p $out
+      cp -r * $out/
   '';
 
 
