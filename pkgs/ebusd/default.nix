@@ -25,13 +25,13 @@ stdenv.mkDerivation rec {
 
 
   postPatch = ''
+    mkdir -p $out
     substituteInPlace CMakeLists.txt \
-      --replace "DESTINATION /etc" "DESTINATION etc" \
+      --replace "DESTINATION /etc" "DESTINATION $out/etc" \
   '';
 
   installPhase = ''
-    mkdir -p $out
-    cd src
+    cd $out
     ls -lah
   '';
 
