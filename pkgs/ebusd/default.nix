@@ -23,17 +23,16 @@ stdenv.mkDerivation rec {
     openssl
   ];
 
-
-  # postPatch = ''
-  #   mkdir -p $out
-  #   substituteInPlace CMakeLists.txt \
-  #     --replace "DESTINATION /etc" "DESTINATION $out/etc" \
-  # '';
-
-  installPhase = ''
-    cat cmake_install.cmake
+  postPatch = ''
+    mkdir -p $out
+    substituteInPlace CMakeLists.txt \
+      --replace "DESTINATION /etc" "DESTINATION etc" \
   '';
 
+  # postConfigure = ''
+  # ls -lah
+  # cat cmake_install.cmake
+  # '';
 
   meta = with lib; {
     description = "Daemon for communication with eBUS heating systems";
