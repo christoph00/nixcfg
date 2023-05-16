@@ -30,8 +30,9 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-     mkdir -p $out
-      ls -lah
+    mkdir -p $out
+    cd src
+    ls -lah
   '';
 
 
