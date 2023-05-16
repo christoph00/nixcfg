@@ -4,6 +4,7 @@
   fetchFromGitHub,
   cmake,
   mosquitto,
+  openssl,
 }:
 stdenv.mkDerivation rec {
   pname = "ebusd";
