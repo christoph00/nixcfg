@@ -111,6 +111,7 @@
         androidtvremote2
         # faster-whisper
         androidtv
+        pyebusd
       ];
     extraComponents = [
       "caldav"
