@@ -31,8 +31,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
      mkdir -p $out
-      cp -r etc $out/
-      cp -r bin $out/
+      ls -lah
   '';
 
 
