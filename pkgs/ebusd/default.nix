@@ -23,9 +23,12 @@ stdenv.mkDerivation rec {
     openssl
   ];
 
-  installPhase = ''
-            cmake --install ./build --prefix $out
-          '';
+
+  postPatch = ''
+    substituteInPlace CMakeLists.txt \
+      --replace "DESTINATION /etc" "DESTINATION $out/etc" \
+  '';
+
 
 
   meta = with lib; {
