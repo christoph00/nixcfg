@@ -83,6 +83,7 @@
     media-sort
     ffmpeg-full
     dlm
+    ebusd
   ];
 
   users.users.jellyfin.extraGroups = ["media"];
