@@ -29,6 +29,8 @@ stdenv.mkDerivation rec {
       --replace "DESTINATION /etc" "DESTINATION etc" \
   '';
 
+  preAutoreconf = "./autogen.sh";
+
   # postConfigure = ''
   # ls -lah
   # cat cmake_install.cmake
