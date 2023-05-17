@@ -8,13 +8,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "ebusd";
-  version = "23.1";
+  version = "unstable-2023-05-01";
 
   src = fetchFromGitHub {
     owner = "john30";
     repo = "ebusd";
-    rev = version;
-    hash = "sha256-wCD328bzRzdm2A4v+/ta6c8ZqFxbldNo+h6G5rVtmYI=";
+    rev = "1895339e4514a3fbb97f46cdd41170ca3f81ad75";
+    shas256 = "1i8gbryd4fvpj1dwcr8ai71a55dmhc9f0wxr7as1fpzp41v5wgyp";
   };
 
   nativeBuildInputs = [
