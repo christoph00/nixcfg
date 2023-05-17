@@ -68,10 +68,10 @@
         };
       };
       zha_toolkit = {};
-      ebusd = {
-        host = "127.0.0.1";
-        circuit = "basv0";
-      };
+      # ebusd = {
+      #   host = "127.0.0.1";
+      #   circuit = "basv0";
+      # };
       ssdp = {};
       mqtt = {};
       dhcp = {};
