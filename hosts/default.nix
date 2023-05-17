@@ -71,7 +71,7 @@
           self.nixosModules.server
           self.nixosModules.virtual
           self.nixosModules.reverse-proxy-server
-          self.nixosModules.mailserver
+         # self.nixosModules.mailserver
           ./oc1
         ];
       };
@@ -81,7 +81,7 @@
           self.nixosModules.server
           self.nixosModules.virtual
           self.nixosModules.reverse-proxy-server
-          self.nixosModules.mailserver
+        #  self.nixosModules.mailserver
           ./oc2
         ];
       };
