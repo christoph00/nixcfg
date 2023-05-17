@@ -68,10 +68,10 @@
         };
       };
       zha_toolkit = {};
-      # ebusd = {
-      #   host = "127.0.0.1";
-      #   circuit = "bai";
-      # };
+      ebusd = {
+        host = "127.0.0.1";
+        circuit = "basv0";
+      };
       ssdp = {};
       mqtt = {};
       dhcp = {};
@@ -121,7 +121,7 @@
         androidtvremote2
         # faster-whisper
         androidtv
-        #pyebus
+        pyebus
       ];
     extraComponents = [
       "caldav"
