@@ -69,8 +69,8 @@
   };
   age.secrets.nd-key = {
     file = ../../secrets/nd-key;
-    # owner = "christoph";
-    # mode = "600";
+    owner = "christoph";
+    mode = "600";
   };
   age.secrets.rclone-nd-conf = {
     file = ../../secrets/rclone-nd.conf;
