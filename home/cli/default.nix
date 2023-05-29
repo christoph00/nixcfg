@@ -27,7 +27,6 @@ in {
     nil
     alejandra
     cachix
-  
 
     #inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
 
@@ -142,7 +141,7 @@ in {
     enableAliases = true;
   };
 
-   services.rclone = {
+  services.rclone = {
     enable = true;
     config = "/run/agenix/rclone-conf";
     mounts = {

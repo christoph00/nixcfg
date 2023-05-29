@@ -67,4 +67,5 @@
     path = "/home/christoph/.config/rclone/rclone.conf";
     owner = "christoph";
     mode = "660";
-  };}
+  };
+}

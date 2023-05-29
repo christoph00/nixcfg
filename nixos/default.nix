@@ -32,6 +32,7 @@
           inputs.agenix.nixosModules.age
           inputs.vscode-server.nixosModule
           inputs.impermanence.nixosModules.impermanence
+          inputs.disko.nixosModules.disko
           self.nixosModules.home-manager
 
           inputs.srvos.nixosModules.common
