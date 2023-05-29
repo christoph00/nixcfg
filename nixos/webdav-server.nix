@@ -8,7 +8,6 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" ];
     serviceConfig = {
-      EnvironmentFile = config.age.secrets.htaccess.path;
       ExecStart = "${pkgs.rclone}/bin/rclone serve webdav NDCRYPT: --config ${config.age.secrets.rclone-conf.path} --addr unix:///run/rclone/ndcrypt.sock";
       Group = "caddy";
       RuntimeDirectory = "rclone-nd";
