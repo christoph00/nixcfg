@@ -47,6 +47,8 @@
         system = "x86_64-linux";
         modules = [
           self.nixosModules.server
+          self.nixosModules.virtual
+          self.nixosModules.home-headless-christoph
           # self.nixosModules.router
           ./cube
         ];
