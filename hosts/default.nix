@@ -62,7 +62,7 @@
           self.nixosModules.virtual
           self.nixosModules.caldav
           self.nixosModules.remote-server
-          self.nixosModule.webdav-server
+          self.nixosModules.webdav-server
           ./oca
         ];
       };
