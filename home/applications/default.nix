@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./firefox.nix
-    ./helix.nix
+    #./helix.nix
     ./chromium.nix
     ./vscode.nix
     #./kate.nix
