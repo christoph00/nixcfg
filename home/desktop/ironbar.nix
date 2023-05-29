@@ -35,7 +35,7 @@ in {
         in
           workspaces (_: "●");
       };
-      tray = {type = "tray";};
+      #tray = {type = "tray";};
       clock = {type = "clock";};
       sys-info = {
         format = [
