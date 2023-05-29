@@ -15,6 +15,7 @@
   disko.devices = import ./disk-config.nix {
     inherit lib;
   };
+  fileSystems."/nix/persist".neededForBoot = true;
 
   networking.hostName = "star";
   networking.interfaces.ens3.useDHCP = true;

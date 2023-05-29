@@ -1,5 +1,4 @@
 {disks ? ["/dev/vda"], ...}: {
-  disko.devices = {
     disk = {
       main = {
         type = "disk";
@@ -50,5 +49,4 @@
         };
       };
     };
-  };
 }
