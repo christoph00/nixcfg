@@ -17,7 +17,7 @@ in {
   programs.ironbar = {
     enable = true;
     package = inputs.ironbar.packages.x86_64-linux.default;
-    systemd = false;
+    systemd = true;
     config = let
       launcher = {
         type = "launcher";
