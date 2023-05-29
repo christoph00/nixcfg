@@ -22,7 +22,7 @@ in {
   "secrets/christoph-password.age".publicKeys = [christoph_air13 futro air13 tower oca oc1 oc2 cube];
   "secrets/wayvnc-key".publicKeys = [christoph_air13 tower christoph_tower];
   "secrets/wayvnc-cert".publicKeys = [christoph_air13 tower christoph_tower];
-  "secrets/rclone.conf".publicKeys = [christoph_air13 tower air13 futro];
+  "secrets/rclone.conf".publicKeys = [christoph_air13 tower air13 futro oca oc1 oc2 christoph_tower];
   "secrets/traefik.env".publicKeys = [christoph_air13 oca oc1 oc2 futro cube];
   "secrets/agent-key".publicKeys = [christoph_air13 futro];
   "secrets/nd-key".publicKeys = [christoph_air13 christoph_tower futro air13 tower oca oc1 oc2];
