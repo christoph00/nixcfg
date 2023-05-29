@@ -23,15 +23,10 @@
     options = ["defaults" "size=2G" "mode=755"];
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/0C57-60FD";
-    fsType = "vfat";
+  disko.devices = import ./disk-config.nix {
+    inherit lib;
   };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/8521cf96-09fd-43f8-a1e7-82b853ac0320";
-    fsType = "ext4";
-  };
+  fileSystems."/nix/persist".neededForBoot = true;
 
   swapDevices = [];
 
