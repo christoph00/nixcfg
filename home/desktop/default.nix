@@ -114,16 +114,7 @@ in {
   #xdg.mimeApps.associations.added = associations;
   #xdg.mimeApps.defaultApplications = associations;
 
-  services.rclone = {
-    enable = true;
-    config = "/run/agenix/rclone-conf";
-    mounts = {
-      nas = {
-        from = "NDCRYPT:";
-        to = "/home/christoph/NAS";
-      };
-    };
-  };
+ 
 
   fontProfiles = {
     enable = true;
