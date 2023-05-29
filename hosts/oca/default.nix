@@ -17,11 +17,11 @@
     };
   };
 
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = ["defaults" "size=2G" "mode=755"];
-  };
+  # fileSystems."/" = {
+  #   device = "none";
+  #   fsType = "tmpfs";
+  #   options = ["defaults" "size=2G" "mode=755"];
+  # };
 
   disko.devices = import ./disk-config.nix {
     inherit lib;
