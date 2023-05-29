@@ -53,8 +53,6 @@
     };
   };
 
-
-
   systemd.tmpfiles.rules = [
     "d /var/lib/jellyfin/media 0770 jellyfin media"
     "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
