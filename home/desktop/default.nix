@@ -114,8 +114,6 @@ in {
   #xdg.mimeApps.associations.added = associations;
   #xdg.mimeApps.defaultApplications = associations;
 
- 
-
   fontProfiles = {
     enable = true;
     monospace = {
