@@ -36,7 +36,13 @@
           ./futro
         ];
       };
+      star = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
           self.nixosModules.server
+          ./star
+        ];
+      };
       cube = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
