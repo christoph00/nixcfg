@@ -64,8 +64,6 @@ in {
     # ./waybar.nix
   ];
 
-  
-
   home.packages = with pkgs; [
     libnotify
     playerctl

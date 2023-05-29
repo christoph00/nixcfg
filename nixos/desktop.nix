@@ -22,7 +22,7 @@
   ];
   boot.loader.timeout = lib.mkForce 0;
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   services.dbus = {
     enable = true;
