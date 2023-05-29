@@ -1,7 +1,6 @@
 {disks ? ["/dev/vda"], ...}: {
-  disk = {
-    nodev = {
-      "/tmp" = {
+  nodev = {
+      "/" = {
         fsType = "tmpfs";
         mountOptions = [
           "defaults"
@@ -10,6 +9,8 @@
         ];
       };
     };
+  disk = {
+    
     main = {
       type = "disk";
       device = builtins.elemAt disks 0;
