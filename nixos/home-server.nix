@@ -8,51 +8,51 @@
   networking.firewall.allowedUDPPorts = [53 1514 514];
 
   #users.users.sftpgo.extraGroups = ["media"];
-  services.sftpgo = {
-    enable = false;
-    package = pkgs.my-sftpgo;
-    openFirewall = true;
-    settings = {
-      # common = {
-      #   proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
-      #   #proxy_protocol = 1;
-      # };
-      data_provider = {
-        driver = "bolt";
-        name = "sftpgo.db";
-      };
-      webdavd = {
-        bindings = [
-          {
-            port = 8033;
-            client_ip_proxy_header = "X-Forwarded-For";
-            proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
-          }
-        ];
-      };
-      httpd = {
-        bindings = [
-          {
-            client_ip_proxy_header = "X-Forwarded-For";
-            proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
-            branding = {
-              web_client = {
-                name = "NAS";
-                short_name = "NAS";
-              };
-            };
-          }
-        ];
-      };
-    };
-  };
+  # services.sftpgo = {
+  #   enable = false;
+  #   package = pkgs.my-sftpgo;
+  #   openFirewall = true;
+  #   settings = {
+  #     # common = {
+  #     #   proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
+  #     #   #proxy_protocol = 1;
+  #     # };
+  #     data_provider = {
+  #       driver = "bolt";
+  #       name = "sftpgo.db";
+  #     };
+  #     webdavd = {
+  #       bindings = [
+  #         {
+  #           port = 8033;
+  #           client_ip_proxy_header = "X-Forwarded-For";
+  #           proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
+  #         }
+  #       ];
+  #     };
+  #     httpd = {
+  #       bindings = [
+  #         {
+  #           client_ip_proxy_header = "X-Forwarded-For";
+  #           proxy_allowed = ["127.0.0.1/32" "100.0.0.0/8"];
+  #           branding = {
+  #             web_client = {
+  #               name = "NAS";
+  #               short_name = "NAS";
+  #             };
+  #           };
+  #         }
+  #       ];
+  #     };
+  #   };
+  # };
 
   environment.persistence."/nix/persist" = {
     directories = [
-      {
-        directory = "/var/lib/sftpgo";
-        inherit (config.services.sftpgo) user group;
-      }
+      # {
+      #   directory = "/var/lib/sftpgo";
+      #   inherit (config.services.sftpgo) user group;
+      # }
       {
         directory = "/var/lib/jellyfin";
         inherit (config.services.jellyfin) user group;
@@ -309,15 +309,15 @@
   #   };
   # };
 
-  services.syslog-ng = {
-    enable = true;
-    extraConfig = ''
-      source s_net {
-        tcp(ip(0.0.0.0) port(514));
-        udp(ip(0.0.0.0) port(514));
-      };
-      destination d_fromnet {file("/var/log/remote/$HOST" owner("root") group("promtail") perm(0660));};
-      log {source(s_net); destination(d_fromnet);};
-    '';
-  };
+  # services.syslog-ng = {
+  #   enable = true;
+  #   extraConfig = ''
+  #     source s_net {
+  #       tcp(ip(0.0.0.0) port(514));
+  #       udp(ip(0.0.0.0) port(514));
+  #     };
+  #     destination d_fromnet {file("/var/log/remote/$HOST" owner("root") group("promtail") perm(0660));};
+  #     log {source(s_net); destination(d_fromnet);};
+  #   '';
+  # };
 }
