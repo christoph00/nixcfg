@@ -33,6 +33,8 @@
           inputs.agenix.nixosModules.age
           inputs.vscode-server.nixosModule
           inputs.impermanence.nixosModules.impermanence
+          self.nixosModules.home-manager
+
 
           inputs.srvos.nixosModules.common
           inputs.srvos.nixosModules.mixins-systemd-boot
@@ -51,7 +53,6 @@
         inputs.home-manager.nixosModule
         #inputs.hyprland.nixosModules.default
         self.nixosModules.default
-        self.nixosModules.home-manager
         self.nixosModules.autologin-graphical-session
         inputs.srvos.nixosModules.desktop
         ./desktop.nix
