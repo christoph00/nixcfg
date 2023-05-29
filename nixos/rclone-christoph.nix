@@ -25,7 +25,7 @@
       #User = "christoph";
       Type = "notify";
       ExecStartPre = "/run/current-system/sw/bin/mkdir -p /home/christoph/NAS";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount --config ${config.age.secrets.rclone-conf.path} --vfs-cache-mode full --allow-other --vfs-cache-max-size 100M --no-modtime --gid 100 --uid 1000 --umask 022 nas: /home/christoph/NAS";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount --config ${config.age.secrets.rclone-conf.path} --vfs-cache-mode full --allow-other --vfs-cache-max-size 100M --no-modtime --gid 100 --uid 1000 --umask 022 NDCRYPT: /home/christoph/NAS";
       ExecStop = "/bin/fusermount -u /home/christoph/NAS";
       Restart = "always";
       RestartSec = "20";
