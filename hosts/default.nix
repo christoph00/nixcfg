@@ -62,6 +62,7 @@
           self.nixosModules.virtual
           self.nixosModules.caldav
           self.nixosModules.remote-server
+          self.nixosModule.webdav-server
           ./oca
         ];
       };
@@ -71,7 +72,7 @@
           self.nixosModules.server
           self.nixosModules.virtual
           self.nixosModules.reverse-proxy-server
-         # self.nixosModules.mailserver
+          # self.nixosModules.mailserver
           ./oc1
         ];
       };
@@ -81,7 +82,7 @@
           self.nixosModules.server
           self.nixosModules.virtual
           self.nixosModules.reverse-proxy-server
-        #  self.nixosModules.mailserver
+          #  self.nixosModules.mailserver
           ./oc2
         ];
       };
