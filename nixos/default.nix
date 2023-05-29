@@ -87,7 +87,6 @@
         ./home-server.nix
         ./matcha.nix
         #inputs.srvos.nixosModules.mixins-nginx
-        self.nixosModules.sftpgo
         #self.nixosModules.syncthing
       ];
 
@@ -107,7 +106,6 @@
       syncthing.imports = [./syncthing.nix];
 
       mailserver.imports = [
-        self.nixosModules.stalwart
         ./mailserver.nix
       ];
 
