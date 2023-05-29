@@ -60,6 +60,8 @@
         modules = [
           self.nixosModules.server
           self.nixosModules.virtual
+          self.nixosModules.home-headless-christoph
+
           self.nixosModules.remote-server
           self.nixosModules.webdav-server
           ./oca

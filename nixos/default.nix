@@ -11,6 +11,8 @@
       home-laptop-christoph = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-laptop] "christoph";
       home-desktop-nina = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-desktop self.homeModules.gaming] "nina";
       home-laptop-nina = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-laptop] "nina";
+      home-headless-christoph = self.lib.mkHomeModule [] "christoph";
+
 
       home-manager.imports = [
         inputs.home-manager.nixosModules.home-manager

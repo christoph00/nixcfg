@@ -43,19 +43,20 @@
 
   #environment.systemPackages = [];
 
-  {
   environment.persistence."/nix/persist" = {
     users.christoph = {
       directories = [
         "Downloads"
         "Documents"
         "Code"
-        { directory = ".ssh"; mode = "0700"; }
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
         ".local/share/direnv"
       ];
     };
   };
-}
 
   # ----------  Secrets  -----------------------------------------
   #age.secrets.cloudflared.file = ../../secrets/oca-cf;
