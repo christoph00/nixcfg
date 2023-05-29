@@ -11,7 +11,6 @@ let
   oca = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoZYVHRKCEs5lRYEIr1OgkydoPiGpVaUGStAIYakXgI";
   oc1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBxEMuue30m1zhq/03TMgJrj1t+8hRudPPpWMM3/5o9A";
   oc2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIND8HbngVMLrM3sfnr8tz3moOlahHFgA0BliQREX6toe";
-
 in {
   "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca cube];
   "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2];
