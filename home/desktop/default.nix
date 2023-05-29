@@ -115,7 +115,7 @@ in {
     config = "/run/agenix/rclone-conf";
     mounts = {
       nas = {
-        from = "nas:";
+        from = "NDCRYPT:";
         to = "/home/christoph/NAS";
       };
     };
