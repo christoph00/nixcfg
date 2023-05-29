@@ -6,10 +6,13 @@
 }: {
   boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "ahci" "sd_mod" "sr_mod" "virtio_blk"];
 
-  boot.loader.grub = {
-    devices = ["/dev/vda"];
-    efiSupport = true;
-    efiInstallAsRemovable = true;
+  boot.loader = {
+    systemd-boot.enable = lib.mkForce false;
+    grub = {
+      enable = true;
+      efiSupport = false;
+      devices = ["/dev/vda"];
+    };
   };
 
   disko.devices = import ./disk-config.nix {
