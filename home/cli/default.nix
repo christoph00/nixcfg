@@ -27,9 +27,7 @@ in {
     nil
     alejandra
     cachix
-    inputs.agenix.packages.x86_64-linux.default
-    inputs.nix-init.packages.x86_64-linux.default
-    inputs.deploy-rs.defaultPackage.${pkgs.system}
+  
 
     #inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
 
@@ -50,16 +48,14 @@ in {
 
     matcha
 
-    flyctl
-
     unrar
     #unzip
     p7zip
     #cabextract
     #innoextract
 
-    wineWowPackages.staging
-    winetricks
+    # wineWowPackages.staging
+    # winetricks
 
     tio
     #picocom
