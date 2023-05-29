@@ -57,7 +57,7 @@ in {
       position = "bottom";
       anchor_to_edges = true;
       start = [workspaces];
-      end = [tray battery clock];
+      end = [battery clock];
     };
   };
 }
