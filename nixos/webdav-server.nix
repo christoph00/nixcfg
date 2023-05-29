@@ -1,12 +1,11 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }: {
-
-
   systemd.services.rclone-private = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network-online.target" ];
+    wantedBy = ["multi-user.target"];
+    after = ["network-online.target"];
     serviceConfig = {
       ExecStart = "${pkgs.rclone}/bin/rclone serve webdav NDCRYPT: --config ${config.age.secrets.rclone-conf.path} --addr unix:///run/rclone/ndcrypt.sock";
       Group = "caddy";
