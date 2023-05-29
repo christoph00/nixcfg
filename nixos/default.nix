@@ -13,7 +13,6 @@
       home-laptop-nina = self.lib.mkHomeModule [self.homeModules.desktop self.homeModules.monitors-laptop] "nina";
       home-headless-christoph = self.lib.mkHomeModule [] "christoph";
 
-
       home-manager.imports = [
         inputs.home-manager.nixosModules.home-manager
         {
@@ -34,7 +33,6 @@
           inputs.vscode-server.nixosModule
           inputs.impermanence.nixosModules.impermanence
           self.nixosModules.home-manager
-
 
           inputs.srvos.nixosModules.common
           inputs.srvos.nixosModules.mixins-systemd-boot
