@@ -36,6 +36,7 @@
           ./futro
         ];
       };
+          self.nixosModules.server
       cube = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
