@@ -148,22 +148,4 @@ in {
 
   programs.command-not-found.enable = false;
   programs.nix-index.enable = true;
-
-  xdg.configFile."zellij/themes/${slug}.kdl".text = ''
-    themes {
-      ${slug} {
-        fg "#${colors.base05}"
-        bg "#${colors.base00}"
-        black "#${colors.base03}"
-        red "#${colors.base08}"
-        green "#${colors.base0B}"
-        yellow "#${colors.base0A}"
-        blue "#${colors.base0D}"
-        magenta "#${colors.base0E}"
-        cyan "#${colors.base0C}"
-        white "#${colors.base05}"
-        orange "#${colors.base0F}"
-      }
-    }
-  '';
 }
