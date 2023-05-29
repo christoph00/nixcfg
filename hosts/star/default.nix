@@ -11,7 +11,7 @@
     fsType = "btrfs";
     options = ["subvol=@root"];
   };
-1
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/B74C-70ED";
     fsType = "vfat";
