@@ -60,7 +60,6 @@
         modules = [
           self.nixosModules.server
           self.nixosModules.virtual
-          self.nixosModules.caldav
           self.nixosModules.remote-server
           self.nixosModules.webdav-server
           ./oca
