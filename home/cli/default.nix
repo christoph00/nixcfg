@@ -73,6 +73,10 @@ in {
     deno
 
     home-assistant-cli
+
+    media-sort
+    ffmpeg-full
+    dlm
   ];
 
   home.sessionVariables = {
