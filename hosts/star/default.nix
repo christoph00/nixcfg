@@ -22,6 +22,10 @@
 
   networking.hostName = "star";
   networking.interfaces.ens3.useDHCP = true;
+  networking.interfaces.eth0.useDHCP = true;
+  networking.interfaces.enp0s3.useDHCP = true;
+
+
 
   powerManagement.cpuFreqGovernor = "performance";
 
