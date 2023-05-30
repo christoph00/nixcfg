@@ -25,8 +25,6 @@
   networking.interfaces.eth0.useDHCP = true;
   networking.interfaces.enp0s3.useDHCP = true;
 
-
-
   powerManagement.cpuFreqGovernor = "performance";
 
   # ----------  Secrets  -----------------------------------------
