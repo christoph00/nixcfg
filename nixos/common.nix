@@ -79,6 +79,8 @@
   programs.command-not-found.enable = false;
   programs.fish.enable = true;
 
+  networking.wireguard.enable = true;
+
   users.users.christoph = {
     description = "Christoph";
     isNormalUser = true;
@@ -125,6 +127,7 @@
     pkgs.killall
     pkgs.dnsutils
     pkgs.htop
+    pkgs.wireguard-tools
   ];
 
   environment.shellAliases = {

@@ -39,7 +39,6 @@
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       Type = "notify";
-      Environment = ["/run/wrappers/bin/:$PATH"];
       ExecStartPre = "/run/current-system/sw/bin/mkdir -p /var/lib/jellyfin/media";
       ExecStart = ''
         ${pkgs.rclone}/bin/rclone mount --config ${config.age.secrets.rclone-conf.path} \
@@ -47,7 +46,6 @@
         --no-modtime \
         --gid 900 \
         --umask 022 \
-        --fast-list \
         --vfs-read-chunk-size=64M \
         --vfs-read-chunk-size-limit=2048M \
         --vfs-cache-mode writes \
@@ -58,7 +56,7 @@
         --timeout=10m \
         --transfers=16 \
         --checkers=12 \
-        NDCRYPT: /var/lib/jellyfin/media'';
+        NDCRYPT:media /var/lib/jellyfin/media'';
       ExecStop = "fusermount -u /var/lib/jellyfin/media";
       Restart = "always";
       RestartSec = "20";
