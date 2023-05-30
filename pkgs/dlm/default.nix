@@ -9,16 +9,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "dlm";
-  version = "0.3.3";
+  version = "0.3.5";
 
   src = fetchFromGitHub {
     owner = "agourlay";
     repo = "dlm";
     rev = "v${version}";
-    hash = "sha256-2Syd4d6Tf3FgdoNxcjFXSu1YjENuV5vWAoKJHGsFVvA=";
+    hash = "sha256-8RHlkd2MZZHzuINPl3/y0FoosUXsgLwzZOrnZpttkW8=";
   };
 
-  cargoHash = "sha256-ivHZtchC6xrgm5kAurObUyS0BqhATLs6+HH42/FZiCg=";
+  cargoHash = "sha256-USv/a+hv8JP11pIVy6kRYbx6H11ckQDLcZm7weOVr/E=";
 
   nativeBuildInputs = [
     pkg-config
