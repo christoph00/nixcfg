@@ -5,7 +5,6 @@
   ...
 }:
 let
-let
   c = rec {
     rcloneConfigFile = config.age.secrets.rclone-conf.path;
 
