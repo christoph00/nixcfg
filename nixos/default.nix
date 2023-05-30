@@ -117,6 +117,8 @@
         #./acme.nix
         ./sunshine.nix
       ];
+
+      wg-pia.imports = [./wg-pia.nix];
       gaming.imports = [./gaming.nix];
 
       reverse-proxy-server.imports = [./reverse-proxy-server.nix];
