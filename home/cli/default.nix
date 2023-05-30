@@ -76,7 +76,7 @@ in {
 
     media-sort
     ffmpeg-full
-    dlm
+
   ];
 
   home.sessionVariables = {
