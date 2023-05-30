@@ -99,6 +99,9 @@
 
       code-server.imports = [./code-server.nix];
 
+      media-server.imports = [./media-server.nix];
+
+
       caldav.imports = [./caldav.nix];
 
       vm-win11.imports = [

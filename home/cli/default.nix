@@ -145,16 +145,16 @@ in {
     enableAliases = true;
   };
 
-  services.rclone = {
-    enable = true;
-    config = "/run/agenix/rclone-conf";
-    mounts = {
-      nas = {
-        from = "NDCRYPT:";
-        to = "/home/christoph/NAS";
-      };
-    };
-  };
+  # services.rclone = {
+  #   enable = true;
+  #   config = "/run/agenix/rclone-conf";
+  #   mounts = {
+  #     nas = {
+  #       from = "NDCRYPT:";
+  #       to = "/home/christoph/NAS";
+  #     };
+  #   };
+  # };
 
   programs.command-not-found.enable = false;
   programs.nix-index.enable = true;

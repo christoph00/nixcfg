@@ -42,6 +42,7 @@
           self.nixosModules.server
           self.nixosModules.virtual
           self.nixosModules.home-headless-christoph
+          self.nixosModules.media-server
           ./star
         ];
       };
