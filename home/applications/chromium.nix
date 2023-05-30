@@ -1,10 +1,10 @@
 {pkgs, ...}: {
   programs.chromium = {
     enable = true;
-    package = pkgs.chromium;
+    package = pkgs.microsoft-edge-beta;
     extensions = [
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
-      {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
+     # {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
       {id = "nngceckbapebfimnlniiiahkandclblb";} # Bitwarden
       {
         id = "dcpihecpambacapedldabdbpakmachpb";
@@ -12,7 +12,7 @@
       }
       {id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
       {id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
-      {id = "jofbglonpbndadajbafmmaklbfbkggpo";} # Bing Chat for all Browers
+     # {id = "jofbglonpbndadajbafmmaklbfbkggpo";} # Bing Chat for all Browers
     ];
     commandLineArgs = [
       "--enable-features=UseOzonePlatform"
