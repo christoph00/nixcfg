@@ -41,9 +41,10 @@
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       Type = "notify";
+      Environment = [ "/run/wrappers/bin/:$PATH" ];
       ExecStartPre = "/run/current-system/sw/bin/mkdir -p /var/lib/jellyfin/media";
       ExecStart = "${pkgs.rclone}/bin/rclone mount --config ${config.age.secrets.rclone-conf.path} --vfs-cache-mode full --allow-other --vfs-cache-max-size 500M --no-modtime --gid 900 --umask 022 NDCRYPT: /var/lib/jellyfin/media";
-      ExecStop = "${pkgs.fuse}/bin/fusermount -u /var/lib/jellyfin/media";
+      ExecStop = "fusermount -u /var/lib/jellyfin/media";
       Restart = "always";
       RestartSec = "20";
     };
