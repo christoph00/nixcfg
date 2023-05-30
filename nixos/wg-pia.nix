@@ -12,7 +12,7 @@
         Description = "WireGuard tunnel wg-pia";
       };
       wireguardConfig = {
-        PrivateKeyFile = ${config.age.secrets.wg-pia-key.path};
+        PrivateKeyFile = config.age.secrets.wg-pia-key.path;
       };
       wireguardPeers = [
         {
