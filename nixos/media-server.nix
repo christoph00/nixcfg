@@ -10,6 +10,10 @@
         directory = "/var/lib/jellyfin";
         inherit (config.services.jellyfin) user group;
       }
+        {
+        directory = "/var/lib/sabnzbd";
+        inherit (config.services.sabnzbd) user group;
+      }
     ];
   };
 
@@ -32,6 +36,12 @@
   services.jellyfin = {
     enable = true;
     openFirewall = false;
+  };
+
+  services.sabnzbd = {
+    enable = true;
+    openFirewall = false;
+    group = "media";
   };
 
   systemd.services.mount-jellyfin-media = {
