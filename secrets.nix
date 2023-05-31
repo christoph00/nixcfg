@@ -27,5 +27,6 @@ in {
   "secrets/agent-key".publicKeys = [christoph_air13 futro];
   "secrets/nd-key".publicKeys = [christoph_air13 christoph_tower futro air13 tower oca oc1 oc2];
   "secrets/rclone-nd.conf".publicKeys = [christoph_air13 christoph_air13 futro air13 tower oca oc1 oc2];
-  "secrets/wg-pia-star.key".publicKeys = [christoph_air13 star];
+  "secrets/pia.env".publicKeys = [christoph_air13 star];
+  "secrets/pia.crt".publicKeys = [christoph_air13 star];
 }

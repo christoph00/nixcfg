@@ -40,6 +40,7 @@
           inputs.srvos.nixosModules.mixins-terminfo
 
           self.nixosModules.tailscale-tls
+          self.nixosModules.pia-vpn
 
           ./common.nix
           ./tailscale.nix
