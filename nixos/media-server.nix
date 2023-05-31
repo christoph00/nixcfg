@@ -40,7 +40,6 @@
 
   services.sabnzbd = {
     enable = true;
-    openFirewall = false;
     group = "media";
   };
 
