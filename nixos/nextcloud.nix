@@ -16,10 +16,11 @@
 
   environment.persistence."/nix/persist" = {
     directories = [
-      "/var/lib/nextcloud"
       "/var/lib/postgresql"
     ];
   };
+
+  services.caddy.enable = true;
 
   services.nextcloud = {
     enable = true;
