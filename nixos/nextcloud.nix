@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   age.secrets.nc-admin-pass.file = ../secrets/nc-admin-pass;
