@@ -10,6 +10,12 @@
     "listen.group" = config.services.caddy.group;
   };
 
+  environment.persistence."/nix/persist" = {
+    directories = [
+      "/var/lib/nextcloud"
+      "/var/lib/postgresql"
+    ];
+
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud26;
