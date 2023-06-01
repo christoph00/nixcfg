@@ -10,8 +10,8 @@
     mode = "660";
   };
   services.phpfpm.pools.nextcloud.settings = {
-    "listen.owner" = config.services.caddy.user;
-    "listen.group" = config.services.caddy.group;
+    "listen.owner" = config.services.nginx.user;
+    "listen.group" = config.services.nginx.group;
   };
 
   environment.persistence."/nix/persist" = {
@@ -26,6 +26,7 @@
   #   enable = true;
   #   acmeCA = null;
   # };
+  users.users.nginx.extraGroups = ["acme" "media"];
 
   services.nginx.enable = true;
   services.nginx.virtualHosts = {
@@ -96,45 +97,6 @@
       adminpassFile = "${config.age.secrets.nc-admin-pass.path}";
 
       defaultPhoneRegion = "DE";
-    };
-  };
-
-  users.users.caddy.extraGroups = ["nextcloud" "media"];
-  services.caddy.virtualHosts = {
-    "${config.services.nextcloud.hostName}" = {
-      useACMEHost = "r505.de";
-      extraConfig = ''
-        redir /.well-known/carddav /remote.php/dav 301
-        redir /.well-known/caldav /remote.php/dav 301
-
-        @forbidden {
-            path /.htaccess
-            path /data/*
-            path /config/*
-            path /db_structure
-            path /.xml
-            path /README
-            path /3rdparty/*
-            path /lib/*
-            path /templates/*
-            path /occ
-            path /console.php
-        }
-        respond @forbidden 404
-
-        root * ${config.services.nextcloud.package}
-
-        handle /nix-apps/* {
-          file_server {
-            root  /nix/persist/ncdata/nix-apps
-          }
-        }
-
-        file_server
-        php_fastcgi unix//run/phpfpm/nextcloud.sock
-        encode gzip zstd
-        log
-      '';
     };
   };
 
