@@ -78,7 +78,6 @@
         ./acme.nix
         self.nixosModules.headless
         inputs.srvos.nixosModules.mixins-nginx
-
       ];
       virtual.imports = [
         "${inputs.nixpkgs}/nixos/modules/profiles/qemu-guest.nix"

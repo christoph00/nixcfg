@@ -29,10 +29,11 @@
 
   services.nginx.enable = true;
   nginx.virtualHosts = {
-      "cloud.r505.de" = {
-        forceSSL = true;
-        useACMEHost = "r505.de";
-      };
+    "cloud.r505.de" = {
+      forceSSL = true;
+      useACMEHost = "r505.de";
+    };
+  };
 
   # services.imaginary = {
   #   enable = true;
@@ -98,7 +99,7 @@
     };
   };
 
-users.users.caddy.extraGroups = ["nextcloud" "media"];
+  users.users.caddy.extraGroups = ["nextcloud" "media"];
   services.caddy.virtualHosts = {
     "${config.services.nextcloud.hostName}" = {
       useACMEHost = "r505.de";
