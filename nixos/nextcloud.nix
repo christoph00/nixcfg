@@ -20,6 +20,8 @@
     ];
   };
 
+  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedUDPPorts = [443];
   services.caddy = {
     enable = true;
     acmeCA = null;
