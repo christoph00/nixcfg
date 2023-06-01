@@ -15,6 +15,7 @@
       "/var/lib/nextcloud"
       "/var/lib/postgresql"
     ];
+  };
 
   services.nextcloud = {
     enable = true;
