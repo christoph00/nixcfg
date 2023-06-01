@@ -77,6 +77,8 @@
       server.imports = [
         ./acme.nix
         self.nixosModules.headless
+        inputs.srvos.nixosModules.mixins-nginx
+
       ];
       virtual.imports = [
         "${inputs.nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
@@ -88,8 +90,7 @@
       home-server.imports = [
         # ./cloudflared.nix
         ./home-server.nix
-        ./matcha.nix
-        #inputs.srvos.nixosModules.mixins-nginx
+        #./matcha.nix
         #self.nixosModules.syncthing
       ];
 
