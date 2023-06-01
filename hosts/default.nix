@@ -43,7 +43,7 @@
           self.nixosModules.virtual
           self.nixosModules.home-headless-christoph
           self.nixosModules.media-server
-          self.nixosModules.wg-pia
+          #self.nixosModules.wg-pia
           ./star
         ];
       };
