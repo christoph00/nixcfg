@@ -10,7 +10,7 @@
         directory = "/var/lib/jellyfin";
         inherit (config.services.jellyfin) user group;
       }
-        {
+      {
         directory = "/var/lib/sabnzbd";
         inherit (config.services.sabnzbd) user group;
       }

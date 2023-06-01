@@ -29,4 +29,5 @@ in {
   "secrets/rclone-nd.conf".publicKeys = [christoph_air13 christoph_air13 futro air13 tower oca oc1 oc2];
   "secrets/pia.env".publicKeys = [christoph_air13 star];
   "secrets/pia.crt".publicKeys = [christoph_air13 star];
+  "secrets/nc-admin-pass".publicKeys = [christoph_air13 star];
 }
