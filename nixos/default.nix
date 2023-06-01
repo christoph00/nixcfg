@@ -104,6 +104,9 @@
 
       caldav.imports = [./caldav.nix];
 
+      nextcloud.imports = [./nextcloud.nix];
+
+
       vm-win11.imports = [
         ./gpu_passthrough.nix
         ./win11.nix
