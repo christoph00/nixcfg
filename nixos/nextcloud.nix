@@ -52,7 +52,6 @@
         notify_push
         onlyoffice
         twofactor_nextcloud_notification
-        twofactor_totp
         twofactor_webauthn
         ;
     };
