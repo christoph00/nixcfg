@@ -20,7 +20,12 @@
     ];
   };
 
-  services.caddy.enable = true;
+  services.caddy = {
+    enable = true;
+    acmeCA = null;
+  };
+
+  services.nginx.enable = false;
 
   services.nextcloud = {
     enable = true;
@@ -58,34 +63,37 @@
   };
 
   services.caddy.virtualHosts = {
-    "${config.services.nextcloud.hostName}".extraConfig = ''
-      redir /.well-known/carddav /remote.php/dav 301
-      redir /.well-known/caldav /remote.php/dav 301
+    "${config.services.nextcloud.hostName}" = {
+      useACMEHost = "r505.de";
+      extraConfig = ''
+        redir /.well-known/carddav /remote.php/dav 301
+        redir /.well-known/caldav /remote.php/dav 301
 
-      @forbidden {
-          path /.htaccess
-          path /data/*
-          path /config/*
-          path /db_structure
-          path /.xml
-          path /README
-          path /3rdparty/*
-          path /lib/*
-          path /templates/*
-          path /occ
-          path /console.php
-      }
-      respond @forbidden 404
+        @forbidden {
+            path /.htaccess
+            path /data/*
+            path /config/*
+            path /db_structure
+            path /.xml
+            path /README
+            path /3rdparty/*
+            path /lib/*
+            path /templates/*
+            path /occ
+            path /console.php
+        }
+        respond @forbidden 404
 
-      root * ${config.services.nextcloud.package}
-      file_server
-      php_fastcgi unix//run/phpfpm/nextcloud.sock
-    '';
+        root * ${config.services.nextcloud.package}
+        file_server
+        php_fastcgi unix//run/phpfpm/nextcloud.sock
+      '';
+    };
   };
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql_13;
+    package = pkgs.postgresql_15;
     ensureDatabases = ["nextcloud"];
     ensureUsers = [
       {
