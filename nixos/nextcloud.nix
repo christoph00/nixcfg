@@ -22,14 +22,24 @@
 
   networking.firewall.allowedTCPPorts = [80 443];
   networking.firewall.allowedUDPPorts = [443];
-  services.caddy = {
-    enable = true;
-    acmeCA = null;
-  };
+  # services.caddy = {
+  #   enable = true;
+  #   acmeCA = null;
+  # };
 
-  services.nginx.enable = false;
+  services.nginx.enable = true;
+  nginx.virtualHosts = {
+      "cloud.r505.de" = {
+        forceSSL = true;
+        useACMEHost = "r505.de";
+      };
 
-  services.imaginary.enable = true;
+  # services.imaginary = {
+  #   enable = true;
+  #   settings = {
+  #     enable-url-source = true;
+  #   };
+  # };
 
   services.nextcloud = {
     enable = true;
@@ -88,6 +98,7 @@
     };
   };
 
+users.users.caddy.extraGroups = ["nextcloud" "media"];
   services.caddy.virtualHosts = {
     "${config.services.nextcloud.hostName}" = {
       useACMEHost = "r505.de";
@@ -111,8 +122,17 @@
         respond @forbidden 404
 
         root * ${config.services.nextcloud.package}
+
+        handle /nix-apps/* {
+          file_server {
+            root  /nix/persist/ncdata/nix-apps
+          }
+        }
+
         file_server
         php_fastcgi unix//run/phpfpm/nextcloud.sock
+        encode gzip zstd
+        log
       '';
     };
   };
