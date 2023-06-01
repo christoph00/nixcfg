@@ -86,6 +86,19 @@
       "pm.min_spare_servers" = "40";
       "pm.start_servers" = "40";
     };
+    phpOptions = ''
+      zend_extension = ${pkgs.php}/lib/php/extensions/opcache.so
+      opcache.enable = 1
+      opcache.enable_cli = 1
+      opcache.interned_strings_buffer = 8
+      opcache.max_accelerated_files = 10000
+      opcache.memory_consumption = 128
+      opcache.save_comments = 1
+      opcache.revalidate_freq = 1
+
+      max_input_time = 60
+      max_execution_time = 60
+    '';
 
     config = {
       dbtype = "pgsql";
