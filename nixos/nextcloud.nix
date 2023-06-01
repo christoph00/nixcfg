@@ -32,6 +32,30 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud26;
+    extraApps = {
+      memories = pkgs.fetchNextcloudApp rec {
+        url = "https://github.com/pulsejet/memories/releases/download/v5.1.0/memories.tar.gz";
+        sha256 = "0xa275kswc8jwrzzqf6ghf7zvvbj9khw8hw7sz8rzpnf8cyhlbqb";
+      };
+      inherit
+        (pkgs.nextcloud26Packages.apps)
+        news
+        notes
+        contacts
+        calendar
+        tasks
+        mail
+        deck
+        previewgenerator
+        files_markdown
+        files_texteditor
+        notify_push
+        onlyoffice
+        twofactor_nextcloud_notification
+        twofactor_totp
+        twofactor_webauthn
+        ;
+    };
     https = true;
     # overwriteProtocol = "https";
     hostName = "cloud.r505.de";
@@ -40,7 +64,7 @@
     autoUpdateApps.startAt = "05:00:00";
 
     # phpExtraExtensions = [];
-    home = "/var/lib/nextcloud";
+    home = "/nix/persist/ncdata";
 
     poolSettings = {
       pm = "dynamic";
@@ -95,12 +119,15 @@
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql_15;
+    package = pkgs.postgresql_14;
     ensureDatabases = ["nextcloud"];
     ensureUsers = [
       {
         name = "nextcloud";
-        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+        ensurePermissions = {
+          "DATABASE nextcloud" = "ALL PRIVILEGES";
+          "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
+        };
       }
     ];
   };
