@@ -4,8 +4,11 @@
   config,
   ...
 }: {
-  age.secrets.nc-admin-pass.file = ../secrets/nc-admin-pass;
-
+  age.secrets.nc-admin-pass = {
+    file = ../secrets/nc-admin-pass;
+    owner = "nextcloud";
+    mode = "660";
+  };
   services.phpfpm.pools.nextcloud.settings = {
     "listen.owner" = config.services.caddy.user;
     "listen.group" = config.services.caddy.group;
