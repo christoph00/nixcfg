@@ -52,7 +52,7 @@
   };
 
   services.caddy.virtualHosts = {
-    "cloud.r505.de".extraConfig = ''
+    "${config.services.nextcloud.hostName}".extraConfig = ''
       redir /.well-known/carddav /remote.php/dav 301
       redir /.well-known/caldav /remote.php/dav 301
 
