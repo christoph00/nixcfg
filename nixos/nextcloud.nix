@@ -28,7 +28,7 @@
   # };
 
   services.nginx.enable = true;
-  nginx.virtualHosts = {
+  services.nginx.virtualHosts = {
     "cloud.r505.de" = {
       forceSSL = true;
       useACMEHost = "r505.de";
