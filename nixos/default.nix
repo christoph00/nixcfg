@@ -75,6 +75,7 @@
         inputs.srvos.nixosModules.server
       ];
       server.imports = [
+        ./acme.nix
         self.nixosModules.headless
       ];
       virtual.imports = [
@@ -85,7 +86,6 @@
         ./home-assistant
       ];
       home-server.imports = [
-        ./acme.nix
         # ./cloudflared.nix
         ./home-server.nix
         ./matcha.nix
