@@ -29,6 +29,8 @@
 
   services.nginx.enable = false;
 
+  services.imaginary.enable = true;
+
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud26;
@@ -59,8 +61,7 @@
     # overwriteProtocol = "https";
     hostName = "cloud.r505.de";
 
-    autoUpdateApps.enable = true;
-    autoUpdateApps.startAt = "05:00:00";
+    autoUpdateApps.enable = false;
 
     # phpExtraExtensions = [];
     home = "/nix/persist/ncdata";
