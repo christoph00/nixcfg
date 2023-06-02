@@ -28,6 +28,8 @@
   powerManagement.cpuFreqGovernor = "performance";
 
   services.nextcloud.home = "/nix/persist/ncdata";
+  services.nextcloud.hostName = "star.r505.de";
+
 
   # ----------  Secrets  -----------------------------------------
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;

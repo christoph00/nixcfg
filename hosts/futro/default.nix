@@ -64,6 +64,8 @@
   # };
 
   services.nextcloud.home = "/mnt/ncdata";
+  services.nextcloud.hostName = "cloud.r505.de";
+
 
   # ----------  Secrets  -----------------------------------------
   age.secrets.cloudflared.file = ../../secrets/futro-cf;
