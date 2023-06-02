@@ -71,7 +71,7 @@
     };
     https = true;
     # overwriteProtocol = "https";
-    hostName = "cloud.r505.de";
+    #hostName = "SET VIA HOST-CONFIG
 
     autoUpdateApps.enable = false;
 

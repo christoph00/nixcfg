@@ -29,6 +29,11 @@
     options = ["subvol=@data" "discard=async" "compress-force=zstd" "nofail"];
   };
 
+    fileSystems."/mnt/ncdata" = {
+    device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
+    options = ["subvol=@ncdata" "discard=async" "compress-force=zstd" "nofail"];
+  };
+
   fileSystems."/media/data-hdd" = {
     device = "/dev/disk/by-uuid/1c39c565-7d6c-4924-b709-2516b50b542f";
     options = ["subvol=@data" "compress-force=zstd" "nofail"];
@@ -57,6 +62,8 @@
   # hardware.opengl = {
   # driSupport = true;
   # };
+
+  services.nextcloud.home = "/mnt/ncdata";
 
   # ----------  Secrets  -----------------------------------------
   age.secrets.cloudflared.file = ../../secrets/futro-cf;
