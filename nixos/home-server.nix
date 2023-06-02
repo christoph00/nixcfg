@@ -36,27 +36,24 @@
     ffmpeg-full
   ];
 
+  age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
+
   services.cloudflare-dyndns = {
     enable = true;
     ipv6 = true;
     proxied = false;
     domains = ["home.r505.de" "cloud.r505.de"];
+    apiTokenFile = config.age.secrets.cf-dyndns.path;
+  };
+
+  networking.hosts = {
+    "192.168.2.50" = config.serives.cloudflare-dyndns.domains;
   };
 
   users.users.jellyfin.extraGroups = ["media"];
   services.jellyfin = {
     enable = true;
     openFirewall = true;
-  };
-
-  services.caddy.virtualHosts = {
-    "media.net.r505.de" = {
-      serverAliases = [":6001"];
-      extraConfig = ''
-        encode gzip
-        reverse_proxy localhost:8096
-      '';
-    };
   };
 
   systemd.tmpfiles.rules = [

@@ -10,7 +10,7 @@
   #   port = 2342;
   #   addr = "0.0.0.0";
   # };
-  services.caddy.enable = true;
+  #services.caddy.enable = true;
   environment.persistence."/nix/persist" = {
     directories = [
       {
