@@ -45,7 +45,7 @@
     forceSSL = true;
     useACMEHost = "r505.de";
     locations = {
-      "/".proxyPass = "http://127.0.0.1:8080";
+      "/".proxyPass = "http://127.0.0.1:8096";
     };
   };
 
