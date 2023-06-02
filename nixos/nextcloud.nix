@@ -110,7 +110,6 @@
         "opcache.fast_shutdown" = "1";
         "openssl.cafile" = "/etc/ssl/certs/ca-certificates.crt";
         catch_workers_output = "yes";
-        memory_limit = "1024M";
       '';
       redis = {
         host = "/run/redis-nextcloud/redis.sock";
