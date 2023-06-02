@@ -22,15 +22,14 @@
 
   networking.firewall.allowedTCPPorts = [80 443];
   networking.firewall.allowedUDPPorts = [443];
-  # services.caddy = {
-  #   enable = true;
-  #   acmeCA = null;
-  # };
+
   users.users.nginx.extraGroups = ["acme" "media"];
+  users.users.nextcloud.extraGroups = ["media"];
+
 
   services.nginx.enable = true;
   services.nginx.virtualHosts = {
-    "cloud.r505.de" = {
+    "${config.services.nextcloud.host}" = {
       forceSSL = true;
       useACMEHost = "r505.de";
     };
