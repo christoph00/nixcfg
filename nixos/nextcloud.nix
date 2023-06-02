@@ -52,6 +52,10 @@
         url = "https://github.com/pulsejet/memories/releases/download/v5.1.0/memories.tar.gz";
         sha256 = "0xa275kswc8jwrzzqf6ghf7zvvbj9khw8hw7sz8rzpnf8cyhlbqb";
       };
+      integration_google = pkgs.fetchNextcloudApp rec {
+        url = "https://github.com/nextcloud/integration_google/releases/download/v1.0.9/integration_google-1.0.9.tar.gz";
+        sha256 = "0fw15p0mkzckr554rvhzmbm7h0pvkiwvqv6zaak7xbyhq0ksxrv4";
+      };
       inherit
         (pkgs.nextcloud26Packages.apps)
         news
