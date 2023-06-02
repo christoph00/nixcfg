@@ -15,13 +15,13 @@
     };
   };
 
-  services.caddy.virtualHosts."dav.r505.de" = {
-    extraConfig = ''
-      basicauth {
-        cc JDJhJDE0JDAvOVAzSzFMVlNsM1BjMFhPUS5lby5IMWdDcVd5MVlqdDZEN3JSMXpxQTQzTkZleU9aMU8y
-      }
-      reverse_proxy unix/run/rclone/ndcrypt.sock
-      encode gzip
-    '';
-  };
+  # services.caddy.virtualHosts."dav.r505.de" = {
+  #   extraConfig = ''
+  #     basicauth {
+  #       cc JDJhJDE0JDAvOVAzSzFMVlNsM1BjMFhPUS5lby5IMWdDcVd5MVlqdDZEN3JSMXpxQTQzTkZleU9aMU8y
+  #     }
+  #     reverse_proxy unix/run/rclone/ndcrypt.sock
+  #     encode gzip
+  #   '';
+  # };
 }
