@@ -88,18 +88,30 @@
     };
     extraOptions = {
       phpOptions = ''
-        zend_extension = ${pkgs.php}/lib/php/extensions/opcache.so
-        opcache.enable = 1
-        opcache.enable_cli = 1
-        opcache.interned_strings_buffer = 8
-        opcache.max_accelerated_files = 10000
-        opcache.memory_consumption = 128
-        opcache.save_comments = 1
-        opcache.revalidate_freq = 1
-
-        max_input_time = 60
-        max_execution_time = 60
+        short_open_tag = "Off";
+        expose_php = "Off";
+        error_reporting = "E_ALL & ~E_DEPRECATED & ~E_STRICT";
+        display_errors = "stderr";
+        "opcache.enable_cli" = "1";
+        "opcache.enable" = "1";
+        "opcache.interned_strings_buffer" = "12";
+        "opcache.max_accelerated_files" = "10000";
+        "opcache.memory_consumption" = "128";
+        "opcache.save_comments" = "1";
+        "opcache.revalidate_freq" = "1";
+        "opcache.fast_shutdown" = "1";
+        "openssl.cafile" = "/etc/ssl/certs/ca-certificates.crt";
+        catch_workers_output = "yes";
       '';
+      redis = {
+        host = "/run/redis-nextcloud/redis.sock";
+        port = 0;
+      };
+      memcache = {
+        local = "\\OC\\Memcache\\Redis";
+        distributed = "\\OC\\Memcache\\Redis";
+        locking = "\\OC\\Memcache\\Redis";
+      };
     };
 
     config = {
@@ -113,6 +125,12 @@
 
       defaultPhoneRegion = "DE";
     };
+  };
+
+  services.redis.servers.nextcloud = {
+    enable = true;
+    user = "nextcloud";
+    port = 0;
   };
 
   services.postgresql = {
