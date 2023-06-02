@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   networking.firewall.allowedTCPPorts = [80 443];
@@ -20,14 +21,14 @@
       };
       webdavd.bindings = [
         {
-          port = 0;
+          port = 8089;
           address = "/run/sftpgo/webdavd.sock";
           prefix = "/dav";
         }
       ];
       httpd.bindings = [
         {
-          port = 0;
+          port = 8088;
           address = "/run/sftpgo/httpd.sock";
           hide_login_url = 3;
           branding = {
@@ -38,15 +39,19 @@
       ];
     };
   };
+  systemd.services.sftpgo.serviceConfig.RuntimeDirectory = "sftpgo";
+  systemd.services.sftpgo.serviceConfig.RuntimeDirectoryMode = "0755";
+  systemd.services.sftpgo.serviceConfig.UMask = lib.mkForce "007";
 
-  services.caddy.virtualHosts."cloud.r505.de" = {
+  users.users.nginx.extraGroups = ["acme" "media"];
+  services.nginx.enable = true;
+  services.nginx.virtualHosts."cloud.r505.de" = {
+    http2 = true;
+    forceSSL = true;
     useACMEHost = "r505.de";
-    extraConfig = ''
-      reverse_proxy unix/run/sftpgo/httpd.sock
-      encode gzip zstd
-      route /dav/* {
-        reverse_proxy unix/run/sftpgo/webdavd.sock
-      }
-    '';
+    locations = {
+      "/dav/".proxyPass = "http://unix:/run/sftpgo/webdavd.sock";
+      "/".proxyPass = "http://unix:/run/sftpgo/httpd.sock";
+    };
   };
 }
