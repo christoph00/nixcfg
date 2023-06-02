@@ -20,6 +20,8 @@
     ];
   };
 
+  boot.kernel.sysctl."vm.overcommit_memory" = lib.mkDefault "1";
+
   networking.firewall.allowedTCPPorts = [80 443];
   networking.firewall.allowedUDPPorts = [443];
 
@@ -29,7 +31,7 @@
 
   services.nginx.enable = true;
   services.nginx.virtualHosts = {
-    "${config.services.nextcloud.host}" = {
+    "${config.services.nextcloud.hostName}" = {
       forceSSL = true;
       useACMEHost = "r505.de";
     };
@@ -68,6 +70,10 @@
         twofactor_webauthn
         ;
     };
+    maxUploadSize = "2048M";
+
+    caching.redis = true;
+
     https = true;
     # overwriteProtocol = "https";
     #hostName = "SET VIA HOST-CONFIG
