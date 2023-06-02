@@ -29,6 +29,9 @@
       ExecStop = "/bin/fusermount -u /home/christoph/NAS";
       Restart = "always";
       RestartSec = "20";
+      Environment = [
+        "PATH=/run/wrappers/bin/:$PATH"
+      ];
     };
   };
 }
