@@ -76,7 +76,7 @@
     autoUpdateApps.enable = false;
 
     # phpExtraExtensions = [];
-    home = "/nix/persist/ncdata";
+    #home = "SET VIA HOST-CONFIG
 
     poolSettings = {
       pm = "dynamic";
