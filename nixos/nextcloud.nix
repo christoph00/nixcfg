@@ -96,21 +96,21 @@
     };
     extraOptions = {
       phpOptions = ''
-        short_open_tag = "Off";
-        expose_php = "Off";
-        error_reporting = "E_ALL & ~E_DEPRECATED & ~E_STRICT";
-        display_errors = "stderr";
-        "opcache.enable_cli" = "1";
-        "opcache.enable" = "1";
-        "opcache.interned_strings_buffer" = "12";
-        "opcache.max_accelerated_files" = "10000";
-        "opcache.memory_consumption" = "128";
-        "opcache.save_comments" = "1";
-        "opcache.revalidate_freq" = "1";
-        "opcache.fast_shutdown" = "1";
-        "openssl.cafile" = "/etc/ssl/certs/ca-certificates.crt";
-        catch_workers_output = "yes";
-      '';
+                short_open_tag = "Off";
+                expose_php = "Off";
+                error_reporting = "E_ALL & ~E_DEPRECATED & ~E_STRICT";
+                display_errors = "stderr";
+                "opcache.enable_cli" = "1";
+                "opcache.enable" = "1";
+                "opcache.interned_strings_buffer" = "12";
+                "opcache.max_accelerated_files" = "10000";
+                "opcache.memory_consumption" = "128";
+                "opcache.save_comments" = "1";
+                "opcache.revalidate_freq" = "1";
+                "opcache.fast_shutdown" = "1";
+                "openssl.cafile" = "/etc/ssl/certs/ca-certificates.crt";
+                catch_workers_output = "yes";
+        j      '';
       redis = {
         host = "/run/redis-nextcloud/redis.sock";
         port = 0;
