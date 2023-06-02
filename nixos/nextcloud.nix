@@ -28,7 +28,6 @@
   users.users.nginx.extraGroups = ["acme" "media"];
   users.users.nextcloud.extraGroups = ["media"];
 
-
   services.nginx.enable = true;
   services.nginx.virtualHosts = {
     "${config.services.nextcloud.hostName}" = {
