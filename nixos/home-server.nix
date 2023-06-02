@@ -36,6 +36,13 @@
     ffmpeg-full
   ];
 
+  services.cloudflare-dyndns = {
+    enable = true;
+    ipv6 = true;
+    proxied = false;
+    domains = ["home.r505.de" "cloud.r505.de"];
+  };
+
   users.users.jellyfin.extraGroups = ["media"];
   services.jellyfin = {
     enable = true;
