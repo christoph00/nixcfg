@@ -43,6 +43,8 @@
   systemd.services.sftpgo.serviceConfig.RuntimeDirectoryMode = "0755";
   systemd.services.sftpgo.serviceConfig.UMask = lib.mkForce "007";
 
+  services.nginx.clientMaxBodySize = "10G";
+
   users.users.nginx.extraGroups = ["acme" "media"];
   services.nginx.enable = true;
   services.nginx.virtualHosts."cloud.r505.de" = {

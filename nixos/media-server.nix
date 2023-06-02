@@ -38,40 +38,22 @@
     openFirewall = false;
   };
 
+  services.jellyseerr.enable = true;
+
+  services.nginx.virtualHosts."media.r505.de" = {
+    http2 = true;
+    forceSSL = true;
+    useACMEHost = "r505.de";
+    locations = {
+      "/".proxyPass = "http://127.0.0.1:8080";
+    };
+  };
+
+
   services.sabnzbd = {
     enable = true;
     group = "media";
   };
 
-  systemd.services.mount-jellyfin-media = {
-    description = "Mount Jellyfin Media";
-    wantedBy = ["multi-user.target"];
-    serviceConfig = {
-      Type = "notify";
-      ExecStartPre = "/run/current-system/sw/bin/mkdir -p /var/lib/jellyfin/media";
-      ExecStart = ''
-        ${pkgs.rclone}/bin/rclone mount --config ${config.age.secrets.rclone-conf.path} \
-        --allow-other \
-        --no-modtime \
-        --gid 900 \
-        --umask 022 \
-        --vfs-read-chunk-size=64M \
-        --vfs-read-chunk-size-limit=2048M \
-        --vfs-cache-mode writes \
-        --buffer-size=128M \
-        --max-read-ahead=256M \
-        --poll-interval=1m \
-        --dir-cache-time=168h \
-        --timeout=10m \
-        --transfers=16 \
-        --checkers=12 \
-        NDCRYPT:media /var/lib/jellyfin/media'';
-      ExecStop = "fusermount -u /var/lib/jellyfin/media";
-      Restart = "always";
-      RestartSec = "20";
-      Environment = [
-        "PATH=/run/wrappers/bin/:$PATH"
-      ];
-    };
-  };
+
 }
