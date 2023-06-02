@@ -47,7 +47,7 @@
   };
 
   networking.hosts = {
-    "192.168.2.50" = config.serives.cloudflare-dyndns.domains;
+    "192.168.2.50" = config.services.cloudflare-dyndns.domains;
   };
 
   users.users.jellyfin.extraGroups = ["media"];
