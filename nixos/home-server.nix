@@ -10,10 +10,6 @@
   environment.persistence."/nix/persist" = {
     directories = [
       {
-        directory = "/var/lib/jellyfin";
-        inherit (config.services.jellyfin) user group;
-      }
-      {
         directory = "/var/lib/prometheus2";
         user = "prometheus";
         group = "prometheus";
