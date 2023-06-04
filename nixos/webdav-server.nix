@@ -37,6 +37,21 @@
           };
         }
       ];
+      sftpd.bindings = [
+        {
+            port = 2022;
+        }
+      ];
+      command.commands = [
+        {
+          path = "${pkgs.media-sort}/bin/media-sort";
+          args = ["-r ." "-t ../TVShows" "-a 80" "-n 1"];
+        }
+        {
+          path = "${pkgs.media-sort}/bin/media-sort";
+          args = ["-r ." "-m ../Movies" "-a 80" "-n 1"];
+        }
+      ];
     };
   };
   systemd.services.sftpgo.serviceConfig.RuntimeDirectory = "sftpgo";
