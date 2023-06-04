@@ -49,11 +49,14 @@
     };
   };
 
-
   services.sabnzbd = {
     enable = true;
     group = "media";
   };
+  age.secrets.rclone-conf-sab = {
+    file = ../secrets/rclone.conf;
+    path = "/var/lib/sabnzbd/.config/rclone/rclone.conf";
+  };
 
-
+  users.users.nginx.extraGroups = ["acme"];
 }
