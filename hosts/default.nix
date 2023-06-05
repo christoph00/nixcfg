@@ -43,9 +43,8 @@
           self.nixosModules.server
           self.nixosModules.virtual
           self.nixosModules.home-headless-christoph
-          self.nixosModules.media-server
           #self.nixosModules.nextcloud
-          #self.nixosModules.wg-pia
+          self.nixosModules.nzb
           ./star
         ];
       };

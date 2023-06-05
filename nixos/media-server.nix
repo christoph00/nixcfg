@@ -49,10 +49,7 @@
     };
   };
 
-  age.secrets.rclone-conf-sab = {
-    file = ../secrets/rclone.conf;
-    owner = config.services.sabnzbd.user;
-  };
+
 
   users.users.nginx.extraGroups = ["acme"];
 

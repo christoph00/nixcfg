@@ -27,17 +27,9 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
-  services.sabnzbd = {
-    enable = true;
-    group = "media";
-  };
-  users.users.sabnzbd = {
-    #isNormalUser = true;
-    #isSystemUser = false;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEtkH/Ux40Ks3hJToweMP+YhCgBrPZNH/4POZZuGCqmH star-sab"
-    ];
-  };
+
+
+
   # ----------  Secrets  -----------------------------------------
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
   age.secrets.cf-acme.file = ../../secrets/cf-acme;
