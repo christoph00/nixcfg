@@ -53,25 +53,13 @@
 
   users.users.nginx.extraGroups = ["acme"];
 
-  systemd.services.media-sort-movies = {
-    description = "Media-Sort Movies";
-    wantedBy = ["multi-user.target"];
-    serviceConfig = {
-      User = "sftpgo";
-      Type = "simple";
-      ExecStart = "${pkgs.media-sort}/bin/media-sort -m /media/data-hdd/Movies -a 80 -w -r /mnt/ncdata/christoph/Incoming/Movies";
-      Restart = "always";
-      RestartSec = "20";
-    };
-  };
-
-  systemd.services.media-sort-tvshows = {
+  systemd.services.media-sort = {
     description = "Media-Sort TVShows";
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       User = "sftpgo";
       Type = "simple";
-      ExecStart = "${pkgs.media-sort}/bin/media-sort -t /media/data-hdd/TVShows -a 80 -w -r /mnt/ncdata/christoph/Incoming/TVShows";
+      ExecStart = "${pkgs.media-sort}/bin/media-sort -t /media/data-hdd/TVShows -m /media/data-hdd/Movies  -a 80 -w -r /mnt/ncdata/christoph/Incoming/TVShows";
       Restart = "always";
       RestartSec = "20";
     };
