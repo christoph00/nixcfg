@@ -13,12 +13,14 @@ in {
       size = 12;
     };
     theme = {
-      name = "${config.colorscheme.slug}";
-      package = gtkThemeFromScheme {scheme = config.colorscheme;};
+      #name = "${config.colorscheme.slug}";
+      #package = gtkThemeFromScheme {scheme = config.colorscheme;};
+      name = "Fluent";
+      package = pkgs.fluent-gtk-theme;
     };
     iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
+      name = "Fluent";
+      package = pkgs.fluent-icon-theme;
     };
     # iconTheme = {
     #   name = "vimix black";

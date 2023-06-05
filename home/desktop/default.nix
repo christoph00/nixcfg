@@ -108,6 +108,7 @@ in {
     #BROWSER = "firefox";
     #TERMINAL = "footclient";
     NIXPKGS_ALLOW_UNFREE = 1;
+    NIXOS_OZONE_WL = 1;
   };
 
   #xdg.mimeApps.enable = true;
