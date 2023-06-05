@@ -49,14 +49,12 @@
     };
   };
 
-
   age.secrets.rclone-conf-sab = {
     file = ../secrets/rclone.conf;
     owner = config.services.sabnzbd.user;
   };
 
   users.users.nginx.extraGroups = ["acme"];
-
 
   systemd.services.media-sort-movies = {
     description = "Media-Sort Movies";

@@ -39,8 +39,8 @@
       ];
       sftpd.bindings = [
         {
-            port = 2022;
-            address = "0.0.0.0";
+          port = 2022;
+          address = "0.0.0.0";
         }
       ];
       command.commands = [
