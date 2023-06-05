@@ -124,6 +124,9 @@
       wg-pia.imports = [./wg-pia.nix];
       gaming.imports = [./gaming.nix];
 
+      nzb.imports = [./nzb.nix];
+
+
       reverse-proxy-server.imports = [./reverse-proxy-server.nix];
       remote-server.imports = [./remote-server.nix];
       router.imports = [./router];
