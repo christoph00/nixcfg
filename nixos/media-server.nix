@@ -59,7 +59,7 @@
     serviceConfig = {
       User = "sftpgo";
       Type = "simple";
-      ExecStart = "${pkgs.media-sort}/bin/media-sort -t /media/data-hdd/TVShows -m /media/data-hdd/Movies  -a 80 -w -r /mnt/ncdata/christoph/Incoming/TVShows";
+      ExecStart = "${pkgs.media-sort}/bin/media-sort -t /media/data-hdd/TVShows -m /media/data-hdd/Movies  -a 80 -w -r /mnt/ncdata/christoph/Incoming";
       Restart = "always";
       RestartSec = "20";
     };
