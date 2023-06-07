@@ -24,11 +24,16 @@ buildNpmPackage rec {
   nativeBuildInputs = [
     pkg-config
     python3
+    nest-cli
   ];
 
   buildInputs = [
     vips
   ];
+
+  buildPhase = ''
+    nest build immich
+  '';
 
   makeCacheWritable = true;
 
