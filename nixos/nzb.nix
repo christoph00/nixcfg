@@ -1,7 +1,10 @@
-{pkgs, config, lib, ...}:
-
 {
-    services.sabnzbd = {
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
+  services.sabnzbd = {
     enable = true;
     group = "media";
   };
