@@ -21,6 +21,12 @@ buildNpmPackage rec {
 
   npmDepsHash = lib.fakeSha256;
 
+  preConfigurePhases = ["preConfigurePhase"];
+
+  preConfigurePhase = ''
+    cd server
+  '';
+
   nativeBuildInputs = [
     pkg-config
     python3
@@ -31,7 +37,7 @@ buildNpmPackage rec {
   ];
 
   makeCacheWritable = true;
-  npmRebuildFlags = [ "--ignore-scripts" ];
+  npmRebuildFlags = ["--ignore-scripts"];
 
   meta = with lib; {
     description = "Self-hosted photo and video backup solution directly from your mobile phone";

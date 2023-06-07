@@ -32,7 +32,6 @@
     ffmpeg-full
 
     immich-server
-
   ];
 
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
