@@ -62,6 +62,8 @@ final: prev: {
   # systemd2mqtt = pkgs.callPackage ./systemd2mqtt {};
   piper-bin = final.callPackage ./piper-bin {};
 
+  immich-server = final.callPackage ./immich-server {};
+
   ha-lovelace-battery-entity = final.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = final.callPackage ./ha-lovelace/fold-entity-row.nix {};
   ha-lovelace-mini-graph-card = final.callPackage ./ha-lovelace/mini-graph-card.nix {};
