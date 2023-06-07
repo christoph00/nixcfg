@@ -34,7 +34,6 @@
           #self.nixosModules.reverse-proxy-server
           self.nixosModules.webdav-server
           self.nixosModules.media-server
-          self.nixosModules.immich
           ./futro
         ];
       };
