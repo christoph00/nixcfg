@@ -57,6 +57,13 @@
     address = "0.0.0.0";
   };
 
+   users.users.photoprism {
+      isSystemUser = true;
+      group = "media";
+    };
+
+    systemd.services.photoprism.serviceConfig.group = "media";
+
   systemd.tmpfiles.rules = [
     "d /var/lib/jellyfin/media 0770 jellyfin media"
     "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
