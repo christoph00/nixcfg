@@ -38,7 +38,7 @@
     enable = true;
     ipv6 = true;
     proxied = false;
-    domains = ["home.r505.de" "cloud.r505.de"];
+    domains = ["home.r505.de" "cloud.r505.de" "bilder.r505.de"];
     apiTokenFile = config.age.secrets.cf-dyndns.path;
   };
 
