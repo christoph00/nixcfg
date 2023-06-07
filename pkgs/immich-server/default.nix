@@ -17,15 +17,11 @@ buildNpmPackage rec {
     repo = "immich";
     rev = "v${version}";
     hash = "sha256-+tM9lDowKbN77c3W1ev42WYOHlP8guruzN9/RGl2Bew=";
-  };
+  } + "/server";
 
   npmDepsSha256 = lib.fakeSha256;
 
   preConfigurePhases = ["preConfigurePhase"];
-
-  preConfigurePhase = ''
-    cd server
-  '';
 
   nativeBuildInputs = [
     pkg-config
