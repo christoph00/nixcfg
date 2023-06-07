@@ -19,9 +19,7 @@ buildNpmPackage rec {
     hash = "sha256-+tM9lDowKbN77c3W1ev42WYOHlP8guruzN9/RGl2Bew=";
   };
 
-  npmDepsHash = lib.readFile (runCommand "immich-npm-deps" {} ''
-    ${prefetch-npm-deps}/bin/prefetch-npm-deps ${src}/package-lock.json > $out
-  '');
+  npmDepsHash = lib.fakeSha256;
 
   nativeBuildInputs = [
     pkg-config
@@ -31,6 +29,9 @@ buildNpmPackage rec {
   buildInputs = [
     vips
   ];
+
+  makeCacheWritable = true;
+  npmRebuildFlags = [ "--ignore-scripts" ];
 
   meta = with lib; {
     description = "Self-hosted photo and video backup solution directly from your mobile phone";
