@@ -140,7 +140,7 @@ in {
   };
 
   services.nginx.virtualHosts.${domain} = {
-    acmeHost = "r505.de";
+    useACMEHost = "r505.de";
     forceSSL = true;
     locations."/api" = {
       proxyPass = "http://localhost:3001";
