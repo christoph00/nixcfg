@@ -19,7 +19,7 @@ buildNpmPackage rec {
     hash = "sha256-+tM9lDowKbN77c3W1ev42WYOHlP8guruzN9/RGl2Bew=";
   } + "/server";
 
-  npmDepsSha256 = lib.fakeSha256;
+  npmDepsHash = "sha256-OTEPNIQZfKsur0h2Nm97nJ8lI23HjBj3JW74mAoy8Cw=";
 
   preConfigurePhases = ["preConfigurePhase"];
 
