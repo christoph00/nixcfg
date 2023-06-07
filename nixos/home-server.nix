@@ -49,6 +49,7 @@
   services.photoprism = {
     enable = true;
     storagePath = "/nix/persist/photoprism";
+    originalsPath = "/mnt/ncdata/Bilder";
     settings = {
       PHOTOPRISM_ADMIN_USER = "root";
       PHOTOPRISM_DEFAULT_LOCALE = "de";
