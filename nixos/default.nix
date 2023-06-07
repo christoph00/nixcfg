@@ -129,6 +129,7 @@
       reverse-proxy-server.imports = [./reverse-proxy-server.nix];
       remote-server.imports = [./remote-server.nix];
       router.imports = [./router];
+      immich.imports = [./immich.nix];
       webdav-server.imports = [./webdav-server.nix];
     };
   };
