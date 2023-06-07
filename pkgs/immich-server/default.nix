@@ -21,8 +21,6 @@ buildNpmPackage rec {
 
   npmDepsHash = "sha256-OTEPNIQZfKsur0h2Nm97nJ8lI23HjBj3JW74mAoy8Cw=";
 
-  preConfigurePhases = ["preConfigurePhase"];
-
   nativeBuildInputs = [
     pkg-config
     python3
