@@ -27,9 +27,6 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
-
-
-
   # ----------  Secrets  -----------------------------------------
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
   age.secrets.cf-acme.file = ../../secrets/cf-acme;

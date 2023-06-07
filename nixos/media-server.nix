@@ -49,8 +49,6 @@
     };
   };
 
-
-
   users.users.nginx.extraGroups = ["acme"];
 
   systemd.services.media-sort = {
