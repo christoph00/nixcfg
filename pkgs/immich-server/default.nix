@@ -31,7 +31,6 @@ buildNpmPackage rec {
   ];
 
   makeCacheWritable = true;
-  npmRebuildFlags = ["--ignore-scripts"];
 
   meta = with lib; {
     description = "Self-hosted photo and video backup solution directly from your mobile phone";
