@@ -7,17 +7,20 @@
   pkg-config,
   python3,
   vips,
+  nest-cli,
 }:
 buildNpmPackage rec {
   pname = "immich-server";
   version = "1.60.0";
 
-  src = fetchFromGitHub {
-    owner = "immich-app";
-    repo = "immich";
-    rev = "v${version}";
-    hash = "sha256-+tM9lDowKbN77c3W1ev42WYOHlP8guruzN9/RGl2Bew=";
-  } + "/server";
+  src =
+    fetchFromGitHub {
+      owner = "immich-app";
+      repo = "immich";
+      rev = "v${version}";
+      hash = "sha256-+tM9lDowKbN77c3W1ev42WYOHlP8guruzN9/RGl2Bew=";
+    }
+    + "/server";
 
   npmDepsHash = "sha256-OTEPNIQZfKsur0h2Nm97nJ8lI23HjBj3JW74mAoy8Cw=";
 
