@@ -10,7 +10,7 @@
   services.sftpgo = {
     enable = true;
     group = "media";
-    dataDir = "/mnt/ncdata";
+    dataDir = "/nix/persist/sftpgo";
     settings = {
       common = {
         defender = {
@@ -43,16 +43,6 @@
           address = "0.0.0.0";
         }
       ];
-      command.commands = [
-        {
-          path = "${pkgs.media-sort}/bin/media-sort";
-          args = ["-r ." "-t ../TVShows" "-a 80" "-n 1"];
-        }
-        {
-          path = "${pkgs.media-sort}/bin/media-sort";
-          args = ["-r ." "-m ../Movies" "-a 80" "-n 1"];
-        }
-      ];
     };
   };
   systemd.services.sftpgo.serviceConfig.RuntimeDirectory = "sftpgo";
@@ -63,7 +53,7 @@
 
   users.users.nginx.extraGroups = ["acme" "media"];
   services.nginx.enable = true;
-  services.nginx.virtualHosts."cloud.r505.de" = {
+  services.nginx.virtualHosts."data.r505.de" = {
     http2 = true;
     forceSSL = true;
     useACMEHost = "r505.de";
