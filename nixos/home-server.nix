@@ -45,25 +45,7 @@
   networking.hosts = {
     "192.168.2.50" = config.services.cloudflare-dyndns.domains;
   };
-
-  services.photoprism = {
-    enable = true;
-    storagePath = "/nix/persist/photoprism";
-    originalsPath = "/mnt/ncdata/Bilder";
-    settings = {
-      PHOTOPRISM_ADMIN_USER = "root";
-      PHOTOPRISM_DEFAULT_LOCALE = "de";
-    };
-    address = "0.0.0.0";
-  };
-
-  users.users.photoprism = {
-    isSystemUser = true;
-    group = "media";
-  };
-
-  systemd.services.photoprism.serviceConfig.group = "media";
-
+  
   systemd.tmpfiles.rules = [
     "d /var/lib/jellyfin/media 0770 jellyfin media"
     "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"

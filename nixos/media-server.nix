@@ -10,10 +10,6 @@
         directory = "/var/lib/jellyfin";
         inherit (config.services.jellyfin) user group;
       }
-      {
-        directory = "/var/lib/sabnzbd";
-        inherit (config.services.sabnzbd) user group;
-      }
     ];
   };
 
@@ -38,8 +34,6 @@
     openFirewall = false;
   };
 
-  services.jellyseerr.enable = true;
-
   services.nginx.virtualHosts."media.r505.de" = {
     http2 = true;
     forceSSL = true;
@@ -51,15 +45,4 @@
 
   users.users.nginx.extraGroups = ["acme"];
 
-  systemd.services.media-sort = {
-    description = "Media-Sort TVShows";
-    wantedBy = ["multi-user.target"];
-    serviceConfig = {
-      User = "sftpgo";
-      Type = "simple";
-      ExecStart = "${pkgs.media-sort}/bin/media-sort -t /media/data-hdd/TVShows -m /media/data-hdd/Movies  -a 80 -w -r /mnt/ncdata/christoph/Incoming";
-      Restart = "always";
-      RestartSec = "20";
-    };
-  };
 }
