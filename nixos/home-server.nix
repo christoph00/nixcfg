@@ -47,51 +47,6 @@
     "192.168.2.50" = config.services.cloudflare-dyndns.domains;
   };
 
-  systemd.services.immich-server = {
-    after = ["network.target"];
-    wantedBy = ["multi-user.target"];
-    environment = {
-      NODE_ENV = "production";
-      DB_HOSTNAME = "localhost";
-      DB_USERNAME = "immich";
-      DB_PASSWORD = "immich";
-      DB_DATABASE_NAME = "immich";
-      UPLOAD_LOCATION = "/mnt/userdata/immich";
-      TYPESENSE_API_KEY = "23942984928392";
-
-      IMMICH_WEB_URL = "http://localhost:3000";
-      IMMICH_SERVER_URL = "http://localhost:3001";
-      IMMICH_MACHINE_LEARNING_URL = "http://localhost:3003";
-
-      REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
-      REDIS_HOSTNAME = "localhost";
-    };
-    serviceConfig = {
-      ExecStart = "${pkgs.nodejs}/bin/node ${pkgs.immich-server}/dist/apps/immich/apps/immich/src/main.js";
-    };
-  };
-
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_14;
-    ensureDatabases = ["immich"];
-    ensureUsers = [
-      {
-        name = "immich";
-        ensurePermissions = {
-          "DATABASE immich" = "ALL PRIVILEGES";
-          "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
-        };
-      }
-    ];
-  };
-
-  services.redis.servers.immich = {
-    enable = true;
-    user = "immich";
-    port = 0;
-  };
-
   systemd.tmpfiles.rules = [
     "d /var/lib/jellyfin/media 0770 jellyfin media"
     "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
