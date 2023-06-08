@@ -38,7 +38,6 @@
 
   systemd.services.nextcloud-notify_push.after = ["phpfpm-nextcloud.service"];
 
-
   systemd.services.imaginary = {
     after = ["network.target"];
     wantedBy = ["multi-user.target"];

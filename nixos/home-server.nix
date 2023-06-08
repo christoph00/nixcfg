@@ -30,8 +30,7 @@
     unzip
     media-sort
     ffmpeg-full
-
-    immich-server
+    nodejs
   ];
 
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
@@ -46,6 +45,42 @@
 
   networking.hosts = {
     "192.168.2.50" = config.services.cloudflare-dyndns.domains;
+  };
+
+  systemd.services.immich-server = {
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
+    environment = {
+      NODE_ENV = "production";
+      DB_HOSTNAME = "immich_postgres";
+      DB_USERNAME = "immich";
+      DB_PASSWORD = "immich";
+      DB_DATABASE_NAME = "immich";
+      UPLOAD_LOCATION = "/mnt/userdata/immich";
+      TYPESENSE_API_KEY = "23942984928392";
+
+      IMMICH_WEB_URL = "http://localhost:3000";
+      IMMICH_SERVER_URL = "http://localhost:3001";
+      IMMICH_MACHINE_LEARNING_URL = "http://localhost:3003";
+    };
+    serviceConfig = {
+      ExecStart = "${pkgs.nodejs}/bin/node ${pkgs.immich-server}/dist/apps/immich/apps/immich/src/main.js";
+    };
+  };
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_14;
+    ensureDatabases = ["immich"];
+    ensureUsers = [
+      {
+        name = "immich";
+        ensurePermissions = {
+          "DATABASE immich" = "ALL PRIVILEGES";
+          "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
+        };
+      }
+    ];
   };
 
   systemd.tmpfiles.rules = [
