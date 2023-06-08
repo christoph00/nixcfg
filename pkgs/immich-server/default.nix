@@ -35,7 +35,18 @@ buildNpmPackage rec {
   ];
 
   buildPhase = ''
-    nest build immich
+    runHook preBuild
+    npm run build
+    runHook postBuild
+  '';
+
+  installPhase = ''
+  runHook preInstall
+  mkdir $out
+  cp -r node_modules $out/node_modules
+  cp -r bin $out/bin
+  cp -r dist $out/dist
+  runHook postInstall
   '';
 
   makeCacheWritable = true;
