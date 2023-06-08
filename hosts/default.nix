@@ -35,6 +35,7 @@
           self.nixosModules.webdav-server
           self.nixosModules.media-server
           self.nixosModules.nextcloud
+          self.nixosModules.nzb
           ./futro
         ];
       };

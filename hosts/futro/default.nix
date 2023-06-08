@@ -34,6 +34,11 @@
     options = ["subvol=@ncdata" "discard=async" "compress-force=zstd" "nofail"];
   };
 
+  fileSystems."/mnt/userdata" = {
+    device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
+    options = ["subvol=@userdata" "discard=async" "compress-force=zstd" "nofail"];
+  };
+
   fileSystems."/media/data-hdd" = {
     device = "/dev/disk/by-uuid/1c39c565-7d6c-4924-b709-2516b50b542f";
     options = ["subvol=@data" "compress-force=zstd" "nofail"];

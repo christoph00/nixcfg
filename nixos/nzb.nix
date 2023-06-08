@@ -26,6 +26,15 @@
     unzip
   ];
 
+    environment.persistence."/nix/persist" = {
+    directories = [
+      {
+        directory = "/var/lib/sabnzbd";
+        inherit (config.services.sabnzbd) user group;
+      }
+    ];
+  };
+
   age.secrets.rclone-conf-sab = {
     file = ../secrets/rclone.conf;
     owner = config.services.sabnzbd.user;
