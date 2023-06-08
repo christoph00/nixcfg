@@ -45,7 +45,7 @@
   networking.hosts = {
     "192.168.2.50" = config.services.cloudflare-dyndns.domains;
   };
-  
+
   systemd.tmpfiles.rules = [
     "d /var/lib/jellyfin/media 0770 jellyfin media"
     "L /var/lib/jellyfin/media/Movies - - - - /media/data-hdd/Movies"
