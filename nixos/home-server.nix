@@ -52,7 +52,7 @@
     wantedBy = ["multi-user.target"];
     environment = {
       NODE_ENV = "production";
-      DB_HOSTNAME = "immich_postgres";
+      DB_HOSTNAME = "localhost";
       DB_USERNAME = "immich";
       DB_PASSWORD = "immich";
       DB_DATABASE_NAME = "immich";
@@ -62,6 +62,9 @@
       IMMICH_WEB_URL = "http://localhost:3000";
       IMMICH_SERVER_URL = "http://localhost:3001";
       IMMICH_MACHINE_LEARNING_URL = "http://localhost:3003";
+
+      REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
+      REDIS_HOSTNAME = "localhost";
     };
     serviceConfig = {
       ExecStart = "${pkgs.nodejs}/bin/node ${pkgs.immich-server}/dist/apps/immich/apps/immich/src/main.js";
@@ -81,6 +84,12 @@
         };
       }
     ];
+  };
+
+  services.redis.servers.immich = {
+    enable = true;
+    user = "immich";
+    port = 0;
   };
 
   systemd.tmpfiles.rules = [
