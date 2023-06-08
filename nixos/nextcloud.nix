@@ -36,12 +36,43 @@
     };
   };
 
-  # services.imaginary = {
-  #   enable = true;
-  #   settings = {
-  #     enable-url-source = true;
-  #   };
-  # };
+  systemd.services.nextcloud-notify_push.after = ["phpfpm-nextcloud.service"];
+
+
+  systemd.services.imaginary = {
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.imaginary}/bin/imaginary -p 9000 -concurrency 50 -enable-url-source";
+      ProtectProc = "invisible";
+      NoNewPrivileges = true;
+      DynamicUser = true;
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      PrivateTmp = true;
+      PrivateDevices = true;
+      ProtectHostname = true;
+      ProtectClock = true;
+      ProtectKernelTunables = true;
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      ProtectControlGroups = true;
+      RestrictAddressFamilies = [
+        "AF_INET"
+        "AF_INET6"
+      ];
+      RestrictNamespaces = true;
+      LockPersonality = true;
+      MemoryDenyWriteExecute = true;
+      RestrictRealtime = true;
+      PrivateMounts = true;
+      SystemCallFilter = [
+        "@system-service"
+        "~@privileged"
+      ];
+      DevicePolicy = "closed";
+    };
+  };
 
   services.nextcloud = {
     enable = true;
@@ -89,6 +120,8 @@
     # phpExtraExtensions = [];
     #home = "SET VIA HOST-CONFIG
 
+    phpOptions."opcache.interned_strings_buffer" = "32";
+
     poolSettings = {
       pm = "dynamic";
       "pm.max_children" = "160";
@@ -98,22 +131,6 @@
       "pm.start_servers" = "40";
     };
     extraOptions = {
-      phpOptions = ''
-                short_open_tag = "Off";
-                expose_php = "Off";
-                error_reporting = "E_ALL & ~E_DEPRECATED & ~E_STRICT";
-                display_errors = "stderr";
-                "opcache.enable_cli" = "1";
-                "opcache.enable" = "1";
-                "opcache.interned_strings_buffer" = "12";
-                "opcache.max_accelerated_files" = "10000";
-                "opcache.memory_consumption" = "128";
-                "opcache.save_comments" = "1";
-                "opcache.revalidate_freq" = "1";
-                "opcache.fast_shutdown" = "1";
-                "openssl.cafile" = "/etc/ssl/certs/ca-certificates.crt";
-                catch_workers_output = "yes";
-        j      '';
       redis = {
         host = "/run/redis-nextcloud/redis.sock";
         port = 0;

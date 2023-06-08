@@ -26,7 +26,7 @@
     unzip
   ];
 
-    environment.persistence."/nix/persist" = {
+  environment.persistence."/nix/persist" = {
     directories = [
       {
         directory = "/var/lib/sabnzbd";
