@@ -83,6 +83,9 @@
 
     autoUpdateApps.enable = false;
 
+    notify_push.enable = true;
+    notify_push.bendDomainToLocalhost = true;
+
     # phpExtraExtensions = [];
     #home = "SET VIA HOST-CONFIG
 
