@@ -64,7 +64,7 @@ in {
       DB_PASSWORD = "immich";
       DB_DATABASE_NAME = "immich";
       UPLOAD_LOCATION = "/mnt/userdata/immich";
-      TYPESENSE_API_KEY = "23942984928392";
+      #TYPESENSE_API_KEY = "23942984928392";
 
       IMMICH_WEB_URL = "http://localhost:3000";
       IMMICH_SERVER_URL = "http://localhost:3001";
