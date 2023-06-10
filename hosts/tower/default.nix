@@ -117,7 +117,7 @@
   };
 
   services.nextcloud.home = "/mnt/ncdata";
-  services.nextcloud.hostName = "cloud.r505.de";
+  services.nextcloud.hostName = "nc.r505.de";
 
   # Secrets
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
