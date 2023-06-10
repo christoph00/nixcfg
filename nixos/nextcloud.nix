@@ -20,7 +20,7 @@
     ];
   };
 
-    services.cloudflare-dyndns = {
+  services.cloudflare-dyndns = {
     enable = true;
     ipv6 = true;
     proxied = false;
