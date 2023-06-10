@@ -20,6 +20,7 @@
     ];
   };
 
+  age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
   services.cloudflare-dyndns = {
     enable = true;
     ipv6 = true;
