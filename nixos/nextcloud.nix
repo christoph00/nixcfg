@@ -20,7 +20,17 @@
     ];
   };
 
-  
+    services.cloudflare-dyndns = {
+    enable = true;
+    ipv6 = true;
+    proxied = false;
+    domains = ["${config.services.nextcloud.hostName}"];
+    apiTokenFile = config.age.secrets.cf-dyndns.path;
+  };
+
+  # networking.hosts = {
+  #   "192.168.2.50" = config.services.cloudflare-dyndns.domains;
+  # };
 
   boot.kernel.sysctl."vm.overcommit_memory" = lib.mkDefault "1";
 
