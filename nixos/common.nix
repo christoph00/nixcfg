@@ -128,6 +128,7 @@
     pkgs.dnsutils
     pkgs.htop
     pkgs.wireguard-tools
+    pkgs.exiftool
   ];
 
   environment.shellAliases = {
