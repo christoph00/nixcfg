@@ -95,6 +95,11 @@
     #   fsType = "btrfs";
     #   options = ["subvol=@data" "noatime" "compress-force=zstd"];
     # };
+
+      fileSystems."/mnt/ncdata" = {
+      device = "/dev/disk/by-label/ssd-data";
+    options = ["subvol=@ncdata" "discard=async" "compress-force=zstd" "nofail"];
+  };
   };
 
   swapDevices = [{device = "/dev/nvme0n1p2";}];
@@ -111,23 +116,14 @@
     address = "0.0.0.0";
   };
 
+  services.nextcloud.home = "/mnt/ncdata";
+  services.nextcloud.hostName = "cloud.r505.de";
+
   # Secrets
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
-  age.secrets.wayvnc-key = {
-    file = ../../secrets/wayvnc-key;
-    path = "/etc/wayvnc/key.pem";
-    owner = "christoph";
-    mode = "660";
-  };
-  age.secrets.wayvnc-cert = {
-    file = ../../secrets/wayvnc-cert;
-    path = "/etc/wayvnc/cert.pem";
-    owner = "christoph";
-    mode = "660";
-  };
   age.secrets.rclone-conf = {
     file = ../../secrets/rclone.conf;
-    #path = "/home/christoph/.config/rclone/rclone.conf";
+    path = "/home/christoph/.config/rclone/rclone.conf";
     owner = "christoph";
     mode = "660";
   };
