@@ -16,7 +16,7 @@ in {
   "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca cube star];
   "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
   "secrets/cf-acme".publicKeys = [christoph_air13 futro cube oca oc1 oc2 tower star];
-  "secrets/cf-dyndns".publicKeys = [christoph_air13 futro];
+  "secrets/cf-dyndns".publicKeys = [christoph_air13 futro tower];
   "secrets/futro-cf".publicKeys = [christoph_air13 futro];
   "secrets/immich-env".publicKeys = [christoph_air13 futro];
   "secrets/immich-db-password".publicKeys = [christoph_air13 futro];
@@ -33,5 +33,5 @@ in {
   "secrets/rclone-nd.conf".publicKeys = [christoph_air13 christoph_air13 futro air13 tower oca oc1 oc2];
   "secrets/pia.env".publicKeys = [christoph_air13 star];
   "secrets/pia.crt".publicKeys = [christoph_air13 star];
-  "secrets/nc-admin-pass".publicKeys = [christoph_air13 star futro oca];
+  "secrets/nc-admin-pass".publicKeys = [christoph_air13 star futro oca tower christoph_tower];
 }
