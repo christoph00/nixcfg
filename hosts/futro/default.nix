@@ -68,8 +68,6 @@
   # driSupport = true;
   # };
 
-  
-
   # ----------  Secrets  -----------------------------------------
   age.secrets.cloudflared.file = ../../secrets/futro-cf;
   age.secrets.tailscale-preauthkey.file = ../../secrets/tailscale-preauthkey;
