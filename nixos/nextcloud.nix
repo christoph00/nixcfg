@@ -29,9 +29,9 @@
     apiTokenFile = config.age.secrets.cf-dyndns.path;
   };
 
-  # networking.hosts = {
-  #   "192.168.2.50" = config.services.cloudflare-dyndns.domains;
-  # };
+   networking.hosts = {
+     "127.0.0.1" = config.services.cloudflare-dyndns.domains;
+   };
 
   boot.kernel.sysctl."vm.overcommit_memory" = lib.mkDefault "1";
 
