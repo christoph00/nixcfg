@@ -75,6 +75,7 @@ in {
     home-assistant-cli
 
     media-sort
+    phockup
     ffmpeg-full
   ];
 
