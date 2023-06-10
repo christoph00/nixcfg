@@ -22,6 +22,7 @@
           # self.nixosModules.gamestream
           self.nixosModules.gaming
           #self.nixosModules.code-server
+          self.nixosModules.nextcloud
           ./tower
         ];
       };
