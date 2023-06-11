@@ -142,6 +142,7 @@
       "assist_pipeline"
       "jellyfin"
       "androidtv"
+      "androidtv_remote"
       "openai_conversation"
       "lovelace"
       "mobile_app"
