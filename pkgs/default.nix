@@ -62,6 +62,8 @@ final: prev: {
   # systemd2mqtt = pkgs.callPackage ./systemd2mqtt {};
   piper-bin = final.callPackage ./piper-bin {};
 
+  go-vod = final.callPackage ./go-vod {};
+
   immich-server = final.callPackage ./immich-server {};
 
   ha-lovelace-battery-entity = final.callPackage ./ha-lovelace/battery-entity.nix {};

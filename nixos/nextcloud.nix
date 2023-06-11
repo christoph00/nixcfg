@@ -56,33 +56,14 @@
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       ExecStart = "${pkgs.imaginary}/bin/imaginary -p 9000 -concurrency 50 -enable-url-source";
-      ProtectProc = "invisible";
-      NoNewPrivileges = true;
-      DynamicUser = true;
-      ProtectSystem = "strict";
-      ProtectHome = true;
-      PrivateTmp = true;
-      PrivateDevices = true;
-      ProtectHostname = true;
-      ProtectClock = true;
-      ProtectKernelTunables = true;
-      ProtectKernelModules = true;
-      ProtectKernelLogs = true;
-      ProtectControlGroups = true;
-      RestrictAddressFamilies = [
-        "AF_INET"
-        "AF_INET6"
-      ];
-      RestrictNamespaces = true;
-      LockPersonality = true;
-      MemoryDenyWriteExecute = true;
-      RestrictRealtime = true;
-      PrivateMounts = true;
-      SystemCallFilter = [
-        "@system-service"
-        "~@privileged"
-      ];
-      DevicePolicy = "closed";
+    };
+  };
+
+  systemd.services.go-vod = {
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.go-vod}/bin/go-vod";
     };
   };
 
