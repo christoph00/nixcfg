@@ -23,6 +23,8 @@ in {
   environment.persistence."/nix/persist" = {
     directories = [
       "/var/lib/postgresql"
+      "/mnt/ncdata/nix-apps/recognize/models"
+
     ];
   };
 
