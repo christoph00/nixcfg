@@ -75,7 +75,7 @@
         inputs.srvos.nixosModules.server
       ];
       server.imports = [
-        ./acme.nix
+        #./acme.nix
         self.nixosModules.headless
         inputs.srvos.nixosModules.mixins-nginx
       ];
