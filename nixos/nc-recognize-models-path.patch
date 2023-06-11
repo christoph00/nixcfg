@@ -24,7 +24,7 @@ index b519f5b2..3e4dd6d4 100644
  			$it = new RecursiveDirectoryIterator($targetPath, FilesystemIterator::SKIP_DOTS);
 @@ -43,7 +44,7 @@ public function download() : void {
  		}
- 
+
  		$archiveUrl = $this->getArchiveUrl($this->getNeededArchiveRef());
 -		$archivePath = __DIR__ . '/../../models.tar.gz';
 +		$archivePath = $dataDir . '/models.tar.gz';
