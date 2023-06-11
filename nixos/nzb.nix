@@ -8,6 +8,7 @@
     enable = true;
     group = "media";
   };
+
   users.users.sabnzbd = {
     #isNormalUser = true;
     #isSystemUser = false;
@@ -15,6 +16,7 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEtkH/Ux40Ks3hJToweMP+YhCgBrPZNH/4POZZuGCqmH star-sab"
     ];
+    group = "media";
   };
   environment.systemPackages = with pkgs; [
     rclone
