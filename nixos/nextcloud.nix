@@ -4,7 +4,8 @@
   config,
   ...
 }: let
-  vod-config = pkgs.formats.json.generate "config.json" {
+  jsonFormat = pkgs.formats.json {};
+  vod-config = jsonFormat.generate "config.json" {
     FFmpeg = "${pkgs.ffmpeg}/bin/ffmpeg";
     FFprobe = "${pkgs.ffprobe}/bin/ffprobe";
   };
