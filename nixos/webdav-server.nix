@@ -64,7 +64,7 @@
   services.nginx.virtualHosts."data.r505.de" = {
     http2 = true;
     forceSSL = true;
-    useACMEHost = "r505.de";
+    useACMEHost = "data.r505.de";
     locations = {
       "/dav/".proxyPass = "http://unix:/run/sftpgo/webdavd.sock";
       "/".proxyPass = "http://unix:/run/sftpgo/httpd.sock";
