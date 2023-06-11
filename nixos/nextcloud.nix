@@ -119,7 +119,9 @@ in {
         notify_push
         onlyoffice
         #twofactor_nextcloud_notification
+        
         #twofactor_webauthn
+        
         ;
     };
     maxUploadSize = "2048M";
