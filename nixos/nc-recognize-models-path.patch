@@ -53,3 +53,49 @@ index fe20c27a..94f3e4c3 100644
  			filter(path, entry) {
  				return path.includes('models')
  			},
+
+---
+ src/classifier_imagenet.js | 2 +-
+ src/classifier_movinet.js  | 2 +-
+ src/classifier_musicnn.js  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/classifier_imagenet.js b/src/classifier_imagenet.js
+index f4cb788b..1d74e1b3 100644
+--- a/src/classifier_imagenet.js
++++ b/src/classifier_imagenet.js
+@@ -58,7 +58,7 @@ if (process.argv.length < 3) throw new Error('Incorrect arguments: node classify
+  * @param minInput
+  */
+ async function main(modelName, imgSize, minInput) {
+-	const modelPath = path.resolve(__dirname, '..', 'models', modelName)
++	const modelPath = path.resolve('/mnt/ncdata', 'models', modelName)
+ 
+ 	const modelFileName = 'model.json'
+ 	let modelUrl
+diff --git a/src/classifier_movinet.js b/src/classifier_movinet.js
+index 499ea6be..408a074e 100644
+--- a/src/classifier_movinet.js
++++ b/src/classifier_movinet.js
+@@ -33,7 +33,7 @@ if (process.argv.length < 3) throw new Error('Incorrect arguments: node classify
+  *
+  */
+ async function main() {
+-	const modelPath = path.resolve(__dirname, '..', 'models', 'movinet-a3')
++	const modelPath = path.resolve('/mnt/ncdata', 'models', 'movinet-a3')
+ 
+ 	const modelFileName = 'model.json'
+ 	let modelUrl
+diff --git a/src/classifier_musicnn.js b/src/classifier_musicnn.js
+index 5b35bcc6..dfa905ea 100644
+--- a/src/classifier_musicnn.js
++++ b/src/classifier_musicnn.js
+@@ -51,7 +51,7 @@ if (process.argv.length < 3) throw new Error('Incorrect arguments: node classify
+  *
+  */
+ async function main() {
+-	const modelPath = path.resolve(__dirname, '..', 'models', 'musicnn')
++	const modelPath = path.resolve('/mnt/ncdata', 'models', 'musicnn')
+ 
+ 	const modelFileName = 'model.json'
+ 	let modelUrl
