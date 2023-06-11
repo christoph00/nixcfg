@@ -23,7 +23,6 @@ in {
   environment.persistence."/nix/persist" = {
     directories = [
       "/var/lib/postgresql"
-      "/mnt/ncdata/nix-apps/recognize/models"
     ];
   };
 
@@ -98,6 +97,7 @@ in {
       recognize = pkgs.fetchNextcloudApp rec {
         url = "https://github.com/nextcloud/recognize/releases/download/v4.1.0/recognize-4.1.0.tar.gz";
         sha256 = "1cjia6652b952k74503ylj62ikqfc0z1z9qpbrgh3sgc4qnvp93s";
+        patches = [./nc-recognize-models-path.patch];
       };
       # facerecognition = pkgs.fetchNextcloudApp rec {
       #   url = "https://github.com/matiasdelellis/facerecognition/releases/download/v0.9.12/facerecognition.tar.gz";
@@ -119,9 +119,7 @@ in {
         notify_push
         onlyoffice
         #twofactor_nextcloud_notification
-        
         #twofactor_webauthn
-        
         ;
     };
     maxUploadSize = "2048M";

@@ -1,0 +1,55 @@
+From 5a0f644194c795b1bb2d180c68d3c39e1e0cc77f Mon Sep 17 00:00:00 2001
+From: Christoph <christoph00@users.noreply.github.com>
+Date: Sun, 11 Jun 2023 18:02:36 +0200
+Subject: [PATCH] add models path
+
+---
+ lib/Service/DownloadModelsService.php | 5 +++--
+ src/model-manager.js                  | 6 +++---
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/lib/Service/DownloadModelsService.php b/lib/Service/DownloadModelsService.php
+index b519f5b2..3e4dd6d4 100644
+--- a/lib/Service/DownloadModelsService.php
++++ b/lib/Service/DownloadModelsService.php
+@@ -26,7 +26,8 @@ public function __construct(IClientService $clientService, bool $isCLI) {
+ 	 * @throws \Exception
+ 	 */
+ 	public function download() : void {
+-		$targetPath = __DIR__ . '/../../models';
++		$dataDir = $this->config->getSystemValue('datadirectory');
++		$targetPath = $dataDir . '/models';
+ 		if (file_exists($targetPath)) {
+ 			// remove models directory
+ 			$it = new RecursiveDirectoryIterator($targetPath, FilesystemIterator::SKIP_DOTS);
+@@ -43,7 +44,7 @@ public function download() : void {
+ 		}
+ 
+ 		$archiveUrl = $this->getArchiveUrl($this->getNeededArchiveRef());
+-		$archivePath = __DIR__ . '/../../models.tar.gz';
++		$archivePath = $dataDir . '/models.tar.gz';
+ 		$timeout = $this->isCLI ? 0 : 480;
+ 		$this->clientService->newClient()->get($archiveUrl, ['sink' => $archivePath, 'timeout' => $timeout]);
+ 		$tarManager = new TAR($archivePath);
+diff --git a/src/model-manager.js b/src/model-manager.js
+index fe20c27a..94f3e4c3 100644
+--- a/src/model-manager.js
++++ b/src/model-manager.js
+@@ -7,14 +7,14 @@ const ref = process.env.GITHUB_REF ? process.env.GITHUB_REF : `refs/tags/v${VERS
+ exports.downloadAll = async () => {
+ 	await download(
+ 		`https://github.com/nextcloud/recognize/archive/${ref}.tar.gz`,
+-		path.resolve(__dirname, '..'),
++		path.resolve('/mnt/ncdata'),
+ 		{ filename: 'recognize.tar.gz' }
+ 	)
+ 	await new Promise(resolve =>
+ 		tar.x({
+ 			strip: 1,
+-			C: path.resolve(__dirname, '..'),
+-			file: path.resolve(__dirname, '..', 'recognize.tar.gz'),
++			C: path.resolve('/mnt/ncdata'),
++			file: path.resolve('/mnt/ncdata', 'recognize.tar.gz'),
+ 			filter(path, entry) {
+ 				return path.includes('models')
+ 			},
