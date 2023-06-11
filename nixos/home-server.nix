@@ -39,13 +39,13 @@
     enable = true;
     ipv6 = true;
     proxied = false;
-    domains = ["home.r505.de" "data.r505.de"];
+    domains = ["home.r505.de" "data.r505.de" "media.r505.de"];
     apiTokenFile = config.age.secrets.cf-dyndns.path;
   };
 
-  # networking.hosts = {
-  #   "192.168.2.50" = config.services.cloudflare-dyndns.domains;
-  # };
+  networking.hosts = {
+    "192.168.2.50" = config.services.cloudflare-dyndns.domains;
+  };
 
   systemd.tmpfiles.rules = [
     "d /var/lib/jellyfin/media 0770 jellyfin media"
