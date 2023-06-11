@@ -26,6 +26,8 @@ in {
     ];
   };
 
+  environment.systemPackages = [pkgs.nodejs pkgs.ffmpeg pkgs.go-vod];
+
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
   services.cloudflare-dyndns = {
     enable = true;
@@ -71,6 +73,13 @@ in {
     serviceConfig = {
       ExecStart = "${pkgs.go-vod}/bin/go-vod ${vod-config}";
     };
+  };
+
+  systemd.services.nextcloud-previewgenerator = {
+    serviceConfig.Type = "oneshot";
+    serviceConfig.ExecStart = "${config.services.nextcloud.occ}/bin/nextcloud-occ preview:pre-generate";
+    serviceConfig.User = "nextcloud";
+    startAt = "*:0/10";
   };
 
   services.nextcloud = {
