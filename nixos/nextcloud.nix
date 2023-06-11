@@ -7,7 +7,7 @@
   jsonFormat = pkgs.formats.json {};
   vod-config = jsonFormat.generate "config.json" {
     FFmpeg = "${pkgs.ffmpeg}/bin/ffmpeg";
-    FFprobe = "${pkgs.ffprobe}/bin/ffprobe";
+    FFprobe = "${pkgs.ffmpeg}/bin/ffprobe";
   };
 in {
   age.secrets.nc-admin-pass = {
