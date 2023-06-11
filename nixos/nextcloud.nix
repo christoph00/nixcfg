@@ -24,7 +24,6 @@ in {
     directories = [
       "/var/lib/postgresql"
       "/mnt/ncdata/nix-apps/recognize/models"
-
     ];
   };
 
