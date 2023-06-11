@@ -117,7 +117,7 @@
         pyiqvia
         pyipp
         wyoming
-        wyoming-piper
+        #wyoming-piper
         androidtvremote2
         # faster-whisper
         androidtv
