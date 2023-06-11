@@ -17,7 +17,7 @@ index b519f5b2..3e4dd6d4 100644
  	 */
  	public function download() : void {
 -		$targetPath = __DIR__ . '/../../models';
-+		$dataDir = $this->config->getSystemValue('datadirectory');
++		$dataDir = '/mnt/ncdata';
 +		$targetPath = $dataDir . '/models';
  		if (file_exists($targetPath)) {
  			// remove models directory
