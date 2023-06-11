@@ -121,7 +121,6 @@
         files_texteditor
         notify_push
         onlyoffice
-        twofactor_totp
         #twofactor_nextcloud_notification
         #twofactor_webauthn
         ;
