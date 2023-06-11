@@ -6,7 +6,7 @@
     ./vscode.nix
     #./kate.nix
     ./office.nix
-    #./discord.nix
+    ./discord.nix
     #./kdeconnect.nix
     ./nemo.nix
     ./foot.nix

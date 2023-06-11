@@ -6,7 +6,7 @@
 }: let
   inherit (config.colorscheme) colors;
 in {
-  home.packages = with pkgs; [discord-ptb discocss];
+  home.packages = with pkgs; [discord discocss];
 
   xdg.configFile."discocss/custom.css".text = ''
     .theme-dark {

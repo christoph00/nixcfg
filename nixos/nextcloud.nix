@@ -3,7 +3,13 @@
   lib,
   config,
   ...
-}: {
+}: let
+  jsonFormat = pkgs.formats.json {};
+  vod-config = jsonFormat.generate "config.json" {
+    FFmpeg = "${pkgs.ffmpeg}/bin/ffmpeg";
+    FFprobe = "${pkgs.ffmpeg}/bin/ffprobe";
+  };
+in {
   age.secrets.nc-admin-pass = {
     file = ../secrets/nc-admin-pass;
     owner = "nextcloud";
@@ -23,15 +29,15 @@
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
   services.cloudflare-dyndns = {
     enable = true;
-    ipv6 = true;
+    #ipv6 = true;
     proxied = false;
     domains = ["${config.services.nextcloud.hostName}"];
     apiTokenFile = config.age.secrets.cf-dyndns.path;
   };
 
-   networking.hosts = {
-     "127.0.0.1" = config.services.cloudflare-dyndns.domains;
-   };
+  networking.hosts = {
+    "127.0.0.1" = config.services.cloudflare-dyndns.domains;
+  };
 
   boot.kernel.sysctl."vm.overcommit_memory" = lib.mkDefault "1";
 
@@ -56,33 +62,14 @@
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       ExecStart = "${pkgs.imaginary}/bin/imaginary -p 9000 -concurrency 50 -enable-url-source";
-      ProtectProc = "invisible";
-      NoNewPrivileges = true;
-      DynamicUser = true;
-      ProtectSystem = "strict";
-      ProtectHome = true;
-      PrivateTmp = true;
-      PrivateDevices = true;
-      ProtectHostname = true;
-      ProtectClock = true;
-      ProtectKernelTunables = true;
-      ProtectKernelModules = true;
-      ProtectKernelLogs = true;
-      ProtectControlGroups = true;
-      RestrictAddressFamilies = [
-        "AF_INET"
-        "AF_INET6"
-      ];
-      RestrictNamespaces = true;
-      LockPersonality = true;
-      MemoryDenyWriteExecute = true;
-      RestrictRealtime = true;
-      PrivateMounts = true;
-      SystemCallFilter = [
-        "@system-service"
-        "~@privileged"
-      ];
-      DevicePolicy = "closed";
+    };
+  };
+
+  systemd.services.go-vod = {
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.go-vod}/bin/go-vod ${vod-config}";
     };
   };
 
@@ -98,8 +85,17 @@
         url = "https://github.com/nextcloud/integration_google/releases/download/v1.0.9/integration_google-1.0.9.tar.gz";
         sha256 = "0fw15p0mkzckr554rvhzmbm7h0pvkiwvqv6zaak7xbyhq0ksxrv4";
       };
+      recognize = pkgs.fetchNextcloudApp rec {
+        url = "https://github.com/nextcloud/recognize/releases/download/v4.1.0/recognize-4.1.0.tar.gz";
+        sha256 = "1cjia6652b952k74503ylj62ikqfc0z1z9qpbrgh3sgc4qnvp93s";
+      };
+      facerecognition = pkgs.fetchNextcloudApp rec {
+        url = "https://github.com/matiasdelellis/facerecognition/releases/download/v0.9.12/facerecognition.tar.gz";
+        sha256 = "1hz1dcvf5wg41dx95dvzdxp80j8153sp9cfbp0kcgsr6wxdnyxw6";
+      };
       inherit
         (pkgs.nextcloud26Packages.apps)
+        bookmarks
         news
         notes
         contacts
@@ -112,8 +108,10 @@
         files_texteditor
         notify_push
         onlyoffice
-        twofactor_nextcloud_notification
-        twofactor_webauthn
+        #twofactor_nextcloud_notification
+        
+        #twofactor_webauthn
+        
         ;
     };
     maxUploadSize = "2048M";
@@ -151,6 +149,12 @@
         local = "\\OC\\Memcache\\Redis";
         distributed = "\\OC\\Memcache\\Redis";
         locking = "\\OC\\Memcache\\Redis";
+      };
+      memories = {
+        vod.connect = "127.0.0.1:47788";
+        vod.vaapi = true;
+        vod.disable = false;
+        exiftool = "${pkgs.exiftool}/bin/exiftool";
       };
     };
 
