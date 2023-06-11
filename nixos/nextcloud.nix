@@ -29,9 +29,9 @@
     apiTokenFile = config.age.secrets.cf-dyndns.path;
   };
 
-   networking.hosts = {
-     "127.0.0.1" = config.services.cloudflare-dyndns.domains;
-   };
+  networking.hosts = {
+    "127.0.0.1" = config.services.cloudflare-dyndns.domains;
+  };
 
   boot.kernel.sysctl."vm.overcommit_memory" = lib.mkDefault "1";
 
@@ -103,7 +103,9 @@
         notify_push
         onlyoffice
         #twofactor_nextcloud_notification
+        
         #twofactor_webauthn
+        
         ;
     };
     maxUploadSize = "2048M";
@@ -141,6 +143,12 @@
         local = "\\OC\\Memcache\\Redis";
         distributed = "\\OC\\Memcache\\Redis";
         locking = "\\OC\\Memcache\\Redis";
+      };
+      memories = {
+        vod.connect = "127.0.0.1:47788";
+        vod.vaapi = true;
+        vod.disable = false;
+        exiftool = "${pkgs.exiftool}/bin/exiftool";
       };
     };
 
