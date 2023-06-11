@@ -155,6 +155,8 @@
       "xiaomi_ble"
       "weather"
       "rest"
+      "ipp"
+      "met"
       "ping"
       "snmp"
       "google"
