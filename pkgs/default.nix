@@ -5,7 +5,7 @@ final: prev: {
       (python-final: python-prev: {
         #wyoming = python-final.callPackage ./python/wyoming.nix {};
         #wyoming-piper = python-final.callPackage ./python/wyoming-piper.nix {};
-        #androidtvremote2 = python-final.callPackage ./python/androidtvremote2.nix {};
+        androidtvremote2 = python-final.callPackage ./python/androidtvremote2.nix {};
         #faster-whisper = python-final.callPackage ./python/faster-whisper.nix {};
 
         androidtv = python-prev.androidtv.overrideAttrs (o: {
