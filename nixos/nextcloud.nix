@@ -23,7 +23,7 @@
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
   services.cloudflare-dyndns = {
     enable = true;
-    ipv6 = true;
+    #ipv6 = true;
     proxied = false;
     domains = ["${config.services.nextcloud.hostName}"];
     apiTokenFile = config.age.secrets.cf-dyndns.path;
