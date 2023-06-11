@@ -98,6 +98,14 @@
         url = "https://github.com/nextcloud/integration_google/releases/download/v1.0.9/integration_google-1.0.9.tar.gz";
         sha256 = "0fw15p0mkzckr554rvhzmbm7h0pvkiwvqv6zaak7xbyhq0ksxrv4";
       };
+      recognize = pkgs.fetchNextcloudApp rec {
+        url = "https://github.com/nextcloud/recognize/releases/download/v4.1.0/recognize-4.1.0.tar.gz";
+        sha256 = "1cjia6652b952k74503ylj62ikqfc0z1z9qpbrgh3sgc4qnvp93s";
+      };
+      facerecognition = pkgs.fetchNextcloudApp rec {
+        url = "https://github.com/nextcloud/matiasdelellis/facerecognition/download/v0.9.12/facerecognition.tar.gz";
+        sha256 = "1hz1dcvf5wg41dx95dvzdxp80j8153sp9cfbp0kcgsr6wxdnyxw6";
+      };
       inherit
         (pkgs.nextcloud26Packages.apps)
         news
