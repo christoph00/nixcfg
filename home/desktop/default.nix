@@ -91,9 +91,11 @@ in {
     inputs.agenix.packages.x86_64-linux.default
     inputs.nix-init.packages.x86_64-linux.default
     inputs.deploy-rs.defaultPackage.${pkgs.system}
+
+    themechanger
   ];
 
-  colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
+  colorscheme = inputs.nix-colors.colorSchemes.tokyo-night-light;
   wallpaper = lib.mkDefault (mkWallpaper
     {
       scheme = config.colorscheme;
