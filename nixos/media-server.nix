@@ -34,10 +34,18 @@
     openFirewall = false;
   };
 
+  security.acme.certs."media.r505.de" = {
+    #server = "https://acme.zerossl.com/v2/DV90";
+    domain = "media.r505.de";
+    dnsProvider = "cloudflare";
+    credentialsFile = config.age.secrets.cf-acme.path;
+    dnsResolver = "1.1.1.1:53";
+  };
+
   services.nginx.virtualHosts."media.r505.de" = {
     http2 = true;
     forceSSL = true;
-    useACMEHost = "r505.de";
+    useACMEHost = "media.r505.de";
     locations = {
       "/".proxyPass = "http://127.0.0.1:8096";
     };
