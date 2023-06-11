@@ -4,8 +4,8 @@
   lib,
   ...
 }: {
-  networking.firewall.allowedTCPPorts = [80 443];
-  networking.firewall.allowedUDPPorts = [443];
+  networking.firewall.allowedTCPPorts = [80 443 2022];
+  networking.firewall.allowedUDPPorts = [443 2022];
 
   services.sftpgo = {
     enable = true;
