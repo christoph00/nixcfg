@@ -3,7 +3,12 @@
   lib,
   config,
   ...
-}: {
+}: let
+  vod-config = pkgs.formats.json.generate "config.json" {
+    FFmpeg = "${pkgs.ffmpeg}/bin/ffmpeg";
+    FFprobe = "${pkgs.ffprobe}/bin/ffprobe";
+  };
+in {
   age.secrets.nc-admin-pass = {
     file = ../secrets/nc-admin-pass;
     owner = "nextcloud";
@@ -63,7 +68,7 @@
     after = ["network.target"];
     wantedBy = ["multi-user.target"];
     serviceConfig = {
-      ExecStart = "${pkgs.go-vod}/bin/go-vod";
+      ExecStart = "${pkgs.go-vod}/bin/go-vod ${vod-config}";
     };
   };
 
