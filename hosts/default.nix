@@ -33,7 +33,7 @@
           self.nixosModules.smart-home
           self.nixosModules.home-server
           #self.nixosModules.reverse-proxy-server
-          #self.nixosModules.webdav-server
+          self.nixosModules.webdav-server
           self.nixosModules.media-server
           #self.nixosModules.nextcloud
           self.nixosModules.nzb

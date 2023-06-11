@@ -7,6 +7,14 @@
   networking.firewall.allowedTCPPorts = [80 443 2022];
   networking.firewall.allowedUDPPorts = [443 2022];
 
+  security.acme.certs."data.r505.de" = {
+    #server = "https://acme.zerossl.com/v2/DV90";
+    domain = "data.r505.de";
+    dnsProvider = "cloudflare";
+    credentialsFile = config.age.secrets.cf-acme.path;
+    dnsResolver = "1.1.1.1:53";
+  };
+
   services.sftpgo = {
     enable = true;
     group = "media";

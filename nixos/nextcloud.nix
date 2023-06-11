@@ -53,7 +53,7 @@ in {
   services.nginx.virtualHosts = {
     "${config.services.nextcloud.hostName}" = {
       forceSSL = true;
-      useACMEHost = "r505.de";
+      useACMEHost = "${config.services.nextcloud.hostName}";
     };
   };
 
@@ -80,6 +80,14 @@ in {
     serviceConfig.ExecStart = "${config.services.nextcloud.occ}/bin/nextcloud-occ preview:pre-generate";
     serviceConfig.User = "nextcloud";
     startAt = "*:0/10";
+  };
+
+  security.acme.certs."${config.services.nextcloud.hostName}" = {
+    #server = "https://acme.zerossl.com/v2/DV90";
+    domain = "${config.services.nextcloud.hostName}";
+    dnsProvider = "cloudflare";
+    credentialsFile = config.age.secrets.cf-acme.path;
+    dnsResolver = "1.1.1.1:53";
   };
 
   services.nextcloud = {
@@ -118,13 +126,9 @@ in {
         files_texteditor
         notify_push
         onlyoffice
-        #twofactor_nextcloud_notification
-        
-        #twofactor_webauthn
-        
         ;
     };
-    maxUploadSize = "2048M";
+    maxUploadSize = "4096M";
 
     caching.redis = true;
 
