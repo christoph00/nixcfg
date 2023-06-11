@@ -93,7 +93,7 @@ in {
     inputs.deploy-rs.defaultPackage.${pkgs.system}
   ];
 
-  colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
+  colorscheme = inputs.nix-colors.colorSchemes.tokio-night-light;
   wallpaper = lib.mkDefault (mkWallpaper
     {
       scheme = config.colorscheme;
