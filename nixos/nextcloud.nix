@@ -151,10 +151,16 @@ in {
         locking = "\\OC\\Memcache\\Redis";
       };
       memories = {
+        vod.path = "${pkgs.go-vod}/bin/go-vod";
         vod.connect = "127.0.0.1:47788";
         vod.vaapi = true;
+        vod.ffmpeg = "${pkgs.ffmpeg}/bin/ffmpeg";
+        vod.ffprobe = "${pkgs.ffmpeg}/bin/ffprobe";
+
         vod.disable = false;
+        vod.external = true;
         exiftool = "${pkgs.exiftool}/bin/exiftool";
+        exiftool_no_local = true;
       };
       recognize = {
         node_binary = "${pkgs.nodejs}/bin/node";
