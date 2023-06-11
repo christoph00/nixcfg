@@ -108,6 +108,7 @@
       };
       inherit
         (pkgs.nextcloud26Packages.apps)
+        bookmarks
         news
         notes
         contacts
@@ -120,8 +121,9 @@
         files_texteditor
         notify_push
         onlyoffice
-        twofactor_nextcloud_notification
-        twofactor_webauthn
+        twofactor_totp
+        #twofactor_nextcloud_notification
+        #twofactor_webauthn
         ;
     };
     maxUploadSize = "2048M";
