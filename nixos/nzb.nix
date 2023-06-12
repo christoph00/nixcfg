@@ -11,7 +11,6 @@
 
   systemd.services.sabnzbd.serviceConfig.UMask = lib.mkForce "002";
 
-
   users.users.sabnzbd = {
     #isNormalUser = true;
     #isSystemUser = false;
