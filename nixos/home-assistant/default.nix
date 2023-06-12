@@ -9,6 +9,7 @@
     ./systemmonitor.nix
     ./commands.nix
     ./network_sensors.nix
+    ./webserver.nix
     # ./netdata.nix
     #./piper.nix
   ];
