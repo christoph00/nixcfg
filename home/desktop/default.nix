@@ -94,7 +94,7 @@ in {
 
     themechanger
 
-    darktable
+     digikam
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-night-light;
