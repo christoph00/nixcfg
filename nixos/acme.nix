@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-   environment.persistence."/nix/persist" = {
+  environment.persistence."/nix/persist" = {
     directories = [
       "/var/lib/acme"
     ];
