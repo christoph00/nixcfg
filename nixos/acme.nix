@@ -3,6 +3,11 @@
   config,
   ...
 }: {
+   environment.persistence."/nix/persist" = {
+    directories = [
+      "/var/lib/acme"
+    ];
+  };
   security.acme = {
     acceptTerms = true;
     defaults = {
