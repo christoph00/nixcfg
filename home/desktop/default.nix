@@ -93,6 +93,8 @@ in {
     inputs.deploy-rs.defaultPackage.${pkgs.system}
 
     themechanger
+
+    darktable
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-night-light;
