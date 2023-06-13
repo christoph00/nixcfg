@@ -51,7 +51,7 @@
     user = "sftpgo:media";
     volumes = [
       "/nix/persist/sftpgo/gallery:/data"
-      "/media/userdata/christoph/Bilder:/data/Bilder"
+      "/mnt/userdata/christoph/Bilder:/data/Bilder"
     ];
     cmd = ["run init --source /data/Bilder"];
   };
