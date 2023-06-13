@@ -42,6 +42,10 @@ buildNpmPackage rec {
     node scripts/disable-dependency.js --prefix=packages/extractor sharp
   '';
 
+   postInstall = ''
+    wrapProgram "$out/bin/home-gallery" --set NODE_PATH "$out/lib/node_modules/@home-gallery/mono-repo/node_modules/"
+  '';
+
   makeCacheWritable = true;
 
   meta = with lib; {
