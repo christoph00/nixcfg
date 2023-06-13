@@ -46,14 +46,14 @@
   };
 
   virtualisation.oci-containers.containers.gallery = {
-    ports = ["0.0.0.0:3000:3000"];
+    ports = ["0.0.0.0:3001:3000"];
     image = "xemle/home-gallery";
-    user = "256:256";
+    user = "994:256";
     volumes = [
       "/nix/persist/sftpgo/gallery:/data"
       "/mnt/userdata/christoph/Bilder:/data/Bilder"
     ];
-    cmd = ["run init --source /data/Bilder"];
+    cmd = ["run" "server"];
   };
 
   systemd.tmpfiles.rules = [
