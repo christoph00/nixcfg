@@ -16,7 +16,7 @@ buildNpmPackage rec {
     hash = "sha256-RfBb0i7yDs+Wj7OTVW0gemhaI9LQCvcxDqAgj8Wibn8=";
   };
 
-  npmDepsSha256 = "${lib.fakeSha256}";
+  npmDepsHash = "sha256-wDFfnTApmRPRtmZ/8nH8cpsoyQbpMtKO/Y+dEIENs7I=";
 
   nativeBuildInputs = [
     pkg-config
