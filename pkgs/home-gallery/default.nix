@@ -4,6 +4,9 @@
   fetchFromGitHub,
   prefetch-npm-deps,
   pkg-config,
+  pnpm,
+  vips,
+  ffmpeg,
 }:
 buildNpmPackage rec {
   pname = "home-gallery";
@@ -23,6 +26,9 @@ buildNpmPackage rec {
   ];
 
   buildInputs = [
+    pnpm
+    vips
+    ffmpeg
   ];
 
   postPatch = ''
