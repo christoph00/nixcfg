@@ -29,8 +29,8 @@
     xplr
     unzip
     media-sort
-    ffmpeg-full
-    nodejs
+    
+    home-gallery
   ];
 
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
