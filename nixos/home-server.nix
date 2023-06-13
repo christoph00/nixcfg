@@ -29,8 +29,6 @@
     xplr
     unzip
     media-sort
-
-    home-gallery
   ];
 
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
@@ -45,6 +43,17 @@
 
   networking.hosts = {
     "192.168.2.50" = config.services.cloudflare-dyndns.domains;
+  };
+
+  virtualisation.oci-containers.containers.gallery = {
+    networking = "host";
+    image = "xemle/home-gallery";
+    user = "sftpgo:media";
+    volumes = [
+      "/nix/persist/sftpgo/gallery:/data"
+      "/media/userdata/christoph/Bilder:/data/Bilder"
+    ];
+    cmd = ["run init --source /data/Bilder"];
   };
 
   systemd.tmpfiles.rules = [
