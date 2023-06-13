@@ -31,7 +31,7 @@ buildNpmPackage rec {
     libtensorflow
   ];
 
-   npmFlags = builtins.toString [ "--ignore-scripts" ];
+  npmFlags = builtins.toString ["--ignore-scripts"];
 
   postPatch = ''
     cp ${./package-lock.json} package-lock.json
@@ -42,7 +42,7 @@ buildNpmPackage rec {
     node scripts/disable-dependency.js --prefix=packages/extractor sharp
   '';
 
-   postInstall = ''
+  postInstall = ''
     wrapProgram "$out/bin/home-gallery" --set NODE_PATH "$out/lib/node_modules/@home-gallery/mono-repo/node_modules/"
   '';
 
