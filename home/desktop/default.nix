@@ -49,16 +49,16 @@
 in {
   imports = [
     ./gtk.nix
-    #./plasma.nix
-    ./hyprland.nix
+    ./plasma.nix
+    #./hyprland.nix
     #./sway.nix
     #./wayvnc.nix
-    ./rofi.nix
+    #./rofi.nix
     #./xfce.nix
     #./labwc.nix
     #./river.nix
     ./idle.nix
-    ./ironbar.nix
+    #./ironbar.nix
     # ./eww.nix
     #./sfwbar.nix
     # ./waybar.nix
