@@ -15,8 +15,7 @@ buildNpmPackage rec {
       repo = "home-gallery";
       rev = "v${version}";
       sha256 = "0zvflb2qy8501qqzf2nhs8imls3s41nmb4xkiybcy3pj5v95pw25";
-    }
-    + "/server";
+    };
 
   npmDepsSha256 = "${lib.fakeSha256}";
 
