@@ -25,6 +25,10 @@ buildNpmPackage rec {
   buildInputs = [
   ];
 
+  postPatch = ''
+    cp ${./package-lock.json} package-lock.json
+  '';
+
   makeCacheWritable = true;
 
   meta = with lib; {
