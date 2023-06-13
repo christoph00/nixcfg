@@ -35,6 +35,11 @@ buildNpmPackage rec {
     cp ${./package-lock.json} package-lock.json
   '';
 
+  preConfigure = ''
+    node scripts/disable-dependency.js api-server styleguide
+    node scripts/disable-dependency.js --prefix=packages/extractor sharp
+  '';
+
   makeCacheWritable = true;
 
   meta = with lib; {
