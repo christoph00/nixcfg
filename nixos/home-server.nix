@@ -48,7 +48,7 @@
   virtualisation.oci-containers.containers.gallery = {
     ports = ["0.0.0.0:3000:3000"];
     image = "xemle/home-gallery";
-    user = "sftpgo:media";
+    user = "${config.users.users.sftpgo.uid}:${config.users.groups.media.gid}";
     volumes = [
       "/nix/persist/sftpgo/gallery:/data"
       "/mnt/userdata/christoph/Bilder:/data/Bilder"
