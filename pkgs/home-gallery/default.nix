@@ -6,6 +6,7 @@
   pkg-config,
   vips,
   ffmpeg,
+  libtensorflow,
 }:
 buildNpmPackage rec {
   pname = "home-gallery";
@@ -27,6 +28,7 @@ buildNpmPackage rec {
   buildInputs = [
     vips
     ffmpeg
+    libtensorflow
   ];
 
   postPatch = ''
