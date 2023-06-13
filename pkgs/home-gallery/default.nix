@@ -31,6 +31,8 @@ buildNpmPackage rec {
     libtensorflow
   ];
 
+   npmFlags = builtins.toString [ "--ignore-scripts" ];
+
   postPatch = ''
     cp ${./package-lock.json} package-lock.json
   '';
