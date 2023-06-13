@@ -4,7 +4,6 @@
   fetchFromGitHub,
   prefetch-npm-deps,
   pkg-config,
-  pnpm,
   vips,
   ffmpeg,
 }:
@@ -26,7 +25,6 @@ buildNpmPackage rec {
   ];
 
   buildInputs = [
-    pnpm
     vips
     ffmpeg
   ];
