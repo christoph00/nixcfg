@@ -58,15 +58,21 @@
   programs.ssh.startAgent = true;
 
   # Greeter
-  # programs.regreet.enable = true;
-  # services.greetd.settings.initial_session = {
-  #   command = "Hyprland";
-  #   user = "christoph";
-  # };
-  # environment.etc."greetd/environments".text = ''
-  #   Hyprland
-  # '';
-
+  programs.regreet.enable = true;
+  services.greetd = {
+    enable = true;
+    restart = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd startplasma-wayland";
+        user = "greeter";
+      };
+      initial_session = {
+        command = "startplasma-wayland";
+        user = "christoph";
+      };
+    };
+  };
   security = {
     rtkit.enable = true;
   };
