@@ -46,7 +46,7 @@
   };
 
   virtualisation.oci-containers.containers.gallery = {
-    networking = "host";
+    ports = ["0.0.0.0:3000:3000"];
     image = "xemle/home-gallery";
     user = "sftpgo:media";
     volumes = [
