@@ -9,13 +9,12 @@ buildNpmPackage rec {
   pname = "home-gallery";
   version = "1.10.0";
 
-  src =
-    fetchFromGitHub {
-      owner = "xemlep";
-      repo = "home-gallery";
-      rev = "v${version}";
-      sha256 = "0zvflb2qy8501qqzf2nhs8imls3s41nmb4xkiybcy3pj5v95pw25";
-    };
+  src = fetchFromGitHub {
+    owner = "xemle";
+    repo = "home-gallery";
+    rev = "v${version}";
+    hash = "sha256-RfBb0i7yDs+Wj7OTVW0gemhaI9LQCvcxDqAgj8Wibn8=";
+  };
 
   npmDepsSha256 = "${lib.fakeSha256}";
 
@@ -32,9 +31,10 @@ buildNpmPackage rec {
   makeCacheWritable = true;
 
   meta = with lib; {
-    description = "consume, browse and discover all my personal photos and videos.";
-    homepage = "https://home-gallery.org";
+    description = "Self-hosted open-source web gallery to view your photos and videos featuring mobile-friendly, tagging and AI powered image discovery";
+    homepage = "https://github.com/xemle/home-gallery";
+    changelog = "https://github.com/xemle/home-gallery/blob/${src.rev}/CHANGELOG.md";
     license = licenses.mit;
-    maintainers = with maintainers; [];
+    maintainers = with maintainers; [ ];
   };
 }
