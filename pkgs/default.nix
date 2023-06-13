@@ -29,7 +29,7 @@ final: prev: {
   python3Packages = final.python3.pkgs;
 
   xr6515dn = final.callPackage ./xr6515dn {};
-  home-gallery = final.callPackage ./home-gallery.nix {};
+  home-gallery = final.callPackage ./home-gallery {};
   # swww = pkgs.callPackage ./swww {};
   #wallpaper = pkgs.callPackage ./wallpaper {};
   # gfn-electron = pkgs.callPackage ./gfn-electron {};
