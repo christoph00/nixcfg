@@ -25,9 +25,6 @@ buildNpmPackage rec {
   buildInputs = [
   ];
 
-
-
-
   makeCacheWritable = true;
 
   meta = with lib; {
@@ -35,6 +32,6 @@ buildNpmPackage rec {
     homepage = "https://github.com/xemle/home-gallery";
     changelog = "https://github.com/xemle/home-gallery/blob/${src.rev}/CHANGELOG.md";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }
