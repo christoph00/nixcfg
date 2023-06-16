@@ -44,6 +44,9 @@ in {
       enable = true;
       hidpi = false;
     };
+    plugins = [
+        inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      ];
     extraConfig = lib.mkMerge [
       (
         builtins.concatStringsSep "\n" (
