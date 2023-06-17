@@ -59,23 +59,23 @@
 
   # Greeter
   programs.regreet.enable = true;
-  services.greetd = {
-    enable = true;
-    settings = {
-      # default_session = {
-      #   command = "${pkgs.greetd.greetd}/bin/agreety --cmd startplasma-wayland";
-      #   user = "greeter";
-      # };
-      # initial_session = {
-      #   command = "startplasma-wayland";
-      #   user = "christoph";
-      # };
-    };
-  };
-  environment.etc."greetd/environments".text = ''
-    Hyprland
-    startplasma-wayland"
-  '';
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     # default_session = {
+  #     #   command = "${pkgs.greetd.greetd}/bin/agreety --cmd startplasma-wayland";
+  #     #   user = "greeter";
+  #     # };
+  #     # initial_session = {
+  #     #   command = "startplasma-wayland";
+  #     #   user = "christoph";
+  #     # };
+  #   };
+  # };
+  # environment.etc."greetd/environments".text = ''
+  #   Hyprland
+  #   startplasma-wayland"
+  # '';
   security = {
     rtkit.enable = true;
   };
