@@ -57,7 +57,7 @@ in {
     #./xfce.nix
     #./labwc.nix
     #./river.nix
-    #./idle.nix
+    ./idle.nix
     #./ironbar.nix
     ./eww.nix
     #./sfwbar.nix

@@ -6,16 +6,16 @@
 }: {
   services.swayidle = {
     enable = true;
-    # events = [
-    #   {
-    #     event = "before-sleep";
-    #     command = "${pkgs.swaylock}/bin/swaylock -f -e -k -l -c 000000";
-    #   }
-    #   {
-    #     event = "lock";
-    #     command = "${pkgs.swaylock}/bin/swaylock -f -e -k -l -c 000000";
-    #   }
-    # ];
+    events = [
+      {
+        event = "before-sleep";
+        command = "${pkgs.systemd}/bin/loginctl lock-session";
+      }
+      {
+        event = "lock";
+        command = "${pkgs.swaylock-effects}/bin/swaylock -fF";
+      }
+    ];
     timeouts = [
       {
         timeout = 300;
