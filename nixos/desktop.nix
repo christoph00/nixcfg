@@ -77,16 +77,6 @@
   #   startplasma-wayland"
   # '';
 
-  environment.systemPackages = with pkgs; [
-    (catppuccin-gtk.override {
-      size = "compact";
-      accents = ["peach"];
-      variant = "mocha";
-    })
-    catppuccin-cursors.mochaDark
-    (papirus-icon-theme.override {color = "orange";})
-    cage
-  ];
 
   security.pam.services.greetd.gnupg.enable = true;
 
@@ -96,12 +86,6 @@
       default_session = {
         command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
         user = "greeter";
-      };
-      GTK = {
-        cursor_theme_name = "Catppuccin-Mocha-Dark-Cursors";
-        font_name = "Roboto 12";
-        icon_theme_name = "Papirus-Dark";
-        theme_name = "Catppuccin-Mocha-Compact-Peach-Dark";
       };
     };
   };
