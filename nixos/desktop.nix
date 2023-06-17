@@ -58,7 +58,7 @@
   programs.ssh.startAgent = true;
 
   # Greeter
-  programs.regreet.enable = true;
+  # programs.regreet.enable = true;
   # services.greetd = {
   #   enable = true;
   #   settings = {
@@ -72,15 +72,38 @@
   #     # };
   #   };
   # };
-  # environment.etc."greetd/environments".text = ''
-  #   Hyprland
-  #   startplasma-wayland"
-  # '';
+  environment.etc."greetd/environments".text = ''
+    Hyprland
+    startplasma-wayland"
+  '';
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
+        user = "greeter";
+      };
+    };
+  };
+
   security = {
     rtkit.enable = true;
   };
 
-  environment.systemPackages = [pkgs.fan2go pkgs.httplz];
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
 
   #systemd.services."user@1000".serviceConfig.LimitNOFILE = "32768";
 
