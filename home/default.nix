@@ -10,7 +10,6 @@
         home.stateVersion = "22.11";
         imports = [
           inputs.nix-colors.homeManagerModule
-          inputs.nix-index-database.hmModules.nix-index
           # inputs.nixneovim.nixosModules.default
           ./cli
           ../modules/home-manager
