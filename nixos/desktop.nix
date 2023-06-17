@@ -87,15 +87,12 @@
 
   services.greetd = {
     enable = true;
-    # restart on logout
     restart = true;
     settings = {
       default_session = {
-        # use dbus for faster execution
         command = "${pkgs.dbus}/bin/dbus-run-session ${
           lib.getExe pkgs.sway
         } --config /etc/greetd/sway-config";
-        # set user explicitly
         user = "greeter";
       };
     };
@@ -103,8 +100,8 @@
   #
   environment.etc."greetd/environment".text = ''
     Hyprland
-    sway
-    zsh
+    startplasma-wayland
+    fish
   '';
   environment.etc."greetd/sway-config".text = ''
     exec "${lib.getExe config.programs.regreet.package}; swaymsg exit"
