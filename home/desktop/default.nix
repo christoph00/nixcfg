@@ -58,7 +58,7 @@ in {
     #./labwc.nix
     #./river.nix
     #./idle.nix
-    ./ironbar.nix
+    #./ironbar.nix
     # ./eww.nix
     #./sfwbar.nix
     # ./waybar.nix
