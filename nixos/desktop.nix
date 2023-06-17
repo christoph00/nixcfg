@@ -88,7 +88,6 @@
     cage
   ];
 
-
   security.pam.services.greetd.gnupg.enable = true;
 
   services.greetd = {
@@ -98,7 +97,7 @@
         command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
         user = "greeter";
       };
-       GTK = {
+      GTK = {
         cursor_theme_name = "Catppuccin-Mocha-Dark-Cursors";
         font_name = "Roboto 12";
         icon_theme_name = "Papirus-Dark";
