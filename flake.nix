@@ -30,12 +30,6 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    nix-index-database.url = "github:Mic92/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-init.url = "github:nix-community/nix-init";
-    nix-init.inputs.nixpkgs.follows = "nixpkgs";
-
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
