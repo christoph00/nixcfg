@@ -80,14 +80,9 @@
   security.pam.services.greetd.gnupg.enable = true;
 
 environment.systemPackages = with pkgs; [
-    # theme packages
-    (catppuccin-gtk.override {
-      accents = ["mauve"];
-      size = "compact";
-      variant = "mocha";
-    })
-    bibata-cursors
-    papirus-icon-theme
+    fluent-gtk-theme;
+    apple-cursor
+    fluent-icon-theme
   ];
 
 
@@ -95,10 +90,10 @@ environment.systemPackages = with pkgs; [
     enable = true;
      settings = {
       GTK = {
-        cursor_theme_name = "Bibata-Modern-Classic";
+        cursor_theme_name = "macOS-Monterey";
         font_name = "Roboto 12";
-        icon_theme_name = "Papirus-Dark";
-        theme_name = "Catppuccin-Mocha-Compact-Mauve-Dark";
+        icon_theme_name = "Fluent";
+        theme_name = "Fluent-Light";
       };
     };
   };
