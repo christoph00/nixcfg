@@ -79,10 +79,28 @@
 
   security.pam.services.greetd.gnupg.enable = true;
 
-  programs.sway = {enable = true;};
+environment.systemPackages = with pkgs; [
+    # theme packages
+    (catppuccin-gtk.override {
+      accents = ["mauve"];
+      size = "compact";
+      variant = "mocha";
+    })
+    bibata-cursors
+    papirus-icon-theme
+  ];
+
 
   programs.regreet = {
     enable = true;
+     settings = {
+      GTK = {
+        cursor_theme_name = "Bibata-Modern-Classic";
+        font_name = "Roboto 12";
+        icon_theme_name = "Papirus-Dark";
+        theme_name = "Catppuccin-Mocha-Compact-Mauve-Dark";
+      };
+    };
   };
 
   services.greetd = {
@@ -90,23 +108,11 @@
     restart = true;
     settings = {
       default_session = {
-        command = "${pkgs.dbus}/bin/dbus-run-session ${
-          lib.getExe pkgs.sway
-        } --config /etc/greetd/sway-config";
+        command = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
         user = "greeter";
       };
     };
   };
-  #
-  environment.etc."greetd/environment".text = ''
-    Hyprland
-    startplasma-wayland
-    fish
-  '';
-  environment.etc."greetd/sway-config".text = ''
-    exec "${lib.getExe config.programs.regreet.package}; swaymsg exit"
-    include /etc/sway/config.d/*
-  '';
 
   security = {
     rtkit.enable = true;
