@@ -80,7 +80,7 @@
   security.pam.services.greetd.gnupg.enable = true;
 
 environment.systemPackages = with pkgs; [
-    fluent-gtk-theme;
+    fluent-gtk-theme
     apple-cursor
     fluent-icon-theme
   ];
