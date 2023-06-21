@@ -59,19 +59,20 @@
 
   # Greeter
   # programs.regreet.enable = true;
-  # services.greetd = {
-  #   enable = true;
-  #   settings = {
-  #     # default_session = {
-  #     #   command = "${pkgs.greetd.greetd}/bin/agreety --cmd startplasma-wayland";
-  #     #   user = "greeter";
-  #     # };
-  #     # initial_session = {
-  #     #   command = "startplasma-wayland";
-  #     #   user = "christoph";
-  #     # };
-  #   };
-  # };
+  services.greetd = {
+    enable = true;
+    restart = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd ${pkgs.hyprland}/bin/Hyprland";
+        user = "christoph";
+      };
+      # initial_session = {
+      #   command = "startplasma-wayland";
+      #   user = "christoph";
+      # };
+    };
+  };
   # environment.etc."greetd/environments".text = ''
   #   Hyprland
   #   startplasma-wayland"
@@ -86,28 +87,28 @@ environment.systemPackages = with pkgs; [
   ];
 
 
-  programs.regreet = {
-    enable = true;
-     settings = {
-      GTK = {
-        cursor_theme_name = "macOS-Monterey";
-        font_name = "Roboto 12";
-        icon_theme_name = "Fluent";
-        theme_name = "Fluent-Light";
-      };
-    };
-  };
+  # programs.regreet = {
+  #   enable = true;
+  #    settings = {
+  #     GTK = {
+  #       cursor_theme_name = "macOS-Monterey";
+  #       font_name = "Roboto 12";
+  #       icon_theme_name = "Fluent";
+  #       theme_name = "Fluent-Light";
+  #     };
+  #   };
+  # };
 
-  services.greetd = {
-    enable = true;
-    restart = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
-        user = "greeter";
-      };
-    };
-  };
+  # services.greetd = {
+  #   enable = true;
+  #   restart = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
 
   security = {
     rtkit.enable = true;
