@@ -64,13 +64,13 @@
     restart = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd ${pkgs.hyprland}/bin/Hyprland";
+        command = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
+        user = "greeter";
+      };
+      initial_session = {
+        command = "Hyprland";
         user = "christoph";
       };
-      # initial_session = {
-      #   command = "startplasma-wayland";
-      #   user = "christoph";
-      # };
     };
   };
   # environment.etc."greetd/environments".text = ''
@@ -87,17 +87,17 @@ environment.systemPackages = with pkgs; [
   ];
 
 
-  # programs.regreet = {
-  #   enable = true;
-  #    settings = {
-  #     GTK = {
-  #       cursor_theme_name = "macOS-Monterey";
-  #       font_name = "Roboto 12";
-  #       icon_theme_name = "Fluent";
-  #       theme_name = "Fluent-Light";
-  #     };
-  #   };
-  # };
+  programs.regreet = {
+    enable = true;
+     settings = {
+      GTK = {
+        cursor_theme_name = "macOS-Monterey";
+        font_name = "Roboto 12";
+        icon_theme_name = "Fluent";
+        theme_name = "Fluent-Light";
+      };
+    };
+  };
 
   # services.greetd = {
   #   enable = true;
