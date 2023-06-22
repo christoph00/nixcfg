@@ -80,16 +80,15 @@
 
   security.pam.services.greetd.gnupg.enable = true;
 
-environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     fluent-gtk-theme
     apple-cursor
     fluent-icon-theme
   ];
 
-
   programs.regreet = {
     enable = true;
-     settings = {
+    settings = {
       GTK = {
         cursor_theme_name = "macOS-Monterey";
         font_name = "Roboto 12";
