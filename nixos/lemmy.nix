@@ -32,17 +32,18 @@
   services.lemmy = {
     enable = true;
     nginx.enable = true;
+    database.createLocally = true;
+    database.uri = "postgres:///lemmy?host=/run/postgresql&user=lemmy";
 
     settings = {
       hostname = "pub.r505.de";
-      database = {
-        user = "lemmy";
-        host = "/run/postgresql";
-        port = 5432;
-        database = "lemmy";
-        pool_size = 5;
-      };
     };
+  };
+
+  environment.persistence."/nix/persist" = {
+    directories = [
+      "/var/lib/postgresql"
+    ];
   };
 
   services.postgresql = {
