@@ -47,7 +47,7 @@
           self.nixosModules.virtual
           self.nixosModules.home-headless-christoph
           #self.nixosModules.nextcloud
-          self.nixosModules.nzb
+          self.nixosModules.lemmy
           ./star
         ];
       };
