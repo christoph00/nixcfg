@@ -27,6 +27,7 @@
     forceSSL = true;
     useACMEHost = "pub.r505.de";
   };
+  users.users.nginx.extraGroups = ["acme"];
 
   services.lemmy = {
     enable = true;
