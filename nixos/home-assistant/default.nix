@@ -147,7 +147,7 @@
       "openai_conversation"
       "lovelace"
       "mobile_app"
-      "nzbget"
+      #"nzbget"
       "ubus"
       "wake_on_lan"
       "cast"
@@ -162,7 +162,7 @@
       "snmp"
       "google"
       "spotify"
-      "python_script"
+      #"python_script"
     ];
   };
 
