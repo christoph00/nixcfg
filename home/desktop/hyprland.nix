@@ -120,6 +120,12 @@ in {
               layout = dwindle
           }
 
+          misc {
+            vrr = 2
+            disable_autoreload = true
+            disable_splash_rendering = true
+          }
+
           decoration {
               # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
