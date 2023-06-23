@@ -21,21 +21,21 @@ in {
     config = let
       launcher = {
         type = "launcher";
-        favorites = ["chromium-browser" "foot"];
+        favorites = ["edge-browser" "wezterm"];
         show_names = false;
         show_icons = true;
-        icon_theme = "Breeze";
+        # icon_theme = "Breeze";
       };
 
       workspaces = {
         type = "workspaces";
         all_monitors = false;
-        name_map = let
-          workspaces = lib.genAttrs (map (n: builtins.toString n) [1 2 3 4 5 6 7 8 9 10]);
-        in
-          workspaces (_: "●");
+        # name_map = let
+        #   workspaces = lib.genAttrs (map (n: builtins.toString n) [1 2 3 4 5 6 7 8 9 10]);
+        # in
+        #   workspaces (_: "●");
       };
-      #tray = {type = "tray";};
+      tray = {type = "tray";};
       clock = {type = "clock";};
       sys-info = {
         format = [
@@ -56,8 +56,8 @@ in {
     in {
       position = "bottom";
       anchor_to_edges = true;
-      start = [workspaces];
-      end = [battery clock];
+      start = [workspaces launcher];
+      end = [battery tray sys-info clock];
     };
   };
 }
