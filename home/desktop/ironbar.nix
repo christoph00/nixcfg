@@ -24,7 +24,7 @@ in {
         # favorites = ["edge-browser" "wezterm"];
         show_names = false;
         show_icons = true;
-        # icon_theme = "Breeze";
+        icon_theme = "Fluent";
       };
 
       workspaces = {
