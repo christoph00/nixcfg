@@ -16,15 +16,16 @@
 in {
   programs.ironbar = {
     enable = true;
-    package = inputs.ironbar.packages.x86_64-linux.default;
     systemd = true;
+    package = inputs.ironbar.packages.x86_64-linux.default.overrideAttrs (old: {
+      patches = [./ironbar-nix-path.patch];
+    });
     config = let
       launcher = {
         type = "launcher";
         # favorites = ["edge-browser" "wezterm"];
         show_names = false;
         show_icons = true;
-        icon_theme = "Fluent";
       };
 
       workspaces = {
@@ -55,6 +56,7 @@ in {
       };
     in {
       position = "bottom";
+      icon_theme = "Fluent";
       anchor_to_edges = true;
       start = [workspaces launcher];
       end = [battery tray sys-info clock];

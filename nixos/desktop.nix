@@ -84,6 +84,7 @@
     fluent-gtk-theme
     apple-cursor
     fluent-icon-theme
+    microsoft-edge-beta
   ];
 
   programs.regreet = {
