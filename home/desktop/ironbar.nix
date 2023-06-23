@@ -58,16 +58,8 @@ in {
       position = "bottom";
       icon_theme = "Fluent";
       anchor_to_edges = true;
-<<<<<<< HEAD
       start = [workspaces launcher];
       end = [battery tray sys-info clock];
-||||||| parent of c64ff93 ()
-      start = [workspaces];
-      end = [battery clock];
-=======
-      start = [workspaces];
-      end = [battery tray clock];
->>>>>>> c64ff93 ()
     };
   };
 }
