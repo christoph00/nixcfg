@@ -21,7 +21,7 @@ in {
     config = let
       launcher = {
         type = "launcher";
-        favorites = ["edge-browser" "wezterm"];
+        # favorites = ["edge-browser" "wezterm"];
         show_names = false;
         show_icons = true;
         # icon_theme = "Breeze";
