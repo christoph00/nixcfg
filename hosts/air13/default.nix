@@ -29,7 +29,8 @@
     "vt.global_cursor_default=0"
     "mem_sleep_default=deep"
     "ahci.mobile_lpm_policy=3"
-    "resume_offset=20260096"
+    "resume_offset=15024568"
+    "resume=UUID=b7759054-0eab-42fe-bad0-4f1d92694c9f"
   ];
   boot.extraModprobeConfig = ''
     options bbswitch load_state=-1 unload_state=1
