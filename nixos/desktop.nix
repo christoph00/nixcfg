@@ -24,7 +24,7 @@
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
-   security.pam.services = {
+  security.pam.services = {
     gtklock = {
       name = "gtklock";
       text = ''
@@ -40,6 +40,9 @@
     # implementation = "broker";
     # packages = [pkgs.gcr pkgs.dconf];
   };
+
+  services.gnome.at-spi2-core.enable = true;
+
   hardware.uinput.enable = true;
 
   virtualisation = {
