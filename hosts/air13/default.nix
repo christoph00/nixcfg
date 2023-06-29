@@ -30,7 +30,6 @@
     "mem_sleep_default=deep"
     "ahci.mobile_lpm_policy=3"
   ];
-  boot.resumeDevice = "/dev/nvme0n1p2";
   boot.extraModprobeConfig = ''
     options bbswitch load_state=-1 unload_state=1
     options cfg80211 ieee80211_regdom="DE"
@@ -94,7 +93,15 @@
       fsType = "btrfs";
       options = ["subvol=@home" "noatime" "compress-force=zstd"];
     };
+
+    "/swap" = {
+      device = "/dev/disk/by-label/air13";
+      fsType = "btrfs";
+      options = ["subvol=@swap" "noatime" "compress=zstd"];
+    };
   };
+
+  swapDevices = [{device = "/swap/swapfile";}];
 
   # hardware.nvidia.modesetting.enable = false;
 
