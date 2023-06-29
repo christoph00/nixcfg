@@ -29,6 +29,7 @@
     "vt.global_cursor_default=0"
     "mem_sleep_default=deep"
     "ahci.mobile_lpm_policy=3"
+    "resume_offset=20260096"
   ];
   boot.extraModprobeConfig = ''
     options bbswitch load_state=-1 unload_state=1
@@ -101,9 +102,12 @@
     };
   };
 
-  swapDevices = [{device = "/swap/swapfile";   size = 8196;}];
-
-  kernelParams = [ "resume_offset=20260096" ];
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 8196;
+    }
+  ];
 
   # hardware.nvidia.modesetting.enable = false;
 
