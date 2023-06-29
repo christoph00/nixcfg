@@ -189,6 +189,7 @@ in {
           bind = $mainMod, R, exec, ${config.programs.rofi.package}/bin/rofi -show drun
           bind = $mainMod, P, pseudo, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
+          bind = $mainMod, L, exec, ${pkgs.systemd}/bin/loginctl lock-session
 
           # Move focus with mainMod + arrow keys
           bind = $mainMod, left, movefocus, l

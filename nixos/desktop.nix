@@ -24,6 +24,17 @@
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
+   security.pam.services = {
+    gtklock = {
+      name = "gtklock";
+      text = ''
+        auth            sufficient      pam_unix.so try_first_pass likeauth nullok
+        auth            sufficient      pam_fprintd.so
+        auth include login
+      '';
+    };
+  };
+
   services.dbus = {
     enable = true;
     # implementation = "broker";
@@ -90,7 +101,7 @@
     fluent-gtk-theme
     apple-cursor
     fluent-icon-theme
-    microsoft-edge-beta
+    gtklock
   ];
 
   programs.regreet = {
