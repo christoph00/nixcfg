@@ -77,7 +77,6 @@
   age.secrets.christoph-password.file = ../secrets/christoph-password.age;
 
   programs.command-not-found.enable = false;
-  programs.bash.enable = true;
 
   networking.wireguard.enable = true;
 
