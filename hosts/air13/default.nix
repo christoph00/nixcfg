@@ -97,11 +97,13 @@
     "/swap" = {
       device = "/dev/disk/by-label/air13";
       fsType = "btrfs";
-      options = ["subvol=@swap" "noatime" "compress=zstd"];
+      options = ["subvol=@swap" "noatime"];
     };
   };
 
-  swapDevices = [{device = "/swap/swapfile";}];
+  swapDevices = [{device = "/swap/swapfile";   size = 8196;}];
+
+  kernelParams = [ "resume_offset=20260096" ];
 
   # hardware.nvidia.modesetting.enable = false;
 
