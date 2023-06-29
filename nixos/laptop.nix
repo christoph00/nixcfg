@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }: {
@@ -10,7 +8,9 @@
     lidSwitchExternalPower = "hybrid-sleep";
     extraConfig = ''
       IdleAction=hybrid-sleep
-      IdleActionSec=30min
+      IdleActionSec=10min
+      HandlePowerKey=hybrid-sleep
+      HibernateDelaySec=3600
     '';
   };
 
