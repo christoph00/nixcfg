@@ -24,9 +24,10 @@
   '';
 in {
   home.packages = [
-    pkgs.gnome.file-roller
+   # pkgs.gnome.file-roller
     gvfs
     pkgs.cinnamon.nemo
+    pkgs.cinnamon.nemo-fileroller
   ];
 
   dconf.settings."org/nemo/window-state" = {
