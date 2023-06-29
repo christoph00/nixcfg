@@ -77,7 +77,7 @@
   age.secrets.christoph-password.file = ../secrets/christoph-password.age;
 
   programs.command-not-found.enable = false;
-  programs.fish.enable = true;
+  programs.bash.enable = true;
 
   networking.wireguard.enable = true;
 
@@ -85,7 +85,7 @@
     description = "Christoph";
     isNormalUser = true;
     createHome = true;
-    shell = pkgs.fish;
+    shell = pkgs.bash;
     extraGroups = [
       "wheel"
       "video"
