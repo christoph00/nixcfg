@@ -57,6 +57,12 @@
 
   programs.ssh.startAgent = true;
 
+  services.logind.extraConfig = ''
+    HandlePowerKey=suspend
+    IdleAction=suspend
+    IdleActionSec=1m
+  '';
+
   # Greeter
   # programs.regreet.enable = true;
   services.greetd = {
