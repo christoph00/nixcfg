@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Lid settings
   services.logind = {
     lidSwitch = "hybrid-sleep";
@@ -25,6 +22,8 @@
       matchConfig.Name = "wl*";
     };
   };
+
+  services.fprintd.enable = true;
 
   networking.wireless = {
     enable = false;
