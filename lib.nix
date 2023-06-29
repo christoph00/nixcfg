@@ -29,6 +29,11 @@
             ++ mod;
         };
       };
+      compileSCSS = name: source: "${pkgs.runCommandLocal name {} ''
+        mkdir -p $out
+        ${lib.getExe pkgs.sassc} -t expanded '${source}' > $out/${name}.css
+      ''}/${name}.css";
+
       mkCSS = file: let
         fileName = lib.removeSuffix ".scss" (baseNameOf file);
         compiledStyles =

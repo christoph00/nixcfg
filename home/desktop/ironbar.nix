@@ -3,17 +3,7 @@
   pkgs,
   lib,
   ...
-}: let
-  dependencies = with pkgs; [
-    brightnessctl
-    pamixer
-    coreutils
-    hyprland
-  ];
-  script-battery = pkgs.writeShellScript "battery.sh" ''
-    print 98
-  '';
-in {
+}: {
   programs.ironbar = {
     enable = true;
     systemd = true;
@@ -21,6 +11,18 @@ in {
       patches = [./ironbar-nix-path.patch];
     });
     config = let
+      menu = {
+        type = "custom";
+        name = "menu";
+        bar = [
+          {
+            type = "image";
+            src = "icon:application-menu";
+            size = 24;
+          }
+        ];
+      };
+
       launcher = {
         type = "launcher";
         # favorites = ["edge-browser" "wezterm"];
@@ -58,8 +60,15 @@ in {
       position = "bottom";
       icon_theme = "Fluent";
       anchor_to_edges = true;
-      start = [workspaces launcher];
-      end = [battery tray sys-info clock];
+      start = [menu launcher];
+      end = [battery tray clock];
+      style = ''
+        * {
+            font-family: Noto Sans Nerd Font, sans-serif;
+            font-size: 16px;
+            border: none;
+        }
+      '';
     };
   };
 }
