@@ -45,7 +45,7 @@ in {
        }
        {
         event = "lock";
-         command = "${gtklock-blur}";
+         command = "${gtklock-blur}/bin/gtklock-blur";
        }
      ];
     timeouts = [
