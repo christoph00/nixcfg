@@ -9,10 +9,6 @@
     enable = true;
     settings = {
       theme = "base16_default";
-      formatter.alejandra = {
-        command = "${pkgs.alejandra}/bin/alejandra";
-        includes = ["*.nix"];
-      };
       indent-guides = {
         render = true;
         character = "┊";
