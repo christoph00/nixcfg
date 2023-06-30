@@ -1,13 +1,12 @@
 diff --git a/src/desktop_file.rs b/src/desktop_file.rs
-index bcab737..b7d1a60 100644
+index e071bb5..57991e4 100644
 --- a/src/desktop_file.rs
 +++ b/src/desktop_file.rs
-@@ -8,7 +8,7 @@ use walkdir::WalkDir;
- /// Gets directories that should contain `.desktop` files
- /// and exist on the filesystem.
- fn find_application_dirs() -> Vec<PathBuf> {
--    let mut dirs = vec![PathBuf::from("/usr/share/applications")];
-+    let mut dirs = vec![PathBuf::from("/run/current-system/sw/share/applications")];
-     let user_dir = dirs::data_local_dir();
+@@ -25,6 +25,7 @@ fn find_application_dirs() -> Vec<PathBuf> {
+     let mut dirs = vec![
+         PathBuf::from("/usr/share/applications"), // system installed apps
+         PathBuf::from("/var/lib/flatpak/exports/share/applications"), // flatpak apps
++        PathBuf::from("/run/current-system/sw/share/applications"), // nixos apps
+     ];
  
-     if let Some(mut user_dir) = user_dir {
+     let user_dir = dirs::data_local_dir(); // user installed apps

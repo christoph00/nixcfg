@@ -137,7 +137,7 @@ in {
     gh.enable = true;
     lf.enable = true;
     go.enable = true;
-    zsh.enable = true;
+    bash.enable = true;
   };
 
   programs.exa = {
