@@ -1,12 +1,12 @@
 {pkgs, ...}: {
   # Lid settings
   services.logind = {
-    lidSwitch = "hybrid-sleep";
-    lidSwitchExternalPower = "hybrid-sleep";
+    lidSwitch = "suspend-then-hibernate";
+    lidSwitchExternalPower = "suspend-then-hibernate";
     extraConfig = ''
-      IdleAction=hybrid-sleep
+      IdleAction=suspend-then-hibernate
       IdleActionSec=10min
-      HandlePowerKey=hybrid-sleep
+      HandlePowerKey=suspend-then-hibernate
       HibernateDelaySec=3600
     '';
   };
