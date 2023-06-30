@@ -3,6 +3,7 @@
   services.logind = {
     lidSwitch = "suspend-then-hibernate";
     lidSwitchExternalPower = "suspend-then-hibernate";
+    killUserProcesses = true;
     extraConfig = ''
       IdleAction=suspend-then-hibernate
       IdleActionSec=10min
