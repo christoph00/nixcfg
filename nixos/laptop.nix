@@ -8,7 +8,7 @@
       IdleAction=suspend-then-hibernate
       IdleActionSec=10min
       HandlePowerKey=suspend-then-hibernate
-      HibernateDelaySec=3600
+      HibernateDelaySec=1800
     '';
   };
 
