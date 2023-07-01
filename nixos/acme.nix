@@ -8,7 +8,7 @@
       "/var/lib/acme"
     ];
   };
-  
+
   security.acme = {
     acceptTerms = true;
     defaults = {
