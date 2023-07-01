@@ -90,6 +90,8 @@
           self.nixosModules.virtual
           #self.nixosModules.reverse-proxy-server
           # self.nixosModules.mailserver
+          self.nixosModules.feed2imap
+          self.nixosModules.feeds
           ./oc1
         ];
       };
