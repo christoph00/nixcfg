@@ -191,6 +191,9 @@
 
   programs.adb.enable = true;
 
+  programs.geary.enable = true;
+
+
   environment.persistence."/nix/persist" = {
     directories = [
       "/etc/NetworkManager/system-connections"
