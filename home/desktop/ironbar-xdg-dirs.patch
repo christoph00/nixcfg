@@ -1,0 +1,23 @@
+diff --git a/src/desktop_file.rs b/src/desktop_file.rs
+index e071bb5..bda2b4f 100644
+--- a/src/desktop_file.rs
++++ b/src/desktop_file.rs
+@@ -33,6 +33,18 @@ fn find_application_dirs() -> Vec<PathBuf> {
+         dirs.push(user_dir);
+     }
+ 
++    let extra_data_dirs = match env::var_os("XDG_DATA_DIRS") {
++        Some(val) => {
++            env::split_paths(&val).map(PathBuf::from).collect()
++        },
++        None => {
++            vec![PathBuf::from("/usr/local/share"),
++                 PathBuf::from("/usr/share")]
++        }
++    for dir in extra_data_dirs {
++        dirs.push(dir.join("applications"));
++    }
++
+     dirs.into_iter().filter(|dir| dir.exists()).collect()
+ }
+ 

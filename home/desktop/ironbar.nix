@@ -8,7 +8,7 @@
     enable = true;
     systemd = true;
     package = inputs.ironbar.packages.x86_64-linux.default.overrideAttrs (old: {
-      patches = [./ironbar-nix-path.patch];
+      patches = [./ironbar-xdg-dirs.patch];
     });
     config = let
       menu = {
