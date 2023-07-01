@@ -5,6 +5,5 @@
     nixosModules.tailscale-tls.imports = [./nixos/tailscale-tls.nix];
     nixosModules.pia-vpn.imports = [./nixos/pia-vpn.nix];
     nixosModules.feed2imap.imports = [./nixos/feed2imap.nix];
-
   };
 }

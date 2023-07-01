@@ -36,6 +36,7 @@ in {
   ###### implementation
 
   config = mkIf cfg.enable {
+    users.groups.feed2imap = {};
 
     users.users.feed2imap = {
       description = "feed2imap user";
@@ -49,7 +50,7 @@ in {
 
     systemd.services.feed2imap = {
       serviceConfig = {
-        ExecStart = "${pkgs.feed2imap-go}/bin/feed2imap-go -f ${configFile} -c feeds.cache";
+        ExecStart = "${pkgs.feed2imap-go}/bin/feed2imap-go -f ${cfg.configFile} -c feeds.cache";
         User = "feed2imap";
         Group = "feed2imap";
         WorkingDirectory = "${cfg.dataDir}";

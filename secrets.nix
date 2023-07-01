@@ -23,7 +23,6 @@ in {
 
   "secrets/feed2imap.yml".publicKeys = [christoph_air13 oc1];
 
-
   "secrets/ha-serviceaccount".publicKeys = [christoph_air13 futro];
   "secrets/ha-secrets.yaml".publicKeys = [christoph_air13 futro];
   "secrets/christoph-password.age".publicKeys = [christoph_air13 futro air13 tower oca oc1 oc2 cube star];
