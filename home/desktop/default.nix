@@ -49,7 +49,7 @@
 in {
   imports = [
     ./gtk.nix
-    ./plasma.nix
+    #./plasma.nix
     ./hyprland.nix
     #./sway.nix
     #./wayvnc.nix
@@ -141,9 +141,7 @@ in {
   };
 
   dconf.enable = true;
-
-  programs.geary.enable = true;
-
+  services.gnome-keyring.enable = true;
   services.gammastep = {
     enable = true;
     latitude = "52.3";
