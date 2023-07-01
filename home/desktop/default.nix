@@ -93,6 +93,8 @@ in {
 
     themechanger
 
+    gnome.gnome-keyring
+
     nixd
     digikam
   ];
@@ -141,7 +143,10 @@ in {
   };
 
   dconf.enable = true;
-  services.gnome-keyring.enable = true;
+  services.gnome-keyring = {
+    enable = true;
+    components = ["ssh" "secrets"];
+  };
   services.gammastep = {
     enable = true;
     latitude = "52.3";
