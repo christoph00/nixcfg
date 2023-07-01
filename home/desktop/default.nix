@@ -94,9 +94,6 @@ in {
     themechanger
 
     nixd
-
-    gnome.geary
-
     digikam
   ];
 
@@ -144,6 +141,8 @@ in {
   };
 
   dconf.enable = true;
+
+  programs.geary.enable = true;
 
   services.gammastep = {
     enable = true;
