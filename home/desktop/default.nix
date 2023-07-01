@@ -95,6 +95,8 @@ in {
 
     nixd
 
+    gnome.geary
+
     digikam
   ];
 
