@@ -36,11 +36,9 @@ in {
   ###### implementation
 
   config = mkIf cfg.enable {
-    users.groups.feed2imap.gid = config.ids.gids.feed2imap;
 
     users.users.feed2imap = {
       description = "feed2imap user";
-      uid = config.ids.uids.feed2imap;
       group = "feed2imap";
       home = cfg.dataDir;
       createHome = true;
