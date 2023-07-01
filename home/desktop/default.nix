@@ -93,6 +93,8 @@ in {
 
     themechanger
 
+    nixd
+
     digikam
   ];
 
