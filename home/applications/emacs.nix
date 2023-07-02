@@ -5,7 +5,7 @@
   programs.emacs = {
     enable = true;
 
-    package = pkgs.emacs-git;
+    package = pkgs.emacs-gtk;
 
     init = {
       enable = true;
@@ -80,17 +80,91 @@
           };
         };
 
-        nix-mode = {
-          enable = true;
-          mode = [ ''"\\.nix\\'"'' ];
-        };
+        all-the-icons.enable = true;
+
+        ripgrep.enable = true;
+
+        nix-mode.enable = true;
+
+        modus-themes.enable = true;
 
         eglot = {
           enable = true;
           config = ''
             (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
           '';
-          hook = [ "(nix-mode . eglot-ensure)" ];
+          hook = ["(nix-mode . eglot-ensure)"];
+        };
+
+        which-key = {
+          enable = true;
+          command = ["which-key-mode"];
+          diminish = ["which-key-mode"];
+          defer = 2;
+          config = "(which-key-mode)";
+        };
+
+        ivy = {
+          enable = true;
+          demand = true;
+          diminish = ["ivy-mode"];
+          command = ["ivy-mode"];
+          config = ''
+            (setq ivy-use-virtual-buffers t
+                  ivy-count-format "%d/%d "
+                  ivy-virtual-abbreviate 'full)
+
+            (ivy-mode 1)
+          '';
+        };
+
+        ivy-hydra = {
+          enable = true;
+          defer = true;
+          after = ["ivy" "hydra"];
+        };
+
+        ivy-xref = {
+          enable = true;
+          after = ["ivy" "xref"];
+          command = ["ivy-xref-show-xrefs"];
+          config = ''
+            (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
+          '';
+        };
+
+        swiper = {
+          enable = true;
+          command = ["swiper" "swiper-all" "swiper-isearch"];
+          bind = {
+            "C-s" = "swiper-isearch";
+          };
+        };
+
+        # Lets counsel do prioritization. A fork of smex.
+        amx = {
+          enable = true;
+          command = ["amx-initialize"];
+        };
+
+        counsel = {
+          enable = true;
+          bind = {
+            "C-x C-d" = "counsel-dired-jump";
+            "C-x C-f" = "counsel-find-file";
+            "C-x C-M-f" = "counsel-fzf";
+            "C-x C-r" = "counsel-recentf";
+            "C-x C-y" = "counsel-yank-pop";
+            "M-x" = "counsel-M-x";
+            "C-c g" = "counsel-git-grep";
+          };
+          diminish = ["counsel-mode"];
+          config = let
+            fd = "${pkgs.fd}/bin/fd";
+            fzf = "${pkgs.fzf}/bin/fzf";
+          in ''
+            (setq counsel-fzf-cmd "${fd} --type f | ${fzf} -f \"%s\"")
+          '';
         };
       };
     };
