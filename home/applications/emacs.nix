@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  services.emacs = {
+    enable = true;
+  };
   programs.emacs = {
     enable = true;
 
@@ -34,6 +37,26 @@
 
         (setq initial-major-mode 'fundamental-mode
               initial-scratch-message nil)
+
+        (setq custom-file (locate-user-emacs-file "custom.el"))
+
+         ;; Backups
+        (setq
+          backup-by-copying t      ; don't clobber symlinks
+          backup-directory-alist
+          '(("." . "~/.saves/"))    ; don't litter my fs tree
+          delete-old-versions t
+          kept-new-versions 6
+          kept-old-versions 2
+          version-control t
+          global-visual-line-mode t)
+
+        ;; Cleaning up some visual mess
+        (tool-bar-mode 0)
+        (scroll-bar-mode 0)
+
+        ;; Safe themes
+        (setq custom-safe-themes t)
       '';
       usePackage = {
         crux = {
@@ -55,6 +78,19 @@
             # "C-Backspace" = "crux-kill-line-backwards";
             "M-o" = "crux-other-window-or-switch-buffer";
           };
+        };
+
+        nix-mode = {
+          enable = true;
+          mode = [ ''"\\.nix\\'"'' ];
+        };
+
+        eglot = {
+          enable = true;
+          config = ''
+            (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
+          '';
+          hook = [ "(nix-mode . eglot-ensure)" ];
         };
       };
     };
