@@ -88,6 +88,11 @@
 
         modus-themes.enable = true;
 
+        systemd = {
+          enable = true;
+          defer = true;
+        };
+
         eglot = {
           enable = true;
           config = ''
