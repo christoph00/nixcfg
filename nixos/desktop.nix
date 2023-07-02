@@ -195,7 +195,6 @@
 
   services.gnome3.gnome-keyring.enable = true;
 
-
   environment.persistence."/nix/persist" = {
     directories = [
       "/etc/NetworkManager/system-connections"
