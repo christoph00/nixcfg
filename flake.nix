@@ -87,6 +87,12 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "utils";
+    };
     # nixneovim.url = "github:nixneovim/nixneovim";
   };
 
@@ -114,6 +120,7 @@
       }: {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
+          overlays = [inputs.emacs-overlay.overlay];
           config.allowUnfree = true;
         };
         formatter = pkgs.alejandra;
