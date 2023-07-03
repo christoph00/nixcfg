@@ -78,11 +78,8 @@ in {
     phockup
     ffmpeg-full
 
-    cargo
-    rustc
-    rustfmt
-    clippy
-    gcc
+    inputs.devenv.packages.x86_64-linux.devenv
+    direnv
   ];
 
   home.sessionVariables = {
