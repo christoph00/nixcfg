@@ -8,7 +8,7 @@
   };
   programs.emacs = {
     enable = true;
-    package = lib.mkForce (pkgs.emacs.override {
+    package = lib.mkForce (pkgs.emacs29-pgtk.override {
       withTreeSitter = true;
       withNativeCompilation = true;
       withImageMagick = true;
