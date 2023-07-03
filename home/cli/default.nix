@@ -81,8 +81,7 @@ in {
 
     cargo
     rustc
-    rust-analyser
-  ];
+];
 
   home.sessionVariables = {
     PF_INFO = "ascii title os kernel uptime shell term desktop scheme palette";
