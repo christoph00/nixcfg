@@ -28,6 +28,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    devenv.url = "github:cachix/devenv/latest";
+
     impermanence.url = "github:nix-community/impermanence";
 
     rust-overlay = {
@@ -87,8 +89,6 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-
   };
 
   outputs = inputs @ {flake-parts, ...}:

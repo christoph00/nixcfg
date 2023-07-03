@@ -78,10 +78,12 @@ in {
     phockup
     ffmpeg-full
 
-
     cargo
     rustc
-];
+    rustfmt
+    clippy
+    gcc
+  ];
 
   home.sessionVariables = {
     PF_INFO = "ascii title os kernel uptime shell term desktop scheme palette";
