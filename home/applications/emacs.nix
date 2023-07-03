@@ -1,10 +1,19 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   services.emacs = {
     enable = true;
   };
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-gtk;
+    package = lib.mkForce (pkgs.emacsPgtk.override {
+      withTreeSitter = true;
+      withNativeCompilation = true;
+      withImageMagick = true;
+      withSystemd = true;      
+    });
 
     init = {
       enable = true;
@@ -20,45 +29,90 @@
         (push '(tool-bar-lines . nil) default-frame-alist)
         (push '(vertical-scroll-bars . nil) default-frame-alist)
 
-
-
-        (set-face-attribute 'default
-                          nil
-                          :height 120
-                          :family "FiraCode Nerd Font Mono")
-        (set-face-attribute 'variable-pitch
-                          nil
-                          :family "FiraCode Nerd Font")
-
-        (load-theme 'modus-operandi)
       '';
       prelude = ''
-        ;; Disable startup message.
-        (setq inhibit-startup-screen t
-              inhibit-startup-echo-area-message (user-login-name))
+                ;; Disable startup message.
+                (setq inhibit-startup-screen t
+                      inhibit-startup-echo-area-message (user-login-name))
 
-        (setq initial-major-mode 'fundamental-mode
-              initial-scratch-message nil)
+                (setq initial-major-mode 'fundamental-mode
+                      initial-scratch-message nil)
 
-        (setq custom-file (locate-user-emacs-file "custom.el"))
+                (setq custom-file (locate-user-emacs-file "custom.el"))
 
-         ;; Backups
-        (setq
-          backup-by-copying t      ; don't clobber symlinks
-          backup-directory-alist
-          '(("." . "~/.saves/"))    ; don't litter my fs tree
-          delete-old-versions t
-          kept-new-versions 6
-          kept-old-versions 2
-          version-control t
-          global-visual-line-mode t)
+                 ;; Backups
+                (setq
+                  backup-by-copying t      ; don't clobber symlinks
+                  backup-directory-alist
+                  '(("." . "~/.saves/"))    ; don't litter my fs tree
+                  delete-old-versions t
+                  kept-new-versions 6
+                  kept-old-versions 2
+                  version-control t
+                  global-visual-line-mode t)
 
-        ;; Cleaning up some visual mess
-        (tool-bar-mode 0)
-        (scroll-bar-mode 0)
+                ;; Cleaning up some visual mess
+                (tool-bar-mode 0)
+                (scroll-bar-mode 0)
 
-        ;; Safe themes
-        (setq custom-safe-themes t)
+                ;; Safe themes
+                (setq custom-safe-themes t)
+
+         (setq ok/font-alist
+             	 '((jetbrains-mono . (:font   "JetBrains Mono Nerd Font"
+        		   :height 140))
+        (iosevka        . (:font   "Iosevka"
+        		   :height 160))))
+
+                (setq ok/current-font 'jetbrains-mono)
+
+                (defun ok/switch-font (font)
+                "Select one of the fonts configured in 'ok/font-alist' as the face-font."
+                (interactive
+                (list (intern (completing-read "Font: " (mapcar #'car (copy-alist ok/font-alist))))))
+                ;; If the selected font is not the currently active font, switch.
+                (let* ((attrs (alist-get font ok/font-alist))
+               (font (plist-get attrs :font))
+               (height (plist-get attrs :height)))
+                (setq ok/current-font font)
+                (set-face-attribute 'default nil
+                                 :font font
+                                  :height height)))
+
+                ;; Set the font to the default.
+                (ok/switch-font ok/current-font)
+
+                (global-set-key (kbd "C-. s f") #'ok/switch-font)
+                (global-set-key (kbd "C-. s t") #'ok/switch-theme)
+
+
+                ;; Taken from Johannes init.el
+                ;; https://github.com/kenranunderscore/dotfiles/blob/main/modules/programs/emacs/emacs.d/init.el#L80
+                (defun ok/switch-theme (name)
+                "Switch themes interactively.  Similar to `load-theme' but also disables all other enabled themes."
+                (interactive
+                  (list (intern
+                          (completing-read
+                            "Theme: "
+                           (mapcar #'symbol-name
+                                    (-difference (custom-available-themes)
+                                        custom-enabled-themes))))))
+                                        (progn
+                                        (mapcar #'disable-theme
+                                     custom-enabled-themes)
+                                     (load-theme name t)))
+
+                (setq modus-themes-mode-line '(accented borderless (padding . 5)))
+                (setq modus-themes-italic-constructs t)
+                (setq modus-themes-syntax '(yellow-comments green-strings))
+                (setq modus-themes-paren-match '(bold))
+                (setq modus-themes-headings '((t . (monochrome))))
+                (setq modus-themes-org-blocks 'gray-background)
+                (setq modus-themes-fringes nil)
+
+                ;; Set the theme to gruvbox
+                (ok/switch-theme 'modus-operandi)
+
       '';
       usePackage = {
         crux = {
@@ -180,6 +234,10 @@
 
         orderless = {
           enable = true;
+          config = ''
+            (setq completion-styles '(orderless flex)
+                  completion-category-overrides '((eglot (styles . (orderless flex)))))
+          '';
         };
 
         magit = {
