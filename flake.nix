@@ -88,12 +88,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "utils";
-    };
-    # nixneovim.url = "github:nixneovim/nixneovim";
+
   };
 
   outputs = inputs @ {flake-parts, ...}:
