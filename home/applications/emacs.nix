@@ -145,7 +145,6 @@
         rust-mode.enable = true;
         rustic.enable = true;
 
-        
         modus-themes.enable = true;
 
         systemd = {
@@ -170,7 +169,6 @@
           defer = 2;
           config = "(which-key-mode)";
         };
-
 
         swiper = {
           enable = true;
