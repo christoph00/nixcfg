@@ -3,7 +3,7 @@
     enable = true;
     package = pkgs.brave;
     extensions = [
-     # {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
+      # {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
       # {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
       {id = "nngceckbapebfimnlniiiahkandclblb";} # Bitwarden
       {
