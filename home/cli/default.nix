@@ -77,6 +77,11 @@ in {
     media-sort
     phockup
     ffmpeg-full
+
+
+    cargo
+    rustc
+    rust-analyser
   ];
 
   home.sessionVariables = {
