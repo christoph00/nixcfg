@@ -4,7 +4,6 @@
   };
   programs.emacs = {
     enable = true;
-
     package = pkgs.emacs-gtk;
 
     init = {
@@ -29,6 +28,7 @@
         (set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height 100)
         (set-face-attribute '
          variable-pitch nil :font "Cantarell" :height 150 :weight 'regular)
+        (load-theme 'modus-vivendi)
       '';
       prelude = ''
         ;; Disable startup message.
@@ -67,7 +67,6 @@
 
             # "C-k" = "crux-smart-kill-line";
             "C-k" = "crux-kill-and-join-forward";
-
             "C-S-RET" = "crux-smart-open-line-above";
             "S-RET" = "crux-smart-open-line";
             "C-x 4 t" = "crux-transpose-windows";
@@ -98,9 +97,7 @@
           config = ''
             (add-to-list 'eglot-server-programs
                          '(go-mode . ("${pkgs.gopls}/bin/gopls"))
-                         '(nix-mode . ("${pkgs.nixd}/bin/nixd"))
-                         '((js-mode typescript-mode) .
-                             ("${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server" "--stdio")))
+                         '(nix-mode . ("${pkgs.nixd}/bin/nixd")))
           '';
           hook = ["(nix-mode . eglot-ensure)"];
         };
@@ -150,11 +147,6 @@
 
         orderless = {
           enable = true;
-          init = ''
-            (setq completion-styles '(orderless basic)
-            completion-category-defaults nil
-            completion-category-overrides '((file (styles partial-completion)))))
-          '';
         };
 
         magit = {
