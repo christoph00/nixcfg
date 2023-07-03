@@ -96,7 +96,11 @@
         eglot = {
           enable = true;
           config = ''
-            (add-to-list 'eglot-server-programs '(nix-mode . ("nixd")))
+            (add-to-list 'eglot-server-programs
+                         '(go-mode . ("${pkgs.gopls}/bin/gopls"))
+                         '(nix-mode . ("${pkgs.nixd}/bin/nixd"))
+                         '((js-mode typescript-mode) .
+                             ("${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server" "--stdio")))
           '';
           hook = ["(nix-mode . eglot-ensure)"];
         };
@@ -109,35 +113,6 @@
           config = "(which-key-mode)";
         };
 
-        ivy = {
-          enable = true;
-          demand = true;
-          diminish = ["ivy-mode"];
-          command = ["ivy-mode"];
-          config = ''
-            (setq ivy-use-virtual-buffers t
-                  ivy-count-format "%d/%d "
-                  ivy-virtual-abbreviate 'full)
-
-            (ivy-mode 1)
-          '';
-        };
-
-        ivy-hydra = {
-          enable = true;
-          defer = true;
-          after = ["ivy" "hydra"];
-        };
-
-        ivy-xref = {
-          enable = true;
-          after = ["ivy" "xref"];
-          command = ["ivy-xref-show-xrefs"];
-          config = ''
-            (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
-          '';
-        };
-
         swiper = {
           enable = true;
           command = ["swiper" "swiper-all" "swiper-isearch"];
@@ -146,10 +121,14 @@
           };
         };
 
-        # Lets counsel do prioritization. A fork of smex.
-        amx = {
+        vertico = {
           enable = true;
-          command = ["amx-initialize"];
+          config = ''
+            (vertico-mode t)
+            (define-key vertico-map (kbd "RET") #'vertico-directory-enter)
+            (define-key vertico-map (kbd "DEL") #'vertico-directory-delete-word)
+            (define-key vertico-map (kbd "M-d") #'vertico-directory-delete-char)
+          '';
         };
 
         counsel = {
@@ -169,6 +148,15 @@
             fzf = "${pkgs.fzf}/bin/fzf";
           in ''
             (setq counsel-fzf-cmd "${fd} --type f | ${fzf} -f \"%s\"")
+          '';
+        };
+        magit = {
+          enable = true;
+          bind = {
+            "C-c g" = "magic-status";
+          };
+          config = ''
+            (setq magit-diff-refine-hunk t)
           '';
         };
       };
