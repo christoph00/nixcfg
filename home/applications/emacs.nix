@@ -30,7 +30,7 @@
                           nil
                           :family "FiraCode Nerd Font")
 
-        (load-theme 'modus-vivendi)
+        (load-theme 'modus-operandi)
       '';
       prelude = ''
         ;; Disable startup message.
@@ -123,10 +123,41 @@
         vertico = {
           enable = true;
           config = ''
-            (vertico-mode t)
+            ;; Prefix the current candidate with “» ”. From
+            ;; https://github.com/minad/vertico/wiki#prefix-current-candidate-with-arrow
+            (advice-add #'vertico--format-candidate :around
+              (lambda (orig cand prefix suffix index _start)
+                (setq cand (funcall orig cand prefix suffix index _start))
+                (concat
+                 (if (= vertico--index index)
+                     (propertize "» " 'face 'vertico-current)
+                   "  ")
+                 cand)))
+
+            (setq vertico-count 13   ;; Number of candidates to display
+                  vertico-cycle nil)
+
+            (vertico-mode)
           '';
         };
+        marginalia = {
+          enable = true;
+          after = ["vertico"];
+          config = ''
+            (setq marginalia-max-relative-age 0)
 
+            ;; Must be in the :init section of use-package such that the mode gets
+            ;; enabled right away. Note that this forces loading the package.
+            (marginalia-mode)
+
+            ;; Enable richer annotations for M-x.
+            ;; Only keybindings are shown by default, in order to reduce noise for this very common command.
+            ;; * marginalia-annotate-symbol: Annotate with the documentation string
+            ;; * marginalia-annotate-command-binding (default): Annotate only with the keybinding
+            ;; * marginalia-annotate-command-full: Annotate with the keybinding and the documentation string
+            ;; (setf (alist-get 'command marginalia-annotate-alist) #'marginalia-annotate-command-full)
+          '';
+        };
         counsel = {
           enable = true;
           bind = {
