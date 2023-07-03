@@ -125,9 +125,6 @@
           enable = true;
           config = ''
             (vertico-mode t)
-            (define-key vertico-map (kbd "RET") #'vertico-directory-enter)
-            (define-key vertico-map (kbd "DEL") #'vertico-directory-delete-word)
-            (define-key vertico-map (kbd "M-d") #'vertico-directory-delete-char)
           '';
         };
 
@@ -150,6 +147,16 @@
             (setq counsel-fzf-cmd "${fd} --type f | ${fzf} -f \"%s\"")
           '';
         };
+
+        orderless = {
+          enable = true;
+          init = ''
+            (setq completion-styles '(orderless basic)
+            completion-category-defaults nil
+            completion-category-overrides '((file (styles partial-completion)))))
+          '';
+        };
+
         magit = {
           enable = true;
           bind = {
