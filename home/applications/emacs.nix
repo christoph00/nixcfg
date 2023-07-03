@@ -241,6 +241,12 @@
           '';
         };
 
+        company = {
+          enable = true;
+          hook = ["(after-init . global-company-mode)"];
+          diminish = ["company-mode"];
+        };
+
         magit = {
           enable = true;
           bind = {
