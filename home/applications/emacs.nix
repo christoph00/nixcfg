@@ -114,6 +114,7 @@
                 ;; Set the theme to gruvbox
                 (ok/switch-theme 'modus-operandi)
 
+
       '';
       usePackage = {
         crux = {
@@ -141,7 +142,10 @@
         ripgrep.enable = true;
 
         nix-mode.enable = true;
+        rust-mode.enable = true;
+        rustic.enable = true;
 
+        
         modus-themes.enable = true;
 
         systemd = {
@@ -166,6 +170,7 @@
           defer = 2;
           config = "(which-key-mode)";
         };
+
 
         swiper = {
           enable = true;
