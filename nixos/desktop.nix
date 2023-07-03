@@ -119,6 +119,12 @@
     };
   };
 
+  fonts.fonts = with pkgs; [
+    fira
+    nerdfonts
+    noto-fonts-emoji
+  ];
+
   # services.greetd = {
   #   enable = true;
   #   restart = true;
