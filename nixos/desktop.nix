@@ -121,7 +121,7 @@
 
   fonts.fonts = with pkgs; [
     fira
-    nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" ]; }
+    (nerdfonts.override {fonts = ["FiraCode" "SourceCodePro" "JetBrainsMono"];})
     noto-fonts-emoji
   ];
 
