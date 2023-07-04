@@ -14,7 +14,7 @@ buildNpmPackage rec {
     hash = "sha256-BOEnOwXP38hv6dH42cXXF8VHgfIh9F1uUjBI6esOtvM=";
   };
 
-  npmDepsHash = lib.fakeHash;
+  npmDepsHash = "sha256-2skWgYAv1qmLfn18lMOk24zrsdyBzYTP1zj9urf9qx8=";
 
   meta = with lib; {
     description = "A fast directory-first photo gallery website, with rich UI,  optimized for running on low resource servers (especially on raspberry pi";
