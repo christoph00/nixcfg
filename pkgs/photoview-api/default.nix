@@ -15,7 +15,7 @@ buildGoModule rec {
   } + "/api";
 
 
-  vendorHash = lib.fakeHash;
+  vendorHash = "sha256-0SWywy9YdPtgvxRhwKhKvspPmhbnibSuhvzhsjIQvZk=";
   
   meta = with lib; {
     description = "Photo gallery for self-hosted personal servers";
