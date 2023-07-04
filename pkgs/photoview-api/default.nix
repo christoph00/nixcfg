@@ -18,7 +18,7 @@ buildGoModule rec {
 
   vendorHash = "sha256-0SWywy9YdPtgvxRhwKhKvspPmhbnibSuhvzhsjIQvZk=";
 
-  buildInputs = [
+  nativeBuildInputs = [
     pkg-config
   ];
   
