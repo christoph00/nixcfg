@@ -95,8 +95,9 @@ in {
 
     gnome.gnome-keyring
 
-    nixd
-    digikam
+    darktable
+
+    nix-init
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-night-light;
