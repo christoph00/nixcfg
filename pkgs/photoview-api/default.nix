@@ -2,6 +2,7 @@
 , buildGoModule
 , fetchFromGitHub
 , pkg-config
+, libheif
 }:
 
 buildGoModule rec {
@@ -20,6 +21,7 @@ buildGoModule rec {
 
   nativeBuildInputs = [
     pkg-config
+    libheif
   ];
   
   meta = with lib; {
