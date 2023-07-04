@@ -1,6 +1,7 @@
 { lib
 , buildGoModule
 , fetchFromGitHub
+, pkg-config
 }:
 
 buildGoModule rec {
@@ -16,6 +17,10 @@ buildGoModule rec {
 
 
   vendorHash = "sha256-0SWywy9YdPtgvxRhwKhKvspPmhbnibSuhvzhsjIQvZk=";
+
+  buildInputs = [
+    pkg-config
+  ];
   
   meta = with lib; {
     description = "Photo gallery for self-hosted personal servers";
