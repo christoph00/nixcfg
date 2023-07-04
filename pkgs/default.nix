@@ -68,6 +68,9 @@ final: prev: {
   immich-server = final.callPackage ./immich-server {};
 
   photoview-api = final.callPackage ./photoview-api {};
+
+  vitejs = final.callPackage ./vitejs {};
+
   
   ha-lovelace-battery-entity = final.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = final.callPackage ./ha-lovelace/fold-entity-row.nix {};
