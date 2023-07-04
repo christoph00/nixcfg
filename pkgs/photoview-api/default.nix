@@ -14,6 +14,9 @@ buildGoModule rec {
     hash = "sha256-O6k5nbiWTsuOi8YLX0rsZJ9dOIo5d6pdwjhFZrdwI0E=";
   } + "/api";
 
+
+  vendorHash = lib.fakeHash;
+  
   meta = with lib; {
     description = "Photo gallery for self-hosted personal servers";
     homepage = "https://github.com/photoview/photoview";
