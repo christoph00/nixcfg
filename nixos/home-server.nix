@@ -29,8 +29,6 @@
     xplr
     unzip
     media-sort
-
-    pigallery2
   ];
 
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;
