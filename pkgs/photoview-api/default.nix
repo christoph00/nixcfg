@@ -2,7 +2,12 @@
 , buildGoModule
 , fetchFromGitHub
 , pkg-config
-, libheif
+, blas
+, dlib
+, lapack
+, libjpeg
+, darktable
+, ffmpeg
 }:
 
 buildGoModule rec {
@@ -21,7 +26,17 @@ buildGoModule rec {
 
   nativeBuildInputs = [
     pkg-config
-    libheif
+];
+
+  buildInputs = [
+    blas
+    dlib
+    lapack
+    libjpeg
+  ];
+  propagetedBuildInputs = [
+    darktable
+    ffmpeg
   ];
   
   meta = with lib; {
