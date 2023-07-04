@@ -8,6 +8,8 @@
 , libjpeg
 , darktable
 , ffmpeg
+, libheif
+, libexif
 }:
 
 buildGoModule rec {
@@ -33,6 +35,8 @@ buildGoModule rec {
     dlib
     lapack
     libjpeg
+    libexif
+    libheif
   ];
   propagetedBuildInputs = [
     darktable
