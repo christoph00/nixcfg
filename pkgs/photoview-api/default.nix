@@ -4,7 +4,7 @@
 }:
 
 buildGoModule rec {
-  pname = "photoview";
+  pname = "photoview-api";
   version = "2.3.13";
 
   src = fetchFromGitHub {
