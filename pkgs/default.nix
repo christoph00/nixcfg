@@ -69,9 +69,8 @@ final: prev: {
 
   photoview-api = final.callPackage ./photoview-api {};
 
-  vitejs = final.callPackage ./vitejs {};
+  pigallery2 = final.callPackage ./pigallery2 {};
 
-  
   ha-lovelace-battery-entity = final.callPackage ./ha-lovelace/battery-entity.nix {};
   ha-lovelace-fold-entity-row = final.callPackage ./ha-lovelace/fold-entity-row.nix {};
   ha-lovelace-mini-graph-card = final.callPackage ./ha-lovelace/mini-graph-card.nix {};

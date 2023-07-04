@@ -30,7 +30,7 @@
     unzip
     media-sort
 
-    photoview-api
+    pigallery2
   ];
 
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;

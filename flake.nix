@@ -115,7 +115,7 @@
       }: {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
-          overlays = [inputs.emacs-overlay.overlay];
+
           config.allowUnfree = true;
         };
         formatter = pkgs.alejandra;

@@ -77,12 +77,6 @@ in {
     media-sort
     phockup
     ffmpeg-full
-
-    inputs.devenv.packages.x86_64-linux.devenv
-    direnv
-
-    vitejs
-
   ];
 
   home.sessionVariables = {
