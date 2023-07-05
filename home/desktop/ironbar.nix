@@ -7,9 +7,7 @@
   programs.ironbar = {
     enable = true;
     systemd = true;
-    package = inputs.ironbar.packages.x86_64-linux.default.overrideAttrs (old: {
-      patches = [./ironbar-xdg-dirs.patch];
-    });
+    package = inputs.ironbar.packages.x86_64-linux.default;
     config = let
       menu = {
         type = "custom";
