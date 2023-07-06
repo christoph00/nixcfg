@@ -77,6 +77,8 @@ in {
     media-sort
     phockup
     ffmpeg-full
+
+    neonmodem
   ];
 
   home.sessionVariables = {
