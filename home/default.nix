@@ -18,6 +18,7 @@
       desktop.imports = [
         inputs.hyprland.homeManagerModules.default
         inputs.ironbar.homeManagerModules.default
+        inputs.anyrun.homeManagerModules.default
         ./desktop
         ./applications
       ];
