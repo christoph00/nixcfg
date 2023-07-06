@@ -151,7 +151,7 @@ in {
     enable = true;
     components = ["ssh" "secrets"];
   };
-  services.gammastep = {
+  services.wlsunset = {
     enable = true;
     latitude = "52.3";
     longitude = "9.7";
