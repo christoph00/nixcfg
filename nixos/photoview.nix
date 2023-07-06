@@ -11,7 +11,6 @@
       PHOTOVIEW_LISTEN_PORT = "4001";
       PHOTOVIEW_MEDIA_CACHE = "/app/cache";
     };
-    }
     volumes = [
       "/nix/persist/sftpgo/photoview/db:/app/db"
       "/nix/persist/sftpgo/photoview/cache:/app/cache"
