@@ -48,6 +48,7 @@
     };
 in {
   imports = [
+    ./anyrun.nix
     ./gtk.nix
     #./plasma.nix
     ./hyprland.nix
