@@ -101,7 +101,6 @@ in {
     nix-init
 
     nixd
-    anyrun
   ];
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-night-light;
