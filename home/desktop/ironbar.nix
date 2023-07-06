@@ -23,7 +23,7 @@
 
       launcher = {
         type = "launcher";
-        # favorites = ["edge-browser" "wezterm"];
+        favorites = ["brave-browser" "wezterm" "nemo"];
         show_names = false;
         show_icons = true;
       };
