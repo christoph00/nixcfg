@@ -10,8 +10,8 @@
       PHOTOVIEW_LISTEN_IP = "0.0.0.0";
       PHOTOVIEW_LISTEN_PORT = "4001";
       PHOTOVIEW_MEDIA_CACHE = "/app/cache";
-      PHOTOVIEW_DISABLE_RAW_PROCESSING = 1;
-      PHOTOVIEW_DISABLE_VIDEO_ENCODING = 1;
+      PHOTOVIEW_DISABLE_RAW_PROCESSING = "1";
+      PHOTOVIEW_DISABLE_VIDEO_ENCODING = "1";
     };
     volumes = [
       "/nix/persist/sftpgo/photoview/db:/app/db"
