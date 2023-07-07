@@ -78,7 +78,8 @@ in {
     phockup
     ffmpeg-full
 
-    neonmodem
+    podman-compose
+    podman-tui
   ];
 
   home.sessionVariables = {
