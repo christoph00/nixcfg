@@ -16,14 +16,13 @@
           {
             type = "image";
             src = "icon:application-menu";
-            size = 24;
+            size = 32;
           }
         ];
       };
 
       launcher = {
         type = "launcher";
-        favorites = ["brave-browser" "wezterm" "nemo"];
         show_names = false;
         show_icons = true;
       };
