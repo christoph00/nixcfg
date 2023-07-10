@@ -31,6 +31,8 @@ final: prev: {
   xr6515dn = final.callPackage ./xr6515dn {};
   home-gallery = final.callPackage ./home-gallery {};
   neonmodem = final.callPackage ./neonmodem {};
+
+  asynq-cli = final.callPackage ./asynq-cli {};
   # swww = pkgs.callPackage ./swww {};
   #wallpaper = pkgs.callPackage ./wallpaper {};
   # gfn-electron = pkgs.callPackage ./gfn-electron {};
