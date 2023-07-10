@@ -59,6 +59,8 @@ in {
     tio
     #picocom
 
+    asynq-cli
+
     simple-http-server
 
     #vomit-sync
