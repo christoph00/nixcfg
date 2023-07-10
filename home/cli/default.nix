@@ -43,6 +43,8 @@ in {
 
     gopls
 
+    tailwindcss
+
     tree
 
     matcha
