@@ -91,7 +91,7 @@
         ./home-server.nix
         #./matcha.nix
         #self.nixosModules.syncthing
-        ./photoview.nix
+        #./photoview.nix
       ];
 
       sdImage.imports = [
