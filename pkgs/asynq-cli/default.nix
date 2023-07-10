@@ -18,6 +18,8 @@ buildGoModule rec {
 
   ldflags = [ "-s" "-w" ];
 
+   proxyVendor = true;
+
   subPackages = [ "asynq" ];
 
   meta = with lib; {
