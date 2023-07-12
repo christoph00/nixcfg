@@ -107,6 +107,8 @@ in {
 
   systemd.user.startServices = "sd-switch";
 
+  programs.direnv.enable = true;
+
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;

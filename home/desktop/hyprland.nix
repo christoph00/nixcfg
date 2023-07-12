@@ -102,8 +102,6 @@ in {
           # air13 keyboard
           device:at-translated-set-2-keyboard {
             kb_layout = us-german-umlaut
-            kb_options = caps:escape,compose:menu
-            kb_variant = altgr-intl
           }
 
           device:cm-storm-coolermaster-novatouch-tkl-keyboard {
