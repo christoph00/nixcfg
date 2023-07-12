@@ -5,7 +5,8 @@
       nativeBuildInputs = [pkgs.makeWrapper];
       postFixup = ''
         wrapProgram $out/opt/microsoft/msedge/microsoft-edge \
-          --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-features=VaapiVideoDecoder,VaapiVideoEncoder --gtk-version=4 --password-store=gnome --use-vulkan --enable-zero-copy --ignore-gpu-blocklist --enable-gpu-rasterization}}"
+          -set LD_LIBRARY_PATH ${pkgs.wayland}/lib \
+          --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=UseOzonePlatform,WaylandWindowDecorations,VaapiVideoDecoder,VaapiVideoEncoder --gtk-version=4 --password-store=gnome --use-vulkan --enable-zero-copy --ignore-gpu-blocklist --enable-gpu-rasterization}}"
       '';
     });
     extensions = [
