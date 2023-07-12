@@ -6,7 +6,6 @@
 }: let
   dataDir = "/mnt/userdata/immich";
   uploadDir = "/mnt/userdata/upload";
-  dbPasswordFile = "...";
 in {
   age.secrets.immich-env.file = ../secrets/immich-env;
   age.secrets.immich-db-password.file = ../secrets/immich-db-password;
@@ -27,31 +26,6 @@ in {
   services.redis.servers.immich = {
     enable = true;
     port = 31640;
-  };
-
-  systemd.services.immich-init = {
-    enable = true;
-    description = "Set up paths & database access";
-    requires = ["postgresql.service"];
-    after = ["postgresql.service"];
-    before = [
-      "immich-server.service"
-      #    "immich-microservices.service"
-      #     "immich-machine-learning.service"
-      #      "immich-web.service"
-    ];
-    wantedBy = ["multi-user.target"];
-    serviceConfig = {
-      Type = "oneshot";
-      LoadCredential = ["db_password:${dbPasswordFile}"];
-    };
-    script = ''
-      mkdir -p ${dataDir} ${uploadDir}
-      echo "Set immich postgres user password"
-      db_password="$(<"$CREDENTIALS_DIRECTORY/db_password")"
-      ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/psql postgres \
-        -c "alter user immich with password '$db_password'"
-    '';
   };
 
   systemd.services.immich-server = {
@@ -80,9 +54,15 @@ in {
     };
   };
 
-  services.nginx.virtualHosts.${domain} = {
-    useACMEHost = "r505.de";
-    forceSSL = true;
+  security.acme.certs."fotos.r505.de" = {
+    #server = "https://acme.zerossl.com/v2/DV90";
+    domain = "fotos.r505.de";
+    dnsProvider = "cloudflare";
+    credentialsFile = config.age.secrets.cf-acme.path;
+    dnsResolver = "1.1.1.1:53";
+  };
+
+  services.nginx.virtualHosts."fotos.r505.de" = {
     locations."/api" = {
       proxyPass = "http://localhost:3001";
       extraConfig = ''
