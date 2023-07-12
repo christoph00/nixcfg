@@ -39,7 +39,7 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
-    systemd.enable = true;
+    systemdIntegration = true;
     xwayland = {
       enable = true;
       hidpi = false;
