@@ -80,6 +80,8 @@ in {
 
     podman-compose
     podman-tui
+
+    inputs.devenv.packages.x86_64-linux.devenv
   ];
 
   home.sessionVariables = {
