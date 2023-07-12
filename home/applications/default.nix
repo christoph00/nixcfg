@@ -10,7 +10,7 @@
     #./kdeconnect.nix
     ./nemo.nix
     ./foot.nix
-    #./obsidian.nix
+    ./obsidian.nix
     #./geary.nix
     ./wezterm.nix
     ./emacs.nix
