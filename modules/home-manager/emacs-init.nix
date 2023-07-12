@@ -149,6 +149,13 @@ with lib; let
           Code to place in the <option>:config</option> section.
         '';
       };
+      custom = mkOption {
+        type = types.lines;
+        default = "";
+        description = ''
+          Code to place in the <option>:custom</option> section.
+        '';
+      };
 
       extraConfig = mkOption {
         type = types.lines;
@@ -246,6 +253,7 @@ with lib; let
           ++ mkMode config.mode
           ++ optionals (config.init != "") [":init" config.init]
           ++ optionals (config.config != "") [":config" config.config]
+          ++ optionals (config.custom != "") [":custom" config.custom]
           ++ optional (config.extraConfig != "") config.extraConfig)
         + ")";
     };

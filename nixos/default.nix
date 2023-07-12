@@ -89,6 +89,7 @@
       home-server.imports = [
         # ./cloudflared.nix
         ./home-server.nix
+        #./immich.nix
         #./matcha.nix
         #self.nixosModules.syncthing
         #./photoview.nix

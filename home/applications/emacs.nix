@@ -3,9 +3,9 @@
   lib,
   ...
 }: {
-  services.emacs = {
-    enable = true;
-  };
+  # services.emacs = {
+  #   enable = true;
+  # };
   programs.emacs = {
     enable = true;
     package = lib.mkForce (pkgs.emacs29-pgtk.override {
@@ -180,41 +180,26 @@
 
         vertico = {
           enable = true;
+          custom = ''
+            (vertico-count 13)                    ; Number of candidates to display
+            (vertico-resize t)
+            (vertico-cycle nil)                   ; Go from last to first candidate and first to last (cycle)?
+          '';
           config = ''
-            ;; Prefix the current candidate with “» ”. From
-            ;; https://github.com/minad/vertico/wiki#prefix-current-candidate-with-arrow
-            (advice-add #'vertico--format-candidate :around
-              (lambda (orig cand prefix suffix index _start)
-                (setq cand (funcall orig cand prefix suffix index _start))
-                (concat
-                 (if (= vertico--index index)
-                     (propertize "» " 'face 'vertico-current)
-                   "  ")
-                 cand)))
-
-            (setq vertico-count 13   ;; Number of candidates to display
-                  vertico-cycle nil)
-
             (vertico-mode)
           '';
+          bindLocal = {
+            vertico-map = {"<escape>" = "minibuffer-keyboard-quit";};
+          };
         };
         marginalia = {
           enable = true;
           after = ["vertico"];
-          config = ''
-            (setq marginalia-max-relative-age 0)
-
-            ;; Must be in the :init section of use-package such that the mode gets
-            ;; enabled right away. Note that this forces loading the package.
-            (marginalia-mode)
-
-            ;; Enable richer annotations for M-x.
-            ;; Only keybindings are shown by default, in order to reduce noise for this very common command.
-            ;; * marginalia-annotate-symbol: Annotate with the documentation string
-            ;; * marginalia-annotate-command-binding (default): Annotate only with the keybinding
-            ;; * marginalia-annotate-command-full: Annotate with the keybinding and the documentation string
-            ;; (setf (alist-get 'command marginalia-annotate-alist) #'marginalia-annotate-command-full)
+          custom = ''
+            (marginalia-max-relative-age 0)
+            (marginalia-align 'right)
           '';
+          init = ''(marginalia-mode)'';
         };
         counsel = {
           enable = true;
@@ -238,9 +223,26 @@
 
         orderless = {
           enable = true;
-          config = ''
-            (setq completion-styles '(orderless flex)
-                  completion-category-overrides '((eglot (styles . (orderless flex)))))
+          custom = ''
+          (completion-styles '(orderless))
+          (completion-category-defaults nil)    ; I want to be in control!
+          (completion-category-overrides
+          '((file (styles basic-remote ; For `tramp' hostname completion with `vertico'
+                   orderless
+           ))))
+           (orderless-component-separator 'orderless-escapable-split-on-space)
+           (orderless-matching-styles
+           '(orderless-literal
+           orderless-prefixes
+           orderless-initialism
+           orderless-regexp
+              orderless-flex
+              ;; orderless-strict-leading-initialism
+              ;; orderless-strict-initialism
+              ;; orderless-strict-full-initialism
+              ;; orderless-without-literal          ; Recommended for dispatches instead
+           ))
+
           '';
         };
 
