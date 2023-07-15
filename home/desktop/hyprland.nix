@@ -83,7 +83,7 @@ in {
 
           # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
           input {
-              kb_layout=us
+              kb_layout = us-german-umlaut
               kb_options =
               kb_rules =
 
@@ -101,10 +101,6 @@ in {
 
           # air13 keyboard
           device:at-translated-set-2-keyboard {
-            kb_layout = us-german-umlaut
-          }
-
-          device:cm-storm-coolermaster-novatouch-tkl-keyboard {
             kb_layout = us-german-umlaut
           }
 
