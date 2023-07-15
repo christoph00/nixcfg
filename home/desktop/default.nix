@@ -115,9 +115,6 @@ in {
       key <AD09> { [ o, O, odiaeresis, Odiaeresis ] };
       key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
       key <AC02> { [ s, S, ssharp ] };
-      key <ESC> {[Caps_Lock]};
-      key <CAPS> {[Escape]};
-
        };
     '';
   };
