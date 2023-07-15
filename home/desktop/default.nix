@@ -108,7 +108,6 @@ in {
       default partial alphanumeric_keys
       xkb_symbols "basic" {
       include "us(altgr-intl)"
-      include "level3(caps_switch)"
       name[Group1] = "English (US, international with German umlaut)";
       key <AD03> { [ e, E, EuroSign, cent ] };
       key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
