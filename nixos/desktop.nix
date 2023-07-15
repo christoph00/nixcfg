@@ -47,7 +47,7 @@
 
   virtualisation = {
     #   waydroid.enable = true;
-    lxd.enable = true;
+    lxd.enable = false;
     podman.enable = true;
     podman.dockerSocket.enable = true;
   };
@@ -58,7 +58,8 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
+    jack.enable = false;
+    wireplumber.enable = true;
   };
 
   hardware.bluetooth.enable = true;
