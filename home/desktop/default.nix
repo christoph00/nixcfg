@@ -74,8 +74,6 @@ in {
     vlc
 
     xdg-utils
-    xdg-desktop-portal
-    xdg-desktop-portal-wlr
     solaar
 
     pciutils
