@@ -1,10 +1,18 @@
 {pkgs, ...}: {
   programs.chromium = {
     enable = true;
-    package = pkgs.brave;
+    package = pkgs.ungoogled-chromium;
     extensions = [
+<<<<<<< HEAD
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
       # {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
+||||||| parent of fade8c4 ()
+      # {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
+      # {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
+=======
+      {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
+        {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
+>>>>>>> fade8c4 ()
       {id = "nngceckbapebfimnlniiiahkandclblb";} # Bitwarden
       {
         id = "dcpihecpambacapedldabdbpakmachpb";
@@ -12,9 +20,9 @@
       }
       {id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
       {id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
-      # {id = "jofbglonpbndadajbafmmaklbfbkggpo";} # Bing Chat for all Browers
+      {id = "jofbglonpbndadajbafmmaklbfbkggpo";} # Bing Chat for all Browers
     ];
-    commandLineArgs = [
+    defaultSearchProviderSuggestURL = [
       "--ignore-gpu-blocklist"
       "--enable-gpu-rasterization"
       "--enable-zero-copy"
