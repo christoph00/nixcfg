@@ -99,6 +99,9 @@ in {
     nix-init
 
     nixd
+
+    pcmanfm
+    ferdium
   ];
 
   xdg.configFile."xkb/symbols/us-german-umlaut" = {
