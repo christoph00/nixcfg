@@ -63,7 +63,7 @@
   };
 
   hardware.bluetooth.enable = true;
-  services.blueman.enable = false;
+  services.blueman.enable = true;
 
   programs.dconf.enable = true;
 
@@ -170,14 +170,14 @@
   # programs.kdeconnect.enable = true;
   # programs.nm-applet.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    #wlr.enable = true;
+  #xdg.portal = {
+  #  enable = true;
+  #  wlr.enable = false;
     # extraPortals = [
     #   pkgs.xdg-desktop-portal-gtk
     #   #  inputs.xdg-portal-hyprland.packages.${pkgs.system}.default
     # ];
-  };
+  #};
 
   # Udev Rules
   services.udev.extraRules = ''
