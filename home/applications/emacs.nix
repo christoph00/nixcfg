@@ -224,24 +224,24 @@
         orderless = {
           enable = true;
           custom = ''
-          (completion-styles '(orderless))
-          (completion-category-defaults nil)    ; I want to be in control!
-          (completion-category-overrides
-          '((file (styles basic-remote ; For `tramp' hostname completion with `vertico'
-                   orderless
-           ))))
-           (orderless-component-separator 'orderless-escapable-split-on-space)
-           (orderless-matching-styles
-           '(orderless-literal
-           orderless-prefixes
-           orderless-initialism
-           orderless-regexp
-              orderless-flex
-              ;; orderless-strict-leading-initialism
-              ;; orderless-strict-initialism
-              ;; orderless-strict-full-initialism
-              ;; orderless-without-literal          ; Recommended for dispatches instead
-           ))
+            (completion-styles '(orderless))
+            (completion-category-defaults nil)    ; I want to be in control!
+            (completion-category-overrides
+            '((file (styles basic-remote ; For `tramp' hostname completion with `vertico'
+                     orderless
+             ))))
+             (orderless-component-separator 'orderless-escapable-split-on-space)
+             (orderless-matching-styles
+             '(orderless-literal
+             orderless-prefixes
+             orderless-initialism
+             orderless-regexp
+                orderless-flex
+                ;; orderless-strict-leading-initialism
+                ;; orderless-strict-initialism
+                ;; orderless-strict-full-initialism
+                ;; orderless-without-literal          ; Recommended for dispatches instead
+             ))
 
           '';
         };

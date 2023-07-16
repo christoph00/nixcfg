@@ -1,7 +1,5 @@
-{config, ...}:
-{
-
-   security.acme.certs."fotos.r505.de" = {
+{config, ...}: {
+  security.acme.certs."fotos.r505.de" = {
     #server = "https://acme.zerossl.com/v2/DV90";
     domain = "fotos.r505.de";
     dnsProvider = "cloudflare";
