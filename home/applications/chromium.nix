@@ -14,7 +14,7 @@
       {id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
       {id = "jofbglonpbndadajbafmmaklbfbkggpo";} # Bing Chat for all Browers
     ];
-    defaultSearchProviderSuggestURL = [
+    commandLineArgs = [
       "--ignore-gpu-blocklist"
       "--enable-gpu-rasterization"
       "--enable-zero-copy"
