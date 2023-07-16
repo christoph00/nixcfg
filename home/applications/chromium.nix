@@ -3,16 +3,8 @@
     enable = true;
     package = pkgs.ungoogled-chromium;
     extensions = [
-<<<<<<< HEAD
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
-      # {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
-||||||| parent of fade8c4 ()
-      # {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
-      # {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
-=======
-      {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
-        {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
->>>>>>> fade8c4 ()
+      {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
       {id = "nngceckbapebfimnlniiiahkandclblb";} # Bitwarden
       {
         id = "dcpihecpambacapedldabdbpakmachpb";

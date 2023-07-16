@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-programs.anyrun = {
+  programs.anyrun = {
     enable = true;
     config = {
       plugins = [
@@ -12,5 +12,5 @@ programs.anyrun = {
         "${inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins}/lib/kidex"
       ];
     };
-};
+  };
 }
