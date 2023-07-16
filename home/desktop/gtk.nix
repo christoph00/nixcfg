@@ -15,7 +15,7 @@ in {
     theme = {
       #name = "${config.colorscheme.slug}";
       #package = gtkThemeFromScheme {scheme = config.colorscheme;};
-      name = "Rosé Pine";
+      name = "rose-pine";
       package = pkgs.rose-pine-gtk-theme;
     };
     iconTheme = {
