@@ -15,8 +15,8 @@ in {
     theme = {
       #name = "${config.colorscheme.slug}";
       #package = gtkThemeFromScheme {scheme = config.colorscheme;};
-      name = "Fluent-Light";
-      package = pkgs.fluent-gtk-theme;
+      name = "Rosé Pine";
+      package = pkgs.rose-pine-gtk-theme;
     };
     iconTheme = {
       name = "Fluent";
