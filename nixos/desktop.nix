@@ -45,6 +45,8 @@
 
   hardware.uinput.enable = true;
 
+  services.upower.enable = true;
+
   virtualisation = {
     #   waydroid.enable = true;
     lxd.enable = false;
