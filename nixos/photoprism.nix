@@ -6,8 +6,8 @@
   services.photoprism = {
     enable = true;
     address = "[::]";
-    originalsPath = "/mnt/userdata/photos";
-    importPath = "/mnt/userdata/photos";
+    #originalsPath = "/mnt/userdata/photos";
+    #importPath = "/mnt/userdata/photos";
     settings = {
       PHOTOPRISM_DEFAULT_LOCALE = "de";
       PHOTOPRISM_DISABLE_PLACES = "false";
