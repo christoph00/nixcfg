@@ -5,7 +5,7 @@
 }: {
   services.photoprism = {
     enable = true;
-    address = "[::]";
+    address = "0.0.0.0";
     originalsPath = "/mnt/userdata/photos";
     #importPath = "/mnt/userdata/photos";
     settings = {
@@ -21,13 +21,14 @@
       PHOTOPRISM_SITE_CAPTION = "Fotos";
       PHOTOPRISM_HTTP_COMPRESSION = "gzip";
       PHOTOPRISM_SETTINGS_HIDDEN = "false";
+      PHOTOPRISM_SPONSOR = "true";
     };
   };
 
   systemd.services.photoprism.serviceConfig = {
-    User = "sftpgo";
-    Group = "sftpgo";
-    DynamicUser = false;
+    User = lib.mkForce "sftpgo";
+    Group = lib.mkForce "sftpgo";
+    DynamicUser = lib.mkForce false;
   };
 
 
