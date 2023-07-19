@@ -29,6 +29,7 @@
     serviceConfig = {
       WorkingDirectory = lib.mkForce "/nix/persist/photoprism";
     };
+    preStart = lib.mkForce "";
   };
 
   networking.firewall.allowedTCPPorts = [2342];
