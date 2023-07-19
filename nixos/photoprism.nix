@@ -6,7 +6,7 @@
   services.photoprism = {
     enable = true;
     address = "[::]";
-    #originalsPath = "/mnt/userdata/photos";
+    originalsPath = "/mnt/userdata/photos";
     #importPath = "/mnt/userdata/photos";
     settings = {
       PHOTOPRISM_DEFAULT_LOCALE = "de";
@@ -22,6 +22,12 @@
       PHOTOPRISM_HTTP_COMPRESSION = "gzip";
       PHOTOPRISM_SETTINGS_HIDDEN = "false";
     };
+  };
+
+  systemd.services.photoprism.serviceConfig = {
+    User = "sftpgo";
+    Group = "sftpgo";
+    DynamicUser = false;
   };
 
 
