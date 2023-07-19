@@ -175,10 +175,10 @@
   #xdg.portal = {
   #  enable = true;
   #  wlr.enable = false;
-    # extraPortals = [
-    #   pkgs.xdg-desktop-portal-gtk
-    #   #  inputs.xdg-portal-hyprland.packages.${pkgs.system}.default
-    # ];
+  # extraPortals = [
+  #   pkgs.xdg-desktop-portal-gtk
+  #   #  inputs.xdg-portal-hyprland.packages.${pkgs.system}.default
+  # ];
   #};
 
   # Udev Rules
