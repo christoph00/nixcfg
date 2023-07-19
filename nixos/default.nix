@@ -93,6 +93,7 @@
         #./matcha.nix
         #self.nixosModules.syncthing
         #./photoview.nix
+        ./photoprism.nix
       ];
 
       sdImage.imports = [
