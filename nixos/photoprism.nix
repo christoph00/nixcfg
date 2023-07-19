@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   services.photoprism = {
     enable = true;
     address = "[::]";
@@ -12,6 +16,18 @@
       PHOTOPRISM_EXPERIMENTAL = "true";
       PHOTOPRISM_JPEG_QUALITY = "92";
       PHOTOPRISM_ORIGINALS_LIMIT = "10000";
+      PHOTOPRISM_ADMIN_PASSWORD = "start001";
+      PHOTOPRISM_DISABLE_CLASSIFICATION = "true";
+      PHOTOPRISM_DISABLE_RAW = "true";
+      PHOTOPRISM_SITE_CAPTION = "Fotos";
+      PHOTOPRISM_HTTP_COMPRESSION = "gzip";
+      PHOTOPRISM_SETTINGS_HIDDEN = "false";
+    };
+  };
+
+  systemd.services.photoprism = {
+    serviceConfig = {
+      WorkingDirectory = lib.mkForce "/nix/persist/photoprism";
     };
   };
 
