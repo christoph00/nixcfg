@@ -157,11 +157,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1689566545,
-        "narHash": "sha256-ptqnKcXUeVh1842izue1qNZYjK7JE9omQtI+B/JTdVo=",
+        "lastModified": 1689652949,
+        "narHash": "sha256-EMTvTrwwRdXlQX2xLWuAZ6I4EaECotXmuQBqP2djPsM=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "a81c2b3a701ef49977fd9c720c0058625f780c60",
+        "rev": "2c8f3050de5868b00d746d4fd213c416ed8bde1f",
         "type": "gitlab"
       },
       "original": {
@@ -460,11 +460,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1689633497,
-        "narHash": "sha256-nBy4kh96do3ffXqNgXijOPi4Omnp/2nHbxOcuL1kfBk=",
+        "lastModified": 1689712860,
+        "narHash": "sha256-XCdCutZX8uumCJu6O4CT28ZyBqt57h2KET64i/vP4yg=",
         "owner": "JakeStanger",
         "repo": "ironbar",
-        "rev": "806cfc61aa285e7e504ea510587af9211949254a",
+        "rev": "5a6b14e5f89584ddb348e0e240076d6a803867a4",
         "type": "github"
       },
       "original": {
@@ -672,11 +672,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1689647697,
-        "narHash": "sha256-8ZX/DVpKLmr85FRKILb+2p+JuxfLQ49LjXG/gmwsoIU=",
+        "lastModified": 1689735719,
+        "narHash": "sha256-HOEDWJLm+f6HSD4j7n4xc8J4FcqjJ+U7ZnMLQQrZKYg=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "ed2774a9131ddad12e552ba04bd92f87df04a28b",
+        "rev": "31d08cf9f5c3a49475e723c75c6f645171364a74",
         "type": "github"
       },
       "original": {
