@@ -136,7 +136,6 @@
       router.imports = [./router];
       immich.imports = [./immich.nix];
       webdav-server.imports = [./webdav-server.nix];
-      lemmy.imports = [./lemmy.nix];
     };
   };
 }
