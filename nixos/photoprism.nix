@@ -25,12 +25,15 @@
     };
   };
 
+  environment.persistence = {
+    "/nix/persist".directories = ["/var/lib/photoprism"];
+  };
+
   systemd.services.photoprism.serviceConfig = {
     User = lib.mkForce "sftpgo";
     Group = lib.mkForce "sftpgo";
     DynamicUser = lib.mkForce false;
   };
-
 
   networking.firewall.allowedTCPPorts = [2342];
 }
