@@ -18,7 +18,10 @@
     forceSSL = true;
     useACMEHost = "fotos.r505.de";
     locations = {
-      "/".proxyPass = "http://127.0.0.1:2342";
+      "/" = {
+        proxyPass = "http://127.0.0.1:2342";
+        proxyWebsockets = true;
+      };
     };
   };
 
