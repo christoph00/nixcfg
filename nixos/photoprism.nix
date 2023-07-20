@@ -28,8 +28,8 @@
   services.photoprism = {
     enable = true;
     address = "0.0.0.0";
-    originalsPath = "/mnt/userdata/photos";
-    #importPath = "/mnt/userdata/photos";
+    originalsPath = "/mnt/userdata/photos/originals";
+    importPath = "/mnt/userdata/photos/imports";
     settings = {
       PHOTOPRISM_DEFAULT_LOCALE = "de";
       PHOTOPRISM_USERS_PATH = "/mnt/userdata/photos/users";
