@@ -119,7 +119,7 @@ in {
     '';
   };
 
-  colorscheme = inputs.nix-colors.colorSchemes.rose-pine;
+  colorscheme = inputs.nix-colors.colorSchemes.tokyo-night-light;
   wallpaper = lib.mkDefault (mkWallpaper
     {
       scheme = config.colorscheme;
