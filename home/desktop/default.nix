@@ -46,6 +46,11 @@
       '';
       installPhase = "install -Dm0644 wallpaper.png $out";
     };
+    gpt4all = pkgs.makeDesktopItem {
+      name = "gpt4all";
+      exec = "${inputs.gpt4all.packages.x86_64-linux.default}/bin/chat";
+      desktopName = "gpt4all";
+    };
 in {
   imports = [
     ./anyrun.nix
@@ -103,8 +108,7 @@ in {
     pcmanfm
     gtkcord4
 
-    inputs.gpt4all.packages.x86_64-linux.default
-  ];
+  ] + [ gpt4all];
 
   xdg.configFile."xkb/symbols/us-german-umlaut" = {
     text = ''
