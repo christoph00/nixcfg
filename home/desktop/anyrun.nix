@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }:
 {
@@ -10,7 +11,7 @@
     config = {
       plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
-        randr
+        #randr
         rink
         shell
         symbols
@@ -44,10 +45,10 @@
         maxEntries = null;
     };
 
-    extraCss = ''
+    extraCss = with config.colorscheme.colors;''
       * {
         transition: 200ms ease;
-        font-family: Lexend;
+        font-family: ${config.fontProfiles.monospace.family};
         font-size: 1.3rem;
       }
 
@@ -73,9 +74,9 @@
       }
 
       box#main {
-        background: rgba(30, 30, 46, 0.7);
-        border: 1px solid #28283d;
-        border-radius: 24px;
+        background: #${base00};
+        border: 1px solid #${base03};
+        border-radius: 16px;
         padding: 8px;
       }
     '';
