@@ -172,6 +172,16 @@ in {
 
           windowrulev2 = workspace 2,class:chromium
 
+          windowrulev2 = nomaxsize,class:^(.*)$
+
+          layerrule = blur,gtk-layer-shell
+          layerrule = ignorezero,gtk-layer-shell
+          layerrule = blur,anyrun
+          layerrule = ignorealpha 0.6,anyrun
+          layerrule = blur,notifications
+          layerrule = ignorezero,notifications
+          layerrule = noanim, ^(selection)$
+
 
 
           # See https://wiki.hyprland.org/Configuring/Keywords/ for more
