@@ -14,7 +14,6 @@
         rink
         shell
         symbols
-        translate
       ];
 
       # the x coordinate of the runner
