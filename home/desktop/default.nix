@@ -101,7 +101,7 @@ in {
     nixd
 
     pcmanfm
-    ferdium
+    gtkcord4
   ];
 
   xdg.configFile."xkb/symbols/us-german-umlaut" = {
