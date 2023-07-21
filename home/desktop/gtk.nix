@@ -13,19 +13,15 @@ in {
       size = 12;
     };
     theme = {
-      #name = "${config.colorscheme.slug}";
-      #package = gtkThemeFromScheme {scheme = config.colorscheme;};
-      name = "Fluent";
-      package = pkgs.fluent-gtk-theme;
+      name = "${config.colorscheme.slug}";
+      package = gtkThemeFromScheme {scheme = config.colorscheme;};
+      #name = "Fluent";
+      #package = pkgs.fluent-gtk-theme;
     };
     iconTheme = {
       name = "Fluent";
       package = pkgs.fluent-icon-theme;
     };
-    # iconTheme = {
-    #   name = "vimix black";
-    #   package = pkgs.vimix-icon-theme;
-    # };
     cursorTheme = {
       name = "macOS-Monterey";
       package = pkgs.apple-cursor;

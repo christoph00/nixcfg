@@ -200,9 +200,8 @@
 
   programs.adb.enable = true;
 
-  programs.geary.enable = true;
+  #programs.geary.enable = true;
 
-  services.gnome3.gnome-keyring.enable = true;
 
   environment.persistence."/nix/persist" = {
     directories = [
