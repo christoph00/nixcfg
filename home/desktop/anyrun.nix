@@ -47,9 +47,9 @@
 
     extraCss = with config.colorscheme.colors;''
       * {
-        transition: 200ms ease;
+        transition: 100ms ease;
         font-family: ${config.fontProfiles.monospace.family};
-        font-size: 1.3rem;
+        font-size: 1.1rem;
       }
 
       #window,
@@ -61,16 +61,16 @@
       }
 
       #match:selected {
-        background: rgba(203, 166, 247, 0.7);
+        background: #${base03};
       }
 
       #match {
         padding: 3px;
-        border-radius: 16px;
+        border-radius: 8px;
       }
 
       #entry, #plugin:hover {
-        border-radius: 16px;
+        border-radius: 8px;
       }
 
       box#main {
