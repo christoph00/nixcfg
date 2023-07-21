@@ -32,7 +32,7 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    tsnsrv.url = "github.com:antifuchs/tsnsrv";
+    tsnsrv.url = "github:antifuchs/tsnsrv";
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
