@@ -16,7 +16,7 @@
         ];
       };
       desktop.imports = [
-        inputs.hyprland.homeManagerModules.default
+        #inputs.hyprland.homeManagerModules.default
         inputs.ironbar.homeManagerModules.default
         inputs.anyrun.homeManagerModules.default
         ./desktop
@@ -26,12 +26,14 @@
         {
           monitors = [
             {
+              enabled = true;
               name = "eDP-1";
               width = 1920;
               height = 1080;
               isPrimary = true;
               refreshRate = 59;
               x = 0;
+              y = 0;
               workspace = "1";
             }
           ];
@@ -48,6 +50,7 @@
               isPrimary = true;
               refreshRate = 60;
               x = 0;
+              y = 0;
               scale = "1.5";
             }
             {
