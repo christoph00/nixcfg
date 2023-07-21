@@ -167,8 +167,11 @@ in {
           }
 
 
-          windowrulev2 = float,class:rofi
-          windowrulev2 = center,class:rofi
+          windowrulev2 = float,class:anyrun
+          windowrulev2 = center,class:anyrun
+
+          windowrulev2 = workspace 2,class:chromium
+
 
 
           # See https://wiki.hyprland.org/Configuring/Keywords/ for more
