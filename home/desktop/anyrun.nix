@@ -35,7 +35,7 @@
         hidePluginInfo = false;
 
         # Close window when a click outside the main box is received
-        closeOnClick = false;
+        closeOnClick = true;
 
         # Show search results immediately when Anyrun starts
         showResultsImmediately = false;
