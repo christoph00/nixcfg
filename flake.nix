@@ -32,8 +32,12 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    tsnsrv.url = "github:antifuchs/tsnsrv";
-
+    tsnsrv = {
+      url = "github:antifuchs/tsnsrv";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "utils";
+      inputs.flake-parts.follows = "flake-parts";
+    };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
