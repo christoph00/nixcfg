@@ -34,6 +34,7 @@
           inputs.impermanence.nixosModules.impermanence
           inputs.disko.nixosModules.disko
           self.nixosModules.home-manager
+          inputs.tsnsrv.nixosModules.default
 
           inputs.srvos.nixosModules.common
           inputs.srvos.nixosModules.mixins-systemd-boot
