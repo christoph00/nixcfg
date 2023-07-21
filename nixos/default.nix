@@ -63,7 +63,7 @@
         #./gnome.nix
         #./greetd.nix
         ./printing.nix
-        #./rclone-christoph.nix
+        ./rclone-christoph.nix
         #./sway.nix
       ];
       laptop.imports = [
@@ -93,7 +93,7 @@
         #./matcha.nix
         #self.nixosModules.syncthing
         #./photoview.nix
-        ./photoprism.nix
+        #./photoprism.nix
       ];
 
       sdImage.imports = [
