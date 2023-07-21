@@ -102,6 +102,8 @@ in {
 
     pcmanfm
     gtkcord4
+
+    inputs.gpt4all.packages.x86_64-linux.default
   ];
 
   xdg.configFile."xkb/symbols/us-german-umlaut" = {

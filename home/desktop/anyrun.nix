@@ -61,7 +61,7 @@
       }
 
       #match:selected {
-        background: #${base03};
+        background: alpha(#${base03},0.8);
       }
 
       #match {
@@ -74,8 +74,8 @@
       }
 
       box#main {
-        background: #${base00};
-        border: 1px solid #${base03};
+        background: alpha(#${base00},0.8);
+        border: 1px solid alpha(#${base03},0.8);
         border-radius: 16px;
         padding: 8px;
       }
