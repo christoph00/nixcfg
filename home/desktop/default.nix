@@ -54,7 +54,7 @@ in {
     ./hyprland.nix
     #./sway.nix
     #./wayvnc.nix
-    ./rofi.nix
+    #./rofi.nix
     #./xfce.nix
     #./labwc.nix
     #./river.nix
