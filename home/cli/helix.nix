@@ -1,4 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: let
+  inherit (config) colorscheme;
+in {
+  home.sessionVariables.COLORTERM = "truecolor";
+
   programs.helix = {
     enable = true;
     languages = {
@@ -17,11 +25,11 @@
             args = ["-i" "2" "-"];
           };
         }
-
       ];
     };
     settings = {
-      theme = "base16_default";
+      #theme = "base16_default";
+      theme = colorscheme.slug;
       keys.normal = {
         X = "extend_line_above";
       };
@@ -42,7 +50,6 @@
         };
         gutters = ["diagnostics" "line-numbers" "spacer" "diff"];
         statusline = {
-          mode-separator = "";
           separator = "";
           left = ["mode" "spinner" "file-type" "diagnostics"];
           center = ["file-name"];
@@ -59,6 +66,7 @@
           skip-levels = 1;
         };
       };
+      themes = import ./theme.nix {inherit colorscheme;};
     };
   };
 }
