@@ -34,7 +34,7 @@
       PHOTOPRISM_DEFAULT_LOCALE = "de";
       PHOTOPRISM_USERS_PATH = "/mnt/userdata/photos/users";
       PHOTOPRISM_SIDECAR_PATH = "/mnt/userdata/photos/sidecar";
-      PHOTOPRISM_CACHE_PATH= "/mnt/userdata/photos/cache";
+      PHOTOPRISM_CACHE_PATH = "/mnt/userdata/photos/cache";
       PHOTOPRISM_DISABLE_PLACES = "false";
       PHOTOPRISM_DISABLE_TENSORFLOW = "true";
       PHOTOPRISM_EXPERIMENTAL = "true";

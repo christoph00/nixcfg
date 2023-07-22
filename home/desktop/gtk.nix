@@ -15,7 +15,7 @@ in {
     theme = {
       name = "${config.colorscheme.slug}";
       package = gtkThemeFromScheme {scheme = config.colorscheme;};
-      #name = "Fluent";
+      #name = "Fluent-Light";
       #package = pkgs.fluent-gtk-theme;
     };
     iconTheme = {
@@ -27,6 +27,11 @@ in {
       package = pkgs.apple-cursor;
       size = 16;
     };
+    gtk3.extraCss = ''
+    button.image-button {
+      border-radius: 1px;
+    };
+    '';
   };
 
   services.xsettingsd = {

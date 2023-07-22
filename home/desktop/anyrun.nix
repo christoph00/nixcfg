@@ -3,8 +3,7 @@
   inputs,
   config,
   ...
-}:
-{
+}: {
   programs.anyrun = {
     enable = true;
 
@@ -18,34 +17,34 @@
       ];
 
       # the x coordinate of the runner
-        #x.relative = 800;
-        # the y coordinate of the runner
-        #y.absolute = 500.0;
-        y.fraction = 0.0;
+      #x.relative = 800;
+      # the y coordinate of the runner
+      #y.absolute = 500.0;
+      y.fraction = 0.0;
 
-        # Hide match and plugin info icons
-        hideIcons = false;
+      # Hide match and plugin info icons
+      hideIcons = false;
 
-        # ignore exclusive zones, i.e. Waybar
-        ignoreExclusiveZones = false;
+      # ignore exclusive zones, i.e. Waybar
+      ignoreExclusiveZones = false;
 
-        # Layer shell layer: Background, Bottom, Top, Overlay
-        layer = "overlay";
+      # Layer shell layer: Background, Bottom, Top, Overlay
+      layer = "overlay";
 
-        # Hide the plugin info panel
-        hidePluginInfo = false;
+      # Hide the plugin info panel
+      hidePluginInfo = false;
 
-        # Close window when a click outside the main box is received
-        closeOnClick = true;
+      # Close window when a click outside the main box is received
+      closeOnClick = true;
 
-        # Show search results immediately when Anyrun starts
-        showResultsImmediately = false;
+      # Show search results immediately when Anyrun starts
+      showResultsImmediately = false;
 
-        # Limit amount of entries shown in total
-        maxEntries = null;
+      # Limit amount of entries shown in total
+      maxEntries = null;
     };
 
-    extraCss = with config.colorscheme.colors;''
+    extraCss = with config.colorscheme.colors; ''
       * {
         transition: 100ms ease;
         font-family: ${config.fontProfiles.monospace.family};
