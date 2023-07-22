@@ -66,7 +66,8 @@ in {
           skip-levels = 1;
         };
       };
-      themes = import ./helix_theme.nix {inherit colorscheme;};
     };
+
+    themes = import ./helix_theme.nix {inherit colorscheme;};
   };
 }
