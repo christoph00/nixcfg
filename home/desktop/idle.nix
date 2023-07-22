@@ -44,14 +44,19 @@ in {
       }
       {
         event = "lock";
-        command = "${gtklock-blur}/bin/gtklock-blur";
+        command = "${gtklock-blur}/bin/gtklock-blur && systemctl hybrid-sleep";
       }
     ];
     timeouts = [
       {
-        timeout = 300;
+        timeout = 200;
         command = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms off";
         resumeCommand = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms on";
+      }
+
+      {
+        timeout = 300;
+        command = "systemctl suspend-then-hibernate";
       }
     ];
   };
