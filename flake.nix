@@ -54,10 +54,9 @@
       inputs.utils.follows = "utils";
     };
 
-    gpt4all ={
+    gpt4all = {
       url = "github:polygon/gpt4all-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-
     };
 
     # helix = {

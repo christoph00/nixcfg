@@ -13,6 +13,6 @@
     ./obsidian.nix
     #./geary.nix
     ./wezterm.nix
-    #./emacs.nix
+    ./emacs.nix
   ];
 }
