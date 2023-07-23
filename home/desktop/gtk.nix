@@ -28,9 +28,9 @@ in {
       size = 16;
     };
     gtk3.extraCss = ''
-    button.image-button {
-      border-radius: 1px;
-    };
+      button.image-button {
+        border-radius: 1px;
+      };
     '';
   };
 
