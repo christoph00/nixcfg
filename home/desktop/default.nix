@@ -5,6 +5,11 @@
   inputs,
   ...
 }: let
+  openBase16 =
+    pkgs.writeScriptBin "openBase16"
+    ''
+      xdg-open ${theme-html}
+    '';
   theme-html = with config.colorscheme;
     pkgs.writeTextFile {
       name = "base16-theme";
@@ -222,7 +227,7 @@ in {
     pcmanfm
     webcord
 
-    theme-html
+    openBase16
     # gpt4all
   ];
 
