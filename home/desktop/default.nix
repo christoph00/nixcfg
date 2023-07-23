@@ -108,6 +108,7 @@ in {
     pcmanfm
     webcord
 
+    inputs.ags.packages.x86_64-linux.default
     # gpt4all
   ];
 

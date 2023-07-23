@@ -47,24 +47,30 @@ in {
       #      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
     ];
     extraConfig = lib.mkMerge [
-      (
-        builtins.concatStringsSep "\n" (
-          map
-          (m:
-            if m.enabled
-            then ''
-              monitor=${m.name},${toString m.width}x${toString m.height}@${toString m.refreshRate},${toString m.x}x${toString m.y},${toString m.scale}
-              ${lib.optionalString (m.workspace != null) "workspace=${m.name},${m.workspace}"}
-            ''
-            else ''
-              monitor=${m.name},disabled
-            '')
-          config.monitors
-        )
-      )
+      # (
+      #   builtins.concatStringsSep "\n" (
+      #     map
+      #     (m:
+      #       if m.enabled
+      #       then ''
+      #         monitor=${m.name},${toString m.width}x${toString m.height}@${toString m.refreshRate},${toString m.x}x${toString m.y},${toString m.scale}
+      #         ${lib.optionalString (m.workspace != null) "workspace=${m.name},${m.workspace}"}
+      #       ''
+      #       else ''
+      #         monitor=${m.name},disabled
+      #       '')
+      #     config.monitors
+      #   )
+      # )
 
       (
         with config.colorscheme.colors; ''
+
+          monitor=DP-2,highres,auto,1.5
+          exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1.5
+          env = GDK_SCALE,1.5
+          env = XCURSOR_SIZE,24
+
           exec-once = ${pkgs.gtklock}/bin/gtklock -d
           exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP

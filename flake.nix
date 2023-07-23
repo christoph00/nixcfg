@@ -35,7 +35,6 @@
     tsnsrv = {
       url = "github:antifuchs/tsnsrv";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "utils";
       inputs.flake-parts.follows = "flake-parts";
     };
     rust-overlay = {
@@ -56,6 +55,11 @@
 
     gpt4all = {
       url = "github:polygon/gpt4all-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ags = {
+      url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
