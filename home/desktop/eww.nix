@@ -91,7 +91,7 @@
 in {
   programs.eww.enable = true;
   programs.eww.configDir = eww-config;
-  programs.eww.package = pkgs.eww-wayland;
+  programs.eww.package = inputs.eww.packages.x86_64-linux.default;
 
   systemd.user.services.eww = {
     Unit = {

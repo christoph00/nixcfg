@@ -64,8 +64,8 @@ in {
     #./labwc.nix
     #./river.nix
     ./idle.nix
-    ./ironbar.nix
-    #./eww.nix
+    # ./ironbar.nix
+    ./eww.nix
     #./sfwbar.nix
     # ./waybar.nix
   ];
@@ -108,7 +108,6 @@ in {
     pcmanfm
     webcord
 
-    inputs.ags.packages.x86_64-linux.default
     # gpt4all
   ];
 
