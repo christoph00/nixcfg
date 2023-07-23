@@ -108,7 +108,7 @@ in {
     pcmanfm
     webcord
 
-   # gpt4all
+    # gpt4all
   ];
 
   xdg.configFile."xkb/symbols/us-german-umlaut" = {

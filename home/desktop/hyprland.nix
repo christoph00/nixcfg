@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   config,
   pkgs,
@@ -182,13 +181,9 @@ in {
           layerrule = ignorezero,notifications
           layerrule = noanim, ^(selection)$
 
-
-
-          # See https://wiki.hyprland.org/Configuring/Keywords/ for more
           $mainMod = SUPER
 
-          # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-          bind = $mainMod, Q, exec, ${pkgs.foot}/bin/footclient
+          bind = $mainMod, Q, exec, ${pkgs.wezterm}/bin/wezterm
           bind = $mainMod, C, killactive,
           bind = $mainMod, M, exit,
           bind = $mainMod, E, exec, ${pkgs.cinnamon.nemo}/bin/nemo
@@ -242,7 +237,7 @@ in {
           bindm = $mainMod, mouse:273, resizewindow
 
           # lid switch
-          bindl=,switch:on:Lid Switch,exec,exec, sleep 1 && hyprctl dispatch dpms off
+          bindl=,switch:on:Lid Switch,exec,exec, sleep 1 && hyprctl dispatch dpms off && systemctl hybrid-sleep
           bindl=,switch:off:Lid Switch,exec,exec, hyprctl dispatch dpms on
 
         ''
