@@ -4,7 +4,17 @@
   lib,
   config,
   ...
-}: {
+}: let
+  getVolume =
+    (pkgs.writeShellApplication {
+      name = "volget";
+      runtimeInputs = [pkgs.wireplumber];
+      text = ''
+        wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}'
+      '';
+    })
+    + "/bin/volget";
+in {
   programs.ironbar = {
     enable = true;
     systemd = true;
@@ -36,12 +46,31 @@
         # in
         #   workspaces (_: "●");
       };
+      volume = {
+        transition_type = "slide_end";
+        transition_duration = 350;
+        type = "custom";
+        bar = [
+          {
+            type = "slider";
+            class = "scale";
+            length = 100;
+            max = 100;
+            on_change = "!${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ $0%";
+            on_scroll_down = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 2%-";
+            on_scroll_up = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 2%+";
+            on_click_right = "pavucontrol";
+            value = "100:${getVolume}";
+            tooltip = "{{${getVolume}}}%";
+          }
+        ];
+      };
       tray = {type = "tray";};
       clock = {type = "clock";};
       sys-info = {
         format = [
           " {cpu_percent}%"
-          # " {memory_used} / {memory_total} GB ({memory_percent}%)"
+          #" {memory_used} / {memory_total} GB ({memory_percent}%)"
           # "| {swap_used} / {swap_total} GB ({swap_percent}%)"
           # " {disk_used:/} / {disk_total:/} GB ({disk_percent:/}%)"
           # "李 {net_down:enp39s0} / {net_up:enp39s0} Mbps"
@@ -59,8 +88,15 @@
       icon_theme = "Fluent";
       anchor_to_edges = true;
       start = [menu launcher];
-      end = [battery tray clock];
+      end = [battery tray volume clock];
       style = with config.colorscheme.colors; ''
+
+        @define-color color_bg #${base00};
+        @define-color color_bg_dark #${base01};
+        @define-color color_border #${base05};
+        @define-color color_border_active #${base04};
+        @define-color color_text #${base05};
+        @define-color color_urgent #${base04};
 
         /* -- base styles -- */
 
