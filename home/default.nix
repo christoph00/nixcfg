@@ -51,7 +51,7 @@
               refreshRate = 60;
               x = 0;
               y = 0;
-              scale = "1.5";
+              scale = "1.51";
             }
             {
               enabled = false;

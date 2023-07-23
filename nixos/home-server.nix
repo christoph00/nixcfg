@@ -29,6 +29,7 @@
     xplr
     unzip
     media-sort
+    phockup
   ];
 
   age.secrets.cf-dyndns.file = ../secrets/cf-dyndns;

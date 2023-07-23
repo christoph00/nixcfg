@@ -41,7 +41,7 @@ in {
     systemdIntegration = true;
     xwayland = {
       enable = true;
-      hidpi = false;
+      hidpi = true;
     };
     plugins = [
       #      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
@@ -237,7 +237,7 @@ in {
           bindm = $mainMod, mouse:273, resizewindow
 
           # lid switch
-          bindl=,switch:on:Lid Switch,exec,exec, sleep 1 && hyprctl dispatch dpms off && systemctl hybrid-sleep
+          bindl=,switch:on:Lid Switch,exec,exec, sleep 1 && hyprctl dispatch dpms off
           bindl=,switch:off:Lid Switch,exec,exec, hyprctl dispatch dpms on
 
         ''

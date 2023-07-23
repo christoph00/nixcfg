@@ -44,7 +44,7 @@ in {
       }
       {
         event = "lock";
-        command = "${gtklock-blur}/bin/gtklock-blur && systemctl hybrid-sleep";
+        command = "${gtklock-blur}/bin/gtklock-blur";
       }
     ];
     timeouts = [
