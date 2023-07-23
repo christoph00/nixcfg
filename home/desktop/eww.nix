@@ -91,7 +91,7 @@
 in {
   programs.eww.enable = true;
   programs.eww.configDir = eww-config;
-  programs.eww.package = inputs.eww.packages.x86_64-linux.default;
+  programs.eww.package = inputs.eww.packages.x86_64-linux.default.override {withWayland = true;};
 
   systemd.user.services.eww = {
     Unit = {
