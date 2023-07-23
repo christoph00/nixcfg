@@ -55,6 +55,7 @@
   };
   systemd.services.sftpgo.serviceConfig.RuntimeDirectory = "sftpgo";
   systemd.services.sftpgo.serviceConfig.RuntimeDirectoryMode = "0755";
+  systemd.services.sftpgo.serviceConfig.ReadWritePaths = ["/mnt/userdata"];
   systemd.services.sftpgo.serviceConfig.UMask = lib.mkForce "007";
 
   services.nginx.clientMaxBodySize = "10G";
