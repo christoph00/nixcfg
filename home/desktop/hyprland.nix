@@ -65,13 +65,14 @@ in {
 
       (
         with config.colorscheme.colors; ''
+          exec-once = ${pkgs.gtklock}/bin/gtklock -d
+
 
           monitor=DP-2,highres,auto,1.5
           exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1.5
           env = GDK_SCALE,1.5
           env = XCURSOR_SIZE,24
 
-          exec-once = ${pkgs.gtklock}/bin/gtklock -d
           exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
           exec = ${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill
@@ -135,7 +136,7 @@ in {
               blur_passes = 3
               blur_new_optimizations = on
 
-              drop_shadow = false
+              drop_shadow = true
               shadow_range = 4
               shadow_render_power = 3
               col.shadow = rgba(1a1a1aee)
