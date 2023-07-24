@@ -66,7 +66,7 @@ in {
         ];
       };
       tray = {type = "tray";};
-      clock = {type = "clock";};
+      clock = {type = "clock"; format = "%H:%M"; format_popup = "%d.%m.%Y %H:%M";};
       sys-info = {
         format = [
           " {cpu_percent}%"
@@ -87,7 +87,8 @@ in {
       position = "bottom";
       icon_theme = "Fluent";
       anchor_to_edges = true;
-      start = [menu launcher];
+      start = [workspaces ];
+      center = [ launcher];
       end = [battery tray volume clock];
       style = with config.colorscheme.colors; ''
 
