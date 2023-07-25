@@ -14,6 +14,35 @@
       '';
     })
     + "/bin/volget";
+
+  scss = with config.colorscheme.colors; ''
+    $base00: ${base00};
+    $base01: ${base01};
+    $base02: ${base02};
+    $base03: ${base03};
+    $base04: ${base04};
+    $base05: ${base05};
+    $base06: ${base06};
+    $base07: ${base07};
+    $base08: ${base08};
+    $base09: ${base09};
+    $base0A: ${base0A};
+    $base0B: ${base0B};
+    $base0C: ${base0C};
+    $base0D: ${base0D};
+    $base0E: ${base0E};
+    $base0F: ${base0F};
+
+    $base10: ${base10};
+    $base11: ${base11};
+    $base12: ${base12};
+    $base13: ${base13};
+    $base14: ${base14};
+    $base15: ${base15};
+    $base16: ${base16};
+    $base17: ${base17};
+
+  '';
 in {
   programs.ironbar = {
     enable = true;
@@ -93,21 +122,54 @@ in {
       anchor_to_edges = true;
       start = [workspaces];
       center = [menu];
-      end = [battery tray volume clock];
+      end = [battery tray clock];
     };
   };
   xdg.configFile."ironbar/style.css".text = with config.colorscheme.colors; ''
-    * {
-      color: #${base01};
-    }
+            @define-color base00 #${base00};
+            @define-color base01 #${base01};
+            @define-color base02 #${base02};
+            @define-color base03 #${base03};
+            @define-color base04 #${base04};
+            @define-color base05 #${base05};
+            @define-color base06 #${base06};
+            @define-color base07 #${base07};
+            @define-color base08 #${base08};
+            @define-color base09 #${base09};
+            @define-color base0A #${base0A};
+            @define-color base0B #${base0B};
+            @define-color base0C #${base0C};
+            @define-color base0D #${base0D};
+            @define-color base0E #${base0E};
+            @define-color base0F #${base0F};
 
-    button:hover {
-      background: #${base04};
+    * {
+     all: unset;
     }
 
     #bar {
-      border-top: 1px solid #${base01};
-      background: alpha(#${base04}, 0.95);
+
+     background-color: alpha(@base05,0.7);
+     border: 1px solid alpha(@base04,0.7);
+     border-radius: 6px 6px 0px 0;
+     padding: 4px;
     }
+
+    .item {
+      padding: 6px;
+     border: 1px solid;
+     background: @base03;
+     color: @base04;
+      border-radius: 5px;
+     margin: 1px;
+    }
+
+
+    .item.focused {
+     background: @base0E;
+     color: @base06;
+    }
+
+
   '';
 }

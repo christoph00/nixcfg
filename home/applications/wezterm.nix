@@ -21,6 +21,7 @@ in {
           set_environment_variables = {
             TERM = 'wezterm',
           },
+          window_background_opacity = 0.7
         }
       '';
   };
