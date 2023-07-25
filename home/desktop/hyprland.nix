@@ -68,10 +68,10 @@ in {
           exec-once = ${pkgs.gtklock}/bin/gtklock -d
 
 
-          monitor=DP-2,highres,auto,1.5
-          exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1.5
-          env = GDK_SCALE,1.5
-          env = XCURSOR_SIZE,24
+          # monitor=DP-2,highres,auto,1.5
+          # exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1.5
+          # env = GDK_SCALE,1.5
+          # env = XCURSOR_SIZE,24
 
           exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
