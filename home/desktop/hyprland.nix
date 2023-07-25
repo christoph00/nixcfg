@@ -67,6 +67,7 @@ in {
         with config.colorscheme.colors; ''
           exec-once = ${pkgs.gtklock}/bin/gtklock -d
 
+          monitor=eDP-1,highres,auto,1
 
           # monitor=DP-2,highres,auto,1.5
           # exec-once=${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 1.5
