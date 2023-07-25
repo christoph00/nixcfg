@@ -192,9 +192,7 @@ in {
   home.packages = with pkgs; [
 
     brightnessctl
-    pamixer
     coreutils
-    hyprland
 
     (inputs.eww.packages.x86_64-linux.default.override {withWayland = true;})
 
