@@ -196,7 +196,7 @@ in {
     coreutils
     hyprland
 
-    inputs.eww.packages.x86_64-linux.default.override {withWayland = true;}
+    (inputs.eww.packages.x86_64-linux.default.override {withWayland = true;})
 
     libnotify
     playerctl
