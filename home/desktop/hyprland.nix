@@ -75,8 +75,6 @@ in {
 
           exec-once = ${pkgs.polkit_gnome}/libexec/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland
           exec-once = ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-          exec = ${pkgs.swaybg}/bin/swaybg -i ~/Bilder/Wallpaper.jpg --mode fill
-          # exec = ${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill
 
           exec-once = hyprctl setcursor ${config.gtk.cursorTheme.name} 24
 
