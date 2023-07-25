@@ -184,12 +184,15 @@ in {
     #./river.nix
     ./idle.nix
     ./ironbar.nix
-    ./eww.nix
+    #./eww.nix
     #./sfwbar.nix
     # ./waybar.nix
   ];
 
   home.packages = with pkgs; [
+
+    inputs.eww.packages.x86_64-linux.default.override {withWayland = true;}
+
     libnotify
     playerctl
     wireplumber
