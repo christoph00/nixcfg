@@ -183,13 +183,18 @@ in {
     #./labwc.nix
     #./river.nix
     ./idle.nix
-    ./ironbar.nix
+    #./ironbar.nix
     #./eww.nix
     #./sfwbar.nix
     # ./waybar.nix
   ];
 
   home.packages = with pkgs; [
+
+    brightnessctl
+    pamixer
+    coreutils
+    hyprland
 
     inputs.eww.packages.x86_64-linux.default.override {withWayland = true;}
 
