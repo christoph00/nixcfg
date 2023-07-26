@@ -90,19 +90,19 @@
   ];
 in {
   programs.eww.enable = true;
-  #programs.eww.configDir = eww-config;
+  programs.eww.configDir = "/home/christoph/.config/eww";
   programs.eww.package = inputs.eww.packages.x86_64-linux.default.override {withWayland = true;};
 
-  # systemd.user.services.eww = {
-  #   Unit = {
-  #     Description = "Eww daemon";
-  #     PartOf = ["graphical-session.target"];
-  #   };
-  #   Service = {
-  #     Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
-  #     ExecStart = "${config.programs.eww.package}/bin/eww daemon --no-daemonize";
-  #     Restart = "on-failure";
-  #   };
-  #   Install.WantedBy = ["graphical-session.target"];
-  # };
+  systemd.user.services.eww = {
+    Unit = {
+      Description = "Eww daemon";
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
+      ExecStart = "${config.programs.eww.package}/bin/eww daemon --no-daemonize";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = ["graphical-session.target"];
+  };
 }
