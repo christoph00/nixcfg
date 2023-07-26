@@ -15,6 +15,8 @@
     twitter-color-emoji
     yanone-kaffeesatz
     inriafonts
+
+    material-icons
   ];
 
   # fonts.fontconfig.defaultFonts = lib.mkDefault {

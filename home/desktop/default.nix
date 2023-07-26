@@ -190,7 +190,6 @@ in {
   ];
 
   home.packages = with pkgs; [
-
     brightnessctl
     coreutils
 
