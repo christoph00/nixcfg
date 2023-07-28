@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }: let
   notify-brightness = pkgs.writeShellScriptBin "notify-brightness" ''
@@ -44,7 +45,7 @@ in {
       hidpi = true;
     };
     plugins = [
-      inputs.hy3.packages.x86_64-linux.hy3 
+      inputs.hy3.packages.x86_64-linux.hy3
       #      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
     ];
     extraConfig = lib.mkMerge [
@@ -253,36 +254,34 @@ in {
 
         ''
       )
-      (
       ''
-        plugin {
-  hy3 {
-    # disable gaps when only one window is onscreen
-    no_gaps_when_only = false
+                plugin {
+          hy3 {
+            # disable gaps when only one window is onscreen
+            no_gaps_when_only = false
 
 
-    # tab group settings
-    tabs {
-      # height of the tab bar
-      height = 6
+            # tab group settings
+            tabs {
+              # height of the tab bar
+              height = 6
 
-      # padding between the tab bar and its focused node
-      padding = 2
+              # padding between the tab bar and its focused node
+              padding = 2
 
-      # the tab bar should animate in/out from the top instead of below the window
-      from_top = true
+              # the tab bar should animate in/out from the top instead of below the window
+              from_top = true
 
-      # render the window title on the bar
-      render_text = false
+              # render the window title on the bar
+              render_text = false
 
-      # rounding of tab bar corners
-      rounding = 2
+              # rounding of tab bar corners
+              rounding = 2
 
-    }
-  }
-}
+            }
+          }
+        }
       ''
-      )
     ];
   };
 }
