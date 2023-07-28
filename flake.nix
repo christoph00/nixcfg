@@ -65,10 +65,10 @@
     # };
     nix-colors.url = "github:misterio77/nix-colors";
 
-     hyprland = {
-       url = "github:hyprwm/hyprland/v0.27.1";
-       inputs.nixpkgs.follows = "nixpkgs";
-     };
+    hyprland = {
+      url = "github:hyprwm/hyprland/v0.27.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # hyprland-plugins = {
     #   url = "github:hyprwm/hyprland-plugins";
     #   inputs.hyprland.follows = "hyprland";
@@ -77,10 +77,10 @@
     #   url = "github:hyprwm/contrib";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-     xdg-portal-hyprland = {
-       url = "github:hyprwm/xdg-desktop-portal-hyprland";
-       inputs.nixpkgs.follows = "nixpkgs";
-     };
+    xdg-portal-hyprland = {
+      url = "github:hyprwm/xdg-desktop-portal-hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hy3 = {
       url = "github:outfoxxed/hy3";
