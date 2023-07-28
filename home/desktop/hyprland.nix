@@ -38,7 +38,7 @@
 in {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
+    package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.default;
     systemdIntegration = true;
     xwayland = {
       enable = true;
