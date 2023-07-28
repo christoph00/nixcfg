@@ -17,7 +17,6 @@
       ccls
       gopls
       ltex-ls
-      emmet-ls
       lua-language-server
       nodePackages.bash-language-server
       nixd
