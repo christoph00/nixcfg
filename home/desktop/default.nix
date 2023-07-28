@@ -251,7 +251,7 @@ in {
     '';
   };
 
-  colorscheme = inputs.nix-colors.colorSchemes.tokyo-night;
+  colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
   wallpaper = lib.mkDefault (mkWallpaper
     {
       scheme = config.colorscheme;
