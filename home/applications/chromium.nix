@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs.chromium = {
     enable = true;
-    package = pkgs.chromium;
+    package = (pkgs.vivaldi.override { proprietaryCodecs = true; enableWidevine = true;);
     extensions = [
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
       {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
