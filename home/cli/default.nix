@@ -24,7 +24,8 @@ in {
     fzf
     wget
 
-    nil
+    nixd
+    gcc
     alejandra
     cachix
 
