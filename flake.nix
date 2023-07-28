@@ -66,7 +66,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
 
     hyprland = {
-      url = "github:hyprwm/hyprland/v0.27.1";
+      url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # hyprland-plugins = {
