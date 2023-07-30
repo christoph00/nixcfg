@@ -80,7 +80,6 @@
       imports = [
         {config._module.args._inputs = inputs // {inherit (inputs) self;};}
         ./pkgs
-        ./args.nix
       ];
       flake = let
         lib = import ./lib {inherit nixpkgs lib inputs;};
