@@ -6,7 +6,7 @@ with lib; {
     };
     hw = {
       cpu = mkOption {
-        type = types.enum ["intel" "vm-intel" "amd" "vm-amd" null];
+        type = types.enum ["intel" "vm-intel" "amd" "vm-amd" "pi" null];
         default = null;
       };
       gpu = mkOption {
@@ -27,16 +27,20 @@ with lib; {
       rootOnTmpfs = mkEnableOption "mount root on tmpfs";
       stateDir = mkOption {
         type = types.str;
+        default = "/nix/persist";
       };
       btrfs = mkEnableOption "btrfs layout";
       mainDisk = mkOption {
         type = types.str;
+        default = "/dev/sda2";
       };
       efiDisk = mkOption {
         type = types.str;
+        default = "/dev/sda1";
       };
       swapDevice = mkOption {
         type = types.str;
+        default = "/dev/sda3";
       };
     };
     mainUser = mkOption {
@@ -67,7 +71,7 @@ with lib; {
         type = types.enum ["networkd" "network-manager" null];
         default = "networkd";
       };
-      tailscale = mkEnableOption "persist root";
+      tailscale = mkEnableOption "tailscale";
       tweaks = mkEnableOption "network tweaks";
     };
     containers = mkEnableOption "containers";
@@ -81,8 +85,8 @@ with lib; {
     desktop = {
       enable = mkEnableOption "desktop";
       wm = mkOption {
-        type = types.enum ["hyprland" "xfce"];
-        default = "hyprland";
+        type = types.enum ["Hyprland" "xfce"];
+        default = "Hyprland";
       };
       autologin = mkOption {
         type = types.bool;

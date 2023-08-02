@@ -4,6 +4,7 @@
   hostname,
   ...
 }: {
+  networking.hostname = "${hostname}";
   networking.useHostResolvConf = false;
   services.resolved = {
     enable = lib.mkDefault true;
