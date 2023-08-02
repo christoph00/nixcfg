@@ -13,6 +13,7 @@
     daemonIOSchedPriority = 7;
     settings = {
       auto-optimise-store = lib.mkDefault true;
+      warn-dirty = false;
       min-free = "${lib.toString (5 * 1024 * 1024 * 1024)}";
       max-free = "${lib.toString (10 * 1024 * 1024 * 1024)}";
       allowed-users = ["@wheel" "nix-builder"];

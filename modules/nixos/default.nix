@@ -22,6 +22,23 @@ with lib; {
         default = [];
       };
     };
+    fs = {
+      persist = mkEnableOption "rollback root";
+      rootOnTmpfs = mkEnableOption "mount root on tmpfs";
+      stateDir = mkOption {
+        type = types.str;
+      };
+      btrfs = mkEnableOption "btrfs layout";
+      mainDisk = mkOption {
+        type = types.str;
+      };
+      efiDisk = mkOption {
+        type = types.str;
+      };
+      swapDevice = mkOption {
+        type = types.str;
+      };
+    };
     mainUser = mkOption {
       type = types.str;
     };
@@ -45,13 +62,6 @@ with lib; {
       type = types.enum ["none" "grub" "systemd-boot"];
       default = "systemd-boot";
     };
-    persist = {
-      enable = mkEnableOption "rollback root";
-      rootOnTmpfs = mkEnableOption "mount root on tmpfs";
-      stateDir = mkOption {
-        type = types.str;
-      };
-    };
     network = {
       manager = mkOption {
         type = types.enum ["networkd" "network-manager" null];
@@ -61,6 +71,12 @@ with lib; {
       tweaks = mkEnableOption "network tweaks";
     };
     containers = mkEnableOption "containers";
+
+    services = {
+      home-assistant = {
+        enable = mkEnableOption "desktop";
+      };
+    };
 
     desktop = {
       enable = mkEnableOption "desktop";
