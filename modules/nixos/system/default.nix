@@ -18,6 +18,8 @@
     "net.core.bpf_jit_harden" = true;
   };
 
+  powerManagement.cpuFreqGovernor = "powersave";
+
   environment.systemPackages = [
     pkgs.git
     pkgs.killall

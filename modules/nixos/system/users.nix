@@ -5,6 +5,9 @@
   ...
 }: {
   security.sudo.wheelNeedsPassword = false;
+  programs.fuse.userAllowOther = true;
+  users.mutableUsers = false;
+  users.groups.media.gid = 900;
 
   users.users.christoph = {
     description = "Christoph";
