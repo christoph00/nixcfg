@@ -512,7 +512,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay",
-        "srvos": "srvos",
         "xdg-desktop-portal-hyprland": "xdg-desktop-portal-hyprland"
       }
     },
@@ -534,26 +533,6 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "srvos": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1690557184,
-        "narHash": "sha256-KMGPz3pP7OoUZaUhgcuYG84CtVaJOQw6RK8J0fAtKt0=",
-        "owner": "numtide",
-        "repo": "srvos",
-        "rev": "ceed433086a85e5540bd73cff46497af5a09e36f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "srvos",
         "type": "github"
       }
     },

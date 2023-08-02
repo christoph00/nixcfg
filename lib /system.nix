@@ -8,6 +8,10 @@
 
   mkSystem = nixpkgs.lib.nixosSystem;
 
+  mapHosts = dir: attrs @ {system ? system, ...}:
+    mapModules dir
+    (hostPath: mkHost hostPath attrs);
+
   mkNixosSystem = {
     hostname,
     modules,

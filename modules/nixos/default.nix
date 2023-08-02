@@ -71,7 +71,10 @@ with lib; {
         type = types.enum ["networkd" "network-manager" null];
         default = "networkd";
       };
-      tailscale = mkEnableOption "tailscale";
+      tailscale = mkOption {
+        type = types.bool;
+        default = true;
+      };
       tweaks = mkEnableOption "network tweaks";
     };
     containers = mkEnableOption "containers";
