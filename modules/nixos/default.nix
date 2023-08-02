@@ -46,7 +46,11 @@ with lib; {
       default = "systemd-boot";
     };
     persist = {
-      enableRoot = mkEnableOption "persist root";
+      enable = mkEnableOption "rollback root";
+      rootOnTmpfs = mkEnableOption "mount root on tmpfs";
+      stateDir = mkOption {
+        type = types.str;
+      };
     };
     network = {
       manager = mkOption {
