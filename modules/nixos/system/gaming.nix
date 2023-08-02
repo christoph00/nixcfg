@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs',
+  self',
   ...
 }: {
   config = lib.mkIf config.nos.desktop.gaming {
@@ -39,7 +40,7 @@
     };
     programs = {
       steam.enable = true;
-      steam.package = pkgs.steam-with-packages;
+      steam.package = self'.packages.steam-with-packages;
       gamemode = {
         enable = true;
         settings = {

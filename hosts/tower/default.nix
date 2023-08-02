@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   nos = {
     type = "desktop";
     hw = {
@@ -7,7 +7,7 @@
     };
     fs = {
       persist = true;
-      mainDisk = "/dev/disk-by/label/NIXOS";
+      mainDisk = "/dev/disk/by-label/NIXOS";
       efiDisk = "/dev/nvme0n1p1";
     };
 
@@ -19,5 +19,55 @@
     };
   };
 
+  fileSystems = {
+    "/media/Games" = {
+      device = "/dev/disk/by-label/ssd-data";
+      fsType = "btrfs";
+      options = ["subvol=@games" "noatime" "compress-force=zstd"];
+    };
+
+    "/media/ssd-data" = {
+      device = "/dev/disk/by-label/ssd-data";
+      fsType = "btrfs";
+      options = ["subvol=@data" "noatime" "compress-force=zstd"];
+    };
+
+    # "/media/hdd-data" = {
+    #   device = "/dev/disk/by-uuid/25fc5836-72df-4881-8760-af49333fa485";
+    #   fsType = "btrfs";
+    #   options = ["subvol=@data" "noatime" "compress-force=zstd"];
+    # };
+
+    "/mnt/ncdata" = {
+      device = "/dev/disk/by-label/ssd-data";
+      options = ["subvol=@ncdata" "discard=async" "compress-force=zstd" "nofail"];
+    };
+  };
+
   swapDevices = [{device = "/dev/nvme0n1p2";}];
+
+  services.fstrim.enable = true;
+
+  hardware.cpu.intel.updateMicrocode = true;
+  boot.initrd = {
+    availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
+    kernelModules = ["amdgpu"];
+  };
+  boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev"];
+  boot.blacklistedKernelModules = ["dm_mod"];
+  boot.kernelParams = [
+    "i915.fastboot=1"
+    "enable_gvt=1"
+    "quiet"
+    "rcutree.rcu_idle_gp_delay=1"
+    "splash"
+    "loglevel=3"
+    "udev.log-priority=3"
+    "vt.global_cursor_default=0"
+    "mem_sleep_default=deep"
+    "amdgpu.gartsize=4096"
+    "adgpu.ignore_crat=1"
+  ];
+
+  services.xserver.videoDrivers = ["amdgpu"];
 }
