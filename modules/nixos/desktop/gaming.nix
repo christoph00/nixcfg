@@ -40,7 +40,7 @@
     };
     programs = {
       steam.enable = true;
-     # steam.package = inputs'.unfree.legacyPackages.steam.override {
+      steam.package = pkgs.steam.override {
         extraPkgs = pkgs:
           with pkgs; [
             xorg.libXcursor
