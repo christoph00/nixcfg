@@ -5,7 +5,7 @@
   ...
 }: let
   inputs = self.inputs;
-  inherit (lib) concatLists mkNixosIso mkNixosSystem;
+  inherit (lib) concatLists mkNixosSystem;
 
   sharedArgs = {inherit inputs self lib;};
 in {
