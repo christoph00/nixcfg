@@ -10,7 +10,6 @@
 
   mkNixosSystem = {
     hostname,
-    modules,
     system,
     withSystem,
     ...
@@ -22,12 +21,10 @@
     }:
       mkSystem {
         inherit system;
-        modules =
-          [
-            "${self}/nixos/common"
-            "${self}/hosts/${args.hostname}"
-          ]
-          ++ args.modules or [];
+        modules = [
+          "${self}/nixos/common"
+          "${self}/hosts/${args.hostname}"
+        ];
         specialArgs =
           {
             inherit lib inputs self inputs' self';
