@@ -49,19 +49,19 @@
       script = ''
         mkdir -p /mnt
 
-        mount -o subvol=@root /dev/disk/by-label/NIXOS /mnt
+        mount -t btrfs -o subvol=@root /dev/disk/by-label/NIXOS /mnt
 
-        btrfs subvolume list -o /mnt/root |
+        btrfs subvolume list -o /mnt/@root |
           cut -f9 -d' ' |
           while read subvolume; do
             echo "deleting /$subvolume subvolume..."
             btrfs subvolume delete "/mnt/$subvolume"
           done &&
-          echo "deleting /root subvolume..." &&
-          btrfs subvolume delete /mnt/root
+          echo "deleting @root subvolume..." &&
+          btrfs subvolume delete /mnt/@root
 
-        echo "restoring blank /root subvolume..."
-        btrfs subvolume snapshot /mnt/root-blank /mnt/root
+        echo "restoring blank @root subvolume..."
+        btrfs subvolume snapshot /mnt/@root-blank /mnt/@root
 
         umount /mnt
       '';
