@@ -3,15 +3,13 @@ with lib; let
   mkFontOption = kind: {
     family = lib.mkOption {
       type = lib.types.str;
-      default = null;
+      default = "Fira Code";
       description = "Family name for ${kind} font profile";
-      example = "Fira Code";
     };
     package = lib.mkOption {
       type = lib.types.package;
-      default = null;
+      default = pkgs.fira-code;
       description = "Package for ${kind} font profile";
-      example = "pkgs.fira-code";
     };
   };
 in {
