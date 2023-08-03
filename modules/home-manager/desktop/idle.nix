@@ -15,7 +15,7 @@
         }
         {
           event = "lock";
-          command = "${pkgs.gtklock}/bin/gtklock-blur";
+          command = "${pkgs.gtklock}/bin/gtklock";
         }
       ];
       timeouts = [
@@ -26,8 +26,8 @@
         }
 
         {
-          timeout = 300;
-          command = "systemctl suspend-then-hibernate";
+          timeout = 333;
+          command = "${pkgs.systemd}/bin/systemctl suspend-then-hibernate";
         }
       ];
     };
