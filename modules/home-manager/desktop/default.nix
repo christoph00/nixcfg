@@ -51,9 +51,6 @@
 
       pcmanfm
       webcord
-
-      openBase16
-      # gpt4all
     ];
   };
 }
