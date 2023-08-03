@@ -5,7 +5,7 @@
   osConfig,
   ...
 }: let
-  anyrun-packages = inputs'.anyrun.package;
+  anyrun-packages = inputs'.anyrun.packages;
 in {
   programs.anyrun = {
     enable = true;
