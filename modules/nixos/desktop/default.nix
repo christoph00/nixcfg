@@ -5,7 +5,7 @@
   ...
 }:
 with lib; {
-  imports = [./gaming.nix ./hyprland.nix ./laptop.nix];
+  imports = [./gaming.nix ./hyprland.nix ./laptop.nix ./idle.nix];
   config = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
     # Disable mitigations on desktop
     boot.kernelParams = [
