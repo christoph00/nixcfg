@@ -9,6 +9,6 @@
     ./applications
     ./cli
     ./desktop
-    # ./gaming
+    ./gaming
   ];
 }

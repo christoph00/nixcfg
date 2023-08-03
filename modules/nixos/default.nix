@@ -111,6 +111,7 @@ with lib; {
 
   imports = [
     ./system
+    ./desktop
     #  ./services
   ];
 }
