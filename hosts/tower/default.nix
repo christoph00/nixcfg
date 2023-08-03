@@ -8,7 +8,7 @@
     fs = {
       btrfs = true;
       persist = true;
-      mainDisk = "/dev/disk/by-label/NIXOS";
+      mainDisk = "/dev/nvme0n1p3";
       efiDisk = "/dev/nvme0n1p1";
     };
     enableHomeManager = true;
