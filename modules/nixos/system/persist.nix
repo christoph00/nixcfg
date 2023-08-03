@@ -29,10 +29,10 @@
         "/var/lib/tailscale"
       ];
       files = [
-        "/etc/machine-id"
-        "/etc/ssh/ssh_host_rsa_key"
-        "/etc/ssh/ssh_host_rsa_key.pub"
-        "/etc/nix/id_rsa"
+        #  "/etc/machine-id"
+        # "/etc/ssh/ssh_host_rsa_key"
+        # "/etc/ssh/ssh_host_rsa_key.pub"
+        #  "/etc/nix/id_rsa"
       ];
     };
 
@@ -49,7 +49,7 @@
       script = ''
         mkdir -p /mnt
 
-        mount -t btrfs /dev/disk/by-label/NIXOS /mnt
+        mount -t btrfs ${config.nos.fs.mainDisk} /mnt
 
         btrfs subvolume list -o /mnt/@root |
           cut -f9 -d' ' |
