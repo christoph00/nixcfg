@@ -1,9 +1,13 @@
 {
   pkgs,
   inputs',
+  inputs,
   config,
   ...
 }: {
+  imports = [
+    inputs.anyrun.homeManagerModules.default
+  ];
   programs.anyrun = {
     enable = true;
     package = inputs'.anyrun.packages.anyrun;
@@ -48,7 +52,7 @@
     extraCss = with config.colorscheme.colors; ''
       * {
         transition: 100ms ease;
-        font-family: "Noto Sans";
+        font-family: "Noto Sans";`
       }
 
       #window,
