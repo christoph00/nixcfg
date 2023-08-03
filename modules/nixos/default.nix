@@ -45,6 +45,7 @@ with lib; {
     };
     mainUser = mkOption {
       type = types.str;
+      default = "christoph";
     };
     audio = {
       enable = mkEnableOption "audio";
@@ -105,4 +106,9 @@ with lib; {
 
   config = {
   };
+
+  imports = [
+    ./system
+    ./services
+  ];
 }
