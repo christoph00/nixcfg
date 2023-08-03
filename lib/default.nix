@@ -5,6 +5,6 @@
   inputs,
   ...
 }: let
-  system = import ./builders.nix {inherit lib inputs nixpkgs;};
+  system = import ./system.nix {inherit lib inputs nixpkgs;};
 in
   nixpkgs.lib.extend (_: _: system)
