@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  config = lib.mkIf (osConfig.desktop.wm == "Hyprland") {
+  config = lib.mkIf (osConfig.nos.desktop.wm == "Hyprland") {
     wayland.windowManager.hyprland = with config.colorscheme; {
       enable = true;
       systemdIntegration = true;
