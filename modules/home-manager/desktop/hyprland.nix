@@ -159,6 +159,11 @@ in {
           "move 75 44%,title:^(Volume Control)$"
           "float, class:^(imv)$"
         ];
+
+        layerrule = [
+          "blur, ^(gtk-layer-shell|anyrun)$"
+          "ignorezero, ^(gtk-layer-shell|anyrun)$"
+        ];
       };
       extraConfig = ''
         # a submap for resizing windows

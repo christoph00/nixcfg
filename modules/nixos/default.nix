@@ -132,7 +132,6 @@ in {
 
       gaming = mkEnableOption "gaming";
       fontProfiles = {
-        enable = lib.mkEnableOption "Whether to enable font profiles";
         monospace = mkFontOption "monospace";
         regular = mkFontOption "regular";
       };
