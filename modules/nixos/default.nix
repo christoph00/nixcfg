@@ -1,4 +1,8 @@
-{lib, ...}:
+{
+  lib,
+  pkgs,
+  ...
+}:
 with lib; let
   mkFontOption = kind: {
     family = lib.mkOption {
