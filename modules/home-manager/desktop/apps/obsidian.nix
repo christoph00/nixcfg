@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  inputs',
   lib,
   self,
   ...
@@ -211,8 +211,8 @@
 
   '';
 in {
-  home.packages = with pkgs; [
-    obsidian
+  home.packages = [
+    inputs'.unfree.legacyPackages.obsidian
   ];
   home.file.".config/obsidian/snippets/base16-theme.css".text = theme-css;
 }

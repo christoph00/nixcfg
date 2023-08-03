@@ -1,10 +1,10 @@
-{pkgs, ...}: {
+{inputs', ...}: {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode;
+    package = inputs'.unfree.legacyPackages.vscode;
 
     mutableExtensionsDir = true;
-    extensions = with pkgs.vscode-extensions; [
+    extensions = with inputs'.unfree.legacyPackages.vscode-extensions; [
       kahole.magit
       redhat.vscode-yaml
       jnoortheen.nix-ide
