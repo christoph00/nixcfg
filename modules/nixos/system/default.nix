@@ -9,7 +9,7 @@
     ./desktop.nix
     ./filesystems.nix
     ./fonts.nix
-    ./gaming.nix
+    # ./gaming.nix
     ./network.nix
     ./nix.nix
     ./persist.nix

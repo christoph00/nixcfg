@@ -3,5 +3,5 @@
   self,
   ...
 }: {
-  age.secrets.christoph-password.file = "${self}/secrets/christoph-password.age";
+  age.secrets.user-password.file = "${self}/secrets/christoph-password.age";
 }

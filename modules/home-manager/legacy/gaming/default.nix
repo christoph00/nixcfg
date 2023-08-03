@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  self',
   ...
 }: let
   desktopSteam = pkgs.makeDesktopItem {
@@ -11,21 +12,23 @@
     categories = ["Game"];
     terminal = false;
   };
+  steam-with-packages = self'.packages.steam-with-packages;
 in {
-  home.packages = with pkgs; [
-    steam-with-packages
-    gamehub
-    gamescope
-    gamemode
-    protontricks
-    radeontop
+  home.packages = with pkgs;
+    [
+      gamehub
+      gamescope
+      gamemode
+      protontricks
+      radeontop
 
-    rare
-    heroic
-    gogdl
+      rare
+      heroic
+      gogdl
 
-    desktopSteam
-  ];
+      desktopSteam
+    ]
+    ++ [steam-with-packages];
 
   # home.file.".steam/root/compatibilitytools.d/Proton-GE".source = "${pkgs.proton-ge}";
   # home.sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = ["$HOME/.steam/root/compatibilitytools.d"];
@@ -38,7 +41,7 @@ in {
       Service = {
         StartLimitInterval = 5;
         StartLimitBurst = 1;
-        ExecStart = "${pkgs.steam-with-packages}/bin/steam -language german -silent -newbigpicture -pipewire"; #
+        ExecStart = "${steam-with-packages}/bin/steam -language german -silent -newbigpicture -pipewire"; #
         Type = "simple";
         Restart = "on-failure";
       };
@@ -50,7 +53,7 @@ in {
       Service = {
         StartLimitInterval = 5;
         StartLimitBurst = 1;
-        ExecStart = "${pkgs.steam-with-packages}/bin/steam steam://rungameid/%i";
+        ExecStart = "${steam-with-packages}/bin/steam steam://rungameid/%i";
         Type = "oneshot";
       };
     };
@@ -61,7 +64,7 @@ in {
       Service = {
         StartLimitInterval = 5;
         StartLimitBurst = 1;
-        ExecStart = "${pkgs.steam-with-packages}/bin/steam -start steam://open/bigpicture";
+        ExecStart = "${steam-with-packages}/bin/steam -start steam://open/bigpicture";
         Type = "oneshot";
       };
     };

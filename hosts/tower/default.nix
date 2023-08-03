@@ -6,6 +6,7 @@
       gpu = "amd";
     };
     fs = {
+      btrfs = true;
       persist = true;
       mainDisk = "/dev/disk/by-label/NIXOS";
       efiDisk = "/dev/nvme0n1p1";

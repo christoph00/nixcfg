@@ -14,8 +14,8 @@
     settings = {
       auto-optimise-store = lib.mkDefault true;
       warn-dirty = false;
-      min-free = "${lib.toString (5 * 1024 * 1024 * 1024)}";
-      max-free = "${lib.toString (10 * 1024 * 1024 * 1024)}";
+      min-free = "${toString (5 * 1024 * 1024 * 1024)}";
+      max-free = "${toString (10 * 1024 * 1024 * 1024)}";
       allowed-users = ["@wheel" "nix-builder"];
       trusted-users = ["@wheel" "nix-builder"];
       max-jobs = "auto";

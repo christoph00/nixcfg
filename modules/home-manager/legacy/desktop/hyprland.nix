@@ -2,7 +2,7 @@
   lib,
   config,
   pkgs,
-  inputs,
+  inputs',
   ...
 }: let
   notify-brightness = pkgs.writeShellScriptBin "notify-brightness" ''
@@ -38,14 +38,14 @@
 in {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.default;
+    package = inputs'.hyprland.packages.default;
     systemdIntegration = true;
     xwayland = {
       enable = true;
       hidpi = true;
     };
     plugins = [
-      inputs.hy3.packages.x86_64-linux.hy3
+      #inputs.hy3.packages.x86_64-linux.hy3
       #      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
     ];
     extraConfig = lib.mkMerge [
@@ -201,7 +201,7 @@ in {
           bind = $mainMod, E, exec, ${pkgs.cinnamon.nemo}/bin/nemo
           bind = $mainMod, V, togglefloating,
           bind = $mainMod, F, fullscreen, 0
-          bind = $mainMod, R, exec, ${config.programs.anyrun.package}/bin/anyrun
+
           bind = $mainMod, P, pseudo, # dwindle
           bind = $mainMod, J, togglesplit, # dwindle
           bind = $mainMod, L, exec, ${pkgs.systemd}/bin/loginctl lock-session
