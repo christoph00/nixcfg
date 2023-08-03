@@ -14,6 +14,8 @@
       };
     };
 
+    boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+
     boot.initrd = {
       systemd.enable = true;
     };

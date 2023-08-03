@@ -24,6 +24,8 @@ with lib; {
     ];
     boot.loader.timeout = lib.mkForce 0;
 
+    boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+
     hardware.opengl = {
       enable = true;
       driSupport = true;
