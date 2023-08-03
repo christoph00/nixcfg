@@ -5,6 +5,7 @@
   ...
 }:
 with lib; {
+  imports = [./gaming.nix ./hyprland.nix];
   config = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
     # Disable mitigations on desktop
     boot.kernelParams = [
@@ -27,6 +28,24 @@ with lib; {
       enable = true;
       driSupport = true;
     };
+
+    environment = {
+      variables = {
+        NIXOS_OZONE_WL = "1";
+        _JAVA_AWT_WM_NONEREPARENTING = "1";
+        GDK_BACKEND = "wayland,x11";
+        ANKI_WAYLAND = "1";
+        MOZ_ENABLE_WAYLAND = "1";
+        XDG_SESSION_TYPE = "wayland";
+        SDL_VIDEODRIVER = "wayland";
+        CLUTTER_BACKEND = "wayland";
+      };
+    };
+
+    environment.etc."greetd/environments".text = ''
+      ${lib.optionalString (config.desktop.wm == "Hyprland") "Hyprland"}
+      zsh
+    '';
 
     services.greetd = {
       enable = true;
@@ -67,12 +86,31 @@ with lib; {
       '';
     };
 
+    services.seatd = {
+      enable = true;
+      description = "Seat management daemon";
+      script = "${lib.getExe pkgs.seatd} -g wheel";
+      serviceConfig = {
+        Type = "simple";
+        Restart = "always";
+        RestartSec = "1";
+      };
+      wantedBy = ["multi-user.target"];
+    };
+
+    xdg.portal = {
+      enable = true;
+
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
+
     hardware.logitech.wireless.enable = true;
     networking.networkmanager.enable = lib.mkForce true;
 
     programs.dconf.enable = true;
 
-    services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
     services.fwupd.enable = true;
 
     hardware.pulseaudio.enable = false;
