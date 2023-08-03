@@ -41,5 +41,9 @@ with lib; {
     };
 
     networking.networkmanager.wifi.backend = "iwd";
+
+
+    programs.light.enable = true;
+
   };
 }

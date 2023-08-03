@@ -1,14 +1,17 @@
 {
   pkgs,
-  inputs,
+  inputs',
   config,
+  osConfig,
   ...
-}: {
+}: let
+  anyrun-packages = inputs'.anyrun.package<<<<<<< refactors;
+in {
   programs.anyrun = {
     enable = true;
 
     config = {
-      plugins = with inputs.anyrun.packages.${pkgs.system}; [
+      plugins = with anyrun-packages; [
         applications
         #randr
         rink
@@ -47,7 +50,8 @@
     extraCss = with config.colorscheme.colors; ''
       * {
         transition: 100ms ease;
-        font-family: "Noto Sans";
+        font-family: "${osConfig.nos.desktop.fontProfiles.regular.family}";
+
         font-size: 1rem;
       }
 
