@@ -15,4 +15,10 @@ in {
     system = "x86_64-linux";
     specialArgs = sharedArgs;
   };
+  air13 = mkNixosSystem {
+    inherit withSystem;
+    hostname = "air13";
+    system = "x86_64-linux";
+    specialArgs = sharedArgs;
+  };
 }
