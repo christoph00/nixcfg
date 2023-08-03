@@ -1,14 +1,15 @@
 {
   pkgs,
-  inputs,
+  inputs',
   config,
   ...
 }: {
   programs.anyrun = {
     enable = true;
+    package = inputs'.anyrun.packages.anyrun
 
     config = {
-      plugins = with inputs.anyrun.packages.${pkgs.system}; [
+      plugins = with inputs'.anyrun.packages; [
         applications
         #randr
         rink

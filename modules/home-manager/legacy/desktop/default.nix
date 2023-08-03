@@ -168,7 +168,7 @@
     };
 in {
   imports = [
-    #./anyrun.nix
+    ./anyrun.nix
     ./gtk.nix
     #./plasma.nix
     ./hyprland.nix
