@@ -11,10 +11,13 @@
   ];
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     unfree.url = "github:numtide/nixpkgs-unfree/nixos-unstable";
-    unfree.inputs.nixpkgs.follows = "nixpkgs";
+    unfree.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    nixpkgs.url = "github:numtide/nixpkgs-unfree/nixos-unstable";
+    nixpkgs.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
