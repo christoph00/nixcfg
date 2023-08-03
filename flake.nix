@@ -13,7 +13,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    unfree.url = "github:numtide/nixpkgs-unfree";
+    unfree.url = "github:numtide/nixpkgs-unfree/nixos-unstable";
     unfree.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts = {
@@ -71,6 +71,9 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
+    anyrun.url = "github:Kirottu/anyrun";
+    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -101,13 +104,6 @@
         system,
         ...
       }: {
-        legacyPackages = import inputs.nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-          config.allowUnsupportedSystem = true;
-          overlays = [];
-        };
-
         formatter = pkgs.alejandra;
       };
     });
