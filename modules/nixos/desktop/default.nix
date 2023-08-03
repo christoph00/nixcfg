@@ -5,7 +5,7 @@
   ...
 }:
 with lib; {
-  imports = [./gaming.nix ./hyprland.nix];
+  imports = [./gaming.nix ./hyprland.nix ./laptop.nix];
   config = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
     # Disable mitigations on desktop
     boot.kernelParams = [
@@ -80,6 +80,7 @@ with lib; {
     };
 
     services.logind = {
+      killUserProcesses = true;
       lidSwitch = "suspend-then-hibernate";
       lidSwitchExternalPower = "suspend-then-hibernate";
       extraConfig = ''
