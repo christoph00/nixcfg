@@ -6,7 +6,7 @@
   config,
   ...
 }: let
-  pointer = config.home.pointerCursor;
+  pointer = config.gtk.cursorTheme;
 in {
   config = lib.mkIf (osConfig.nos.desktop.wm == "Hyprland") {
     wayland.windowManager.hyprland = with config.colorscheme; {
