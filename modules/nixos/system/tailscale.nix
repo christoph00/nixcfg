@@ -5,7 +5,7 @@
   ...
 }:
 with lib; {
-  config = mkIf (config.nos.network.tailscale) {
+  config = mkIf (config.nos.network.tailscale.enable) {
     # make the tailscale command usable to users
     environment.systemPackages = [pkgs.tailscale];
 
