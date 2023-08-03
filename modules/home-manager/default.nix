@@ -7,7 +7,8 @@
 }: {
   imports = [
     inputs.nix-colors.homeManagerModule
-    ./legacy
+    ./cli
+    ./desktop
   ];
 
   config = {
