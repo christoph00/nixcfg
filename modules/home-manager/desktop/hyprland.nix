@@ -5,7 +5,9 @@
   inputs',
   config,
   ...
-}: {
+}: let
+  pointer = config.home.pointerCursor;
+in {
   config = lib.mkIf (osConfig.nos.desktop.wm == "Hyprland") {
     wayland.windowManager.hyprland = with config.colorscheme; {
       enable = true;
@@ -17,6 +19,10 @@
       package = inputs'.hyprland.packages.default;
       settings = {
         "$MOD" = "SUPER";
+
+        exec-once = [
+          "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
+        ];
 
         gestures = {
           workspace_swipe = true;

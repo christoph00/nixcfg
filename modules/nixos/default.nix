@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  hostname,
   ...
 }:
 with lib; let
@@ -89,9 +90,15 @@ in {
         type = types.enum ["networkd" "network-manager" null];
         default = "networkd";
       };
-      tailscale = mkOption {
-        type = types.bool;
-        default = true;
+      domain = mkOption {
+        type = types.str;
+        default = "${hostname}.net.r505.de";
+      };
+      tailscale = {
+        enable = mkOption {
+          type = types.bool;
+          default = true;
+        };
       };
       tweaks = mkEnableOption "network tweaks";
     };
@@ -99,7 +106,11 @@ in {
 
     services = {
       home-assistant = {
-        enable = mkEnableOption "desktop";
+        enable = mkEnableOption "home-assistant";
+        domain = mkOption {
+          type = types.str;
+          default = "ha.${config.nos.network.domain}";
+        };
       };
     };
 
@@ -126,9 +137,6 @@ in {
         regular = mkFontOption "regular";
       };
     };
-  };
-
-  config = {
   };
 
   imports = [
