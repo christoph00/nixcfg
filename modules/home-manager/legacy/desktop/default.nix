@@ -189,7 +189,7 @@ in {
     brightnessctl
     coreutils
 
-    (inputs.eww.packages.x86_64-linux.default.override {withWayland = true;})
+    (inputs'.eww.packages.default.override {withWayland = true;})
 
     libnotify
     playerctl

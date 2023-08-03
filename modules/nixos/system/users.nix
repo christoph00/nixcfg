@@ -52,7 +52,7 @@
       inherit inputs self inputs' self';
     };
     users = {
-      ${config.nos.mainUser} = "${self}/modules/nixos";
+      ${config.nos.mainUser} = "${self}/modules/home-manager";
     };
   };
 }
