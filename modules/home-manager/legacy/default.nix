@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    inputs.agenix.homeManagerModules.age
     ./legacy
   ];
 }
