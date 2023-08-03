@@ -11,13 +11,10 @@
   ];
 
   inputs = {
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     unfree.url = "github:numtide/nixpkgs-unfree/nixos-unstable";
-    unfree.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
-    nixpkgs.url = "github:numtide/nixpkgs-unfree/nixos-unstable";
-    nixpkgs.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    unfree.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -123,12 +120,6 @@
         ...
       }: {
         formatter = pkgs.alejandra;
-        legacyPackages = import inputs.nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-          config.allowUnsupportedSystem = true;
-          overlays = [];
-        };
       };
     });
 }
