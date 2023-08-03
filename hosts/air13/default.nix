@@ -10,7 +10,7 @@
       persist = true;
       mainDisk = "/dev/nvme0n1p3";
       efiDisk = "/dev/nvme0n1p1";
-      # rootOnTmpfs = true;
+      rootOnTmpfs = true;
     };
     enableHomeManager = true;
 
