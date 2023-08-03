@@ -123,6 +123,12 @@
         ...
       }: {
         formatter = pkgs.alejandra;
+        legacyPackages = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          config.allowUnsupportedSystem = true;
+          overlays = [];
+        };
       };
     });
 }
