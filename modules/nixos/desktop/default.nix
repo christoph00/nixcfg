@@ -43,7 +43,7 @@ with lib; {
     };
 
     environment.etc."greetd/environments".text = ''
-      ${lib.optionalString (config.desktop.wm == "Hyprland") "Hyprland"}
+      ${lib.optionalString (config.nos.desktop.wm == "Hyprland") "Hyprland"}
       zsh
     '';
 
