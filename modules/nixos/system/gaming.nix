@@ -40,15 +40,26 @@
     };
     programs = {
       steam.enable = true;
-      steam.package = self'.packages.steam-with-packages;
+      steam.package = inputs'.unfree.legacyPackages.steam.override {
+        extraPkgs = pkgs:
+          with pkgs; [
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXinerama
+            xorg.libXScrnSaver
+            libpng
+            libpulseaudio
+            libvorbis
+            stdenv.cc.cc.lib
+            libkrb5
+            keyutils
+            gamescope
+            gamemode
+            mangohud
+          ];
+      };
       gamemode = {
         enable = true;
-        settings = {
-          custom = {
-            start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
-            end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
-          };
-        };
       };
     };
     systemd.extraConfig = "DefaultLimitNOFILE=1048576";
