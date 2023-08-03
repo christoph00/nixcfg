@@ -36,7 +36,7 @@
       ];
     };
 
-    boot.initrd.systemd.services.rollback = {
+    boot.initrd.systemd.services.rollback = lib.mkIf (!config.nos.fs.rootOnTmpfs) {
       description = "Rollback BTRFS root subvolume to a pristine state";
       wantedBy = [
         "initrd.target"
