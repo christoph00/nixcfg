@@ -16,7 +16,7 @@ in {
     gtk = {
       enable = true;
       font = {
-        name = osConfig.fontProfiles.regular.family;
+        name = osConfig.nos.fontProfiles.regular.family;
         size = 12;
       };
       theme = {
