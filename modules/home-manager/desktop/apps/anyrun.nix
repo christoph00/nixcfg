@@ -5,7 +5,7 @@
   osConfig,
   ...
 }: let
-  anyrun-packages = inputs'.anyrun.package<<<<<<< refactors;
+  anyrun-packages = inputs'.anyrun.package;
 in {
   programs.anyrun = {
     enable = true;
