@@ -49,7 +49,7 @@
       script = ''
         mkdir -p /mnt
 
-        mount -t btrfs -o subvol=@root /dev/disk/by-label/NIXOS /mnt
+        mount -t btrfs /dev/disk/by-label/NIXOS /mnt
 
         btrfs subvolume list -o /mnt/@root |
           cut -f9 -d' ' |
