@@ -6,7 +6,7 @@
   lib,
   ...
 }: {
-  imports = [./hyprland.nix ./apps];
+  imports = [./hyprland.nix ./apps ./theme.nix];
   config = lib.mkIf (builtins.elem osConfig.nos.type ["desktop" "laptop"]) {
     colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
 
