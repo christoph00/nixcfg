@@ -33,8 +33,6 @@ with lib; {
       powersave = true; # enable wifi powersaving
     };
   };
-  hardware.wirelessRegulatoryDatabase = mkIf config.nos.type == "laptop" true;
-
   systemd.network.wait-online.enable = false;
 
   boot.kernel.sysctl = {

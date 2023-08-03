@@ -8,7 +8,7 @@
       device = config.nos.fs.mainDisk;
     in {
       "/" =
-        if config.nos.fs.rootOnTmpffs
+        if config.nos.fs.rootOnTmpfs
         then {
           device = "none";
           fsType = "tmpfs";

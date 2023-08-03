@@ -1,7 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs',
+  ...
+}: {
   programs.chromium = {
     enable = true;
-    package = pkgs.vivaldi.override {
+    package = inputs'.unfree.legacyPackages.vivaldi.override {
       proprietaryCodecs = true;
       enableWidevine = true;
     };

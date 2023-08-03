@@ -4,6 +4,7 @@
   system,
   config,
   lib,
+  inputs',
   ...
 }:
 with config.colorscheme; let
@@ -11,74 +12,77 @@ with config.colorscheme; let
   localeEnglish = "en_US.UTF-8";
 in {
   imports = [./helix.nix ./neovim.nix];
-  home.packages = with pkgs; [
-    ripgrep
-    htop
-    pfetch
-    bc # Calculator
-    bottom # System viewer
-    ncdu # TUI disk usage
-    ripgrep # Better grep
-    fd # Better find
-    jq # JSON pretty printer and manipulator
-    fzf
-    wget
+  home.packages = with pkgs;
+    [
+      ripgrep
+      htop
+      pfetch
+      bc # Calculator
+      bottom # System viewer
+      ncdu # TUI disk usage
+      ripgrep # Better grep
+      fd # Better find
+      jq # JSON pretty printer and manipulator
+      fzf
+      wget
 
-    nixd
-    gcc
-    alejandra
-    cachix
+      nixd
+      gcc
+      alejandra
+      cachix
 
-    #inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
+      #inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
 
-    #vscode-cli
+      #vscode-cli
 
-    rclone
-    rsync
+      rclone
+      rsync
 
-    nodejs
-    python3
+      nodejs
+      python3
 
-    tmux
-    xplr
+      tmux
+      xplr
 
-    gopls
+      gopls
 
-    tailwindcss
+      tailwindcss
 
-    tree
+      tree
 
-    unrar
-    #unzip
-    p7zip
-    #cabextract
-    #innoextract
+      #unzip
+      p7zip
+      #cabextract
+      #innoextract
 
-    # wineWowPackages.staging
-    # winetricks
+      # wineWowPackages.staging
+      # winetricks
 
-    tio
-    #picocom
+      tio
+      #picocom
 
-    simple-http-server
+      simple-http-server
 
-    #vomit-sync
-    #    vmt
+      #vomit-sync
+      #    vmt
 
-    # jellyfin-ffmpeg
+      # jellyfin-ffmpeg
 
-    #conda
+      #conda
 
-    wrangler
-    flyctl
-    deno
+      wrangler
+      flyctl
+      deno
 
-    home-assistant-cli
+      home-assistant-cli
 
-    media-sort
-    phockup
-    ffmpeg-full
-  ];
+      # media-sort
+      phockup
+      ffmpeg-full
+    ]
+    ++ [
+      inputs'.unfree.legacyPackages.unrar
+    ];
 
   home.sessionVariables = {
     PF_INFO = "ascii title os kernel uptime shell term desktop scheme palette";

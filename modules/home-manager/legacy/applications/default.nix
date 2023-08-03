@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-    ./firefox.nix
+    #./firefox.nix
     #./helix.nix
     ./chromium.nix
     ./vscode.nix
@@ -13,6 +13,6 @@
     ./obsidian.nix
     #./geary.nix
     ./wezterm.nix
-    ./emacs.nix
+    #./emacs.nix
   ];
 }

@@ -4,7 +4,7 @@
   ...
 }:
 with config.colorscheme.colors; let
-  mono-font = config.fontProfiles.monospace.family;
+  mono-font = "Agave Nerd Font";
 in {
   programs.foot = {
     enable = true;

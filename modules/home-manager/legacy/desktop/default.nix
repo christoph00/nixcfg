@@ -168,7 +168,7 @@
     };
 in {
   imports = [
-    ./anyrun.nix
+    #./anyrun.nix
     ./gtk.nix
     #./plasma.nix
     ./hyprland.nix
@@ -247,15 +247,15 @@ in {
   };
 
   colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
-  wallpaper = lib.mkDefault (mkWallpaper
-    {
-      scheme = config.colorscheme;
-      width = 1920;
-      height = 1080;
-      logoScale = 4;
-    });
-  xdg.dataFile."colorscheme".text = config.colorscheme.slug;
-  xdg.dataFile."wallpaper.png".source = config.wallpaper;
+  # wallpaper = lib.mkDefault (mkWallpaper
+  #   {
+  #     scheme = config.colorscheme;
+  #     width = 1920;
+  #     height = 1080;
+  #     logoScale = 4;
+  #   });
+  #xdg.dataFile."colorscheme".text = config.colorscheme.slug;
+  #xdg.dataFile."wallpaper.png".source = config.wallpaper;
 
   home.sessionVariables = {
     #BROWSER = "firefox";
@@ -268,17 +268,17 @@ in {
   #xdg.mimeApps.associations.added = associations;
   #xdg.mimeApps.defaultApplications = associations;
 
-  fontProfiles = {
-    enable = true;
-    monospace = {
-      family = "Agave Nerd Font";
-      package = pkgs.nerdfonts.override {fonts = ["Agave"];};
-    };
-    regular = {
-      family = "Fira Sans";
-      package = pkgs.fira;
-    };
-  };
+  # fontProfiles = {
+  #   enable = true;
+  #   monospace = {
+  #     family = "Agave Nerd Font";
+  #     package = pkgs.nerdfonts.override {fonts = ["Agave"];};
+  #   };
+  #   regular = {
+  #     family = "Fira Sans";
+  #     package = pkgs.fira;
+  #   };
+  # };
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "true";

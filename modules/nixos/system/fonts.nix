@@ -33,7 +33,6 @@ with lib; {
 
       # font packages that should be installed
       packages = with pkgs; [
-        corefonts
         material-icons
         material-design-icons
         roboto
