@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   osConfig,
   lib,
@@ -6,6 +7,8 @@
 }: {
   imports = [./hyprland.nix ./apps];
   config = lib.mkIf (builtins.elem osConfig.nos.type ["desktop" "laptop"]) {
+    colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
+
     home.packages = with pkgs; [
       brightnessctl
       coreutils
