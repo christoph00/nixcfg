@@ -8,7 +8,7 @@
     stateVersion = lib.mkDefault "23.05";
   };
   nix = {
-    aemonCPUSchedPolicy = "batch";
+    daemonCPUSchedPolicy = "batch";
     daemonIOSchedClass = "idle";
     daemonIOSchedPriority = 7;
     settings = {

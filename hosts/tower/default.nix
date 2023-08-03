@@ -10,11 +10,11 @@
       mainDisk = "/dev/disk/by-label/NIXOS";
       efiDisk = "/dev/nvme0n1p1";
     };
+    enableHomeManager = true;
 
     desktop = {
       wm = "Hyprland";
       autologin = true;
-      enableHomeManager = true;
       gaming = true;
     };
   };

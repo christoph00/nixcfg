@@ -43,7 +43,7 @@
 
   users.users.root.passwordFile = config.age.secrets.user-password.path;
 
-  home-manager = lib.mkIf config.nos.home-manager {
+  home-manager = lib.mkIf config.nos.enableHomeManager {
     verbose = true;
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -52,7 +52,7 @@
       inherit inputs self inputs' self';
     };
     users = {
-      ${config.nos.mainUser} = ../../home-manager;
+      ${config.nos.mainUser} = "${self}/modules/nixos";
     };
   };
 }

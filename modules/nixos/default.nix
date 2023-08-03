@@ -86,6 +86,11 @@ with lib; {
       };
     };
 
+    enableHomeManager = mkOption {
+      type = types.bool;
+      default = false;
+    };
+
     desktop = {
       enable = mkEnableOption "desktop";
       wm = mkOption {
@@ -96,10 +101,7 @@ with lib; {
         type = types.bool;
         default = false;
       };
-      enableHomeManager = mkOption {
-        type = types.bool;
-        default = false;
-      };
+
       gaming = mkEnableOption "gaming";
     };
   };
@@ -109,6 +111,6 @@ with lib; {
 
   imports = [
     ./system
-    ./services
+    #  ./services
   ];
 }
