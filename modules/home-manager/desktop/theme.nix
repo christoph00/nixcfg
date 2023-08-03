@@ -8,7 +8,7 @@
   ...
 }: let
   inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
-  fontProfiles = osConfig.nos.fontProfiles;
+  fontProfiles = osConfig.nos.desktop.fontProfiles;
 in {
   config = lib.mkIf (builtins.elem osConfig.nos.type ["desktop" "laptop"]) {
     colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
@@ -16,7 +16,7 @@ in {
     gtk = {
       enable = true;
       font = {
-        name = osConfig.nos.fontProfiles.regular.family;
+        name = fontProfiles.regular.family;
         size = 12;
       };
       theme = {
