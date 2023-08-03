@@ -60,8 +60,23 @@
       url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    xdg-desktop-portal-hyprland = {
+    hyprpicker = {
+      url = "github:hyprwm/hyprpicker";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprpaper = {
+      url = "github:hyprwm/hyprpaper";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    xdg-portal-hyprland = {
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
