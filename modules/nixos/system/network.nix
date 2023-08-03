@@ -5,11 +5,11 @@
   ...
 }:
 with lib; {
-  useDHCP = mkDefault false;
-  useNetworkd = mkDefault true;
+  networking.useDHCP = mkDefault false;
+  networking.useNetworkd = mkDefault true;
 
-  networking.hostname = "${hostname}";
-  hostId = builtins.substring 0 8 (
+  networking.hostName = "${hostname}";
+  networking.hostId = builtins.substring 0 8 (
     builtins.hashString "md5" config.networking.hostName
   );
   networking.useHostResolvConf = false;
@@ -21,11 +21,11 @@ with lib; {
       DNSStubListenerExtra=[::1]:53
     '';
   };
-  nameservers = [
+  networking.nameservers = [
     "1.1.1.1"
     "9.9.9.9"
   ];
-  networkmanager = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
+  networking.networkmanager = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
     enable = true;
     plugins = []; # disable all plugins, we don't need them
     dns = "systemd-resolved"; # use systemd-resolved as dns backend

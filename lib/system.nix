@@ -22,7 +22,9 @@
       mkSystem {
         inherit system;
         modules = [
-          "${self}/nixos/common"
+          inputs.home-manager.nixosModules.home-manager
+          inputs.agenix.nixosModules.age
+          "${self}/modules/nixos"
           "${self}/hosts/${args.hostname}"
         ];
         specialArgs =
