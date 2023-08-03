@@ -47,8 +47,8 @@
     extraCss = with config.colorscheme.colors; ''
       * {
         transition: 100ms ease;
-        font-family: ${config.fontProfiles.monospace.family};
-        font-size: 1.1rem;
+        font-family: "Noto Sans";
+        font-size: 1rem;
       }
 
       #window,
