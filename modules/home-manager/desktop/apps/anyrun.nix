@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   config,
+  osConfig,
   ...
 }: {
   programs.anyrun = {
@@ -47,7 +48,7 @@
     extraCss = with config.colorscheme.colors; ''
       * {
         transition: 100ms ease;
-        font-family: "Noto Sans";
+        font-family: "${osConfig.nos.desktop.fontProfiles.regular.name}";
         font-size: 1rem;
       }
 
