@@ -6,7 +6,7 @@
 }: {
   programs.anyrun = {
     enable = true;
-    package = inputs'.anyrun.packages.anyrun
+    package = inputs'.anyrun.packages.anyrun;
 
     config = {
       plugins = with inputs'.anyrun.packages; [
