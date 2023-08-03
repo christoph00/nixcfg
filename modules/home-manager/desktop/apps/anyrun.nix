@@ -5,7 +5,7 @@
   osConfig,
   ...
 }: let
-  anyrun-packages = inputs'.anyrun.packages;
+  anyrun-packages = inputs'.anyrun.package<<<<<<< refactors;
 in {
   programs.anyrun = {
     enable = true;
@@ -51,6 +51,7 @@ in {
       * {
         transition: 100ms ease;
         font-family: "${osConfig.nos.desktop.fontProfiles.regular.family}";
+
         font-size: 1rem;
       }
 
