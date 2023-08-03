@@ -7,6 +7,7 @@
 }: {
   imports = [
     inputs.nix-colors.homeManagerModule
+    inputs.anyrun.homeManagerModules.default
     ./cli
     ./desktop
   ];
