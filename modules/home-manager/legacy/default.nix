@@ -4,4 +4,7 @@
   config,
   ...
 }: {
+  imports = [
+    ./legacy
+  ];
 }

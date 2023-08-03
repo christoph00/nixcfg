@@ -4,6 +4,20 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./boot.nix
+    ./desktop.nix
+    ./filesystems.nix
+    ./fonts.nix
+    ./gaming.nix
+    ./network.nix
+    ./nix.nix
+    ./persist.nix
+    ./secrets.nix
+    ./tailscale.nix
+    ./users.nix
+  ];
+
   system.stateVersion = "23.11";
   hardware.enableRedistributableFirmware = true;
 
