@@ -39,7 +39,7 @@
     #   options = ["subvol=@data" "noatime" "compress-force=zstd"];
     # };
 
-    "/mnt/ncdata" = {
+    "/media/ncdata" = {
       device = "/dev/disk/by-label/ssd-data";
       options = ["subvol=@ncdata" "discard=async" "compress-force=zstd" "nofail"];
     };
