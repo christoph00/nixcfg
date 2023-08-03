@@ -5,9 +5,6 @@
   ...
 }: {
   imports = [
-    ./applications
-    ./cli
-    ./desktop
-    ./gaming
+    ./legacy
   ];
 }
