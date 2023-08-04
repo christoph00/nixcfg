@@ -1,5 +1,5 @@
 {...}: {
   imports = [
-    ./smart-home
+    ./home-assistant
   ];
 }
