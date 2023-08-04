@@ -17,14 +17,6 @@ in {
         "192.168.0.0/16"
       ];
 
-      jails = {
-        sshd = ''
-          enabled = true
-          port = 22
-          mode = aggressive
-        '';
-      };
-
       bantime-increment = {
         enable = true;
         rndtime = "12m";
