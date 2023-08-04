@@ -128,6 +128,7 @@ in {
       default = "systemd-boot";
     };
     network = {
+      tweaks = mkEnableOption "network tweaks";
       manager = mkOption {
         type = types.enum ["networkd" "network-manager" null];
         default = "networkd";
@@ -142,7 +143,6 @@ in {
           default = true;
         };
       };
-      tweaks = mkEnableOption "network tweaks";
     };
     containers = mkEnableOption "containers";
 

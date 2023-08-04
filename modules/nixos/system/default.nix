@@ -9,6 +9,7 @@
     ./filesystems.nix
     ./fonts.nix
     ./network.nix
+    ./network-tweaks.nix
     ./nix.nix
     ./persist.nix
     ./secrets.nix
