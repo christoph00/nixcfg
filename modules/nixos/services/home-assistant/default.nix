@@ -1,9 +1,10 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
-  config = {
+  config = lib.mkIf config.nos.services.home-assistant.enable {
     users.users.hass = {
       extraGroups = ["dialout"];
       openssh.authorizedKeys.keys = [
@@ -168,6 +169,27 @@
       path = "/nix/persist/hass/serviceaccount.json";
       owner = "hass";
       group = "hass";
+    };
+
+    services.mosquitto = {
+      enable = true;
+      listeners = [
+        {
+          acl = ["pattern readwrite #"];
+          omitPasswordAuth = true;
+          settings.allow_anonymous = true;
+        }
+      ];
+    };
+
+    systemd.services.ebusd = {
+      description = "ebusd";
+      wantedBy = ["multi-user.target"];
+
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.ebusd}/usr/bin/ebusd -f --scanconfig -d ens:ebus.speedport.ip:9999 --mqtthost futro.speedport.ip --mqttport 1883 --mqttvar=filter-direction=r|u|^w --mqttint=${pkgs.ebusd}/etc/ebusd/mqtt-hassio.cfg --mqttjson --configlang=de ";
+      };
     };
   };
 }
