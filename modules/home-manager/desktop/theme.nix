@@ -9,6 +9,8 @@
 }: let
   inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
   fontProfiles = osConfig.nos.desktop.fontProfiles;
+  monitors = osConfig.nos.hw.monitors;
+  primaryMonitor = builtins.head (lib.filter (monitor: monitor.isPrimary) monitors);
 in {
   config = lib.mkIf (builtins.elem osConfig.nos.type ["desktop" "laptop"]) {
     colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
@@ -32,7 +34,7 @@ in {
       cursorTheme = {
         name = "macOS-Monterey";
         package = pkgs.apple-cursor;
-        size = 16;
+        size = 24 * primaryMonitor.scale;
       };
       gtk3.extraCss = ''
         button.image-button {
