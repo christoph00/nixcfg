@@ -7,6 +7,7 @@
   ...
 }: let
   pointer = config.gtk.cursorTheme;
+  monitors = osConfig.nos.hw.monitors;
 in {
   config = lib.mkIf (osConfig.nos.desktop.wm == "Hyprland") {
     wayland.windowManager.hyprland = with config.colorscheme; {
@@ -19,6 +20,8 @@ in {
       package = inputs'.hyprland.packages.default;
       settings = {
         "$MOD" = "SUPER";
+
+        monitor = map (monitor: "${monitor.name},${monitor.width}x${monitor.height}@${monitor.refreshRate},${monitor.x}x${monitor.y},${monitor.scale}") monitors;
 
         exec-once = [
           "hyprctl setcursor ${pointer.name} ${toString pointer.size}"

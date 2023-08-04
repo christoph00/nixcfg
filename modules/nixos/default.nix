@@ -32,8 +32,50 @@ in {
         default = null;
       };
       monitors = mkOption {
-        type = types.listOf types.string;
-        default = [];
+        type = types.listOf (types.submodule {
+          options = {
+            name = mkOption {
+              type = types.str;
+              example = "DP-1";
+            };
+            isPrimary = mkOption {
+              type = types.bool;
+              default = true;
+            };
+            width = mkOption {
+              type = types.int;
+              default = 1920;
+            };
+            height = mkOption {
+              type = types.int;
+              default = 1080;
+            };
+            refreshRate = mkOption {
+              type = types.int;
+              default = 60;
+            };
+            x = mkOption {
+              type = types.int;
+              default = 0;
+            };
+            y = mkOption {
+              type = types.int;
+              default = 0;
+            };
+            enabled = mkOption {
+              type = types.bool;
+              default = true;
+            };
+            workspace = mkOption {
+              type = types.nullOr types.str;
+              default = null;
+            };
+            scale = mkOption {
+              type = types.str;
+              default = "1";
+            };
+          };
+        });
       };
       netifs = mkOption {
         type = types.listOf types.string;

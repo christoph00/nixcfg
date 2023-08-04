@@ -4,6 +4,24 @@
     hw = {
       cpu = "intel";
       gpu = "amd";
+      monitors = [
+        {
+          enabled = true;
+          name = "DP-1";
+          width = 3840;
+          height = 2160;
+          scale = "1.5";
+        }
+        {
+          enabled = false;
+          name = "DP-2";
+          width = 1920;
+          height = 1080;
+          isPrimary = false;
+          refreshRate = 60;
+          scale = "1";
+        }
+      ];
     };
     fs = {
       btrfs = true;
