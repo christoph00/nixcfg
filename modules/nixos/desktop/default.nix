@@ -117,6 +117,11 @@ with lib; {
 
     services.upower.enable = true;
 
+    environment.systemPackages = [pkgs.gtklock];
+    # services.udev.packages = [ pkgs.light ];
+    security.polkit.enable = true;
+    security.pam.services.gtklock.text = "auth include login\n";
+
     services.dbus = {
       enable = true;
       # implementation = "broker";
