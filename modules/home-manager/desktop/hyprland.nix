@@ -29,13 +29,13 @@ in {
         monitors;
 
         exec-once = [
-          "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
+          "hyprctl setcursor ${pointer.name} ${toString pointer.size * primaryMonitor.scale}"
           "xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 24c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2"
         ];
 
         env = [
           "GDK_SCALE, ${toString primaryMonitor.scale}"
-          "XCURSOR_SIZE, 12"
+          "XCURSOR_SIZE, ${toString pointer.size * primaryMonitor.scale}"
           "NIXOS_OZONE_WL, 1"
           "WLR_DRM_NO_MODIFIERS,1"
           "SDL_VIDEODRIVER,wayland"
