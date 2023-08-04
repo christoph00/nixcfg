@@ -8,6 +8,7 @@
 }: let
   pointer = config.gtk.cursorTheme;
   monitors = osConfig.nos.hw.monitors;
+  primaryMonitor = builtins.head (lib.filter (monitor: monitor.isPrimary) monitors);
 in {
   config = lib.mkIf (osConfig.nos.desktop.wm == "Hyprland") {
     wayland.windowManager.hyprland = with config.colorscheme; {
@@ -15,17 +16,35 @@ in {
       systemdIntegration = true;
       xwayland = {
         enable = true;
-        hidpi = true;
+        hidpi = primaryMonitor.scale > 1;
       };
       package = inputs'.hyprland.packages.default;
       settings = {
         "$MOD" = "SUPER";
 
-        monitor = map (monitor: "${monitor.name},${monitor.width}x${monitor.height}@${monitor.refreshRate},${monitor.x}x${monitor.y},${monitor.scale}") monitors;
+        monitor = map (monitor:
+          if monitor.enabled
+          then "${monitor.name},${toString monitor.width}x${toString monitor.height}@${toString monitor.refreshRate},${toString monitor.x}x${toString monitor.y},${toString monitor.scale}"
+          else "${monitor.name},disable")
+        monitors;
 
         exec-once = [
           "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
+          "xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 24c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2"
         ];
+
+        env = [
+          "GDK_SCALE, ${toString primaryMonitor.scale}"
+          "XCURSOR_SIZE, 12"
+          "NIXOS_OZONE_WL, 1"
+          "WLR_DRM_NO_MODIFIERS,1"
+          "SDL_VIDEODRIVER,wayland"
+          "_JAVA_AWT_WM_NONREPARENTING,1"
+        ];
+
+        xwayland = {
+          force_zero_scaling = true;
+        };
 
         gestures = {
           workspace_swipe = true;
