@@ -15,6 +15,7 @@
     ./tailscale.nix
     ./users.nix
     ./ssh.nix
+    ./firewall.nix
   ];
 
   system.stateVersion = "23.11";
