@@ -78,13 +78,13 @@ with lib; {
           };
       };
     };
-
+    #suspend-then-hibernate
     services.logind = {
       killUserProcesses = true;
-      lidSwitch = "suspend-then-hibernate";
-      lidSwitchExternalPower = "suspend-then-hibernate";
+      lidSwitch = "hibernate";
+      lidSwitchExternalPower = "hibernate";
       extraConfig = ''
-        HandlePowerKey=suspend-then-hibernate
+        HandlePowerKey=hibernate
         HibernateDelaySec=3600
       '';
     };
