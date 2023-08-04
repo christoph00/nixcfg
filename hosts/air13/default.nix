@@ -4,6 +4,12 @@
     hw = {
       cpu = "intel";
       gpu = "intel";
+      monitors = [
+        {
+          enabled = true;
+          name = "eDP-1";
+        }
+      ];
     };
     fs = {
       btrfs = true;
