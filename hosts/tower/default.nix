@@ -27,6 +27,10 @@
     };
     enableHomeManager = true;
 
+    network = {
+      tweaks = true;
+    };
+
     desktop = {
       wm = "Hyprland";
       autologin = true;
