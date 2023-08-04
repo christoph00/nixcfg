@@ -16,14 +16,18 @@ with lib; {
   services.resolved = {
     enable = lib.mkDefault true;
     dnssec = "false";
+    fallbackDns = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
     llmnr = "true";
     extraConfig = ''
       DNSStubListenerExtra=[::1]:53
+      DNSOverTLS=yes
     '';
   };
+
+  # 1-7dhqcaaa4aaeaaya6kpt7egqaflhgiiaeeiabca.max.rethinkdns.com
+
   networking.nameservers = [
-    "1.1.1.1"
-    "9.9.9.9"
+    "1.1.1.1#1-7dhqcaaa4aaeaaya6kpt7egqaflhgiiaeeiabca.max.rethinkdns.com"
   ];
   networking.networkmanager = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
     enable = true;
