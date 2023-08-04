@@ -34,7 +34,7 @@ in {
       cursorTheme = {
         name = "macOS-Monterey";
         package = pkgs.apple-cursor;
-        size = 24 * primaryMonitor.scale;
+        size = builtins.ceil (16 * primaryMonitor.scale);
       };
       gtk3.extraCss = ''
         button.image-button {
