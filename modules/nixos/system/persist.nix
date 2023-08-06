@@ -8,7 +8,7 @@
     inputs.impermanence.nixosModules.impermanence
   ];
 
-  config = lib.mkIf config.nos.fs.persist  {
+  config = lib.mkIf config.nos.fs.persist {
     environment.persistence."/nix/persist" = {
       hideMounts = true;
       directories = [
