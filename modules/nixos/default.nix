@@ -147,8 +147,19 @@ in {
     containers = mkEnableOption "containers";
 
     services = {
+      nas = {
+        enable = mkEnableOption "enable nas";
+        domain = mkOption {
+          type = types.str;
+          default = "data.${config.nos.network.domain}";
+        };
+      };
+      smart-home = mkEnableOption "smart home";
       home-assistant = {
-        enable = mkEnableOption "home-assistant";
+        enable = mkOption {
+          type = types.bool;
+          default = config.nos.services.smart-home;
+        };
         domain = mkOption {
           type = types.str;
           default = "ha.${config.nos.network.domain}";
