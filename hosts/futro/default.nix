@@ -16,7 +16,7 @@
     domain = "r505.de";
     services = {
       smart-home = true;
-      nas = true;
+      nas.enable = true;
     };
   };
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "ohci_pci" "ehci_pci" "usb_storage" "usbhid" "sd_mod"];
