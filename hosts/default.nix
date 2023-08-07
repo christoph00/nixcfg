@@ -21,4 +21,10 @@ in {
     system = "x86_64-linux";
     specialArgs = sharedArgs;
   };
+  futro = mkNixosSystem {
+    inherit withSystem;
+    hostname = "futro";
+    system = "x86_64-linux";
+    specialArgs = sharedArgs;
+  };
 }
