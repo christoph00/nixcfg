@@ -91,10 +91,6 @@ with lib; {
 
     xdg.portal = {
       enable = true;
-
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-      ];
     };
 
     hardware.logitech.wireless.enable = true;
