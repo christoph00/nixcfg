@@ -10,8 +10,9 @@
       gpu = "amd";
     };
     fs = {
-      btrfs = true;
-      persist = false;
+      btrfs = false;
+      persist = true;
+      rootOnTmpfs = true;
     };
     network.domain = "r505.de";
     services = {
