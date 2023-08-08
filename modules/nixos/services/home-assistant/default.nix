@@ -74,7 +74,7 @@
           report_state = true;
           exposed_domains = ["switch" "light"];
         };
-        lovelace.mode = "yaml";
+        #lovelace.mode = "yaml";
         switch = [
           {
             name = "Tower";
