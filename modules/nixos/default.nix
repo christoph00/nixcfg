@@ -127,7 +127,7 @@ in {
     };
     printing = mkOption {
       type = types.bool;
-      default = false;
+      default = config.nos.desktop.enable;
     };
 
     kernel = mkOption {
