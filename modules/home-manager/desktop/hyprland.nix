@@ -90,7 +90,6 @@ in {
           blur = true;
           blur_size = 5;
           blur_passes = 4;
-          blur_xray = true;
 
           # shadow config
           drop_shadow = "yes";
