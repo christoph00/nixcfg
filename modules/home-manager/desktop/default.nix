@@ -12,7 +12,7 @@
     ./theme.nix
     ./idle.nix
   ];
-  config = lib.mkIf osConfig.desktop.enable {
+  config = lib.mkIf osConfig.nos.desktop.enable {
     colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
 
     xdg.configFile."xkb/symbols/us-german-umlaut" = {
