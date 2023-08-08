@@ -108,16 +108,28 @@ in {
       default = "christoph";
     };
     audio = {
-      enable = mkEnableOption "audio";
+      enable = mkOption {
+        type = types.bool;
+        default = config.nos.desktop.enable;
+      };
     };
     video = {
-      enable = mkEnableOption "video";
+      enable = mkOption {
+        type = types.bool;
+        default = config.nos.desktop.enable;
+      };
     };
     bluetooth = {
-      enable = mkEnableOption "bluetooth";
+      enable = mkOption {
+        type = types.bool;
+        default = config.nos.desktop.enable;
+      };
     };
     printing = {
-      enable = mkEnableOption "printing";
+      enable = mkOption {
+        type = types.bool;
+        default = config.nos.desktop.enable;
+      };
     };
     kernel = mkOption {
       type = types.raw;
@@ -169,7 +181,7 @@ in {
 
     enableHomeManager = mkOption {
       type = types.bool;
-      default = false;
+      default = config.nos.desktop.enable;
     };
 
     desktop = {
