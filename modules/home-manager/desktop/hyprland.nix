@@ -42,6 +42,7 @@ in {
           "WLR_DRM_NO_MODIFIERS,1"
           "SDL_VIDEODRIVER,wayland"
           "_JAVA_AWT_WM_NONREPARENTING,1"
+          "SDL_VIDEODRIVER=wayland"
         ];
 
         xwayland = {
@@ -84,12 +85,6 @@ in {
           # fancy corners
           rounding = 7;
           multisample_edges = true; # fixes pixelated corners on relatively better monitors, useless on old monitors
-
-          # blur
-          blur_new_optimizations = 1;
-          blur = true;
-          blur_size = 5;
-          blur_passes = 4;
 
           # shadow config
           drop_shadow = "yes";
