@@ -125,12 +125,11 @@ in {
         default = config.nos.desktop.enable;
       };
     };
-    printing = {
-      enable = mkOption {
-        type = types.bool;
-        default = config.nos.desktop.enable;
-      };
+    printing = mkOption {
+      type = types.bool;
+      default = false;
     };
+
     kernel = mkOption {
       type = types.raw;
       default = pkgs.linuxPackages_latest;
