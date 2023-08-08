@@ -40,7 +40,6 @@ in {
           "XCURSOR_SIZE, ${toString pointer.size}"
           "NIXOS_OZONE_WL, 1"
           "WLR_DRM_NO_MODIFIERS,1"
-          "SDL_VIDEODRIVER,wayland"
           "_JAVA_AWT_WM_NONREPARENTING,1"
           "SDL_VIDEODRIVER=x11"
         ];
