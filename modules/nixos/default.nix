@@ -187,7 +187,7 @@ in {
     desktop = {
       enable = mkOption {
         type = types.bool;
-        default = false;
+        default = builtins.elem config.nos.type ["desktop" "laptop"];
       };
       wm = mkOption {
         type = types.enum ["Hyprland" "xfce"];

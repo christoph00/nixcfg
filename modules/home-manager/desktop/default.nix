@@ -12,7 +12,7 @@
     ./theme.nix
     ./idle.nix
   ];
-  config = lib.mkIf (builtins.elem osConfig.nos.type ["desktop" "laptop"]) {
+  config = lib.mkIf osConfig.desktop.enable {
     colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
 
     xdg.configFile."xkb/symbols/us-german-umlaut" = {
