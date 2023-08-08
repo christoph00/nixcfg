@@ -12,6 +12,7 @@
     ./network-tweaks.nix
     ./nix.nix
     ./persist.nix
+    ./printing.nix
     ./secrets.nix
     ./tailscale.nix
     ./users.nix
