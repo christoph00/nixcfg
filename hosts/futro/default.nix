@@ -13,7 +13,7 @@
       btrfs = true;
       persist = false;
     };
-    domain = "r505.de";
+    network.domain = "r505.de";
     services = {
       smart-home = true;
       nas.enable = true;
