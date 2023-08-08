@@ -185,7 +185,10 @@ in {
     };
 
     desktop = {
-      enable = mkEnableOption "desktop";
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+      };
       wm = mkOption {
         type = types.enum ["Hyprland" "xfce"];
         default = "Hyprland";
