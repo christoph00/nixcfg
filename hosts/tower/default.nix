@@ -32,6 +32,7 @@
     };
 
     desktop = {
+      enable = true;
       wm = "Hyprland";
       autologin = true;
       gaming = true;
