@@ -18,7 +18,7 @@
           Duplex = "DuplexNoTumble";
           PageSize = "A4";
         };
-        deviceUri = "ipps://xerox.speedport.ip";
+        deviceUri = "ipps://192.168.2.110";
       }
     ];
   };
