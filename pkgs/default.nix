@@ -6,7 +6,7 @@ _: {
 
   perSystem = {pkgs, ...}: {
     packages = {
-      xr6515dn = pkgs.callPackage ./xr651dn;
+      xr6515dn = pkgs.callPackage ./xr651dn {};
     };
   };
 }
