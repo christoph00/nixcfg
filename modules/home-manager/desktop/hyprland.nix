@@ -42,7 +42,7 @@ in {
           "WLR_DRM_NO_MODIFIERS,1"
           "SDL_VIDEODRIVER,wayland"
           "_JAVA_AWT_WM_NONREPARENTING,1"
-          "SDL_VIDEODRIVER=wayland"
+          "SDL_VIDEODRIVER=x11"
         ];
 
         xwayland = {
