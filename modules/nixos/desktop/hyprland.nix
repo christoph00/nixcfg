@@ -14,7 +14,7 @@ in {
 
     programs.hyprland = {
       enable = true;
-      package = null; # Managed by home manager
+      package = inputs'.hyprland.packages.default;
     };
 
     xdg.portal = {
