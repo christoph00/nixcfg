@@ -159,6 +159,13 @@ in {
     containers = mkEnableOption "containers";
 
     services = {
+      webserver = {
+        enable = mkEnableOption "enable webserver";
+        domain = mkOption {
+          type = types.str;
+          default = config.nos.network.domain;
+        };
+      };
       nas = {
         enable = mkEnableOption "enable nas";
         domain = mkOption {

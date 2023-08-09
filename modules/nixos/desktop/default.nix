@@ -9,6 +9,7 @@ with lib; {
   config = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
     # Disable mitigations on desktop
     boot.kernelParams = [
+      "splash"
       "l1tf=off"
       "mds=off"
       "mitigations=off"

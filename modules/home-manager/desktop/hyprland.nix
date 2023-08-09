@@ -93,7 +93,7 @@ in {
         };
 
         misc = {
-          vrr = 2;
+          vrr = 1;
           disable_hyprland_logo = true;
           disable_splash_rendering = true;
 
