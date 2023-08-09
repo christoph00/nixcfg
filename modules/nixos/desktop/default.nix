@@ -136,9 +136,6 @@ with lib; {
         };
       };
 
-      # provide location
-      geoclue2.enable = true;
-
       gnome.gnome-keyring.enable = true;
 
       upower.enable = true;
