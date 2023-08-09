@@ -129,6 +129,20 @@ with lib; {
       upower.enable = true;
     };
 
+    systemd.services = {
+      seatd = {
+        enable = true;
+        description = "Seat management daemon";
+        script = "${pkgs.seatd}/bin/seatd -g wheel";
+        serviceConfig = {
+          Type = "simple";
+          Restart = "always";
+          RestartSec = "1";
+        };
+        wantedBy = ["multi-user.target"];
+      };
+    };
+
     hardware.pulseaudio.enable = false;
     services.pipewire = {
       enable = true;
@@ -140,7 +154,7 @@ with lib; {
     };
     hardware.uinput.enable = true;
 
-    environment.systemPackages = [pkgs.gtklock];
+    environment.systemPackages = [pkgs.gtklock pkgs.seatd];
     # services.udev.packages = [ pkgs.light ];
     security.polkit.enable = true;
     security.pam.services.gtklock.text = "auth include login\n";
