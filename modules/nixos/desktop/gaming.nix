@@ -18,7 +18,7 @@
     name = "Steam (Gamescope Fullscreen)";
     exec = "${pkgs.gamescope}/bin/gamescope -W 2560 -H 1440 -w 2560 -h 1440 -f -e -F fsr -S integer --framerate-limit 60 -r 60 -- ${steam}/bin/steam -tenfoot -steamos -fulldesktopres";
     comment = "Steam big picture running in gamescope";
-    desktopName = "Steam (Gamescope)";
+    desktopName = "Steam (Fullscreen)";
     categories = ["Game"];
   };
 
