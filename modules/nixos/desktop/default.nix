@@ -123,19 +123,6 @@ with lib; {
     services.fwupd.enable = true;
 
     services = {
-      # use Ambient Light Sensors for auto brightness adjustment
-      clight = {
-        enable = true;
-        settings = {
-          verbose = true;
-          backlight.disabled = true;
-          dpms.timeouts = [900 300];
-          dimmer.timeouts = [870 270];
-          gamma.long_transition = false;
-          screen.disabled = true;
-        };
-      };
-
       gnome.gnome-keyring.enable = true;
 
       upower.enable = true;
