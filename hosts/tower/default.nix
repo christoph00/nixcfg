@@ -73,7 +73,25 @@
     availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
     kernelModules = ["amdgpu"];
   };
-  boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev"];
+
+  services.xserver.videoDrivers = ["amdgpu"];
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    package = pkgs.mesa_drivers;
+    extraPackages = with pkgs; [
+      amdvlk
+      rocm-opencl-icd
+      rocm-opencl-runtime
+    ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
+    ];
+  };
+
+  boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
   boot.blacklistedKernelModules = ["dm_mod"];
   boot.kernelParams = [
     "quiet"
@@ -86,6 +104,4 @@
     "amdgpu.gartsize=4096"
     "adgpu.ignore_crat=1"
   ];
-
-  services.xserver.videoDrivers = ["amdgpu"];
 }
