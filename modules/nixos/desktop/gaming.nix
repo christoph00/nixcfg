@@ -65,9 +65,12 @@
             mangohud
           ];
       };
+      steam.gamescopeSession.enable = true;
+
       gamemode = {
         enable = true;
       };
+      gamescope.enable = true;
     };
     systemd.extraConfig = "DefaultLimitNOFILE=1048576";
   };
