@@ -143,6 +143,8 @@ with lib; {
       };
     };
 
+    programs.xwayland.enable = true;
+
     hardware.pulseaudio.enable = false;
     services.pipewire = {
       enable = true;
