@@ -44,9 +44,13 @@ with lib; {
       };
     };
 
+    boot.plymouth = {
+      enable = true;
+    };
+
     environment.etc."greetd/environments".text = ''
       ${lib.optionalString (config.nos.desktop.wm == "Hyprland") "Hyprland"}
-      zsh
+      bash
     '';
 
     services.greetd = {
@@ -91,6 +95,24 @@ with lib; {
 
     xdg.portal = {
       enable = true;
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    };
+
+    fonts = {
+      packages = with pkgs; [
+        material-symbols
+        lexend
+        noto-fonts
+        noto-fonts-emoji
+        roboto
+        (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka"];})
+      ];
+      fontconfig.defaultFonts = {
+        serif = ["Roboto Serif" "Noto Color Emoji"];
+        sansSerif = ["Roboto" "Noto Color Emoji"];
+        monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
+        emoji = ["Noto Color Emoji"];
+      };
     };
 
     hardware.logitech.wireless.enable = true;
@@ -99,6 +121,28 @@ with lib; {
     programs.dconf.enable = true;
 
     services.fwupd.enable = true;
+
+    services = {
+      # use Ambient Light Sensors for auto brightness adjustment
+      clight = {
+        enable = true;
+        settings = {
+          verbose = true;
+          backlight.disabled = true;
+          dpms.timeouts = [900 300];
+          dimmer.timeouts = [870 270];
+          gamma.long_transition = false;
+          screen.disabled = true;
+        };
+      };
+
+      # provide location
+      geoclue2.enable = true;
+
+      gnome.gnome-keyring.enable = true;
+
+      upower.enable = true;
+    };
 
     hardware.pulseaudio.enable = false;
     services.pipewire = {
@@ -111,8 +155,6 @@ with lib; {
     };
     hardware.uinput.enable = true;
 
-    services.upower.enable = true;
-
     environment.systemPackages = [pkgs.gtklock];
     # services.udev.packages = [ pkgs.light ];
     security.polkit.enable = true;
@@ -121,7 +163,7 @@ with lib; {
     services.dbus = {
       enable = true;
       # implementation = "broker";
-      # packages = [pkgs.gcr pkgs.dconf];
+      packages = [pkgs.gcr pkgs.dconf];
     };
   };
 }
