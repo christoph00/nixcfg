@@ -29,6 +29,9 @@
         xorg.libXi
         xorg.libXinerama
         xorg.libXScrnSaver
+        xorg.libXext
+        xorg.libX11
+        xorg.libXfixes
         libpng
         libpulseaudio
         libvorbis
