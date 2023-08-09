@@ -76,8 +76,6 @@
   boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev"];
   boot.blacklistedKernelModules = ["dm_mod"];
   boot.kernelParams = [
-    "i915.fastboot=1"
-    "enable_gvt=1"
     "quiet"
     "rcutree.rcu_idle_gp_delay=1"
     "splash"
