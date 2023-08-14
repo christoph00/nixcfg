@@ -32,6 +32,7 @@
       "media"
       "podman"
       "adbusers"
+      "i2c"
     ];
 
     openssh.authorizedKeys.keys = [
