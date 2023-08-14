@@ -36,6 +36,8 @@
 
   powerManagement.cpuFreqGovernor = "powersave";
 
+  hardware.i2c.enable = true;
+
   environment.systemPackages = [
     pkgs.git
     pkgs.killall
