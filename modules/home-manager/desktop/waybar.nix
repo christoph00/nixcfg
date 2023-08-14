@@ -14,11 +14,6 @@
 in {
   config = lib.mkIf (osConfig.nos.desktop.bar == "waybar") {
     programs.waybar.systemd.enable = true;
-    xdg.configFile."waybar/config".onChange = ''
-      echo 'Restarting waybar.service'
-      ${pkgs.systemd}/bin/systemctl --user restart waybar.service
-    '';
-
     programs.waybar.settings = {
       mainBar = {
         layer = "top";
@@ -35,6 +30,7 @@ in {
         modules-right = [
           "temperature"
           "tray"
+          "wireplumber"
           "clock#date"
         ];
 
@@ -46,6 +42,13 @@ in {
           show-passive-items = true;
           icon-size = 12;
           spacing = 16;
+        };
+
+        wireplumber = {
+          format = "{volume}% {icon}";
+          format-muted = "";
+          on-click = "${pkgs.helvum}/bin/helvum";
+          format-icons = ["" "" ""];
         };
       };
     };
