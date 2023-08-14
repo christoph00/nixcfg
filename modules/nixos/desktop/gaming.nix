@@ -4,6 +4,7 @@
   pkgs,
   inputs',
   self',
+  unfree,
   ...
 }: let
   gamescopeSteam = pkgs.makeDesktopItem {
@@ -22,7 +23,7 @@
     categories = ["Game"];
   };
 
-  steam = pkgs.steam.override {
+  steam = unfree.steam.override {
     extraPkgs = pkgs:
       with pkgs; [
         xorg.libXcursor
@@ -86,11 +87,11 @@ in {
     programs = {
       steam.enable = true;
       steam.package = steam;
-      steam.gamescopeSession.enable = true;
+      # steam.gamescopeSession.enable = true;
       gamemode = {
         enable = true;
       };
-      gamescope.enable = true;
+      #gamescope.enable = true;
     };
     systemd.extraConfig = "DefaultLimitNOFILE=1048576";
   };
