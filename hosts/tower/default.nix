@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   nos = {
     type = "desktop";
     hw = {
@@ -74,20 +78,13 @@
     kernelModules = ["amdgpu"];
   };
 
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = lib.mkDefault ["modesetting"];
 
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    driSupport32Bit = true;
-    package = pkgs.mesa_drivers;
     extraPackages = with pkgs; [
-      amdvlk
-      rocm-opencl-icd
-      rocm-opencl-runtime
-    ];
-    extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
+      mesa.drivers
     ];
   };
 
