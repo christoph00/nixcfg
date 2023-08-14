@@ -23,7 +23,7 @@
     desktop = {
       wm = "Hyprland";
       autologin = true;
-      gaming = true;
+      gaming = false;
     };
   };
 
@@ -34,7 +34,7 @@
   };
 
   boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi" "i915"];
-  # boot.blacklistedKernelModules = ["nouveau"];
+  boot.blacklistedKernelModules = ["nouveau" "nvidia"];
   boot.kernelParams = [
     "quiet"
     "pcie_port_pm=off"
@@ -61,8 +61,6 @@
     options snd_hda_intel power_save=1
     options snd_ac97_codec power_save=1
     options iwlwifi power_save=Y
-    blacklist nouveau
-    options nouveau modeset=0
   '';
 
   boot.resumeDevice = "/dev/disk/by-label/air13";
@@ -80,7 +78,6 @@
     # Remove NVIDIA VGA/3D controller devices
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
   '';
-  boot.blacklistedKernelModules = ["nouveau" "nvidia"];
 
   swapDevices = [{device = "/dev/nvme0n1p2";}];
 
