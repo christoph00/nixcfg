@@ -41,10 +41,11 @@ in {
         env = [
           "GDK_SCALE, ${toString primaryMonitor.scale}"
           "XCURSOR_SIZE, ${toString pointer.size}"
+          "GDK_BACKEND,wayland,x11"
           "NIXOS_OZONE_WL, 1"
           # "WLR_DRM_NO_MODIFIERS,1"
           "_JAVA_AWT_WM_NONREPARENTING,1"
-          # "SDL_VIDEODRIVER, x11"
+          "SDL_VIDEODRIVER,wayland,x11"
         ];
 
         xwayland = {
@@ -66,29 +67,17 @@ in {
         };
 
         general = {
-          # sensitivity of the mouse cursor
           sensitivity = 0.8;
-
-          # gaps
           gaps_in = 6;
           gaps_out = 11;
-
-          # border thiccness
           border_size = 3;
-
-          # active border color
           "col.active_border" = "0xff${colors.base0F}";
-
-          # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
           apply_sens_to_raw = 0;
         };
 
         decoration = {
-          # fancy corners
           rounding = 7;
-          multisample_edges = true; # fixes pixelated corners on relatively better monitors, useless on old monitors
-
-          # shadow config
+          multisample_edges = true;
           drop_shadow = "yes";
           shadow_range = 14;
           shadow_render_power = 3;
