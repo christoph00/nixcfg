@@ -204,6 +204,10 @@ in {
         type = types.bool;
         default = false;
       };
+      bar = mkOption {
+        type = types.enum ["waybar" "eww"];
+        default = "waybar";
+      };
 
       gaming = mkEnableOption "gaming";
       fontProfiles = {
