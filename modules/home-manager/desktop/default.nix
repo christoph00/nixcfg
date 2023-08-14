@@ -11,6 +11,7 @@
     ./apps
     ./theme.nix
     ./idle.nix
+    ./waybar.nix
   ];
   config = lib.mkIf osConfig.nos.desktop.enable {
     colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
