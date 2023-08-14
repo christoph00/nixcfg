@@ -18,6 +18,10 @@ in {
         enable = true;
         hidpi = primaryMonitor.scale > 1;
       };
+      package = inputs'.hyprland.packages.default.override {
+        enableXWayland = true;
+        nvidiaPatches = false;
+      };
       plugins = [inputs'.hy3.packages.hy3];
 
       settings = {
