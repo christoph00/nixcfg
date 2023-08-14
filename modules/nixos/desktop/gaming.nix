@@ -4,7 +4,6 @@
   pkgs,
   inputs',
   self',
-  unfree,
   ...
 }: let
   gamescopeSteam = pkgs.makeDesktopItem {
@@ -23,7 +22,7 @@
     categories = ["Game"];
   };
 
-  steam = unfree.steam.override {
+  steam = inputs'.unfree.legacyPackages.steam.override {
     extraPkgs = pkgs:
       with pkgs; [
         xorg.libXcursor
@@ -36,6 +35,7 @@
         libpng
         libpulseaudio
         libvorbis
+        libgdiplus
         stdenv.cc.cc.lib
         libkrb5
         keyutils
