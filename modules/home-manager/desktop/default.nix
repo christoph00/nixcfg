@@ -72,6 +72,9 @@
 
       pcmanfm
       webcord
+
+      vulkan-tools
+      glxinfo
     ];
   };
 }

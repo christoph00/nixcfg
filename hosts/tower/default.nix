@@ -86,6 +86,7 @@
     extraPackages = with pkgs; [
       mesa.drivers
     ];
+    setLdLibraryPath = true;
   };
 
   boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
