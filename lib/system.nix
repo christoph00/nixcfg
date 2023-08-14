@@ -25,6 +25,7 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.agenix.nixosModules.age
           inputs.tsnsrv.nixosModules.default
+          inputs.hyprland.nixosModules.default
           "${self}/modules/nixos"
           "${self}/hosts/${args.hostname}"
         ];
