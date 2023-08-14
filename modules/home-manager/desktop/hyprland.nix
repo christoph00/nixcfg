@@ -18,7 +18,6 @@ in {
         enable = true;
         hidpi = primaryMonitor.scale > 1;
       };
-      package = inputs'.hyprland.packages.default;
       plugins = [inputs'.hy3.packages.hy3];
 
       settings = {
