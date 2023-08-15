@@ -16,7 +16,6 @@ in {
       systemdIntegration = true;
       xwayland = {
         enable = true;
-        hidpi = primaryMonitor.scale > 1;
       };
       package = inputs'.hyprland.packages.default.override {
         enableXWayland = true;
