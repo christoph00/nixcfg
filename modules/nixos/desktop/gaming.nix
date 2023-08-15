@@ -43,6 +43,10 @@
         gamemode
         mangohud
       ];
+    extraLibraries = p:
+      with p; [
+        (lib.getLib pkgs.networkmanager)
+      ];
   };
 in {
   config = lib.mkIf config.nos.desktop.gaming {
@@ -84,6 +88,21 @@ in {
         "steam-runtime"
         "steam-run"
       ];
+    systemd.user.services = {
+      steam = {
+        partOf = ["graphical-session.target"];
+        environment = {
+          SDL_VIDEODRIVER = "x11";
+        };
+        serviceConfig = {
+          StartLimitInterval = 5;
+          StartLimitBurst = 1;
+          ExecStart = "${steam}/bin/steam -language german -silent -pipewire"; #
+          Type = "simple";
+          Restart = "on-failure";
+        };
+      };
+    };
     programs = {
       steam.enable = true;
       steam.package = steam;
