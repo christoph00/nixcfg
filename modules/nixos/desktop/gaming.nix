@@ -86,13 +86,11 @@ in {
       ];
     systemd.user.services = {
       steam = {
-        Unit.Description = "Steam Client";
-        Install.WantedBy = ["graphical-session.target"];
-        Unit.PartOf = ["graphical-session.target"];
+        partOf = ["graphical-session.target"];
         environment = {
           SDL_VIDEODRIVER = "x11";
         };
-        Service = {
+        serviceConfig = {
           StartLimitInterval = 5;
           StartLimitBurst = 1;
           ExecStart = "${steam}/bin/steam -language german -silent -pipewire"; #
