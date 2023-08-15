@@ -43,6 +43,10 @@
         gamemode
         mangohud
       ];
+    extraLibraries = p:
+      with p; [
+        (lib.getLib pkgs.networkmanager)
+      ];
   };
 in {
   config = lib.mkIf config.nos.desktop.gaming {

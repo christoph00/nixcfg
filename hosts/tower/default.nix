@@ -89,6 +89,8 @@
     setLdLibraryPath = true;
   };
 
+  environment.systemPackages = [pkgs.amdgpu_top];
+
   boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
   boot.blacklistedKernelModules = ["dm_mod"];
   boot.kernelParams = [
