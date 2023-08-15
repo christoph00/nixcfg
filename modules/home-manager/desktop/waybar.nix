@@ -24,7 +24,7 @@ in {
           "eDP-1"
           "DP-1"
         ];
-        modules-left = ["wlr/workspaces"];
+        modules-left = ["hyprland/workspaces"];
         modules-center = [
           "clock#time"
         ];
