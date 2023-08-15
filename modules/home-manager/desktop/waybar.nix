@@ -35,9 +35,9 @@ in {
           "clock#date"
         ];
 
-        "clock#time" = {format = "{:%I:%M %p}";};
+        "clock#time" = {format = "{:%H:%M}";};
 
-        "clock#date" = {format = "{:%A, %B %d}";};
+        "clock#date" = {format = "{:%A, %d. %B}";};
 
         tray = {
           show-passive-items = true;
