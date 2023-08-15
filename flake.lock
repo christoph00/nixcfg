@@ -48,6 +48,27 @@
         "type": "github"
       }
     },
+    "ags": {
+      "inputs": {
+        "dongsu8142-nur": "dongsu8142-nur",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1692027678,
+        "narHash": "sha256-y7qJ1WBFB9B4rm4TEth6j5c7ADpWZmsPEB5bSz9Dvh4=",
+        "owner": "Aylur",
+        "repo": "ags",
+        "rev": "4998d17d704d6407e3facc80b5e903a945b3e6a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Aylur",
+        "repo": "ags",
+        "type": "github"
+      }
+    },
     "anyrun": {
       "inputs": {
         "flake-parts": [
@@ -177,6 +198,27 @@
       "original": {
         "owner": "numtide",
         "repo": "devshell",
+        "type": "github"
+      }
+    },
+    "dongsu8142-nur": {
+      "inputs": {
+        "nixpkgs": [
+          "ags",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1690083492,
+        "narHash": "sha256-UoIG+sl44U38FTmM2+m4X2Qi5aivjITcUxAkVHouZl4=",
+        "owner": "dongsu8142",
+        "repo": "nur",
+        "rev": "7f5c7067a482e96fe3787e07a54e21041a4d15c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dongsu8142",
+        "repo": "nur",
         "type": "github"
       }
     },
@@ -663,6 +705,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "ags": "ags",
         "anyrun": "anyrun",
         "devshell": "devshell",
         "eww": "eww",
