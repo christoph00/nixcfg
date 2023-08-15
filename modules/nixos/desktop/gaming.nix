@@ -84,6 +84,23 @@ in {
         "steam-runtime"
         "steam-run"
       ];
+    systemd.user.services = {
+      steam = {
+        Unit.Description = "Steam Client";
+        Install.WantedBy = ["graphical-session.target"];
+        Unit.PartOf = ["graphical-session.target"];
+        environment = {
+          SDL_VIDEODRIVER = "x11";
+        };
+        Service = {
+          StartLimitInterval = 5;
+          StartLimitBurst = 1;
+          ExecStart = "${steam}/bin/steam -language german -silent -pipewire"; #
+          Type = "simple";
+          Restart = "on-failure";
+        };
+      };
+    };
     programs = {
       steam.enable = true;
       steam.package = steam;
