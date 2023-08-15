@@ -60,6 +60,8 @@
 
       inputs'.agenix.packages.default
 
+      inputs'.ags.packages.default
+
       themechanger
 
       gnome.gnome-keyring
