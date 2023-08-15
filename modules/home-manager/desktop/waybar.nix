@@ -15,7 +15,7 @@ in {
   config = lib.mkIf (osConfig.nos.desktop.bar == "waybar") {
     programs.waybar.enable = true;
     programs.waybar.systemd.enable = true;
-    programs.waybar.systemd.target = "hyprland-session.target";
+    #programs.waybar.systemd.target = "hyprland-session.target";
     programs.waybar.settings = {
       mainBar = {
         layer = "top";
