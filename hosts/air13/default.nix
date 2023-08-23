@@ -24,6 +24,7 @@
       wm = "Hyprland";
       autologin = true;
       gaming = false;
+      bar = "ags";
     };
   };
 
