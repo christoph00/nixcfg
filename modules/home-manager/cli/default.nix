@@ -79,6 +79,8 @@ in {
       # media-sort
       phockup
       ffmpeg-full
+
+      rsass
     ]
     ++ [
       inputs'.unfree.legacyPackages.unrar
