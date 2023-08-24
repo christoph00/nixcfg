@@ -36,11 +36,11 @@ in {
         package = pkgs.apple-cursor;
         size = builtins.ceil (16 * primaryMonitor.scale);
       };
-      gtk3.extraCss = ''
-        button.image-button {
-          border-radius: 1px;
-        };
-      '';
+      # gtk3.extraCss = ''
+      #   button.image-button {
+      #     border-radius: 1px;
+      #   };
+      # '';
     };
 
     fonts.fontconfig.enable = true;
