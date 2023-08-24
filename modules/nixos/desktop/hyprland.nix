@@ -12,10 +12,7 @@ in {
   config = mkIf (builtins.elem config.nos.type ["desktop" "laptop"] && (config.nos.desktop.wm == "Hyprland")) {
     programs.hyprland = {
       enable = true;
-      package = inputs'.hyprland.packages.default.override {
-        enableXWayland = true;
-        nvidiaPatches = false;
-      };
+      package = inputs'.hyprland.packages.default;
     };
   };
 }
