@@ -57,7 +57,7 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland/v0.28.0";
+      url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprpicker = {
