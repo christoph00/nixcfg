@@ -11,7 +11,6 @@
     ./apps
     ./theme.nix
     ./idle.nix
-    ./waybar.nix
   ];
   config = lib.mkIf osConfig.nos.desktop.enable {
     colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
@@ -35,7 +34,7 @@
       brightnessctl
       coreutils
 
-      (inputs'.eww.packages.default.override {withWayland = true;})
+      #(inputs'.eww.packages.default.override {withWayland = true;})
 
       libnotify
       playerctl
@@ -60,8 +59,6 @@
 
       inputs'.agenix.packages.default
 
-      inputs'.ags.packages.default
-
       themechanger
 
       gnome.gnome-keyring
@@ -77,6 +74,9 @@
 
       vulkan-tools
       glxinfo
+
+      wlsunset
+      wl-paste
     ];
   };
 }
