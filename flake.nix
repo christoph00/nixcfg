@@ -57,7 +57,7 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland";
+      url = "github:hyprwm/hyprland/v0.28.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprpicker = {
@@ -65,10 +65,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprpaper = {
-      url = "github:hyprwm/hyprpaper";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     xdg-portal-hyprland = {
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
@@ -109,7 +105,7 @@
     };
 
     ags = {
-      url = "github:Aylur/ags";
+      url = "github:Aylur/ags/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
