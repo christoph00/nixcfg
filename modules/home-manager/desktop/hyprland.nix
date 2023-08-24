@@ -17,10 +17,7 @@ in {
       xwayland = {
         enable = true;
       };
-      package = inputs'.hyprland.packages.default.override {
-        enableXWayland = true;
-        nvidiaPatches = false;
-      };
+      package = inputs'.hyprland.packages.default;
       plugins = [inputs'.hy3.packages.hy3];
 
       settings = {
