@@ -76,7 +76,7 @@
       glxinfo
 
       wlsunset
-      wl-paste
+      wl-clipboard
     ];
   };
 }
