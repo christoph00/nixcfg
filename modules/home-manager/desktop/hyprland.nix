@@ -38,7 +38,7 @@ in {
           "wlsunset -S 8:00 -s 20:00"
           "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
           #"xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 24c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2"
-        ] ++ optionals (osconfig.nos.desktop.bar == "ags") [
+        ] ++ lib.optionals (osConfig.nos.desktop.bar == "ags") [
           "ags"
         ];
 
