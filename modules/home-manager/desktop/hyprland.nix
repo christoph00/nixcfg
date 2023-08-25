@@ -29,15 +29,17 @@ in {
           else "${monitor.name},disable")
         monitors;
 
-        exec-once = [
-          "wl-paste --type text --watch cliphist store"
-          "wl-paste --type image --watch cliphist store"
-          "wlsunset -S 8:00 -s 20:00"
-          "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
-          #"xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 24c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2"
-        ] ++ lib.optionals (osConfig.nos.desktop.bar == "ags") [
-          "ags"
-        ];
+        exec-once =
+          [
+            "wl-paste --type text --watch cliphist store"
+            "wl-paste --type image --watch cliphist store"
+            "wlsunset -S 8:00 -s 20:00"
+            "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
+            #"xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 24c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2"
+          ]
+          ++ lib.optionals (osConfig.nos.desktop.bar == "ags") [
+            "ags"
+          ];
 
         env = [
           "GDK_SCALE, ${toString primaryMonitor.scale}"
