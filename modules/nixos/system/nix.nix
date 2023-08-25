@@ -29,6 +29,12 @@
       http-connections = 50;
       accept-flake-config = true;
       builders-use-substitutes = true;
+      trusted-public-keys = [
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      ];
+      substituters = [
+        "https://cache.garnix.io"
+      ];
     };
     package = pkgs.nixUnstable;
     gc = {
