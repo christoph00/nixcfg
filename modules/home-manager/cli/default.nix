@@ -84,6 +84,7 @@ in {
     ]
     ++ [
       inputs'.unfree.legacyPackages.unrar
+      inputs'.tsnsrv.packages.default
     ];
 
   home.sessionVariables = {
