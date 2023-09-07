@@ -182,14 +182,14 @@
       ];
     };
 
-    systemd.services.ebusd = {
-      description = "ebusd";
-      wantedBy = ["multi-user.target"];
+    # systemd.services.ebusd = {
+    #   description = "ebusd";
+    #   wantedBy = ["multi-user.target"];
 
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.ebusd}/usr/bin/ebusd -f --scanconfig -d ens:ebus.speedport.ip:9999 --mqtthost futro.speedport.ip --mqttport 1883 --mqttvar=filter-direction=r|u|^w --mqttint=${pkgs.ebusd}/etc/ebusd/mqtt-hassio.cfg --mqttjson --configlang=de ";
-      };
-    };
+    #   serviceConfig = {
+    #     Type = "simple";
+    #     ExecStart = "${pkgs.ebusd}/usr/bin/ebusd -f --scanconfig -d ens:ebus.speedport.ip:9999 --mqtthost futro.speedport.ip --mqttport 1883 --mqttvar=filter-direction=r|u|^w --mqttint=${pkgs.ebusd}/etc/ebusd/mqtt-hassio.cfg --mqttjson --configlang=de ";
+    #   };
+    # };
   };
 }
