@@ -12,6 +12,8 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower"
       ];
     };
+    hardware.bluetooth.enable = true;
+
     services.home-assistant = {
       enable = true;
       package = pkgs.home-assistant.overrideAttrs (old: {
