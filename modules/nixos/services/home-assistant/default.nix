@@ -59,7 +59,7 @@
             "a4:c1:38:35:dd:d5:77:cc-5".type = "switch";
           };
         };
-        zha_toolkit = {};
+        #zha_toolkit = {};
         # ebusd = {
         #   host = "127.0.0.1";
         #   circuit = "basv0";
@@ -83,7 +83,7 @@
             #host = "tower.lan.net.r505.de";
             turn_off = {
               service = "shell_command.suspend_host";
-              data.host = "tower.speedport.ip";
+              data.host = "tower.lan";
             };
           }
         ];
