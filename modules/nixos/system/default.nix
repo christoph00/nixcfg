@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs',
   ...
 }: {
   imports = [
@@ -43,6 +44,7 @@
     pkgs.killall
     pkgs.dnsutils
     pkgs.htop
+    inputs'.tsnsrv.packages.default
   ];
 
   time.timeZone = "Europe/Berlin";
