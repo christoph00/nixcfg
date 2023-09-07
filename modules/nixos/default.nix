@@ -220,6 +220,6 @@ in {
   imports = [
     ./system
     ./desktop
-    #  ./services
+    ./services
   ];
 }
