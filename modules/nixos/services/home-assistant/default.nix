@@ -41,8 +41,8 @@
           unit_system = "metric";
           time_zone = "Europe/Berlin";
           temperature_unit = "C";
-          external_url = "https://ha.r505.de";
-          #  internal_url = "http://futro.speedport.ip:8123";
+          external_url = "https://ha.cama-boa.ts.net";
+          internal_url = "https://ha.cama-boa.ts.net";
           packages = "!include_dir_named pkgs";
         };
         default_config = {};

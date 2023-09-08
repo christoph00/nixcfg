@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }:
 with lib; {
@@ -28,8 +29,8 @@ with lib; {
 
     age.secrets.tailscale-tsnsrv = {
       file = "${self}/secrets/tailscale-tsnsrv";
-      owner = "tsnsrv";
-      group = "tsnsrv";
+      group = config.users.groups.tsnsrv.name;
+      mode = "770";
     };
 
     services.tsnsrv = {
