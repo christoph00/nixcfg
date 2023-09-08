@@ -15,10 +15,10 @@
     hardware.bluetooth.enable = true;
 
     services.tsnsrv.services = {
-      #  ha = {
-      #  funnel = true;
-      # toUrl = "http://127.0.0.1:8123";
-      #   };
+      ha = {
+        funnel = true;
+        toUrl = "http://127.0.0.1:8123";
+      };
     };
 
     services.home-assistant = {
