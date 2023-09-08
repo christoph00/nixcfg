@@ -15,6 +15,8 @@ let
 in {
   "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca cube star];
   "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
+  "secrets/tailscale-tsnsrv".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
+
   "secrets/cf-acme".publicKeys = [christoph_air13 futro cube oca oc1 oc2 tower star];
   "secrets/cf-dyndns".publicKeys = [christoph_air13 futro tower];
   "secrets/futro-cf".publicKeys = [christoph_air13 futro];
