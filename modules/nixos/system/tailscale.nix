@@ -22,6 +22,8 @@ with lib; {
     services.tailscale = {
       enable = true;
       permitCertUid = "root";
+      useRoutingFeatures = "client";
+      authKeyFile = lib.mkDefault config.age.secrets.tailscaleAuthKey.path;
     };
   };
 }
