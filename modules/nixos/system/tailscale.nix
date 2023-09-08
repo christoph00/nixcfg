@@ -25,5 +25,12 @@ with lib; {
       useRoutingFeatures = "client";
       authKeyFile = lib.mkDefault config.age.secrets.tailscaleAuthKey.path;
     };
+
+    services.tsnsrv = {
+      enable = true;
+      defaults = {
+        authKeyPath = lib.mkDefault config.age.secrets.tailscaleAuthKey.path;
+      };
+    };
   };
 }
