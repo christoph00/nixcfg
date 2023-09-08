@@ -26,7 +26,7 @@ with lib; {
 
   # 1-7dhqcaaa4aaeaaya6kpt7egqaflhgiiaeeiabca.max.rethinkdns.com
 
-  networking.nameservers = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
+  #networking.nameservers = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
 
   networking.networkmanager = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
     enable = true;
