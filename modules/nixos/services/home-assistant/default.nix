@@ -17,7 +17,8 @@
     services.tsnsrv.services = {
       ha = {
         funnel = true;
-        toUrl = "http://127.0.0.1:8123";
+        ephemeral = true;
+        toURL = "http://127.0.0.1:8123";
       };
     };
 
