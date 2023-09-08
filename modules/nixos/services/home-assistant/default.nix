@@ -14,6 +14,11 @@
     };
     hardware.bluetooth.enable = true;
 
+    services.tsnsrv.services.home-assistant = {
+      funnel = true;
+      toUrl = "http://127.0.0.1:8123";
+    };
+
     services.home-assistant = {
       enable = true;
       package = pkgs.home-assistant.overrideAttrs (old: {
