@@ -26,10 +26,16 @@ with lib; {
       authKeyFile = lib.mkDefault config.age.secrets.tailscaleAuthKey.path;
     };
 
+    age.secrets.tailscale-tsnsrv = {
+      file = "${self}/secrets/tailscale-tsnsrv";
+      owner = "tsnsrv";
+      group = "tsnsrv";
+    };
+
     services.tsnsrv = {
       enable = true;
       defaults = {
-        authKeyPath = lib.mkDefault config.age.secrets.tailscaleAuthKey.path;
+        authKeyPath = lib.mkDefault config.age.secrets.tailscale-tsnsrv.path;
       };
     };
   };
