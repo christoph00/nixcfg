@@ -164,6 +164,8 @@
         "google"
         "spotify"
         #"python_script"
+        "bluetooth_tracker"
+        "bluetooth_le_tracker"
       ];
     };
 
