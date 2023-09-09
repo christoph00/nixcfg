@@ -11,6 +11,7 @@
     ./fonts.nix
     ./network.nix
     ./network-tweaks.nix
+    ./netbird.nix
     ./nix.nix
     ./persist.nix
     ./printing.nix
