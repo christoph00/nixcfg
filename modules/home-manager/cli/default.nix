@@ -151,11 +151,6 @@ in {
     bash.enable = true;
   };
 
-  programs.exa = {
-    enable = true;
-    enableAliases = true;
-  };
-
   # services.rclone = {
   #   enable = true;
   #   config = "/run/agenix/rclone-conf";
