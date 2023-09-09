@@ -22,7 +22,7 @@ in {
     };
     environmentFile = mkOption {
       type = types.nullOr types.path;
-      default = null;
+      default = config.age.secrets.netbirdenv.path;
       description = lib.mdDoc ''
         File containing environment variables to be passed to the netbird service.
       '';
