@@ -7,7 +7,7 @@
 with lib; let
   cfg = config.nos.network.netbird;
   kernel = config.boot.kernelPackages;
-  interfaceName = "wg0";
+  interfaceName = "wt0";
 in {
   options.nos.network.netbird = {
     enable = mkOption {
@@ -19,6 +19,13 @@ in {
       default = pkgs.netbird;
       defaultText = literalExpression "pkgs.netbird";
       description = lib.mdDoc "The package to use for netbird";
+    };
+    environmentFile = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+      description = lib.mdDoc ''
+        File containing environment variables to be passed to the netbird service.
+      '';
     };
   };
 
@@ -48,11 +55,8 @@ in {
         openresolv
       ];
       serviceConfig = {
-        Environment = [
-          "NB_CONFIG=/var/lib/netbird/config.json"
-          "NB_LOG_FILE=console"
-        ];
-        ExecStart = "${cfg.package}/bin/netbird service run";
+        EnvironmentFile = cfg.environmentFile;
+        ExecStart = "${cfg.package}/bin/netbird up --foreground-mode -c /var/lib/netbird/config.json --log-file console";
         Restart = "always";
         RuntimeDirectory = "netbird";
         StateDirectory = "netbird";
