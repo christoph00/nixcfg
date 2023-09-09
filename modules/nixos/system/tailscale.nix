@@ -10,6 +10,8 @@ with lib; {
     # make the tailscale command usable to users
     environment.systemPackages = [pkgs.tailscale];
 
+    age.secrets.tailscaleAuthKey.file = "${self}/secrets/tailscale-preauthkey";
+
     networking.firewall = {
       # always allow traffic from your Tailscale network
       trustedInterfaces = ["tailscale0"];
