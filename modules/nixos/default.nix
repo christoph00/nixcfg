@@ -97,7 +97,7 @@ in {
       };
       efiDisk = mkOption {
         type = types.str;
-        default = "/dev/sda1";
+        default = "/dev/disk/by-label/UEFI";
       };
       swapDevice = mkOption {
         type = types.str;
