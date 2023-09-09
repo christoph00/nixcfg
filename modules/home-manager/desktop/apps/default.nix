@@ -8,5 +8,6 @@
     ./wezterm.nix
     ./waybar.nix
     ./ags.nix
+    ./firefox.nix
   ];
 }
