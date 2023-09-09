@@ -3,6 +3,7 @@
   config,
   lib,
   self,
+  hostname,
   ...
 }: {
   config = lib.mkIf config.nos.services.home-assistant.enable {
@@ -204,10 +205,14 @@
       ];
     };
 
-    age.secrets.cf-tunnel.file = "${self}/secrets/cf-tunnel-futro";
+    age.secrets.cf-tunnel = {
+      file = "${self}/secrets/cf-tunnel-${hostname}";
+      owner = config.services.cloudflared.user;
+      group = config.services.cloudflared.group;
+    };
 
     services.cloudflared.enable = true;
-    services.cloudflared.tunnels."56824638-72a8-41f7-a9a1-22a588e37e67" = {
+    services.cloudflared.tunnels."${hostname}" = {
       default = "http_status:404";
       credentialsFile = config.age.secrets.cf-tunnel.path;
       ingress = {
