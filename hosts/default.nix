@@ -27,4 +27,10 @@ in {
     system = "x86_64-linux";
     specialArgs = sharedArgs;
   };
+  oca = mkNixosSystem {
+    inherit withSystem;
+    hostname = "oca";
+    system = "aarch64-linux";
+    specialArgs = sharedArgs;
+  };
 }
