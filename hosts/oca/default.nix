@@ -38,7 +38,7 @@
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-label/nix";
+    device = "/dev/sdb3";
     fsType = "ext4";
     neededForBoot = true;
   };
