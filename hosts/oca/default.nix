@@ -32,5 +32,5 @@
   };
 
 
-  powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 }
