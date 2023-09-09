@@ -77,6 +77,8 @@
 
       wlsunset
       wl-clipboard
+
+      peazip
     ];
   };
 }
