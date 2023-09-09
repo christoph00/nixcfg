@@ -46,6 +46,14 @@
           packages = "!include_dir_named pkgs";
         };
         default_config = {};
+        device_tracker = [
+          {
+            platform = "bluetooth_le_tracker";
+          }
+          {
+            platform = "bluetooth_tracker";
+          }
+        ];
         http = {
           use_x_forwarded_for = true;
           trusted_proxies = ["::1" "127.0.0.1" "100.0.0.0/8"];
