@@ -51,9 +51,9 @@ in {
         "media.rdd-ffmpeg.enabled" = true;
         "widget.dmabuf.force-enabled" = true;
         "widget.use-xdg-desktop-portal" = true;
-        "font.name.monospace.x-western" = "${config.fontProfiles.monospace.family}";
-        "font.name.sans-serif.x-western" = "${config.fontProfiles.regular.family}";
-        "font.name.serif.x-western" = "${config.fontProfiles.regular.family}";
+        # "font.name.monospace.x-western" = "${config.fontProfiles.monospace.family}";
+        # "font.name.sans-serif.x-western" = "${config.fontProfiles.regular.family}";
+        # "font.name.serif.x-western" = "${config.fontProfiles.regular.family}";
         "gnomeTheme.systemIcons" = true;
         "gnomeTheme.hideSingleTab" = true;
       };
