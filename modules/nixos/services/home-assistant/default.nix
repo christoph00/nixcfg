@@ -64,7 +64,8 @@
         automation = {};
         frontend = {};
         mobile_app = {};
-        discovery = {};
+        dhcp = {};
+        ssdp = {};
         zeroconf = {};
         zha = {
           enable_quirks = true;
