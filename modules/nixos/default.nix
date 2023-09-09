@@ -152,7 +152,7 @@ in {
       tailscale = {
         enable = mkOption {
           type = types.bool;
-          default = true;
+          default = false;
         };
       };
     };
