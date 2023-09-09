@@ -211,6 +211,7 @@
       group = config.services.cloudflared.group;
     };
 
+    boot.kernel.sysctl."net.core.rmem_max" = lib.mkDefault 2500000;
     services.cloudflared.enable = true;
     services.cloudflared.tunnels."${hostname}" = {
       default = "http_status:404";
