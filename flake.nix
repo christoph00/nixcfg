@@ -44,8 +44,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    inputs.disko.url = github:nix-community/disko;
-    inputs.disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko = {
+      url = github:nix-community/disko;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
