@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  self,
   ...
 }: {
   config = lib.mkIf config.nos.services.home-assistant.enable {
@@ -202,10 +203,13 @@
         }
       ];
     };
+
+    age.secrets.cf-tunnel.file = "${self}/secrets/cf-tunnel-futro";
+
     services.cloudflared.enable = true;
-    services.cloudflared.tunnels."home-assistant" = {
+    services.cloudflared.tunnels."futro" = {
       default = "http_status:404";
-      credentialsFile = config.age.secrets.cf-acme.path;
+      credentialsFile = config.age.secrets.cf-tunnel.path;
       ingress = {
         "ha.r505.de" = "http://127.0.0.1:8123";
       };
