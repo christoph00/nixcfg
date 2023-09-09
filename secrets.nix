@@ -23,6 +23,8 @@ in {
   "secrets/immich-env".publicKeys = [christoph_air13 futro];
   "secrets/immich-db-password".publicKeys = [christoph_air13 futro];
 
+  "secrets/cf-tunnel-futro".publicKeys = [christoph_tower futro];
+
   "secrets/feed2imap.yml".publicKeys = [christoph_air13 oc1];
 
   "secrets/netbird.env".publicKeys = [christoph_air13 christoph_tower futro air13 tower oca oc1 oc2 cube star];
