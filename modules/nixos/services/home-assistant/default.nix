@@ -207,7 +207,7 @@
     age.secrets.cf-tunnel.file = "${self}/secrets/cf-tunnel-futro";
 
     services.cloudflared.enable = true;
-    services.cloudflared.tunnels."futro" = {
+    services.cloudflared.tunnels."56824638-72a8-41f7-a9a1-22a588e37e67" = {
       default = "http_status:404";
       credentialsFile = config.age.secrets.cf-tunnel.path;
       ingress = {
