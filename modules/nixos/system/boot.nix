@@ -8,7 +8,7 @@
       efi.canTouchEfiVariables = true;
       systemd-boot = lib.mkIf (config.nos.bootloader == "systemd-boot") {
         enable = lib.mkDefault true;
-        configurationLimit = 6;
+        configurationLimit = 5;
         consoleMode = "max";
         editor = false;
       };
