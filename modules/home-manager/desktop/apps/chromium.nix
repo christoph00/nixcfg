@@ -26,11 +26,11 @@
       "--enable-gpu-rasterization"
       "--enable-zero-copy"
       # "--force-dark-mode"
-      "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
+      #"--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
       "--disable-features=UseChromeOSDirectVideoDecoder"
       "--use-vulkan"
       "--ozone-platform-hint=auto"
-      "--enable-hardware-overlays"
+      # "--enable-hardware-overlays"
       # "--password-store=gnome"
       # "--gtk-version=4"
     ];
