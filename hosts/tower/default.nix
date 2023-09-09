@@ -38,6 +38,7 @@
     desktop = {
       enable = true;
       wm = "Hyprland";
+      bar = "ags";
       autologin = true;
       gaming = true;
     };
