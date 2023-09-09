@@ -43,8 +43,8 @@
           unit_system = "metric";
           time_zone = "Europe/Berlin";
           temperature_unit = "C";
-          external_url = "https://ha.cama-boa.ts.net";
-          internal_url = "https://ha.cama-boa.ts.net";
+          external_url = "https://ha.r505.de";
+          #internal_url = "https://ha.net.r505.de";
           packages = "!include_dir_named pkgs";
         };
         default_config = {};
