@@ -12,6 +12,7 @@
       btrfs = false;
       persist = true;
       rootOnTmpfs = true;
+      efiDisk = "/dev/sdb1";
     };
     network.domain = "r505.de";
   };
