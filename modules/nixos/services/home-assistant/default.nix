@@ -202,6 +202,14 @@
         }
       ];
     };
+    services.cloudflared.enable = true;
+    services.cloudflared.tunnels."home-assistant" = {
+      default = "http_status:404";
+      credentialsFile = config.age.secrets.cf-acme.path;
+      ingress = {
+        "ha.r505.de" = "http://127.0.0.1:8123";
+      };
+    };
 
     # systemd.services.ebusd = {
     #   description = "ebusd";

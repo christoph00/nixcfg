@@ -36,6 +36,12 @@ in {
 
     networking.dhcpcd.denyInterfaces = [interfaceName];
 
+    networking.firewall = {
+      trustedInterfaces = [interfaceName];
+      checkReversePath = "loose";
+      allowedUDPPorts = [51820];
+    };
+
     systemd.network.networks."50-netbird" = mkIf config.networking.useNetworkd {
       matchConfig = {
         Name = interfaceName;
