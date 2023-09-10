@@ -1,29 +1,17 @@
-{...}: {
-  services.home-assistant.config.sensor = [
+{
+  lib,
+  config,
+  ...
+}: {
+  services.home-assistant.config.sensor = lib.mkIf config.nos.services.home-assistant.enable [
     {
       platform = "netdata";
-      name = "futro";
+      name = "router";
       resources = {
         load = {
           data_group = "system.load";
           element = "load15";
           icon = "mdi:chip";
-        };
-        data-ssd_avail = {
-          data_group = "disk_space._media_data-ssd";
-          element = "avail";
-        };
-        data-ssd_used = {
-          data_group = "disk_space._media_data-ssd";
-          element = "used";
-        };
-        data-hdd_avail = {
-          data_group = "disk_space._media_data-hdd";
-          element = "avail";
-        };
-        data-hdd_used = {
-          data_group = "disk_space._media_data-hdd";
-          element = "used";
         };
         temperature = {
           data_group = "sensors.k10temp-pci-00c3_temperature";
