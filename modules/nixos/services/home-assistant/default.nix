@@ -204,6 +204,7 @@
         }
       ];
     };
+    networking.firewall.allowedTCPPorts = [1883];
 
     age.secrets.cf-tunnel = {
       file = "${self}/secrets/cf-tunnel-${hostname}";
