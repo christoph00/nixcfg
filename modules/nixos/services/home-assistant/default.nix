@@ -95,7 +95,16 @@
         #   circuit = "basv0";
         # };
         ssdp = {};
-        mqtt = {};
+        mqtt = {
+          sensor = [
+            {
+              name = "Router Load";
+              unit_of_measurement = "load";
+              state_topic = "collectd/OpenWrt/load/load";
+              value_template = "{{ value.split(':')[2] | float }}";
+            }
+          ];
+        };
         tasmota = {};
         dhcp = {};
         conversation = {};
