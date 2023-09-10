@@ -28,6 +28,8 @@ with lib; {
 
   networking.nameservers = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
 
+  services.avahi.enable = true;
+
   networking.networkmanager = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
     enable = true;
     plugins = []; # disable all plugins, we don't need them
@@ -35,6 +37,7 @@ with lib; {
     wifi = {
       powersave = true; # enable wifi powersaving
     };
+    connectionConfig."connection.mdns" = 2;
   };
   systemd.network.wait-online.enable = false;
 }
