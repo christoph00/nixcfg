@@ -60,8 +60,8 @@
             host = "192.168.2.1";
             username = "root";
             password = "!secret router_pass";
-             ssl = true;
-              verify_ssl = false;
+            ssl = true;
+            verify_ssl = false;
           }
         ];
         http = {
