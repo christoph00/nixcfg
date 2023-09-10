@@ -77,6 +77,7 @@
         dhcp = {};
         ssdp = {};
         zeroconf = {};
+        bthome = {};
         zha = {
           enable_quirks = true;
           custom_quirks_path = "${config.services.home-assistant.configDir}/zha_quirks/";
@@ -187,6 +188,7 @@
         #"python_script"
         "bluetooth_tracker"
         "bluetooth_le_tracker"
+        "bthome_ble"
       ];
     };
 
