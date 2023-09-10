@@ -99,6 +99,8 @@ with lib; {
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
 
+    services.udev.packages = [pkgs.platformio-core.udev];
+
     fonts = {
       packages = with pkgs; [
         material-symbols
