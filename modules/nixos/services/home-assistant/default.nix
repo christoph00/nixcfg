@@ -188,7 +188,6 @@
         #"python_script"
         "bluetooth_tracker"
         "bluetooth_le_tracker"
-        "bthome_ble"
       ];
     };
 
