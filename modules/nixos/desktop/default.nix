@@ -166,5 +166,14 @@ with lib; {
       # implementation = "broker";
       packages = [pkgs.gcr pkgs.dconf];
     };
+
+    virtualisation = {
+      podman = {
+        enable = true;
+        defaultNetwork.settings = {
+          dns_enabled = true;
+        };
+      };
+    };
   };
 }
