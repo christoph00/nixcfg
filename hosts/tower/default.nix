@@ -91,10 +91,6 @@
   };
 
   environment.systemPackages = [pkgs.amdgpu_top];
-
-  services.udev.packages = [pkgs.platformio-core.udev];
-  services.esphome.enable = true;
-
   boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
   boot.blacklistedKernelModules = ["dm_mod"];
   boot.kernelParams = [
