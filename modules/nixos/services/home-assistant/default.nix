@@ -87,6 +87,7 @@
         # };
         ssdp = {};
         mqtt = {};
+        tasmota = {};
         dhcp = {};
         conversation = {};
         google_assistant = {
