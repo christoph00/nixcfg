@@ -135,6 +135,7 @@
           # faster-whisper
           androidtv
           pyebus
+          hatasmota
         ];
       extraComponents = [
         "caldav"
@@ -177,7 +178,6 @@
         #"python_script"
         "bluetooth_tracker"
         "bluetooth_le_tracker"
-        "hatasmota"
       ];
     };
 
