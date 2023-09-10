@@ -55,6 +55,12 @@
           {
             platform = "bluetooth_tracker";
           }
+          {
+            platform = "luci";
+            host = "192.168.2.1";
+            username = "root";
+            password = "!secret router_pass";
+          }
         ];
         http = {
           use_x_forwarded_for = true;
