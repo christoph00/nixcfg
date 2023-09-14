@@ -16,14 +16,6 @@
     };
     hardware.bluetooth.enable = true;
 
-    services.tsnsrv.services = {
-      ha = {
-        funnel = true;
-        ephemeral = true;
-        toURL = "http://127.0.0.1:8123";
-      };
-    };
-
     services.home-assistant = {
       enable = true;
       package = pkgs.home-assistant.overrideAttrs (old: {
@@ -78,6 +70,7 @@
         ssdp = {};
         zeroconf = {};
         bthome = {};
+        media_extractor = {};
         zha = {
           enable_quirks = true;
           custom_quirks_path = "${config.services.home-assistant.configDir}/zha_quirks/";
