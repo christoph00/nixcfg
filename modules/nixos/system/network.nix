@@ -30,8 +30,8 @@ with lib; {
 
   services.avahi.enable = true;
 
-  networking.networkmanager = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
-    enable = true;
+  networking.networkmanager =  {
+    enable = (builtins.elem config.nos.type ["desktop" "laptop"]);
     plugins = []; # disable all plugins, we don't need them
     # dns = "systemd-resolved"; # use systemd-resolved as dns backend
     wifi = {
