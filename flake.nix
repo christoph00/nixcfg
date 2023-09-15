@@ -9,7 +9,7 @@
   ];
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     unfree.url = "github:numtide/nixpkgs-unfree/nixos-unstable";
     unfree.inputs.nixpkgs.follows = "nixpkgs";
