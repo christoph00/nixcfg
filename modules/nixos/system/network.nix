@@ -14,24 +14,24 @@ with lib; {
   );
   # networking.useHostResolvConf = false;
   services.resolved = {
-    enable = (builtins.elem config.nos.type ["server" "vm"]);
+    enable = builtins.elem config.nos.type ["server" "vm"];
     dnssec = "false";
     fallbackDns = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
     llmnr = "true";
-    extraConfig = ''
-      DNSStubListenerExtra=[::1]:53
-      DNSOverTLS=yes
-    '';
+    # extraConfig = ''
+    #   DNSStubListenerExtra=[::1]:53
+    #   DNSOverTLS=yes
+    # '';
   };
 
   # 1-7dhqcaaa4aaeaaya6kpt7egqaflhgiiaeeiabca.max.rethinkdns.com
 
-  networking.nameservers = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
+  #networking.nameservers = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
 
   services.avahi.enable = true;
 
-  networking.networkmanager =  {
-    enable = (builtins.elem config.nos.type ["desktop" "laptop"]);
+  networking.networkmanager = {
+    enable = builtins.elem config.nos.type ["desktop" "laptop"];
     plugins = []; # disable all plugins, we don't need them
     # dns = "systemd-resolved"; # use systemd-resolved as dns backend
     wifi = {
