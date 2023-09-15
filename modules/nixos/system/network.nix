@@ -13,16 +13,16 @@ with lib; {
     builtins.hashString "md5" config.networking.hostName
   );
   # networking.useHostResolvConf = false;
-  # services.resolved = {
-  #   enable = lib.mkDefault true;
-  #   dnssec = "false";
-  #   fallbackDns = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
-  #   llmnr = "true";
-  #   extraConfig = ''
-  #     DNSStubListenerExtra=[::1]:53
-  #     DNSOverTLS=yes
-  #   '';
-  # };
+  services.resolved = {
+    enable = mkIf (builtins.elem config.nos.type ["server" "vm"]);
+    dnssec = "false";
+    fallbackDns = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
+    llmnr = "true";
+    extraConfig = ''
+      DNSStubListenerExtra=[::1]:53
+      DNSOverTLS=yes
+    '';
+  };
 
   # 1-7dhqcaaa4aaeaaya6kpt7egqaflhgiiaeeiabca.max.rethinkdns.com
 
