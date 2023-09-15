@@ -14,7 +14,7 @@ with lib; {
   );
   # networking.useHostResolvConf = false;
   services.resolved = {
-    enable = mkIf (builtins.elem config.nos.type ["server" "vm"]);
+    enable = (builtins.elem config.nos.type ["server" "vm"]);
     dnssec = "false";
     fallbackDns = ["1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one"];
     llmnr = "true";
@@ -30,8 +30,8 @@ with lib; {
 
   services.avahi.enable = true;
 
-  networking.networkmanager =  {
-    enable = (builtins.elem config.nos.type ["desktop" "laptop"]);
+  networking.networkmanager = mkIf (builtins.elem config.nos.type ["desktop" "laptop"]) {
+    enable = true;
     plugins = []; # disable all plugins, we don't need them
     # dns = "systemd-resolved"; # use systemd-resolved as dns backend
     wifi = {
