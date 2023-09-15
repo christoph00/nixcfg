@@ -38,6 +38,7 @@
           external_url = "https://ha.r505.de";
           #internal_url = "https://ha.net.r505.de";
           packages = "!include_dir_named pkgs";
+          customize.zone.home.radius = 20;
         };
         default_config = {};
         device_tracker = [
