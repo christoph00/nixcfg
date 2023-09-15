@@ -38,7 +38,7 @@
           external_url = "https://ha.r505.de";
           #internal_url = "https://ha.net.r505.de";
           packages = "!include_dir_named pkgs";
-          customize.zone.home.radius = 20;
+          #customize.zone.home.radius = 20;
         };
         default_config = {};
         device_tracker = [
@@ -238,16 +238,6 @@
       credentialsFile = config.age.secrets.cf-tunnel.path;
       ingress = {
         "ha.r505.de" = "http://127.0.0.1:8123";
-      };
-    };
-
-    systemd.services.ebusd = {
-      description = "ebusd";
-      wantedBy = ["multi-user.target"];
-
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.ebusd}/usr/bin/ebusd -f --scanconfig -d ens:ebus.lan.r505.de:9999 --mqtthost 192.168.2.50 --mqttport 1883 --mqttvar=filter-direction=r|u|^w --mqttint=${pkgs.ebusd}/etc/ebusd/mqtt-hassio.cfg --mqttjson --configlang=de ";
       };
     };
   };
