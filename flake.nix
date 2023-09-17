@@ -11,9 +11,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    unfree.url = "github:numtide/nixpkgs-unfree/nixos-unstable";
-    unfree.inputs.nixpkgs.follows = "nixpkgs";
-
     snowfall-lib = {
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +18,11 @@
 
     snowfall-frost = {
       url = "github:snowfallorg/frost";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    snowfall-flake = {
+      url = "github:snowfallorg/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -62,13 +64,13 @@
     anyrun = {
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
     };
 
     devenv = {
       url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,9 +81,33 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs:
-    inputs.snowfall-lib.mkFlake {
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
       inherit inputs;
       src = ./.;
+
+      snowfall = {
+        meta = {
+          name = "chr";
+          title = "Christoph's NixOS Config";
+        };
+
+        namespace = "chr";
+      };
+    };
+  in
+    lib.mkFlake {
+      channels-config = {
+        allowUnfree = true;
+      };
+
+      overlays = with inputs; [
+        snowfall-flake.overlay
+      ];
+
+      systems.modules.nixos = with inputs; [
+        home-manager.nixosModules.home-manager
+        agenix.nixosModules.age
+      ];
     };
 }
