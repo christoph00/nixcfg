@@ -101,10 +101,6 @@
         allowUnfree = true;
       };
 
-      overlays = with inputs; [
-        snowfall-flake.overlay
-      ];
-
       systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.age
