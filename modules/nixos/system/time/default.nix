@@ -5,7 +5,7 @@ with lib.chr;
 let cfg = config.chr.system.time;
 in
 {
-  options.plusultra.system.time = with types; {
+  options.chr.system.time = with types; {
     enable =
       mkBoolOpt false "Whether or not to configure timezone information.";
   };
