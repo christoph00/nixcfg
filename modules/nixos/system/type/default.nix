@@ -19,7 +19,7 @@ in {
 
     (mkIf (cfg == "desktop" || "laptop") {
       chr.apps.firefox.enable = mkDefault true;
-      chr.filesystem = {
+      chr.system.filesystem = {
         enable = mkDefault true;
         btrfs = mkDefault true;
         persist = mkDefault true;
