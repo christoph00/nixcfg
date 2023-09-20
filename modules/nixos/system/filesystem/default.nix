@@ -33,41 +33,45 @@ in {
   };
 
   config = mkIf cfg.enable {
-    "/" =
-      if config.chr.system.filesystem.rootOnTmpfs
-      then {
-        device = "none";
-        fsType = "tmpfs";
-        options = ["defaults" "size=2G" "mode=755"];
-      }
-      else {
+    fileSystems = let
+      device = config.chr.system.filesystem.mainDisk;
+    in {
+      "/" =
+        if config.chr.system.filesystem.rootOnTmpfs
+        then {
+          device = "none";
+          fsType = "tmpfs";
+          options = ["defaults" "size=2G" "mode=755"];
+        }
+        else {
+          inherit device;
+          fsType = "btrfs";
+          options = ["subvol=@root" "noatime" "compress-force=zstd"];
+        };
+
+      "/nix" = mkIf cfg.btrfs {
         inherit device;
         fsType = "btrfs";
-        options = ["subvol=@root" "noatime" "compress-force=zstd"];
+        options = ["subvol=@nix" "noatime" "compress-force=zstd"];
       };
 
-    "/nix" = {
-      inherit device;
-      fsType = "btrfs";
-      options = ["subvol=@nix" "noatime" "compress-force=zstd"];
-    };
+      "/boot" = {
+        device = chr.system.filesystem.efiDisk;
+        fsType = "vfat";
+      };
 
-    "/boot" = {
-      device = chr.system.filesystem.efiDisk;
-      fsType = "vfat";
-    };
+      "${config.chr.system.filesystem.stateDir}" = mkIf cfg.btrfs {
+        inherit device;
+        fsType = "btrfs";
+        options = ["subvol=@persist" "noatime" "compress-force=zstd"];
+        neededForBoot = true;
+      };
 
-    "${config.chr.system.filesystem.stateDir}" = {
-      inherit device;
-      fsType = "btrfs";
-      options = ["subvol=@persist" "noatime" "compress-force=zstd"];
-      neededForBoot = true;
-    };
-
-    "/home" = {
-      inherit device;
-      fsType = "btrfs";
-      options = ["subvol=@home" "noatime" "compress-force=zstd"];
+      "/home" = mkIf cfg.btrfs {
+        inherit device;
+        fsType = "btrfs";
+        options = ["subvol=@home" "noatime" "compress-force=zstd"];
+      };
     };
   };
 }
