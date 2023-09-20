@@ -7,18 +7,18 @@
 }:
 with lib;
 with lib.chr; let
-  cfg = config.chr;
+  cfg = config.chr.type;
 in {
   options.chr.type = mkOption {
     type = types.enum ["laptop" "desktop" "server" "vm"];
   };
 
   config = mkMerge [
-    (mkIf (cfg.type == "server") {
+    (mkIf (cfg == "server") {
       })
 
-    (mkIf (cfg.type == "desktop") {
-      cfg.apps.firefox.enable = true;
+    (mkIf (cfg == "desktop") {
+      config.chr.apps.firefox.enable = true;
     })
   ];
 }
