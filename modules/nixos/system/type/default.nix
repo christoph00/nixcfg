@@ -18,7 +18,7 @@ in {
       })
 
     (mkIf (cfg == "desktop") {
-      config.chr.apps.firefox.enable = true;
+      chr.apps.firefox.enable = true;
     })
   ];
 }
