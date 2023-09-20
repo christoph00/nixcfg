@@ -6,7 +6,7 @@
   ...
 }:
 with lib;
-with lib.plusultra; let
+with lib.chr; let
   cfg = config.chr.system.boot;
 in {
   options.chr.system.boot = with types; {
