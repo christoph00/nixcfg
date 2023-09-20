@@ -17,7 +17,7 @@ in {
     (mkIf (cfg == "server") {
       })
 
-    (mkIf (cfg == "desktop" || "laptop") {
+    (mkIf (cfg == "desktop" || cfg == "laptop") {
       chr.apps.firefox.enable = mkDefault true;
       chr.system.filesystem = {
         enable = mkDefault true;
