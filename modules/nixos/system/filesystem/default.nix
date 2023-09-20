@@ -56,7 +56,7 @@ in {
       };
 
       "/boot" = {
-        device = chr.system.filesystem.efiDisk;
+        device = config.chr.system.filesystem.efiDisk;
         fsType = "vfat";
       };
 
