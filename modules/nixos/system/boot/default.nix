@@ -7,7 +7,7 @@
 }:
 with lib;
 with lib.plusultra; let
-  cfg = config.plusultra.system.boot;
+  cfg = config.chr.system.boot;
 in {
   options.chr.system.boot = with types; {
     enable = mkBoolOpt false "Whether or not to enable booting.";
