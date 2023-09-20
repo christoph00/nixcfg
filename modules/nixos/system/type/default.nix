@@ -18,7 +18,15 @@ in {
       })
 
     (mkIf (cfg == "desktop") {
-      chr.apps.firefox.enable = true;
+      chr.apps.firefox.enable = mkDefault true;
+      chr.filesystem = {
+        enable = mkDefault true;
+        btrfs = mkDefault true;
+        persist = mkDefault true;
+        mainDisk = mkDefault "/dev/nvme0n1p3";
+        efiDisk = mkDefault "/dev/nvme0n1p1";
+        rootOnTmpfs = mkDefault true;
+      };
     })
   ];
 }
