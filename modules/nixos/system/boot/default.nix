@@ -11,7 +11,10 @@ with lib.chr; let
 in {
   options.chr.system.boot = with types; {
     enable = mkBoolOpt true "Whether or not to enable booting.";
-    bootloader = mkOpt types.enum ["none" "grub" "systemd-boot"] "systemd-boot" "Bootloader to use";
+    bootloader = mkOption {
+      type = types.enum ["none" "grub" "systemd-boot"];
+      default = "systemd-boot";
+    };
   };
 
   config = mkIf cfg.enable {
