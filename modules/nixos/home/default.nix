@@ -10,10 +10,6 @@ with lib;
 with lib.chr; let
   cfg = config.chr.home;
 in {
-  # imports = with inputs; [
-  #   home-manager.nixosModules.home-manager
-  # ];
-
   options.chr.home = with types; {
     file =
       mkOpt attrs {}
