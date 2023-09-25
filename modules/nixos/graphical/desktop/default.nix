@@ -1,11 +1,34 @@
 {
+  options,
   config,
-  lib,
   pkgs,
+  lib,
   ...
 }:
-with lib; {
-  config = mkIf (builtins.elem config.chr.type ["desktop" "laptop"]) {
+with lib;
+with lib.chr; let
+  cfg = config.chr.desktop;
+in {
+  options.chr.desktop = with types; {
+    enable = mkOption {
+      type = types.bool;
+      default = builtins.elem config.chr.type ["desktop" "laptop"];
+    };
+    wm = mkOption {
+      type = types.enum ["Hyprland" "plasma"];
+      default = "Hyprland";
+    };
+    autologin = mkOption {
+      type = types.bool;
+      default = true;
+    };
+    bar = mkOption {
+      type = types.enum ["waybar" "eww" "ags" "none"];
+      default = "waybar";
+    };
+  };
+
+  config = mkIf cfg.enable {
     # Disable mitigations on desktop
     boot.kernelParams = [
       "splash"
@@ -44,27 +67,23 @@ with lib; {
       };
     };
 
-    boot.plymouth = {
-      enable = true;
-    };
-
     environment.etc."greetd/environments".text = ''
-      ${lib.optionalString (config.nos.desktop.wm == "Hyprland") "Hyprland"}
+      ${lib.optionalString (config.chr.desktop.wm == "Hyprland") "Hyprland"}
       bash
     '';
 
     services.greetd = {
       enable = true;
       vt = 2;
-      restart = !config.nos.desktop.autologin;
+      restart = !config.chr.desktop.autologin;
       settings = {
-        initial_session = mkIf config.nos.desktop.autologin {
-          command = "${config.nos.desktop.wm}";
-          user = "${config.nos.mainUser}";
+        initial_session = mkIf config.chr.desktop.autologin {
+          command = "${config.chr.desktop.wm}";
+          user = "${config.chr.user.name}";
         };
 
         default_session =
-          if (!config.nos.desktop.autologin)
+          if (!config.chr.desktop.autologin)
           then {
             command = lib.concatStringsSep " " [
               (lib.getExe pkgs.greetd.tuigreet)
@@ -77,8 +96,8 @@ with lib; {
             user = "greeter";
           }
           else {
-            command = "${config.nos.desktop.wm}";
-            user = "${config.nos.mainUser}";
+            command = "${config.chr.desktop.wm}";
+            user = "${config.chr.mainUser}";
           };
       };
     };

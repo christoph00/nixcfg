@@ -1,4 +1,4 @@
-{...}:{
+{...}: {
   fileSystems = {
     "/media/Games" = {
       device = "/dev/disk/by-label/ssd-data";
@@ -18,10 +18,12 @@
     #   options = ["subvol=@data" "noatime" "compress-force=zstd"];
     # };
 
- /*    "/media/ncdata" = {
+    /*
+       "/media/ncdata" = {
       device = "/dev/disk/by-label/ssd-data";
       options = ["subvol=@ncdata" "discard=async" "compress-force=zstd" "nofail"];
-    }; */
+    };
+    */
   };
 
   swapDevices = [{device = "/dev/nvme0n1p2";}];
