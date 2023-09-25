@@ -1,10 +1,18 @@
 {
+  options,
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
-}: {
-  config = lib.mkIf config.nos.services.nas.enable {
+}:
+with lib;
+with lib.chr; let
+  cfg = config.chr.services.nas;
+in {
+  options.chr.services.nas = with types; {
+    enable = mkBoolOpt true "Enable NAS Service.";
+  };
+  config = lib.mkIf config.chr.services.nas.enable {
     networking.firewall.allowedTCPPorts = [80 443 2022];
     networking.firewall.allowedUDPPorts = [443 2022];
 
