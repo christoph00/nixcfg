@@ -26,6 +26,10 @@ in {
       home.file = mkAliasDefinitions options.chr.home.file;
       xdg.enable = true;
       xdg.configFile = mkAliasDefinitions options.chr.home.configFile;
+
+      stateVersion = lib.mkDefault "23.05";
+
+      systemd.user.startServices = "sd-switch";
     };
 
     home-manager = {

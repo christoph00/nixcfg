@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  nos = {
+  chr = {
     type = "laptop";
     hw = {
       cpu = "intel";
@@ -64,7 +64,7 @@
     options iwlwifi power_save=Y
   '';
 
-  boot.resumeDevice = "/dev/disk/by-label/air13";
+  #boot.resumeDevice = "/dev/disk/by-uuid/air13";
 
   services.udev.extraRules = ''
     # Remove NVIDIA USB xHCI Host Controller devices, if present
@@ -80,9 +80,45 @@
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
   '';
 
-  swapDevices = [{device = "/dev/nvme0n1p2";}];
+  #swapDevices = [{device = "/dev/nvme0n1p2";}];
 
   services.fstrim.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
+
+  services.power-profiles-daemon.enable = true;
+  services.thermald.enable = true;
+
+  services.fprintd.enable = true;
+
+  networking.wireless = {
+    enable = false;
+    fallbackToWPA2 = false;
+    iwd = {
+      enable = true;
+      settings = {
+        General.AddressRandomization = "once";
+        General.AddressRandomizationRange = "full";
+      };
+    };
+
+    # Imperative
+    allowAuxiliaryImperativeNetworks = true;
+    userControlled = {
+      enable = true;
+      group = "network";
+    };
+    extraConfig = ''
+      update_config=1
+    '';
+  };
+  environment.persistence."/nix/persist" = {
+    directories = [
+      "/var/lib/iwd"
+    ];
+  };
+
+  networking.networkmanager.wifi.backend = "iwd";
+
+  programs.light.enable = true;
 }
