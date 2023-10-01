@@ -13,9 +13,9 @@ in {
     name = mkOpt str "christoph" "The name to use for the user account.";
     fullName = mkOpt str "christoph" "The full name of the user.";
     email = mkOpt str "christoph@asche.co" "The email of the user.";
-    initialPassword =
-      mkOpt str "password"
-      "The initial password to use when the user is first created.";
+    passwordFile =
+      mkOpt str config.age.secrets.user-password.path
+      "Hashed Password File";
     icon =
       mkOpt (nullOr package) defaultIcon
       "The profile picture to use for the user.";
@@ -82,7 +82,7 @@ in {
       {
         isNormalUser = true;
 
-        inherit (cfg) name initialPassword;
+        inherit (cfg) name passwordFile;
 
         home = "/home/${cfg.name}";
         group = "users";
