@@ -97,7 +97,7 @@ in {
           }
           else {
             command = "${config.chr.desktop.wm}";
-            user = "${config.chr.mainUser}";
+            user = "${config.chr.user.name}";
           };
       };
     };
