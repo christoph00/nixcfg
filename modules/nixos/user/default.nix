@@ -31,6 +31,9 @@ in {
   };
 
   config = {
+
+    age.secrets.user-password.file = "../../secrets/christoph-password.age";
+    
     programs.zsh = {
       enable = true;
       autosuggestions.enable = true;
