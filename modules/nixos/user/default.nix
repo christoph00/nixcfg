@@ -20,6 +20,8 @@ in {
       mkOpt (nullOr package) defaultIcon
       "The profile picture to use for the user.";
     extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
+    authorizedKeys = mkOpt (listOf str) [] "Authorized Keys.";
+
     extraOptions =
       mkOpt attrs {}
       (mdDoc "Extra options passed to `users.users.<name>`.");
@@ -33,6 +35,10 @@ in {
     };
 
     chr.home = {
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX christoph@air13"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower"
+      ];
       extraOptions = {
         home.shellAliases = {
           lc = "${pkgs.colorls}/bin/colorls --sd";
@@ -92,6 +98,8 @@ in {
         uid = 1000;
 
         extraGroups = [] ++ cfg.extraGroups;
+
+        openssh.authorizedKeys.keys = [] ++ cfg.authorizedKeys;
       }
       // cfg.extraOptions;
   };
