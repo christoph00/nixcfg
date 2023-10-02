@@ -6,7 +6,7 @@
   ...
 }: let
   inherit (lib) types mkIf mkDefault mkMerge;
-  inherit (lib.plusultra) mkOpt;
+  inherit (lib.chr) mkOpt;
 
   cfg = config.chr.user;
 
