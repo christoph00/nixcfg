@@ -31,7 +31,6 @@ in {
       xdg.enable = true;
       xdg.configFile = mkAliasDefinitions options.chr.home.configFile;
 
-      stateVersion = lib.mkDefault "23.05";
 
       systemd.user.startServices = "sd-switch";
 
@@ -41,6 +40,9 @@ in {
     home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
+
+      stateVersion = lib.mkDefault "23.05";
+
 
       users.${config.chr.user.name} =
         mkAliasDefinitions options.chr.home.extraOptions;
