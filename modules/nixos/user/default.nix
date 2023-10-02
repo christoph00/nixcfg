@@ -13,7 +13,7 @@ in {
     name = mkOpt str "christoph" "The name to use for the user account.";
     fullName = mkOpt str "christoph" "The full name of the user.";
     email = mkOpt str "christoph@asche.co" "The email of the user.";
-    passwordFile =
+    hashedPasswordFile =
       mkOpt str config.age.secrets.user-password.path
       "Hashed Password File";
     icon =
@@ -78,7 +78,7 @@ in {
       {
         isNormalUser = true;
 
-        inherit (cfg) name passwordFile;
+        inherit (cfg) name hashedPasswordFile;
 
         home = "/home/${cfg.name}";
         group = "users";

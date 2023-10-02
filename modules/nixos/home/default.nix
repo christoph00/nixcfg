@@ -41,9 +41,6 @@ in {
       useUserPackages = true;
       useGlobalPkgs = true;
 
-      stateVersion = lib.mkDefault "23.05";
-
-
       users.${config.chr.user.name} =
         mkAliasDefinitions options.chr.home.extraOptions;
     };
