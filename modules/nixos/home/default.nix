@@ -11,6 +11,10 @@ with lib.chr; let
   cfg = config.chr.home;
 in {
   options.chr.home = with types; {
+    enable = mkOption {
+      type = types.bool;
+      default = builtins.elem config.chr.type ["desktop" "laptop"];
+    };
     file =
       mkOpt attrs {}
       (mdDoc "A set of files to be managed by home-manager's `home.file`.");

@@ -40,15 +40,6 @@ in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower"
       ];
       extraOptions = {
-        home.shellAliases = {
-          lc = "${pkgs.colorls}/bin/colorls --sd";
-          lcg = "lc --gs";
-          lcl = "lc -1";
-          lclg = "lc -1 --gs";
-          lcu = "${pkgs.colorls}/bin/colorls -U";
-          lclu = "${pkgs.colorls}/bin/colorls -U -1";
-        };
-
         programs = {
           starship = {
             enable = true;
