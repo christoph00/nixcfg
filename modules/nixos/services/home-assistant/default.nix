@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.services.home-assistant;
 in {
   options.chr.services.home-assistant = with types; {
-    enable = mkBoolOpt true "Enable Home-Assistant Service.";
+    enable = mkBoolOpt false "Enable Home-Assistant Service.";
   };
   config = lib.mkIf cfg.enable {
     users.users.hass = {
@@ -232,14 +232,14 @@ in {
     networking.firewall.allowedTCPPorts = [1883];
 
     age.secrets.cf-tunnel = {
-      file = "${self}/secrets/cf-tunnel-${hostname}";
+      file = "${self}/secrets/cf-tunnel-${config.networking.hostname}";
       owner = config.services.cloudflared.user;
       group = config.services.cloudflared.group;
     };
 
     boot.kernel.sysctl."net.core.rmem_max" = lib.mkDefault 2500000;
     services.cloudflared.enable = true;
-    services.cloudflared.tunnels."${hostname}" = {
+    services.cloudflared.tunnels."${config.networking.hostname}" = {
       default = "http_status:404";
       credentialsFile = config.age.secrets.cf-tunnel.path;
       ingress = {
