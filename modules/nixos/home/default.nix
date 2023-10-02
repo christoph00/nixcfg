@@ -31,7 +31,6 @@ in {
       xdg.enable = true;
       xdg.configFile = mkAliasDefinitions options.chr.home.configFile;
 
-
       systemd.user.startServices = "sd-switch";
 
       programs.home-manager.enable = true;
