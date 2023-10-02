@@ -24,7 +24,7 @@ in {
     extraOptions = mkOpt attrs {} "Options to pass directly to home-manager.";
   };
 
-  config = {
+  config = mkIf cfg.enable {
     chr.home.extraOptions = {
       home.stateVersion = config.system.stateVersion;
       home.file = mkAliasDefinitions options.chr.home.file;
@@ -34,6 +34,8 @@ in {
       stateVersion = lib.mkDefault "23.05";
 
       systemd.user.startServices = "sd-switch";
+
+      programs.home-manager.enable = true;
     };
 
     home-manager = {
