@@ -18,7 +18,12 @@ in {
       })
 
     (mkIf (cfg == "desktop" || cfg == "laptop") {
-      chr.apps.firefox.enable = mkDefault true;
+      chr.apps = {
+        firefox.enable = mkDefault true;
+        vscode.enable = mkDefault true;
+        wezterm.enable = mkDefault true;
+      };
+
       chr.system.filesystem = {
         enable = mkDefault true;
         btrfs = mkDefault true;
