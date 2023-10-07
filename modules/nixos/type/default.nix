@@ -24,6 +24,8 @@ in {
         wezterm.enable = mkDefault true;
       };
 
+      chr.desktop.plasma.enable = mkDefault true;
+
       chr.system.filesystem = {
         enable = mkDefault true;
         btrfs = mkDefault true;
