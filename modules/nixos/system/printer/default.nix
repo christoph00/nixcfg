@@ -14,7 +14,10 @@ in {
       mkBoolOpt false "Whether or not to configure printer.";
   };
 
-  config =
-    mkIf cfg.enable {
+  config = mkIf cfg.enable {
+    services.printing = {
+      enable = true;
+      drivers = with pkgs; [xr6515dn];
     };
+  };
 }

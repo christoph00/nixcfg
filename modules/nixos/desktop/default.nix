@@ -8,6 +8,9 @@
 with lib;
 with lib.chr; let
   cfg = config.chr.desktop;
+  plasma = pkgs.writeScriptBin "plasma" ''
+    ${pkgs.plasma-workspace}/bin/startplasma-wayland &> /dev/null
+  '';
 in {
   options.chr.desktop = with types; {
     enable = mkOption {
@@ -75,8 +78,10 @@ in {
     services.greetd = {
       enable = true;
       settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+        default_session.command = ''
+          ${pkgs.greetd.tuigreet}/bin/tuigreet --remember --user-menu --asterisks --time --greeting "Welcome to NixOS" --cmd ${plasma}/bin/plasma'';
+        initial_session = {
+          command = "${plasma}/bin/plasma";
           user = config.chr.user.name;
         };
       };

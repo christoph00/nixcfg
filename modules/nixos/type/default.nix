@@ -26,6 +26,8 @@ in {
 
       chr.desktop.plasma.enable = mkDefault true;
 
+      chr.system.printer.enable = mkDefault true;
+
       chr.system.filesystem = {
         enable = mkDefault true;
         btrfs = mkDefault true;
