@@ -16,7 +16,7 @@ in {
     };
     wm = mkOption {
       type = types.enum ["Hyprland" "plasma"];
-      default = "Hyprland";
+      default = "plasma";
     };
     autologin = mkOption {
       type = types.bool;
@@ -67,50 +67,60 @@ in {
       };
     };
 
-    environment.etc."greetd/environments".text = ''
-      ${lib.optionalString (config.chr.desktop.wm == "Hyprland") "Hyprland"}
-      bash
-    '';
+    # environment.etc."greetd/environments".text = ''
+    #   ${lib.optionalString (config.chr.desktop.wm == "Hyprland") "Hyprland"}
+    #   bash
+    # '';
 
     services.greetd = {
       enable = true;
-      vt = 2;
-      restart = !config.chr.desktop.autologin;
       settings = {
-        initial_session = mkIf config.chr.desktop.autologin {
-          command = "${config.chr.desktop.wm}";
-          user = "${config.chr.user.name}";
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+          user = config.chr.user.name;
         };
-
-        default_session =
-          if (!config.chr.desktop.autologin)
-          then {
-            command = lib.concatStringsSep " " [
-              (lib.getExe pkgs.greetd.tuigreet)
-              "--time"
-              "--remember"
-              "--remember-user-session"
-              "--asterisks"
-              "--sessions '${sessionPath}'"
-            ];
-            user = "greeter";
-          }
-          else {
-            command = "${config.chr.desktop.wm}";
-            user = "${config.chr.user.name}";
-          };
       };
     };
+
+    # services.greetd = {
+    #   enable = true;
+    #   vt = 2;
+    #   restart = !config.chr.desktop.autologin;
+    #   settings = {
+    #     initial_session = mkIf config.chr.desktop.autologin {
+    #       command = "${config.chr.desktop.wm}";
+    #       user = "${config.chr.user.name}";
+    #     };
+
+    #     default_session =
+    #       if (!config.chr.desktop.autologin)
+    #       then {
+    #         command = lib.concatStringsSep " " [
+    #           (lib.getExe pkgs.greetd.tuigreet)
+    #           "--time"
+    #           "--remember"
+    #           "--remember-user-session"
+    #           "--asterisks"
+    #           "--sessions '${sessionPath}'"
+    #         ];
+    #         user = "greeter";
+    #       }
+    #       else {
+    #         command = "${config.chr.desktop.wm}";
+    #         user = "${config.chr.user.name}";
+    #       };
+    #   };
+    # };
     #suspend-then-hibernate
-    services.logind = {
-      killUserProcesses = true;
-      lidSwitch = "hibernate";
-      lidSwitchExternalPower = "hibernate";
-      extraConfig = ''
-        HandlePowerKey=hibernate
-        HibernateDelaySec=3600
-      '';
-    };
+    # services.logind = {
+    #   killUserProcesses = true;
+    #   lidSwitch = "hibernate";
+    #   lidSwitchExternalPower = "hibernate";
+    #   extraConfig = ''
+    #     HandlePowerKey=hibernate
+    #     HibernateDelaySec=3600
+    #   '';
+    # };
 
     xdg.portal = {
       enable = true;
