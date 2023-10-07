@@ -17,7 +17,7 @@ in {
   config = mkIf cfg.enable {
     services.printing = {
       enable = true;
-      drivers = with pkgs; [xr6515dn];
+      #drivers = with pkgs; [xr6515dn];
     };
   };
 }
