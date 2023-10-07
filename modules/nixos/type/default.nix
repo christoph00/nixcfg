@@ -14,6 +14,9 @@ in {
   };
 
   config = mkMerge [
+    {
+      chr.system.shell.enable = mkDefault true;
+    }
     (mkIf (cfg == "server") {
       })
 
