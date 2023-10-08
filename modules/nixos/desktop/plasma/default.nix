@@ -27,6 +27,7 @@ in {
       okular
       gwenview
       dolphin
+      kate
 
       libsForQt5.accounts-qt
       libsForQt5.kaccounts-integration
