@@ -12,11 +12,11 @@ with lib.chr; {
       enable = true;
     };
     desktop = {
-    enable = true;
+      enable = true;
     };
     apps = {
-    firefox = true;
-    cli = true;
+      firefox = true;
+      cli = true;
     };
   };
 }

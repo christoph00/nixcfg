@@ -10,14 +10,14 @@
   inherit (lib.chr) mkOpt;
 
   cfg = config.chr.desktop;
- in {
- imports = [
+in {
+  imports = [
     inputs.nix-colors.homeManagerModules.default
   ];
-    options.chr.desktop.enable = mkOpt types.bool false "Enable Desktop Config.";
+  options.chr.desktop.enable = mkOpt types.bool false "Enable Desktop Config.";
 
-config = mkIf cfg.enable {
-  colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
+  config = mkIf cfg.enable {
+    colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
 
     xdg.configFile."xkb/symbols/us-german-umlaut" = {
       text = ''
@@ -82,5 +82,5 @@ config = mkIf cfg.enable {
 
       peazip
     ];
-};
+  };
 }
