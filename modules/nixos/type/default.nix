@@ -14,9 +14,6 @@ in {
   };
 
   config = mkMerge [
-    {
-      chr.system.shell.enable = mkDefault true;
-    }
     (mkIf (cfg == "server") {
       })
 
@@ -31,7 +28,9 @@ in {
 
       chr.system.printer.enable = mkDefault true;
 
-      chr.system.filesystem = {
+      chr.system.filesystem = {    {
+      chr.system.shell.enable = mkDefault true;
+    }
         enable = mkDefault true;
         btrfs = mkDefault true;
         persist = mkDefault true;
