@@ -15,6 +15,7 @@
 , qtdeclarative
 , qtx11extras
 , fftw
+, plasma5Packages
 }:
 
 mkDerivation rec {
@@ -32,7 +33,8 @@ mkDerivation rec {
 
 
   nativeBuildInputs = [ cmake extra-cmake-modules ];
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with plasma5Packages
+    frameworkintegration
     kcmutils
     kconfigwidgets
     kcoreaddons
