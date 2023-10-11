@@ -11,6 +11,9 @@
 
   cfg = config.chr.desktop;
  in {
+ imports = [
+    inputs.nix-colors.homeManagerModules.default
+  ];
     options.chr.desktop.enable = mkOpt types.bool false "Enable Desktop Config.";
 
 config = mkIf cfg.enable {
