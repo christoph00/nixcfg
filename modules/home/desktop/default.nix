@@ -19,7 +19,6 @@ in {
   config = mkIf cfg.enable {
     colorscheme = inputs.nix-colors.colorSchemes.tokyo-city-terminal-light;
 
-
     home.packages = with pkgs; [
       brightnessctl
       coreutils
