@@ -48,7 +48,9 @@ in {
 
       fluent-icon-theme
 
-      chr.klassy
+
+
+
 
     ];
 
