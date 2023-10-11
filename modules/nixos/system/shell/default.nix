@@ -31,6 +31,8 @@ in {
         btop
         neofetch
         unzip
+
+
       ];
 
       localBinInPath = true;
