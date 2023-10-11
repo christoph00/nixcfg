@@ -10,6 +10,9 @@ with lib;
 with lib.chr; let
   cfg = config.chr.system.network;
 in {
+  imports = [
+    ./netbird.nix
+  ];
   options.chr.system.network = with types; {
     enable = mkOpt types.bool true "Enable Network Config.";
     tweaks = mkOpt types.bool true "Enable Network Tweaks.";
