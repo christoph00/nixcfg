@@ -1,19 +1,21 @@
 { lib
-, mkDerivation
 , fetchFromGitHub
+, mkDerivation
 , cmake
 , extra-cmake-modules
-, kdecoration
-, qtx11extras
-, kcoreaddons
-, kguiaddons
-, kconfigwidgets
-, kiconthemes
-, kwindowsystem
-, kwayland
-, kirigami2
 , frameworkintegration
 , kcmutils
+, kconfigwidgets
+, kcoreaddons
+, kdecoration
+, kguiaddons
+, ki18n
+, kwayland
+, kwindowsystem
+, plasma-framework
+, qtdeclarative
+, qtx11extras
+, fftw
 }:
 
 mkDerivation rec {
@@ -29,20 +31,22 @@ mkDerivation rec {
 
   extraCmakeFlags = [ "-DBUILD_TESTING=OFF" ];
 
-  nativeBuildInputs = [ cmake extra-cmake-modules ];
 
-  buildInputs = [
-    kdecoration
-    qtx11extras
-    kcoreaddons
-    kguiaddons
-    kconfigwidgets
-    kiconthemes
-    kwayland
-    kwindowsystem
-    kirigami2
+  nativeBuildInputs = [ cmake extra-cmake-modules ];
+  propagatedBuildInputs = [
     frameworkintegration
     kcmutils
+    kconfigwidgets
+    kcoreaddons
+    kdecoration
+    kguiaddons
+    ki18n
+    kwayland
+    kwindowsystem
+    plasma-framework
+    qtdeclarative
+    qtx11extras
+    fftw
   ];
 
   meta = with lib; {
