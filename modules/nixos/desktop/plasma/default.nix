@@ -38,6 +38,16 @@ in {
       # Use GNOME's cursor to overcome this bug: https://gitlab.freedesktop.org/drm/amd/-/issues/1513
       # Forcing software curosr fixes how it looks, but introduces other glitches.
       gnome.adwaita-icon-theme
+
+      graphite-kde-theme
+      arc-kde-theme
+      adapta-kde-theme
+      fluent-gtk-theme
+      whitesur-gtk-theme
+      whitesur-icon-theme
+
+      Fluent-icon-theme
+
     ];
 
     services.dbus.packages = [pkgs.gcr];
