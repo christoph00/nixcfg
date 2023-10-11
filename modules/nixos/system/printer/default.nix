@@ -19,7 +19,7 @@ in {
       enable = true;
       drivers = with pkgs; [chr.xr6515dn gutenprint];
     };
-     hardware.printers.ensurePrinters = [
+    hardware.printers.ensurePrinters = [
       {
         name = "Xerox_WorkCentre_6515DN";
         model = "xerox-workcentre-6515DN/xr6515dn.ppd";

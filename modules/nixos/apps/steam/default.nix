@@ -19,8 +19,8 @@ in {
 
     hardware.steam-hardware.enable = true;
 
-    environment.systemPackages = with pkgs.chr; [
-      steam
+    environment.systemPackages = with pkgs; [
+      chr.steam
     ];
 
     environment.sessionVariables = {
