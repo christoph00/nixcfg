@@ -80,6 +80,13 @@
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    schizofox = {
+      url = "github:schizofox/schizofox";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
