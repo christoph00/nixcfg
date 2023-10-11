@@ -3,7 +3,6 @@
 , mkDerivation
 , cmake
 , extra-cmake-modules
-, frameworkintegration
 , kcmutils
 , kconfigwidgets
 , kcoreaddons
@@ -34,7 +33,6 @@ mkDerivation rec {
 
   nativeBuildInputs = [ cmake extra-cmake-modules ];
   propagatedBuildInputs = [
-    frameworkintegration
     kcmutils
     kconfigwidgets
     kcoreaddons
