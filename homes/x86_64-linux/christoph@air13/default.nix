@@ -13,6 +13,7 @@ with lib.chr; {
     };
     apps = {
     firefox = true;
+    cli = true;
     };
   };
 }
