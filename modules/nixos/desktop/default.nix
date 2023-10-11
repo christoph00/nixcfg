@@ -201,6 +201,7 @@ in {
     };
 
     services.xserver = {
+      layout = "us-german-umlaut,us";
       extraLayouts.us-german-umlaut = {
         description = "US Layout with German Umlauts";
         languages = ["eng" "ger"];
