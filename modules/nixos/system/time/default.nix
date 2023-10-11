@@ -15,10 +15,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-  time.timeZone = "Europe/Berlin";
+    time.timeZone = "Europe/Berlin";
 
-     i18n.defaultLocale = "de_DE.UTF-8";
+    i18n.defaultLocale = "de_DE.UTF-8";
 
-    console = { keyMap = mkForce "us"; };
-    };
+    console = {keyMap = mkForce "us";};
+  };
 }
