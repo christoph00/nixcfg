@@ -28,9 +28,7 @@ in {
 
       chr.system.printer.enable = mkDefault true;
 
-      chr.system.filesystem = {    {
-      chr.system.shell.enable = mkDefault true;
-    }
+      chr.system.filesystem = {
         enable = mkDefault true;
         btrfs = mkDefault true;
         persist = mkDefault true;
