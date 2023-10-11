@@ -49,10 +49,6 @@ in {
       fluent-icon-theme
 
       chr.klassy
-
-
-
-
     ];
 
     services.dbus.packages = [pkgs.gcr];
