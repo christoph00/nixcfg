@@ -66,6 +66,8 @@ in {
       wl-clipboard
 
       peazip
+
+      libreoffice-qt
     ];
   };
 }
