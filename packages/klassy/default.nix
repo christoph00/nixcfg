@@ -33,7 +33,7 @@ mkDerivation rec {
 
 
   nativeBuildInputs = [ cmake extra-cmake-modules ];
-  propagatedBuildInputs = with plasma5Packages
+  propagatedBuildInputs = with plasma5Packages; [
     frameworkintegration
     kcmutils
     kconfigwidgets
