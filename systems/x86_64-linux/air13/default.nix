@@ -12,4 +12,6 @@ with lib.chr; {
   chr = {
     type = "laptop";
   };
+
+  system.stateVersion = "23.11";
 }
