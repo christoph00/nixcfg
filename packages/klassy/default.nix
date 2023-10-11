@@ -3,7 +3,6 @@
 , mkDerivation
 , cmake
 , extra-cmake-modules
-, kcmutils
 , kconfigwidgets
 , kcoreaddons
 , kdecoration
@@ -16,6 +15,7 @@
 , qtx11extras
 , fftw
 , plasma5Packages
+, libsForQt5
 }:
 
 mkDerivation rec {
@@ -33,7 +33,7 @@ mkDerivation rec {
 
 
   nativeBuildInputs = [ cmake extra-cmake-modules ];
-  propagatedBuildInputs = with plasma5Packages; [
+  propagatedBuildInputs = with libsForQt5; [
     frameworkintegration
     kcmutils
     kconfigwidgets
