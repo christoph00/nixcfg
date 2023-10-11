@@ -3,18 +3,7 @@
 , mkDerivation
 , cmake
 , extra-cmake-modules
-, kconfigwidgets
-, kcoreaddons
-, kdecoration
-, kguiaddons
-, ki18n
-, kwayland
-, kwindowsystem
-, plasma-framework
-, qtdeclarative
-, qtx11extras
 , fftw
-, plasma5Packages
 , libsForQt5
 }:
 
