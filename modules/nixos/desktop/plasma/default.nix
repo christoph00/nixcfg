@@ -46,7 +46,9 @@ in {
       whitesur-gtk-theme
       whitesur-icon-theme
 
-      Fluent-icon-theme
+      fluent-icon-theme
+
+      chr.klassy
 
     ];
 
