@@ -204,7 +204,7 @@ in {
       extraLayouts.us-german-umlaut = {
         description = "US Layout with German Umlauts";
         languages = ["eng" "ger"];
-        symbolsFile = writeText "us-german-umlaut" ''
+        symbolsFile = pkgs.writeText "us-german-umlaut" ''
           default partial alphanumeric_keys
           xkb_symbols "basic" {
             include "us(altgr-intl)"
