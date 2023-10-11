@@ -1,10 +1,12 @@
-{ lib
+{ mkDerivation
+, lib
 , fetchFromGitHub
-, mkDerivation
 , cmake
 , extra-cmake-modules
-, fftw
-, libsForQt5
+, kdecoration
+, plasma-workspace
+, qtbase
+, qt5
 }:
 
 mkDerivation rec {
@@ -21,21 +23,16 @@ mkDerivation rec {
   extraCmakeFlags = [ "-DBUILD_TESTING=OFF" ];
 
 
-  nativeBuildInputs = [ cmake extra-cmake-modules ];
-  propagatedBuildInputs = with libsForQt5; [
-    frameworkintegration
-    kcmutils
-    kconfigwidgets
-    kcoreaddons
+   buildInputs = [
     kdecoration
-    kguiaddons
-    ki18n
-    kwayland
-    kwindowsystem
-    plasma-framework
-    qtdeclarative
-    qtx11extras
-    fftw
+    plasma-workspace
+    qtbase
+    qt5.qtx11extras
+  ];
+
+  nativeBuildInputs = [
+    cmake
+    extra-cmake-modules
   ];
 
   meta = with lib; {
