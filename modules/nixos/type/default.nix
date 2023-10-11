@@ -22,7 +22,7 @@ in {
 
     (mkIf (cfg == "desktop" || cfg == "laptop") {
       chr.apps = {
-        firefox.enable = mkDefault true;
+        firefox.enable = mkDefault false;
         vscode.enable = mkDefault true;
         wezterm.enable = mkDefault true;
       };
