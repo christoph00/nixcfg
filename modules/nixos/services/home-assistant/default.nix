@@ -232,7 +232,7 @@ in {
     networking.firewall.allowedTCPPorts = [1883];
 
     age.secrets.cf-tunnel = {
-      file = "${self}/secrets/cf-tunnel-${config.networking.hostname}";
+      file = ../../../../secrets/cf-tunnel-${config.networking.hostName};
       owner = config.services.cloudflared.user;
       group = config.services.cloudflared.group;
     };
