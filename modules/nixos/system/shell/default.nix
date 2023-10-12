@@ -15,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     environment = {
-      shells = with pkgs; [zsh];
+      shells = with pkgs; [bash];
 
       shellAliases = {
         ll = "ls -lah";
@@ -28,9 +28,9 @@ in {
         wget
         git
         ncdu
-        btop
-        neofetch
+        htop
         unzip
+
       ];
 
       localBinInPath = true;
