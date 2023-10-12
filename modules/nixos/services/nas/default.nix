@@ -12,7 +12,7 @@ in {
   options.chr.services.nas = with types; {
     enable = mkBoolOpt false "Enable NAS Service.";
   };
-  config = lib.mkIf config.chr.services.nas.enable {
+  config = mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [80 443 2022];
     networking.firewall.allowedUDPPorts = [443 2022];
 
@@ -54,18 +54,18 @@ in {
             };
           }
         ];
-        sftpd.bindings = [
-          {
-            port = 2022;
-            address = "0.0.0.0";
-          }
-        ];
+        # sftpd.bindings = [
+        #   {
+        #     port = 2022;
+        #     address = "0.0.0.0";
+        #   }
+        # ];
       };
     };
     systemd.services.sftpgo.serviceConfig.RuntimeDirectory = "sftpgo";
     systemd.services.sftpgo.serviceConfig.RuntimeDirectoryMode = "0755";
     systemd.services.sftpgo.serviceConfig.ReadWritePaths = ["/mnt/userdata"];
-    systemd.services.sftpgo.serviceConfig.UMask = lib.mkForce "007";
+    systemd.services.sftpgo.serviceConfig.UMask = mkForce "007";
 
     # services.nginx.clientMaxBodySize = "10G";
 
