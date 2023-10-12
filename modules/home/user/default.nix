@@ -13,7 +13,7 @@
   home-directory =
     if cfg.name == null
     then null
-    else "/home/${cfg.name}";  
+    else "/home/${cfg.name}";
 in {
   options.chr.user = {
     enable = mkOpt types.bool false "Whether to configure the user account.";
