@@ -1,5 +1,5 @@
 builds:
   include:
     - nixosConfigurations.*
-    - pkgs.x86_64-linux.nixpkgs.chr.*
-    - pkgs.aarch64-linux.nixpkgs.chr.*
+    - '*.x86_64-linux.nixpkgs.chr.*'
+    - '*.aarch64-linux.nixpkgs.chr.*'
