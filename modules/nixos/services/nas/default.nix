@@ -16,13 +16,13 @@ in {
     networking.firewall.allowedTCPPorts = [80 443 2022];
     networking.firewall.allowedUDPPorts = [443 2022];
 
-    security.acme.certs."data.r505.de" = {
-      #server = "https://acme.zerossl.com/v2/DV90";
-      domain = "data.r505.de";
-      dnsProvider = "cloudflare";
-      credentialsFile = config.age.secrets.cf-acme.path;
-      dnsResolver = "1.1.1.1:53";
-    };
+    # security.acme.certs."data.r505.de" = {
+    #   #server = "https://acme.zerossl.com/v2/DV90";
+    #   domain = "data.r505.de";
+    #   dnsProvider = "cloudflare";
+    #   credentialsFile = config.age.secrets.cf-acme.path;
+    #   dnsResolver = "1.1.1.1:53";
+    # };
 
     services.sftpgo = {
       enable = true;
@@ -67,18 +67,18 @@ in {
     systemd.services.sftpgo.serviceConfig.ReadWritePaths = ["/mnt/userdata"];
     systemd.services.sftpgo.serviceConfig.UMask = lib.mkForce "007";
 
-    services.nginx.clientMaxBodySize = "10G";
+    # services.nginx.clientMaxBodySize = "10G";
 
-    users.users.nginx.extraGroups = ["acme" "media"];
-    services.nginx.enable = true;
-    services.nginx.virtualHosts."data.r505.de" = {
-      http2 = true;
-      forceSSL = true;
-      useACMEHost = "data.r505.de";
-      locations = {
-        "/dav/".proxyPass = "http://unix:/run/sftpgo/webdavd.sock";
-        "/".proxyPass = "http://unix:/run/sftpgo/httpd.sock";
-      };
-    };
+    # users.users.nginx.extraGroups = ["acme" "media"];
+    # services.nginx.enable = true;
+    # services.nginx.virtualHosts."data.r505.de" = {
+    #   http2 = true;
+    #   forceSSL = true;
+    #   useACMEHost = "data.r505.de";
+    #   locations = {
+    #     "/dav/".proxyPass = "http://unix:/run/sftpgo/webdavd.sock";
+    #     "/".proxyPass = "http://unix:/run/sftpgo/httpd.sock";
+    #   };
+    # };
   };
 }
