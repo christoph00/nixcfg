@@ -126,7 +126,7 @@ in {
             #host = "tower.lan.net.r505.de";
             turn_off = {
               service = "shell_command.suspend_host";
-              data.host = "tower.lan";
+              data.host = "tower.lan.r505.de";
             };
           }
         ];
