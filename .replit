@@ -1,16 +1,16 @@
 run = "nix build"
 
 [nix]
-channel = "stable-22_11"
+channel = "unstable"
 
 [deployment]
 run = ["sh", "-c", "nix build"]
 
 [languages]
 
-[languages.bash]
-pattern = "**/{*.sh,*.bash}"
+[languages.nix]
+pattern = "**/{*.nix}"
 
-[languages.bash.languageServer]
-start = "bash-language-server start"
+[languages.nix.languageServer]
+start = "rnix-lsp"
 deploymentTarget = "cloudrun"
