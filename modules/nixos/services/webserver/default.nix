@@ -12,7 +12,7 @@ in {
   options.chr.services.webserver = with types; {
     enable = mkBoolOpt false "Enable Webserver";
   };
-  config =
-    lib.mkIf cfg.enable {
-    };
+  config = lib.mkIf cfg.enable {
+    users.users.caddy.extraGroups = ["acme"];
+  };
 }

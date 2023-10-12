@@ -10,7 +10,6 @@ with lib;
 with lib.chr; let
   inherit (inputs) nixos-hardware;
 in {
-
   networking.hostName = "oca";
 
   chr = {
