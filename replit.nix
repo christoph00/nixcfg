@@ -1,7 +1,8 @@
 {pkgs}: {
   deps = [
     pkgs.bashInteractive
-    pkgs.nodePackages.bash-language-server
+    pkgs.nixd
+    pkgs.alejandra
     pkgs.man
   ];
 }
