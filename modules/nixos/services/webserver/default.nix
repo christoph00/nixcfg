@@ -14,6 +14,5 @@ in {
   };
   config =
     lib.mkIf cfg.enable {
-
     };
 }
