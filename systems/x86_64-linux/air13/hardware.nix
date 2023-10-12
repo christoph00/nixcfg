@@ -17,9 +17,6 @@ in {
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
-    
-
-  boot.supportedFilesystems = [ "bcachefs" ];
 
   boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi" "i915"];
   boot.blacklistedKernelModules = ["nouveau" "nvidia"];

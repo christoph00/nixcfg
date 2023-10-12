@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.apps.vscode;
 in {
   options.chr.apps.vscode = with types; {
-    enable = mkBoolOpt false "Whether or not to enable Firefox.";
+    enable = mkBoolOpt' false;
   };
 
   config = mkIf cfg.enable {
