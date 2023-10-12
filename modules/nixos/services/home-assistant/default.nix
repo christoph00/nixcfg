@@ -239,7 +239,7 @@ in {
 
     boot.kernel.sysctl."net.core.rmem_max" = lib.mkDefault 2500000;
     services.cloudflared.enable = true;
-    services.cloudflared.tunnels."${config.networking.hostname}" = {
+    services.cloudflared.tunnels."${config.networking.hostName}" = {
       default = "http_status:404";
       credentialsFile = config.age.secrets.cf-tunnel.path;
       ingress = {
