@@ -15,6 +15,14 @@ in {
   config = mkIf cfg.thunderbird {
     programs.thunderbird = {
       enable = true;
+      profiles = {
+        christoph = {
+          isDefault = true;
+        };
+      };
+      settings = {
+        "privacy.donottrackheader.enabled" = true;
+      };
     };
   };
 }
