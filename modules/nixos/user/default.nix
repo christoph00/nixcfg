@@ -33,48 +33,9 @@ in {
   config = {
     age.secrets.user-password.file = ../../../secrets/christoph-password.age;
 
-    programs.zsh = {
-      enable = true;
-      autosuggestions.enable = true;
-      histFile = "$XDG_CACHE_HOME/zsh.history";
-    };
-
-    chr.home = {
-      extraOptions = {
-        programs = {
-          starship = {
-            enable = true;
-            settings = {
-              character = {
-                success_symbol = "[➜](bold green)";
-                error_symbol = "[✗](bold red) ";
-                vicmd_symbol = "[](bold blue) ";
-              };
-            };
-          };
-
-          zsh = {
-            enable = true;
-            enableCompletion = true;
-            enableAutosuggestions = true;
-            syntaxHighlighting.enable = true;
-
-            plugins = [
-              {
-                name = "zsh-nix-shell";
-                file = "nix-shell.plugin.zsh";
-                src = pkgs.fetchFromGitHub {
-                  owner = "chisui";
-                  repo = "zsh-nix-shell";
-                  rev = "v0.4.0";
-                  sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
-                };
-              }
-            ];
-          };
-        };
-      };
-    };
+    security.sudo.wheelNeedsPassword = false;
+    programs.fuse.userAllowOther = true;
+    users.mutableUsers = false;
 
     users.users.${cfg.name} =
       {
@@ -85,11 +46,11 @@ in {
         home = "/home/${cfg.name}";
         group = "users";
 
-        shell = pkgs.zsh;
+        shell = pkgs.bash;
 
         uid = 1000;
 
-        extraGroups = [] ++ cfg.extraGroups;
+        extraGroups = ["wheel" "lp" "input" "dbus"] ++ cfg.extraGroups;
 
         openssh.authorizedKeys.keys = [] ++ cfg.authorizedKeys;
       }

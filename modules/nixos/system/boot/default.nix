@@ -28,6 +28,8 @@ in {
       };
     };
 
+    boot.kernelPackages = mkDefault pkgs.linuxPackages_xanmod_latest;
+
     boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
     boot.initrd = {

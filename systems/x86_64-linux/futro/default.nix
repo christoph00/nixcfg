@@ -73,4 +73,6 @@ in {
       size = 2147;
     }
   ];
+
+  system.stateVersion = "23.11";
 }
