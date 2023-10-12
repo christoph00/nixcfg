@@ -10,12 +10,12 @@
 
   cfg = config.chr.apps;
 in {
-  options.chr.apps.firefox = mkOpt types.bool false "Enable Firefox.";
+  options.chr.apps.firefox = mkOpt types.bool config.chr.desktop.enable "Enable Firefox.";
 
   config = mkIf cfg.firefox {
     programs.firefox = {
       enable = true;
-      #   package = pkgs.librewolf;
+      package = pkgs.librewolf;
       # extensions = with addons; [
       #   ublock-origin
       #   bitwarden
