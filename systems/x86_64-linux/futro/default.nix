@@ -11,7 +11,7 @@ with lib.chr; {
 
   chr = {
     type = "server";
-    filesystem = {
+    system.filesystem = {
       enable = mkDefault true;
       btrfs = mkDefault true;
       persist = mkDefault true;
