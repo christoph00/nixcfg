@@ -23,8 +23,7 @@ in {
     type = "server";
     system.filesystem = {
       enable = true;
-      persist = mkDefault true;
-      mainDisk = mkDefault "/dev/nvme0n1p3";
+      persist = true;
       efiDisk = "/dev/disk/by-uuid/62F9-9D4F";
       rootOnTmpfs = true;
     };

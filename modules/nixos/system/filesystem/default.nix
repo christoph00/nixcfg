@@ -11,13 +11,13 @@ with lib.chr; let
 in {
   options.chr.system.filesystem = with types; {
     enable = mkBoolOpt false "Whether or not to configure filesystems.";
-    persist = mkEnableOption "rollback root";
-    rootOnTmpfs = mkEnableOption "mount root on tmpfs";
+    persist = mkBoolOpt false "rollback root";
+    rootOnTmpfs = mkBoolOpt false "mount root on tmpfs";
     stateDir = mkOption {
       type = types.str;
       default = "/nix/persist";
     };
-    btrfs = mkEnableOption "btrfs layout";
+    btrfs = mkBoolOpt false "btrfs layout";
     mainDisk = mkOption {
       type = types.str;
       default = "/dev/sda2";
@@ -34,20 +34,18 @@ in {
 
   config = mkIf cfg.enable {
     fileSystems = let
-      device = config.chr.system.filesystem.mainDisk;
+      device = cfg.mainDisk;
     in {
-      "/" =
-        if config.chr.system.filesystem.rootOnTmpfs
-        then {
-          device = "none";
-          fsType = "tmpfs";
-          options = ["defaults" "size=2G" "mode=755"];
-        }
-        else {
-          inherit device;
-          fsType = "btrfs";
-          options = ["subvol=@root" "noatime" "compress-force=zstd"];
-        };
+      "/" = mkIf cfg.rootOnTmpfs {
+        device = "none";
+        fsType = "tmpfs";
+        options = ["defaults" "size=2G" "mode=755"];
+      };
+      # else {
+      #   inherit device;
+      #   fsType = "btrfs";
+      #   options = ["subvol=@root" "noatime" "compress-force=zstd"];
+      # };
 
       "/nix" = mkIf cfg.btrfs {
         inherit device;
@@ -56,11 +54,11 @@ in {
       };
 
       "/boot" = {
-        device = config.chr.system.filesystem.efiDisk;
+        device = cfg.efiDisk;
         fsType = "vfat";
       };
 
-      "${config.chr.system.filesystem.stateDir}" = mkIf cfg.btrfs {
+      "${cfg.stateDir}" = mkIf cfg.btrfs {
         inherit device;
         fsType = "btrfs";
         options = ["subvol=@persist" "noatime" "compress-force=zstd"];
