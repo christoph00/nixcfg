@@ -15,7 +15,7 @@ in {
   config = mkIf cfg.firefox {
     programs.firefox = {
       enable = true;
-      package = pkgs.librewolf;
+      package = pkgs.firefox-beta;
       # extensions = with addons; [
       #   ublock-origin
       #   bitwarden
