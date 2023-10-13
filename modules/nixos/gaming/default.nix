@@ -8,13 +8,47 @@
 with lib;
 with lib.chr; let
   cfg = config.chr.gaming;
-  desktopSteam = pkgs.makeDesktopItem {
-    name = "Steam Service";
-    desktopName = "Steam Service";
-    exec = "${pkgs.systemd}/bin/systemctl --user start steam.service";
-    icon = "steam";
+
+  steam = pkgs.steam.override {
+    extraPkgs = pkgs:
+      with pkgs; [
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        xorg.libXext
+        xorg.libX11
+        xorg.libXfixes
+        libpng
+        libpulseaudio
+        libvorbis
+        libgdiplus
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
+        gamescope
+        gamemode
+        mangohud
+      ];
+    extraLibraries = p:
+      with p; [
+        (lib.getLib pkgs.networkmanager)
+      ];
+  };
+  gamescopeSteam = pkgs.makeDesktopItem {
+    name = "Steam (Gamescope)";
+    exec = "${pkgs.gamescope}/bin/gamescope -e -F fsr -S integer --framerate-limit 60 -r 60 -- ${steam}/bin/steam -fulldesktopres";
+    comment = "Steam big picture running in gamescope";
+    desktopName = "Steam (Gamescope)";
     categories = ["Game"];
-    terminal = false;
+  };
+
+  gamescopeSteamFull = pkgs.makeDesktopItem {
+    name = "Steam (Gamescope Fullscreen)";
+    exec = "${pkgs.gamescope}/bin/gamescope -W 2560 -H 1440 -w 2560 -h 1440 -f -e -F fsr -S integer --framerate-limit 60 -r 60 -- ${steam}/bin/steam -tenfoot -steamos -fulldesktopres";
+    comment = "Steam big picture running in gamescope";
+    desktopName = "Steam (Fullscreen)";
+    categories = ["Game"];
   };
 in {
   options.chr.gaming = with types; {
@@ -24,14 +58,11 @@ in {
   config = mkIf cfg.enable {
     programs.steam = {
       enable = true;
-      package = pkgs.chr.steam;
-
+      package = steam;
     };
     chr.home = {
       extraOptions = {
-
         home.packages = with pkgs; [
-          chr.steam
           gamehub
           gamescope
           gamemode
@@ -41,49 +72,7 @@ in {
           rare
           heroic
           gogdl
-
-          desktopSteam
         ];
-
-        # home.file.".steam/root/compatibilitytools.d/Proton-GE".source = "${pkgs.proton-ge}";
-        # home.sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = ["$HOME/.steam/root/compatibilitytools.d"];
-
-        systemd.user.services = {
-          steam = {
-            Unit.Description = "Steam Client";
-            Install.WantedBy = ["graphical-session.target"];
-            Unit.PartOf = ["graphical-session.target"];
-            Service = {
-              StartLimitInterval = 5;
-              StartLimitBurst = 1;
-              ExecStart = "${pkgs.chr.steam}/bin/steam -language german -silent -newbigpicture -pipewire"; #
-              Type = "simple";
-              Restart = "on-failure";
-            };
-          };
-          "steam-appid@" = {
-            Unit.Description = "Steam Game %i";
-            Unit.PartOf = ["steam.service"];
-
-            Service = {
-              StartLimitInterval = 5;
-              StartLimitBurst = 1;
-              ExecStart = "${pkgs.chr.steam}/bin/steam steam://rungameid/%i";
-              Type = "oneshot";
-            };
-          };
-          "steam-bigpicture" = {
-            Unit.Description = "Steam Big Picture";
-            Unit.PartOf = ["steam.service"];
-
-            Service = {
-              StartLimitInterval = 5;
-              StartLimitBurst = 1;
-              ExecStart = "${pkgs.chr.steam}/bin/steam -start steam://open/bigpicture";
-              Type = "oneshot";
-            };
-          };
-        };
       };
     };
   };
