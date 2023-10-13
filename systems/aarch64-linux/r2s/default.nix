@@ -52,6 +52,7 @@ in {
   boot = {
     loader = {
       timeout = 1;
+      systemd-boot.enable = mkForce false;
       grub.enable = mkForce false;
       generic-extlinux-compatible = {
         enable = mkForce true;
