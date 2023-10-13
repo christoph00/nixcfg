@@ -32,7 +32,6 @@ in {
       profiles.christoph = {
         bookmarks = {};
         settings = {
-          "browser.startup.homepage" = "${pkgs.chr.homer}";
           "identity.fxaccounts.enabled" = false;
           "signon.rememberSignons" = false;
           "browser.topsites.blockedSponsors" = ''["amazon"]'';
