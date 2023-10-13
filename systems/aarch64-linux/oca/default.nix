@@ -44,6 +44,8 @@ in {
     neededForBoot = true;
   };
 
+  environment.systemPackages = [pkgs.chr.ubootNanopiR2s];
+
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 
   system.stateVersion = "23.11";
