@@ -14,9 +14,6 @@ in {
 
   chr = {
     type = "server";
-    system.filesystem = {
-      enable = true;
-    };
   };
 
   hardware.deviceTree.name = "rockchip/rk3328-nanopi-r2s.dtb";
