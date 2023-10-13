@@ -29,7 +29,7 @@ in {
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
-    efiInstallAsRemovable = true;
+   # efiInstallAsRemovable = true;
     device = "nodev";
   };
   boot.loader.systemd-boot.enable = lib.mkForce false;
