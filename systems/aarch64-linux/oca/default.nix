@@ -44,7 +44,7 @@ in {
     neededForBoot = true;
   };
 
-  environment.systemPackages = [pkgs.chr.uboo-nanopi-r2s];
+  environment.systemPackages = [pkgs.chr.uboot-nanopi-r2s];
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 
