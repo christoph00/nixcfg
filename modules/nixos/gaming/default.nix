@@ -22,8 +22,14 @@ in {
   };
 
   config = mkIf cfg.enable {
+    programs.steam = {
+      enable = true;
+      package = pkgs.chr.steam;
+
+    };
     chr.home = {
       extraOptions = {
+
         home.packages = with pkgs; [
           chr.steam
           gamehub
