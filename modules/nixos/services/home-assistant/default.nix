@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.services.home-assistant;
 in {
   options.chr.services.home-assistant = with types; {
-    enable = mkBoolOpt false "Enable Home-Assistant Service.";
+    enable = mkBoolOpt config.services.smart-home "Enable Home-Assistant Service.";
   };
   config = lib.mkIf cfg.enable {
     users.users.hass = {
@@ -219,17 +219,7 @@ in {
       group = "hass";
     };
 
-    services.mosquitto = {
-      enable = true;
-      listeners = [
-        {
-          acl = ["pattern readwrite #"];
-          omitPasswordAuth = true;
-          settings.allow_anonymous = true;
-        }
-      ];
-    };
-    networking.firewall.allowedTCPPorts = [1883];
+   
 
     age.secrets.cf-tunnel = {
       file = ../../../../secrets/cf-tunnel-${config.networking.hostName};

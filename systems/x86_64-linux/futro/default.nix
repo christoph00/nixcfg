@@ -29,7 +29,7 @@ in {
     };
     services = {
       nas.enable = true;
-      home-assistant.enable = true;
+      smart-home.enable = true;
     };
   };
 
