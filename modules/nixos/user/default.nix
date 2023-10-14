@@ -25,9 +25,7 @@ in {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower"
     ] "Authorized Keys.";
 
-    extraOptions =
-      mkOpt attrs {}
-      (mdDoc "Extra options passed to `users.users.<name>`.");
+    extraOptions = mkOpt attrs {} "Extra options.";
   };
 
   config = {
