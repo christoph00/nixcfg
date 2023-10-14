@@ -27,7 +27,7 @@ in {
 
       lowLatency = {
         # enable this module
-        enable = config.chr.gameing.enable;
+        enable = config.chr.gaming.enable;
         # defaults (no need to be set unless modified)
         quantum = 64;
         rate = 48000;
