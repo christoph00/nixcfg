@@ -1,5 +1,6 @@
 {
   options,
+  inputs,
   config,
   lib,
   pkgs,
@@ -51,6 +52,10 @@ with lib.chr; let
     categories = ["Game"];
   };
 in {
+  imports = [
+    inputs.nix-gaming.nixosModules.steam-compat
+  ];
+
   options.chr.gaming = with types; {
     enable = mkBoolOpt (config.chr.type == "desktop") "Whether or not to enable Gaming Module.";
   };
@@ -110,6 +115,9 @@ in {
       gamemode = {
         enable = true;
       };
+      extraCompatPackages = [
+        inputs.nix-gaming.packages.${pkgs.system}.proton-ge
+      ];
     };
     chr.home = {
       extraOptions = {
@@ -119,7 +127,7 @@ in {
           gamemode
           protontricks
           radeontop
-
+          inputs.nix-gaming.packages.${pkgs.system}.wine-ge
           rare
           heroic
           gogdl
