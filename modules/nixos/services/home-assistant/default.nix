@@ -219,8 +219,6 @@ in {
       group = "hass";
     };
 
-   
-
     age.secrets.cf-tunnel = {
       file = ../../../../secrets/cf-tunnel-${config.networking.hostName};
       owner = config.services.cloudflared.user;

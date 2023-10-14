@@ -118,25 +118,27 @@ in {
                     extraArgs = ["-f"]; # Override existing partition
                     # Subvolumes must set a mountpoint in order to be mounted,
                     # unless their parent is mounted
-                    subvolumes = {
-                      # Subvolume name is different from mountpoint
-                      "@root" = mkIf (!cfg.rootOnTmpfs) {
-                        mountpoint = "/";
-                      };
-                      # Mountpoints inferred from subvolume name
-                      "@home" = mkIf cfg.home {
-                        mountpoint = "/home";
-                        mountOptions = ["compress-force=zstd"];
-                      };
-                      "@nix" = {
-                        mountpoint = "/nix";
-                        mountOptions = ["compress-force=zstd" "noatime"];
-                      };
-                      "@persist" = mkIf cfg.persist {
-                        mountpoint = "${cfg.stateDir}";
-                        mountOptions = ["compress-force=zstd" "noatime"];
-                      };
-                    } // cfg.extraSubvolumes;
+                    subvolumes =
+                      {
+                        # Subvolume name is different from mountpoint
+                        "@root" = mkIf (!cfg.rootOnTmpfs) {
+                          mountpoint = "/";
+                        };
+                        # Mountpoints inferred from subvolume name
+                        "@home" = mkIf cfg.home {
+                          mountpoint = "/home";
+                          mountOptions = ["compress-force=zstd"];
+                        };
+                        "@nix" = {
+                          mountpoint = "/nix";
+                          mountOptions = ["compress-force=zstd" "noatime"];
+                        };
+                        "@persist" = mkIf cfg.persist {
+                          mountpoint = "${cfg.stateDir}";
+                          mountOptions = ["compress-force=zstd" "noatime"];
+                        };
+                      }
+                      // cfg.extraSubvolumes;
                   };
                 };
               };
