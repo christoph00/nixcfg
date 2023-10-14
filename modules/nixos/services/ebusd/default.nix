@@ -53,7 +53,7 @@ in {
     enable = mkBoolOpt config.chr.services.smart-home "Enable eBUSd Service.";
     device = mkOption {
       type = types.str;
-      default = "";
+      default = "ens:192.168.2.190:9999";
       example = "IP:PORT";
       description = lib.mdDoc ''
         Use DEV as eBUS device [/dev/ttyUSB0].
@@ -153,7 +153,7 @@ in {
     mqtt = {
       enable = mkOption {
         type = types.bool;
-        default = false;
+        default = true;
         description = lib.mdDoc ''
           Adds support for MQTT
         '';
@@ -177,7 +177,7 @@ in {
 
       home-assistant = mkOption {
         type = types.bool;
-        default = false;
+        default = true;
         description = lib.mdDoc ''
           Adds the Home Assistant topics to MQTT, read more at [MQTT Integration](https://github.com/john30/ebusd/wiki/MQTT-integration)
         '';
@@ -193,6 +193,7 @@ in {
 
       user = mkOption {
         type = types.str;
+        default = "ebusd";
         description = lib.mdDoc ''
           The MQTT user to use
         '';
@@ -215,6 +216,7 @@ in {
     };
   };
   config = mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [cfg.port];
     systemd.services.ebusd = {
       description = "EBUSd Service";
       wantedBy = ["multi-user.target"];
