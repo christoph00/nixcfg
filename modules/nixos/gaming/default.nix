@@ -53,7 +53,7 @@ with lib.chr; let
   };
 in {
   imports = [
-    inputs.nix-gaming.nixosModules.steam-compat
+    inputs.nix-gaming.nixosModules.steamCompat
   ];
 
   options.chr.gaming = with types; {
