@@ -56,9 +56,60 @@ in {
   };
 
   config = mkIf cfg.enable {
+    boot.kernel.sysctl."vm.max_map_count" = 262144;
+
+    hardware.opengl.driSupport32Bit = true;
+    hardware.pulseaudio.support32Bit = true;
+    hardware.steam-hardware.enable = true;
+    security.pam.loginLimits = [
+      {
+        domain = "*";
+        item = "memlock";
+        type = "-";
+        value = "unlimited";
+      }
+      {
+        domain = "*";
+        item = "nofile";
+        type = "soft";
+        value = "unlimited";
+      }
+      {
+        domain = "*";
+        item = "nofile";
+        type = "hard";
+        value = "unlimited";
+      }
+    ];
+
+    environment.sessionVariables = {
+      # PRESSURE_VESSEL_FILESYSTEMS_RO = "${inputs'.nix-gaming.packages.proton-ge}";
+      # STEAM_EXTRA_COMPAT_TOOLS_PATHS = ["${inputs'.nix-gaming.packages.proton-ge}"];
+    };
+
+    systemd.user.services = {
+      steam = {
+        partOf = ["graphical-session.target"];
+        environment = {
+          SDL_VIDEODRIVER = "x11";
+        };
+        serviceConfig = {
+          StartLimitInterval = 5;
+          StartLimitBurst = 1;
+          ExecStart = "${steam}/bin/steam -language german -silent -pipewire"; #
+          Type = "simple";
+          Restart = "on-failure";
+        };
+      };
+    };
+    systemd.extraConfig = "DefaultLimitNOFILE=1048576";
+
     programs.steam = {
       enable = true;
       package = steam;
+      gamemode = {
+        enable = true;
+      };
     };
     chr.home = {
       extraOptions = {

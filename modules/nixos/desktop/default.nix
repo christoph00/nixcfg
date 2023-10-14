@@ -178,15 +178,6 @@ in {
 
     programs.xwayland.enable = true;
 
-    hardware.pulseaudio.enable = false;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = false;
-      wireplumber.enable = true;
-    };
     hardware.uinput.enable = true;
 
     environment.systemPackages = [pkgs.gtklock pkgs.seatd pkgs.ddcutil pkgs.ddcui pkgs.nixd];
