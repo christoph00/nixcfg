@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.services.home-assistant;
 in {
   options.chr.services.home-assistant = with types; {
-    enable = mkBoolOpt config.services.smart-home "Enable Home-Assistant Service.";
+    enable = mkBoolOpt config.chr.services.smart-home "Enable Home-Assistant Service.";
   };
   config = lib.mkIf cfg.enable {
     users.users.hass = {

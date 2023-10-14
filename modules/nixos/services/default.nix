@@ -10,6 +10,6 @@ with lib.chr; let
   cfg = config.chr.services;
 in {
   options.chr.services = with types; {
-    smart-home.enable = mkBoolOpt false "Enable Smart Home Services.";
+    smart-home = mkBoolOpt false "Enable Smart Home Services.";
   };
 }
