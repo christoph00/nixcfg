@@ -112,13 +112,12 @@ in {
     programs.steam = {
       enable = true;
       package = steam;
-      gamemode = {
-        enable = true;
-      };
       extraCompatPackages = [
         inputs.nix-gaming.packages.${pkgs.system}.proton-ge
       ];
     };
+    programs.gamemode.enable = true;
+
     chr.home = {
       extraOptions = {
         home.packages = with pkgs; [
