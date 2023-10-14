@@ -12,7 +12,7 @@ in {
   options.chr.services.ebusd = with types; {
     enable = mkBoolOpt config.chr.services.smart-home "Enable eBUSd Service.";
   };
-  config = mkIf cfg.enable {
-   
-  };
+  config =
+    mkIf cfg.enable {
+    };
 }

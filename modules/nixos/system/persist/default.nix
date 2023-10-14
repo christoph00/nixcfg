@@ -19,7 +19,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-
     config.chr.system.ssh.hostKeyDir = "${cfg.stateDir}/etc/ssh";
 
     environment.persistence."${cfg.stateDir}" = {
