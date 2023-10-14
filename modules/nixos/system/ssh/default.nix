@@ -11,7 +11,7 @@ with lib.chr; let
 in {
   options.chr.system.ssh = with types; {
     enable = mkBoolOpt true "Whether or not to enable ssh server.";
-    hostKeyDir = mkOpt str "/etc/ssh";
+    hostKeyDir = mkOpt' str "/etc/ssh";
   };
 
   config = mkIf cfg.enable {
