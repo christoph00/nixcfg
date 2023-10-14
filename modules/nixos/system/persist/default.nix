@@ -19,6 +19,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+
+    config.chr.system.ssh.hostKeyDir = "${cfg.stateDir}/etc/ssh";
+
     environment.persistence."${cfg.stateDir}" = {
       hideMounts = true;
       directories = [
@@ -32,12 +35,6 @@ in {
         "/etc/NetworkManager/system-connections"
         # if sound
         "/var/lib/pipewire"
-      ];
-      files = [
-        #  "/etc/machine-id"
-        # "/etc/ssh/ssh_host_rsa_key"
-        # "/etc/ssh/ssh_host_rsa_key.pub"
-        #  "/etc/nix/id_rsa"
       ];
     };
 
