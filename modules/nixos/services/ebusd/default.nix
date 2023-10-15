@@ -201,6 +201,8 @@ in {
 
       password = mkOption {
         type = types.str;
+        default = "ebusd";
+
         description = lib.mdDoc ''
           The MQTT password.
         '';
