@@ -137,6 +137,7 @@ in {
           zeroconf
           #psycopg2
           google-api-core
+          ebusdpy
           protobuf
           pymetno
           pyxiaomigateway
