@@ -15,7 +15,6 @@ with lib.chr; {
       enable = true;
     };
     apps = {
-      firefox = true;
       cli = true;
     };
   };
