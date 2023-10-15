@@ -27,12 +27,11 @@ in {
         programs.thunderbird = {
           enable = true;
           profiles.${config.chr.user.name} = {
-            inherit (cfg) extraConfig userChrome;
+            inherit (cfg) extraConfig userChrome settings;
             id = 0;
             name = config.chr.user.name;
             isDefault = true;
           };
-          inherit settings;
         };
       };
     };
