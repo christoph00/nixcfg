@@ -9,7 +9,7 @@ with lib;
 with lib.chr; let
   cfg = config.chr.apps.chromium;
 in {
-  options.chr.apps.firefox = with types; {
+  options.chr.apps.chromium = with types; {
     enable = mkBoolOpt config.chr.dsktop.enable "Whether or not to enable Chromium.";
   };
 
