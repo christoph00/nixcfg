@@ -30,6 +30,7 @@ in {
     services = {
       nas.enable = true;
       smart-home = true;
+      media.enable = true;
     };
   };
 
