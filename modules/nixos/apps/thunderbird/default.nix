@@ -28,8 +28,6 @@ in {
           enable = true;
           profiles.${config.chr.user.name} = {
             inherit (cfg) extraConfig userChrome settings;
-            id = 0;
-            name = config.chr.user.name;
             isDefault = true;
           };
         };
