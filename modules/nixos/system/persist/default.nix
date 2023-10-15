@@ -14,7 +14,7 @@ in {
     inputs.impermanence.nixosModules.impermanence
   ];
   options.chr.system.persist = with types; {
-    enable = mkOpt types.bool false "Whether to persist.";
+    enable = mkOpt types.bool config.chr.filesystem.persist "Whether to persist.";
     stateDir = mkOpt (types.nullOr types.str) "/nix/persist" "The State Dir.";
   };
 
