@@ -30,7 +30,7 @@ in {
         installCheckPhase = ":";
       });
       openFirewall = true;
-      configDir = "/nix/persist/hass";
+      configDir = "${config.chr.system.persist.stateDir}/hass";
       config = {
         homeassistant = {
           name = "Home";
@@ -90,21 +90,12 @@ in {
           };
         };
         #zha_toolkit = {};
-        # ebusd = {
-        #   host = "127.0.0.1";
-        #   circuit = "basv0";
-        # };
-        ssdp = {};
-        mqtt = {
-          sensor = [
-            {
-              name = "Router Load";
-              unit_of_measurement = "load";
-              state_topic = "collectd/OpenWrt/load/load";
-              value_template = "{{ value.split(':')[2] | float }}";
-            }
-          ];
+        ebusd = mkIf config.chr.services.ebusd {
+           host = "127.0.0.1";
+           circuit = "basv0";
         };
+        ssdp = {};
+        mqtt = {};
         tasmota = {};
         dhcp = {};
         conversation = {};
