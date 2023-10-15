@@ -35,7 +35,6 @@ in {
       unrar
       xplr
       unzip
-      media-sort
       ffmpeg-full
     ];
 
