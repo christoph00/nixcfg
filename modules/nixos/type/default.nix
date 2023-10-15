@@ -12,30 +12,4 @@ in {
   options.chr.type = mkOption {
     type = types.enum ["laptop" "desktop" "server" "vm"];
   };
-
-  config = mkMerge [
-    (mkIf (cfg == "server") {
-      })
-
-    (mkIf (cfg == "desktop" || cfg == "laptop") {
-      chr.apps = {
-        firefox.enable = mkDefault false;
-        vscode.enable = mkDefault true;
-        wezterm.enable = mkDefault true;
-      };
-
-      chr.desktop.plasma.enable = mkDefault true;
-
-      chr.system.printer.enable = mkDefault true;
-
-      chr.system.filesystem = {
-        enable = mkDefault true;
-        btrfs = mkDefault true;
-        persist = mkDefault true;
-        mainDisk = mkDefault "/dev/nvme0n1p3";
-        efiDisk = mkDefault "/dev/nvme0n1p1";
-        rootOnTmpfs = mkDefault true;
-      };
-    })
-  ];
 }

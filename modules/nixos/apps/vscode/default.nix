@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.apps.vscode;
 in {
   options.chr.apps.vscode = with types; {
-    enable = mkBoolOpt' false;
+    enable = mkBoolOpt' config.chr.desktop.enable;
   };
 
   config = mkIf cfg.enable {
