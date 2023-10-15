@@ -23,7 +23,7 @@ with lib.chr; let
 in {
   options.chr.desktop.fonts = with types; {
     enable =
-      mkBoolOpt false "Enable Font Config";
+      mkBoolOpt config.chr.desktop.enable "Enable Font Config";
     fontProfiles = {
       monospace = mkFontOption "monospace";
       regular = mkFontOption "regular";

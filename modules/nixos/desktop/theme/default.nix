@@ -21,12 +21,12 @@ in {
         #  name = fontProfiles.regular.family;
         #  size = 12;
         #};
-        theme = {
-          #name = "${config.colorscheme.slug}";
-          #package = gtkThemeFromScheme {scheme = config.colorscheme;};
-          name = "Fluent-Light";
-          package = pkgs.fluent-gtk-theme;
-        };
+        # theme = {
+        #   #name = "${config.colorscheme.slug}";
+        #   #package = gtkThemeFromScheme {scheme = config.colorscheme;};
+        #   name = "Fluent-Light";
+        #   package = pkgs.fluent-gtk-theme;
+        # };
         iconTheme = {
           name = "Fluent";
           package = pkgs.fluent-icon-theme;
@@ -43,9 +43,6 @@ in {
         #   };
         # '';
       };
-
-      fonts.fontconfig.enable = true;
-      #home.packages = [fontProfiles.monospace.package fontProfiles.regular.package];
 
       services.xsettingsd = {
         enable = true;
