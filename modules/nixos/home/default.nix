@@ -34,6 +34,8 @@ in {
       systemd.user.startServices = "sd-switch";
 
       programs.home-manager.enable = true;
+
+      chr.user.enable = config.chr.desktop.enable;
     };
 
     home-manager = {
