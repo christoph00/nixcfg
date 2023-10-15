@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.apps.chromium;
 in {
   options.chr.apps.chromium = with types; {
-    enable = mkBoolOpt config.chr.dsktop.enable "Whether or not to enable Chromium.";
+    enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Chromium.";
   };
 
   config = mkIf cfg.enable {
