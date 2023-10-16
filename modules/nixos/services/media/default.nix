@@ -40,6 +40,7 @@ in {
       ffmpeg-full
     ];
 
+    users.users.sabnzbd.extraGroups = ["media"];
     users.users.jellyfin.extraGroups = ["media"];
     services.jellyfin = {
       enable = true;
