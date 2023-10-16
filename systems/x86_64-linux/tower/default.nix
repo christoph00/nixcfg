@@ -7,7 +7,6 @@
 }:
 with lib;
 with lib.chr; {
-
   chr = {
     type = "desktop";
   };
