@@ -26,6 +26,8 @@ in {
       ];
     };
 
+    networking.firewall.allowedTCPPorts = [8080 8096];
+
     environment.systemPackages = with pkgs; [
       rclone
       git
