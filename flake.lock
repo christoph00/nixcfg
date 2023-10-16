@@ -210,11 +210,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1697412012,
-        "narHash": "sha256-XbEj/8mqUtVulRK6RnE6n9pHE8dSnJ9oq6VbpOFHI/g=",
+        "lastModified": 1697428965,
+        "narHash": "sha256-ZfdT7YIWWXRO7dSnVi/UEIzQ6y3qKXZMtjfWOSfkkps=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "c92b41a405c8009edd11e0035ec1963881e8e25a",
+        "rev": "50750219de8ed413ad0008db60580156dc281ff4",
         "type": "gitlab"
       },
       "original": {
@@ -656,11 +656,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1697418904,
-        "narHash": "sha256-AzmvZVPSRodS43MSY3JnRAKy/8fA2FydX8WhNo+SzAc=",
+        "lastModified": 1697475556,
+        "narHash": "sha256-2C78LIwBAiyp8ym8AEk2Na2mdFw71jA6VVd6RWpxgvw=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "42430485ab19049d69c81372ead35d6e683a94ac",
+        "rev": "8fb703eaf958963957390285e992a68ce5c056ff",
         "type": "github"
       },
       "original": {
@@ -686,16 +686,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1697059129,
-        "narHash": "sha256-9NJcFF9CEYPvHJ5ckE8kvINvI84SZZ87PvqMbH6pro0=",
+        "lastModified": 1697343899,
+        "narHash": "sha256-66Dosy7YYVhkesbHXB4xxZZ+2NOi9CmFDyHOI1ZTAbQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593",
+        "rev": "982b24c40e743793c966b47b3bb3699881489ae0",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-unstable",
+        "ref": "nixos-unstable-small",
         "repo": "nixpkgs",
         "type": "github"
       }
