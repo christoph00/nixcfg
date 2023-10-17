@@ -11,7 +11,7 @@ with lib.chr; let
 in {
   options.chr.system.printer = with types; {
     enable =
-      mkBoolOpt false "Whether or not to configure printer.";
+      mkBoolOpt config.chr.desktop.enable "Whether or not to configure printer.";
   };
 
   config = mkIf cfg.enable {
