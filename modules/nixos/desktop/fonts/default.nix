@@ -46,7 +46,7 @@ in {
         noto-fonts
         noto-fonts-emoji
         roboto
-        (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka"];})
+        (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka" "Agave"];})
       ];
 
       enableDefaultPackages = false;
