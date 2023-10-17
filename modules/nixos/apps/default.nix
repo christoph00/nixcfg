@@ -19,8 +19,6 @@ in {
         brightnessctl
         coreutils
 
-        #(inputs'.eww.packages.default.override {withWayland = true;})
-
         libnotify
         playerctl
         wireplumber
@@ -33,14 +31,7 @@ in {
 
         pciutils
 
-        foot
-
-        kanshi
-
         usbimager
-
-        gimp-with-plugins
-        inkscape
 
         themechanger
 
