@@ -37,14 +37,9 @@ in {
 
         gnome.gnome-keyring
 
-        darktable
-
         nix-init
 
         nixd
-
-        pcmanfm
-        webcord
 
         vulkan-tools
         glxinfo
@@ -53,8 +48,6 @@ in {
         wl-clipboard
 
         peazip
-
-        libreoffice-qt
       ];
     };
   };
