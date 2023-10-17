@@ -41,6 +41,7 @@ in {
       extraOptions = {
         programs.firefox = {
           enable = true;
+          package = pkgs.firefox-beta;
           profiles.${config.chr.user.name} = {
             inherit (cfg) extraConfig userChrome settings;
             id = 0;
