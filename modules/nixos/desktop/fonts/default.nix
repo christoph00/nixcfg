@@ -36,14 +36,12 @@ in {
       packages = with pkgs; [
         # Icons
         material-design-icons
-        noto-fonts-emoji
-
-        liberation_ttf
-
         material-symbols
+
+        noto-fonts-emoji
+        liberation_ttf
         lexend
         noto-fonts
-        noto-fonts-emoji
         roboto
         (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka" "Agave"];})
       ];
