@@ -53,6 +53,12 @@ with lib.chr; {
     # ];
     setLdLibraryPath = true;
   };
+  
+  programs.corectrl = {
+    enable = true;
+    gpuOverclock.ppfeaturemask = "0xffffffff";
+    gpuOverclock.enable = true;
+  };
 
   environment.systemPackages = [pkgs.amdgpu_top pkgs.lact];
   boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
