@@ -17,7 +17,7 @@ in {
     system.filesystem = {
       enable = true;
       persist = true;
-      diskio = true;
+      disko = true;
       efiDisk = "/dev/sda1";
       rootOnTmpfs = true;
     };
