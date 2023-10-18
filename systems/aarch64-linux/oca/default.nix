@@ -13,10 +13,11 @@ in {
   networking.hostName = "oca";
 
   chr = {
-    type = "server";
+    type = "vm";
     system.filesystem = {
       enable = true;
       persist = true;
+      diskio = true;
       efiDisk = "/dev/sda1";
       rootOnTmpfs = true;
     };
