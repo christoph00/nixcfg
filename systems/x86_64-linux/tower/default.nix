@@ -53,7 +53,7 @@ with lib.chr; {
     # ];
     setLdLibraryPath = true;
   };
-  
+
   programs.corectrl = {
     enable = true;
     gpuOverclock.ppfeaturemask = "0xffffffff";
