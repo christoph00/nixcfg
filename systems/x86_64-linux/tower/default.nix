@@ -43,7 +43,7 @@ with lib.chr; {
     kernelModules = ["amdgpu"];
   };
 
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = ["modesetting"];
 
   hardware.opengl = {
     enable = true;
