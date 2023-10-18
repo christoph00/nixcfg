@@ -100,32 +100,26 @@ in {
             {
               name = "Heizung";
               max_temp = 25;
-              min_temp = 5.5;
+              min_temp = 12;
               precision = 0.1;
               temp_step = 0.5;
-              modes = ["auto" "heat" "cool" "off"];
+              modes = ["auto" "heat" "off"];
               # Quite an ugly regex workaround due to 0 not being findable...
               mode_state_template = ''
-                {% set values = { 'auto':'auto', 'day':'heat',  'night':'cool', 'off':'off'} %}
+                {% set values = { 'auto':'auto', 'day':'heat', 'off':'off'} %}
                 {% set v = value | regex_findall_index( '"value"\s?:\s?"(.*)"')  %}
                 {{ values[v] if v in values.keys() else 'auto' }}
               '';
               mode_state_topic = "ebusd/basv/z1OpMode";
               mode_command_template = ''
-                {% set values = { 'auto':'auto', 'heat':'day',  'cool':'night', 'off':'off'} %}
+                {% set values = { 'auto':'auto', 'heat':'day', 'off':'off'} %}
                 {{ values[value] if value in values.keys() else 'off' }}
               '';
               mode_command_topic = "ebusd/basv/z1OpMode/set";
               temperature_state_topic = "ebusd/basv/z1ActualRoomTempDesired";
               temperature_state_template = "{{ value_json.tempv.value }}";
-              temperature_low_state_topic = "ebusd/basv/z1NightTemp";
-              temperature_low_state_template = "{{ value_json.tempv.value }}";
               temperature_high_state_topic = "ebusd/basv/z1DayTemp";
               temperature_high_state_template = "{{ value_json.tempv.value }}";
-              temperature_low_command_topic = "ebusd/basv/z1NightTemp/set";
-              temperature_low_command_template = ''
-                {{ value }}
-              '';
               temperature_high_command_topic = "ebusd/basv/z1DayTemp/set";
               temperature_high_command_template = ''
                 {{ value }}
