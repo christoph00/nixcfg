@@ -43,7 +43,7 @@ with lib.chr; {
     kernelModules = ["amdgpu"];
   };
 
-    services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = ["amdgpu"];
 
   hardware.opengl = {
     enable = true;
@@ -53,7 +53,6 @@ with lib.chr; {
     # ];
     setLdLibraryPath = true;
   };
-
 
   environment.systemPackages = [pkgs.amdgpu_top];
   boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
