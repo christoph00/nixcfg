@@ -24,5 +24,6 @@ in {
       ];
     };
     networking.firewall.allowedTCPPorts = [1883];
+    environment.systemPackages = [pkgs.mqttui];
   };
 }

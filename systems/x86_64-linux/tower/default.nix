@@ -7,6 +7,7 @@
 }:
 with lib;
 with lib.chr; {
+  system.stateVersion = "23.11";
   chr = {
     type = "desktop";
   };
