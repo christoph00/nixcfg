@@ -54,7 +54,7 @@ with lib.chr; {
     setLdLibraryPath = true;
   };
 
-  environment.systemPackages = [pkgs.amdgpu_top];
+  environment.systemPackages = [pkgs.amdgpu_top pkgs.lact];
   boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
   boot.blacklistedKernelModules = ["dm_mod"];
   boot.kernelParams = [
