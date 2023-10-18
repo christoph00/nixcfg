@@ -35,6 +35,7 @@ with lib.chr; let
       "--mqttport=${toString cfg.mqtt.port}"
       "--mqttuser=${cfg.mqtt.user}"
       "--mqttpass=${cfg.mqtt.password}"
+      "--mqttvar=filter-direction=r|u|^w"
     ]
     ++ lib.optionals cfg.mqtt.home-assistant [
       "--mqttint=${package}/etc/ebusd/mqtt-hassio.cfg"
