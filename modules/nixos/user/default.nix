@@ -49,7 +49,16 @@ in {
 
         uid = 1000;
 
-        extraGroups = ["wheel" "lp" "input" "dbus"] ++ cfg.extraGroups;
+        extraGroups =
+          [
+            "wheel"
+            "lp"
+            "input"
+            "dbus"
+            "tty"
+            "dialout"
+          ]
+          ++ cfg.extraGroups;
 
         openssh.authorizedKeys.keys = [] ++ cfg.authorizedKeys;
       }
