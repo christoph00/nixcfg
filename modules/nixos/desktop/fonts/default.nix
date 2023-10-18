@@ -34,12 +34,11 @@ in {
     fonts = {
       fontDir.enable = true;
       packages = with pkgs; [
-        chr.san-francisco-pro
-        jetbrains-mono
-
         # Icons
         material-design-icons
         noto-fonts-emoji
+
+        liberation_ttf
 
         material-symbols
         lexend
