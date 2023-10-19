@@ -25,6 +25,7 @@
   libdrm,
   libkrb5,
   libuuid,
+  libxkbcommon,
   mesa,
   nspr,
   nss,
