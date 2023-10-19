@@ -21,7 +21,6 @@
   gnome,
   gsettings-desktop-schemas,
   gtk3,
-  libX11,
   libXScrnSaver,
   libXcomposite,
   libXcursor,
@@ -96,7 +95,6 @@
       glib
       gtk3
       libdrm
-      libX11
       libGL
       libxkbcommon
       libXScrnSaver
