@@ -44,7 +44,7 @@ in {
       };
 
       xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
-     # home.file.".gtkrc-2.0".force = true;
+      # home.file.".gtkrc-2.0".force = true;
     }
   ]);
 }

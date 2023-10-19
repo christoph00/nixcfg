@@ -109,6 +109,8 @@
       xorg.libxcb
       zlib
       snappy
+      vivaldi-ffmpeg-codecs
+
       libkrb5
     ]
     ++ optional pulseSupport libpulseaudio
