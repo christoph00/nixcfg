@@ -25,7 +25,7 @@ in {
       "L ${haDir}/www/mushroom.js 0755 hass hass - ${mushroom}"
 
       "d /nix/persist/hass/custom_components 0755 hass hass"
-      "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.chr.better-thermostat}/better_thermostat"
+      "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.chr.ha-better-thermostat}/better_thermostat"
       #  "L /nix/persist/hass/custom_components/zha_toolkit - - - - ${pkgs.ha-component-zha-toolkit}/zha_toolkit"
     ];
 
