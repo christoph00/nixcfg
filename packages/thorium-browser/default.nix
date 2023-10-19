@@ -1,253 +1,162 @@
-{
-  lib,
-  stdenv,
-  fetchurl,
-  wrapGAppsHook,
-  makeWrapper,
-  dpkg,
-  alsa-lib,
-  at-spi2-atk,
-  at-spi2-core,
-  atk,
-  cairo,
-  cups,
-  dbus,
-  expat,
-  vivaldi-ffmpeg-codecs,
-  fontconfig,
-  freetype,
-  gdk-pixbuf,
-  glib,
-  gnome,
-  gsettings-desktop-schemas,
-  gtk3,
-  libuuid,
-  libdrm,
-  libX11,
-  libXcomposite,
-  libXcursor,
-  libXdamage,
-  libXext,
-  libXfixes,
-  libXi,
-  libxkbcommon,
-  libXrandr,
-  libXrender,
-  libXScrnSaver,
-  libxshmfence,
-  libXtst,
-  mesa,
-  nspr,
-  nss,
-  pango,
-  pipewire,
-  udev,
-  wayland,
-  xorg,
-  zlib,
-  xdg-utils,
-  snappy,
-  # command line arguments which are always set e.g "--disable-gpu"
-  commandLineArgs ? "",
-  # Necessary for USB audio devices.
-  pulseSupport ? stdenv.isLinux,
-  libpulseaudio,
-  # For GPU acceleration support on Wayland (without the lib it doesn't seem to work)
-  libGL,
-  # For video acceleration via VA-API (--enable-features=VaapiVideoDecoder,VaapiVideoEncoder)
-  libvaSupport ? stdenv.isLinux,
-  libva,
-  enableVideoAcceleration ? libvaSupport,
-  # For Vulkan support (--enable-features=Vulkan); disabled by default as it seems to break VA-API
-  vulkanSupport ? false,
-  addOpenGLRunpath,
-  enableVulkan ? vulkanSupport,
-}: let
-  inherit
-    (lib)
-    optional
-    optionals
-    makeLibraryPath
-    makeSearchPathOutput
-    makeBinPath
-    optionalString
-    strings
-    escapeShellArg
-    ;
+{ lib
+, stdenv
+, fetchurl
+, autoPatchelfHook
+, dpkg
+, wrapGAppsHook
+, alsa-lib
+, at-spi2-atk
+, at-spi2-core
+, cairo
+, cups
+, curl
+, dbus
+, expat
+, ffmpeg
+, fontconfig
+, freetype
+, glib
+, glibc
+, gtk3
+, gtk4
+, libcanberra
+, liberation_ttf
+, libexif
+, libglvnd
+, libkrb5
+, libnotify
+, libpulseaudio
+, libu2f-host
+, libva
+, libxkbcommon
+, mesa
+, nspr
+, nss
+, pango
+, pciutils
+, pipewire
+, qt6
+, speechd
+, udev
+, unrar
+, vaapiVdpau
+, vulkan-loader
+, wayland
+, wget
+, xdg-utils
+, xfce
+, xorg
+}:
 
-  deps =
-    [
-      alsa-lib
-      at-spi2-atk
-      at-spi2-core
-      atk
-      cairo
-      cups
-      dbus
-      expat
-      vivaldi-ffmpeg-codecs
-      fontconfig
-      freetype
-      gdk-pixbuf
-      glib
-      gtk3
-      libdrm
-      libX11
-      libGL
-      libxkbcommon
-      libXScrnSaver
-      libXcomposite
-      libXcursor
-      libXdamage
-      libXext
-      libXfixes
-      libXi
-      libXrandr
-      libXrender
-      libxshmfence
-      libXtst
-      libuuid
-      mesa
-      nspr
-      nss
-      pango
-      pipewire
-      udev
-      wayland
-      xorg.libxcb
-      zlib
-      snappy
-      stdenv.cc.cc.lib
-    ]
-    ++ optional pulseSupport libpulseaudio
-    ++ optional libvaSupport libva;
+stdenv.mkDerivation rec {
+  pname = "thorium-browser";
+  version = "117.0.5938.157";
 
-  rpath = makeLibraryPath deps + ":" + makeSearchPathOutput "lib" "lib64" deps;
-  binpath = makeBinPath deps;
+  src = fetchurl {
+    url = "https://github.com/Alex313031/thorium/releases/download/M${version}/thorium-browser_${version}_amd64.deb";
+    hash = "sha256-muNBYP6832PmP0et9ESaRpd/BIwYZmwdkHhsMNBLQE4=";
+  };
 
-  enableFeatures =
-    optionals enableVideoAcceleration ["VaapiVideoDecoder" "VaapiVideoEncoder"]
-    ++ optional enableVulkan "Vulkan";
+  nativeBuildInputs = [
+    autoPatchelfHook
+    dpkg
+    wrapGAppsHook
+    qt6.wrapQtAppsHook
+  ];
 
-  # The feature disable is needed for VAAPI to work correctly: https://github.com/thorium/thorium-browser/issues/20935
-  disableFeatures = optional enableVideoAcceleration "UseChromeOSDirectVideoDecoder";
-in
-  stdenv.mkDerivation rec {
-    pname = "thorium-browser";
-    version = "117.0.5938.157";
+  buildInputs = [
+    stdenv.cc.cc.lib
+    alsa-lib
+    at-spi2-atk
+    at-spi2-core
+    cairo
+    cups
+    curl
+    dbus
+    expat
+    ffmpeg
+    fontconfig
+    freetype
+    glib
+    glibc
+    gtk3
+    gtk4
+    libcanberra
+    liberation_ttf
+    libexif
+    libglvnd
+    libkrb5
+    libnotify
+    libpulseaudio
+    libu2f-host
+    libva
+    libxkbcommon
+    mesa
+    nspr
+    nss
+    qt6.qtbase
+    pango
+    pciutils
+    pipewire
+    speechd
+    udev
+    unrar
+    vaapiVdpau
+    vulkan-loader
+    wayland
+    wget
+    xdg-utils
+    xfce.exo
+    xorg.libxcb
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libXcomposite
+    xorg.libXdamage
+    xorg.libXext
+    xorg.libXfixes
+    xorg.libXi
+    xorg.libXrandr
+    xorg.libXrender
+    xorg.libXtst
+    xorg.libXxf86vm
+  ];
 
-    src = fetchurl {
-      #https://github.com/alex313031/thorium/releases/download/M112.0.5615.166/thorium-browser_112.0.5615.166-1_amd64.deb
-      #https://github.com/alex313031/thorium/releases/download/M112.0.5615.166/thorium-browser_112.0.5615.166_amd64.deb
-      url = "https://github.com/alex313031/thorium/releases/download/M${version}/thorium-browser_${version}_amd64.deb";
-      sha256 = "sha256-k788C+prnu8HO2dreJHm2Qe3ZC5J10ZT6+Ar/0P7Jt0=";
-    };
+  autoPatchelfIgnoreMissingDeps = [
+    "libQt5Widgets.so.5"
+    "libQt5Gui.so.5"
+    "libQt5Core.so.5"
+  ];
 
-    dontConfigure = true;
-    dontBuild = true;
-    dontPatchELF = true;
-    doInstallCheck = true;
+  installPhase = ''
+    runHook preInstall
 
-    nativeBuildInputs = [
-      dpkg
-      (wrapGAppsHook.override {inherit makeWrapper;})
-    ];
+    mkdir -p $out
+    cp -r usr/* $out
+    cp -r etc $out
+    cp -r opt $out
+    ln -sf $out/opt/chromium.org/thorium/thorium-browser $out/bin/thorium-browser
+    rm $out/share/applications/thorium-shell.desktop
 
-    buildInputs = [
-      # needed for GSETTINGS_SCHEMAS_PATH
-      glib
-      gsettings-desktop-schemas
-      gtk3
-      vivaldi-ffmpeg-codecs
+    substituteInPlace $out/share/applications/thorium-browser.desktop \
+      --replace /usr/bin $out/bin \
+      --replace StartupWMClass=thorium StartupWMClass=thorium-browser \
+      --replace Icon=thorium-browser Icon=$out/opt/chromium.org/thorium/product_logo_256.png
 
-      # needed for XDG_ICON_DIRS
-      gnome.adwaita-icon-theme
-    ];
+    addAutoPatchelfSearchPath $out/chromium.org/thorium
+    addAutoPatchelfSearchPath $out/chromium.org/thorium/lib
+    substituteInPlace $out/opt/chromium.org/thorium/thorium-browser \
+      --replace 'export LD_LIBRARY_PATH' "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${ lib.makeLibraryPath buildInputs }:$out/chromium.org/thorium:$out/chromium.org/thorium/lib" \
+      --replace /usr $out
 
-    unpackPhase = "dpkg-deb --fsys-tarfile $src | tar -x --no-same-permissions --no-same-owner";
+    runHook postInstall
+  '';
 
-    installPhase = ''
-      runHook preInstall
-
-      mkdir -p $out $out/bin
-
-      cp -R usr/share $out
-      cp -R opt/ $out/opt
-
-      export BINARYWRAPPER=$out/opt/chromium.org/thorium/thorium-browser
-
-      # Fix path to bash in $BINARYWRAPPER
-      substituteInPlace $BINARYWRAPPER \
-          --replace /bin/bash ${stdenv.shell}
-
-      ln -sf $BINARYWRAPPER $out/bin/thorium
-
-      for exe in $out/opt/chromium.org/thorium/{thorium,chrome_crashpad_handler}; do
-          patchelf \
-              --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-              --set-rpath "${rpath}" $exe
-      done
-
-      # Fix paths
-      substituteInPlace $out/share/applications/thorium-browser.desktop \
-          --replace /usr/bin/thorium-browser $out/bin/thorium
-      substituteInPlace $out/share/gnome-control-center/default-apps/thorium-browser.xml \
-          --replace /opt/chromium.org $out/opt/chromium.org
-      substituteInPlace $out/share/menu/thorium-browser.menu \
-          --replace /opt/chromium.org $out/opt/chromium.org
-      substituteInPlace $out/opt/chromium.org/thorium/default-app-block \
-          --replace /opt/chromium.org $out/opt/chromium.org
-
-      # Correct icons location
-      icon_sizes=("16" "24" "32" "48" "64" "128" "256")
-
-      for icon in ''${icon_sizes[*]}
-      do
-          mkdir -p $out/share/icons/hicolor/$icon\x$icon/apps
-          ln -s $out/opt/chromium.org/thorium/product_logo_$icon.png $out/share/icons/hicolor/$icon\x$icon/apps/thorium-browser.png
-      done
-
-      # Replace xdg-settings and xdg-mime
-      ln -sf ${xdg-utils}/bin/xdg-settings $out/opt/chromium.org/thorium/xdg-settings
-      ln -sf ${xdg-utils}/bin/xdg-mime $out/opt/chromium.org/thorium/xdg-mime
-
-      runHook postInstall
-    '';
-
-    preFixup = ''
-      # Add command line args to wrapGApp.
-      gappsWrapperArgs+=(
-        --prefix LD_LIBRARY_PATH : ${rpath}
-        --prefix PATH : ${binpath}
-        --suffix PATH : ${lib.makeBinPath [xdg-utils vivaldi-ffmpeg-codecs]}
-        ${optionalString (enableFeatures != []) ''
-        --add-flags "--enable-features=${strings.concatStringsSep "," enableFeatures}"
-      ''}
-        ${optionalString (disableFeatures != []) ''
-        --add-flags "--disable-features=${strings.concatStringsSep "," disableFeatures}"
-      ''}
-        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
-        ${optionalString vulkanSupport ''
-        --prefix XDG_DATA_DIRS  : "${addOpenGLRunpath.driverLink}/share"
-      ''}
-        --add-flags ${escapeShellArg commandLineArgs}
-      )
-    '';
-
-    installCheckPhase = ''
-      # Bypass upstream wrapper which suppresses errors
-      $out/opt/chromium.org/thorium/thorium --version
-    '';
-
-    meta = with lib; {
-      homepage = "https://thorium.rocks/";
-      description = "Thorium - The fastest browser on Earth (Based on chromium)";
-      changelog = "https://github.com/thorium/thorium-browser/blob/master/CHANGELOG_DESKTOP.md#" + replaceStrings ["."] [""] version;
-      longDescription = ''
-        Chromium fork for Linux, MacOS, Raspberry Pi, and Windows named after radioactive element No. 90.
-      '';
-      sourceProvenance = with sourceTypes; [binaryNativeCode];
-      license = licenses.mpl20;
-      platforms = ["x86_64-linux"];
-    };
-  }
+  meta = with lib; {
+    description = "Compiler-optimized private Chromium fork";
+    homepage = "https://thorium.rocks/index.html";
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
+    license = licenses.unfree;
+    platforms = [ "x86_64-linux" ];
+    mainProgram = "thorium-browser";
+  };
+}
