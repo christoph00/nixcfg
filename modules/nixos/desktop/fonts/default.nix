@@ -46,7 +46,7 @@ in {
         (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka" "Agave"];})
       ];
 
-      enableDefaultPackages = false;
+      #   enableDefaultPackages = false;
       fontconfig = {
         enable = true;
         defaultFonts = {

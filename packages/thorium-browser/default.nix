@@ -1,53 +1,53 @@
-{ lib
-, stdenv
-, fetchurl
-, autoPatchelfHook
-, dpkg
-, wrapGAppsHook
-, alsa-lib
-, at-spi2-atk
-, at-spi2-core
-, cairo
-, cups
-, curl
-, dbus
-, expat
-, ffmpeg
-, fontconfig
-, freetype
-, glib
-, glibc
-, gtk3
-, gtk4
-, libcanberra
-, liberation_ttf
-, libexif
-, libglvnd
-, libkrb5
-, libnotify
-, libpulseaudio
-, libu2f-host
-, libva
-, libxkbcommon
-, mesa
-, nspr
-, nss
-, pango
-, pciutils
-, pipewire
-, qt6
-, speechd
-, udev
-, unrar
-, vaapiVdpau
-, vulkan-loader
-, wayland
-, wget
-, xdg-utils
-, xfce
-, xorg
+{
+  lib,
+  stdenv,
+  fetchurl,
+  autoPatchelfHook,
+  dpkg,
+  wrapGAppsHook,
+  alsa-lib,
+  at-spi2-atk,
+  at-spi2-core,
+  cairo,
+  cups,
+  curl,
+  dbus,
+  expat,
+  ffmpeg,
+  fontconfig,
+  freetype,
+  glib,
+  glibc,
+  gtk3,
+  gtk4,
+  libcanberra,
+  liberation_ttf,
+  libexif,
+  libglvnd,
+  libkrb5,
+  libnotify,
+  libpulseaudio,
+  libu2f-host,
+  libva,
+  libxkbcommon,
+  mesa,
+  nspr,
+  nss,
+  pango,
+  pciutils,
+  pipewire,
+  qt6,
+  speechd,
+  udev,
+  unrar,
+  vaapiVdpau,
+  vulkan-loader,
+  wayland,
+  wget,
+  xdg-utils,
+  xfce,
+  xorg,
 }:
-
 stdenv.mkDerivation rec {
   pname = "thorium-browser";
   version = "117.0.5938.157";
@@ -145,7 +145,7 @@ stdenv.mkDerivation rec {
     addAutoPatchelfSearchPath $out/chromium.org/thorium
     addAutoPatchelfSearchPath $out/chromium.org/thorium/lib
     substituteInPlace $out/opt/chromium.org/thorium/thorium-browser \
-      --replace 'export LD_LIBRARY_PATH' "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${ lib.makeLibraryPath buildInputs }:$out/chromium.org/thorium:$out/chromium.org/thorium/lib" \
+      --replace 'export LD_LIBRARY_PATH' "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${lib.makeLibraryPath buildInputs}:$out/chromium.org/thorium:$out/chromium.org/thorium/lib" \
       --replace /usr $out
 
     runHook postInstall
@@ -154,8 +154,8 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Compiler-optimized private Chromium fork";
     homepage = "https://thorium.rocks/index.html";
-    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
+    sourceProvenance = with sourceTypes; [binaryNativeCode];
     license = licenses.unfree;
-    platforms = [ "x86_64-linux" ];
+    platforms = ["x86_64-linux"];
   };
 }
