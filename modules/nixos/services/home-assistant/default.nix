@@ -12,6 +12,9 @@ in {
   options.chr.services.home-assistant = with types; {
     enable = mkBoolOpt config.chr.services.smart-home "Enable Home-Assistant Service.";
   };
+  imports = [
+    ./extentions.nix
+  ];
   config = lib.mkIf cfg.enable {
     users.users.hass = {
       extraGroups = ["dialout"];

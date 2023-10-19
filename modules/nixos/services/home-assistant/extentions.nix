@@ -13,7 +13,7 @@ with lib.chr; let
   mushroom = "${pkgs.ha-lovelace-mushroom}/mushroom.js";
 in {
   config = mkIf cfg.enable {
-    services.home-assistant.config.default_config.whitelist_external_dirs = ["/nix/persist/hass/www"];
+    services.home-assistant.config.default_config.whitelist_external_dirs = ["${haDir}/www"];
     systemd.tmpfiles.rules = [
       "d ${haDir} 0755 hass hass"
       # "C /nix/persist/hass/www/vacuum-card.js 0755 hass hass - ${vacuum-card}"
