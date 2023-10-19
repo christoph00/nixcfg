@@ -151,6 +151,7 @@ in
       glib
       gsettings-desktop-schemas
       gtk3
+      qt6.qtbase
 
       # needed for XDG_ICON_DIRS
       gnome.adwaita-icon-theme
