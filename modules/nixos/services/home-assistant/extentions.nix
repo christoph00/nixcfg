@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.services.home-assistant;
   haDir = config.services.home-assistant.configDir;
 
-  mushroom = "${pkgs.ha-lovelace-mushroom}/mushroom.js";
+  mushroom = "${pkgs.chr.ha-lovelace-mushroom}/mushroom.js";
 in {
   config = mkIf cfg.enable {
     services.home-assistant.config.default_config.whitelist_external_dirs = ["${haDir}/www"];
