@@ -24,8 +24,8 @@ in {
       # "C /nix/persist/hass/www/better-thermostat-ui-card.js 0755 hass hass - ${better-thermostat-ui-card}"
       "L ${haDir}/www/mushroom.js 0755 hass hass - ${mushroom}"
 
-      #  "d /nix/persist/hass/custom_components 0755 hass hass"
-      #  "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.ha-component-better-thermostat}/better_thermostat"
+      "d /nix/persist/hass/custom_components 0755 hass hass"
+      "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.chr.better-thermostat}/better_thermostat"
       #  "L /nix/persist/hass/custom_components/zha_toolkit - - - - ${pkgs.ha-component-zha-toolkit}/zha_toolkit"
     ];
 
