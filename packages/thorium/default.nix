@@ -21,16 +21,7 @@
   gnome,
   gsettings-desktop-schemas,
   gtk3,
-  libXScrnSaver,
-  libXcomposite,
-  libXcursor,
-  libXdamage,
-  libXext,
-  libXfixes,
-  libXi,
-  libXrandr,
-  libXrender,
-  libXtst,
+  xorg,
   libdrm,
   libkrb5,
   libuuid,
@@ -47,7 +38,6 @@
   wayland,
   xdg-utils,
   coreutils,
-  xorg,
   zlib,
   qt6,
   curl,
@@ -79,7 +69,7 @@
     escapeShellArg
     ;
 
-  deps =
+  deps = with xorg;
     [
       alsa-lib
       at-spi2-atk
@@ -95,6 +85,7 @@
       glib
       gtk3
       libdrm
+      libX11
       libGL
       libxkbcommon
       libXScrnSaver
