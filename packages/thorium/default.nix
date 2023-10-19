@@ -181,7 +181,7 @@ in
 
       ln -sf $BINARYWRAPPER $out/bin/thorium
 
-      for exe in $out/opt/chromium.org/thorium/{thorium,chrome_crashpad_handler}; do
+      for exe in $out/opt/chromium.org/thorium/{thorium,chrome_crashpad_handler,thorium-shell}; do
           patchelf \
               --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
               --set-rpath "${rpath}" $exe
@@ -190,6 +190,8 @@ in
        # Fix paths
       substituteInPlace $out/share/applications/thorium-browser.desktop \
           --replace /usr/bin/thorium-browser $out/bin/thorium
+      substituteInPlace $out/share/applications/thorium-shell.desktop \
+          --replace /usr/bin/thorium-shell $out/bin/thorium-shell
       substituteInPlace $out/share/gnome-control-center/default-apps/thorium-browser.xml \
           --replace /opt/chromium.org $out/opt/chromium.org
       substituteInPlace $out/share/menu/thorium-browser.menu \
