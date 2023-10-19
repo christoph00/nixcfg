@@ -42,6 +42,9 @@ in {
         username = mkDefault cfg.name;
         homeDirectory = mkDefault cfg.home;
       };
+
+      xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
+      home.file.".gtkrc-2.0".force = true;
     }
   ]);
 }
