@@ -4,7 +4,7 @@
   fetchFromGitHub,
 }:
 buildNpmPackage rec {
-  pname = "mushroom";
+  pname = "ha-lovelace-mushroom";
   version = "3.1.0";
 
   src = fetchFromGitHub {
