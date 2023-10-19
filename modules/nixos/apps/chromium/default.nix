@@ -18,7 +18,7 @@ in {
       extraOptions = {
         programs.chromium = {
           enable = true;
-          package = pkgs.chromium;
+          package = pkgs.chr.thorium-browser;
           extensions = [
             {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
             {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
