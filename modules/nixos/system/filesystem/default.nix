@@ -74,7 +74,6 @@ in {
           options = mkIf (!cfg.disko) ["subvol=@persist" "noatime" "compress-force=zstd"];
           neededForBoot = true;
         };
-        
 
         "/home" = mkIf (cfg.btrfs && !cfg.disko) {
           inherit device;
@@ -148,6 +147,4 @@ in {
         }
         // cfg.extraDisks;
     };
-
-    
 }

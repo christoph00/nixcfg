@@ -42,7 +42,9 @@ in {
         liberation_ttf
         lexend
         noto-fonts
-        ubuntu-font-family
+        dejavu_fonts
+        ubuntu_font_family
+        unifont
         roboto
         (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka" "Agave"];})
       ];
