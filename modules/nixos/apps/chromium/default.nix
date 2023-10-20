@@ -19,6 +19,7 @@ in {
         programs.chromium = {
           enable = true;
           package = pkgs.chr.thorium;
+          enableWideVine = true;
           extensions = [
             {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
             {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
