@@ -37,6 +37,7 @@
   wayland,
   xdg-utils,
   coreutils,
+  widevine-cdm,
   zlib,
   qt6,
   curl,
@@ -110,7 +111,6 @@
       zlib
       snappy
       vivaldi-ffmpeg-codecs
-      widevine-cdm
 
       libkrb5
     ]
