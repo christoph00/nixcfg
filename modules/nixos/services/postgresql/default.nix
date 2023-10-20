@@ -16,6 +16,15 @@ in {
     services.home-assistant.config.recorder.db_url = "postgresql://hass@/homeassistant";
     services.postgresql = {
       enable = true;
+      enableTCPIP = false;
+      package = pkgs.postgresql_15;
+
+      extraPlugins = with config.services.postgresql.package.pkgs; [
+        timescaledb
+      ];
+      settings = {
+        shared_preload_libraries = "timescaledb";
+      };
       authentication = ''
         local homeassistant hass ident map=ha
       '';
