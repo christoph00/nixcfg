@@ -153,6 +153,7 @@ in
       gsettings-desktop-schemas
       gtk3
       qt6.qtbase
+      qt6.qtwayland
 
       # needed for XDG_ICON_DIRS
       gnome.adwaita-icon-theme
