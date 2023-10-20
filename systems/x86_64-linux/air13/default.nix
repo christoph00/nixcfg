@@ -7,7 +7,7 @@
 }:
 with lib;
 with lib.chr; {
-    imports = with nixos-hardware.nixosModules; [
+  imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-cpu-intel
     common-gpu-intel
@@ -73,12 +73,12 @@ with lib.chr; {
     type = "laptop";
   };
   chr.system.filesystem = {
-    enable =  true;
-    btrfs =  true;
+    enable = true;
+    btrfs = true;
     disko = true;
-    persist =  true;
+    persist = true;
     mainDisk = "/dev/nvme0n1";
-    rootOnTmpfs =  true;
+    rootOnTmpfs = true;
   };
 
   system.stateVersion = "23.11";
