@@ -72,8 +72,9 @@ in {
           inherit device;
           fsType = "btrfs";
           options = ["subvol=@persist" "noatime" "compress-force=zstd"];
-          neededForBoot = true;
         };
+
+        "${cfg.stateDir}".neededForBoot = mkIf (cfg.persist && cfg.btrfs) true;
 
         "/home" = mkIf (cfg.btrfs && !cfg.disko) {
           inherit device;
@@ -147,4 +148,6 @@ in {
         }
         // cfg.extraDisks;
     };
+
+    
 }
