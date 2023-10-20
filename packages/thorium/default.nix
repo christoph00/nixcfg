@@ -56,6 +56,7 @@
   vulkanSupport ? true,
   addOpenGLRunpath,
   enableVulkan ? vulkanSupport,
+  enableWidevine ? true,
 }: let
   inherit
     (lib)
@@ -241,9 +242,10 @@ in
       ''}
         --add-flags ${escapeShellArg commandLineArgs}
 
-        --suffix LD_LIBRARY_PATH : ${libPath}
       )
     '';
+
+    #        --suffix LD_LIBRARY_PATH : ${libPath}
 
     installCheckPhase = ''
       # Bypass upstream wrapper which suppresses errors
