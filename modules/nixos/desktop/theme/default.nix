@@ -15,6 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     chr.home.extraOptions = {
+      fonts.fontconfig.enable = true;
       gtk = {
         enable = true;
         #font = {
