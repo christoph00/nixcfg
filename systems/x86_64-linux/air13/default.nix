@@ -3,17 +3,12 @@
   config,
   lib,
   channel,
+  inputs,
   ...
 }:
 with lib;
 with lib.chr; {
-  imports = with nixos-hardware.nixosModules; [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    common-cpu-intel
-    common-gpu-intel
-    common-pc
-    common-pc-ssd
-  ];
+
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
 
@@ -47,7 +42,7 @@ with lib.chr; {
     options iwlwifi power_save=Y
   '';
 
-  boot.resumeDevice = "/dev/disk/by-label/air13";
+  #boot.resumeDevice = "/dev/disk/by-label/air13";
 
   services.udev.extraRules = ''
     # Remove NVIDIA USB xHCI Host Controller devices, if present
