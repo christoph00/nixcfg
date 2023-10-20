@@ -148,6 +148,4 @@ in {
         }
         // cfg.extraDisks;
     };
-
-    
 }
