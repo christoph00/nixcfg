@@ -35,5 +35,9 @@ in {
         }
       ];
     };
+    systemd.services.postgresql.postStart = lib.mkAfter ''
+      $PSQL mydb -tAc 'GRANT ALL ON ALL TABLES IN SCHEMA public TO hass' || true
+      $PSQL mydb -tAc 'GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO hass' || true
+    '';
   };
 }
