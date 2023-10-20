@@ -51,7 +51,6 @@ in {
       fontconfig = {
         enable = true;
         defaultFonts = {
-          regular = ["Lexend"];
           serif = ["Lexend" "Noto Color Emoji"];
           sansSerif = ["Lexend" "Noto Color Emoji"];
           monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
