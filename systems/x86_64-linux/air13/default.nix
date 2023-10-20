@@ -70,7 +70,8 @@ with lib.chr; {
     btrfs = true;
     disko = false;
     persist = true;
-    mainDisk = "/dev/nvme0n1";
+    mainDisk = "/dev/nvme0n1p3";
+    bootDisk = "/dev/nvme0n1p1";
     rootOnTmpfs = true;
   };
 
