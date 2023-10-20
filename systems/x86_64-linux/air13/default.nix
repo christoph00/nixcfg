@@ -71,7 +71,7 @@ with lib.chr; {
     disko = false;
     persist = true;
     mainDisk = "/dev/nvme0n1p3";
-    bootDisk = "/dev/nvme0n1p1";
+    efiDisk = "/dev/nvme0n1p1";
     rootOnTmpfs = true;
   };
 
