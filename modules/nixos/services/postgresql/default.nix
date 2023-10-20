@@ -21,6 +21,7 @@ in {
 
       extraPlugins = with config.services.postgresql.package.pkgs; [
         timescaledb
+        postgis
       ];
       settings = {
         shared_preload_libraries = "timescaledb";
