@@ -18,6 +18,7 @@ in {
       enable = true;
       enableTCPIP = false;
       package = pkgs.postgresql_15;
+      dataDir = "${config.chr.system.persist.stateDir}/pgDB/${config.services.postgresql.package.psqlSchema}";
 
       extraPlugins = with config.services.postgresql.package.pkgs; [
         timescaledb
@@ -26,12 +27,6 @@ in {
       settings = {
         shared_preload_libraries = "timescaledb";
       };
-      authentication = ''
-        local homeassistant hass ident map=ha
-      '';
-      identMap = ''
-        ha root hass
-      '';
       ensureDatabases = ["homeassistant"];
       ensureUsers = [
         {
