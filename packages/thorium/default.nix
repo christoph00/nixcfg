@@ -110,6 +110,7 @@
       zlib
       snappy
       vivaldi-ffmpeg-codecs
+      widevine-cdm
 
       libkrb5
     ]
@@ -156,6 +157,12 @@ in
       # needed for XDG_ICON_DIRS
       gnome.adwaita-icon-theme
     ];
+
+    libPath =
+      lib.makeLibraryPath buildInputs
+      + lib.optionalString (stdenv.is64bit)
+      (":" + lib.makeSearchPathOutput "lib" "lib64" buildInputs)
+      + ":$out/opt/chromium.org/thorium/lib";
 
     autoPatchelfIgnoreMissingDeps = [
       "libQt5Widgets.so.5"
@@ -210,6 +217,8 @@ in
       ln -sf ${xdg-utils}/bin/xdg-settings $out/opt/chromium.org/thorium/xdg-settings
       ln -sf ${xdg-utils}/bin/xdg-mime $out/opt/chromium.org/thorium/xdg-mime
 
+      ln -sf ${widevine-cdm}/share/google/chrome/WidevineCdm $out/opt/chromium.org/thorium/WidevineCdm
+
       runHook postInstall
     '';
 
@@ -230,6 +239,8 @@ in
         --prefix XDG_DATA_DIRS  : "${addOpenGLRunpath.driverLink}/share"
       ''}
         --add-flags ${escapeShellArg commandLineArgs}
+
+        --suffix LD_LIBRARY_PATH : ${libPath}
       )
     '';
 
