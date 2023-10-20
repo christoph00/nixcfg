@@ -24,9 +24,9 @@ in {
 
       # "C /nix/persist/hass/www/mini-graph-card.js 0755 hass hass - ${mini-graph-card}"
       # "C /nix/persist/hass/www/better-thermostat-ui-card.js 0755 hass hass - ${better-thermostat-ui-card}"
-      "L ${haDir}/www/mushroom.js 0755 hass hass - ${mushroom}"
-      "L ${haDir}/www/bubble-card.js 0755 hass hass - ${bubble}"
-      "L ${haDir}/www/card-mod.js 0755 hass hass - ${card-mod}"
+      "C ${haDir}/www/mushroom.js 0755 hass hass - ${mushroom}"
+      "C ${haDir}/www/bubble-card.js 0755 hass hass - ${bubble}"
+      "C ${haDir}/www/card-mod.js 0755 hass hass - ${card-mod}"
 
       "d /nix/persist/hass/custom_components 0755 hass hass"
       "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.chr.ha-better-thermostat}/better_thermostat"
