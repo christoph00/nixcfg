@@ -70,7 +70,7 @@ with lib.chr; {
   chr.system.filesystem = {
     enable = true;
     btrfs = true;
-    disko = true;
+    disko = false;
     persist = true;
     mainDisk = "/dev/nvme0n1";
     rootOnTmpfs = true;
