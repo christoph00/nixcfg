@@ -27,11 +27,41 @@ in {
 
     services.home-assistant = {
       enable = true;
-      package = pkgs.home-assistant.overrideAttrs (old: {
-        doCheck = false;
-        checkPhase = ":";
-        installCheckPhase = ":";
-      });
+      package =
+        (pkgs.home-assistant.override {
+          extraPackages = python3Packages:
+            with python3Packages; [
+              aiodiscover
+              aiogithubapi
+              scapy
+              securetar
+              kegtron-ble
+              aioblescan
+              janus
+              bluepy
+              pybluez
+              ifaddr
+              zeroconf
+              gtts
+              psycopg2
+              google-api-core
+              pyebus
+              protobuf
+              pymetno
+              pyxiaomigateway
+              pyiqvia
+              pyipp
+              wyoming
+              #wyoming-piper
+              androidtvremote2
+              # faster-whisper
+              androidtv
+              pyebus
+              hatasmota
+              kegtron-ble
+            ];
+        })
+        .overrideAttrs (oldAttrs: {doInstallCheck = false;});
       openFirewall = true;
       configDir = "${config.chr.system.persist.stateDir}/hass";
       config = {
@@ -183,35 +213,6 @@ in {
           }
         ];
       };
-      extraPackages = python3Packages:
-        with pkgs.python3Packages; [
-          aiodiscover
-          aiogithubapi
-          scapy
-          securetar
-          kegtron-ble
-          aioblescan
-          janus
-          bluepy
-          pybluez
-          ifaddr
-          zeroconf
-          psycopg2
-          google-api-core
-          pyebus
-          protobuf
-          pymetno
-          pyxiaomigateway
-          pyiqvia
-          pyipp
-          wyoming
-          #wyoming-piper
-          androidtvremote2
-          # faster-whisper
-          androidtv
-          pyebus
-          hatasmota
-        ];
       extraComponents = [
         "caldav"
         "bluetooth"
