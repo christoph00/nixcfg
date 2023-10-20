@@ -12,7 +12,7 @@ with lib.chr; let
   codium = pkgs.vscodium.overrideAttrs (prev: {
     version = "1.83.1.23285";
     src = pkgs.fetchurl {
-      url = "https://github.com/Alex313031/codium/releases/download/1.83.1.23285/Codium_linux_x64_${version}.zip";
+      url = "https://github.com/Alex313031/codium/releases/download/1.83.1.23285/Codium_linux_x64_1.83.1.23285.zip";
       sha256 = "0x3w5zw22cin83mfba6wvss6s9m8zkmy20502hscw5py156x0x2m";
     };
   });
