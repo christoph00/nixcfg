@@ -16,10 +16,10 @@ in {
   config = mkIf cfg.enable {
     chr.home = {
       extraOptions = {
+        home.packages = [pkgs.widevine-cdm];
         programs.chromium = {
           enable = true;
           package = pkgs.chr.thorium;
-          enableWideVine = true;
           extensions = [
             {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
             {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
