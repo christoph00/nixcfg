@@ -14,6 +14,15 @@ with lib.chr; let
   bubble = "${pkgs.chr.ha-lovelace-bubble}/bubble-card.js";
   card-mod = "${pkgs.chr.ha-lovelace-card-mod}/card-mod.js";
 in {
+  options.chr.services.home-assistant = with types; {
+    customCards = mkOption {
+      default = {inherit mushroom bubble card-mod;};
+      type = types.attrsOf types.path;
+      description = ''
+        List of custom cards to install.
+      '';
+    };
+  };
   config = mkIf cfg.enable {
     systemd.tmpfiles.rules = [
       #"d ${haDir} 0755 hass hass"
@@ -26,20 +35,11 @@ in {
       #"C ${haDir}/www/mushroom.js 0755 hass hass - ${mushroom}"
       #"C ${haDir}/www/bubble-card.js 0755 hass hass - ${bubble}"
       #"C ${haDir}/www/card-mod.js 0755 hass hass - ${card-mod}"
-      "L+ ${haDir}/www - - - - ${cfg.linkfarm "www" [
-        {
-          name = "mushroom.js";
-          path = mushroom;
-        }
-        {
-          name = "bubble-card.js";
-          path = bubble;
-        }
-        {
-          name = "card-mod.js";
-          path = card-mod;
-        }
-      ]}"
+      "L+ ${cfg.configDir}/www - - - - ${pkgs.runCommand "www" {} ''
+        for p in ${toString (builtins.attrValues cfg.customCards)}; do
+          install -D -m 644 "$p" "$out/$p"
+        done
+      ''}"
 
       "d /nix/persist/hass/custom_components 0755 hass hass"
       "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.chr.ha-better-thermostat}/better_thermostat"
