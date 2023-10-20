@@ -11,6 +11,7 @@ with lib.chr; let
   haDir = config.services.home-assistant.configDir;
 
   mushroom = "${pkgs.chr.ha-lovelace-mushroom}/mushroom.js";
+  bubble = "${pkgs.chr.ha-lovelace-bubble}/bubble-card.js";
 in {
   config = mkIf cfg.enable {
     services.home-assistant.config.default_config.whitelist_external_dirs = ["${haDir}/www"];
@@ -23,6 +24,7 @@ in {
       # "C /nix/persist/hass/www/mini-graph-card.js 0755 hass hass - ${mini-graph-card}"
       # "C /nix/persist/hass/www/better-thermostat-ui-card.js 0755 hass hass - ${better-thermostat-ui-card}"
       "L ${haDir}/www/mushroom.js 0755 hass hass - ${mushroom}"
+      "L ${haDir}/www/bubble-card.js 0755 hass hass - ${bubble}"
 
       "d /nix/persist/hass/custom_components 0755 hass hass"
       "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.chr.ha-better-thermostat}/better_thermostat"
@@ -32,6 +34,10 @@ in {
     services.home-assistant.config.lovelace.resources = [
       {
         url = "/local/mushroom.js?v=${builtins.hashFile "md5" mushroom}";
+        type = "module";
+      }
+      {
+        url = "/local/bubble-card.js?v=${builtins.hashFile "md5" bubble}";
         type = "module";
       }
     ];
