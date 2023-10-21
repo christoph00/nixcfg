@@ -22,15 +22,15 @@ in {
           package = pkgs.chr.thorium;
           extensions = [
             {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
-            {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
+            #{id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
             {id = "nngceckbapebfimnlniiiahkandclblb";} # Bitwarden
             {
               id = "dcpihecpambacapedldabdbpakmachpb";
               updateUrl = "https://raw.githubusercontent.com/iamadamdev/bypass-paywalls-chrome/master/updates.xml";
             }
-            {id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
-            {id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
-            {id = "jofbglonpbndadajbafmmaklbfbkggpo";} # Bing Chat for all Browers
+            #{id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
+            #{id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
+            {id = "hceobhjokpdbogjkplmfjeomkeckkngi";} # New Bing Anywhere
           ];
           commandLineArgs = [
             "--ignore-gpu-blocklist"
