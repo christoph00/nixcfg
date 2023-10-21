@@ -36,7 +36,6 @@ in {
       "C ${haDir}/www/bubble-card.js 0644 hass hass - ${bubble}"
       "C ${haDir}/www/card-mod.js 0644 hass hass - ${card-mod}"
 
-
       "d /nix/persist/hass/custom_components 0755 hass hass"
       "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.chr.ha-better-thermostat}/better_thermostat"
       #  "L /nix/persist/hass/custom_components/zha_toolkit - - - - ${pkgs.ha-component-zha-toolkit}/zha_toolkit"
