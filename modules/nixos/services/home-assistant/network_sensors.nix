@@ -1,4 +1,14 @@
-{pkgs, ...}: let
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.chr; let
+  cfg = config.chr.services.home-assistant;
+
   mkPingSensor = host: name: {
     platform = "ping";
     inherit name;
@@ -7,7 +17,7 @@
     scan_interval = 5;
   };
 in {
-  services.home-assistant.config = {
+  services.home-assistant.config = mkIf cfg.enable {
     binary_sensor = [
       # (mkPingSensor "tower.speedport.ip" "tower")
       # (mkPingSensor "shield.lan" "shield")
@@ -17,6 +27,10 @@ in {
       # (mkPingSensor "oca.cama-boa.ts.net" "oca")
       (mkPingSensor "193.110.81.0" "Internet IP")
       (mkPingSensor "dns0.eu" "Internet DNS")
+      (mkPingSensor "192.168.2.1" "Router")
+
+      (mkPingSensor "tower.lan.r505.de" "tower")
+      (mkPingSensor "air13.lan.r505.de" "air13")
     ];
     # device_tracker = [
     #   {

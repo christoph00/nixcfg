@@ -1,15 +1,20 @@
 {
-  pkgs,
-  lib,
+  options,
   config,
+  lib,
+  pkgs,
   ...
-}: let
+}:
+with lib;
+with lib.chr; let
+  cfg = config.chr.services.home-assistant;
+
   createResources = types: map (type: {inherit type;}) types;
 
   createResourcesWithArg = arg: types: map (type: {inherit type arg;}) types;
   createResourcesWithArgs = args: types: lib.flatten (map (arg: createResourcesWithArg arg types) args);
 in {
-  services.home-assistant.config.sensor = [
+  services.home-assistant.config.sensor = mkIf cfg.enable [
     {
       platform = "systemmonitor";
       resources =
