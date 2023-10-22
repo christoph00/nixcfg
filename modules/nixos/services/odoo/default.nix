@@ -26,7 +26,7 @@ in {
           "5432:5432"
         ];
         environment = {
-          POSTGRES_PASSWORD = "odoo12";
+          POSTGRES_PASSWORD = "odoo";
           POSTGRES_DB = "odoo";
           POSTGRES_USER = "odoo";
         };
@@ -42,8 +42,7 @@ in {
           "/media/ssd-data/container/odoo-db:/var/lib/odoo"
         ];
         environment = {
-          HOST = "odoo-db";
-          PASSWORD = "odoo12"; # I am a bad thing
+          HOST = "localhost";
         };
         dependsOn = ["odoo-db"];
       };
