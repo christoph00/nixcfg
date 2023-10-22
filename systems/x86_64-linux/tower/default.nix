@@ -21,7 +21,6 @@ with lib.chr; {
     rootOnTmpfs = mkDefault true;
   };
 
-
   fileSystems = {
     "/media/Games" = {
       device = "/dev/disk/by-label/ssd-data";
