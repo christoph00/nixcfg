@@ -16,6 +16,7 @@ in {
     services.odoo = {
       enable = true;
       addons = [];
+      domain = "tower.lan.r505.de";
       settings = {
         options = {
           db_user = "odoo";
