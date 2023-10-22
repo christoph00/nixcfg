@@ -25,7 +25,10 @@ in {
         };
       };
     };
-    services.nginx.enable = true;
+    services.nginx = {
+      enable = true;
+      openFirewall = true;
+    };
     services.postgresql = {
       enable = true;
       package = pkgs.postgresql_15;
