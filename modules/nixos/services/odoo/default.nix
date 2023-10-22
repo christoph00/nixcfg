@@ -22,6 +22,9 @@ in {
         volumes = [
           "/media/ssd-data/container/odoo-db:/var/lib/postgresql/data"
         ];
+         ports = [
+          "5432:5432"
+        ];
         environment = {
           POSTGRES_PASSWORD = "odoo12";
           POSTGRES_DB = "odoo";
@@ -39,7 +42,7 @@ in {
           "/media/ssd-data/container/odoo-db:/var/lib/odoo"
         ];
         environment = {
-          POSTGRES_HOST = "odoo-db";
+          POSTGRES_HOST = "localhost";
           POSTGRES_PASSWORD = "odoo12"; # I am a bad thing
           POSTGRES_DB = "odoo";
           POSTGRES_USER = "odoo";
