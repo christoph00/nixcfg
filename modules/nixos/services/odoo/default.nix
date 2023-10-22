@@ -13,6 +13,8 @@ in {
     enable = mkBoolOpt false "Enable odoo Service.";
   };
   config = mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [8069];
+
     virtualisation.oci-containers.containers = {
       "odoo-db" = {
         autoStart = true;
