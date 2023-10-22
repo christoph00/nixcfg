@@ -21,6 +21,10 @@ with lib.chr; {
     rootOnTmpfs = mkDefault true;
   };
 
+   nixpkgs.config.permittedInsecurePackages = [
+                "qtwebkit-5.212.0-alpha4"
+              ];
+
   fileSystems = {
     "/media/Games" = {
       device = "/dev/disk/by-label/ssd-data";
