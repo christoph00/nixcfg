@@ -13,39 +13,29 @@ in {
     enable = mkBoolOpt false "Enable odoo Service.";
   };
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [8069];
-
-    virtualisation.oci-containers.containers = {
-      "odoo-db" = {
-        autoStart = true;
-        image = "postgres:alpine";
-        volumes = [
-          "/media/ssd-data/container/odoo-db:/var/lib/postgresql/data"
-        ];
-         ports = [
-          "5432:5432"
-        ];
-        environment = {
-          POSTGRES_PASSWORD = "odoo";
-          POSTGRES_DB = "odoo";
-          POSTGRES_USER = "odoo";
+    services.odoo = {
+      enable = true;
+      addons = [];
+      settings = {
+        options = {
+          db_user = "odoo";
+          db_password = "odoo";
+          admin_passwd = "odoo123";
         };
       };
-      "odoo" = {
-        autoStart = true;
-        image = "odoo:latest";
+    };
+    services.postgresql = {
+      enable = true;
+      package = pkgs.postgresql_15;
+      dataDir = "${config.chr.system.persist.stateDir}/pgDB/${config.services.postgresql.package.psqlSchema}";
 
-        ports = [
-          "8069:8069"
-        ];
-        volumes = [
-          "/media/ssd-data/container/odoo-db:/var/lib/odoo"
-        ];
-        environment = {
-          HOST = "localhost";
-        };
-        dependsOn = ["odoo-db"];
-      };
+      ensureDatabases = ["odoo"];
+      ensureUsers = [
+        {
+          name = "odoo";
+          ensurePermissions = {"DATABASE odoo" = "ALL PRIVILEGES";};
+        }
+      ];
     };
   };
 }
