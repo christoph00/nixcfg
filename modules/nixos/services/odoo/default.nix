@@ -27,8 +27,9 @@ in {
     };
     services.nginx = {
       enable = true;
-      openFirewall = true;
     };
+    networking.firewall.allowedTCPPorts = [80];
+
     services.postgresql = {
       enable = true;
       package = pkgs.postgresql_15;
