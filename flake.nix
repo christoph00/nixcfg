@@ -99,6 +99,9 @@
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
+        permittedInsecurePackages = [
+          "qtwebkit-5.212.0-alpha4"
+        ];
       };
 
       systems.modules.nixos = with inputs; [
