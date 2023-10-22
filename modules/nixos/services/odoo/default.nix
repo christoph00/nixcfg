@@ -42,10 +42,8 @@ in {
           "/media/ssd-data/container/odoo-db:/var/lib/odoo"
         ];
         environment = {
-          POSTGRES_HOST = "localhost";
-          POSTGRES_PASSWORD = "odoo12"; # I am a bad thing
-          POSTGRES_DB = "odoo";
-          POSTGRES_USER = "odoo";
+          HOST = "odoo-db";
+          PASSWORD = "odoo12"; # I am a bad thing
         };
         dependsOn = ["odoo-db"];
       };
