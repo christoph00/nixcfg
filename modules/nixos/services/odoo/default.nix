@@ -16,7 +16,7 @@ in {
     services.odoo = {
       enable = true;
       addons = [];
-      domain = "tower.lan.r505.de";
+      #domain = "tower.lan.r505.de";
       settings = {
         options = {
           db_user = "odoo";
@@ -25,10 +25,12 @@ in {
         };
       };
     };
-    services.nginx = {
-      enable = true;
-    };
-    networking.firewall.allowedTCPPorts = [80];
+    # services.nginx = {
+    #   enable = true;
+    # };
+    networking.firewall.allowedTCPPorts = [8069];
+
+
 
     services.postgresql = {
       enable = true;
