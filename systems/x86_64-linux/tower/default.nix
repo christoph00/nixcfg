@@ -10,7 +10,7 @@ with lib.chr; {
   system.stateVersion = "23.11";
   chr = {
     type = "desktop";
-    services.odoo.enable = true;
+    services.odoo.enable = false;
   };
   chr.system.filesystem = {
     enable = mkDefault true;
@@ -21,9 +21,6 @@ with lib.chr; {
     rootOnTmpfs = mkDefault true;
   };
 
-   nixpkgs.config.permittedInsecurePackages = [
-                "qtwebkit-5.212.0-alpha4"
-              ];
 
   fileSystems = {
     "/media/Games" = {
