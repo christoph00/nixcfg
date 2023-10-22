@@ -26,6 +26,7 @@ with lib.chr; let
       "--log=update:${cfg.logs.update}"
       "--log=other:${cfg.logs.other}"
       "--log=all:${cfg.logs.all}"
+      "--accesslevel=*"
     ]
     ++ lib.optionals cfg.readonly [
       "--readonly"
