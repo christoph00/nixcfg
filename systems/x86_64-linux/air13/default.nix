@@ -63,7 +63,7 @@ with lib.chr; {
   hardware.cpu.intel.updateMicrocode = true;
 
   chr = {
-    type = "laptop";
+    type = "bootstrap";
   };
   chr.system.filesystem = {
     enable = true;
