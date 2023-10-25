@@ -10,7 +10,6 @@ with lib.chr; {
   system.stateVersion = "23.11";
   chr = {
     type = "desktop";
-    services.odoo.enable = true;
   };
   chr.system.filesystem = {
     enable = mkDefault true;

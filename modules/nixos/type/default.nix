@@ -10,6 +10,6 @@ with lib.chr; let
   cfg = config.chr.type;
 in {
   options.chr.type = mkOption {
-    type = types.enum ["laptop" "desktop" "server" "vm"];
+    type = types.enum ["laptop" "desktop" "server" "vm" "bootstrap"];
   };
 }
