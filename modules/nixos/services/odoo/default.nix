@@ -30,8 +30,6 @@ in {
     # };
     networking.firewall.allowedTCPPorts = [8069];
 
-
-
     services.postgresql = {
       enable = true;
       package = pkgs.postgresql_15;
