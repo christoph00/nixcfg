@@ -15,33 +15,33 @@ let
   star = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICQRi4HsYX2Mbv7SPPpzPp/uiNQlx8bRin2Z+UN5K0qC";
   x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE+DRHaQYXS4jLpb6TQ72zP3prgkcb2X0YVGIXtUCHUY";
 in {
-  "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca cube star];
-  "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
-  "secrets/tailscale-tsnsrv".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
+#  "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca cube star];
+#  "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
+#  "secrets/tailscale-tsnsrv".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
 
-  "secrets/cf-acme".publicKeys = [christoph_air13 futro cube oca oc1 oc2 tower star];
-  "secrets/cf-dyndns".publicKeys = [christoph_air13 futro tower];
-  "secrets/futro-cf".publicKeys = [christoph_air13 futro];
-  "secrets/immich-env".publicKeys = [christoph_air13 futro];
-  "secrets/immich-db-password".publicKeys = [christoph_air13 futro];
+#  "secrets/cf-acme".publicKeys = [christoph_air13 futro cube oca oc1 oc2 tower star];
+#  "secrets/cf-dyndns".publicKeys = [christoph_air13 futro tower];
+#  "secrets/futro-cf".publicKeys = [christoph_air13 futro];
+#  "secrets/immich-env".publicKeys = [christoph_air13 futro];
+#  "secrets/immich-db-password".publicKeys = [christoph_air13 futro];
 
   "secrets/cf-tunnel-futro".publicKeys = [christoph_tower futro];
 
-  "secrets/feed2imap.yml".publicKeys = [christoph_air13 oc1];
+#  "secrets/feed2imap.yml".publicKeys = [christoph_air13 oc1];
 
   "secrets/netbird.env".publicKeys = [christoph_air13 christoph_tower christoph_x13 x13 futro air13 tower oca oc1 oc2 cube star];
 
   "secrets/ha-serviceaccount".publicKeys = [christoph_air13 futro];
   "secrets/ha-secrets.yaml".publicKeys = [christoph_air13 futro];
   "secrets/christoph-password.age".publicKeys = [christoph_air13 christoph_tower christoph_x13 futro air13 tower oca oc1 oc2 cube star x13];
-  "secrets/wayvnc-key".publicKeys = [christoph_air13 tower christoph_tower];
-  "secrets/wayvnc-cert".publicKeys = [christoph_air13 tower christoph_tower];
-  "secrets/rclone.conf".publicKeys = [christoph_air13 tower air13 futro oca oc1 oc2 christoph_tower star];
-  "secrets/traefik.env".publicKeys = [christoph_air13 oca oc1 oc2 futro cube];
-  "secrets/agent-key".publicKeys = [christoph_air13 futro];
-  "secrets/nd-key".publicKeys = [christoph_air13 christoph_tower futro air13 tower oca oc1 oc2];
-  "secrets/rclone-nd.conf".publicKeys = [christoph_air13 futro air13 tower oca oc1 oc2];
-  "secrets/pia.env".publicKeys = [christoph_air13 star];
-  "secrets/pia.crt".publicKeys = [christoph_air13 star];
-  "secrets/nc-admin-pass".publicKeys = [christoph_air13 star futro oca tower christoph_tower];
+#  "secrets/wayvnc-key".publicKeys = [christoph_air13 tower christoph_tower];
+#  "secrets/wayvnc-cert".publicKeys = [christoph_air13 tower christoph_tower];
+#  "secrets/rclone.conf".publicKeys = [christoph_air13 tower air13 futro oca oc1 oc2 christoph_tower star];
+#  "secrets/traefik.env".publicKeys = [christoph_air13 oca oc1 oc2 futro cube];
+#  "secrets/agent-key".publicKeys = [christoph_air13 futro];
+#  "secrets/nd-key".publicKeys = [christoph_air13 christoph_tower futro air13 tower oca oc1 oc2];
+#  "secrets/rclone-nd.conf".publicKeys = [christoph_air13 futro air13 tower oca oc1 oc2];
+#  "secrets/pia.env".publicKeys = [christoph_air13 star];
+#  "secrets/pia.crt".publicKeys = [christoph_air13 star];
+#  "secrets/nc-admin-pass".publicKeys = [christoph_air13 star futro oca tower christoph_tower];
 }
