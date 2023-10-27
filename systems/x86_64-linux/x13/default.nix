@@ -31,7 +31,7 @@ with lib.chr; {
   ];
   boot.kernelModules = ["kvm-intel"];
 
-  swapDevices = ["/dev/nvme0n1p2"];
+  swapDevices = [];
 
   services.fstrim.enable = true;
 
