@@ -49,5 +49,7 @@ with lib.chr; {
     rootOnTmpfs = true;
   };
 
+  services.thinkfan.enable = true;
+
   system.stateVersion = "23.11";
 }
