@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
   # See: https://aur.archlinux.org/packages/jetbrains-fleet
   src = fetchzip {
     url = "https://download-cdn.jetbrains.com/fleet/installers/linux_x64/Fleet-${version}.tar.gz";
-    sha256 = "sha256-7l0LwAO3YwZby/PQWlbQOetzw3ZTiVnigOrcY8J4WDM=";
+    sha256 = "sha256-9TyGc4gCkj2ZpawXaJR9ehmALOckPCeg612o/uYrsXI=";
   };
 
   sourceRoot = ".";
