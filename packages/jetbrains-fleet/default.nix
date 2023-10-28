@@ -15,12 +15,12 @@
 }:
 stdenv.mkDerivation rec {
   pname = "jetbrains-fleet";
-  version = "1.23.175";
+  version = "1.25.206";
 
   # See: https://aur.archlinux.org/packages/jetbrains-fleet
   src = fetchzip {
     url = "https://download-cdn.jetbrains.com/fleet/installers/linux_x64/Fleet-${version}.tar.gz";
-    sha256 = "sha256-QvyI8psjYnzQBVXZFl649y6uKuT4ilvJDuOGKa/hwRk=";
+    sha256 = "sha256-7l0LwAO3YwZby/PQWlbQOetzw3ZTiVnigOrcY8J4WDM=";
   };
 
   sourceRoot = ".";
