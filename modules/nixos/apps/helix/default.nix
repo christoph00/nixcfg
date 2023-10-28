@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
@@ -23,7 +24,9 @@ in {
 
         programs.helix = {
           enable = true;
+          package = inputs.helix.outputs.packages.${pkgs.stdenv.hostPlatform.system}.helix;
           settings = {
+            theme = "fleet-dark";
             editor = {
               line-number = "relative";
               mouse = true;
