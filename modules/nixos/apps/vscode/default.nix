@@ -25,7 +25,6 @@ in {
             jnoortheen.nix-ide
             dhall.dhall-lang
             timonwong.shellcheck
-            bungcip.better-toml
             haskell.haskell
             justusadam.language-haskell
             # ms-python.python
