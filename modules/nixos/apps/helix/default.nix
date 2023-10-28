@@ -22,6 +22,8 @@ in {
           EDITOR = "hx";
         };
 
+        home.packages = [pkgs.chr.templ];
+
         programs.helix = {
           enable = true;
           package = inputs.helix.outputs.packages.${pkgs.stdenv.hostPlatform.system}.helix;

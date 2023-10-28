@@ -22,6 +22,9 @@ buildGoModule rec {
     "-X=github.com/a-h/templ.Version=${version}"
   ];
 
+  subPackages = ["./cmd/templ"];
+
+
   meta = with lib; {
     description = "A language for writing HTML user interfaces in Go";
     homepage = "https://github.com/a-h/templ";
