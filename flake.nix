@@ -81,7 +81,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helix = {url = "github:helix-editor/helix";};
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
