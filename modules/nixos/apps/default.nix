@@ -48,6 +48,11 @@ in {
         wl-clipboard
 
         peazip
+
+        jetbrains.goland
+        jetbrains.webstrom
+
+        chr.jetbrains-fleet
       ];
     };
   };
