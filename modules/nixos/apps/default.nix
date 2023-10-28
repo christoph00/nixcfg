@@ -50,7 +50,8 @@ in {
         peazip
 
         jetbrains.goland
-        jetbrains.webstrom
+
+        jetbrains.webstorm
 
         chr.jetbrains-fleet
       ];
