@@ -1,16 +1,17 @@
-{ stdenv
-, lib
-, fetchurl
-, autoPatchelfHook
-, alsa-lib
-, freetype
-, fontconfig
-, glib
-, jdk
-, libGL
-, xorg
-, zlib
-, makeDesktopItem
+{
+  stdenv,
+  lib,
+  fetchzip,
+  autoPatchelfHook,
+  alsa-lib,
+  freetype,
+  fontconfig,
+  glib,
+  jdk,
+  libGL,
+  xorg,
+  zlib,
+  makeDesktopItem,
 }:
 stdenv.mkDerivation rec {
   pname = "jetbrains-fleet";
@@ -26,27 +27,26 @@ stdenv.mkDerivation rec {
 
   dontBuild = true;
 
+  nativeBuildInputs = [autoPatchelfHook];
 
-  nativeBuildInputs = [ autoPatchelfHook ];
-
-
-  buildInputs = [
-    alsa-lib
-    fontconfig
-    freetype
-    glib
-    jdk
-    libGL
-    stdenv.cc.cc.lib
-    zlib
-  ] ++ (with xorg; [
-    libX11
-    libXext
-    libXi
-    libXrender
-    libXtst
-  ]);
-
+  buildInputs =
+    [
+      alsa-lib
+      fontconfig
+      freetype
+      glib
+      jdk
+      libGL
+      stdenv.cc.cc.lib
+      zlib
+    ]
+    ++ (with xorg; [
+      libX11
+      libXext
+      libXi
+      libXrender
+      libXtst
+    ]);
 
   installPhase = ''
     mkdir -p $out/share/icons
