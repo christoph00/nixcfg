@@ -52,7 +52,6 @@ in {
         jetbrains.goland
         jetbrains.webstrom
 
-        chr.jetbrains-fleet
       ];
     };
   };
