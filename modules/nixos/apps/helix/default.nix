@@ -9,7 +9,7 @@ with lib;
 with lib.chr; let
   cfg = config.chr.apps.helix;
 in {
-  options.chr.apps.vscode = with types; {
+  options.chr.apps.helix = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
     defaultEditor = mkBoolOpt' true;
   };
