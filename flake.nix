@@ -80,6 +80,8 @@
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    helix = {url = "github:helix-editor/helix";};
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
