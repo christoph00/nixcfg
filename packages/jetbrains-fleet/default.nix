@@ -1,21 +1,16 @@
-# Credits to: https://github.com/pupbrained/nix-config/blob/924d06b687f2d48738bde13ab6cf3ad96802dd12/pkgs/fleet.nix
-{
-  stdenv,
-  fetchzip,
-  alsa-lib,
-  glib,
-  zlib,
-  autoPatchelfHook,
-  freetype,
-  fontconfig,
-  mesa,
-  libX11,
-  libXext,
-  libXrender,
-  libXtst,
-  libXi,
-  libGL,
-  makeDesktopItem,
+{ stdenv
+, lib
+, fetchurl
+, autoPatchelfHook
+, alsa-lib
+, freetype
+, fontconfig
+, glib
+, jdk
+, libGL
+, xorg
+, zlib
+, makeDesktopItem
 }:
 stdenv.mkDerivation rec {
   pname = "jetbrains-fleet";
@@ -31,7 +26,27 @@ stdenv.mkDerivation rec {
 
   dontBuild = true;
 
-  nativeBuildInputs = [autoPatchelfHook zlib freetype libX11 libXext libXrender libXtst libXi alsa-lib glib fontconfig mesa libGL];
+
+  nativeBuildInputs = [ autoPatchelfHook ];
+
+
+  buildInputs = [
+    alsa-lib
+    fontconfig
+    freetype
+    glib
+    jdk
+    libGL
+    stdenv.cc.cc.lib
+    zlib
+  ] ++ (with xorg; [
+    libX11
+    libXext
+    libXi
+    libXrender
+    libXtst
+  ]);
+
 
   installPhase = ''
     mkdir -p $out/share/icons
