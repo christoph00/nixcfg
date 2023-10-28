@@ -67,19 +67,36 @@ in {
               };
             };
           };
-          languages = {
-            language = [
-              {
-                name = "nix";
-                indent.tab-width = 2;
-                indent.unit = "  ";
-                language-server = {
-                  command = "${pkgs.nixd}/bin/nixd";
-                  args = [];
-                };
-              }
-            ];
+          languages.language-server = {
+            nixd.command = "${pkgs.nixd}/bin/nixd";
+            deno = {
+              command = "${pkgs.deno}/bin/deno";
+              args = ["lsp"];
+              config = {
+                enable = true;
+                unstable = true;
+                lint = true;
+              };
+            };
+
+            tailwindcss = {
+              command = "${pkgs.nodePackages_latest."@tailwindcss/language-server"}/bin/tailwindcss-language-server";
+              language-id = "tailwindcss";
+              args = ["--stdio"];
+              config = {};
+            };
           };
+          languages.language = [
+            {
+              name = "nix";
+              language-servers = ["nixd"];
+              auto-format = true;
+              formatter = {
+                command = "${pkgs.alejandra}/bin/alejandra";
+                args = ["-"];
+              };
+            }
+          ];
         };
       };
     };

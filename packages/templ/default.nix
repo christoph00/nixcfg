@@ -1,8 +1,8 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
 }:
-
 buildGoModule rec {
   pname = "templ";
   version = "0.2.408";
@@ -24,12 +24,11 @@ buildGoModule rec {
 
   subPackages = ["./cmd/templ"];
 
-
   meta = with lib; {
     description = "A language for writing HTML user interfaces in Go";
     homepage = "https://github.com/a-h/templ";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "templ";
   };
 }
