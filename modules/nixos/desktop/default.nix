@@ -127,6 +127,17 @@ in {
     #   '';
     # };
 
+    services.logind = {
+      killUserProcesses = true;
+      lidSwitch = "hybrid-sleep";
+      lidSwitchExternalPower = "hybrid-sleep";
+      extraConfig = ''
+        # IdleAction=lock
+        # IdleActionSec=30
+        HandlePowerKey=suspend
+      '';
+    };
+
     xdg.portal = {
       enable = true;
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
