@@ -28,7 +28,7 @@ in {
           enable = true;
           package = inputs.helix.outputs.packages.${pkgs.stdenv.hostPlatform.system}.helix;
           settings = {
-            theme = "fleet-dark";
+            theme = "fleet_dark";
             editor = {
               line-number = "relative";
               mouse = true;
