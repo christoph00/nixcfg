@@ -39,6 +39,7 @@ with lib.chr; {
 
   chr = {
     type = "laptop";
+    gaming.enable = true;
   };
   chr.system.filesystem = {
     enable = true;
