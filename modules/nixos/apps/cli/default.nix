@@ -53,7 +53,7 @@ in {
 
         gopls
 
-        tailwindcss
+        #tailwindcss
 
         tree
 
