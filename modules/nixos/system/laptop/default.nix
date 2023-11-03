@@ -14,7 +14,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    #services.power-profiles-daemon.enable = true;
+    services.power-profiles-daemon.enable = false;
     #services.thermald.enable = false;
     services.tlp = {
       enable = true;
