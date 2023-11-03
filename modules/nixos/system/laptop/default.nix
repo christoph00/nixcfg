@@ -15,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     services.power-profiles-daemon.enable = true;
-    services.thermald.enable = true;
+    services.thermald.enable = false;
 
     environment.systemPackages = [pkgs.powertop pkgs.powerstat];
 
