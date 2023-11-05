@@ -31,6 +31,8 @@ in {
         fzf
         wget
 
+        unrar
+
         nixd
         gcc
         alejandra

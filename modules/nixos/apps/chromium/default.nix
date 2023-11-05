@@ -31,6 +31,7 @@ in {
             #{id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
             #{id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
             {id = "hceobhjokpdbogjkplmfjeomkeckkngi";} # New Bing Anywhere
+            {id = "jinjaccalgkegednnccohejagnlnfdag";} # tampermonkey
           ];
           commandLineArgs = [
             "--ignore-gpu-blocklist"
