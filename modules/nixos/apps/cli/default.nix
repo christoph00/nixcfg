@@ -51,7 +51,7 @@ in {
         python3
 
         tmux
-        xplr
+        # xplr
 
         gopls
 
@@ -79,9 +79,9 @@ in {
 
         #conda
 
-        wrangler
+        # wrangler
         flyctl
-        deno
+        # deno
 
         home-assistant-cli
 
