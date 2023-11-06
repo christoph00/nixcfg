@@ -143,6 +143,8 @@ in {
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
 
+    services.xserver.desktopManager.cosmic.enable = true;
+
     fonts = {
       packages = with pkgs; [
         material-symbols
