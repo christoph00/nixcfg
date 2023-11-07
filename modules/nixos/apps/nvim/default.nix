@@ -36,24 +36,6 @@ in {
         programs.neovim = {
           enable = true;
         };
-
-        home.activation.astrovim = mkIf (cfg.configRepo != null) (lib.hm.dag.entryAfter ["writeBoundary"] ''
-          if ! [[ -d ${config.xdg.configHome}/nvim ]]; then
-            $DRY_RUN_CMD ${git} clone $VERBOSE_ARG --depth 1 "${cfg.configRepo}" "${config.xdg.configHome}/nvim"
-            if [[ -d ${config.xdg.dataHome}/nvim ]]; then
-              $DRY_RUN_CMD mv $VERBOSE_ARG "${config.xdg.dataHome}/nvim" "${config.xdg.dataHome}/nvim~"
-            fi
-            if [[ -d ${config.xdg.stateHome}/nvim ]]; then
-              $DRY_RUN_CMD mv $VERBOSE_ARG "${config.xdg.stateHome}/nvim" "${config.xdg.stateHome}/nvim~"
-            fi
-          fi
-        '');
-
-        home.activation.astrovimUser = mkIf (cfg.userConfigRepo != null) (lib.hm.dag.entryAfter ["writeBoundary"] ''
-          if ! [[ -d ${config.xdg.configHome}/astronvim ]]; then
-            $DRY_RUN_CMD ${git} clone $VERBOSE_ARG --depth 1 "${cfg.userConfigRepo}" "${config.xdg.configHome}/astronvim/lua/user"
-          fi
-        '');
       };
     };
   };
