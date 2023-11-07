@@ -10,7 +10,7 @@ with lib;
 with lib.chr; let
   cfg = config.chr.desktop.cosmic;
 in {
-  options.chr.desktop.plasma = with types; {
+  options.chr.desktop.cosmic = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Cosmic Desktop.";
   };
 
