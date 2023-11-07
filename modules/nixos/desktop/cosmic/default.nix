@@ -16,11 +16,11 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      cosmic-comp-unstable
-      cosmic-panel-unstable
-      cosmic-icons-unstable
-      cosmic-applets-unstable
-      cosmic-settings-unstable
+      cosmic-comp
+      cosmic-panel
+      cosmic-icons
+      cosmic-applets
+      cosmic-settings
     ];
   };
 }
