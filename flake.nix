@@ -87,18 +87,18 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    cosmic-comp.url = "github:pop-os/cosmic-comp";
-    cosmic-panel.url = "github:pop-os/cosmic-panel";
-    cosmic-settings.url = "github:pop-os/cosmic-settings";
-    cosmic-settings-daemon.url = "github:pop-os/cosmic-settings-daemon";
-    cosmic-launcher.url = "github:pop-os/cosmic-launcher";
-    cosmic-applibrary.url = "github:pop-os/cosmic-applibrary";
-    cosmic-session.url = "github:pop-os/cosmic-session";
-    cosmic-applets.url = "github:pop-os/cosmic-applets";
-    cosmic-workspaces.url = "github:pop-os/cosmic-workspaces-epoch";
-    cosmic-osd.url = "github:pop-os/cosmic-osd";
-    cosmic-bg.url = "github:pop-os/cosmic-bg";
-    xdg-desktop-portal-cosmic.url = "github:pop-os/xdg-desktop-portal-cosmic";
+    # cosmic-comp.url = "github:pop-os/cosmic-comp";
+    # cosmic-panel.url = "github:pop-os/cosmic-panel";
+    # cosmic-settings.url = "github:pop-os/cosmic-settings";
+    # cosmic-settings-daemon.url = "github:pop-os/cosmic-settings-daemon";
+    # cosmic-launcher.url = "github:pop-os/cosmic-launcher";
+    # cosmic-applibrary.url = "github:pop-os/cosmic-applibrary";
+    # cosmic-session.url = "github:pop-os/cosmic-session";
+    # cosmic-applets.url = "github:pop-os/cosmic-applets";
+    # cosmic-workspaces.url = "github:pop-os/cosmic-workspaces-epoch";
+    # cosmic-osd.url = "github:pop-os/cosmic-osd";
+    # cosmic-bg.url = "github:pop-os/cosmic-bg";
+    # xdg-desktop-portal-cosmic.url = "github:pop-os/xdg-desktop-portal-cosmic";
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
