@@ -46,7 +46,7 @@ in {
         home = "/home/${cfg.name}";
         group = "users";
 
-        shell = pkgs.nushell;
+        # shell = pkgs.nushell;
 
         uid = 1000;
 
