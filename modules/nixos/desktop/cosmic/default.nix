@@ -19,7 +19,8 @@ in {
       pkgs.cosmic-icons
       cosmic-applets.packages."${pkgs.system}".default
       cosmic-applibrary.packages."${pkgs.system}".default
-      cosmic-comp.packages."${pkgs.system}".default
+      pkgs.cosmic-comp
+      # cosmic-comp.packages."${pkgs.system}".default
       cosmic-launcher.packages."${pkgs.system}".default
       cosmic-notifications.packages."${pkgs.system}".default
       cosmic-osd.packages."${pkgs.system}".default
