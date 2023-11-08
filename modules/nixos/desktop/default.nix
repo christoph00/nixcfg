@@ -52,6 +52,10 @@ in {
 
     boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
+    services.udev.packages = [
+      pkgs.android-udev-rules
+    ];
+
     hardware.opengl = {
       enable = true;
       driSupport = true;

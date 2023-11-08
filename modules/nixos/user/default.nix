@@ -58,6 +58,7 @@ in {
             "dbus"
             "tty"
             "dialout"
+            "adbusers"
           ]
           ++ cfg.extraGroups;
 
