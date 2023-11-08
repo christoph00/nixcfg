@@ -38,6 +38,8 @@ in {
         alejandra
         cachix
 
+        aichat
+
         #inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
 
         inputs.agenix.packages.${pkgs.system}.default
