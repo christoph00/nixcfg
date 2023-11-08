@@ -53,7 +53,11 @@ in {
 
         jetbrains.webstorm
 
-        chr.jetbrains-fleet
+        # chr.jetbrains-fleet
+
+        heimdall-gui
+
+        codeium
       ];
     };
   };
