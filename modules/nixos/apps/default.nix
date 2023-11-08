@@ -14,6 +14,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    programs.adb.enable = true;
+
     chr.home.extraOptions = {
       home.packages = with pkgs; [
         brightnessctl
