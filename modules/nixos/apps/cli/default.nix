@@ -38,7 +38,8 @@ in {
         alejandra
         cachix
 
-        aichat
+        chr.aichat
+        chr.tgpt
 
         #inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
 
