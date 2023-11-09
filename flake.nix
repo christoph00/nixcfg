@@ -139,7 +139,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     xdg-desktop-portal-cosmic = {
-      url = "github:pop-os/xdg-desktop-portal-cosmic";
+      url = "github:felschr/xdg-desktop-portal-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.crane.follows = "crane";
       inputs.fenix.follows = "fenix";
