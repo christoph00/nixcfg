@@ -46,8 +46,9 @@ in {
         ubuntu_font_family
         unifont
         roboto
-        (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka" "Agave"];})
+        (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka" "Agave" "IBMPlexMono" "Gohu" "Hermit" "IntelOneMono"];})
         chr.operator-mono-nf
+        #intel-one-mono
       ];
 
       #   enableDefaultPackages = false;
