@@ -60,8 +60,6 @@ in {
         # chr.jetbrains-fleet
 
         heimdall-gui
-
-        mailspring
       ];
     };
   };
