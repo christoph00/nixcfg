@@ -27,7 +27,7 @@ in {
       cosmic-osd.packages.${pkgs.system}.default
       cosmic-panel.packages.${pkgs.system}.default
       cosmic-settings.packages.${pkgs.system}.default
-      cosmic-settings-daemon.packages.${pks.system}.default
+      # cosmic-settings-daemon.packages.${pks.system}.default
     ];
   };
 }
