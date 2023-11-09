@@ -41,6 +41,9 @@ in {
         chr.aichat
         chr.tgpt
 
+        typst-lsp
+        typst-live
+
         #inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
 
         inputs.agenix.packages.${pkgs.system}.default

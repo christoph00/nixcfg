@@ -37,6 +37,8 @@ in {
 
         themechanger
 
+        typst
+
         gnome.gnome-keyring
 
         nix-init
