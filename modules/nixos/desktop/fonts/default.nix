@@ -47,6 +47,7 @@ in {
         unifont
         roboto
         (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka" "Agave"];})
+        chr.operator-mono-nf
       ];
 
       #   enableDefaultPackages = false;
