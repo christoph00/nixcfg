@@ -89,10 +89,17 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    cosmic-desktop = {
-      url = "github:phossil/nixos-module-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    cosmic-applets.url = "github:pop-os/cosmic-applets";
+    cosmic-applibrary.url = "github:pop-os/cosmic-applibrary";
+    cosmic-bg.url = "github:pop-os/cosmic-bg";
+    cosmic-comp.url = "github:pop-os/cosmic-comp";
+    cosmic-launcher.url = "github:pop-os/cosmic-launcher";
+    cosmic-osd.url = "github:pop-os/cosmic-osd";
+    cosmic-panel.url = "github:pop-os/cosmic-panel";
+    cosmic-session.url = "github:pop-os/cosmic-session";
+    cosmic-settings.url = "github:pop-os/cosmic-settings";
+    cosmic-settings-daemon.url = "github:pop-os/cosmic-settings-daemon";
+    xdg-desktop-portal-cosmic.url = "github:pop-os/xdg-desktop-portal-cosmic";
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
