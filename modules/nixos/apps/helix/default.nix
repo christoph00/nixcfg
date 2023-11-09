@@ -61,20 +61,19 @@ in {
                 display-inlay-hints = true;
               };
 
-              keys = {
-                normal = {
-                  "C-n" = [
-                    "extend_line"
-                    ":insert-output echo 'FILL_THIS'"
-                    "extend_line_below"
-                    ":pipe ${pkgs.chr.tgpt} --code 'Using this comment, fill the line having the comment FILL_THIS.'"
-                  ];
-                };
-              };
-
               indent-guides = {
                 render = false;
                 skip-level = 1;
+              };
+            };
+            keys = {
+              normal = {
+                "C-n" = [
+                  "extend_line"
+                  ":insert-output echo 'FILL_THIS'"
+                  "extend_line_below"
+                  ":pipe ${pkgs.chr.tgpt}/bin/tgpt --code 'Using this comment, fill the line having the comment FILL_THIS.'"
+                ];
               };
             };
           };
