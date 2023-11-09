@@ -25,7 +25,7 @@ in {
       extraOptions = {
         programs.vscode = {
           enable = true;
-          package = pkgs.vscodium;
+          package = pkgs.vscode.fhs;
           mutableExtensionsDir = true;
           extensions = with pkgs.vscode-extensions;
             [
@@ -51,18 +51,18 @@ in {
             ]
             ++ marketplace-extensions;
 
-          userSettings = {
-            stylua.styluaPath = lib.getExe pkgs.stylua;
-            nix.serverPath = lib.getExe pkgs.nixd;
+          # userSettings = {
+          #   stylua.styluaPath = lib.getExe pkgs.stylua;
+          #   nix.serverPath = lib.getExe pkgs.nixd;
 
-            "[css]".editor.defaultFormatter = "esbenp.prettier-vscode";
-            "[html]".editor.defaultFormatter = "vscode.html-language-features";
-            "[javascript]".editor.defaultFormatter = "esbenp.prettier-vscode";
-            "[json]".editor.defaultFormatter = "esbenp.prettier-vscode";
-            "[jsonc]".editor.defaultFormatter = "esbenp.prettier-vscode";
-            "[lua]".editor.defaultFormatter = "johnnymorganz.stylua";
-            "[nix]".editor.defaultFormatter = "kamadorueda.alejandra";
-          };
+          #   "[css]".editor.defaultFormatter = "esbenp.prettier-vscode";
+          #   "[html]".editor.defaultFormatter = "vscode.html-language-features";
+          #   "[javascript]".editor.defaultFormatter = "esbenp.prettier-vscode";
+          #   "[json]".editor.defaultFormatter = "esbenp.prettier-vscode";
+          #   "[jsonc]".editor.defaultFormatter = "esbenp.prettier-vscode";
+          #   "[lua]".editor.defaultFormatter = "johnnymorganz.stylua";
+          #   "[nix]".editor.defaultFormatter = "kamadorueda.alejandra";
+          # };
         };
       };
     };
