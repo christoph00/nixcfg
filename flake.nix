@@ -44,6 +44,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    crane = {
+      url = "github:ipetkov/crane";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     disko = {
@@ -132,6 +141,8 @@
     xdg-desktop-portal-cosmic = {
       url = "github:pop-os/xdg-desktop-portal-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.crane.follows = "crane";
+      inputs.fenix.follows = "fenix";
     };
   };
   outputs = inputs: let
