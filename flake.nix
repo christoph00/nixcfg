@@ -97,53 +97,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };
-
-    cosmic-applets = {
-      url = "github:pop-os/cosmic-applets";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cosmic-applibrary = {
-      url = "github:pop-os/cosmic-applibrary";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cosmic-bg = {
-      url = "github:pop-os/cosmic-bg";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cosmic-comp = {
-      url = "github:pop-os/cosmic-comp";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cosmic-launcher = {
-      url = "github:pop-os/cosmic-launcher";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cosmic-osd = {
-      url = "github:pop-os/cosmic-osd";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cosmic-panel = {
-      url = "github:pop-os/cosmic-panel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cosmic-session = {
-      url = "github:pop-os/cosmic-session";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cosmic-settings = {
-      url = "github:pop-os/cosmic-settings";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    cosmic-settings-daemon = {
-      url = "github:pop-os/cosmic-settings-daemon";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    xdg-desktop-portal-cosmic = {
-      url = "github:felschr/xdg-desktop-portal-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
-      inputs.fenix.follows = "fenix";
-    };
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
