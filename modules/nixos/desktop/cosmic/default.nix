@@ -14,7 +14,7 @@ in {
     inputs.cosmic-desktop.nixosModules.default
   ];
   options.chr.desktop.cosmic = with types; {
-    enable = mkBoolOpt false "Whether or not to enable Cosmic Desktop.";
+    enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Cosmic Desktop.";
   };
 
   config = mkIf cfg.enable {
