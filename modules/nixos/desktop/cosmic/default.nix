@@ -16,18 +16,18 @@ in {
 
   config = mkIf cfg.enable {
     xdg.portal.enable = true;
-    xdg.portal.extraPortals = [inputs.xdg-desktop-portal-cosmic.packages.${system}.default];
+    xdg.portal.extraPortals = [inputs.xdg-desktop-portal-cosmic.packages.${pkgs.system}.default];
 
     environment.systemPackages = with inputs; [
-      cosmic-applets.packages.${system}.default
-      cosmic-applibrary.packages.${system}.default
-      cosmic-bg.packages.${system}.default
-      cosmic-comp.packages.${system}.default
-      cosmic-launcher.packages.${system}.default
-      cosmic-osd.packages.${system}.default
-      cosmic-panel.packages.${system}.default
-      cosmic-settings.packages.${system}.default
-      cosmic-settings-daemon.packages.${system}.default
+      cosmic-applets.packages.${pkgs.system}.default
+      cosmic-applibrary.packages.${pkgs.system}.default
+      cosmic-bg.packages.${pkgs.system}.default
+      cosmic-comp.packages.${pkgs.system}.default
+      cosmic-launcher.packages.${pkgs.system}.default
+      cosmic-osd.packages.${pkgs.system}.default
+      cosmic-panel.packages.${pkgs.system}.default
+      cosmic-settings.packages.${pkgs.system}.default
+      cosmic-settings-daemon.packages.${pks.system}.default
     ];
   };
 }
