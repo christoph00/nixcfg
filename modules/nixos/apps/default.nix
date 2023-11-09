@@ -61,7 +61,7 @@ in {
 
         heimdall-gui
 
-        codeium
+        mailspring
       ];
     };
   };
