@@ -10,25 +10,14 @@ with lib;
 with lib.chr; let
   cfg = config.chr.desktop.cosmic;
 in {
+  imports = [
+    inputs.cosmic-desktop.nixosModules.default
+  ];
   options.chr.desktop.cosmic = with types; {
     enable = mkBoolOpt false "Whether or not to enable Cosmic Desktop.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with inputs; [
-      pkgs.cosmic-icons
-      cosmic-applets.packages."${pkgs.system}".default
-      cosmic-applibrary.packages."${pkgs.system}".default
-      pkgs.cosmic-comp
-      # cosmic-comp.packages."${pkgs.system}".default
-      cosmic-launcher.packages."${pkgs.system}".default
-      cosmic-notifications.packages."${pkgs.system}".default
-      cosmic-osd.packages."${pkgs.system}".default
-      cosmic-panel.packages."${pkgs.system}".default
-      cosmic-settings.packages."${pkgs.system}".default
-      # cosmic-settings-daemon.packages."${pkgs.system}".default
-      cosmic-session.packages."${pkgs.system}".default
-      xdg-desktop-portal-cosmic.packages."${pkgs.system}".default
-    ];
+    services.xserver.desktopManager.cosmic.enable = true;
   };
 }

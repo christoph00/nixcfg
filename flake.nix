@@ -89,74 +89,8 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    # COSMIC Desktop
-    cosmic-applets = {
-      url = "github:pop-os/cosmic-applets";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-applibrary = {
-      url = "github:pop-os/cosmic-applibrary";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-bg = {
-      url = "github:pop-os/cosmic-bg";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-comp = {
-      url = "github:pop-os/cosmic-comp";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-launcher = {
-      url = "github:pop-os/cosmic-launcher";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-notifications = {
-      url = "github:pop-os/cosmic-notifications";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-osd = {
-      url = "github:pop-os/cosmic-osd";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-panel = {
-      url = "github:pop-os/cosmic-panel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # cosmic-protocols.url = "github:pop-os/cosmic-protocols";
-
-    cosmic-settings = {
-      url = "github:pop-os/cosmic-settings";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-settings-daemon = {
-      url = "github:pop-os/cosmic-settings-daemon";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    cosmic-session = {
-      url = "github:pop-os/cosmic-session";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # cosmic-text.url = "github:pop-os/cosmic-text";
-    # cosmic-text-editor.url = "github:pop-os/cosmic-text-editor";
-    # cosmic-theme.url = "github:pop-os/cosmic-theme";
-    # cosmic-theme-editor.url = "github:pop-os/cosmic-theme-editor";
-    # cosmic-time.url = "github:pop-os/cosmic-time";
-    # cosmic-workspaces-epoch.url = "github:pop-os/cosmic-workspaces-epoch";
-    # libcosmic.url = "github:pop-os/libcosmic";
-
-    xdg-desktop-portal-cosmic = {
-      url = "github:pop-os/xdg-desktop-portal-cosmic";
+    cosmic-desktop = {
+      url = "github:phossil/nixos-module-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
