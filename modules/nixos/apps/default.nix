@@ -60,6 +60,8 @@ in {
         # chr.jetbrains-fleet
 
         heimdall-gui
+
+        gtkcord4
       ];
     };
   };
