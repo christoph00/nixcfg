@@ -24,7 +24,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/thomasloven/lovelace-layout-card";
     license = licenses.mit;
     maintainers = with maintainers; [];
-    mainProgram = "ha-lovelace-layout-card";
     platforms = platforms.all;
   };
 }
