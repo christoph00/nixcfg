@@ -63,7 +63,7 @@ in {
 
         armcord
 
-        geary
+        claws-mail
       ];
     };
   };
