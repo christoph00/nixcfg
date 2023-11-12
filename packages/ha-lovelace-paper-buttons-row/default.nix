@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
   version = "2.1.3";
 
   src = fetchurl {
-    url = "https://github.com/jcwillox/lovelace-paper-buttons-row/releases/download/v${version}/paper-buttons-row.js";
+    url = "https://github.com/jcwillox/lovelace-paper-buttons-row/releases/download/${version}/paper-buttons-row.js";
     sha256 = "003zcj60sg0w5q26hbkj9jsfz7vfa0fkrzrrpkavb5pmqxsn3rpx";
   };
 
