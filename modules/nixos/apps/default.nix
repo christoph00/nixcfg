@@ -62,6 +62,8 @@ in {
         heimdall-gui
 
         armcord
+
+        geany
       ];
     };
   };
