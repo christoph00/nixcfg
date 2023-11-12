@@ -4,14 +4,14 @@
   fetchFromGitHub,
 }:
 stdenv.mkDerivation rec {
-  pname = "lovelace-card-mod";
-  version = "3.2.3";
+  pname = "ha-lovelace-card-mod";
+  version = "3.2.4";
 
   src = fetchFromGitHub {
     owner = "thomasloven";
     repo = "lovelace-card-mod";
     rev = version;
-    hash = "sha256-XTiCwXlUxCYTjCOqRE2Z/fqtbMXvuSTDBBxVC8Z9VrQ=";
+    hash = "sha256-JU8IZiQFWUDuUOUENLv8ffQQn6Z07PxA+674ogGNrac=";
   };
 
   installPhase = ''
@@ -24,7 +24,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/thomasloven/lovelace-card-mod";
     license = licenses.mit;
     maintainers = with maintainers; [];
-    mainProgram = "lovelace-card-mod";
     platforms = platforms.all;
   };
 }
