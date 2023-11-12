@@ -25,7 +25,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/jcwillox/lovelace-paper-buttons-row";
     license = licenses.mit;
     maintainers = with maintainers; [];
-    mainProgram = "ha-lovelace-paper-buttons-row";
     platforms = platforms.all;
   };
 }

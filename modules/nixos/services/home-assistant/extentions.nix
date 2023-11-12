@@ -16,6 +16,7 @@ with lib.chr; let
   button-card = "${pkgs.chr.ha-lovelace-button-card}/button-card.js";
   paper-buttons-row = "${pkgs.chr.ha-lovelace-paper-buttons-row}/paper-buttons-row.js";
   layout-card = "${pkgs.chr.ha-lovelace-layout-card}/layout-card.js";
+  decluttering-card = "${pkgs.chr.ha-lovelace-decluttering-card}/decluttering-card.js";
 in {
   options.chr.services.home-assistant = with types; {
     customCards = mkOption {
@@ -34,6 +35,7 @@ in {
       "/local/button-card.js"
       "/local/paper-buttons-row.js"
       "/local/layout-card.js"
+      "/local/decluttering-card.js"
     ];
     systemd.tmpfiles.rules = [
       "d ${haDir}/www 0755 hass hass"
@@ -49,6 +51,7 @@ in {
       "C ${haDir}/www/button-card.js 0644 hass hass - ${button-card}"
       "C ${haDir}/www/paper-buttons-row.js 0644 hass hass - ${paper-buttons-row}"
       "C ${haDir}/www/layout-card.js 0644 hass hass - ${layout-card}"
+      "C ${haDir}/www/decluttering-card.js 0644 hass hass - ${decluttering-card}"
 
       "d /nix/persist/hass/custom_components 0755 hass hass"
       "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.chr.ha-better-thermostat}/better_thermostat"
