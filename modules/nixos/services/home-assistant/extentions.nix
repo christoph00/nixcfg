@@ -38,6 +38,9 @@ in {
       "C ${haDir}/www/mushroom.js 0644 hass hass - ${mushroom}"
       "C ${haDir}/www/bubble-card.js 0644 hass hass - ${bubble}"
       "C ${haDir}/www/card-mod.js 0644 hass hass - ${card-mod}"
+      "C ${haDir}/www/button-card.js 0644 hass hass - ${button-card}"
+      "C ${haDir}/www/paper-buttons-row.js 0644 hass hass - ${paper-buttons-row}"
+      "C ${haDir}/www/layout-card.js 0644 hass hass - ${layout-card}"
 
       "d /nix/persist/hass/custom_components 0755 hass hass"
       "L /nix/persist/hass/custom_components/better_thermostat - - - - ${pkgs.chr.ha-better-thermostat}/better_thermostat"
