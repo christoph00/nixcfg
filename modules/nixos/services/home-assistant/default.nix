@@ -240,6 +240,7 @@ in {
         "mobile_app"
         "nzbget"
         "ubus"
+        "radio_browser"
         "wake_on_lan"
         "cast"
         #  "wled"
