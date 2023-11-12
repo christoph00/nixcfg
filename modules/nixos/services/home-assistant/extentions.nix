@@ -13,6 +13,9 @@ with lib.chr; let
   mushroom = "${pkgs.chr.ha-lovelace-mushroom}/mushroom.js";
   bubble = "${pkgs.chr.ha-lovelace-bubble}/bubble-card.js";
   card-mod = "${pkgs.chr.ha-lovelace-card-mod}/card-mod.js";
+  button-card = "${pkgs.chr.ha-lovelace-button-card}/button-card.js";
+  paper-buttons-row = "${pkgs.chr.ha-lovelace-paper-buttons-row}/paper-buttons-row.js";
+  layout-card = "${pkgs.chr.ha-lovelace-layout-card}/layout-card.js";
 in {
   options.chr.services.home-assistant = with types; {
     customCards = mkOption {
