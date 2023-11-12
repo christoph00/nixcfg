@@ -20,7 +20,7 @@ with lib.chr; let
 in {
   options.chr.services.home-assistant = with types; {
     customCards = mkOption {
-      default = {inherit mushroom bubble card-mod button-card paper-buttons-row layout-card;};
+      default = {inherit mushroom bubble card-mod button-card paper-buttons-row layout-card decluttering-card;};
       type = types.attrsOf types.path;
       description = ''
         List of custom cards to install.
@@ -28,15 +28,15 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    services.home-assistant.config.frontend.extra_module_url = [
-      "/local/mushroom.js"
-      "/local/bubble-card.js"
-      "/local/card-mod.js"
-      "/local/button-card.js"
-      "/local/paper-buttons-row.js"
-      "/local/layout-card.js"
-      "/local/decluttering-card.js"
-    ];
+    # services.home-assistant.config.frontend.extra_module_url = [
+    #   "/local/mushroom.js"
+    #   "/local/bubble-card.js"
+    #   "/local/card-mod.js"
+    #   "/local/button-card.js"
+    #   "/local/paper-buttons-row.js"
+    #   "/local/layout-card.js"
+    #   "/local/decluttering-card.js"
+    # ];
     systemd.tmpfiles.rules = [
       "d ${haDir}/www 0755 hass hass"
       # "C /nix/persist/hass/www/vacuum-card.js 0755 hass hass - ${vacuum-card}"
