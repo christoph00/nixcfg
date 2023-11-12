@@ -19,6 +19,7 @@ stdenv.mkDerivation rec {
     mkdir $out
     cp $src $out/mini-media-player-bundle.js
   '';
+
   meta = with lib; {
     description = "An advanced calendar card for Home Assistant Lovelace";
     homepage = "https://github.com/totaldebug/atomic-calendar-revive";
