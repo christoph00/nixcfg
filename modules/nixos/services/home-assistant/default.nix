@@ -11,6 +11,10 @@ with lib.chr; let
 in {
   options.chr.services.home-assistant = with types; {
     enable = mkBoolOpt config.chr.services.smart-home "Enable Home-Assistant Service.";
+    hostname = lib.mkOption {
+      type = lib.types.str;
+      default = "ha.r505.de";
+    };
   };
   imports = [
     ./extentions.nix
