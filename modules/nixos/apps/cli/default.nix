@@ -46,7 +46,7 @@ in {
 
         #inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
 
-        inputs.agenix.packages.${pkgs.system}.default
+        inputs.agenix.packages.${system}.default
 
         #vscode-cli
 
