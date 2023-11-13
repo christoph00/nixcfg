@@ -11,6 +11,8 @@
   in {
     config = lib.mkIf cfg.enable {
 
+      chr.services.webserver.enable = true;
+
       services.caddy = {
         enable = lib.mkDefault true;
         virtualHosts."${cfg.hostname}" = {
