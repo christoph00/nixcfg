@@ -14,5 +14,10 @@ in {
   };
   config = lib.mkIf cfg.enable {
     users.users.caddy.extraGroups = ["acme"];
+    services.caddy = {
+      enable = true;
+      #dataDir = "/var/lib/caddy";
+
+    };
   };
 }
