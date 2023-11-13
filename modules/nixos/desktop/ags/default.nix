@@ -11,7 +11,7 @@ with lib.chr; let
   cfg = config.chr.desktop.ags;
 in {
   options.chr.desktop.ags = with types; {
-    enable = mkBoolOpt config.chr.hyprland.enable "Whether or not enable Ags.";
+    enable = mkBoolOpt config.chr.desktop.hyprland.enable "Whether or not enable Ags.";
   };
 
   config = mkIf cfg.enable {
