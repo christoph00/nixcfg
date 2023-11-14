@@ -111,6 +111,24 @@ in {
             mouse_move_enables_dpms = true;
             vrr = 2;
           };
+          "$mod" = "SUPER";
+          bind = [
+            "$mod, Return, exec, wezterm"
+            "$mod + SHIFT, c, killactive "
+            "$mod, p, exec, anyrun"
+            "$mod + SHIFT, p, exec, hyprland-relative-workspace b"
+            "$mod + SHIFT, n, exec, hyprland-relative-workspace f"
+            "$mod, 1, workspace, 1"
+            "$mod, 2, workspace, 2"
+            "$mod, 3, workspace, 3"
+            "$mod, 4, workspace, 4"
+            "$mod, 5, workspace, 5"
+            "$mod, 6, workspace, 6"
+            "$mod, 7, workspace, 7"
+            "$mod, 8, workspace, 8"
+            "$mod, 9, workspace, 9"
+            "$mod, 0, workspace, 10"
+          ];
         };
       };
     };
