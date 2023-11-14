@@ -54,6 +54,7 @@ in {
               passes = 4;
               size = 5;
             };
+            blurls = ["gtk-layer-shell" "waybar" "lockscreen" "ironbar"];
 
             drop_shadow = true;
             shadow_ignore_window = true;
