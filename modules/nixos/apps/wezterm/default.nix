@@ -13,18 +13,16 @@ in {
     enable = mkBoolOpt config.chr.desktop.enable "Whether to enable Wezterm.";
   };
 
-  config = mkIf cfg.enable {
-    programs.wezterm = {
-      enable = cfg.enable;
-      extraConfig = ''
-        return {
-          font = wezterm.font("IntoneMono Nerd Font Mono"),
-          font_size = 16.0,
-          color_scheme = "Tomorrow Night",
-          hide_tab_bar_if_only_one_tab = true,
-        }
+  config.chr.home.extraOptions.programs.wezterm = mkIf cfg.enable {
+    enable = cfg.enable;
+    extraConfig = ''
+      return {
+        font = wezterm.font("IntoneMono Nerd Font Mono"),
+        font_size = 16.0,
+        color_scheme = "Tomorrow Night",
+        hide_tab_bar_if_only_one_tab = true,
+      }
 
-      '';
-    };
+    '';
   };
 }
