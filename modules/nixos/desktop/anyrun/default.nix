@@ -1,16 +1,27 @@
 {
+  options,
+  config,
+  lib,
   pkgs,
-  anyrun,
+  inputs,
   ...
-}: {
+}:
+with lib;
+with lib.chr; let
+  cfg = config.chr.desktop.anyrun;
+in {
+  options.chr.desktop.anyrun = with types; {
+    enable = mkBoolOpt' config.chr.desktop.enable;
+  };
+
   imports = [
-    anyrun.homeManagerModules.default
+    inputs.anyrun.homeManagerModules.default
   ];
 
-  programs.anyrun = {
+  config.programs.anyrun = lib.mkIf cfg.enable {
     enable = true;
     config = {
-      plugins = with anyrun.packages.${pkgs.system}; [
+      plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
         randr
         rink
