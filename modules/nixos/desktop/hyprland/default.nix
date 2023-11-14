@@ -47,7 +47,7 @@ in {
             active_opacity = 0.95;
             fullscreen_opacity = 1.0;
             inactive_opacity = 0.9;
-            rounding = 10;
+            rounding = 4;
 
             blur = {
               enabled = "yes";
@@ -120,7 +120,7 @@ in {
           bind = [
             "$mod, Return, exec, wezterm"
             "$mod + SHIFT, c, killactive "
-            "$mod, p, exec, anyrun"
+            "$mod, r, exec, anyrun"
             "$mod + SHIFT, p, exec, hyprland-relative-workspace b"
             "$mod + SHIFT, n, exec, hyprland-relative-workspace f"
             "$mod, 1, workspace, 1"
