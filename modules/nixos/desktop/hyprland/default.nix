@@ -134,6 +134,12 @@ in {
             "$mod, 9, workspace, 9"
             "$mod, 0, workspace, 10"
           ];
+
+          bindm = [
+            # Move/resize windows with $mod + LMB/RMB and dragging
+            "$mod, mouse:272, movewindow"
+            "$mod, mouse:273, resizewindow"
+          ];
         };
       };
     };
