@@ -1,12 +1,12 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
-, pkg-config
-, oniguruma
-, stdenv
-, darwin
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  pkg-config,
+  oniguruma,
+  stdenv,
+  darwin,
 }:
-
 rustPlatform.buildRustPackage rec {
   pname = "aichat";
   version = "0.10.0";
@@ -24,12 +24,14 @@ rustPlatform.buildRustPackage rec {
     pkg-config
   ];
 
-  buildInputs = [
-    oniguruma
-  ] ++ lib.optionals stdenv.isDarwin [
-    darwin.apple_sdk.frameworks.AppKit
-    darwin.apple_sdk.frameworks.Security
-  ];
+  buildInputs =
+    [
+      oniguruma
+    ]
+    ++ lib.optionals stdenv.isDarwin [
+      darwin.apple_sdk.frameworks.AppKit
+      darwin.apple_sdk.frameworks.Security
+    ];
 
   env = {
     RUSTONIG_SYSTEM_LIBONIG = true;
@@ -38,8 +40,8 @@ rustPlatform.buildRustPackage rec {
   meta = with lib; {
     description = "Use ChatGPT, LocalAI and other LLMs in the terminal";
     homepage = "https://github.com/sigoden/aichat/";
-    license = with licenses; [ mit asl20 ];
-    maintainers = with maintainers; [ ];
+    license = with licenses; [mit asl20];
+    maintainers = with maintainers; [];
     mainProgram = "aichat";
   };
 }
