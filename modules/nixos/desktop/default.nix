@@ -210,19 +210,19 @@ in {
       upower.enable = true;
     };
 
-    systemd.services = {
-      seatd = {
-        enable = true;
-        description = "Seat management daemon";
-        script = "${pkgs.seatd}/bin/seatd -g wheel";
-        serviceConfig = {
-          Type = "simple";
-          Restart = "always";
-          RestartSec = "1";
-        };
-        wantedBy = ["multi-user.target"];
-      };
-    };
+    # systemd.services = {
+    #   seatd = {
+    #     enable = true;
+    #     description = "Seat management daemon";
+    #     script = "${pkgs.seatd}/bin/seatd -g wheel";
+    #     serviceConfig = {
+    #       Type = "simple";
+    #       Restart = "always";
+    #       RestartSec = "1";
+    #     };
+    #     wantedBy = ["multi-user.target"];
+    #   };
+    # };
 
     programs.xwayland.enable = true;
 
@@ -256,15 +256,6 @@ in {
             key <AC02> { [ s, S, ssharp ] };
           };
         '';
-      };
-    };
-
-    virtualisation = {
-      podman = {
-        enable = true;
-        defaultNetwork.settings = {
-          dns_enabled = true;
-        };
       };
     };
   };
