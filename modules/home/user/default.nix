@@ -25,6 +25,10 @@ in {
     home = mkOpt (types.nullOr types.str) home-directory "The user's home directory.";
   };
 
+  imports = [
+    inputs.anyrun.homeManagerModules.default
+  ];
+
   config = mkIf cfg.enable (mkMerge [
     {
       assertions = [
