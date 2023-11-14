@@ -14,6 +14,17 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.wezterm];
+    programs.wezterm = {
+      enable = cfg.enable;
+      extraConfig = ''
+        return {
+          font = wezterm.font("IntoneMono Nerd Font Mono"),
+          font_size = 16.0,
+          color_scheme = "Tomorrow Night",
+          hide_tab_bar_if_only_one_tab = true,
+        }
+
+      '';
+    };
   };
 }
