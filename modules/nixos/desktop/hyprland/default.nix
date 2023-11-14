@@ -89,7 +89,7 @@ in {
           };
 
           monitor = [
-            ",preferred,auto,auto"
+            ",preferred,auto,1"
           ];
 
           input = {
