@@ -3,6 +3,7 @@
   config,
   pkgs,
   osConfig ? {},
+  inputs,
   ...
 }: let
   inherit (lib) types mkIf mkDefault mkMerge;
