@@ -88,6 +88,10 @@ in {
             workspace_swipe_invert = false;
           };
 
+          monitor = [
+            ",preferred,auto,auto"
+          ];
+
           input = {
             follow_mouse = 1;
             kb_layout = "de";
