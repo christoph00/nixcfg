@@ -23,7 +23,7 @@ in {
         };
         programs.emacs = {
           enable = true;
-          package = pkgs.emacs-gtk3;
+          package = pkgs.emacs29-gtk3;
           extraPackages = epkgs: [epkgs.mu4e];
         };
 
