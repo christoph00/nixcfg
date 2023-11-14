@@ -14,12 +14,8 @@ in {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
 
-  imports = [
-    inputs.anyrun.homeManagerModules.default
-  ];
-
-  config.programs.anyrun = lib.mkIf cfg.enable {
-    enable = true;
+  config = lib.mkIf cfg.enable {
+    chr.home.extraOptions.programs.anyrun.enable = true;
     config = {
       plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
