@@ -17,7 +17,6 @@ in {
     services.caddy = {
       enable = true;
       #dataDir = "/var/lib/caddy";
-
     };
   };
 }
