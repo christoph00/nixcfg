@@ -82,14 +82,15 @@ in {
     services.greetd = {
       enable = true;
       settings = {
-        default_session.command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet --remember --user-menu --asterisks --time --greeting "Welcome to NixOS" --cmd ${plasma}/bin/plasma'';
-        initial_session = {
-          command = "${plasma}/bin/plasma";
-          user = config.chr.user.name;
-        };
+        # default_session.command = ''
+        #   ${pkgs.greetd.tuigreet}/bin/tuigreet --remember --user-menu --asterisks --time --greeting "Welcome to NixOS" --cmd ${plasma}/bin/plasma'';
+        # initial_session = {
+        #   command = "${plasma}/bin/plasma";
+        #   user = config.chr.user.name;
+        # };
       };
     };
+    programs.regreet.enable = true;
 
     # services.greetd = {
     #   enable = true;
