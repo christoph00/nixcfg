@@ -1,25 +1,26 @@
-{ options
-, config
-, lib
-, pkgs
-, inputs
-, ...
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
 }:
 with lib;
 with lib.chr; let
   cfg = config.chr.apps.nvim;
-  pluginGit = owner: repo: ref: sha: pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "${repo}";
-    version = ref;
-    src = pkgs.fetchFromGitHub {
-      owner = owner;
-      repo = repo;
-      rev = ref;
-      sha256 = sha;
+  pluginGit = owner: repo: ref: sha:
+    pkgs.vimUtils.buildVimPluginFrom2Nix {
+      pname = "${repo}";
+      version = ref;
+      src = pkgs.fetchFromGitHub {
+        owner = owner;
+        repo = repo;
+        rev = ref;
+        sha256 = sha;
+      };
     };
-  };
-in
-{
+in {
   options.chr.apps.nvim = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
     defaultEditor = mkBoolOpt' false;
@@ -28,7 +29,7 @@ in
   config = mkIf cfg.enable {
     chr.home = {
       extraOptions = {
-        home.packages = [ pkgs.tree-sitter pkgs.ripgrep pkgs.lazygit pkgs.gdu pkgs.bottom ];
+        home.packages = [pkgs.tree-sitter pkgs.ripgrep pkgs.lazygit pkgs.gdu pkgs.bottom];
         home.sessionVariables = mkIf cfg.defaultEditor {
           EDITOR = "nvim";
         };
@@ -100,15 +101,15 @@ in
                   n_lines = 50;
                   search_method = "cover_or_next";
                 };
-                completion = { };
+                completion = {};
                 # indentscope = {};
-                pairs = { };
-                statusline = { };
-                starter = { };
-                surround = { };
-                comment = { };
-                files = { };
-                tabline = { };
+                pairs = {};
+                statusline = {};
+                starter = {};
+                surround = {};
+                comment = {};
+                files = {};
+                tabline = {};
               };
             };
             lsp = {
@@ -126,6 +127,12 @@ in
                 };
                 tailwindcss.enable = true;
 
+                templ = {
+                  enable = true;
+                  installLanguageServer = false;
+                  cmd = "${pkgs.chr.templ}/bin/templ lsp";
+                  filetypes = ["templ"];
+                };
               };
             };
             lsp-format.enable = true;
@@ -137,7 +144,6 @@ in
             vim-nix
             codeium-vim
             (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
-
           ];
           options = {
             number = true;
