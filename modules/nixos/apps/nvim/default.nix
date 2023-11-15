@@ -24,6 +24,8 @@ in {
         };
         programs.nixvim = {
           enable = true;
+          viAlias = true;
+          vimAlias = true;
           clipboard.providers.wl-copy.enable = true;
           luaLoader.enable = true;
           colorschemes.tokyonight = {
@@ -65,6 +67,12 @@ in {
               maxLines = 2;
               minWindowHeight = 100;
             };
+            treesitter-refactor = {
+              enable = true;
+              highlightCurrentScope.enable = true;
+              highlightDefinitions.enable = true;
+              smartRename.enable = true;
+            };
             mini = {
               enable = true;
               modules = {
@@ -103,6 +111,7 @@ in {
             undofile = true;
             list = true;
             completeopt = "menuone,menuone,noselect";
+            foldenable = false;
           };
 
           globals = {
