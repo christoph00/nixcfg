@@ -8,6 +8,16 @@
 with lib;
 with lib.chr; let
   cfg = config.chr.apps.nvim;
+  pluginGit = owner: repo: ref: sha: pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "${repo}";
+    version = ref;
+    src = pkgs.fetchFromGitHub {
+      owner = owner;
+      repo = repo;
+      rev = ref;
+      sha256 = sha;
+    };
+  };
 in
 {
   options.chr.apps.nvim = with types; {
@@ -108,7 +118,12 @@ in
                 gopls.enable = true;
                 html.enable = true;
                 lua-ls.enable = true;
-                nixd.enable = true;
+                nixd = {
+                  enable = true;
+                  settings = {
+                    formatting.command = "${pkgs.alejandra}/bin/alejandra";
+                  };
+                };
                 tailwindcss.enable = true;
 
               };
@@ -121,6 +136,8 @@ in
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
             codeium-vim
+            (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
+
           ];
           options = {
             number = true;
