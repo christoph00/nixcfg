@@ -1,14 +1,14 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.chr; let
   cfg = config.chr.desktop.theme;
-in {
+in
+{
   options.chr.desktop.theme = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
@@ -22,12 +22,12 @@ in {
         #  name = fontProfiles.regular.family;
         #  size = 12;
         #};
-        # theme = {
-        #   #name = "${config.colorscheme.slug}";
-        #   #package = gtkThemeFromScheme {scheme = config.colorscheme;};
-        #   name = "Fluent-Light";
-        #   package = pkgs.fluent-gtk-theme;
-        # };
+        theme = {
+          #   #name = "${config.colorscheme.slug}";
+          #   #package = gtkThemeFromScheme {scheme = config.colorscheme;};
+          name = "Fluent-Light";
+          package = pkgs.fluent-gtk-theme;
+        };
         iconTheme = {
           name = "Fluent";
           package = pkgs.fluent-icon-theme;
