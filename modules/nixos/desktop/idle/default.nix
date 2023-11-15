@@ -14,7 +14,7 @@ in {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
 
-  config.services.swayidle = lib.mkIf cfg.enable {
+  config.chr.home.extraOptions.services.swayidle = lib.mkIf cfg.enable {
     enable = true;
     extraArgs = ["-d"];
     systemdTarget = "hyprland-session.target";
