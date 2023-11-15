@@ -36,7 +36,6 @@ in {
           #          extraConfigLua = builtins.readFile ./init.lua;
           plugins = {
             which-key.enable = true;
-
             telescope = {
               enable = true;
               extensions.fzf-native.enable = true;
@@ -102,9 +101,14 @@ in {
                 html.enable = true;
                 lua-ls.enable = true;
                 nixd.enable = true;
+                tailwindcss.enable = true;
 
               };
-            }
+            };
+            lsp-format.enable = true;
+            lsp-lines.enable = true;
+            lspkind.enable = true;
+            lspsaga.enable = true;
           };
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
