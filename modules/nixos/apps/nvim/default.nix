@@ -114,7 +114,7 @@ in {
             };
             lsp = {
               enable = true;
-              enabledServers = [ "templ" ];
+              enabledServers = ["templ"];
               servers = {
                 denols.enable = true;
                 gopls.enable = true;
@@ -127,7 +127,9 @@ in {
                   };
                 };
                 tailwindcss.enable = true;
+              };
             };
+
             lsp-format.enable = true;
             lsp-lines.enable = true;
             lspkind.enable = true;
@@ -138,7 +140,8 @@ in {
             codeium-vim
             (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
           ];
-          extraPackages = [ pkgs.chr.templ ];
+
+          extraPackages = [pkgs.chr.templ];
           options = {
             number = true;
             relativenumber = true;
