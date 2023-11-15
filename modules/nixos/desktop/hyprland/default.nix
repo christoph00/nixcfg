@@ -23,6 +23,9 @@ in {
         enable = true;
         package = config.programs.hyprland.package;
         settings = {
+          exec-once = [
+            "${pkgs.gtklock}/bin/gtklock"
+          ];
           animations = {
             enabled = "yes";
 
