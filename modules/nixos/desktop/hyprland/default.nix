@@ -25,6 +25,7 @@ in {
         settings = {
           exec-once = [
             "${pkgs.gtklock}/bin/gtklock"
+            "${config.chr.desktop.ags.package}/bin/ags"
           ];
           animations = {
             enabled = "yes";
