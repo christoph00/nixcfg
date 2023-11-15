@@ -26,28 +26,50 @@ in {
           enable = true;
           clipboard.providers.wl-copy.enable = true;
           luaLoader.enable = true;
-          colorschemes.tokyonight = { 
+          colorschemes.tokyonight = {
             enable = true;
             style = "night";
             transparent = true;
           };
           #          extraConfigLua = builtins.readFile ./init.lua;
           plugins = {
-           telescope = {
+            which-key.enable = true;
+
+            telescope = {
               enable = true;
               extensions.fzf-native.enable = true;
               extraOptions.defaults.layout_config.vertical.height = 0.5;
+              keymaps = {
+                "<C-p>" = "find_files";
+                "<leader>ff" = "find_files";
+                "<leader>fg" = "live_grep";
+                "<leader>fb" = "buffers";
+                "<leader>fh" = "help_tags";
+                "<leader>f:" = "commands";
+                "<leader>fq" = "quickfix";
+                "<leader>fr" = "oldfiles";
+                "<leader>fd" = "diagnostics";
+              };
+              keymapsSilent = true;
             };
             treesitter = {
               enable = true;
               nixGrammars = true;
+              folding = true;
+              indent = true;
+              nixvimInjections = true;
+              incrementalSelection.enable = true;
+            };
+            treesitter-context = {
+              enable = true;
+              maxLines = 2;
+              minWindowHeight = 100;
             };
             mini = {
               enable = true;
               modules = {
                 basics = {
                   extra_ui = true;
-
                 };
                 ai = {
                   n_lines = 50;
