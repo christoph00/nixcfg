@@ -24,19 +24,16 @@ in {
         };
         programs.nixvim = {
           enable = true;
+          clipboard.providers.wl-copy.enable = true;
+          luaLoader.enable = true;
           colorschemes.tokyonight = { 
             enable = true;
             style = "night";
+            transparent = true;
           };
           #          extraConfigLua = builtins.readFile ./init.lua;
           plugins = {
-        #    coq-nvim = {
-        #      enable = true;
-        #      autoStart = "shut-up";
-        #      installArtifacts = true;
-        #      recommendedKeymaps = true;
-        #    };
-            telescope = {
+           telescope = {
               enable = true;
               extensions.fzf-native.enable = true;
               extraOptions.defaults.layout_config.vertical.height = 0.5;
@@ -64,6 +61,7 @@ in {
                 surround = {};
                 comment = {};
                 files = {};
+                tabline = {};
               };
             };
           };
