@@ -24,13 +24,47 @@ in {
         };
         programs.nixvim = {
           enable = true;
-          colorschemes.gruvbox.enable = true;
-          plugins = {
+          extraConfigLua = builtins.readFile ./init.lua;
+         plugins = {
+            coq-nvim = {
+              enable = true;
+              autoStart = "shut-up";
+              installArtifacts = true;
+              recommendedKeymaps = true;
+            };
+            telescope = {
+        enable = true;
+        extensions.fzf-native.enable = true;
+        extraOptions.defaults.layout_config.vertical.height = 0.5;
+      };
+
+      treesitter = {
+        enable = true;
+        nixGrammars = true;
+      };
           };
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
-            codeium-nix
+            codeium-vim
           ];
+          options = {
+            number = true;
+            relativenumber = true;
+            shiftwidth = 0;
+            tabstop = 2;
+            showtabline = 2;
+            expandtab = true;
+            smarttab = true;
+            showmode = false;
+            undofile = true;
+            list = true;
+            completeopt = "menuone,menuone,noselect";
+          };
+
+          globals = {
+            mapleader = " ";
+            rust_recommended_style = false;
+          };
         };
       };
     };
