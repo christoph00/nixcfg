@@ -28,6 +28,7 @@ in {
 
   imports = [
     inputs.anyrun.homeManagerModules.default
+    inputs.nixvim.homeManagerModules.nixvim
   ];
 
   config = mkIf cfg.enable (mkMerge [

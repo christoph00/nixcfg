@@ -22,8 +22,15 @@ in {
         home.sessionVariables = mkIf cfg.defaultEditor {
           EDITOR = "nvim";
         };
-        programs.neovim = {
+        programs.nixvim = {
           enable = true;
+          colorschemes.gruvbox.enable = true;
+          plugins = {
+          };
+          extraPlugins = with pkgs.vimPlugins; [
+            vim-nix
+            codeium-nix
+          ];
         };
       };
     };
