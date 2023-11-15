@@ -116,10 +116,10 @@ in {
       settings = {
         # default_session.command = ''
         #   ${pkgs.greetd.tuigreet}/bin/tuigreet --remember --user-menu --asterisks --time --greeting "Welcome to NixOS" --cmd ${plasma}/bin/plasma'';
-        # initial_session = {
-        #   command = "${plasma}/bin/plasma";
-        #   user = config.chr.user.name;
-        # };
+        initial_session = {
+          command = "${config.programs.hyprland.package}/bin/Hyprland";
+          user = config.chr.user.name;
+        };
       };
     };
     programs.regreet.enable = true;
