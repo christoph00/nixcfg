@@ -19,7 +19,7 @@ in {
       return {
         font = wezterm.font("IntoneMono Nerd Font Mono"),
         font_size = 16.0,
-        color_scheme = "Tomorrow Night",
+        --color_scheme = "Tomorrow Night",
         hide_tab_bar_if_only_one_tab = true,
       }
 
