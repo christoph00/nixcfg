@@ -19,6 +19,17 @@ in {
       home.packages = [
         inputs.ags.packages.${pkgs.system}.default
       ];
+
+      systemd.user.services.ags = {
+        Unit.Description = "Aylurs GTK Shell";
+        Unit.PartOf = ["hyprland-session.target"];
+        Install.WantedBy = ["hyprland-session.target"];
+        Service = {
+          ExecStart = "${inputs.ags.packages.${pkgs.system}.default}/bin/ags";
+          Restart = "always";
+          RestartSec = "3";
+        };
+      };
     };
   };
 }
