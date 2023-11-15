@@ -24,7 +24,7 @@ in {
         };
         programs.nixvim = {
           enable = true;
-          extraConfigLua = builtins.readFile ./init.lua;
+          #          extraConfigLua = builtins.readFile ./init.lua;
           plugins = {
             coq-nvim = {
               enable = true;
@@ -41,6 +41,16 @@ in {
             treesitter = {
               enable = true;
               nixGrammars = true;
+            };
+            mini = {
+              enable = true;
+              modules = {
+                ai = {
+                  n_lines = 50;
+                  search_method = "cover_or_next";
+                };
+                surrounds = {};
+              };
             };
           };
           extraPlugins = with pkgs.vimPlugins; [
