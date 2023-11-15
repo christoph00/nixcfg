@@ -63,7 +63,7 @@ with lib.chr; {
   hardware.cpu.intel.updateMicrocode = true;
 
   chr = {
-    type = "bootstrap";
+    type = "server";
   };
   chr.system.filesystem = {
     enable = true;
@@ -73,6 +73,17 @@ with lib.chr; {
     mainDisk = "/dev/nvme0n1p3";
     efiDisk = "/dev/nvme0n1p1";
     rootOnTmpfs = true;
+  };
+
+  services.logind.lidSwitch = "ignore";
+
+  networking.useNetworkd = true;
+  systemd.network.networks."40-wired" = {
+    matchConfig = {Name = lib.mkForce "enp* eth*";};
+    DHCP = "yes";
+    networkConfig = {
+      IPv6PrivacyExtensions = "yes";
+    };
   };
 
   system.stateVersion = "23.11";
