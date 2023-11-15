@@ -12,24 +12,32 @@ with lib.chr; let
 in {
   options.chr.desktop.ags = with types; {
     enable = mkBoolOpt config.chr.desktop.hyprland.enable "Whether or not enable Ags.";
+    package = mkOption {
+      type = types.package;
+      default = inputs.ags.packages.${pkgs.system}.default;
+      defaultText = literalExpression "inputs.ags.packages.${pkgs.system}.default";
+      description = lib.mdDoc ''
+        ags package to use.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
     chr.home.extraOptions = {
       home.packages = [
-        inputs.ags.packages.${pkgs.system}.default
+        cfg.package
       ];
 
-      systemd.user.services.ags = {
-        Unit.Description = "Aylurs GTK Shell";
-        Unit.PartOf = ["hyprland-session.target"];
-        Install.WantedBy = ["hyprland-session.target"];
-        Service = {
-          ExecStart = "${inputs.ags.packages.${pkgs.system}.default}/bin/ags";
-          Restart = "always";
-          RestartSec = "3";
-        };
-      };
+      # systemd.user.services.ags = {
+      #   Unit.Description = "Aylurs GTK Shell";
+      #   Unit.PartOf = ["hyprland-session.target"];
+      #   Install.WantedBy = ["hyprland-session.target"];
+      #   Service = {
+      #     ExecStart = "${cfg.package}/bin/ags";
+      #     Restart = "always";
+      #     RestartSec = "3";
+      #   };
+      # };
     };
   };
 }
