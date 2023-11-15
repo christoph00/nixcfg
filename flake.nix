@@ -103,22 +103,27 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-  outputs = inputs: let
-    lib = inputs.snowfall-lib.mkLib {
-      inherit inputs;
-      src = ./.;
 
-      snowfall = {
-        meta = {
-          name = "chr";
-          title = "Christoph's NixOS Config";
-        };
-
-        namespace = "chr";
-      };
+    codeium-nvim = {
+      url = "github:Exafunction/codeium.nvim";
     };
-  in
+  };
+  outputs = inputs:
+    let
+      lib = inputs.snowfall-lib.mkLib {
+        inherit inputs;
+        src = ./.;
+
+        snowfall = {
+          meta = {
+            name = "chr";
+            title = "Christoph's NixOS Config";
+          };
+
+          namespace = "chr";
+        };
+      };
+    in
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
