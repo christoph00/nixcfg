@@ -25,7 +25,7 @@ in {
         programs.nixvim = {
           enable = true;
           extraConfigLua = builtins.readFile ./init.lua;
-         plugins = {
+          plugins = {
             coq-nvim = {
               enable = true;
               autoStart = "shut-up";
@@ -33,15 +33,15 @@ in {
               recommendedKeymaps = true;
             };
             telescope = {
-        enable = true;
-        extensions.fzf-native.enable = true;
-        extraOptions.defaults.layout_config.vertical.height = 0.5;
-      };
+              enable = true;
+              extensions.fzf-native.enable = true;
+              extraOptions.defaults.layout_config.vertical.height = 0.5;
+            };
 
-      treesitter = {
-        enable = true;
-        nixGrammars = true;
-      };
+            treesitter = {
+              enable = true;
+              nixGrammars = true;
+            };
           };
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
