@@ -24,20 +24,23 @@ in {
         };
         programs.nixvim = {
           enable = true;
+          colorschemes.tokyonight = { 
+            enable = true;
+            style = "night";
+          };
           #          extraConfigLua = builtins.readFile ./init.lua;
           plugins = {
-            coq-nvim = {
-              enable = true;
-              autoStart = "shut-up";
-              installArtifacts = true;
-              recommendedKeymaps = true;
-            };
+        #    coq-nvim = {
+        #      enable = true;
+        #      autoStart = "shut-up";
+        #      installArtifacts = true;
+        #      recommendedKeymaps = true;
+        #    };
             telescope = {
               enable = true;
               extensions.fzf-native.enable = true;
               extraOptions.defaults.layout_config.vertical.height = 0.5;
             };
-
             treesitter = {
               enable = true;
               nixGrammars = true;
@@ -45,17 +48,28 @@ in {
             mini = {
               enable = true;
               modules = {
+                basics = {
+                  extra_ui = true;
+
+                };
                 ai = {
                   n_lines = 50;
                   search_method = "cover_or_next";
                 };
-                surrounds = {};
+                completion = {};
+                # indentscope = {};
+                pairs = {};
+                statusline = {};
+                starter = {};
+                surround = {};
+                comment = {};
+                files = {};
               };
             };
           };
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
-            codeium-vim
+            #codeium-vim
           ];
           options = {
             number = true;
