@@ -1,15 +1,15 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
+{ options
+, config
+, lib
+, pkgs
+, inputs
+, ...
 }:
 with lib;
 with lib.chr; let
   cfg = config.chr.apps.nvim;
-in {
+in
+{
   options.chr.apps.nvim = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
     defaultEditor = mkBoolOpt' false;
@@ -18,9 +18,17 @@ in {
   config = mkIf cfg.enable {
     chr.home = {
       extraOptions = {
-        home.packages = [pkgs.tree-sitter pkgs.ripgrep pkgs.lazygit pkgs.gdu pkgs.bottom];
+        home.packages = [ pkgs.tree-sitter pkgs.ripgrep pkgs.lazygit pkgs.gdu pkgs.bottom ];
         home.sessionVariables = mkIf cfg.defaultEditor {
           EDITOR = "nvim";
+        };
+        home = {
+          file = {
+            codeium = {
+              target = ".local/share/.codeium/bin/fa6d9e9d6113dd40a57c5478d2f4bb0e35f36b92/language_server_linux_x64";
+              source = "${pkgs.codeium}/bin/codeium_language_server";
+            };
+          };
         };
         programs.nixvim = {
           enable = true;
@@ -82,15 +90,15 @@ in {
                   n_lines = 50;
                   search_method = "cover_or_next";
                 };
-                completion = {};
+                completion = { };
                 # indentscope = {};
-                pairs = {};
-                statusline = {};
-                starter = {};
-                surround = {};
-                comment = {};
-                files = {};
-                tabline = {};
+                pairs = { };
+                statusline = { };
+                starter = { };
+                surround = { };
+                comment = { };
+                files = { };
+                tabline = { };
               };
             };
             lsp = {
@@ -112,7 +120,7 @@ in {
           };
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
-            #codeium-vim
+            codeium-vim
           ];
           options = {
             number = true;
