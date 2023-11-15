@@ -68,7 +68,7 @@ in {
               minWindowHeight = 100;
             };
             treesitter-refactor = {
-              enable = true;
+              enable = false;
               highlightCurrentScope.enable = true;
               highlightDefinitions.enable = true;
               smartRename.enable = true;
@@ -94,6 +94,17 @@ in {
                 tabline = {};
               };
             };
+            lsp = {
+              enable = true;
+              servers = {
+                denols.enable = true;
+                gopls.enable = true;
+                html.enable = true;
+                lua-ls.enable = true;
+                nixd.enable = true;
+
+              };
+            }
           };
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
