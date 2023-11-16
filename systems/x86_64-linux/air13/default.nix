@@ -44,7 +44,7 @@ with lib.chr; {
   chr = {
     type = "server";
     services = {
-      smart-home.enable = true;
+      smart-home = true;
       home-assistant.hostname = "home.r505.de";
     };
   };
