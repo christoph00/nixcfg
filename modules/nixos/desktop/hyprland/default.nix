@@ -1,15 +1,15 @@
-{ options
-, inputs
-, config
-, lib
-, pkgs
-, ...
+{
+  options,
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 with lib.chr; let
   cfg = config.chr.desktop.hyprland;
-in
-{
+in {
   options.chr.desktop.hyprland = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether or not enable Hyprland Desktop.";
   };
@@ -58,7 +58,7 @@ in
               passes = 4;
               size = 5;
             };
-            blurls = [ "gtk-layer-shell" "waybar" "lockscreen" "ironbar" ];
+            blurls = ["gtk-layer-shell" "waybar" "lockscreen" "ironbar"];
 
             drop_shadow = true;
             shadow_ignore_window = true;

@@ -108,22 +108,21 @@
       url = "github:Exafunction/codeium.nvim";
     };
   };
-  outputs = inputs:
-    let
-      lib = inputs.snowfall-lib.mkLib {
-        inherit inputs;
-        src = ./.;
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
+      src = ./.;
 
-        snowfall = {
-          meta = {
-            name = "chr";
-            title = "Christoph's NixOS Config";
-          };
-
-          namespace = "chr";
+      snowfall = {
+        meta = {
+          name = "chr";
+          title = "Christoph's NixOS Config";
         };
+
+        namespace = "chr";
       };
-    in
+    };
+  in
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;

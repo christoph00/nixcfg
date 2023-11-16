@@ -1,14 +1,14 @@
-{ options
-, config
-, lib
-, pkgs
-, ...
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 with lib.chr; let
   cfg = config.chr.desktop.theme;
-in
-{
+in {
   options.chr.desktop.theme = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
