@@ -26,13 +26,14 @@ in {
   #  "secrets/immich-db-password".publicKeys = [christoph_air13 futro];
 
   "secrets/cf-tunnel-futro".publicKeys = [christoph_tower futro];
+  "secrets/cf-tunnel-air13".publicKeys = [christoph_tower christoph_x13 air13];
 
   #  "secrets/feed2imap.yml".publicKeys = [christoph_air13 oc1];
 
   "secrets/netbird.env".publicKeys = [christoph_air13 christoph_tower christoph_x13 x13 futro air13 tower oca oc1 oc2 cube star];
 
-  "secrets/ha-serviceaccount".publicKeys = [christoph_air13 futro];
-  "secrets/ha-secrets.yaml".publicKeys = [christoph_air13 futro];
+  "secrets/ha-serviceaccount".publicKeys = [christoph_air13 futro air13 christoph_x13];
+  "secrets/ha-secrets.yaml".publicKeys = [christoph_air13 futro air];
   "secrets/christoph-password.age".publicKeys = [christoph_air13 christoph_tower christoph_x13 futro air13 tower oca oc1 oc2 cube star x13];
   #  "secrets/wayvnc-key".publicKeys = [christoph_air13 tower christoph_tower];
   #  "secrets/wayvnc-cert".publicKeys = [christoph_air13 tower christoph_tower];
