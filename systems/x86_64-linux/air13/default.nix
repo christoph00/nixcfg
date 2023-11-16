@@ -55,7 +55,30 @@ with lib.chr; {
   };
 
   services.logind.lidSwitch = "ignore";
-  services.upower.ignoreLid = true;
+  services.tlp = {
+    enable = true;
+    settings = {
+      USB_AUTOSUSPEND = 0;
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+    };
+  };
+
+  services.upower = {
+    enable = true;
+    timeLow = 1200;
+    timeCritical = 300;
+    timeAction = 120;
+    percentageLow = 10;
+    percentageCritical = 3;
+    percentageAction = 2;
+    ignoreLid = false;
+    noPollBatteries = false;
+    criticalPowerAction = "suspend";
+    usePercentageForPolicy = true;
+    enableWattsUpPro = false;
+  };
+  services.thermald.enable = true;
 
   networking.useNetworkd = true;
   systemd.network.networks."40-wired" = {
