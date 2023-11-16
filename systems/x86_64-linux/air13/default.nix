@@ -43,6 +43,10 @@ with lib.chr; {
 
   chr = {
     type = "server";
+    services = {
+      smart-home.enable = true;
+      home-assistant.hostname = "home.r505.de";
+    };
   };
   chr.system.filesystem = {
     enable = true;
