@@ -10,8 +10,8 @@ with lib;
 with lib.chr; {
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
 
-  boot.kernelModules = ["kvm-intel" "acpi_call" "bbswitch" "iwlwifi" "i915"];
-  boot.blacklistedKernelModules = ["nouveau" "nvidia" "iwlwifi"];
+  boot.kernelModules = ["kvm-intel" "acpi_call"];
+  boot.blacklistedKernelModules = ["nouveau" "nvidia" "iwlwifi" "snd_hda_intel" "i915"];
   boot.kernelParams = [
     "quiet"
     "splash"
@@ -74,7 +74,7 @@ with lib.chr; {
     percentageAction = 2;
     ignoreLid = false;
     noPollBatteries = false;
-    criticalPowerAction = "suspend";
+    criticalPowerAction = "PowerOff";
     usePercentageForPolicy = true;
     enableWattsUpPro = false;
   };
