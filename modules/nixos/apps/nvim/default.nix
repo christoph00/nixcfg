@@ -111,52 +111,51 @@ in {
                 files = {};
                 tabline = {};
               };
+            };
+            cmp-buffer.enable = true;
 
-              cmp-buffer.enable = true;
+            cmp-emoji.enable = true;
+            cmp-latex-symbols.enable = true;
+            cmp-path.enable = true;
 
-              cmp-emoji.enable = true;
-              cmp-latex-symbols.enable = true;
-              cmp-path.enable = true;
+            cmp-nvim-lsp.enable = true;
+            cmp-nvim-lsp-document-symbol.enable = true;
+            cmp-nvim-lsp-signature-help.enable = true;
 
-              cmp-nvim-lsp.enable = true;
-              cmp-nvim-lsp-document-symbol.enable = true;
-              cmp-nvim-lsp-signature-help.enable = true;
+            luasnip.enable = true;
+            cmp_luasnip.enable = true;
 
-              luasnip.enable = true;
-              cmp_luasnip.enable = true;
+            nvim-cmp = {
+              enable = true;
+              sources = [
+                {name = "buffer";}
+                {name = "codeium";}
+                {name = "path";}
+                {name = "nvim_lsp";}
+                {name = "nvim_lsp_document_symbol";}
+                {name = "nvim_lsp_signature_help";}
+                {name = "luasnip";}
+              ];
+              snippet.expand = "luasnip";
 
-              nvim-cmp = {
-                enable = true;
-                sources = [
-                  {name = "buffer";}
-                  {name = "codeium";}
-                  {name = "path";}
-                  {name = "nvim_lsp";}
-                  {name = "nvim_lsp_document_symbol";}
-                  {name = "nvim_lsp_signature_help";}
-                  {name = "luasnip";}
-                ];
-                snippet.expand = "luasnip";
-
-                window = {
-                  completion = {
-                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None";
-                    colOffset = -3;
-                    sidePadding = 0;
-                  };
+              window = {
+                completion = {
+                  winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None";
+                  colOffset = -3;
+                  sidePadding = 0;
                 };
+              };
 
-                formatting = {
-                  fields = ["kind" "abbr" "menu"];
-                };
+              formatting = {
+                fields = ["kind" "abbr" "menu"];
+              };
 
-                mapping = {
-                  "<C-k>" = "cmp.mapping.select_prev_item()";
-                  "<C-j>" = "cmp.mapping.select_next_item()";
-                  "<C-e>" = "cmp.mapping.abort()";
-                  "<C-b>" = "cmp.mapping.scroll_docs(-2)";
-                  "<C-f>" = "cmp.mapping.scroll_docs(2)";
-                };
+              mapping = {
+                "<C-k>" = "cmp.mapping.select_prev_item()";
+                "<C-j>" = "cmp.mapping.select_next_item()";
+                "<C-e>" = "cmp.mapping.abort()";
+                "<C-b>" = "cmp.mapping.scroll_docs(-2)";
+                "<C-f>" = "cmp.mapping.scroll_docs(2)";
               };
             };
             lsp = {
