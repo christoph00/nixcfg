@@ -53,17 +53,17 @@ in {
 
         peazip
 
-        jetbrains.goland
+        #jetbrains.goland
 
-        jetbrains.webstorm
+        #jetbrains.webstorm
 
         # chr.jetbrains-fleet
 
-        heimdall-gui
+        # heimdall-gui
 
         armcord
 
-        claws-mail
+        kitty
       ];
     };
   };
