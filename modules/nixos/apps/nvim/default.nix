@@ -101,7 +101,7 @@ in {
                   n_lines = 50;
                   search_method = "cover_or_next";
                 };
-                completion = {};
+                # completion = {};
                 # indentscope = {};
                 pairs = {};
                 statusline = {};
@@ -110,6 +110,53 @@ in {
                 comment = {};
                 files = {};
                 tabline = {};
+              };
+
+              cmp-buffer.enable = true;
+
+              cmp-emoji.enable = true;
+              cmp-latex-symbols.enable = true;
+              cmp-path.enable = true;
+
+              cmp-nvim-lsp.enable = true;
+              cmp-nvim-lsp-document-symbol.enable = true;
+              cmp-nvim-lsp-signature-help.enable = true;
+
+              luasnip.enable = true;
+              cmp_luasnip.enable = true;
+
+              nvim-cmp = {
+                enable = true;
+                sources = [
+                  {name = "buffer";}
+                  {name = "codeium";}
+                  {name = "path";}
+                  {name = "nvim_lsp";}
+                  {name = "nvim_lsp_document_symbol";}
+                  {name = "nvim_lsp_signature_help";}
+                  {name = "luasnip";}
+                ];
+                snippet.expand = "luasnip";
+
+                window = {
+                  completion = {
+                    winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None";
+                    colOffset = -3;
+                    sidePadding = 0;
+                  };
+                };
+
+                formatting = {
+                  fields = ["kind" "abbr" "menu"];
+                };
+
+                mapping = {
+                  "<C-k>" = "cmp.mapping.select_prev_item()";
+                  "<C-j>" = "cmp.mapping.select_next_item()";
+                  "<C-e>" = "cmp.mapping.abort()";
+                  "<C-b>" = "cmp.mapping.scroll_docs(-2)";
+                  "<C-f>" = "cmp.mapping.scroll_docs(2)";
+                };
               };
             };
             lsp = {
@@ -138,6 +185,8 @@ in {
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
             codeium-vim
+            friendly-snippets
+
             (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
           ];
 
