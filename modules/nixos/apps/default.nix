@@ -63,7 +63,9 @@ in {
 
         armcord
 
-        kitty
+        neovide
+
+        wpsoffice
       ];
     };
   };
