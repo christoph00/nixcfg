@@ -203,6 +203,7 @@ in {
             list = true;
             completeopt = "menuone,menuone,noselect";
             foldenable = false;
+            guifont = "IntoneMono Nerd Font Mono:h12";
           };
 
           globals = {
