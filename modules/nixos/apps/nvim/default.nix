@@ -156,14 +156,60 @@ in {
               formatting = {
                 fields = ["kind" "abbr" "menu"];
               };
-
               mapping = {
-                "<C-k>" = "cmp.mapping.select_prev_item()";
-                "<C-j>" = "cmp.mapping.select_next_item()";
+                "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+                "<C-f>" = "cmp.mapping.scroll_docs(4)";
                 "<C-e>" = "cmp.mapping.abort()";
-                "<C-b>" = "cmp.mapping.scroll_docs(-2)";
-                "<C-f>" = "cmp.mapping.scroll_docs(2)";
+                "<CR>" = "cmp.mapping.confirm({ select = false })";
+
+                "<Tab>" = {
+                  modes = ["i" "s"];
+
+                  action = ''
+                    function(fallback)
+                      unpack = unpack or table.unpack
+                      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+                      if cmp.visible() then
+                        cmp.select_next_item()
+                      else
+                        local _, err = pcall(function()
+                          if vim.fn["vsnip#available"](1) == 1 then
+                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(vsnip-expand-or-jump)", true, true, true), "", true)
+                          else
+                            error({code=121})
+                          end
+                        end)
+
+                        if err.code == 121 and col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil then
+                          cmp.complete()
+                        else
+                          fallback()
+                        end
+                      end
+                    end
+                  '';
+                };
+
+                "<S-Tab>" = {
+                  modes = ["i" "s"];
+
+                  action = ''
+                    function()
+                      if cmp.visible() then
+                        cmp.select_next_item()
+                      elseif vim.call('vsnip#jumpable', -1) == 1 then
+                        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(vsnip-jump-prev)", true, true, true), "", true)
+                      end
+                    end
+                  '';
+                };
               };
+
+              mappingPresets = ["cmdline"];
+            };
+            harpoon = {
+              enable = true;
             };
             lsp = {
               enable = true;
@@ -191,13 +237,40 @@ in {
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
             friendly-snippets
+            hover-nvim
 
             (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
             inputs.codeium-nvim.packages.${pkgs.system}.vimPlugins.codeium-nvim
           ];
 
           extraConfigLua = ''
-            require("codeium").setup()
+                -- Codeium
+                require("codeium").setup()
+                -- Hover-nvim
+                require("hover").setup {
+                init = function()
+                    -- Require providers
+                    require("hover.providers.lsp")
+                    -- require('hover.providers.gh')
+                    -- require('hover.providers.gh_user')
+                    -- require('hover.providers.jira')
+                    -- require('hover.providers.man')
+                    -- require('hover.providers.dictionary')
+                end,
+                preview_opts = {
+                    border = 'single'
+                },
+                -- Whether the contents of a currently open hover window should be moved
+                -- to a :h preview-window when pressing the hover keymap.
+                preview_window = false,
+                title = true,
+                mouse_providers = {
+                    'LSP'
+                },
+                mouse_delay = 1000
+            }
+
+
           '';
 
           extraPackages = [pkgs.chr.templ];
