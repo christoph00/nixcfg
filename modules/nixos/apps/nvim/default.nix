@@ -37,7 +37,7 @@ in {
           file = {
             codeium = {
               target = ".local/share/.codeium/bin/39080e89780bea461f7a46e6dc1026d80a3a353a/language_server_linux_x64";
-              source = "${pkgs.codeium}/bin/codeium_language_server";
+              source = "${inputs.codeium-nvim.packages.${pkgs.system}.codeium-lsp}/bin/codeium_language_server";
             };
           };
         };
@@ -181,13 +181,16 @@ in {
             lspkind.enable = true;
             lspsaga.enable = true;
           };
-          extraPlugins = with pkgs.vimPlugins; [
-            vim-nix
-            codeium-vim
-            friendly-snippets
+          extraPlugins = with pkgs.vimPlugins;
+            [
+              vim-nix
+              friendly-snippets
 
-            (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
-          ];
+              (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
+            ]
+            + [
+              inputs.codeium-nvim.packages.${pkgs.system}.vimPlugins.codeium-nvim
+            ];
 
           extraPackages = [pkgs.chr.templ];
           options = {
