@@ -308,6 +308,7 @@ in {
                   };
                 };
                 tailwindcss.enable = true;
+                cssls.enable = true;
               };
             };
 
@@ -368,16 +369,6 @@ in {
             rust_recommended_style = false;
           };
 
-          # maps = {
-          #   normal = {
-          #     "gh" = "<cmd>Lspsaga lsp_finder<CR>";
-          #     "gr" = "<cmd>Lspsaga rename<CR>";
-          #     "gd" = "<cmd>Lspsaga peek_definition<CR>";
-          #   };
-          #   normalVisualOp."<leader>ca" = "<cmd>Lspsaga code_action<CR>";
-          #   normalVisualOp."<A-d>" = "<cmd>Lspsaga term_toggle<CR>";
-          #   terminal."<A-d>" = "<cmd>Lspsaga term_toggle<CR>";
-          # };
           keymaps = [
             {
               action = "<cmd>Lspsaga lsp_finder<CR>";
