@@ -81,7 +81,7 @@ in {
             "col.active_border" = "rgba(7793D1FF)";
             "col.inactive_border" = "rgb(5e6798)";
             gaps_in = 5;
-            gaps_out = 20;
+            gaps_out = 10;
             layout = "dwindle";
             no_cursor_warps = true;
           };
