@@ -21,7 +21,7 @@ in {
           settings = {
             confirm_os_window_close = 0;
             window_padding_width = 4;
-            font_style = 14;
+            font_style = 16;
             font_family = "IntoneMono Nerd Font Mono";
           };
           extraConfig = builtins.readFile (builtins.fetchurl {

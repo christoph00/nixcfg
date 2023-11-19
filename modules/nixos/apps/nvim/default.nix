@@ -125,6 +125,7 @@ in {
             cmp-latex-symbols.enable = true;
             cmp-path.enable = true;
             cmp-cmdline.enable = true;
+            cmp-treesitter.enable = true;
 
             cmp-nvim-lsp.enable = true;
             cmp-nvim-lsp-document-symbol.enable = true;
