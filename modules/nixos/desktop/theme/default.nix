@@ -25,8 +25,8 @@ in {
         theme = {
           #   #name = "${config.colorscheme.slug}";
           #   #package = gtkThemeFromScheme {scheme = config.colorscheme;};
-          name = "Fluent-Light";
-          package = pkgs.fluent-gtk-theme;
+          name = "Tokyo-Night";
+          package = pkgs.tokyo-night-gtk;
         };
         iconTheme = {
           name = "Fluent";
@@ -47,10 +47,10 @@ in {
 
       services.xsettingsd = {
         enable = true;
-        # settings = {
-        #   "Net/ThemeName" = "${config.gtk.theme.name}";
-        #   "Net/IconThemeName" = "${config.gtk.iconTheme.name}";
-        # };
+        settings = {
+          "Net/ThemeName" = "${config.gtk.theme.name}";
+          "Net/IconThemeName" = "${config.gtk.iconTheme.name}";
+        };
       };
     };
   };
