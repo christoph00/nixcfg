@@ -146,7 +146,7 @@ in {
               snippet.expand = "luasnip";
               window = {
                 completion = {
-                  winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
+                  # winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
                   scrollbar = false;
                   sidePadding = 0;
                   border = [
@@ -172,7 +172,7 @@ in {
                     "╰"
                     "│"
                   ];
-                  winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
+                  # winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
                 };
               };
               formatting = {
