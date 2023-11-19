@@ -144,17 +144,91 @@ in {
                 {name = "luasnip";}
               ];
               snippet.expand = "luasnip";
-
               window = {
                 completion = {
-                  winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None";
-                  colOffset = -3;
+                  winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
+                  scrollbar = false;
                   sidePadding = 0;
+                  border = [
+                    "╭"
+                    "─"
+                    "╮"
+                    "│"
+                    "╯"
+                    "─"
+                    "╰"
+                    "│"
+                  ];
+                };
+
+                documentation = {
+                  border = [
+                    "╭"
+                    "─"
+                    "╮"
+                    "│"
+                    "╯"
+                    "─"
+                    "╰"
+                    "│"
+                  ];
+                  winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
                 };
               };
-
               formatting = {
-                fields = ["kind" "abbr" "menu"];
+                fields = ["abbr" "kind" "menu"];
+                format =
+                  # lua
+                  ''
+                    function(_, item)
+                      local icons = {
+                        Namespace = "󰌗",
+                        Text = "󰉿",
+                        Method = "󰆧",
+                        Function = "󰆧",
+                        Constructor = "",
+                        Field = "󰜢",
+                        Variable = "󰀫",
+                        Class = "󰠱",
+                        Interface = "",
+                        Module = "",
+                        Property = "󰜢",
+                        Unit = "󰑭",
+                        Value = "󰎠",
+                        Enum = "",
+                        Keyword = "󰌋",
+                        Snippet = "",
+                        Color = "󰏘",
+                        File = "󰈚",
+                        Reference = "󰈇",
+                        Folder = "󰉋",
+                        EnumMember = "",
+                        Constant = "󰏿",
+                        Struct = "󰙅",
+                        Event = "",
+                        Operator = "󰆕",
+                        TypeParameter = "󰊄",
+                        Table = "",
+                        Object = "󰅩",
+                        Tag = "",
+                        Array = "[]",
+                        Boolean = "",
+                        Number = "",
+                        Null = "󰟢",
+                        String = "󰉿",
+                        Calendar = "",
+                        Watch = "󰥔",
+                        Package = "",
+                        Copilot = "",
+                        Codeium = "",
+                        TabNine = "",
+                      }
+
+                      local icon = icons[item.kind] or ""
+                      item.kind = string.format("%s %s", icon, item.kind or "")
+                      return item
+                    end
+                  '';
               };
               mapping = {
                 "<C-b>" = "cmp.mapping.scroll_docs(-4)";
@@ -231,51 +305,20 @@ in {
 
             lsp-format.enable = true;
             lsp-lines.enable = true;
-            lspkind.enable = true;
+            # lspkind.enable = true;
             lspsaga.enable = true;
           };
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
             friendly-snippets
-            hover-nvim
 
             (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
             inputs.codeium-nvim.packages.${pkgs.system}.vimPlugins.codeium-nvim
           ];
 
           extraConfigLua = ''
-              -- Codeium
-              require("codeium").setup()
-              -- Hover-nvim
-              require("hover").setup {
-              init = function()
-                  -- Require providers
-                  require("hover.providers.lsp")
-                  -- require('hover.providers.gh')
-                  -- require('hover.providers.gh_user')
-                  -- require('hover.providers.jira')
-                  -- require('hover.providers.man')
-                  -- require('hover.providers.dictionary')
-              end,
-              preview_opts = {
-                  border = 'single'
-              },
-              -- Whether the contents of a currently open hover window should be moved
-              -- to a :h preview-window when pressing the hover keymap.
-              preview_window = false,
-              title = true,
-              mouse_providers = {
-                  'LSP'
-              },
-              mouse_delay = 1000
-            }
-
-            vim.keymap.set("n", "K", require("hover").hover, {desc = "hover.nvim"})
-            vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "hover.nvim (select)"})
-
-            -- Mouse support
-            vim.keymap.set('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
-            vim.o.mousemoveevent = true
+            -- Codeium
+            require("codeium").setup()
           '';
 
           extraPackages = [pkgs.chr.templ];
