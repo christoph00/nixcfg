@@ -106,6 +106,7 @@
 
     codeium-nvim = {
       url = "github:Exafunction/codeium.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = inputs: let
