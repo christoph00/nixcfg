@@ -286,6 +286,7 @@ in {
             };
             harpoon = {
               enable = true;
+              enableTelescope = true;
             };
             lsp = {
               enable = true;
@@ -321,6 +322,7 @@ in {
           extraConfigLua = ''
             -- Codeium
             require("codeium").setup()
+
           '';
 
           extraPackages = [pkgs.chr.templ];
