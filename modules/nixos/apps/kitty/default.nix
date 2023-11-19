@@ -21,8 +21,9 @@ in {
           settings = {
             confirm_os_window_close = 0;
             window_padding_width = 4;
-            font_style = 16;
-            font_family = "IntoneMono Nerd Font Mono";
+            font_size = 14;
+            # font_family = "IntoneMono Nerd Font Mono";
+            font_family = "DaddyTimeMono Nerd Font";
           };
           extraConfig = builtins.readFile (builtins.fetchurl {
             url = "https://raw.githubusercontent.com/folke/tokyonight.nvim/eede574f9ef57137e6d7e4bab37b09db636c5a56/extras/kitty_tokyonight_night.conf";
