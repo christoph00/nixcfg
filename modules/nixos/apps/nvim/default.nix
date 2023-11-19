@@ -55,6 +55,10 @@ in {
           #          extraConfigLua = builtins.readFile ./init.lua;
           plugins = {
             which-key.enable = true;
+            nvim-autopairs = {
+              enable = true;
+              checkTs = true;
+            };
             telescope = {
               enable = true;
               extensions.fzf-native.enable = true;
@@ -283,7 +287,7 @@ in {
                 };
               };
 
-              mappingPresets = ["cmdline"];
+              mappingPresets = ["cmdline" "insert"];
             };
             harpoon = {
               enable = true;
@@ -323,6 +327,23 @@ in {
           extraConfigLua = ''
             -- Codeium
             require("codeium").setup()
+
+            local cmp = require("cmp")
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+            cmp.event:on(
+              'confirm_done',
+              cmp_autopairs.on_confirm_done()
+            )
+
+              -- Use buffer source for `/`
+            cmp.setup.cmdline("/", { mapping = cmp.mapping.preset.cmdline(), sources = { { name = "buffer" } } })
+
+            -- Use cmdline & path source for ':'
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
+            })
           '';
 
           extraPackages = [pkgs.chr.templ];
@@ -362,12 +383,11 @@ in {
               action = "<cmd>Lspsaga lsp_finder<CR>";
               key = "gh";
             }
-           {
-             action = "<cmd>Lspsaga code_action<CR>";
-             key = "<leader>ca";
-             mode = ["i" "o" "v"];
-           }
-
+            {
+              action = "<cmd>Lspsaga code_action<CR>";
+              key = "<leader>ca";
+              mode = ["i" "o" "v"];
+            }
           ];
         };
       };

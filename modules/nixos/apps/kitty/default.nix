@@ -21,7 +21,7 @@ in {
           settings = {
             confirm_os_window_close = 0;
             window_padding_width = 4;
-            font_size = 14;
+            font_size = 11;
             font_family = "IntoneMono Nerd Font Mono";
             # font_family = "DaddyTimeMono Nerd Font";
           };
