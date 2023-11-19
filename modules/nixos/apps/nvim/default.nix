@@ -181,16 +181,17 @@ in {
             lspkind.enable = true;
             lspsaga.enable = true;
           };
-          extraPlugins = with pkgs.vimPlugins;
-            [
-              vim-nix
-              friendly-snippets
+          extraPlugins = with pkgs.vimPlugins; [
+            vim-nix
+            friendly-snippets
 
-              (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
-            ]
-            + [
-              inputs.codeium-nvim.packages.${pkgs.system}.vimPlugins.codeium-nvim
-            ];
+            (pluginGit "Joe-Davidson1802" "templ.vim" "2d1ca014c360a46aade54fc9b94f065f1deb501a" "1bc3p0i3jsv7cbhrsxffnmf9j3zxzg6gz694bzb5d3jir2fysn4h")
+            inputs.codeium-nvim.packages.${system}.vimPlugins.codeium-nvim
+          ];
+
+          extraConfigLua = ''
+            require("codeium").setup()
+          '';
 
           extraPackages = [pkgs.chr.templ];
           options = {
