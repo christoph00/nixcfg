@@ -78,7 +78,14 @@ in {
               folding = true;
               indent = true;
               nixvimInjections = true;
-              incrementalSelection.enable = true;
+              incrementalSelection = {
+                enable = true;
+                keymaps = {
+                  initSelection = "<C-space>";
+                  nodeIncremental = "<C-space>";
+                  nodeDecremental = "<bs>";
+                };
+              };
             };
             treesitter-context = {
               enable = true;
