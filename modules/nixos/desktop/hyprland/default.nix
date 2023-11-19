@@ -122,7 +122,7 @@ in {
           };
           "$mod" = "SUPER";
           bind = [
-            "$mod, Return, exec, wezterm"
+            "$mod, Return, exec, kitty"
             "$mod, c, killactive "
             "$mod, r, exec, anyrun"
             "$mod, f, fullscreen,1"
