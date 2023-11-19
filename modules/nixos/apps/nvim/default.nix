@@ -144,6 +144,7 @@ in {
                 {name = "nvim_lsp_document_symbol";}
                 {name = "nvim_lsp_signature_help";}
                 {name = "luasnip";}
+                {name = "cmdline";}
               ];
               snippet.expand = "luasnip";
               window = {
@@ -322,7 +323,6 @@ in {
           extraConfigLua = ''
             -- Codeium
             require("codeium").setup()
-
           '';
 
           extraPackages = [pkgs.chr.templ];
@@ -346,6 +346,29 @@ in {
             mapleader = " ";
             rust_recommended_style = false;
           };
+
+          # maps = {
+          #   normal = {
+          #     "gh" = "<cmd>Lspsaga lsp_finder<CR>";
+          #     "gr" = "<cmd>Lspsaga rename<CR>";
+          #     "gd" = "<cmd>Lspsaga peek_definition<CR>";
+          #   };
+          #   normalVisualOp."<leader>ca" = "<cmd>Lspsaga code_action<CR>";
+          #   normalVisualOp."<A-d>" = "<cmd>Lspsaga term_toggle<CR>";
+          #   terminal."<A-d>" = "<cmd>Lspsaga term_toggle<CR>";
+          # };
+          keymaps = [
+            {
+              action = "<cmd>Lspsaga lsp_finder<CR>";
+              key = "gh";
+            }
+           {
+             action = "<cmd>Lspsaga code_action<CR>";
+             key = "<leader>ca";
+             mode = ["i" "o" "v"];
+           }
+
+          ];
         };
       };
     };
