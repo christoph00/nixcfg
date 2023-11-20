@@ -47,10 +47,10 @@ in {
 
       services.xsettingsd = {
         enable = true;
-        settings = {
-          "Net/ThemeName" = "${config.gtk.theme.name}";
-          "Net/IconThemeName" = "${config.gtk.iconTheme.name}";
-        };
+        #   settings = {
+        #     "Net/ThemeName" = "${config.gtk.theme.name}";
+        #     "Net/IconThemeName" = "${config.gtk.iconTheme.name}";
+        #   };
       };
     };
   };

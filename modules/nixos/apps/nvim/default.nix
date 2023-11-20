@@ -41,7 +41,9 @@ in {
             };
           };
         };
-        programs.nixvim = {
+        programs.nixvim = let
+          border = ["╭" "─" "╮" "│" "╯" "─" "╰" "│"];
+        in {
           enable = true;
           viAlias = true;
           vimAlias = true;
@@ -55,10 +57,10 @@ in {
           #          extraConfigLua = builtins.readFile ./init.lua;
           plugins = {
             which-key.enable = true;
-            nvim-autopairs = {
-              enable = true;
-              checkTs = true;
-            };
+            # nvim-autopairs = {
+            #   enable = true;
+            #   checkTs = true;
+            # };
             telescope = {
               enable = true;
               extensions.fzf-native.enable = true;
@@ -156,29 +158,11 @@ in {
                   # winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
                   scrollbar = false;
                   sidePadding = 0;
-                  border = [
-                    "╭"
-                    "─"
-                    "╮"
-                    "│"
-                    "╯"
-                    "─"
-                    "╰"
-                    "│"
-                  ];
+                  inherit border;
                 };
 
                 documentation = {
-                  border = [
-                    "╭"
-                    "─"
-                    "╮"
-                    "│"
-                    "╯"
-                    "─"
-                    "╰"
-                    "│"
-                  ];
+                  inherit border;
                   # winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
                 };
               };
@@ -332,11 +316,6 @@ in {
             local cmp = require("cmp")
             local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
-            cmp.event:on(
-              'confirm_done',
-              cmp_autopairs.on_confirm_done()
-            )
-
               -- Use buffer source for `/`
             cmp.setup.cmdline("/", { mapping = cmp.mapping.preset.cmdline(), sources = { { name = "buffer" } } })
 
@@ -371,13 +350,70 @@ in {
 
           keymaps = [
             {
-              action = "<cmd>Lspsaga lsp_finder<CR>";
-              key = "gh";
+              options.desc = "LSP finder";
+              key = "<leader>lf";
+              action = ":Lspsaga finder<cr>";
+              options.silent = true;
             }
             {
-              action = "<cmd>Lspsaga code_action<CR>";
-              key = "<leader>ca";
-              mode = ["i" "o" "v"];
+              options.desc = "LSP code action";
+              key = "<leader>la";
+              action = ":Lspsaga code_action<cr>";
+              options.silent = true;
+            }
+            {
+              options.desc = "LSP rename";
+              key = "<leader>lr";
+              action = ":Lspsaga rename<CR>";
+              options.silent = true;
+            }
+            {
+              options.desc = "LSP peek definition";
+              key = "<leader>ld";
+              action = ":Lspsaga peek_definition<cr>";
+              options.silent = true;
+            }
+            {
+              options.desc = "LSP goto definition";
+              key = "<leader>lD";
+              action = ":Lspsaga goto_definition<cr>";
+              options.silent = true;
+            }
+            {
+              options.desc = "LSP peek type definition";
+              key = "<leader>lt";
+              action = ":Lspsaga peek_type_definition<cr>";
+              options.silent = true;
+            }
+            {
+              options.desc = "LSP goto type definition";
+              key = "<leader>lT";
+              action = ":Lspsaga goto_type_definition<cr>";
+              options.silent = true;
+            }
+            {
+              options.desc = "LSP format code";
+              key = "<leader>lf";
+              action = ":lua vim.lsp.buf.format()<cr>";
+              options.silent = true;
+            }
+            {
+              options.desc = "LSP next diagnostic";
+              key = "<leader>ln";
+              action = ":Lspsaga diagnostic_jump_next<cr>";
+              options.silent = true;
+            }
+            {
+              options.desc = "LSP previous diagnostic";
+              key = "<leader>lN";
+              action = ":Lspsaga diagnostic_jump_prev<cr>";
+              options.silent = true;
+            }
+            {
+              options.desc = "LSP hover documentation";
+              key = "<leader>lh";
+              action = ":Lspsaga hover_doc<cr>";
+              options.silent = true;
             }
           ];
         };
