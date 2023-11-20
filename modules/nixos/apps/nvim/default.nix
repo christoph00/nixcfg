@@ -23,6 +23,7 @@ with lib.chr; let
 in {
   options.chr.apps.nvim = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
+
     defaultEditor = mkBoolOpt' false;
   };
 
@@ -150,7 +151,7 @@ in {
                 {name = "nvim_lsp_document_symbol";}
                 {name = "nvim_lsp_signature_help";}
                 {name = "luasnip";}
-                {name = "cmdline";}
+                # {name = "cmdline";}
               ];
               snippet.expand = "luasnip";
               window = {
@@ -285,7 +286,7 @@ in {
                 gopls.enable = true;
                 html.enable = true;
                 lua-ls.enable = true;
-                nixd = {
+                nil_ls = {
                   enable = true;
                   settings = {
                     formatting.command = "${pkgs.alejandra}/bin/alejandra";
@@ -314,7 +315,7 @@ in {
             require("codeium").setup()
 
             local cmp = require("cmp")
-            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
               -- Use buffer source for `/`
             cmp.setup.cmdline("/", { mapping = cmp.mapping.preset.cmdline(), sources = { { name = "buffer" } } })
