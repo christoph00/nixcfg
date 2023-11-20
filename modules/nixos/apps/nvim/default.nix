@@ -299,7 +299,12 @@ in {
             lsp-format.enable = true;
             lsp-lines.enable = true;
             # lspkind.enable = true;
-            lspsaga.enable = true;
+            lspsaga = {
+              enable = true;
+              ui = {
+                inherit border;
+              };
+            };
             trouble.enable = true;
           };
           extraPlugins = with pkgs.vimPlugins; [
