@@ -56,7 +56,12 @@ in {
           };
           #          extraConfigLua = builtins.readFile ./init.lua;
           plugins = {
-            which-key.enable = true;
+            which-key = {
+              enable = true;
+              window = {
+                inherit border;
+              };
+            };
             # nvim-autopairs = {
             #   enable = true;
             #   checkTs = true;
@@ -84,6 +89,21 @@ in {
               folding = true;
               indent = true;
               nixvimInjections = true;
+              ensureInstalled = [
+                "bash"
+                "c"
+                "html"
+                "latex"
+                "lua"
+                "markdown"
+                "nix"
+                "python"
+                "toml"
+                "yaml"
+                "go"
+                "javascript"
+                "templ"
+              ];
               incrementalSelection = {
                 enable = true;
                 keymaps = {
