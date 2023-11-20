@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -289,7 +288,7 @@ in {
                 nil_ls = {
                   enable = true;
                   settings = {
-                    formatting.command = "${pkgs.alejandra}/bin/alejandra";
+                    # formatting.command = "${pkgs.alejandra}/bin/alejandra";
                   };
                 };
                 tailwindcss.enable = true;
@@ -301,6 +300,7 @@ in {
             lsp-lines.enable = true;
             # lspkind.enable = true;
             lspsaga.enable = true;
+            trouble.enable = true;
           };
           extraPlugins = with pkgs.vimPlugins; [
             vim-nix
