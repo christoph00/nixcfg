@@ -56,13 +56,13 @@ in {
           };
           #          extraConfigLua = builtins.readFile ./init.lua;
           plugins = {
-            which-key = {
-              enable = true;
-              window = {
-                inherit border;
-              };
-            };
-            # nvim-autopairs = {
+            # which-key = {
+            #   enable = true;
+            #   window = {
+            #     inherit border;
+            #   };
+            # };
+            # # nvim-autopairs = {
             #   enable = true;
             #   checkTs = true;
             # };
@@ -128,6 +128,9 @@ in {
                 comment = {};
                 files = {};
                 tabline = {};
+                clue = {};
+                cursorword = {};
+                extra = {};
               };
             };
             cmp-buffer.enable = true;
