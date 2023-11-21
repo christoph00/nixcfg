@@ -63,7 +63,7 @@ in {
       events = [
         {
           event = "before-sleep";
-          command = "${pkgs.gtklock}/bin/gtklock";
+          command = "${pkgs.gtklock}/bin/gtklock -g Tokyonight-Dark-B";
         }
         # { event = "after-resume"; command = "hyprctl dispatch dpms on"; }
       ];
