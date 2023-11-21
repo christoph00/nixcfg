@@ -1,6 +1,4 @@
 {
-  options,
-  inputs,
   config,
   lib,
   pkgs,
@@ -125,7 +123,7 @@ in {
             "$mod, Return, exec, kitty"
             "$mod, c, killactive "
             "$mod, r, exec, anyrun"
-            "$mod, f, fullscreen,1"
+            "$mod, f, fullscreen,0"
             "$mod, v, togglefloating"
             "$mod + SHIFT, p, exec, hyprland-relative-workspace b"
             "$mod + SHIFT, n, exec, hyprland-relative-workspace f"
