@@ -25,7 +25,7 @@ in {
         theme = {
           #   #name = "${config.colorscheme.slug}";
           #   #package = gtkThemeFromScheme {scheme = config.colorscheme;};
-          name = "Tokyo-Night";
+          name = "Tokyonight-Dark-B";
           package = pkgs.tokyo-night-gtk;
         };
         iconTheme = {
