@@ -1,5 +1,5 @@
 {
-  options,
+  inputs,
   config,
   lib,
   pkgs,
@@ -9,12 +9,18 @@ with lib;
 with lib.chr; let
   cfg = config.chr.desktop.theme;
 in {
+  imports = [inputs.matugen.nixosModules.default];
   options.chr.desktop.theme = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
 
   config = mkIf cfg.enable {
+
+    programs.matugen = {
+      enable = false;
+    };
     chr.home.extraOptions = {
+      home.packages = [    inputs.matugen.packages.${pkgs.system}.default];
       fonts.fontconfig.enable = true;
       gtk = {
         enable = true;

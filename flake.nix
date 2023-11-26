@@ -56,7 +56,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     disko = {
-      url = github:nix-community/disko;
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -68,6 +68,11 @@
     nix-colors = {
       url = "github:misterio77/nix-colors";
       inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    matugen = {
+      url = "github:InioX/matugen";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     anyrun = {
