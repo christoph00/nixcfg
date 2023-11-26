@@ -15,12 +15,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-
     programs.matugen = {
       enable = false;
     };
     chr.home.extraOptions = {
-      home.packages = [    inputs.matugen.packages.${pkgs.system}.default];
+      home.packages = [inputs.matugen.packages.${pkgs.system}.default];
       fonts.fontconfig.enable = true;
       gtk = {
         enable = true;
