@@ -16,7 +16,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.matugen = {
-      enable = false;
+      enable = true;
     };
     chr.home.extraOptions = {
       home.packages = [inputs.matugen.packages.${pkgs.system}.default];

@@ -900,6 +900,26 @@
         "type": "github"
       }
     },
+    "matugen": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1700312830,
+        "narHash": "sha256-05xP9nHdz2Nxxg/9gLjheGgOUK6dBDulUzghYdyYTvU=",
+        "owner": "InioX",
+        "repo": "matugen",
+        "rev": "687cd505fd94f3a9c36d984593c77654d8a5c619",
+        "type": "github"
+      },
+      "original": {
+        "owner": "InioX",
+        "repo": "matugen",
+        "type": "github"
+      }
+    },
     "nix": {
       "inputs": {
         "lowdown-src": "lowdown-src",
@@ -1252,6 +1272,7 @@
         "helix": "helix",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "matugen": "matugen",
         "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
         "nix-vscode-extensions": "nix-vscode-extensions",
