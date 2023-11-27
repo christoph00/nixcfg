@@ -76,10 +76,10 @@ in {
           general = {
             allow_tearing = true;
             border_size = 2;
-            "col.active_border" = "rgba(7793D1FF)";
-            "col.inactive_border" = "rgb(5e6798)";
+            "col.active_border" = "rgba(414868FF)";
+            "col.inactive_border" = "rgb(24283b)";
             gaps_in = 5;
-            gaps_out = 10;
+            gaps_out = 5;
             layout = "dwindle";
             no_cursor_warps = true;
           };
