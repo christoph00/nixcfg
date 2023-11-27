@@ -1,8 +1,6 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib;
@@ -21,8 +19,9 @@ in {
           settings = {
             confirm_os_window_close = 0;
             window_padding_width = 4;
-            font_size = 11;
-            font_family = "IntoneMono Nerd Font Mono";
+            font_size = 12;
+            font_family = "ComicShannsMono Nerd Font";
+            # font_family = "IntoneMono Nerd Font Mono";
             # font_family = "DaddyTimeMono Nerd Font";
           };
           extraConfig = builtins.readFile (builtins.fetchurl {
