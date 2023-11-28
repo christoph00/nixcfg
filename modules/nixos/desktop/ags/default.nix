@@ -1,5 +1,4 @@
 {
-  options,
   inputs,
   config,
   lib,

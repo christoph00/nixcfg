@@ -122,7 +122,8 @@ in {
           bind = [
             "$mod, Return, exec, kitty"
             "$mod, c, killactive "
-            "$mod, r, exec, anyrun"
+            "$mod + SHIFT, r, exec, anyrun"
+            "$mod, r, exec, ags -t applauncher"
             "$mod, f, fullscreen,0"
             "$mod, v, togglefloating"
             "$mod + SHIFT, p, exec, hyprland-relative-workspace b"

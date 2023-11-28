@@ -30,10 +30,10 @@ in {
         theme = {
           #   #name = "${config.colorscheme.slug}";
           #   #package = gtkThemeFromScheme {scheme = config.colorscheme;};
-          # name = "Tokyonight-Dark-BL";
-          # package = pkgs.tokyo-night-gtk;
-          package = pkgs.adw-gtk3;
-          name = "adw-gtk3-dark";
+          name = "Tokyonight-Dark-BL";
+          package = pkgs.tokyo-night-gtk;
+          # package = pkgs.adw-gtk3;
+          # name = "adw-gtk3-dark";
         };
         iconTheme = {
           name = "Fluent";
