@@ -229,7 +229,7 @@ in {
 
     hardware.uinput.enable = true;
 
-    environment.systemPackages = [pkgs.gtklock pkgs.seatd pkgs.ddcutil pkgs.ddcui pkgs.nixd];
+    environment.systemPackages = [pkgs.gtklock pkgs.seatd pkgs.ddcutil pkgs.ddcui pkgs.nixd pks.grimblast];
     # services.udev.packages = [ pkgs.light ];
     security.polkit.enable = true;
     security.pam.services.gtklock.text = "auth include login\n";

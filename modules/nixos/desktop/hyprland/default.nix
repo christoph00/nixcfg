@@ -127,6 +127,7 @@ in {
             "$mod, v, togglefloating"
             "$mod + SHIFT, p, exec, hyprland-relative-workspace b"
             "$mod + SHIFT, n, exec, hyprland-relative-workspace f"
+            "$mod, i, exec ${pkgs.grimblast}/bin/grimblast"
             "$mod, 1, workspace, 1"
             "$mod, 2, workspace, 2"
             "$mod, 3, workspace, 3"

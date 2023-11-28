@@ -133,6 +133,7 @@ in {
                 extra = {};
               };
             };
+            typst-vim.enable = true;
             cmp-buffer.enable = true;
 
             cmp-emoji.enable = true;
