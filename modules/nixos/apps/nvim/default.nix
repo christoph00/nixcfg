@@ -37,7 +37,7 @@ in {
           file = {
             codeium = {
               target = ".local/share/.codeium/bin/39080e89780bea461f7a46e6dc1026d80a3a353a/language_server_linux_x64";
-              source = "${inputs.codeium-nvim.packages.${pkgs.system}.codeium-lsp}/bin/codeium_language_server";
+              source = "${pkgs.codeium}/bin/codeium";
             };
           };
         };
@@ -302,6 +302,7 @@ in {
                 };
                 tailwindcss.enable = true;
                 cssls.enable = true;
+                typst-lsp.enable = true;
               };
             };
 
