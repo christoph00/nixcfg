@@ -24,6 +24,9 @@ in {
           exec-once = [
             "${pkgs.gtklock}/bin/gtklock"
             "${config.chr.desktop.ags.package}/bin/ags"
+            "wl-paste --type text --watch cliphist store" #Stores only text data
+            "wl-paste --type image --watch cliphist store"
+            "wlsunset -S 8:00 -s 20:00"
           ];
           animations = {
             enabled = "yes";
