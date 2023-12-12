@@ -18,7 +18,7 @@ in {
         home.packages = [pkgs.widevine-cdm];
         programs.chromium = {
           enable = true;
-          package = pkgs.chr.chromium;
+          package = pkgs.brave;
           extensions = [
             {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
             #{id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
