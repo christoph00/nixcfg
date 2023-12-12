@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -25,17 +24,14 @@ in {
       extraOptions = {
         programs.vscode = {
           enable = true;
-          package = pkgs.vscode.fhs;
+          package = pkgs.vscode;
           mutableExtensionsDir = true;
           extensions = with pkgs.vscode-extensions;
             [
-              kahole.magit
               redhat.vscode-yaml
               jnoortheen.nix-ide
               dhall.dhall-lang
               timonwong.shellcheck
-              haskell.haskell
-              justusadam.language-haskell
               # ms-python.python
               # llvm-vs-code-extensions.vscode-clangd
               stkb.rewrap

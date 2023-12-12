@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -19,7 +18,7 @@ in {
         home.packages = [pkgs.widevine-cdm];
         programs.chromium = {
           enable = true;
-          package = pkgs.chr.thorium;
+          package = pkgs.chr.chromium;
           extensions = [
             {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
             #{id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
