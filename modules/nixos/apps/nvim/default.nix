@@ -286,8 +286,8 @@ in {
               mappingPresets = ["cmdline" "insert"];
             };
             harpoon = {
-              enable = true;
-              enableTelescope = true;
+              enable = false;
+              # enableTelescope = true;
             };
             lsp = {
               enable = true;
