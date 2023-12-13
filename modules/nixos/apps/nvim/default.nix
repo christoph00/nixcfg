@@ -48,6 +48,7 @@ in {
           enable = true;
           viAlias = true;
           vimAlias = true;
+          clipboard.register = "unnamedplus";
           clipboard.providers.wl-copy.enable = true;
           luaLoader.enable = true;
           colorschemes.tokyonight = {
