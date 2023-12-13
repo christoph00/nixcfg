@@ -20,10 +20,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+    programs.nix-ld.enable = true;
     chr.home = {
       extraOptions = {
-        programs.nix-ld.enable = true;
-
         programs.vscode = {
           enable = true;
           package = pkgs.vscodium;
