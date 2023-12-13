@@ -22,9 +22,11 @@ in {
   config = mkIf cfg.enable {
     chr.home = {
       extraOptions = {
+        programs.nix-ld.enable = true;
+
         programs.vscode = {
           enable = true;
-          package = pkgs.vscode;
+          package = pkgs.vscodium;
           mutableExtensionsDir = true;
           extensions = with pkgs.vscode-extensions;
             [
