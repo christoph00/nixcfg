@@ -23,7 +23,6 @@ in {
         enable = true;
       };
       programs.starship.enableBashIntegration = true;
-
     };
   };
 }
