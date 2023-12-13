@@ -42,6 +42,7 @@ in {
               esbenp.prettier-vscode
               christian-kohler.path-intellisense
               bbenoist.nix
+              vscodevim.vim
               file-icons.file-icons
               kamadorueda.alejandra
               sumneko.lua
