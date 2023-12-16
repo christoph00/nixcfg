@@ -37,7 +37,6 @@ in {
 
         themechanger
 
-        typst
 
         gnome.gnome-keyring
 
