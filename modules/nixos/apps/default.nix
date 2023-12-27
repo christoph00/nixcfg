@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -54,7 +53,7 @@ in {
 
         jetbrains.goland
         jetbrains.webstorm
-        hetbrains.phpstorm
+        jetbrains.phpstorm
 
         # chr.jetbrains-fleet
 
