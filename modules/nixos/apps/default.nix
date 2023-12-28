@@ -51,8 +51,8 @@ in {
 
         peazip
 
-        jetbrains.goland
-        jetbrains.webstorm
+        # jetbrains.goland
+        # jetbrains.webstorm
         jetbrains.phpstorm
 
         # chr.jetbrains-fleet
