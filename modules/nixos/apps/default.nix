@@ -30,7 +30,7 @@ in {
         xdg-utils
         solaar
 
-        sublimetext4
+        sublime4
 
         pciutils
 
