@@ -30,6 +30,8 @@ in {
         xdg-utils
         solaar
 
+        sublimetext4
+
         pciutils
 
         usbimager
