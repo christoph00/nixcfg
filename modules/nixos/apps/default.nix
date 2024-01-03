@@ -30,6 +30,8 @@ in {
         xdg-utils
         solaar
 
+        tigervnc
+
         sublime4
 
         pciutils
