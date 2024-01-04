@@ -14,6 +14,7 @@ let
   oc2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIND8HbngVMLrM3sfnr8tz3moOlahHFgA0BliQREX6toe";
   star = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICQRi4HsYX2Mbv7SPPpzPp/uiNQlx8bRin2Z+UN5K0qC";
   x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE+DRHaQYXS4jLpb6TQ72zP3prgkcb2X0YVGIXtUCHUY";
+  turtle = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGs1EldBV90G7uqmUgewt+4Lfcot9WSgDBpZZ4c5184E";
 in {
   #  "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca cube star];
   #  "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
@@ -30,11 +31,11 @@ in {
 
   #  "secrets/feed2imap.yml".publicKeys = [christoph_air13 oc1];
 
-  "secrets/netbird.env".publicKeys = [christoph_air13 christoph_tower christoph_x13 x13 futro air13 tower oca oc1 oc2 cube star];
+  "secrets/netbird.env".publicKeys = [christoph_air13 christoph_tower christoph_x13 x13 futro air13 tower oca oc1 oc2 cube star turtle];
 
   "secrets/ha-serviceaccount".publicKeys = [christoph_air13 christoph_tower futro air13 christoph_x13];
   "secrets/ha-secrets.yaml".publicKeys = [christoph_air13 christoph_tower futro air13 christoph_x13];
-  "secrets/christoph-password.age".publicKeys = [christoph_air13 christoph_tower christoph_x13 futro air13 tower oca oc1 oc2 cube star x13];
+  "secrets/christoph-password.age".publicKeys = [christoph_air13 christoph_tower christoph_x13 futro air13 tower oca oc1 oc2 cube star x13 turtle];
   #  "secrets/wayvnc-key".publicKeys = [christoph_air13 tower christoph_tower];
   #  "secrets/wayvnc-cert".publicKeys = [christoph_air13 tower christoph_tower];
   #  "secrets/rclone.conf".publicKeys = [christoph_air13 tower air13 futro oca oc1 oc2 christoph_tower star];
