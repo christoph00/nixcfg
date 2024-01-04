@@ -32,7 +32,7 @@ in {
 
         tigervnc
 
-        sublime4
+        # sublime4
 
         pciutils
 
@@ -59,7 +59,7 @@ in {
 
         # jetbrains.goland
         # jetbrains.webstorm
-        jetbrains.phpstorm
+        # jetbrains.phpstorm
 
         # chr.jetbrains-fleet
 
