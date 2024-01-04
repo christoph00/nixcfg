@@ -25,7 +25,7 @@ in {
       persist = true;
       mainDisk = "/dev/vda3";
       efiDisk = "/dev/vda2";
-      rootOnTmpfs = false;
+      rootOnTmpfs = true;
     };
   };
 
