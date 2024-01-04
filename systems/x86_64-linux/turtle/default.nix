@@ -23,9 +23,9 @@ in {
       enable = true;
       btrfs = true;
       persist = true;
-      mainDisk = "/dev/vda2";
-      efiDisk = "/dev/vda1";
-      rootOnTmpfs = true;
+      mainDisk = "/dev/vda3";
+      efiDisk = "/dev/vda2";
+      rootOnTmpfs = false;
     };
   };
 
@@ -33,11 +33,12 @@ in {
     enable = true;
     efiSupport = true;
     # efiInstallAsRemovable = true;
-    device = "nodev";
+    device = "/dev/vda1";
   };
   boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi"];
-  boot.initrd.kernelModules = ["nvme"];
+  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "ahci" "sd_mod" "sr_mod" "virtio_blk"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-intel"];
 
   networking = {
     defaultGateway6 = {
@@ -48,6 +49,10 @@ in {
     interfaces.ens3.ipv6.addresses = [
       {
         address = "2a01:4f8:231:f426::a";
+        prefixLength = 64;
+      }
+      {
+        address = "2a01:4f8:231:f426::b";
         prefixLength = 64;
       }
     ];

@@ -54,6 +54,9 @@ in {
 
         peazip
 
+        geary
+        geany-with-vte
+
         # jetbrains.goland
         # jetbrains.webstorm
         jetbrains.phpstorm
