@@ -40,7 +40,6 @@ in {
 
         themechanger
 
-
         gnome.gnome-keyring
 
         nix-init
