@@ -54,7 +54,7 @@ in {
 
         peazip
 
-        geary
+        gnome.geary
         geany-with-vte
 
         # jetbrains.goland
