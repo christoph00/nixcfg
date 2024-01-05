@@ -34,7 +34,7 @@ in {
     efi.canTouchEfiVariables = lib.mkForce false;
     grub = {
       enable = true;
-      device = "/dev/vda1";
+      device = "/dev/vda";
       configurationLimit = 5;
     };
   };
