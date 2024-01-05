@@ -26,6 +26,11 @@ in {
       mainDisk = "/dev/vda2";
       rootOnTmpfs = true;
     };
+    system.boot = {
+      enable = true;
+      bootloader = "grub";
+      efi = false;
+    };
   };
 
   boot.loader = {

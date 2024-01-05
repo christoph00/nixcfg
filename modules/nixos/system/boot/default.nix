@@ -11,6 +11,7 @@ with lib.chr; let
 in {
   options.chr.system.boot = with types; {
     enable = mkBoolOpt true "Whether or not to enable booting.";
+    efi = mkBoolOpt false "Whether or not to enable efi booting.";
     bootloader = mkOption {
       type = types.enum ["none" "grub" "systemd-boot"];
       default = "systemd-boot";
@@ -19,7 +20,7 @@ in {
 
   config = mkIf cfg.enable {
     boot.loader = {
-      efi.canTouchEfiVariables = true;
+      efi.canTouchEfiVariables = cfg.efi;
       systemd-boot = mkIf (config.chr.system.boot.bootloader == "systemd-boot") {
         enable = mkDefault true;
         configurationLimit = 5;

@@ -63,9 +63,15 @@ in {
           options = ["subvol=@nix" "noatime" "compress-force=zstd"];
         };
 
-        "/boot" = mkIf (!cfg.disko) {
+        "/boot" = mkIf (!cfg.disko && config.chr.boot.efi) {
           device = cfg.efiDisk;
           fsType = "vfat";
+        };
+
+        "/boot" = mkIf (!cfg.disko && !config.chr.boot.efi && cfg.btrfs) {
+          inherit device;
+          fsType = "btrfs";
+          options = ["subvol=@boot" "noatime" "compress-force=zstd"];
         };
 
         "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist) {
