@@ -23,8 +23,7 @@ in {
       enable = true;
       btrfs = true;
       persist = true;
-      mainDisk = "/dev/vda3";
-      efiDisk = "/dev/vda2";
+      mainDisk = "/dev/vda2";
       rootOnTmpfs = true;
     };
   };
