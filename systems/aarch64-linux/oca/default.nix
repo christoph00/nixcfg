@@ -45,8 +45,6 @@ in {
     neededForBoot = true;
   };
 
-  environment.systemPackages = [pkgs.chr.uboot-nanopi-r2s];
-
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 
   system.stateVersion = "23.11";
