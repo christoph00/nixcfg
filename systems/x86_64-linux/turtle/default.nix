@@ -26,6 +26,7 @@ in {
       mainDisk = "/dev/vda2";
       rootOnTmpfs = true;
       bootType = "btrfs";
+      efiDisk = "/dev/vda2";
     };
     system.boot = {
       enable = true;
