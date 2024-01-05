@@ -29,13 +29,13 @@ in {
     };
   };
 
-  # boot.loader.grub = {
-  #   enable = true;
-  #   efiSupport = true;
-  #   efiInstallAsRemovable = true;
-  #   device = "/dev/vda1";
-  # };
-  # boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    # efiInstallAsRemovable = true;
+    device = "/dev/vda1";
+  };
+  boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "ahci" "sd_mod" "sr_mod" "virtio_blk"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
