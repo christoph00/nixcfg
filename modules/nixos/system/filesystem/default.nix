@@ -30,6 +30,10 @@ in {
       type = types.str;
       default = "/dev/disk/by-label/UEFI";
     };
+    bootType = mkOption {
+      type = types.str;
+      default = "vfat";
+    };
     swapDevice = mkOption {
       type = types.str;
       default = "/dev/sda3";
@@ -63,15 +67,10 @@ in {
           options = ["subvol=@nix" "noatime" "compress-force=zstd"];
         };
 
-        "/boot" = mkIf (!cfg.disko && config.chr.boot.efi) {
-          device = cfg.efiDisk;
-          fsType = "vfat";
-        };
-
         "/boot" = mkIf (!cfg.disko && !config.chr.boot.efi && cfg.btrfs) {
-          inherit device;
+          device = cfg.efiDisk;
           fsType = "btrfs";
-          options = ["subvol=@boot" "noatime" "compress-force=zstd"];
+          tions = mkIf (!cfg.disko && !config.chr.boot.efi && cfg.btrfs) ["subvol=@boot" "noatime" "compress-force=zstd"];
         };
 
         "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist) {
@@ -83,7 +82,7 @@ in {
 
         "/home" = mkIf (cfg.btrfs && !cfg.disko) {
           inherit device;
-          fsType = "btrfs";
+          fsType = cfg.bootType;
           options = ["subvol=@home" "noatime" "compress-force=zstd"];
         };
       };
