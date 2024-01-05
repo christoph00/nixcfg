@@ -70,7 +70,7 @@ in {
         "/boot" = mkIf (!cfg.disko && !config.chr.system.boot.efi && cfg.btrfs) {
           device = cfg.efiDisk;
           fsType = "btrfs";
-          tions = mkIf (!cfg.disko && !config.chr.system.boot.efi && cfg.btrfs) ["subvol=@boot" "noatime" "compress-force=zstd"];
+          options = mkIf (!cfg.disko && !config.chr.system.boot.efi && cfg.btrfs) ["subvol=@boot" "noatime" "compress-force=zstd"];
         };
 
         "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist) {
