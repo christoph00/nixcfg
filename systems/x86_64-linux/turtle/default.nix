@@ -25,6 +25,7 @@ in {
       persist = true;
       mainDisk = "/dev/vda2";
       rootOnTmpfs = true;
+      bootType = "btrfs";
     };
     system.boot = {
       enable = true;
