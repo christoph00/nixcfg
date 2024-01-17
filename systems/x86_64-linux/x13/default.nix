@@ -52,6 +52,7 @@ with lib.chr; {
     mainDisk = "/dev/nvme0n1p3";
     efiDisk = "/dev/nvme0n1p1";
     rootOnTmpfs = true;
+    boot.efi = true;
   };
 
   services.thinkfan.enable = true;
