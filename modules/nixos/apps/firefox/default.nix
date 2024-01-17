@@ -47,7 +47,7 @@ in {
             inherit (cfg) extraConfig userChrome settings;
             id = 0;
             name = config.chr.user.name;
-            extensions = with inputs.firefox-addons; [
+            extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
               clearurls
               decentraleyes
               bitwarden
