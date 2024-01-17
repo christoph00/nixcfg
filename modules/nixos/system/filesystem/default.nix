@@ -67,22 +67,21 @@ in {
           options = ["subvol=@nix" "noatime" "compress-force=zstd"];
         };
 
-        "/boot" = mkIf (!cfg.disko && !config.chr.system.boot.efi && cfg.btrfs) {
+        "/boot" = mkIf (!cfg.disko) {
           device = cfg.efiDisk;
-          fsType = "btrfs";
-          options = mkIf (!cfg.disko && !config.chr.system.boot.efi && cfg.btrfs) ["subvol=@boot" "noatime" "compress-force=zstd"];
+          fsType = "vfat";
         };
 
-        "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist) {
-          device = mkIf (!cfg.disko) device;
-          fsType = mkIf (!cfg.disko) "btrfs";
-          options = mkIf (!cfg.disko) ["subvol=@persist" "noatime" "compress-force=zstd"];
+        "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist && !cfg.disko) {
+          inherit device;
+          fsType = "btrfs";
+          options = ["subvol=@persist" "noatime" "compress-force=zstd"];
           neededForBoot = true;
         };
 
         "/home" = mkIf (cfg.btrfs && !cfg.disko) {
           inherit device;
-          fsType = cfg.bootType;
+          fsType = "btrfs";
           options = ["subvol=@home" "noatime" "compress-force=zstd"];
         };
       };

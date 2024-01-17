@@ -44,6 +44,7 @@ with lib.chr; {
   chr = {
     type = "laptop";
     gaming.enable = true;
+    system.boot.efi = true;
   };
   chr.system.filesystem = {
     enable = true;

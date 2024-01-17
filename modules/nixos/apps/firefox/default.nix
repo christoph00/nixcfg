@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
@@ -46,6 +47,13 @@ in {
             inherit (cfg) extraConfig userChrome settings;
             id = 0;
             name = config.chr.user.name;
+            extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
+              clearurls
+              decentraleyes
+              bitwarden
+              no-pdf-download
+              ublock-origin
+            ];
           };
         };
       };
