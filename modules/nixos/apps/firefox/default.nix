@@ -48,7 +48,6 @@ in {
             id = 0;
             name = config.chr.user.name;
             extensions = with inputs.firefox-addons; [
-              aria2-integration
               clearurls
               decentraleyes
               bitwarden
