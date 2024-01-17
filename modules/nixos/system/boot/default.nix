@@ -23,7 +23,7 @@ in {
       efi.canTouchEfiVariables = cfg.efi;
       systemd-boot = mkIf (config.chr.system.boot.bootloader == "systemd-boot") {
         enable = mkDefault true;
-        configurationLimit = 5;
+        configurationLimit = 10;
         consoleMode = "max";
         editor = false;
       };
