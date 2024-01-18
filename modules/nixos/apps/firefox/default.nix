@@ -44,9 +44,15 @@ in {
             id = 0;
             name = config.chr.user.name;
             extraConfig = "user_pref(\"toolkit.legacyUserProfileCustomizations.stylesheets\", true)";
-            userChrome = ''
-              @import "${pkgs.chr.firefox-cascade}/chrome/userChrome.css";
-            '';
+            userChrome = lib.concatMapStringsSep "\n" builtins.readFile [
+              "${pkgs.chr.firefox-cascade}/includes/cascade-config.css"
+              "${pkgs.chr.firefox-cascade}/includes/cascade-colours.css"
+              "${pkgs.chr.firefox-cascade}/includes/cascade-layout.css"
+              "${pkgs.chr.firefox-cascade}/includes/cascade-responsive.css"
+              "${pkgs.chr.firefox-cascade}/includes/cascade-floating-panel.css"
+              "${pkgs.chr.firefox-cascade}/includes/cascade-nav-bar.css"
+              "${pkgs.chr.firefox-cascade}/includes/cascade-tabs.css"
+            ];
             extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
               clearurls
               decentraleyes
