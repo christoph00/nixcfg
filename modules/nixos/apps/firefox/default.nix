@@ -45,7 +45,7 @@ in {
             name = config.chr.user.name;
             extraConfig = "user_pref(\"toolkit.legacyUserProfileCustomizations.stylesheets\", true)";
             userChrome = ''
-              @import "${pkgs.chr.firefox-cascade-theme}/chrome/userChrome.css";
+              @import "${pkgs.chr.firefox-cascade}/chrome/userChrome.css";
             '';
             extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
               clearurls
