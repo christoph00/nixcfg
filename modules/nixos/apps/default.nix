@@ -55,7 +55,9 @@ in {
         peazip
 
         gnome.geary
-        geany-with-vte
+        geany-with-
+
+        goldwarden
 
         # jetbrains.goland
         # jetbrains.webstorm

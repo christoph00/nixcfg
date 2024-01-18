@@ -7,9 +7,9 @@
 }:
 with lib;
 with lib.chr; let
-  cfg = config.chr.apps.graphics;
+  cfg = config.chr.apps.office;
 in {
-  options.chr.apps.graphics = with types; {
+  options.chr.apps.office = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
 
@@ -17,9 +17,7 @@ in {
     chr.home = {
       extraOptions = {
         home.packages = with pkgs; [
-          gimp-with-plugins
-          inkscape
-          darktable
+          libreoffice-qt
         ];
       };
     };

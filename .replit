@@ -12,5 +12,5 @@ run = ["sh", "-c", "nix build"]
 pattern = "**/{*.nix}"
 
 [languages.nix.languageServer]
-start = "rnix-lsp"
+start = "nixd"
 deploymentTarget = "cloudrun"
