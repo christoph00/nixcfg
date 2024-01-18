@@ -30,10 +30,6 @@ with lib.chr; let
 in {
   options.chr.apps.firefox = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Firefox.";
-    extraConfig =
-      mkOpt str "" "Extra configuration for the user profile JS file.";
-    userChrome =
-      mkOpt str "" "Extra configuration for the user chrome CSS file.";
     settings = mkOpt attrs defaultSettings "Settings to apply to the profile.";
   };
 
@@ -44,9 +40,13 @@ in {
           enable = true;
           package = pkgs.firefox-beta;
           profiles.${config.chr.user.name} = {
-            inherit (cfg) extraConfig userChrome settings;
+            inherit (cfg) settings;
             id = 0;
             name = config.chr.user.name;
+            extraConfig = "user_pref(\"toolkit.legacyUserProfileCustomizations.stylesheets\", true)";
+            userChrome = ''
+              @import "${pkgs.chr.firefox-cascade-theme}/chrome/userChrome.css";
+            '';
             extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
               clearurls
               decentraleyes
