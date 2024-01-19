@@ -18,8 +18,8 @@ in {
   };
   imports = [
     ./extentions.nix
-    ./network_sensors.nix
-    ./systemmonitor.nix
+    #./network_sensors.nix
+    #./systemmonitor.nix
   ];
   config = lib.mkIf cfg.enable {
     users.users.hass = {
