@@ -21,6 +21,7 @@ in {
 
   chr = {
     type = "server";
+    system.boot.efi = true;
     system.filesystem = {
       enable = true;
       persist = true;
