@@ -1,6 +1,6 @@
 {
   lib,
-  stdenv,
+  php82,
   fetchFromGitHub,
 }: let
   phpPackage = php82.withExtensions ({
