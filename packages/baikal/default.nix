@@ -10,31 +10,32 @@
     enabled ++ [all.imap all.gd all.intl all.pdo_sqlite]);
 in
   phpPackage.buildComposerProject rec {
-    pname = "davis";
-    version = "4.4.1";
+    pname = "baikal";
+    version = "0.9.4";
 
     src = fetchFromGitHub {
-      owner = "tchapi";
-      repo = "davis";
-      rev = "v${version}";
-      hash = "sha256-UBekmxKs4dveHh866Ix8UzY2NL6ygb8CKor+V3Cblns=";
+      owner = "sabre-io";
+      repo = "Baikal";
+      rev = version;
+      hash = "sha256-McxKGxNF8dELmFXI7q1i/VWZZVGuVieIT1WrcynuH4Q=";
     };
 
     php = phpPackage;
 
-    vendorHash = "sha256-WGeNwBRzfUXa7kPIwd7/5dPXDjaBxXirAJcm6lNzueY=";
+    vendorHash = "sha256-cNRdu6RWd4ckxJq9RHTTxVRQ52FN3nBBo7kz0jd6WY0=";
 
     composerNoPlugins = false;
     composerStrictValidation = false;
+    composerLock = ./composer.lock;
 
     passthru = {
       phpPackage = phpPackage;
     };
 
     meta = with lib; {
-      description = "A simple, fully translatable admin interface for sabre/dav based on Symfony 5 and Bootstrap 5, initially inspired by Baïkal";
-      homepage = "https://github.com/tchapi/davis";
-      license = licenses.mit;
+      description = "Baïkal is a Calendar+Contacts server";
+      homepage = "https://github.com/sabre-io/Baikal";
+      license = licenses.gpl3Only;
       maintainers = with maintainers; [];
       platforms = platforms.all;
     };
