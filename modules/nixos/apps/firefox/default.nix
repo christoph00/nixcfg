@@ -38,7 +38,7 @@ in {
       extraOptions = {
         programs.firefox = {
           enable = true;
-          package = pkgs.firefox-beta;
+          package = pkgs.firefox-bin;
           profiles.${config.chr.user.name} = {
             inherit (cfg) settings;
             id = 0;
