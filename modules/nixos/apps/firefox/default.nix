@@ -38,7 +38,7 @@ in {
       extraOptions = {
         programs.firefox = {
           enable = true;
-          package = pkgs.firefox-bin;
+          package = pkgs.chr.mercury-browser;
           profiles.${config.chr.user.name} = {
             inherit (cfg) settings;
             id = 0;
