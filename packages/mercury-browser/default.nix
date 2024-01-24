@@ -14,6 +14,9 @@
   vulkan-loader,
   xdg-utils,
   xorg,
+  autoPatchelfHook,
+  dpkg,
+  wrapGAppsHook,
 }:
 stdenv.mkDerivation rec {
   pname = "mercury-browser";
@@ -24,7 +27,7 @@ stdenv.mkDerivation rec {
     hash = "sha256-78b2QEgf312TDBIy4lXzYUBtTfdNui3VJBbyDfXqOtc=";
   };
 
-  nativeBuildInputs = with pkgs; [
+  nativeBuildInputs = [
     autoPatchelfHook
     dpkg
     wrapGAppsHook
