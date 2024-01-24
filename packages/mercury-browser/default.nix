@@ -69,7 +69,7 @@ stdenv.mkDerivation rec {
       --replace StartupWMClass=mercury StartupWMClass=mercury-default \
     addAutoPatchelfSearchPath $out/lib/mercury
     substituteInPlace $out/bin/mercury-browser \
-      --replace 'export LD_LIBRARY_PATH' "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${makeLibraryPath buildInputs}:$out/lib/mercury" \
+      --replace 'export LD_LIBRARY_PATH' "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${lib.makeLibraryPath buildInputs}:$out/lib/mercury" \
       --replace /usr $out
 
     runHook postInstall
