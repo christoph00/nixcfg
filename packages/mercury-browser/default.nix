@@ -28,7 +28,7 @@ in
 
     src = fetchurl {
       url = "https://github.com/Alex313031/Mercury/releases/download/v.${version}/mercury-browser_${version}_amd64.deb";
-      hash = "sha256-78b2QEgf312TDBIy4lXzYUBtTfdNui3VJBbyDfXqOtc=";
+      hash = "sha256-zgRrTRwdvmx6AhZa8Wvycg2BO0jcfZIIsM7oByVSUaQ=";
     };
 
     nativeBuildInputs = [
@@ -70,8 +70,10 @@ in
       cp -r usr/* $out
 
       substituteInPlace $out/share/applications/mercury-browser.desktop \
-        --replace StartupWMClass=mercury StartupWMClass=mercury-default \
+        --replace StartupWMClass=mercury StartupWMClass=mercury-default
+
       addAutoPatchelfSearchPath $out/lib/mercury
+
       substituteInPlace $out/bin/mercury-browser \
         --replace 'export LD_LIBRARY_PATH' "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${makeLibraryPath buildInputs}:$out/lib/mercury" \
         --replace /usr $out
