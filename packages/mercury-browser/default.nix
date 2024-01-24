@@ -2,7 +2,6 @@
   lib,
   stdenv,
   fetchurl,
-  makeLibraryPath,
   alsa-lib,
   browserpass,
   glib,
@@ -80,7 +79,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/Alex313031/Mercury";
     license = licenses.mpl20;
     maintainers = with maintainers; [];
-    mainProgram = "mercury";
     platforms = platforms.all;
   };
 }
