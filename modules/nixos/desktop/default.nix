@@ -232,7 +232,7 @@ in {
     environment.systemPackages = [pkgs.seatd pkgs.ddcutil pkgs.ddcui pkgs.nixd pkgs.grimblast pkgs.wl-clipboard];
     # services.udev.packages = [ pkgs.light ];
     security.polkit.enable = true;
-    security.pam.services.waylock = true;
+    security.pam.services.waylock = {};
 
     services.dbus = {
       enable = true;
