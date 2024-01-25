@@ -7,10 +7,10 @@
 }:
 with lib;
 with lib.chr; let
-  cfg = config.chr.services.media;
+  cfg = config.chr.desktop.waydroid;
 in {
   options.chr.desktop.waydroid = with types; {
-    enable = mkBoolOpt config.chr.desktop.enable "Enable Waydroid.";
+    enable = mkBoolOpt' config.chr.desktop.enable;
   };
   config = mkIf cfg.enable {
     virtualisation.waydroid.enable = true;
