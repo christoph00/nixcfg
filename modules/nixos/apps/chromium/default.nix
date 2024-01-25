@@ -31,6 +31,7 @@ in {
             #{id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
             {id = "hceobhjokpdbogjkplmfjeomkeckkngi";} # New Bing Anywhere
             {id = "jinjaccalgkegednnccohejagnlnfdag";} # Violentmonkey
+            {id = "hlkenndednhfkekhgcdicdfddnkalmdm";} # Cookie Editor
           ];
           commandLineArgs = [
             "--ignore-gpu-blocklist"
@@ -42,7 +43,7 @@ in {
             "--use-vulkan"
             "--ozone-platform-hint=auto"
             # "--enable-hardware-overlays"
-            # "--password-store=gnome"
+            "--password-store=gnome"
             "--gtk-version=4"
           ];
         };
