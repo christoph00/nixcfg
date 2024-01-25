@@ -22,7 +22,7 @@ in {
         package = config.programs.hyprland.package;
         settings = {
           exec-once = [
-            "${pkgs.gtklock}/bin/gtklock"
+            "${pkgs.waylock}/bin/waylock -fork-on-lock"
             "${config.chr.desktop.ags.package}/bin/ags"
             "wl-paste --type text --watch cliphist store" #Stores only text data
             "wl-paste --type image --watch cliphist store"
