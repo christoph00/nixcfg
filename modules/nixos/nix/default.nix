@@ -45,7 +45,7 @@ in {
       package = cfg.package;
 
       settings = {
-        experimental-features = "nix-command flakes";
+        experimental-features = "nix-command flakes auto-allocate-uids configurable-impure-env";
         http-connections = 50;
         warn-dirty = false;
         log-lines = 50;
