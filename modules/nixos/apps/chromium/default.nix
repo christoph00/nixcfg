@@ -38,6 +38,7 @@ in {
             "--enable-gpu-rasterization"
             "--enable-zero-copy"
             # "--force-dark-mode"
+            "--disable-features=DarkMode"
             #"--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
             "--disable-features=UseChromeOSDirectVideoDecoder"
             "--use-vulkan"
