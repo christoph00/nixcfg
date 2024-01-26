@@ -229,7 +229,7 @@ in {
 
     hardware.uinput.enable = true;
 
-    environment.systemPackages = [pkgs.seatd pkgs.ddcutil pkgs.ddcui pkgs.nixd pkgs.grimblast pkgs.wl-clipboard];
+    environment.systemPackages = [pkgs.seatd pkgs.ddcutil pkgs.ddcui pkgs.nixd pkgs.grimblast pkgs.wl-clipboard pkgs.waylock];
     # services.udev.packages = [ pkgs.light ];
     security.polkit.enable = true;
     security.pam.services.waylock = {};
