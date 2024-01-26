@@ -22,7 +22,7 @@ in {
           EDITOR = "hx";
         };
 
-        home.packages = [pkgs.chr.templ];
+        home.packages = [pkgs.templ];
 
         programs.helix = {
           enable = true;

@@ -346,7 +346,7 @@ in {
             })
           '';
 
-          extraPackages = [pkgs.chr.templ];
+          extraPackages = [pkgs.templ];
           options = {
             number = true;
             relativenumber = true;
