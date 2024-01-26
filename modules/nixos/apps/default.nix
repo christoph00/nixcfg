@@ -52,6 +52,8 @@ in {
         wlsunset
         wl-clipboard
 
+        gtkcord4
+
         peazip
 
         goldwarden
