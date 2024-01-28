@@ -43,7 +43,7 @@ in {
           {
             port = 8089;
             address = "/run/sftpgo/webdavd.sock";
-            prefix = "/dav";
+            #prefix = "/dav";
           }
         ];
         httpd.bindings = [
@@ -69,6 +69,13 @@ in {
     systemd.services.sftpgo.serviceConfig.RuntimeDirectoryMode = "0755";
     systemd.services.sftpgo.serviceConfig.ReadWritePaths = [cfg.userdataDir];
     systemd.services.sftpgo.serviceConfig.UMask = mkForce "007";
+
+    services.cloudflared.tunnels."${config.networking.hostName}" = {
+      ingress = {
+        "data.r505.de" = "unix:/run/sftpgo/httpd.sock";
+        "dav.r505.de" = "unix:/run/sftpgo/webdavd.sock";
+      };
+    };
 
     # services.nginx.clientMaxBodySize = "10G";
 
