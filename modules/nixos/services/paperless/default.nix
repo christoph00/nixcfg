@@ -13,18 +13,10 @@ in {
     enable = mkBoolOpt' false;
   };
   config = mkIf cfg.enable {
-    environment.persistence."/persist".directories = [
-      {
-        directory = "/var/lib/paperless";
-        user = "paperless";
-        group = "paperless";
-        mode = "0750";
-      }
-    ];
-
     services.paperless = {
       enable = true;
       address = "0.0.0.0";
+      dataDir = "/nix/persist/paperless";
       #passwordFile = config.age.secrets.paperless-admin-password.path;
       settings = {
         PAPERLESS_FILENAME_FORMAT = "{owner_username}/{created_year}-{created_month}-{created_day}_{asn}_{title}";
@@ -33,6 +25,12 @@ in {
         PAPERLESS_OCR_LANGUAGE = "deu+eng";
         PAPERLESS_TASK_WORKERS = 4;
         PAPERLESS_WEBSERVER_WORKERS = 4;
+      };
+    };
+
+    services.cloudflared.tunnels."${config.networking.hostName}" = {
+      ingress = {
+        "docs.r505.de" = "http://127.0.0.1:28981";
       };
     };
 
