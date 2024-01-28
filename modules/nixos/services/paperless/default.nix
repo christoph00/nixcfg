@@ -9,7 +9,7 @@ with lib;
 with lib.chr; let
   cfg = config.chr.services.paperless;
 in {
-  options.chr.services.mqtt = with types; {
+  options.chr.services.paperless = with types; {
     enable = mkBoolOpt' false;
   };
   config = mkIf cfg.enable {
