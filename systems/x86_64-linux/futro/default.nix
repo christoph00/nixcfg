@@ -33,6 +33,7 @@ in {
       smart-home = true;
       media.enable = true;
       paperless.enable = true;
+      radicale.enable = true;
     };
   };
 
