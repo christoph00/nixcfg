@@ -32,6 +32,7 @@ in {
       nas.enable = true;
       smart-home = true;
       media.enable = true;
+      paperless.enable = true;
     };
   };
 
