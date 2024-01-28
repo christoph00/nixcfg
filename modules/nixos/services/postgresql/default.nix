@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.services.postgresql;
 in {
   options.chr.services.postgresql = with types; {
-    enable = mkBoolOpt config.chr.services.home-assistant.enable "Enable postgresql.";
+    enable = mkBoolOpt false "Enable postgresql.";
   };
   config = mkIf cfg.enable {
     services.home-assistant.config.recorder.db_url = "postgresql://hass@/homeassistant";
