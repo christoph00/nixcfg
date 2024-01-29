@@ -34,6 +34,7 @@ in {
       media.enable = true;
       paperless.enable = true;
       radicale.enable = true;
+      yarr.enable = true;
     };
   };
 
