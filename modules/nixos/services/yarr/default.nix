@@ -98,12 +98,11 @@ in {
       ingress = {
         "rss.r505.de" = "http://127.0.0.1:7070";
       };
-
-      age.secrets.yarr-auth = {
-        file = ../../../../secrets/yarr-auth;
-        owner = cfg.user;
-        group = cfg.group;
-      };
+    };
+    age.secrets.yarr-auth = {
+      file = ../../../../secrets/yarr-auth;
+      owner = cfg.user;
+      group = cfg.group;
     };
   };
 }
