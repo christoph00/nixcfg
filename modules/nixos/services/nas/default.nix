@@ -43,7 +43,7 @@ in {
           {
             port = 8089;
             address = "/run/sftpgo/webdavd.sock";
-            #prefix = "/dav";
+            prefix = "/dav";
           }
         ];
         httpd.bindings = [
@@ -72,23 +72,30 @@ in {
 
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
-        "data.r505.de" = "unix:/run/sftpgo/httpd.sock";
-        "dav.r505.de" = "unix:/run/sftpgo/webdavd.sock";
+        "data.r505.de" = "http://127.0.0.1:8033";
       };
     };
 
-    # services.nginx.clientMaxBodySize = "10G";
+    services.nginx.clientMaxBodySize = "10G";
 
-    # users.users.nginx.extraGroups = ["acme" "media"];
-    # services.nginx.enable = true;
-    # services.nginx.virtualHosts."data.r505.de" = {
-    #   http2 = true;
-    #   forceSSL = true;
-    #   useACMEHost = "data.r505.de";
-    #   locations = {
-    #     "/dav/".proxyPass = "http://unix:/run/sftpgo/webdavd.sock";
-    #     "/".proxyPass = "http://unix:/run/sftpgo/httpd.sock";
-    #   };
-    # };
+    users.users.nginx.extraGroups = ["acme" "media"];
+    services.nginx.enable = true;
+    services.nginx.virtualHosts."data.r505.de" = {
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 8033;
+          ssl = false;
+        }
+        # {
+        #   addr = "unix:/var/run/nginx-data-r505.sock";
+        # }
+      ];
+      http2 = true;
+      locations = {
+        "/dav/".proxyPass = "http://unix:/run/sftpgo/webdavd.sock";
+        "/".proxyPass = "http://unix:/run/sftpgo/httpd.sock";
+      };
+    };
   };
 }
