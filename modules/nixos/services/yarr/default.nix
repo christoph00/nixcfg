@@ -23,12 +23,6 @@ in {
         description = "Base path of the service URL.";
       };
 
-      authFilePath = mkOption {
-        type = types.str;
-        default = "/run/secrets/yarr_auth";
-        description = "Path to file containing authentication information.";
-      };
-
       address = mkOption {
         type = types.str;
         default = "127.0.0.1";
@@ -96,13 +90,19 @@ in {
 
         ExecStart = "${cfg.package}/bin/yarr -addr ${cfg.address}:${
           toString cfg.port
-        } -db ${cfg.dbPath} -auth-file ${cfg.authFilePath}";
+        } -db ${cfg.dbPath} -auth-file ${config.config.age.secrets.yarr-auth.path}";
       };
     };
 
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
         "rss.r505.de" = "http://127.0.0.1:7070";
+      };
+
+      age.secrets.yarr-auth = {
+        file = ../../../../secrets/yarr-auth;
+        owner = cfg.user;
+        group = cfg.group;
       };
     };
   };
