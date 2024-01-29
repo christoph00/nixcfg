@@ -13,7 +13,7 @@ in {
 
       directory = mkOption {
         type = types.str;
-        default = "/var/lib/yarr";
+        default = "${config.chr.system.persist.stateDir}/yarr";
         description = "Persistent directory to house database.";
       };
 
