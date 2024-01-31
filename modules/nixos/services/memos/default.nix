@@ -86,7 +86,7 @@ in {
       user = "${cfg.user}";
       group = "${cfg.group}";
       autoStart = true;
-      volumes = ["${cfg.directory}=/mnt/docker-aio-config"];
+      volumes = ["${cfg.directory}=/var/opt/memos"];
       environment = {
         MEMOS_PORT = "${toString cfg.port}";
       };
