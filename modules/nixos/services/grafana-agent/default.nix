@@ -46,10 +46,10 @@ in {
               clients = [
                 {
                   basic_auth = {
-                    username = "695583";
-                    password = "\${LOGS_REMOTE_WRITE_PASSWORD}";
+                    username = "285909";
+                    password = "\${METRICS_REMOTE_WRITE_PASSWORD}";
                   };
-                  url = "https://logs-prod-008.grafana.net/api/prom/push";
+                  url = "https://logs-prod-eu-west-0.grafana.net";
                 }
               ];
               name = "default";
