@@ -29,11 +29,11 @@ in {
       httpListenAddr = cfg.httpListenAddr;
 
       staticScrapes = {
-        hass = mkIf config.chr.services.home-assistant.enable {
-          targets = ["localhost:8123"];
-          bearerTokenFile = config.sops.secrets.hass_token.path;
-          metricsPath = "/api/prometheus";
-        };
+        # hass = mkIf config.chr.services.home-assistant.enable {
+        #   targets = ["localhost:8123"];
+        #   bearerTokenFile = config.age.secrets.ha-bearer-token.path;
+        #   metricsPath = "/api/prometheus";
+        # };
 
         jellyfin = mkIf config.chr.services.media.enable {
           targets = ["localhost:8096"];
