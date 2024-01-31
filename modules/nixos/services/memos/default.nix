@@ -87,6 +87,8 @@ in {
       autoStart = true;
       hostname = "memos";
       volumes = ["${cfg.directory}:/var/opt/memos"];
+      ports = ["7030:7030"];
+
       environment = {
         MEMOS_PORT = "${toString cfg.port}";
       };
