@@ -25,9 +25,7 @@ in {
       internalInterfaces = [
         "podman0"
       ];
-      externalInterfaces = [
-        "ens5"
-      ];
+      externalInterface = cfg.externalInterface;
     };
 
     virtualisation = {
