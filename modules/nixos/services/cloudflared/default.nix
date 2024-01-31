@@ -28,5 +28,8 @@ in {
         "ha.r505.de" = "http://127.0.0.1:8123";
       };
     };
+    systemd.services."cloudflared-tunnel-${config.networking.hostName}" = {
+      environment.TUNNEL_METRICS = "localhost:8927";
+    };
   };
 }
