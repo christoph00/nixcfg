@@ -16,9 +16,6 @@ in {
     age.secrets.grafana-password = {
       file = ../../../../secrets/grafana-password;
     };
-    age.secrets.grafana-logs-password = {
-      file = ../../../../secrets/grafana-logs-password;
-    };
     services.grafana-agent = {
       enable = true;
       credentials = {
