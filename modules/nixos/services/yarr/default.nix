@@ -90,7 +90,7 @@ in {
 
         ExecStart = "${cfg.package}/bin/yarr -addr ${cfg.address}:${
           toString cfg.port
-        } -db ${cfg.dbPath} -auth-file ${config.config.age.secrets.yarr-auth.path}";
+        } -db ${cfg.dbPath} -auth-file ${config.age.secrets.yarr-auth.path}";
       };
     };
 
