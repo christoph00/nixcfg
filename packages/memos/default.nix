@@ -31,10 +31,6 @@
 
       nativeBuildInputs = [
         buf
-        protoc-gen-go
-        protoc-gen-go-grpc
-        protoc-gen-validate
-        grpc-gateway
       ];
 
       doCheck = false;
