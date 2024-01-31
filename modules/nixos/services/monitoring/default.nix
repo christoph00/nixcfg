@@ -21,6 +21,8 @@ in {
   config = mkIf cfg.enable {
     age.secrets.grafana-password = {
       file = ../../../../secrets/grafana-password;
+      owner = "grafana-agent-flow";
+      group = "grafana-agent-flow";
     };
     services.grafana-agent-flow = {
       enable = true;
