@@ -25,7 +25,7 @@ with lib; let
         default = "";
       };
 
-      tokenFile = mkOption {
+      environmentFile = mkOption {
         description = "Grafana Cloud API token file path";
         type = types.path;
         default = "";
@@ -155,16 +155,6 @@ in {
       };
 
       serviceConfig = let
-        tokenFile =
-          if cfg.grafanaCloud.enable
-          then ''
-            local.file "gc_token" {
-              filename = "${cfg.grafanaCloud.tokenFile}"
-              is_secret = true
-            }
-          ''
-          else "";
-
         nodeExporterConfig =
           if cfg.nodeExporter.enable
           then ''
@@ -216,16 +206,14 @@ in {
           else "";
 
         configFile = pkgs.writeText "config.river" ''
-          ${tokenFile}
-
           module.git "grafana_cloud" {
             repository = "https://github.com/grafana/agent-modules.git"
             path = "modules/grafana-cloud/autoconfigure/module.river"
             revision = "main"
             pull_frequency = "0s"
             arguments {
-              stack_name = "${cfg.grafanaCloud.stack}"
-              token = local.file.gc_token.content
+              stack_name = env("GRAFANA_CLOUD_STACK")
+              token = env("GRAFANA_CLOUD_TOKEN")
             }
           }
 
@@ -244,6 +232,7 @@ in {
         RestartSec = "30s";
         StateDirectory = "grafana-agent-flow";
         Type = "simple";
+        EnvironmentFile = cfg.environmentFile;
       };
     };
   };

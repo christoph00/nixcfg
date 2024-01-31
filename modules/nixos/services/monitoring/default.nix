@@ -52,7 +52,7 @@ in {
       grafanaCloud = {
         enable = true;
         stack = "aco";
-        tokenFile = config.age.secrets.grafana-password.path;
+        environmentFile = config.age.secrets.grafana-password.path;
       };
     };
   };
