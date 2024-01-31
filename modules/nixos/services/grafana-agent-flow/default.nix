@@ -232,7 +232,7 @@ in {
         RestartSec = "30s";
         StateDirectory = "grafana-agent-flow";
         Type = "simple";
-        EnvironmentFile = cfg.environmentFile;
+        EnvironmentFile = cfg.grafanaCloud.environmentFile;
       };
     };
   };
