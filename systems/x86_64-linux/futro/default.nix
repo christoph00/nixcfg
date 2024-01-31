@@ -40,11 +40,11 @@ in {
       radicale.enable = true;
       yarr.enable = true;
       memos.enable = true;
+      monitoring = {
+        httpListenAddr = "0.0.0.0:12345";
+        scrapeRouter = true;
+      };
     };
-  };
-
-  services.grafana-agent-flow = {
-    httpListenAddr = "0.0.0.0:12345";
   };
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "ohci_pci" "ehci_pci" "usb_storage" "usbhid" "sd_mod"];
