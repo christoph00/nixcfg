@@ -4,7 +4,8 @@
   pkgs,
   ...
 }:
-with pkgs; let
+with pkgs;
+with lib.chr; let
   cfg = config.chr.services.memos;
 in {
   options = with lib; {
