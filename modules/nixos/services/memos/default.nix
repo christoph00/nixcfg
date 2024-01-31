@@ -10,7 +10,7 @@ in {
   options = with lib; {
     chr.services.memos = {
       enable = mkEnableOption "Enable memos";
-      container = mkBoolOpt' true "Enable memos in container";
+      container = mkBoolOpt true "Enable memos in container";
 
       directory = mkOption {
         type = types.str;
