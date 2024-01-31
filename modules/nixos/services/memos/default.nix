@@ -49,8 +49,8 @@ in {
 
       package = mkOption {
         type = types.package;
-        default = pkgs.memos;
-        defaultText = literalExpression "pkgs.memos";
+        default = pkgs.chr.memos;
+        defaultText = literalExpression "pkgs.chr.memos";
         description = "The package to use for memos";
       };
     };
