@@ -18,8 +18,8 @@ in {
     };
     services.grafana-agent = {
       enable = true;
+      extraFlags = ["-disable-reporting" "-disable-support-bundle"];
       credentials = {
-        LOGS_REMOTE_WRITE_PASSWORD = config.age.secrets.grafana-logs-password.path;
         METRICS_REMOTE_WRITE_PASSWORD = config.age.secrets.grafana-password.path;
       };
       settings = {
