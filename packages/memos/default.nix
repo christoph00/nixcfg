@@ -10,90 +10,78 @@
   stdenvNoCC,
   jq,
   moreutils,
+  inputs,
+  system,
+  buf,
 }: let
   version = "0.19.0";
   src = fetchFromGitHub {
     owner = "usememos";
     repo = "memos";
     rev = "v${version}";
-    hash = "sha256-lcOZg5mlFPp04ZCm5GDhQfSwE2ahSmGhmdAw+pygK0A=";
+    hash = "sha256-bsIdioZ8Ak5A9W+XdqJhNlJqLulXlqRwSgq6473Yx6U=";
   };
 
-  frontend = stdenv.mkDerivation (finalAttrs: {
-    pname = "memos-web";
-    inherit version;
+  frontend = let
+    mkPnpmPackage = inputs.pnpm2nix.packages."${system}".mkPnpmPackage;
+    proto = stdenvNoCC.mkDerivation {
+      pname = "memos-proto";
+      inherit version;
+      src = "${src}/proto";
 
-    src = "${src}/web";
+      nativeBuildInputs = [
+        buf
+        protoc-gen-go
+        protoc-gen-go-grpc
+        protoc-gen-validate
+        grpc-gateway
+      ];
 
-    pnpmDeps = assert lib.versionAtLeast nodePackages.pnpm.version "8.10.0";
-      stdenvNoCC.mkDerivation {
-        pname = "${finalAttrs.pname}-pnpm-deps";
-        inherit (finalAttrs) src version;
+      doCheck = false;
 
-        nativeBuildInputs = [
-          jq
-          moreutils
-          nodePackages.pnpm
-          cacert
-        ];
+      postPatch = ''
+        substituteInPlace buf.gen.yaml \
+          --replace-fail '../web' './web'
 
-        pnpmPatch = builtins.toJSON {
-          pnpm.supportedArchitectures = {
-            os = ["linux"];
-            cpu = ["x64" "arm64"];
-          };
-        };
+        substituteInPlace buf.gen.yaml \
+          --replace-fail '../api' './api'
+      '';
 
-        postPatch = ''
-          mv package.json package.json.orig
-          jq --raw-output ". * $pnpmPatch" package.json.orig > package.json
-        '';
-        installPhase = ''
-          export HOME=$(mktemp -d)
+      buildPhase = ''
+        runHook preBuild
+        export SSL_CERT_FILE="${cacert}/etc/ssl/certs/ca-bundle.crt"
+        HOME=$TMPDIR buf generate
+        runHook postBuild
+      '';
 
-          pnpm config set store-dir $out
-          pnpm install --frozen-lockfile --ignore-script
-
-          rm -rf $out/v3/tmp
-          for f in $(find $out -name "*.json"); do
-            sed -i -E -e 's/"checkedAt":[0-9]+,//g' $f
-            jq --sort-keys . $f | sponge $f
-          done
-        '';
-
-        dontBuild = true;
-        dontFixup = true;
-        outputHashMode = "recursive";
-        outputHash = "sha256-8K4GyEZTuzYo/oXIeXlyV4D1VAlffMmodnwEhHSUxfU=";
-      };
-    nativeBuildInputs = [
-      nodePackages.pnpm
-      nodePackages.nodejs
-    ];
-    preBuild = ''
-      export HOME=$(mktemp -d)
-      export STORE_PATH=$(mktemp -d)
-
-      cp -Tr "$pnpmDeps" "$STORE_PATH"
-      chmod -R +w "$STORE_PATH"
-
-      pnpm config set store-dir "$STORE_PATH"
-      pnpm install --offline --frozen-lockfile --ignore-script
-      patchShebangs node_modules/{*,.*}
-    '';
-
-    postBuild = ''
-      pnpm build
-    '';
-
-    installPhase = ''
-      cp -r dist $out/
-    '';
-
-    passthru = {
-      inherit (finalAttrs) pnpmDeps;
+      installPhase = ''
+        cp -r ${src}/web $out
+        cp -r ${src}/api $out
+      '';
     };
-  });
+  in
+    mkPnpmPackage {
+      pname = "memos-web";
+      inherit version;
+      src = "${src}/web";
+
+      installInPlace = true;
+
+      buildPhase = ''
+
+        runHook preBuild
+
+
+
+
+        cp -r ${proto}/web/src/types/proto ./src/types
+
+        npx tsc
+        npx vite --clearScreen=false build
+
+        runHook postBuild
+      '';
+    };
 in
   buildGoModule rec {
     pname = "memos";
@@ -101,7 +89,7 @@ in
 
     # check will unable to access network in sandbox
     doCheck = false;
-    vendorHash = "sha256-UM/xeRvfvlq+jGzWpc3EU5GJ6Dt7RmTbSt9h3da6f8w=";
+    vendorHash = lib.fakeHash;
 
     # Inject frontend assets into go embed
     prePatch = ''

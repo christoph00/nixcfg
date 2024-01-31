@@ -10,6 +10,7 @@ in {
   options = with lib; {
     chr.services.memos = {
       enable = mkEnableOption "Enable memos";
+      container = mkBoolOpt' true "Enable memos in container";
 
       directory = mkOption {
         type = types.str;
@@ -66,7 +67,7 @@ in {
       group = "memos";
     };
 
-    systemd.services.memos = {
+    systemd.services.memos = lib.mkIf (!cfg.container) {
       enable = true;
       description = "Lightweight note-taking service";
       wantedBy = ["multi-user.target"];
@@ -77,6 +78,17 @@ in {
         Group = cfg.group;
 
         ExecStart = "${cfg.package}/bin/memos -m prod -p ${toString cfg.port} -d ${cfg.directory}";
+      };
+    };
+
+    virtualisation.oci-containers.containers.memos = lib.mkIf cfg.container {
+      image = "ghcr.io/usememos/memos:0.19.1";
+      user = "${cfg.user}";
+      group = "${cfg.group}";
+      autoStart = true;
+      volumes = ["${cfg.directory}=/mnt/docker-aio-config"];
+      environment = {
+        MEMOS_PORT = "${toString cfg.port}";
       };
     };
 
