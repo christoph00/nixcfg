@@ -47,4 +47,5 @@ in {
   #  "secrets/pia.crt".publicKeys = [christoph_air13 star];
   #  "secrets/nc-admin-pass".publicKeys = [christoph_air13 star futro oca tower christoph_tower];
   "secrets/yarr-auth".publicKeys = [christoph_x13 futro];
+  "secrets/grafana-password".publicKeys = [christoph_x13 futro x13 tower air13 oca oc1 oc2];
 }
