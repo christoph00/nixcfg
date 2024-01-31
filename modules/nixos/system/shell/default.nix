@@ -19,6 +19,7 @@ in {
 
       shellAliases = {
         ll = "ls -lah";
+        kssh = "kitty +kitten ssh";
       };
 
       systemPackages = with pkgs; [
