@@ -43,6 +43,10 @@ in {
     };
   };
 
+  services.grafana-agent-flow = {
+    httpListenAddr = "0.0.0.0:12345";
+  };
+
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "ohci_pci" "ehci_pci" "usb_storage" "usbhid" "sd_mod"];
   # boot.kernelParams = ["radeon.cik_support=0" "amdgpu.cik_support=1"];
 
