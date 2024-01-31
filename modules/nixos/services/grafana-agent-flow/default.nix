@@ -6,7 +6,7 @@
   ...
 }:
 with lib; let
-  grafanaAgentLib = import ../river-lib.nix;
+  grafanaAgentLib = import ./river-lib.nix;
   inherit (grafanaAgentLib) buildScrapeSet;
 
   cfg = config.services.grafana-agent-flow;
