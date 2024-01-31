@@ -35,6 +35,7 @@ in {
       paperless.enable = true;
       radicale.enable = true;
       yarr.enable = true;
+      memos.enable = true;
     };
   };
 
