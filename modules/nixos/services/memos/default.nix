@@ -19,6 +19,12 @@ in {
         description = "Persistent directory to house database.";
       };
 
+      version = mkOption {
+        type = types.str;
+        default = "0.19.1";
+        description = "Version of memos to use";
+      };
+
       address = mkOption {
         type = types.str;
         default = "127.0.0.1";
@@ -83,7 +89,7 @@ in {
     };
 
     virtualisation.oci-containers.containers.memos = lib.mkIf cfg.container {
-      image = "ghcr.io/usememos/memos:0.19.1";
+      image = "ghcr.io/usememos/memos:${cfg.version}";
       autoStart = true;
       hostname = "memos";
       volumes = ["${cfg.directory}:/var/opt/memos"];

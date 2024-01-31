@@ -20,17 +20,22 @@ in {
   };
 
   config = mkIf cfg.enable {
-    networking.nat = {
-      enable = true;
-      internalInterfaces = [
-        "podman0"
-      ];
-      externalInterface = cfg.externalInterface;
+    networking.firewall = {
+      trustedInterfaces = ["podman0"];
+      interfaces."podman+".allowedUDPPorts = [53];
+      interfaces."podman+".allowedTCPPorts = [53];
+      allowedUDPPorts = [53];
     };
 
     virtualisation = {
       podman = {
         enable = true;
+        dockerSocket.enable = true;
+        autoPrune = {
+          enable = true;
+          dates = "daily";
+          flags = ["--all"];
+        };
       };
       oci-containers = {
         backend = "podman";
