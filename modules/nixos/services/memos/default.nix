@@ -76,7 +76,7 @@ in {
         User = cfg.user;
         Group = cfg.group;
 
-        ExecStart = "${cfg.package}/bin/memos --addr ${cfg.address} --port ${toString cfg.port} --data ${cfg.directory}";
+        ExecStart = "${cfg.package}/bin/memos -m prod -p ${toString cfg.port} -d ${cfg.directory}";
       };
     };
 
