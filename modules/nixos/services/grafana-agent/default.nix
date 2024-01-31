@@ -14,10 +14,10 @@ in {
   };
   config = mkIf cfg.enable {
     age.secrets.grafana-password = {
-      file = ../../../../secrets/grafana-password.age;
+      file = ../../../../secrets/grafana-password;
     };
     age.secrets.grafana-logs-password = {
-      file = ../../../../secrets/grafana-logs-password.age;
+      file = ../../../../secrets/grafana-logs-password;
     };
     services.grafana-agent = {
       enable = true;
