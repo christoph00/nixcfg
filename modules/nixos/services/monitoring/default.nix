@@ -11,6 +11,12 @@ with lib.chr; let
 in {
   options.chr.services.monitoring = with types; {
     enable = mkBoolOpt true "Enable monitoring Service.";
+    scrapeRouter = mkBoolOpt false "Enable scraping router.";
+    httpListenAddr = mkOption {
+      type = types.str;
+      default = "127.0.0.1:9100";
+      description = "The address and port that the HTTP server listens on.";
+    };
   };
   config = mkIf cfg.enable {
     age.secrets.grafana-password = {
@@ -20,6 +26,7 @@ in {
       enable = true;
 
       enableJournaldLogging = true;
+      httpListenAddr = cfg.httpListenAddr;
 
       staticScrapes = {
         hass = mkIf config.chr.services.home-assistant.enable {
@@ -34,6 +41,9 @@ in {
 
         cloudflared = mkIf config.services.cloudflared.enable {
           targets = ["localhost:8927"];
+        };
+        router = mkIf cfg.scrapeRouter {
+          targets = ["192.168.2.1:9100"];
         };
       };
 
