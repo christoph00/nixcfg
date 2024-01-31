@@ -85,6 +85,7 @@ in {
     virtualisation.oci-containers.containers.memos = lib.mkIf cfg.container {
       image = "ghcr.io/usememos/memos:0.19.1";
       autoStart = true;
+      hostname = "memos";
       volumes = ["${cfg.directory}:/var/opt/memos"];
       environment = {
         MEMOS_PORT = "${toString cfg.port}";
