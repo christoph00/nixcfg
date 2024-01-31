@@ -28,6 +28,10 @@ in {
       efiDisk = "/dev/disk/by-uuid/62F9-9D4F";
       rootOnTmpfs = true;
     };
+    system.containers = {
+      enable = true;
+      externalInterface = "enp5s0";
+    };
     services = {
       nas.enable = true;
       smart-home = true;
