@@ -1,4 +1,4 @@
-# ttps://github.com/nmasur/dotfiles
+# https://github.com/nmasur/dotfiles
 # Caddy is a reverse proxy, like Nginx or Traefik. This creates an ingress
 # point from my local network or the public (via Cloudflare). Instead of a
 # Caddyfile, I'm using the more expressive JSON config file format. This means
