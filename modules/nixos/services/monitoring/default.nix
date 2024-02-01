@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.services.monitoring;
 in {
   options.chr.services.monitoring = with types; {
-    enable = mkBoolOpt true "Enable monitoring Service.";
+    enable = mkBoolOpt false "Enable monitoring Service.";
     scrapeRouter = mkBoolOpt false "Enable scraping router.";
     httpListenAddr = mkOption {
       type = types.str;
