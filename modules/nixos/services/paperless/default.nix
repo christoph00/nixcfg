@@ -31,9 +31,31 @@ in {
 
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
-        "docs.r505.de" = "http://127.0.0.1:28981";
+        "docs.r505.de" = "http://localhost:${builtins.toString config.services.paperless.port}";
       };
     };
+
+    caddy.routes = [
+      {
+        match = [
+          {
+            host = ["docs.net.r505.de"];
+          }
+        ];
+        handle = [
+          {
+            handler = "reverse_proxy";
+            upstreams = [
+              {
+                dial = "localhost:${builtins.toString config.services.paperless.port}";
+              }
+            ];
+          }
+        ];
+      }
+    ];
+
+    users.users.paperless.extraGroups = ["sftpgo"];
 
     systemd.services.paperless.serviceConfig.RestartSec = "600"; # Retry every 10 minutes
   };
