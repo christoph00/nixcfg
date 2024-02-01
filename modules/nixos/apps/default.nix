@@ -52,8 +52,6 @@ in {
         wlsunset
         wl-clipboard
 
-        gtkcord4
-
         peazip
 
         goldwarden
@@ -70,7 +68,7 @@ in {
 
         neovide
 
-        wpsoffice
+        #wpsoffice
 
         chr.gpucache
       ];
