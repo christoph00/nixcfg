@@ -71,6 +71,8 @@ in {
         neovide
 
         wpsoffice
+
+        chr.gpucache
       ];
     };
   };
