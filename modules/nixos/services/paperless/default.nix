@@ -34,26 +34,6 @@ in {
       };
     };
 
-    caddy.routes = [
-      {
-        match = [
-          {
-            host = ["docs.net.r505.de"];
-          }
-        ];
-        handle = [
-          {
-            handler = "reverse_proxy";
-            upstreams = [
-              {
-                dial = "localhost:${builtins.toString config.services.paperless.port}";
-              }
-            ];
-          }
-        ];
-      }
-    ];
-
     # Fix permissions on a regular schedule
     systemd.timers.paperless-permissions = {
       timerConfig = {
