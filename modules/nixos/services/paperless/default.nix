@@ -10,13 +10,14 @@ with lib.chr; let
   cfg = config.chr.services.paperless;
 in {
   options.chr.services.paperless = with types; {
-    enable = mkBoolOpt' false;
+    enable = mkBoolOpt' config.chr.services.nas.enable;
   };
   config = mkIf cfg.enable {
     services.paperless = {
       enable = true;
       address = "0.0.0.0";
       dataDir = "/nix/persist/paperless";
+      consumptionDirIsPublic = true;
       #passwordFile = config.age.secrets.paperless-admin-password.path;
       settings = {
         PAPERLESS_FILENAME_FORMAT = "{owner_username}/{created_year}-{created_month}-{created_day}_{asn}_{title}";
