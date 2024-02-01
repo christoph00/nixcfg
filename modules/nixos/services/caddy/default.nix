@@ -1,3 +1,4 @@
+# ttps://github.com/nmasur/dotfiles
 # Caddy is a reverse proxy, like Nginx or Traefik. This creates an ingress
 # point from my local network or the public (via Cloudflare). Instead of a
 # Caddyfile, I'm using the more expressive JSON config file format. This means
@@ -93,6 +94,6 @@
 
     # Caddy exposes Prometheus metrics with the admin API
     # https://caddyserver.com/docs/api
-    prometheus.scrapeTargets = ["127.0.0.1:2019"];
+    #prometheus.scrapeTargets = ["127.0.0.1:2019"];
   };
 }
