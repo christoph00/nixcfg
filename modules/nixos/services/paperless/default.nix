@@ -17,6 +17,7 @@ in {
       enable = true;
       address = "0.0.0.0";
       dataDir = "${config.chr.system.persist.stateDir}/paperless";
+      consumptionDir = "${config.chr.system.persist.stateDir}/paperless-consumption";
       consumptionDirIsPublic = true;
       settings = {
         PAPERLESS_FILENAME_FORMAT = "{owner_username}/{created_year}-{created_month}-{created_day}_{asn}_{title}";
