@@ -80,7 +80,7 @@ in {
 
     services.nginx.clientMaxBodySize = "10G";
 
-    environment.systemPackages = [pkgs.caddy];
+    environment.systemPackages = [pkgs.caddy-cloudflare];
 
     users.users.nginx.extraGroups = ["acme" "media"];
     services.nginx.enable = true;
