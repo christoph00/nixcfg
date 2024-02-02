@@ -66,6 +66,8 @@ in {
 
         armcord
 
+        filezilla
+
         neovide
 
         #wpsoffice
