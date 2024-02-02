@@ -17,7 +17,6 @@ in {
       enable = true;
       address = "0.0.0.0";
       dataDir = "${config.chr.system.persist.stateDir}/paperless";
-      consumptionDir = "/mnt/userdata/inbox";
       settings = {
         PAPERLESS_FILENAME_FORMAT = "{owner_username}/{created_year}-{created_month}-{created_day}_{asn}_{title}";
         PAPERLESS_ENABLE_COMPRESSION = false;
@@ -25,6 +24,7 @@ in {
         PAPERLESS_OCR_LANGUAGE = "deu+eng";
         PAPERLESS_TASK_WORKERS = 4;
         PAPERLESS_WEBSERVER_WORKERS = 4;
+        PAPERLESS_CONVERT_TMPDIR = "${config.chr.system.persist.stateDir}/paperless/tmp";
       };
     };
 
@@ -34,21 +34,15 @@ in {
       };
     };
 
-    # Fix permissions on a regular schedule
-    systemd.timers.paperless-permissions = {
-      timerConfig = {
-        OnCalendar = "*-*-* *:0/10"; # Every 10 minutes
-        Unit = "paperless-permissions.service";
-      };
-      wantedBy = ["timers.target"];
-    };
-
-    # Fix paperless shared permissions
-    systemd.services.paperless-permissions = {
+    systemd.services.paperless-sftpgo = {
       description = "Allow group access to paperless files";
       serviceConfig = {Type = "oneshot";};
+      wantedBy = ["paperless-consumer.service"];
       script = ''
-        find ${config.services.paperless.consumptionDir} -type f -exec chown sftpgo:paperless -- {} +
+        inotifywait -m -e create "/mnt/userdata/inbox" |
+        while read -r DIR FILE; do
+          rsync -avog --remove-source-files --chown=paperless:paperless "/mnt/userdata/inbox/$FILE" "${config.services.paperless.consumtionDir}/"
+        done
       '';
     };
 
