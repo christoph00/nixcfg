@@ -39,9 +39,9 @@ in {
       serviceConfig = {Type = "oneshot";};
       wantedBy = ["paperless-consumer.service"];
       script = ''
-        inotifywait -m -e create "/mnt/userdata/inbox" |
+        inotifywait -m -e close_write,moved_to,create "/mnt/userdata/inbox" |
         while read -r DIR FILE; do
-          rsync -avog --remove-source-files --chown=paperless:paperless "/mnt/userdata/inbox/$FILE" "${config.services.paperless.consumtionDir}/"
+          ${pkgs.rsync}/bin/rsync -avog --remove-source-files --chown=paperless:paperless "/mnt/userdata/inbox/$FILE" "${config.services.paperless.consumptionDir}/"
         done
       '';
     };
