@@ -40,6 +40,7 @@ in {
       radicale.enable = true;
       yarr.enable = true;
       memos.enable = true;
+      vaultwarden.enable = true;
       monitoring = {
         httpListenAddr = "0.0.0.0:12345";
         scrapeRouter = true;
