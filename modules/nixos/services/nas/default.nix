@@ -13,7 +13,7 @@ in {
     enable = mkBoolOpt false "Enable NAS Service.";
     userdataDir = mkOpt (types.nullOr types.str) "/mnt/userdata" "NAS Userdata Dir.";
     webdav = mkBoolOpt true "Enable Webdav Service.";
-    sftp = mkBoolOpt false "Enable Sftp Service.";
+    sftp = mkBoolOpt true "Enable Sftp Service.";
   };
   config = mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [80 443 2022];
