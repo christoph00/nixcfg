@@ -61,9 +61,13 @@ in {
           ${pkgs.curl}/bin/curl ${plurl}/api/documents/post_document/ -X POST \
             -H "Authorization: Token $PLTOKEN" \
             -F "document=@/mnt/userdata/inbox/$file" \
-            -F "title=$file" \
-            -F "tags=inbox"
-            echo "Datei $file erfolgreich gesendet."
+            -F "title=$file"
+          if [ $? -eq 0 ]; then
+            echo "Datei $file erfolgreich gesendet. Lösche Datei..."
+            rm "/mnt/userdata/inbox/$file"
+          else
+            echo "Fehler beim Senden der Datei $file."
+          fi
         done
       '';
     };
