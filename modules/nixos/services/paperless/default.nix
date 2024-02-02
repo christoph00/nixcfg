@@ -46,12 +46,14 @@ in {
     systemd.services.paperless-sftpgo = {
       description = "Move files from sftpgo inbox to paperless consumption directory";
       wantedBy = ["paperless-consumer.service"];
-      environmentFile = config.age.secrets.paperless-token-env.path;
-      script = let
-        plurl = "http://localhost:${builtins.toString config.services.paperless.port}";
-      in ''
-        ${pkgs.chr.scantopl}/bin/scantopl -scandir "/mnt/userdata/inbox" -plurl ${plurl}"
-      '';
+      serviceConfig = {
+        EnvironmentFile = config.age.secrets.paperless-token-env.path;
+        ExecStart = let
+          plurl = "http://localhost:${builtins.toString config.services.paperless.port}";
+        in ''
+          ${pkgs.chr.scantopl}/bin/scantopl -scandir "/mnt/userdata/inbox" -plurl ${plurl}"
+        '';
+      };
       # script = ''
       #   ${pkgs.inotify-tools}/bin/inotifywait -m -e create "/mnt/userdata/inbox" |
       #   while read -r directory action file; do
