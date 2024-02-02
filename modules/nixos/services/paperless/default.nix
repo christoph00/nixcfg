@@ -48,17 +48,24 @@ in {
       wantedBy = ["paperless-consumer.service"];
       serviceConfig = {
         EnvironmentFile = config.age.secrets.paperless-token-env.path;
-        ExecStart = let
-          plurl = "http://localhost:${builtins.toString config.services.paperless.port}";
-        in "${pkgs.chr.scantopl}/bin/scantopl -scandir /mnt/userdata/inbox -plurl ${plurl}";
+        # ExecStart = let
+        #   plurl = "http://localhost:${builtins.toString config.services.paperless.port}";
+        # in "${pkgs.chr.scantopl}/bin/scantopl -scandir /mnt/userdata/inbox -plurl ${plurl}";
       };
-      # script = ''
-      #   ${pkgs.inotify-tools}/bin/inotifywait -m -e create "/mnt/userdata/inbox" |
-      #   while read -r directory action file; do
-      #     chown paperless:paperless "$directory/$file"
-      #     mv "$directory/$file" "${config.services.paperless.consumptionDir}/"
-      #   done
-      # '';
+      script = let
+        plurl = "http://localhost:${builtins.toString config.services.paperless.port}";
+      in ''
+        ${pkgs.inotify-tools}/bin/inotifywait -m -e close_write "/mnt/userdata/inbox" |
+        while read -r directory action file; do
+          echo "Neue Datei $file erkannt. Sende an Paperless..."
+          ${pkgs.curl}/bin/curl ${plurl}/api/documents/post_document/ -X POST \
+            -H "Authorization: Token $PLTOKEN" \
+            -F "document=@/mnt/userdata/inbox/$file" \
+            -F "title=$file" \
+            -F "tags=inbox"
+            echo "Datei $file erfolgreich gesendet."
+        done
+      '';
     };
 
     systemd.services.paperless.serviceConfig.RestartSec = "600"; # Retry every 10 minutes
