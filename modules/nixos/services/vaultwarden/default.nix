@@ -24,9 +24,15 @@ in {
         ROCKET_ADDRESS = "127.0.0.1";
         ROCKET_PORT = 8222;
         WEBSOCKET_ENABLED = false;
-        DATA_FOLDER = "${config.chr.system.persist.stateDir}/vaultwarden";
       };
       #environmentFile = ;
+    };
+    environment.persistence."${config.chr.system.persist.stateDir}" = {
+      directories = [
+        {
+          directory = "/var/lib/vaultwarden";
+        }
+      ];
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
