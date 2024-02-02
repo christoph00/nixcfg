@@ -14,6 +14,7 @@ in {
   };
   config = mkIf cfg.enable {
     services.vaultwarden = {
+      enable = true;
       config = {
         DOMAIN = "https://pass.r505.de";
         SIGNUPS_ALLOWED = false;
