@@ -34,24 +34,6 @@ in {
       };
     };
 
-    # Fix permissions on a regular schedule
-    systemd.timers.paperless-permissions = {
-      timerConfig = {
-        OnCalendar = "*-*-* *:0/10"; # Every 10 minutes
-        Unit = "paperless-permissions.service";
-      };
-      wantedBy = ["timers.target"];
-    };
-
-    # Fix paperless shared permissions
-    systemd.services.paperless-permissions = {
-      description = "Allow group access to paperless files";
-      serviceConfig = {Type = "oneshot";};
-      script = ''
-        find ${config.services.paperless.consumptionDir} -type f -exec chmod 640 -- {} +
-      '';
-    };
-
     systemd.services.paperless.serviceConfig.RestartSec = "600"; # Retry every 10 minutes
   };
 }
