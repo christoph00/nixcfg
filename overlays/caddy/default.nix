@@ -1,6 +1,6 @@
 # Adds the Cloudflare DNS validation module
 inputs: _final: prev: let
-  plugins = ["github.com/caddy-dns/cloudflare" "github.com/hslatman/caddy-crowdsec-bouncer" "github.com/dunglas/frankenphp/caddy"];
+  plugins = ["github.com/caddy-dns/cloudflare"];
   goImports =
     prev.lib.flip prev.lib.concatMapStrings plugins (pkg: "   _ \"${pkg}\"\n");
   goGets =
