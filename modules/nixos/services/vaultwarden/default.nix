@@ -29,9 +29,7 @@ in {
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
-        "pass.r505.de" = "localhost:${
-          builtins.toString config.services.vaultwarden.config.ROCKET_PORT
-        }";
+        "pass.r505.de" = "http://localhost:${builtins.toString config.services.vaultwarden.config.ROCKET_PORT}";
       };
     };
   };
