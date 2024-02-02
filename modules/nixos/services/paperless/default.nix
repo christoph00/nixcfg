@@ -20,11 +20,8 @@ in {
       mediaDir = "/mnt/userdata/paperless";
       settings = {
         PAPERLESS_FILENAME_FORMAT = "{owner_username}/{created_year}-{created_month}-{created_day}_{asn}_{title}";
-        PAPERLESS_ENABLE_COMPRESSION = false;
-        PAPERLESS_NUMBER_OF_SUGGESTED_DATES = 8;
+        PAPERLESS_ENABLE_COMPRESSION = true;
         PAPERLESS_OCR_LANGUAGE = "deu+eng";
-        PAPERLESS_TASK_WORKERS = 4;
-        PAPERLESS_WEBSERVER_WORKERS = 4;
         PAPERLESS_CONVERT_TMPDIR = "${config.services.paperless.dataDir}/tmp";
         PAPERLESS_SCRATCH_DIR = "${config.services.paperless.dataDir}/scratch";
       };
