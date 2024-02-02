@@ -34,6 +34,11 @@ in {
       };
     };
 
+    systemd.services.paperless-consumer.serviceConfig = {
+      Group = "paperless";
+      UMask = "002";
+    };
+
     systemd.services.paperless.serviceConfig.RestartSec = "600"; # Retry every 10 minutes
   };
 }
