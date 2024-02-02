@@ -47,7 +47,8 @@ in {
       script = ''
         ${pkgs.inotify-tools}/bin/inotifywait -m -e create "/mnt/userdata/inbox" |
         while read -r directory action file; do
-          ${pkgs.rsync}/bin/rsync -avog --remove-source-files --chown=paperless:paperless "/mnt/userdata/inbox/$file" "${config.services.paperless.consumptionDir}/"
+          chown paperless:paperless $file
+          mv $file "${config.services.paperless.consumptionDir}/"
         done
       '';
     };
