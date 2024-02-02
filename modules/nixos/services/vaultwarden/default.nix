@@ -25,8 +25,10 @@ in {
         ROCKET_PORT = 8222;
         WEBSOCKET_ENABLED = false;
       };
-      #environmentFile = ;
+      environmentFile = config.age.secrets.vaultwarden-env.path;
     };
+    age.secrets.vaultwarden-env.file = ../../../../secrets/vaultwarden.env;
+
     environment.persistence."${config.chr.system.persist.stateDir}" = {
       directories = [
         {

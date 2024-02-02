@@ -16,7 +16,8 @@ in {
     services.paperless = {
       enable = true;
       address = "0.0.0.0";
-      dataDir = "${config.chr.system.persist.stateDir}/paperless";
+      #dataDir = "${config.chr.system.persist.stateDir}/paperless";
+      mediaDir = "/mnt/userdata/paperless";
       settings = {
         PAPERLESS_FILENAME_FORMAT = "{owner_username}/{created_year}-{created_month}-{created_day}_{asn}_{title}";
         PAPERLESS_ENABLE_COMPRESSION = false;
@@ -24,7 +25,8 @@ in {
         PAPERLESS_OCR_LANGUAGE = "deu+eng";
         PAPERLESS_TASK_WORKERS = 4;
         PAPERLESS_WEBSERVER_WORKERS = 4;
-        PAPERLESS_CONVERT_TMPDIR = "${config.chr.system.persist.stateDir}/paperless/tmp";
+        PAPERLESS_CONVERT_TMPDIR = "${config.services.paperless.dataDir}/tmp";
+        PAPERLESS_SCRATCH_DIR = "${config.services.paperless.dataDir}/scratch";
       };
     };
 
@@ -34,11 +36,19 @@ in {
       };
     };
 
+    environment.persistence."${config.chr.system.persist.stateDir}" = {
+      directories = [
+        {
+          directory = "/var/lib/paperless";
+        }
+      ];
+    };
+
     systemd.services.paperless-sftpgo = {
       description = "Move files from sftpgo inbox to paperless consumption directory";
       wantedBy = ["paperless-consumer.service"];
       script = ''
-        ${pkgs.inotify-tools}/bin/inotifywait -m -e close_write,moved_to,create "/mnt/userdata/inbox" |
+        ${pkgs.inotify-tools}/bin/inotifywait -m -e create "/mnt/userdata/inbox" |
         while read -r directory action file; do
           ${pkgs.rsync}/bin/rsync -avog --remove-source-files --chown=paperless:paperless "/mnt/userdata/inbox/$file" "${config.services.paperless.consumptionDir}/"
         done
