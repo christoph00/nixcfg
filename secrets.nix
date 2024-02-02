@@ -49,4 +49,5 @@ in {
   "secrets/yarr-auth".publicKeys = [christoph_x13 futro];
   "secrets/grafana-password".publicKeys = [christoph_x13 futro x13 tower air13 oca oc1 oc2];
   "secrets/vaultwarden.env".publicKeys = [christoph_x13 futro];
+  "secrets/paperless-token.env".publicKeys = [christoph_x13 futro];
 }

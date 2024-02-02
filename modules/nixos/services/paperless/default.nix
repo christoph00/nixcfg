@@ -41,16 +41,24 @@ in {
       ];
     };
 
+    age.secrets.paperless-token-env.file = ../../../../secrets/paperless-token.env;
+
     systemd.services.paperless-sftpgo = {
       description = "Move files from sftpgo inbox to paperless consumption directory";
       wantedBy = ["paperless-consumer.service"];
-      script = ''
-        ${pkgs.inotify-tools}/bin/inotifywait -m -e create "/mnt/userdata/inbox" |
-        while read -r directory action file; do
-          chown paperless:paperless $file
-          mv $file "${config.services.paperless.consumptionDir}/"
-        done
+      environmentFile = config.age.secrets.paperless-token-env.path;
+      script = let
+        plurl = "http://localhost:${builtins.toString config.services.paperless.port}";
+      in ''
+        ${pkgs.chr.scantopl}/bin/scantopl -scandir "/mnt/userdata/inbox" -plurl ${plurl}"
       '';
+      # script = ''
+      #   ${pkgs.inotify-tools}/bin/inotifywait -m -e create "/mnt/userdata/inbox" |
+      #   while read -r directory action file; do
+      #     chown paperless:paperless "$directory/$file"
+      #     mv "$directory/$file" "${config.services.paperless.consumptionDir}/"
+      #   done
+      # '';
     };
 
     systemd.services.paperless.serviceConfig.RestartSec = "600"; # Retry every 10 minutes
