@@ -35,13 +35,12 @@ in {
     };
 
     systemd.services.paperless-sftpgo = {
-      description = "Allow group access to paperless files";
-      serviceConfig = {Type = "oneshot";};
+      description = "Move files from sftpgo inbox to paperless consumption directory";
       wantedBy = ["paperless-consumer.service"];
       script = ''
-        inotifywait -m -e close_write,moved_to,create "/mnt/userdata/inbox" |
-        while read -r DIR FILE; do
-          ${pkgs.rsync}/bin/rsync -avog --remove-source-files --chown=paperless:paperless "/mnt/userdata/inbox/$FILE" "${config.services.paperless.consumptionDir}/"
+        ${pkgs.inotify-tools}/bin/inotifywait -m -e close_write,moved_to,create "/mnt/userdata/inbox" |
+        while read -r directory action file; do
+          ${pkgs.rsync}/bin/rsync -avog --remove-source-files --chown=paperless:paperless "/mnt/userdata/inbox/$file" "${config.services.paperless.consumptionDir}/"
         done
       '';
     };
