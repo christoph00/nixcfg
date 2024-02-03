@@ -57,14 +57,37 @@ in {
             };
           }
         ];
-        sftpd.bindings = mkIf cfg.sftp [
-          {
-            port = 2022;
-            address = "0.0.0.0";
-          }
-        ];
+        sftpd = mkIf cfg.sftp {
+          host_key_algorithms = [
+            "rsa-sha2-512"
+            "rsa-sha2-256"
+            "ecdsa-sha2-nistp256"
+            "ecdsa-sha2-nistp384"
+            "ecdsa-sha2-nistp521"
+            "ssh-ed25519"
+            "ssh-rsa" # drucker
+          ];
+          kex_algorithms = [
+            "curve25519-sha256"
+            "curve25519-sha256@libssh.org"
+            "ecdh-sha2-nistp256"
+            "ecdh-sha2-nistp384"
+            "ecdh-sha2-nistp521"
+            "diffie-hellman-group14-sha256"
+            "diffie-hellman-group14-sha1" # drucker
+          ];
+          bindings = [
+            {
+              port = 2022;
+              address = "0.0.0.0";
+            }
+          ];
+        };
       };
     };
+
+    # diffie-hellman-group-exchange-sha256 diffie-hellman-group-exchange-sha1 diffie-hellman-group14-sha1
+
     systemd.services.sftpgo.serviceConfig.RuntimeDirectory = "sftpgo";
     systemd.services.sftpgo.serviceConfig.RuntimeDirectoryMode = "0755";
     systemd.services.sftpgo.serviceConfig.ReadWritePaths = [cfg.userdataDir];
