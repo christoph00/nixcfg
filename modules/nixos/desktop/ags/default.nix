@@ -13,7 +13,7 @@ in {
     enable = mkBoolOpt config.chr.desktop.hyprland.enable "Whether or not enable Ags.";
     package = mkOption {
       type = types.package;
-      default = inputs.ags.packages.${pkgs.system}.default;
+      default = inputs.ags.packages.${pkgs.system}.agsWithTypes;
       defaultText = literalExpression "inputs.ags.packages.${pkgs.system}.default";
       description = lib.mdDoc ''
         ags package to use.
@@ -27,16 +27,23 @@ in {
         cfg.package
       ];
 
-      # systemd.user.services.ags = {
-      #   Unit.Description = "Aylurs GTK Shell";
-      #   Unit.PartOf = ["hyprland-session.target"];
-      #   Install.WantedBy = ["hyprland-session.target"];
-      #   Service = {
-      #     ExecStart = "${cfg.package}/bin/ags";
-      #     Restart = "always";
-      #     RestartSec = "3";
-      #   };
-      # };
+      xdg.configFile = {
+        "ags/types" = {
+          source = "${inputs.ags.packages.${pkgs.system}.agsWithTypes}/share/com.github.Aylur.ags/types";
+          recursive = true;
+        };
+      };
+
+      systemd.user.services.ags = {
+        Unit.Description = "Aylurs GTK Shell";
+        Unit.PartOf = ["hyprland-session.target"];
+        Install.WantedBy = ["hyprland-session.target"];
+        Service = {
+          ExecStart = "${cfg.package}/bin/ags";
+          Restart = "always";
+          RestartSec = "3";
+        };
+      };
     };
   };
 }

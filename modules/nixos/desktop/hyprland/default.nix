@@ -23,7 +23,7 @@ in {
         settings = {
           exec-once = [
             "${pkgs.waylock}/bin/waylock -fork-on-lock"
-            "${config.chr.desktop.ags.package}/bin/ags"
+            # "${config.chr.desktop.ags.package}/bin/ags"
             "wl-paste --type text --watch cliphist store" #Stores only text data
             "wl-paste --type image --watch cliphist store"
             "wlsunset -S 8:00 -s 20:00"
