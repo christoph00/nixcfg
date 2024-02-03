@@ -240,7 +240,7 @@ in {
       packages = [pkgs.gcr pkgs.dconf];
     };
 
-    services.xserver = {
+    services.xserver.xkb = {
       layout = "us-german-umlaut,us";
       extraLayouts.us-german-umlaut = {
         description = "US Layout with German Umlauts";

@@ -34,16 +34,16 @@ in {
         };
       };
 
-      systemd.user.services.ags = {
-        Unit.Description = "Aylurs GTK Shell";
-        Unit.PartOf = ["hyprland-session.target"];
-        Install.WantedBy = ["hyprland-session.target"];
-        Service = {
-          ExecStart = "${cfg.package}/bin/ags";
-          Restart = "always";
-          RestartSec = "3";
-        };
-      };
+      # systemd.user.services.ags = {
+      #   Unit.Description = "Aylurs GTK Shell";
+      #   Unit.PartOf = ["hyprland-session.target"];
+      #   Install.WantedBy = ["hyprland-session.target"];
+      #   Service = {
+      #     ExecStart = "${cfg.package}/bin/ags";
+      #     Restart = "always";
+      #     RestartSec = "3";
+      #   };
+      # };
     };
   };
 }

@@ -9,7 +9,7 @@ with lib;
 with lib.chr; let
   cfg = config.chr.desktop.theme;
   gtkcss = ''
-      @define-color accent_color #a9b1d6;
+    @define-color accent_color #a9b1d6;
     @define-color accent_bg_color #a9b1d6;
     @define-color accent_fg_color rgba(0, 0, 0, 0.87);
     @define-color destructive_color #F28B82;
@@ -110,8 +110,8 @@ in {
         theme = {
           #   #name = "${config.colorscheme.slug}";
           #   #package = gtkThemeFromScheme {scheme = config.colorscheme;};
-          package = pkgs.adw-gtk3;
-          name = "adw-gtk3-dark";
+          package = pkgs.fluent-gtk-theme;
+          name = "Fluent-Light";
         };
         iconTheme = {
           name = "Fluent";
