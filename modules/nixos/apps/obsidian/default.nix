@@ -17,8 +17,5 @@ in {
     chr.home.extraOptions = mkIf cfg.enable {
       home.packages = with pkgs; [obsidian];
     };
-    nixpkgs.config.permittedInsecurePackages = [
-      "electron-25.9.0"
-    ];
   };
 }
