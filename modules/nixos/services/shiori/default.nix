@@ -17,13 +17,16 @@ in {
       enable = true;
       port = 9119;
     };
-    environment.persistence."${config.chr.system.persist.stateDir}" = {
-      directories = [
-        {
-          directory = "/var/lib/shiori";
-        }
-      ];
+    systemd.services.shiori = {
+      environment.SHIORI_DIR = lib.mkForce "${config.chr.system.persist.stateDir}/shiori";
     };
+    # environment.persistence."${config.chr.system.persist.stateDir}" = {
+    #   directories = [
+    #     {
+    #       directory = "/var/lib/shiori";
+    #     }
+    #   ];
+    # };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
         "bm.r505.de" = "http://127.0.0.1:9119";
