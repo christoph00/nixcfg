@@ -16,6 +16,8 @@ in {
     common-gpu-amd
     common-pc
     common-pc-ssd
+
+    inputs.microvm.nixosModules.host
   ];
   networking.hostName = "futro";
 
