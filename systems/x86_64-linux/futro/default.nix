@@ -32,7 +32,7 @@ in {
       enable = false;
       externalInterface = "enp5s0";
     };
-    system.lxd.enable = true;
+    system.kvm.enable = true;
     services = {
       nas.enable = true;
       smart-home = true;
