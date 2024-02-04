@@ -9,7 +9,7 @@
 with lib;
 with lib.chr; let
   cfg = config.chr.vms.openwrt;
-  vmconfig = writeText "vmconfig.json" (builtins.toJSON {
+  vmconfig = pkgs.writeText "vmconfig.json" (builtins.toJSON {
     boot-source = {
       kernel_image_path = "/mnt/vm/openwrt/vmlinux";
       boot_args = "ro console=ttyS0 noapic reboot=k panic=1 pci=off nomodules random.trust_cpu=on i8042.noaux";
