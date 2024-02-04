@@ -24,6 +24,7 @@ in {
       lxd = {
         enable = true;
         recommendedSysctlSettings = true;
+        ui.enable = true;
       };
       lxc.lxcfs.enable = true;
     };
