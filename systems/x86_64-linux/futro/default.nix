@@ -33,6 +33,9 @@ in {
       externalInterface = "enp5s0";
     };
     system.kvm.enable = true;
+    vms = {
+      openwrt.enable = true;
+    };
     services = {
       nas.enable = true;
       smart-home = true;
