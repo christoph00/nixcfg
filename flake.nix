@@ -118,6 +118,9 @@
       url = "github:Exafunction/codeium.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    microvm.url = "github:astro/microvm.nix";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
