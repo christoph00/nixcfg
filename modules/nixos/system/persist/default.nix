@@ -25,6 +25,8 @@ in {
       hideMounts = true;
       directories = [
         "/var/lib/containers"
+        "/var/lib/lxd"
+
         "/var/log"
         "/var/db/sudo"
         "/var/lib/bluetooth"

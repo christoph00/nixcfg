@@ -19,7 +19,6 @@ in {
     };
     systemd.services.shiori = {
       serviceConfig = {
-        RestrictAddressFamilies = lib.mkForce ["none"];
       };
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
