@@ -71,6 +71,10 @@ in {
     device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
     options = ["subvol=@ncdata" "discard=async" "compress-force=zstd" "nofail"];
   };
+  fileSystems."/mnt/vm" = {
+    device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
+    options = ["subvol=@vm" "discard=async" "compress-force=zstd" "nofail"];
+  };
 
   fileSystems."/mnt/userdata" = {
     device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";

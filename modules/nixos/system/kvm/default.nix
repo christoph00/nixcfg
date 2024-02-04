@@ -20,6 +20,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.qemu_kvm];
+    environment.systemPackages = [pkgs.qemu_kvm pkgs.qemu-utils pkgs.firecracker pkgs.firectl];
   };
 }
