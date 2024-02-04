@@ -34,6 +34,10 @@ in {
         "/etc/NetworkManager/system-connections"
         # if sound
         "/var/lib/pipewire"
+        {
+          directory = "/var/lib/private";
+          mode = "0700";
+        }
       ];
     };
 
