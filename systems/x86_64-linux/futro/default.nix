@@ -29,9 +29,10 @@ in {
       rootOnTmpfs = true;
     };
     system.containers = {
-      enable = true;
+      enable = false;
       externalInterface = "enp5s0";
     };
+    system.lxd.enable = true;
     services = {
       nas.enable = true;
       smart-home = true;
