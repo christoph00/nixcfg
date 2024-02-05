@@ -142,9 +142,8 @@
         allowUnfree = true;
         permittedInsecurePackages = [
           # "qtwebkit-5.212.0-alpha4"
-          # "electron-24.8.6"
+          "electron-24.8.6"
           "openssl-1.1.1w"
-          "electron-25.9.0"
         ];
       };
 
