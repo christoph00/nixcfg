@@ -32,7 +32,7 @@ in {
     environment.persistence."${config.chr.system.persist.stateDir}" = {
       directories = [
         {
-          directory = "/var/lib/vaultwarden";
+          directory = "/var/lib/bitwarden_rs";
         }
       ];
     };
