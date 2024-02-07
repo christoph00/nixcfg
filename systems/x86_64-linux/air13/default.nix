@@ -11,7 +11,7 @@ with lib.chr; {
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
 
   boot.kernelModules = ["kvm-intel" "acpi_call"];
-  boot.blacklistedKernelModules = ["nouveau" "nvidia" "iwlwifi" "snd_hda_intel" "i915"];
+  boot.blacklistedKernelModules = ["nouveau" "iwlwifi" "snd_hda_intel"];
   boot.kernelParams = [
     "quiet"
     "splash"
@@ -89,6 +89,13 @@ with lib.chr; {
 
     nvidiaPersistenced = true;
   };
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
+
+  virtualisation.podman.enableNvidia = true;
+  services.xserver.videoDrivers = ["nvidia"];
 
   services.upower = {
     enable = true;
