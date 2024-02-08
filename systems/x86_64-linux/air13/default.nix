@@ -123,7 +123,13 @@ with lib.chr; {
     };
   };
 
-  environment.systemPackages = [inputs.ollama-flake.packages.${pkgs.system}.cuda];
+  environment.systemPackages = [inputs.ollama.packages.${pkgs.system}.cuda];
+
+  services.ollama = {
+    enable = true;
+    package = inputs.ollama.packages.${pkgs.system}.cuda;
+    listenAddress = "0.0.0.0:11434";
+  };
 
   system.stateVersion = "23.11";
 }
