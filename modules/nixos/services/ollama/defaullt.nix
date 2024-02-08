@@ -11,7 +11,7 @@ with lib.chr; let
   cfg = config.chr.services.ollama;
 in {
   options.chr.services.ollama = with types; {
-    enable = mkBoolOpt false "Enable ai Service.";
+    enable = mkBoolOpt' false;
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [inputs.ollama.packages.${pkgs.system}.cuda pkgs.cudatoolkit pkgs.nvtop];

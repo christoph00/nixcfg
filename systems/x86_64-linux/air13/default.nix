@@ -44,11 +44,9 @@ with lib.chr; {
 
   chr = {
     type = "server";
-    # services = {
-    #   smart-home = true;
-    #   home-assistant.hostname = "home.r505.de";
-    # };
     services = {
+      #   smart-home = true;
+      #   home-assistant.hostname = "home.r505.de";
       ollama.enable = true;
     };
   };
