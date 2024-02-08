@@ -37,6 +37,15 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
+    utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    ollama = {
+      url = "github:abysssol/ollama-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "utils";
+    };
+
     impermanence.url = "github:nix-community/impermanence";
 
     rust-overlay = {
