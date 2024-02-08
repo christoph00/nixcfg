@@ -2,6 +2,8 @@
   lib,
   buildHomeAssistantComponent,
   fetchFromGitHub,
+  huggingface-hub,
+  requests,
 }:
 buildHomeAssistantComponent rec {
   domain = "llama_conversation";
