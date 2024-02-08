@@ -4,6 +4,7 @@
   lib,
   channel,
   inputs,
+  system,
   ...
 }:
 with lib;
@@ -121,6 +122,8 @@ with lib.chr; {
       IPv6PrivacyExtensions = "yes";
     };
   };
+
+  environment.systemPackages = [inputs.ollama-flake.packages.${pkgs.system}.cuda];
 
   system.stateVersion = "23.11";
 }
