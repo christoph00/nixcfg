@@ -19,6 +19,7 @@ buildHomeAssistantComponent rec {
   propagatedBuildInputs = with python3Packages; [
     huggingface-hub
     requests
+    webcolors
   ];
 
   meta = with lib; {
