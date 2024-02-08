@@ -2,8 +2,7 @@
   lib,
   buildHomeAssistantComponent,
   fetchFromGitHub,
-  huggingface-hub,
-  requests,
+  python3Packages,
 }:
 buildHomeAssistantComponent rec {
   domain = "llama_conversation";
@@ -17,7 +16,7 @@ buildHomeAssistantComponent rec {
     hash = "sha256-ULIxdQKoe8+OlxWeUxh34r+L1KvmgHqi1S3mqjxoxng=";
   };
 
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with python3Packages; [
     huggingface-hub
     requests
   ];
