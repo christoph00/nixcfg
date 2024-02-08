@@ -48,6 +48,9 @@ with lib.chr; {
     #   smart-home = true;
     #   home-assistant.hostname = "home.r505.de";
     # };
+    services = {
+      ai.enable = true;
+    };
   };
   chr.system.filesystem = {
     enable = true;
@@ -121,14 +124,6 @@ with lib.chr; {
     networkConfig = {
       IPv6PrivacyExtensions = "yes";
     };
-  };
-
-  environment.systemPackages = [inputs.ollama.packages.${pkgs.system}.cuda pkgs.cudatoolkit pkgs.nvtop];
-
-  services.ollama = {
-    enable = true;
-    package = inputs.ollama.packages.${pkgs.system}.cuda;
-    listenAddress = "0.0.0.0:11434";
   };
 
   system.stateVersion = "23.11";
