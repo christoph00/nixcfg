@@ -65,8 +65,10 @@ in {
         .overrideAttrs (oldAttrs: {doInstallCheck = false;});
       openFirewall = true;
       configDir = "${config.chr.system.persist.stateDir}/hass";
-      customComponents = [
+      customComponents = with pkgs; [
         pkgs.home-assistant-custom-components.prometheus_sensor
+        chr.ha-better-thermostat
+        chr.ha-home-llm
       ];
       customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
         mini-graph-card
