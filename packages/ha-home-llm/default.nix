@@ -4,13 +4,13 @@
   fetchFromGitHub,
 }:
 buildHomeAssistantComponent rec {
-  domain = "home-llm";
+  domain = "llama_conversation";
   owner = "acon96";
   version = "0.2.5";
 
   src = fetchFromGitHub {
     inherit owner;
-    repo = domain;
+    repo = "home-llm";
     rev = "v${version}";
     hash = "sha256-ULIxdQKoe8+OlxWeUxh34r+L1KvmgHqi1S3mqjxoxng=";
   };
