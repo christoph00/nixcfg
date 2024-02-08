@@ -123,7 +123,7 @@ with lib.chr; {
     };
   };
 
-  environment.systemPackages = [inputs.ollama.packages.${pkgs.system}.cuda pkgs.cudatoolkit plgs.nvtop];
+  environment.systemPackages = [inputs.ollama.packages.${pkgs.system}.cuda pkgs.cudatoolkit pkgs.nvtop];
 
   services.ollama = {
     enable = true;
