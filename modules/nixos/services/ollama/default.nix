@@ -24,7 +24,7 @@ in {
     environment.persistence."${config.chr.system.persist.stateDir}" = {
       directories = [
         {
-          directory = "/var/lib/ollama";
+          directory = "/var/lib/private/ollama";
         }
       ];
     };
