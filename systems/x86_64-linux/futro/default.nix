@@ -43,14 +43,9 @@ in {
       smart-home = true;
       media.enable = true;
       paperless.enable = true;
-      radicale.enable = true;
       yarr.enable = true;
       vaultwarden.enable = true;
       shiori.enable = true;
-      monitoring = {
-        httpListenAddr = "0.0.0.0:12345";
-        scrapeRouter = true;
-      };
     };
   };
 
