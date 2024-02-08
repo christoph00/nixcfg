@@ -16,11 +16,6 @@ in {
       default = "ha.r505.de";
     };
   };
-  imports = [
-    ./extentions.nix
-    #./network_sensors.nix
-    #./systemmonitor.nix
-  ];
   config = lib.mkIf cfg.enable {
     users.users.hass = {
       extraGroups = ["dialout"];
@@ -70,6 +65,13 @@ in {
         .overrideAttrs (oldAttrs: {doInstallCheck = false;});
       openFirewall = true;
       configDir = "${config.chr.system.persist.stateDir}/hass";
+      customComponents = [
+        pkgs.home-assistant-custom-components.prometheus_sensor
+      ];
+      customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+        mini-graph-card
+        mini-media-player
+      ];
       config = {
         homeassistant = {
           name = "Home";
