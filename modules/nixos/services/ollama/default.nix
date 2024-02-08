@@ -14,7 +14,7 @@ in {
     enable = mkBoolOpt' false;
   };
   config = mkIf cfg.enable {
-    environment.systemPackages = [inputs.ollama.packages.${pkgs.system}.cuda pkgs.cudatoolkit pkgs.nvtop];
+    environment.systemPackages = [inputs.ollama.packages.${pkgs.system}.cuda pkgs.cudatoolkit pkgs.nvtop pkgs.openai-whisper-cpp];
 
     services.ollama = {
       enable = true;
