@@ -8,9 +8,9 @@
 }:
 with lib;
 with lib.chr; let
-  cfg = config.chr.services.ai;
+  cfg = config.chr.services.ollama;
 in {
-  options.chr.services.ai = with types; {
+  options.chr.services.ollama = with types; {
     enable = mkBoolOpt false "Enable ai Service.";
   };
   config = mkIf cfg.enable {
