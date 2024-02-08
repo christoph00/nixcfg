@@ -49,7 +49,7 @@ with lib.chr; {
     #   home-assistant.hostname = "home.r505.de";
     # };
     services = {
-      ai.enable = true;
+      ollama.enable = true;
     };
   };
   chr.system.filesystem = {
