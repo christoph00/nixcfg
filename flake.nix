@@ -67,6 +67,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    kde2nix.url = "github:nix-community/kde2nix";
+    kde2nix.inputs.nixpkgs.follows = "nixpkgs";
+    kde2nix.inputs.flake-utils.follows = "utils";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     disko = {

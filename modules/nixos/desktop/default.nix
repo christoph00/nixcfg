@@ -111,20 +111,6 @@ in {
     #   bash
     # '';
 
-    services.greetd = {
-      enable = true;
-      settings = {
-        # default_session.command = ''
-        #   ${pkgs.greetd.tuigreet}/bin/tuigreet --remember --user-menu --asterisks --time --greeting "Welcome to NixOS" --cmd ${plasma}/bin/plasma'';
-        initial_session = {
-          command = "${config.programs.hyprland.package}/bin/Hyprland";
-          user = config.chr.user.name;
-        };
-      };
-    };
-    programs.regreet.enable = true;
-    environment.persistence."${config.chr.system.persist.stateDir}".directories = lib.mkIf config.chr.system.persist.enable ["/var/cache/regreet"];
-
     # services.greetd = {
     #   enable = true;
     #   vt = 2;
@@ -176,11 +162,6 @@ in {
       '';
     };
 
-    xdg.portal = {
-      enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    };
-
     fonts = {
       packages = with pkgs; [
         material-symbols
@@ -206,8 +187,6 @@ in {
     services.fwupd.enable = true;
 
     services = {
-      gnome.gnome-keyring.enable = true;
-
       upower.enable = true;
     };
 
