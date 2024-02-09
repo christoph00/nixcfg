@@ -9,7 +9,7 @@ with lib.chr; let
   cfg = config.chr.desktop.hyprland;
 in {
   options.chr.desktop.hyprland = with types; {
-    enable = mkBoolOpt false "Whether or not enable Hyprland Desktop.";
+    enable = mkBoolOpt true "Whether or not enable Hyprland Desktop.";
   };
 
   config = mkIf cfg.enable {

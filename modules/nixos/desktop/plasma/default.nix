@@ -11,7 +11,7 @@ with lib.chr; let
   cfg = config.chr.desktop.plasma;
 in {
   options.chr.desktop.plasma = with types; {
-    enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Plasma.";
+    enable = mkBoolOpt false "Whether or not to enable Plasma.";
   };
 
   imports = [inputs.kde2nix.nixosModules.plasma6];
@@ -36,8 +36,6 @@ in {
       whitesur-icon-theme
 
       fluent-icon-theme
-
-      chr.klassy
     ];
 
     programs = {
