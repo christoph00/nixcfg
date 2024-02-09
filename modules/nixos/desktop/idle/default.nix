@@ -10,7 +10,7 @@ with lib.chr; let
   lockCommand = "${pkgs.waylock}/bin/waylock -fork-on-lock";
 in {
   options.chr.desktop.idle = with types; {
-    enable = mkBoolOpt' config.chr.desktop.enable;
+    enable = mkBoolOpt' config.chr.desktop.hyprland.enable;
   };
 
   config.chr.home.extraOptions = lib.mkIf cfg.enable {
