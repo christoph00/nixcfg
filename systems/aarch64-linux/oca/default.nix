@@ -18,6 +18,7 @@ in {
     system.boot.bootloader = "grub";
     system.filesystem = {
       enable = true;
+      btrfs = true;
       persist = true;
       efiDisk = "/dev/sda1";
       rootOnTmpfs = true;
@@ -26,9 +27,9 @@ in {
 
   networking.interfaces.eth0.useDHCP = true;
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "virtio_pci" "usbhid"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "virtio_pci" "virtio_scsi" "usbhid"];
   boot.kernelParams = ["net.ifnames=0"];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 
   boot.loader = {
     systemd-boot.enable = lib.mkForce false;
@@ -40,13 +41,9 @@ in {
     };
   };
 
-  fileSystems."/nix" = {
-    device = "/dev/sdb3";
-    fsType = "ext4";
-    neededForBoot = true;
-  };
-
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
+
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
   system.stateVersion = "23.11";
 }
