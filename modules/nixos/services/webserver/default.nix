@@ -63,7 +63,6 @@ in {
         ];
       }
     ];
-    users.users.caddy.extraGroups = ["acme"];
     services.caddy = {
       adapter = "''"; # Required to enable JSON
       configFile = pkgs.writeText "Caddyfile" (builtins.toJSON {
@@ -93,9 +92,6 @@ in {
     ];
 
     age.secrets.caddy-env.file = ../../../../secrets/caddy.env;
-
-    users.users.caddy.group = "caddy";
-    users.groups.caddy = {};
 
     systemd.services.caddy = {
       serviceConfig = {
