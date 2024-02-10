@@ -37,6 +37,12 @@ with lib.chr; {
 
   hardware.cpu.intel.updateMicrocode = true;
 
+  hardware.opengl.extraPackages = with pkgs; [
+    intel-vaapi-driver
+    libvdpau-va-gl
+    intel-media-driver
+  ];
+
   services.throttled = {
     enable = true;
   };
