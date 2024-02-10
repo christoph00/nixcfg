@@ -15,6 +15,10 @@ let
   star = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICQRi4HsYX2Mbv7SPPpzPp/uiNQlx8bRin2Z+UN5K0qC";
   x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE+DRHaQYXS4jLpb6TQ72zP3prgkcb2X0YVGIXtUCHUY";
   turtle = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGs1EldBV90G7uqmUgewt+4Lfcot9WSgDBpZZ4c5184E";
+
+  all = [air13 futro cube tower oca oc1 oc2 star x13 turtle];
+  servers = [air13 futro oca oc1 oc2];
+  users = [christoph_air13 christoph_tower christoph_x13];
 in {
   #  "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca cube star];
   #  "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
@@ -26,28 +30,19 @@ in {
   #  "secrets/immich-env".publicKeys = [christoph_air13 futro];
   #  "secrets/immich-db-password".publicKeys = [christoph_air13 futro];
 
-  "secrets/cf-tunnel-futro".publicKeys = [christoph_tower christoph_x13 futro];
-  "secrets/cf-tunnel-air13".publicKeys = [christoph_tower christoph_x13 air13];
+  "secrets/cf-tunnel-futro".publicKeys = [futro] ++ users;
+  "secrets/cf-tunnel-air13".publicKeys = [air13] ++ users;
 
   #  "secrets/feed2imap.yml".publicKeys = [christoph_air13 oc1];
 
-  "secrets/netbird.env".publicKeys = [christoph_air13 christoph_tower christoph_x13 x13 futro air13 tower oca oc1 oc2 cube star turtle];
+  "secrets/netbird.env".publicKeys = all ++ users;
 
-  "secrets/ha-serviceaccount".publicKeys = [christoph_air13 christoph_tower futro air13 christoph_x13];
-  "secrets/ha-secrets.yaml".publicKeys = [christoph_air13 christoph_tower futro air13 christoph_x13];
-  "secrets/christoph-password.age".publicKeys = [christoph_air13 christoph_tower christoph_x13 futro air13 tower oca oc1 oc2 cube star x13 turtle];
-  #  "secrets/wayvnc-key".publicKeys = [christoph_air13 tower christoph_tower];
-  #  "secrets/wayvnc-cert".publicKeys = [christoph_air13 tower christoph_tower];
-  #  "secrets/rclone.conf".publicKeys = [christoph_air13 tower air13 futro oca oc1 oc2 christoph_tower star];
-  #  "secrets/traefik.env".publicKeys = [christoph_air13 oca oc1 oc2 futro cube];
-  #  "secrets/agent-key".publicKeys = [christoph_air13 futro];
-  #  "secrets/nd-key".publicKeys = [christoph_air13 christoph_tower futro air13 tower oca oc1 oc2];
-  #  "secrets/rclone-nd.conf".publicKeys = [christoph_air13 futro air13 tower oca oc1 oc2];
-  #  "secrets/pia.env".publicKeys = [christoph_air13 star];
-  #  "secrets/pia.crt".publicKeys = [christoph_air13 star];
-  #  "secrets/nc-admin-pass".publicKeys = [christoph_air13 star futro oca tower christoph_tower];
-  "secrets/yarr-auth".publicKeys = [christoph_x13 futro];
-  "secrets/grafana-password".publicKeys = [christoph_x13 futro x13 tower air13 oca oc1 oc2];
-  "secrets/vaultwarden.env".publicKeys = [christoph_x13 futro];
-  "secrets/paperless-token.env".publicKeys = [christoph_x13 futro];
+  "secrets/ha-serviceaccount".publicKeys = [futro air13] ++ users;
+  "secrets/ha-secrets.yaml".publicKeys = [futro air13] ++ users;
+  "secrets/christoph-password.age".publicKeys = all ++ users;
+
+  "secrets/yarr-auth".publicKeys = [futro air13] ++ users;
+  "secrets/grafana-password".publicKeys = all ++ users;
+  "secrets/vaultwarden.env".publicKeys = [futro air13] ++ users;
+  "secrets/paperless-token.env".publicKeys = [futro air13] ++ users;
 }
