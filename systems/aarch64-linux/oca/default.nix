@@ -41,6 +41,10 @@ in {
     };
   };
 
+  swapDevices = [
+    {device = "/dev/disk/by-uuid/1f419e69-49b8-4243-9b5c-191297010e6b";}
+  ];
+
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
