@@ -33,8 +33,8 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    cfg.cidrAllowlist = ["127.0.0.1/32"];
-    cfg.routes = [
+    chr.services.webserver.cidrAllowlist = ["127.0.0.1/32"];
+    chr.services.webserver.routes = [
       {
         match = [{not = [{remote_ip.ranges = cfg.cidrAllowlist;}];}];
         handle = [
@@ -45,7 +45,7 @@ in {
         ];
       }
     ];
-    cfg.tlsPolicies = [
+    chr.services.webserver.tlsPolicies = [
       {
         issuers = [
           {
