@@ -14,10 +14,11 @@ in {
 
   chr = {
     type = "vm";
+    system.boot.efi = true;
+    system.boot.bootloader = "grub";
     system.filesystem = {
       enable = true;
       persist = true;
-      disko = true;
       efiDisk = "/dev/sda1";
       rootOnTmpfs = true;
     };
