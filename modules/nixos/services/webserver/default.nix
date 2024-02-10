@@ -94,6 +94,9 @@ in {
 
     age.secrets.caddy-env.file = ../../../../secrets/caddy.env;
 
+    users.users.caddy.group = "caddy";
+    users.groups.caddy = {};
+
     systemd.services.caddy = {
       serviceConfig = {
         # Required to use ports < 1024
