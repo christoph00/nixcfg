@@ -64,6 +64,7 @@ in {
       }
     ];
     services.caddy = {
+      enable = true;
       adapter = "''"; # Required to enable JSON
       configFile = pkgs.writeText "Caddyfile" (builtins.toJSON {
         apps.http.servers.main = {
