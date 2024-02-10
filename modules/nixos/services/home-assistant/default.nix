@@ -122,6 +122,7 @@ in {
         zeroconf = {};
         bthome = {};
         media_extractor = {};
+        proximity = {};
         zha = {
           enable_quirks = true;
           custom_quirks_path = "${config.services.home-assistant.configDir}/zha_quirks/";
