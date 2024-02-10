@@ -37,15 +37,10 @@ with lib.chr; {
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  hardware.opengl.extraPackages = with pkgs; [
-    intel-vaapi-driver
-    libvdpau-va-gl
-    intel-media-driver
-  ];
-
   services.throttled = {
     enable = true;
   };
+  services.thinkfan.enable = true;
 
   chr = {
     type = "laptop";
@@ -60,8 +55,6 @@ with lib.chr; {
     efiDisk = "/dev/nvme0n1p1";
     rootOnTmpfs = true;
   };
-
-  services.thinkfan.enable = true;
 
   system.stateVersion = "23.11";
 }
