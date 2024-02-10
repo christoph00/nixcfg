@@ -66,7 +66,7 @@ in {
     services.caddy = {
       enable = true;
       adapter = "''"; # Required to enable JSON
-      package = pkgs.chr.caddy;
+      package = pkgs.caddy-cloudflare;
       configFile = pkgs.writeText "Caddyfile" (builtins.toJSON {
         apps.http.servers.main = {
           listen = [":443"];
