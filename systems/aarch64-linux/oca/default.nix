@@ -20,6 +20,7 @@ in {
       enable = true;
       btrfs = true;
       persist = true;
+      mainDisk = "/dev/sda3";
       efiDisk = "/dev/sda1";
       rootOnTmpfs = true;
     };
@@ -42,7 +43,7 @@ in {
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/1f419e69-49b8-4243-9b5c-191297010e6b";}
+    {device = "/dev/sda2";}
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
