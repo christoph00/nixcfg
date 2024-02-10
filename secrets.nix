@@ -35,4 +35,5 @@ in {
   "secrets/grafana-password".publicKeys = all ++ users;
   "secrets/vaultwarden.env".publicKeys = [futro air13] ++ users;
   "secrets/paperless-token.env".publicKeys = [futro air13] ++ users;
+  "secrets/caddy.env".publicKeys = servers ++ users;
 }
