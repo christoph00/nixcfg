@@ -20,8 +20,8 @@ in {
           enable = true;
           package = pkgs.chr.thorium;
           extensions = [
-            # {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
-            #{id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
+            {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
+            {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
             {id = "nngceckbapebfimnlniiiahkandclblb";} # Bitwarden
             {
               id = "dcpihecpambacapedldabdbpakmachpb";
