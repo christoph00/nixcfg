@@ -24,6 +24,9 @@ in {
       efiDisk = "/dev/sda1";
       rootOnTmpfs = true;
     };
+    services = {
+      webserver.enable = true;
+    };
   };
 
   networking.interfaces.eth0.useDHCP = true;
