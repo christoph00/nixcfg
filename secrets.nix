@@ -1,8 +1,8 @@
 let
   # Users
-  christoph_air13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX christoph@air13";
-  christoph_tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower";
-  christoph_x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC5KqxXvpZ+R7/GYx99+W0rPHatXKf6/pG6rZ8z81/f6 christoph@x13";
+  christoph_air13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX";
+  christoph_tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8";
+  christoph_x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC5KqxXvpZ+R7/GYx99+W0rPHatXKf6/pG6rZ8z81/f6";
 
   # Hosts
   air13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaQ1qn7oju1z6X2mumCSg+bsTCNlgzE5KahvO2BxKtg";
@@ -18,22 +18,12 @@ let
 
   all = [air13 futro cube tower oca oc1 oc2 star x13 turtle];
   servers = [air13 futro oca oc1 oc2];
-  users = [christoph_air13 christoph_tower christoph_x13];
+  desktops = [tower x13];
+  users = [christoph_tower christoph_x13];
 in {
-  #  "secrets/cachix".publicKeys = [christoph_air13 air13 futro tower oca cube star];
-  #  "secrets/tailscale-preauthkey".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
-  #  "secrets/tailscale-tsnsrv".publicKeys = [christoph_air13 christoph_tower air13 futro cube tower oca oc1 oc2 star];
-
-  #  "secrets/cf-acme".publicKeys = [christoph_air13 futro cube oca oc1 oc2 tower star];
-  #  "secrets/cf-dyndns".publicKeys = [christoph_air13 futro tower];
-  #  "secrets/futro-cf".publicKeys = [christoph_air13 futro];
-  #  "secrets/immich-env".publicKeys = [christoph_air13 futro];
-  #  "secrets/immich-db-password".publicKeys = [christoph_air13 futro];
-
   "secrets/cf-tunnel-futro".publicKeys = [futro] ++ users;
   "secrets/cf-tunnel-air13".publicKeys = [air13] ++ users;
-
-  #  "secrets/feed2imap.yml".publicKeys = [christoph_air13 oc1];
+  "secrets/cf-tunnel-oca".publicKeys = [oca] ++ users;
 
   "secrets/netbird.env".publicKeys = all ++ users;
 
