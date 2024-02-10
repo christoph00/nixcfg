@@ -36,7 +36,7 @@ in {
     cfg.cidrAllowlist = ["127.0.0.1/32"];
     cfg.routes = [
       {
-        match = [{not = [{remote_ip.ranges = config.caddy.cidrAllowlist;}];}];
+        match = [{not = [{remote_ip.ranges = cfg.caddy.cidrAllowlist;}];}];
         handle = [
           {
             handler = "static_response";
@@ -69,12 +69,12 @@ in {
       configFile = pkgs.writeText "Caddyfile" (builtins.toJSON {
         apps.http.servers.main = {
           listen = [":443"];
-          routes = config.caddy.routes;
-          errors.routes = config.caddy.blocks;
+          routes = cfg.caddy.routes;
+          errors.routes = cfg.caddy.blocks;
           logs = {}; # Uncomment to collect access logs
         };
         apps.http.servers.metrics = {}; # Enables Prometheus metrics
-        apps.tls.automation.policies = config.caddy.tlsPolicies;
+        apps.tls.automation.policies = cfg.caddy.tlsPolicies;
         logging.logs.main = {
           encoder = {format = "console";};
           writer = {
