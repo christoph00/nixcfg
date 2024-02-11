@@ -14,10 +14,6 @@ in {
     enable = mkBoolOpt false "Enable VMs.";
   };
 
-  imports = mkIf cfg.enable [
-    inputs.microvm.nixosModules.host
-  ];
-
   config = mkIf cfg.enable {
     systemd.network = {
       enable = true;

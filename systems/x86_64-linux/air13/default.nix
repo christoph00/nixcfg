@@ -17,6 +17,8 @@ in {
     common-cpu-intel
     common-pc
     common-pc-ssd
+
+    inputs.microvm.nixosModules.host
   ];
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
 
