@@ -45,110 +45,44 @@ in {
     extraSubvolumes = mkOpt attrs {} "Extra Subvolumes for the Main Disk";
   };
 
-  config = let
-    device = cfg.mainDisk;
-  in
-    mkIf cfg.enable {
-      fileSystems = {
-        "/" = mkIf cfg.rootOnTmpfs {
-          device = "none";
-          fsType = "tmpfs";
-          options = ["defaults" "size=2G" "mode=755"];
-        };
-        # else {
-        #   inherit device;
-        #   fsType = "btrfs";
-        #   options = ["subvol=@root" "noatime" "compress-force=zstd"];
-        # };
+  config = mkIf cfg.enable {
+    fileSystems = let
+      device = cfg.mainDisk;
+    in {
+      "/" = mkIf cfg.rootOnTmpfs {
+        device = "none";
+        fsType = "tmpfs";
+        options = ["defaults" "size=2G" "mode=755"];
+      };
+      # else {
+      #   inherit device;
+      #   fsType = "btrfs";
+      #   options = ["subvol=@root" "noatime" "compress-force=zstd"];
+      # };
 
-        "/nix" = mkIf (cfg.btrfs && !cfg.disko) {
-          inherit device;
-          fsType = "btrfs";
-          options = ["subvol=@nix" "noatime" "compress-force=zstd"];
-        };
-
-        "/boot" = mkIf (!cfg.disko) {
-          device = cfg.efiDisk;
-          fsType = "vfat";
-        };
-
-        "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist && !cfg.disko) {
-          inherit device;
-          fsType = "btrfs";
-          options = ["subvol=@persist" "noatime" "compress-force=zstd"];
-          neededForBoot = true;
-        };
-
-        "/home" = mkIf (cfg.btrfs && !cfg.disko) {
-          inherit device;
-          fsType = "btrfs";
-          options = ["subvol=@home" "noatime" "compress-force=zstd"];
-        };
+      "/nix" = mkIf (cfg.btrfs && !cfg.disko) {
+        inherit device;
+        fsType = "btrfs";
+        options = ["subvol=@nix" "noatime" "compress-force=zstd"];
       };
 
-      disko.devices =
-        mkIf cfg.disko {
-          disk.mainDisk = {
-            type = "disk";
-            inherit device;
-            content = {
-              type = "gpt";
-              partitions = {
-                ESP = {
-                  label = "ESP";
-                  type = "EF00";
-                  priority = 1;
-                  size = "512M";
-                  content = {
-                    type = "filesystem";
-                    format = "vfat";
-                    mountpoint = "/boot";
-                  };
-                };
-                swap = mkIf cfg.swap {
-                  label = "swap";
-                  type = "8200";
-                  size = cfg.swapSize;
-                  content = {
-                    type = "swap";
-                    resumeDevice = true; # resume from hiberation from this device
-                  };
-                };
-                root = mkIf cfg.btrfs {
-                  label = "root";
-                  size = "100%";
-                  content = {
-                    type = "btrfs";
-                    extraArgs = ["-f"]; # Override existing partition
-                    # Subvolumes must set a mountpoint in order to be mounted,
-                    # unless their parent is mounted
-                    subvolumes =
-                      {
-                        # Subvolume name is different from mountpoint
-                        "@root" = mkIf (!cfg.rootOnTmpfs) {
-                          mountpoint = "/";
-                        };
-                        # Mountpoints inferred from subvolume name
-                        "@home" = mkIf cfg.home {
-                          mountpoint = "/home";
-                          mountOptions = ["compress-force=zstd"];
-                        };
-                        "@nix" = {
-                          mountpoint = "/nix";
-                          mountOptions = ["compress-force=zstd" "noatime"];
-                        };
-                        "@persist" = mkIf cfg.persist {
-                          mountpoint = "${cfg.stateDir}";
-                          mountOptions = ["compress-force=zstd" "noatime"];
-                        };
-                      }
-                      // cfg.extraSubvolumes;
-                  };
-                };
-              };
-            };
-          };
-        }
-        // cfg.extraDisks;
+      "/boot" = mkIf (!cfg.disko) {
+        device = cfg.efiDisk;
+        fsType = "vfat";
+      };
+
+      "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist && !cfg.disko) {
+        inherit device;
+        fsType = "btrfs";
+        options = ["subvol=@persist" "noatime" "compress-force=zstd"];
+        neededForBoot = true;
+      };
+
+      "/home" = mkIf (cfg.btrfs && !cfg.disko) {
+        inherit device;
+        fsType = "btrfs";
+        options = ["subvol=@home" "noatime" "compress-force=zstd"];
+      };
     };
+  };
 }
