@@ -246,7 +246,7 @@ in {
         "jellyfin"
         "androidtv"
         "androidtv_remote"
-        "openai_conversation"
+        #"openai_conversation"
         "lovelace"
         "mobile_app"
         "nzbget"
