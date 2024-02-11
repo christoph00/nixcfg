@@ -14,7 +14,25 @@ in {
     enable = mkBoolOpt' false;
   };
 
-  config =
-    mkIf cfg.enable {
+  config = mkIf cfg.enable {
+    microvm.vms.router = {
+      inherit pkgs lib;
+      config = {
+        system = {inherit (config.system) stateVersion;};
+
+        microvm.shares = [
+          {
+            source = "/nix/store";
+            mountPoint = "/nix/.ro-store";
+            tag = "ro-store";
+            proto = "virtiofs";
+          }
+        ];
+
+        chr = {
+          type = "vm";
+        };
+      };
     };
+  };
 }
