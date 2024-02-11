@@ -52,6 +52,9 @@ with lib.chr; {
       monitoring.scrapeExtra = true;
       blocky.enable = true;
     };
+    vms = {
+      router.enable = true;
+    };
   };
   chr.system.filesystem = {
     enable = true;
