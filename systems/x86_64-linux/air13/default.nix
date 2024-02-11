@@ -8,7 +8,9 @@
   ...
 }:
 with lib;
-with lib.chr; {
+with lib.chr; let
+  inherit (inputs) nixos-hardware;
+in {
   imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-cpu-intel
