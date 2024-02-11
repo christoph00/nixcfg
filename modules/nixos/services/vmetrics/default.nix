@@ -7,12 +7,10 @@
 }:
 with lib;
 with lib.chr; let
-  cfg = config.services.vmetrics;
+  cfg = config.chr.services.vmetrics;
 in {
-  options = {
-    services.vmetrics = {
-      enable = mkBoolOpt' false;
-    };
+  options.chr.services.vmetrics = {
+    enable = mkBoolOpt' false;
   };
 
   config = mkIf cfg.enable {
