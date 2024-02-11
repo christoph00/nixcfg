@@ -5,6 +5,7 @@
   channel,
   inputs,
   system,
+  modulesPath,
   ...
 }:
 with lib;
