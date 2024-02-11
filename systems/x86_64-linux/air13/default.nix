@@ -47,7 +47,7 @@ with lib.chr; {
     services = {
       #   smart-home = true;
       #   home-assistant.hostname = "home.r505.de";
-      ollama.enable = true;
+      #ollama.enable = true;
       vmetrics.enable = true;
       monitoring.scrapeExtra = true;
       blocky.enable = true;
