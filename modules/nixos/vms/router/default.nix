@@ -30,7 +30,7 @@ in {
         ];
 
         chr = {
-          type = "vm";
+          type = "microvm";
         };
       };
     };
