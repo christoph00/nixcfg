@@ -10,7 +10,7 @@ with lib; let
 in {
   options = {
     services.vmetrics = {
-      enable = mkEnableOpt' false;
+      enable = mkBoolOpt' false;
     };
   };
 
