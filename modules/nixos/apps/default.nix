@@ -68,6 +68,9 @@ in {
 
         neovide
 
+        yt-dlp
+        media-downloader
+
         #wpsoffice
 
         chr.gpucache
