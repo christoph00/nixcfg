@@ -10,7 +10,6 @@ with lib;
 with lib.chr; let
   cfg = config.chr.system.filesystem;
 in {
-  imports = [inputs.disko.nixosModules.disko];
   options.chr.system.filesystem = with types; {
     enable = mkBoolOpt false "Whether or not to configure filesystems.";
     disko = mkBoolOpt false "Enable Disko config";
