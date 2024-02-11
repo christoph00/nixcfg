@@ -74,12 +74,7 @@ in {
           };
         };
       };
-      systemd.services.blocky = {
-        serviceConfig = {
-          Restart = "on-failure";
-          RestartSec = "1";
-        };
-      };
+
       vmagent.prometheusConfig.scrapeConfigs = [
         {
           job_name = "blocky";
@@ -90,6 +85,12 @@ in {
           ];
         }
       ];
+    };
+    systemd.services.blocky = {
+      serviceConfig = {
+        Restart = "on-failure";
+        RestartSec = "1";
+      };
     };
   };
 }
