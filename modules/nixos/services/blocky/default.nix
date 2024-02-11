@@ -29,11 +29,12 @@ in {
           upstreams = {
             groups = {
               default = [
-                "5.9.164.112"
-                "9.9.9.9"
+                "tcp-tls:fdns1.dismail.de:853"
+                "tcp-tls:recursor01.dns.lightningwirelabs.com	:853"
                 "https://one.one.one.one/dns-query"
                 "https://dns10.quad9.net/dns-query"
                 "https://dns-unfiltered.adguard.com/dns-query"
+                "https://dns.telekom.de/dns-query"
               ];
             };
             timeout = "10s";
@@ -58,6 +59,7 @@ in {
             path = "/metrics";
           };
           ports.http = 4040;
+          #ports.dns = "127.0.0.1:53,[::1]:53,192.168.2.194:53";
 
           bootstrapDns = ["tcp+udp:1.1.1.1" "https://1.1.1.1/dns-query"];
           ede.enable = true;
@@ -83,7 +85,9 @@ in {
         }
       ];
     };
+    networking.nameservers = ["127.0.0.1" "::1"];
     systemd.services.blocky = {
+      after = ["netbird.service"];
       serviceConfig = {
         Restart = "on-failure";
         RestartSec = "1";
