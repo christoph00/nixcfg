@@ -29,6 +29,8 @@ in {
           upstreams = {
             groups = {
               default = [
+                "5.9.164.112"
+                "9.9.9.9"
                 "https://one.one.one.one/dns-query"
                 "https://dns10.quad9.net/dns-query"
                 "https://dns-unfiltered.adguard.com/dns-query"
@@ -36,15 +38,9 @@ in {
             };
             timeout = "10s";
           };
-          startVerifyUpstream = true;
           blocking = {
             blackLists.default = [
               "https://v.firebog.net/hosts/Easyprivacy.txt"
-              "https://v.firebog.net/hosts/Prigent-Ads.txt"
-              "https://v.firebog.net/hosts/Prigent-Crypto.txt"
-              "https://v.firebog.net/hosts/RPiList-Malware.txt"
-              "https://v.firebog.net/hosts/RPiList-Phishing.txt"
-              "https://zerodot1.gitlab.io/CoinBlockerLists/hosts_browser"
             ];
             clientGroupsBlock.default = ["default"];
           };
@@ -61,8 +57,9 @@ in {
             enable = true;
             path = "/metrics";
           };
+          ports.http = 4040;
 
-          bootstrapDns = "192.168.2.1";
+          bootstrapDns = ["tcp+udp:1.1.1.1" "https://1.1.1.1/dns-query"];
           ede.enable = true;
           clientLookup.upstream = "192.168.2.1";
           conditional.mapping = {
@@ -75,12 +72,12 @@ in {
         };
       };
 
-      vmagent.prometheusConfig.scrapeConfigs = [
+      vmagent.prometheusConfig.scrape_configs = [
         {
           job_name = "blocky";
           static_configs = [
             {
-              targets = ["localhost:${toString config.services.blocky.ports.http}"];
+              targets = ["localhost:${toString config.services.blocky.settings.ports.http}"];
             }
           ];
         }
