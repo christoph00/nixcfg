@@ -30,7 +30,7 @@ in {
             groups = {
               default = [
                 "tcp-tls:fdns1.dismail.de:853"
-                "tcp-tls:recursor01.dns.lightningwirelabs.com	:853"
+                "tcp-tls:recursor01.dns.lightningwirelabs.com:853"
                 "https://one.one.one.one/dns-query"
                 "https://dns10.quad9.net/dns-query"
                 "https://dns-unfiltered.adguard.com/dns-query"
@@ -59,14 +59,14 @@ in {
             path = "/metrics";
           };
           ports.http = 4040;
-          #ports.dns = "127.0.0.1:53,[::1]:53,192.168.2.194:53";
+          ports.dns = "127.0.0.1:53,[::1]:53,192.168.2.194:53";
 
           bootstrapDns = ["tcp+udp:1.1.1.1" "https://1.1.1.1/dns-query"];
           ede.enable = true;
           clientLookup.upstream = "192.168.2.1";
           conditional.mapping = {
             "." = "192.168.2.1";
-            ".lan.r505.de" = "192.168.2.1";
+            "lan.r505.de" = "192.168.2.1";
             "arpa" = "192.168.2.1";
             "2.168.192.in-addr.arpa" = "192.168.2.1";
             "168.192.in-addr.arpa" = "192.168.2.1";
@@ -85,7 +85,7 @@ in {
         }
       ];
     };
-    networking.nameservers = ["127.0.0.1" "::1"];
+    networking.nameservers = ["127.0.0.1" ":::"];
     systemd.services.blocky = {
       after = ["netbird.service"];
       serviceConfig = {
@@ -93,5 +93,6 @@ in {
         RestartSec = "1";
       };
     };
+    #systemd.services.netbird.after = ["blocky.service"];
   };
 }

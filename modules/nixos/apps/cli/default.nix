@@ -92,6 +92,8 @@ in {
         #phockup
         #ffmpeg-full
         inputs.devenv.packages.${system}.devenv
+
+        wireguard-tools
       ];
 
       home.sessionVariables = {
