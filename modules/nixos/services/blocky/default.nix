@@ -85,7 +85,7 @@ in {
           job_name = "blocky";
           static_configs = [
             {
-              targets = ["localhost:" ${builtins.toString config.services.blocky.ports.http}];
+              targets = ["localhost:${toString config.services.blocky.ports.http}"];
             }
           ];
         }
