@@ -92,22 +92,22 @@ in {
           #customize.zone.home.radius = 20;
         };
         default_config = {};
-        device_tracker = [
-          # {
-          #   platform = "bluetooth_le_tracker";
-          # }
-          # {
-          #   platform = "bluetooth_tracker";
-          # }
-          {
-            platform = "luci";
-            host = "192.168.2.1";
-            username = "root";
-            password = "!secret router_pass";
-            ssl = true;
-            verify_ssl = false;
-          }
-        ];
+        # device_tracker = [
+        #   # {
+        #   #   platform = "bluetooth_le_tracker";
+        #   # }
+        #   # {
+        #   #   platform = "bluetooth_tracker";
+        #   # }
+        #   {
+        #     platform = "luci";
+        #     host = "192.168.2.1";
+        #     username = "root";
+        #     password = "!secret router_pass";
+        #     ssl = true;
+        #     verify_ssl = false;
+        #   }
+        # ];
         http = {
           use_x_forwarded_for = true;
           trusted_proxies = ["::1" "127.0.0.1" "100.0.0.0/8"];
@@ -121,7 +121,7 @@ in {
         dhcp = {};
         ssdp = {};
         zeroconf = {};
-        bthome = {};
+        #bthome = {};
         media_extractor = {};
         proximity = {};
         zha = {
@@ -141,66 +141,66 @@ in {
         #   circuit = "basv0";
         # };
         ssdp = {};
-        mqtt = {
-          climate = [
-            {
-              name = "Heizung";
-              max_temp = 25;
-              min_temp = 12;
-              precision = 0.1;
-              temp_step = 0.5;
-              modes = ["auto" "heat" "off"];
-              # Quite an ugly regex workaround due to 0 not being findable...
-              mode_state_template = ''
-                {% set values = { 'auto':'auto', 'day':'heat', 'off':'off'} %}
-                {% set v = value | regex_findall_index( '"value"\s?:\s?"(.*)"')  %}
-                {{ values[v] if v in values.keys() else 'auto' }}
-              '';
-              mode_state_topic = "ebusd/basv/z1OpMode";
-              mode_command_template = ''
-                {% set values = { 'auto':'auto', 'heat':'day', 'off':'off'} %}
-                {{ values[value] if value in values.keys() else 'off' }}
-              '';
-              mode_command_topic = "ebusd/basv/z1OpMode/set";
-              temperature_state_topic = "ebusd/basv/z1ActualRoomTempDesired";
-              temperature_state_template = "{{ value_json.tempv.value }}";
-              temperature_high_state_topic = "ebusd/basv/z1DayTemp";
-              temperature_high_state_template = "{{ value_json.tempv.value }}";
-              temperature_high_command_topic = "ebusd/basv/z1DayTemp/set";
-              temperature_high_command_template = ''
-                {{ value }}
-              '';
-              current_temperature_topic = "ebusd/basv/z1RoomTemp";
-              current_temperature_template = "{{ value_json.tempv.value }}";
-              temperature_unit = "C";
-            }
-            # {
-            #   name = "Warmwasser";
-            #   max_temp = 90;
-            #   min_temp = 0;
-            #   precision = 0.1;
-            #   temp_step = 0.5;
-            #   # unfortunately mapping is not correct (Yet)
-            #   modes = ["off" "on" "auto" "party" "load" "holiday"];
-            #   mode_state_template = ''
-            #     {% set values = { 0:'off', 1:'on',  2:'auto', 3:'autosunday', 4:'party', 5: 'load', 7: 'holiday'} %}
-            #     {{ values[value] if value in values.keys() else 'auto' }}
-            #   '';
-            #   mode_state_topic = "ebusd/bai/HwcOPMode";
-            #   mode_command_template = ''
-            #     {% set values = { 'off':0, 'on':1,  'auto':2, 'autosunday':3, 'party':4, 'load':5, 'holiday':7} %}
-            #     {{ values[value] if value in values.keys() else 2 }}
-            #   '';
-            #   mode_command_topic = "ebusd/bai/HwcOPMode/set";
-            #   temperature_state_topic = "ebusd/bai/HwcTempDesired";
-            #   temperature_state_template = "{{ value_json.temp1.value }}";
-            #   current_temperature_topic = "ebusd/bai/DisplayedHwcStorageTemp";
-            #   current_temperature_template = "{{ value_json.temp1.value }}";
-            #   temperature_unit = "C";
-            # }
-          ];
-        };
-        tasmota = {};
+        # mqtt = {
+        #   climate = [
+        #     {
+        #       name = "Heizung";
+        #       max_temp = 25;
+        #       min_temp = 12;
+        #       precision = 0.1;
+        #       temp_step = 0.5;
+        #       modes = ["auto" "heat" "off"];
+        #       # Quite an ugly regex workaround due to 0 not being findable...
+        #       mode_state_template = ''
+        #         {% set values = { 'auto':'auto', 'day':'heat', 'off':'off'} %}
+        #         {% set v = value | regex_findall_index( '"value"\s?:\s?"(.*)"')  %}
+        #         {{ values[v] if v in values.keys() else 'auto' }}
+        #       '';
+        #       mode_state_topic = "ebusd/basv/z1OpMode";
+        #       mode_command_template = ''
+        #         {% set values = { 'auto':'auto', 'heat':'day', 'off':'off'} %}
+        #         {{ values[value] if value in values.keys() else 'off' }}
+        #       '';
+        #       mode_command_topic = "ebusd/basv/z1OpMode/set";
+        #       temperature_state_topic = "ebusd/basv/z1ActualRoomTempDesired";
+        #       temperature_state_template = "{{ value_json.tempv.value }}";
+        #       temperature_high_state_topic = "ebusd/basv/z1DayTemp";
+        #       temperature_high_state_template = "{{ value_json.tempv.value }}";
+        #       temperature_high_command_topic = "ebusd/basv/z1DayTemp/set";
+        #       temperature_high_command_template = ''
+        #         {{ value }}
+        #       '';
+        #       current_temperature_topic = "ebusd/basv/z1RoomTemp";
+        #       current_temperature_template = "{{ value_json.tempv.value }}";
+        #       temperature_unit = "C";
+        #     }
+        #     # {
+        #     #   name = "Warmwasser";
+        #     #   max_temp = 90;
+        #     #   min_temp = 0;
+        #     #   precision = 0.1;
+        #     #   temp_step = 0.5;
+        #     #   # unfortunately mapping is not correct (Yet)
+        #     #   modes = ["off" "on" "auto" "party" "load" "holiday"];
+        #     #   mode_state_template = ''
+        #     #     {% set values = { 0:'off', 1:'on',  2:'auto', 3:'autosunday', 4:'party', 5: 'load', 7: 'holiday'} %}
+        #     #     {{ values[value] if value in values.keys() else 'auto' }}
+        #     #   '';
+        #     #   mode_state_topic = "ebusd/bai/HwcOPMode";
+        #     #   mode_command_template = ''
+        #     #     {% set values = { 'off':0, 'on':1,  'auto':2, 'autosunday':3, 'party':4, 'load':5, 'holiday':7} %}
+        #     #     {{ values[value] if value in values.keys() else 2 }}
+        #     #   '';
+        #     #   mode_command_topic = "ebusd/bai/HwcOPMode/set";
+        #     #   temperature_state_topic = "ebusd/bai/HwcTempDesired";
+        #     #   temperature_state_template = "{{ value_json.temp1.value }}";
+        #     #   current_temperature_topic = "ebusd/bai/DisplayedHwcStorageTemp";
+        #     #   current_temperature_template = "{{ value_json.temp1.value }}";
+        #     #   temperature_unit = "C";
+        #     # }
+        #   ];
+        # };
+        #tasmota = {};
         dhcp = {};
         conversation = {};
         ffmpeg = {
@@ -213,18 +213,18 @@ in {
           exposed_domains = ["switch" "light"];
         };
         #lovelace.mode = "yaml";
-        switch = [
-          {
-            name = "Tower";
-            platform = "wake_on_lan";
-            mac = "d0:50:99:82:42:04";
-            #host = "tower.lan.net.r505.de";
-            turn_off = {
-              service = "shell_command.suspend_host";
-              data.host = "tower.lan.r505.de";
-            };
-          }
-        ];
+        # switch = [
+        #   {
+        #     name = "Tower";
+        #     platform = "wake_on_lan";
+        #     mac = "d0:50:99:82:42:04";
+        #     #host = "tower.lan.net.r505.de";
+        #     turn_off = {
+        #       service = "shell_command.suspend_host";
+        #       data.host = "tower.lan.r505.de";
+        #     };
+        #   }
+        # ];
       };
       extraComponents = [
         "caldav"

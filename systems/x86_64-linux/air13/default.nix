@@ -50,6 +50,7 @@ with lib.chr; {
       ollama.enable = true;
       vmetrics.enable = true;
       monitoring.scrapeExtra = true;
+      blocky.enable = true;
     };
   };
   chr.system.filesystem = {
