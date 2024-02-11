@@ -16,7 +16,7 @@ in {
 
   config = mkIf cfg.enable {
     microvm.vms.router = {
-      inherit pkgs lib;
+      inherit pkgs;
       config = {
         system = {inherit (config.system) stateVersion;};
 
