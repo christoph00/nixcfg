@@ -14,7 +14,7 @@ in {
     enable = mkBoolOpt false "Enable VMs.";
   };
 
-  imports = lib.optionals [
+  imports = lib.optionals cfg.enable [
     inputs.microvm.nixosModules.host
   ];
 
