@@ -31,6 +31,7 @@ in {
         ncdu
         htop
         unzip
+        dig
       ];
 
       localBinInPath = true;
