@@ -31,6 +31,26 @@ in {
       extraArgs =
         lib.mkForce
         ["-remoteWrite.label=instance=${config.networking.hostName}"];
+      prometheusConfig = {
+        global = {
+          scrape_interval = "1m";
+          scrape_timeout = "30s";
+        };
+        scrape_configs = [
+          {
+            job_name = "node";
+            static_configs = [
+              {
+                targets = [
+                  "localhost:${
+                    toString config.services.prometheus.exporters.node.port
+                  }"
+                ];
+              }
+            ];
+          }
+        ];
+      };
     };
   };
 }
