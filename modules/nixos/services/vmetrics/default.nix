@@ -21,5 +21,12 @@ in {
       listenAddress = ":8428";
       retentionPeriod = 2;
     };
+    environment.persistence."${config.chr.system.persist.stateDir}" = {
+      directories = [
+        {
+          directory = "/var/lib/private/victoriametrics";
+        }
+      ];
+    };
   };
 }
