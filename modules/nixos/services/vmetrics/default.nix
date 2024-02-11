@@ -5,7 +5,8 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+with lib.chr; let
   cfg = config.services.vmetrics;
 in {
   options = {
