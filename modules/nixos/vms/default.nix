@@ -28,7 +28,7 @@ in {
         networkConfig.DHCP = "yes";
       };
     };
-    environment.persistence."${cfg.stateDir}" = mkIf cfg.enable {
+    environment.persistence."${config.chr.system.persist.stateDir}" = mkIf cfg.enable {
       hideMounts = true;
       directories = [
         "/var/lib/microvms"
