@@ -15,18 +15,18 @@ in {
   };
 
   config = mkIf cfg.enable {
-    microvm.vms.router = {
-      inherit pkgs;
-      config = {
-        microvm.shares = [
-          {
-            source = "/nix/store";
-            mountPoint = "/nix/.ro-store";
-            tag = "ro-store";
-            proto = "virtiofs";
-          }
-        ];
-      };
-    };
+    # microvm.vms.router = {
+    #   inherit pkgs;
+    #   config = {
+    #     microvm.shares = [
+    #       {
+    #         source = "/nix/store";
+    #         mountPoint = "/nix/.ro-store";
+    #         tag = "ro-store";
+    #         proto = "virtiofs";
+    #       }
+    #     ];
+    #   };
+    # };
   };
 }
