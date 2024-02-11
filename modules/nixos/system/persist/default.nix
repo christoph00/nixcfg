@@ -25,7 +25,6 @@ in {
       hideMounts = true;
       directories = [
         "/var/lib/containers"
-        "/var/lib/microvm"
 
         "/var/log"
         "/var/db/sudo"
