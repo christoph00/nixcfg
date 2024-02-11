@@ -28,10 +28,6 @@ in {
             proto = "virtiofs";
           }
         ];
-
-        chr = {
-          type = "microvm";
-        };
       };
     };
   };
