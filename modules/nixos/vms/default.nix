@@ -19,7 +19,7 @@ in {
   ];
 
   config = mkMerge [
-    {microvm.host.enable = cfg.enable;}
+    {microvm.host.enable = lib.mkForce cfg.enable;}
     (mkIf cfg.enable)
     {
       systemd.network = {
