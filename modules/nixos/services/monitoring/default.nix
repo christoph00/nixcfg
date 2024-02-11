@@ -11,6 +11,7 @@ with lib.chr; let
 in {
   options.chr.services.monitoring = with types; {
     enable = mkBoolOpt true "Enable monitoring Service.";
+    scrapeExtra = mkBoolOpt false "Enable scraping External entpoints.";
   };
   config = mkIf cfg.enable {
     services.prometheus = {
@@ -36,20 +37,33 @@ in {
           scrape_interval = "1m";
           scrape_timeout = "30s";
         };
-        scrape_configs = [
-          {
-            job_name = "node";
-            static_configs = [
-              {
-                targets = [
-                  "localhost:${
-                    toString config.services.prometheus.exporters.node.port
-                  }"
-                ];
-              }
-            ];
-          }
-        ];
+        scrape_configs =
+          [
+            {
+              job_name = "node";
+              static_configs = [
+                {
+                  targets = [
+                    "localhost:${
+                      toString config.services.prometheus.exporters.node.port
+                    }"
+                  ];
+                }
+              ];
+            }
+          ]
+          ++ lib.mkIf cfg.scrapeExtra [
+            {
+              job_name = "openwrt";
+              static_configs = [
+                {
+                  targets = [
+                    "192.168.2.1:9100"
+                  ];
+                }
+              ];
+            }
+          ];
       };
     };
   };
