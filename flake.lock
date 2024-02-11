@@ -55,11 +55,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707523368,
-        "narHash": "sha256-41Fh1TKjW93QNkwZdH1x47+Lp4oAs99KgrW1Rqr6JrA=",
+        "lastModified": 1707671181,
+        "narHash": "sha256-U6DiVWJlwqDogptD579eRwP7+obFwFrsvKPv2hOo9D4=",
         "owner": "Aylur",
         "repo": "ags",
-        "rev": "16ca0fd29f46647850664ce93b022c3c4d857ce5",
+        "rev": "e11775883475c9cfbc988fadcfe34803aef4118d",
         "type": "github"
       },
       "original": {
@@ -230,36 +230,16 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1707004164,
-        "narHash": "sha256-9Hr8onWtvLk5A8vCEkaE9kxA0D7PR62povFokM1oL5Q=",
+        "lastModified": 1707653290,
+        "narHash": "sha256-BZoeaofvEPuf2pw+k6VoRDiE/E5/3w7z0jrKfQCiXco=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "0e68853bb27981a4ffd7a7225b59ed84f7180fc7",
+        "rev": "91a572c9866b92294aec152b65fa06c4dad7816f",
         "type": "github"
       },
       "original": {
         "owner": "cachix",
         "repo": "devenv",
-        "type": "github"
-      }
-    },
-    "disko": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1707524024,
-        "narHash": "sha256-HmumZ8FuWAAYZrWUKm3N4G4h8nmZ5VUVX+vXLmCJNKM=",
-        "owner": "nix-community",
-        "repo": "disko",
-        "rev": "d07de570ba05cec2807d058daaa044f6955720c7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "disko",
         "type": "github"
       }
     },
@@ -293,11 +273,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1707602717,
-        "narHash": "sha256-mLEziZaYS1G9Q2l7L1/HU+PyScfBGwgh1R4Mov7x5iY=",
+        "lastModified": 1707673696,
+        "narHash": "sha256-3+IgVATpdUFJ33QLIuK8mIzg5rSWA/wX0IoBMfPKzWo=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "8e23ca5dcbcd202ceb790598b38a68d7d292ef38",
+        "rev": "22f2d8e0cbb3a8490a104ca5cb7bbc8ba10d262c",
         "type": "gitlab"
       },
       "original": {
@@ -911,11 +891,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707488951,
-        "narHash": "sha256-xD0e8vLhrxmLKP8mo4kHmfXtDSQ9RZm/dbMmWDdW5WQ=",
+        "lastModified": 1707673089,
+        "narHash": "sha256-Kf0/HKLVmNIZF/9P4tPcBM3RtiHNfwySOReyykYt1pU=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "d570c29ce37ffbb46a9c49708c31dfd81daa27cf",
+        "rev": "786b5c533e32cfe88dbf8742fdbc18829fb46334",
         "type": "github"
       },
       "original": {
@@ -931,11 +911,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707607386,
-        "narHash": "sha256-hj/RgQMTvCWQVInkZwiMMieumkfOjHXhtWhfuXHop/8=",
+        "lastModified": 1707683400,
+        "narHash": "sha256-Zc+J3UO1Xpx+NL8UB6woPHyttEy9cXXtm+0uWwzuYDc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "bfd0ae29a86eff4603098683b516c67e22184511",
+        "rev": "21b078306a2ab68748abf72650db313d646cf2ca",
         "type": "github"
       },
       "original": {
@@ -1307,11 +1287,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1707268954,
-        "narHash": "sha256-2en1kvde3cJVc3ZnTy8QeD2oKcseLFjYPLKhIGDanQ0=",
+        "lastModified": 1707546158,
+        "narHash": "sha256-nYYJTpzfPMDxI8mzhQsYjIUX+grorqjKEU9Np6Xwy/0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f8e2ebd66d097614d51a56a755450d4ae1632df1",
+        "rev": "d934204a0f8d9198e1e4515dd6fec76a139c87f0",
         "type": "github"
       },
       "original": {
@@ -1348,11 +1328,11 @@
         "pre-commit-hooks": "pre-commit-hooks_3"
       },
       "locked": {
-        "lastModified": 1707595282,
-        "narHash": "sha256-F96hGG5ZCJiwZFBvlUrW8uLyhhz1/QJiqk+vaCjtWjw=",
+        "lastModified": 1707677596,
+        "narHash": "sha256-+xMTYbWXBu0Sek8rjKuXAL3mBLgTp1Bcwp4i1XRBJwo=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "e0926bc41bd06e0f4e86631872ec1a1aa41a4ba2",
+        "rev": "30bc345dee03d933af184f63056ab2ee9864d37f",
         "type": "github"
       },
       "original": {
@@ -1539,7 +1519,6 @@
         "codeium-nvim": "codeium-nvim",
         "crane": "crane_2",
         "devenv": "devenv",
-        "disko": "disko",
         "fenix": "fenix",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts_2",
