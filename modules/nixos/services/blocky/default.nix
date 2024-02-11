@@ -66,7 +66,7 @@ in {
           clientLookup.upstream = "192.168.2.1";
           conditional.mapping = {
             "." = "192.168.2.1";
-            ".local" = "192.168.2.1";
+            ".lan.r505.de" = "192.168.2.1";
             "arpa" = "192.168.2.1";
             "2.168.192.in-addr.arpa" = "192.168.2.1";
             "168.192.in-addr.arpa" = "192.168.2.1";
