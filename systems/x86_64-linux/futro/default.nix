@@ -34,9 +34,8 @@ in {
       enable = false;
       externalInterface = "enp5s0";
     };
-    system.kvm.enable = true;
     vms = {
-      openwrt.enable = true;
+      openwrt.enable = false;
     };
     services = {
       nas.enable = true;
