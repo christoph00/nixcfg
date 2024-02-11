@@ -18,8 +18,6 @@ in {
     microvm.vms.router = {
       inherit pkgs;
       config = {
-        system = {inherit (config.system) stateVersion;};
-
         microvm.shares = [
           {
             source = "/nix/store";
