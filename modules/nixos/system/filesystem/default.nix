@@ -12,7 +12,6 @@ with lib.chr; let
 in {
   options.chr.system.filesystem = with types; {
     enable = mkBoolOpt false "Whether or not to configure filesystems.";
-    disko = mkBoolOpt false "Enable Disko config";
     persist = mkBoolOpt false "rollback root";
     rootOnTmpfs = mkBoolOpt false "mount root on tmpfs";
     stateDir = mkOption {
@@ -40,7 +39,6 @@ in {
     swap = mkBoolOpt' false;
     swapSize = mkOpt' str "8G";
     home = mkBoolOpt true "Enable Home Partition";
-    extraDisks = mkOpt attrs {} "Extra Disks (Disko config).";
     extraSubvolumes = mkOpt attrs {} "Extra Subvolumes for the Main Disk";
   };
 
@@ -59,25 +57,25 @@ in {
       #   options = ["subvol=@root" "noatime" "compress-force=zstd"];
       # };
 
-      "/nix" = mkIf (cfg.btrfs && !cfg.disko) {
+      "/nix" = mkIf cfg.btrfs {
         inherit device;
         fsType = "btrfs";
         options = ["subvol=@nix" "noatime" "compress-force=zstd"];
       };
 
-      "/boot" = mkIf (!cfg.disko) {
+      "/boot" = {
         device = cfg.efiDisk;
         fsType = "vfat";
       };
 
-      "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist && !cfg.disko) {
+      "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist) {
         inherit device;
         fsType = "btrfs";
         options = ["subvol=@persist" "noatime" "compress-force=zstd"];
         neededForBoot = true;
       };
 
-      "/home" = mkIf (cfg.btrfs && !cfg.disko) {
+      "/home" = mkIf cfg.btrfs {
         inherit device;
         fsType = "btrfs";
         options = ["subvol=@home" "noatime" "compress-force=zstd"];

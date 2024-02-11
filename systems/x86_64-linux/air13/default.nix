@@ -70,7 +70,6 @@ in {
   chr.system.filesystem = {
     enable = true;
     btrfs = true;
-    disko = false;
     persist = true;
     mainDisk = "/dev/nvme0n1p3";
     efiDisk = "/dev/nvme0n1p1";
