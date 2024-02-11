@@ -14,23 +14,27 @@ in {
     enable = mkBoolOpt false "Enable VMs.";
   };
 
-  # imports = lib.optionals config.chr.vms.enable [
-  #   inputs.microvm.nixosModules.host
-  # ];
+  imports = [
+    inputs.microvm.nixosModules.host
+  ];
 
-  config = mkIf cfg.enable {
-    systemd.network = {
-      enable = true;
-      networks."10-net0" = {
-        matchConfig.Name = "net0";
-        networkConfig.DHCP = "yes";
+  config = mkMerge [
+    {microvm.host.enable = cfg.enable;}
+    (mkIf cfg.enable)
+    {
+      systemd.network = {
+        enable = true;
+        networks."10-net0" = {
+          matchConfig.Name = "net0";
+          networkConfig.DHCP = "yes";
+        };
       };
-    };
-    environment.persistence."${cfg.stateDir}" = {
-      hideMounts = true;
-      directories = [
-        "/var/lib/microvms"
-      ];
-    };
-  };
+      environment.persistence."${cfg.stateDir}" = {
+        hideMounts = true;
+        directories = [
+          "/var/lib/microvms"
+        ];
+      };
+    }
+  ];
 }
