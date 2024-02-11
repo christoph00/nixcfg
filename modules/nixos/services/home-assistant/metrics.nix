@@ -12,7 +12,7 @@ in {
   services.home-assistant.config.sensor = mkIf cfg.enable [
     {
       platform = "prometheus_sensor";
-      url = "http://air.netbird.cloud:8428"; #TODO: fix hardcoded url
+      url = "http://air13.netbird.cloud:8428"; #TODO: fix hardcoded url
       queries = [
         {
           name = "Futro Load";
