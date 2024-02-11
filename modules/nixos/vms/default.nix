@@ -14,7 +14,7 @@ in {
     inputs.microvm.nixosModules.host
   ];
   options.chr.vms = with types; {
-    enable = mkservicesBoolOpt false "Enable VMs.";
+    enable = mkBoolOpt false "Enable VMs.";
   };
 
   config = mkIf cfg.enable {
