@@ -16,6 +16,7 @@ in {
       default = "ha.r505.de";
     };
   };
+  imports = [./mqtt-sensors.nix];
   config = lib.mkIf cfg.enable {
     users.users.hass = {
       extraGroups = ["dialout"];

@@ -1,8 +1,8 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
 }:
-
 buildGoModule rec {
   pname = "dunnart";
   version = "unstable-2023-11-08";
@@ -16,13 +16,13 @@ buildGoModule rec {
 
   vendorHash = "sha256-vpm8uTjazUfrjwwGXiP2UP5nJu0Vfl8Z+T1gsKefmDo=";
 
-  ldflags = [ "-s" "-w" ];
+  ldflags = ["-s" "-w"];
 
   meta = with lib; {
     description = "Lightweight remote system monitoring over MQTT for Home Assistant";
     homepage = "https://github.com/warthog618/dunnart";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "dunnart";
   };
 }

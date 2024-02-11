@@ -38,10 +38,6 @@ in {
 
         usbimager
 
-        themechanger
-
-        gnome.gnome-keyring
-
         nix-init
 
         nixd
@@ -67,6 +63,8 @@ in {
         armcord
 
         filezilla
+
+        evolution
 
         neovide
 
