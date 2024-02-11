@@ -52,7 +52,7 @@ in {
               ];
             }
           ]
-          ++ lib.mkIf cfg.scrapeExtra [
+          ++ lib.optionals cfg.scrapeExtra [
             {
               job_name = "openwrt";
               static_configs = [
