@@ -18,23 +18,21 @@ in {
     inputs.microvm.nixosModules.host
   ];
 
-  config = mkMerge [
-    {microvm.host.enable = lib.mkForce cfg.enable;}
-    (mkIf cfg.enable)
-    {
-      systemd.network = {
-        enable = true;
-        networks."10-net0" = {
-          matchConfig.Name = "net0";
-          networkConfig.DHCP = "yes";
-        };
+  config = {
+    microvm.host.enable = lib.mkForce cfg.enable;
+
+    systemd.network = mkIf cfg.enable {
+      enable = true;
+      networks."10-net0" = {
+        matchConfig.Name = "net0";
+        networkConfig.DHCP = "yes";
       };
-      environment.persistence."${cfg.stateDir}" = {
-        hideMounts = true;
-        directories = [
-          "/var/lib/microvms"
-        ];
-      };
-    }
-  ];
+    };
+    environment.persistence."${cfg.stateDir}" = mkIf cfg.enable {
+      hideMounts = true;
+      directories = [
+        "/var/lib/microvms"
+      ];
+    };
+  };
 }
