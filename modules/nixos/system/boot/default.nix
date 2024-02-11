@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.system.boot;
 in {
   options.chr.system.boot = with types; {
-    enable = mkBoolOpt (!config.chr.type == "vm") "Whether or not to enable booting.";
+    enable = mkBoolOpt (!config.chr.isMicroVM) "Whether or not to enable booting.";
     efi = mkBoolOpt false "Whether or not to enable efi booting.";
     bootloader = mkOption {
       type = types.enum ["none" "grub" "systemd-boot"];
