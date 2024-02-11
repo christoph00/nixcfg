@@ -10,9 +10,6 @@ with lib;
 with lib.chr; let
   cfg = config.chr.vms;
 in {
-  imports = [
-    inputs.microvm.nixosModules.host
-  ];
   options.chr.vms = with types; {
     enable = mkBoolOpt false "Enable VMs.";
   };
