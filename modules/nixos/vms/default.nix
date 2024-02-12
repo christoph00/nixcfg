@@ -16,10 +16,12 @@ in {
 
   imports = [
     inputs.microvm.nixosModules.host
+    inputs.microvm.nixosModules.microvm
   ];
 
   config = {
     microvm.host.enable = lib.mkForce cfg.enable;
+    microvm.guest.enable = lib.mkForce config.chr.isMicroVM;
 
     systemd.network = mkIf cfg.enable {
       enable = true;
