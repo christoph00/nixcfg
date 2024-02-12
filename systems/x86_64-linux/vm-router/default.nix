@@ -44,6 +44,8 @@
     }
   ];
 
+  networking.firewall.allowedUDPPorts = [67]; # dhcp
+
   systemd.network = {
     enable = true;
 
