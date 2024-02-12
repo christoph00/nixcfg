@@ -25,9 +25,24 @@ in {
 
     systemd.network = mkIf cfg.enable {
       enable = true;
-      networks."10-net0" = {
-        matchConfig.Name = "net0";
+      netdevs.internet.netdevConfig = {
+        Kind = "bridge";
+        Name = "internet";
+      };
+
+      networks."5-internet" = {
+        matchConfig.Name = "internet";
         networkConfig.DHCP = "yes";
+      };
+
+      networks.microvm-internet = {
+        matchConfig.Name = "vm-*";
+        networkConfig.Bridge = "internet";
+      };
+
+      networks.tap-internet = {
+        matchConfig.Name = "tap-internet";
+        networkConfig.Bridge = "internet";
       };
     };
     environment.persistence."${config.chr.system.persist.stateDir}" = mkIf cfg.enable {
