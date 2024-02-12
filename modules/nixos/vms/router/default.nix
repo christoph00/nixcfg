@@ -18,7 +18,6 @@ in {
     microvm.vms.vm-router = {
       flake = inputs.self;
       updateFlake = "github:christoph00/nixcfg";
-      
     };
   };
 }
