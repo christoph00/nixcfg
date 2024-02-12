@@ -1,4 +1,4 @@
-{pkgs, config...}: {
+{pkgs, config , ...}: {
 
 microvm = {
     hypervisor = "cloud-hypervisor";
