@@ -12,6 +12,18 @@
     mem = 512;
     vcpu = 2;
 
+    interfaces = [
+      {
+        type = "macvtap";
+        id = config.networking.hostName;
+        mac = "17-0f-fd-15-9b-a0";
+        macvtap = {
+          link = "ts0";
+          mode = "bridge";
+        };
+      }
+    ];
+
     shares =
       [
         {
