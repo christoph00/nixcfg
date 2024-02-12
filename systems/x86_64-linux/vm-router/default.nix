@@ -1,5 +1,9 @@
 {pkgs, config , ...}: {
 
+chr = {
+    type = "microvm";
+};
+
 microvm = {
     hypervisor = "cloud-hypervisor";
     mem = 512;
