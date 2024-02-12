@@ -62,6 +62,7 @@ in {
       blocky.enable = true;
     };
     vms = {
+      enable = true;
       router.enable = true;
     };
   };
