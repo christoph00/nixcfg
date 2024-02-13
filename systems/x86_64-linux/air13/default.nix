@@ -63,7 +63,7 @@ in {
     };
     vms = {
       enable = true;
-      router.enable = true;
+      smarthome.enable = true;
     };
   };
   chr.system.filesystem = {
