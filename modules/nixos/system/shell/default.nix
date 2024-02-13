@@ -19,7 +19,7 @@ in {
 
       shellAliases = {
         ll = "ls -lah";
-        kssh = lib.mkIF config.chr.apps.kitty.enable "kitty +kitten ssh";
+        kssh = lib.mkIf config.chr.apps.kitty.enable "kitty +kitten ssh";
       };
 
       systemPackages = with pkgs; [
