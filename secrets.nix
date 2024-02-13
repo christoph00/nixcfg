@@ -30,9 +30,13 @@ in {
 
   "secrets/ha-serviceaccount".publicKeys = [futro air13] ++ users;
   "secrets/ha-secrets.yaml".publicKeys = [futro air13] ++ users;
+
+  "secrets/zwave-js-keys.json".publicKeys = [air13] ++ users;
+
   "secrets/christoph-password.age".publicKeys = all ++ users;
 
   "secrets/yarr-auth".publicKeys = [futro air13] ++ users;
+
   "secrets/grafana-password".publicKeys = all ++ users;
   "secrets/vaultwarden.env".publicKeys = [futro air13] ++ users;
   "secrets/paperless-token.env".publicKeys = [futro air13] ++ users;
