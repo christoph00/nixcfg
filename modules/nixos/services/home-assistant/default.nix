@@ -123,6 +123,7 @@ in {
         zeroconf = {};
         #bthome = {};
         media_extractor = {};
+        zwave_js = {};
         proximity = {};
         zha = {
           enable_quirks = true;
