@@ -35,8 +35,6 @@
       url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
-      inputs.home-manager.follows = "home-manager";
-
     };
 
     agenix-rekey = {
