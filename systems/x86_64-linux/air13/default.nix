@@ -59,7 +59,6 @@ in {
       #ollama.enable = true;
       vmetrics.enable = true;
       monitoring.scrapeExtra = true;
-      blocky.enable = true;
       zwave.enable = true;
     };
     vms = {
