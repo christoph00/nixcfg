@@ -10,14 +10,16 @@ with lib.chr; {
   system.stateVersion = "23.11";
   chr = {
     type = "desktop";
+    gaming.enable = true;
+    system.boot.efi = true;
   };
   chr.system.filesystem = {
-    enable = mkDefault true;
-    btrfs = mkDefault true;
-    persist = mkDefault true;
-    mainDisk = mkDefault "/dev/nvme0n1p3";
-    efiDisk = mkDefault "/dev/nvme0n1p1";
-    rootOnTmpfs = mkDefault true;
+    enable = true;
+    btrfs = true;
+    persist = true;
+    mainDisk = "/dev/nvme0n1p3";
+    efiDisk = "/dev/nvme0n1p1";
+    rootOnTmpfs = true;
   };
 
   fileSystems = {
