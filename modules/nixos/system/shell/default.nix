@@ -19,7 +19,7 @@ in {
 
       shellAliases = {
         ll = "ls -lah";
-        kssh = "kitty +kitten ssh";
+        kssh = lib.mkIF config.chr.apps.kitty.enable "kitty +kitten ssh";
       };
 
       systemPackages = with pkgs; [
@@ -28,10 +28,10 @@ in {
         ripgrep
         wget
         git
-        ncdu
         htop
         unzip
         dig
+        kitty.terminfo
       ];
 
       localBinInPath = true;
