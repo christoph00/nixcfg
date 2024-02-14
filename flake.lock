@@ -140,11 +140,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707428299,
-        "narHash": "sha256-LnPNj12V0ecCp3ScXoLuoaWp8qIiAoqdPmYtJZ7ZEoc=",
+        "lastModified": 1707849962,
+        "narHash": "sha256-EiVMy21PsBh9VBbxjL+oqmTsScssHFNyyp/ikVmBMjA=",
         "owner": "Exafunction",
         "repo": "codeium.nvim",
-        "rev": "ad6705cacce51df32c9fd72b66f38cb242a95485",
+        "rev": "103da3c204c82220422169c63fa13af918762f8b",
         "type": "github"
       },
       "original": {
@@ -248,11 +248,11 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "lastModified": 1707653290,
-        "narHash": "sha256-BZoeaofvEPuf2pw+k6VoRDiE/E5/3w7z0jrKfQCiXco=",
+        "lastModified": 1707817777,
+        "narHash": "sha256-vHyIs1OULQ3/91wD6xOiuayfI71JXALGA5KLnDKAcy0=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "91a572c9866b92294aec152b65fa06c4dad7816f",
+        "rev": "5a30b9e5ac7c6167e61b1f4193d5130bb9f8defa",
         "type": "github"
       },
       "original": {
@@ -313,11 +313,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1707673696,
-        "narHash": "sha256-3+IgVATpdUFJ33QLIuK8mIzg5rSWA/wX0IoBMfPKzWo=",
+        "lastModified": 1707816110,
+        "narHash": "sha256-pyEubQVR0ccPcTyOytpH9WjF6NB+Vvnzon1y9eZVXzM=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "22f2d8e0cbb3a8490a104ca5cb7bbc8ba10d262c",
+        "rev": "0baeda8baf7638873038057945f8c6a5e77927cb",
         "type": "gitlab"
       },
       "original": {
@@ -916,31 +916,6 @@
         "type": "github"
       }
     },
-    "gomod2nix": {
-      "inputs": {
-        "flake-utils": [
-          "ollama",
-          "utils"
-        ],
-        "nixpkgs": [
-          "ollama",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1705314449,
-        "narHash": "sha256-yfQQ67dLejP0FLK76LKHbkzcQqNIrux6MFe32MMFGNQ=",
-        "owner": "tweag",
-        "repo": "gomod2nix",
-        "rev": "30e3c3a9ec4ac8453282ca7f67fca9e1da12c3e6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tweag",
-        "repo": "gomod2nix",
-        "type": "github"
-      }
-    },
     "helix": {
       "inputs": {
         "crane": "crane_3",
@@ -953,11 +928,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707785903,
-        "narHash": "sha256-xADPHOde+aLj9hAuDqFhEdfJr0uOcrePr6kAlEmVA74=",
+        "lastModified": 1707840983,
+        "narHash": "sha256-w8sANEvAh4XQThm93ZvsAPbX46vc9GEnBRvZwGgQy+8=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "7934ac77143e69068420556b043dde035255340b",
+        "rev": "c59f29921da98e23525c9ff4ffa82e330310e6fe",
         "type": "github"
       },
       "original": {
@@ -1158,11 +1133,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1706637303,
-        "narHash": "sha256-K6SqE9diWDCoEQ+MzuVlTfNrAKcdIa/dLHBtKfz445U=",
+        "lastModified": 1707825078,
+        "narHash": "sha256-hTfge2J2W+42SZ7VHXkf4kjU+qzFqPeC9k66jAUBMHk=",
         "owner": "misterio77",
         "repo": "nix-colors",
-        "rev": "fc080c51d2a219b40d886870e364243783ed5ca1",
+        "rev": "b01f024090d2c4fc3152cd0cf12027a7b8453ba1",
         "type": "github"
       },
       "original": {
@@ -1220,11 +1195,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1707786897,
-        "narHash": "sha256-zgLmzrfz2xGZpFEhgGsJLhkAdroPhf0gNZfRIsUPJds=",
+        "lastModified": 1707873338,
+        "narHash": "sha256-1iREjolh5VsceIbxK5wcjhM6+uwRnXzD/UmnsbpXxnc=",
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
-        "rev": "856a8c1902513fa72f86963bd9f3c9238828c23a",
+        "rev": "f495145caabb9a3b5bb3ae2815a66db1c3fbe31d",
         "type": "github"
       },
       "original": {
@@ -1235,11 +1210,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1707211557,
-        "narHash": "sha256-LTKTzZ6fM5j8XWXf51IMBzDaOaJg9kYWLUZxoIhzRN8=",
+        "lastModified": 1707842204,
+        "narHash": "sha256-M+HAq1qWQBi/gywaMZwX0odU+Qb/XeqVeANGKRBDOwU=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "6e5cc385fc8cf5ca6495d70243074ccdea9f64c7",
+        "rev": "f1b2f71c86a5b1941d20608db0b1e88a07d31303",
         "type": "github"
       },
       "original": {
@@ -1428,11 +1403,11 @@
         "pre-commit-hooks": "pre-commit-hooks_4"
       },
       "locked": {
-        "lastModified": 1707770208,
-        "narHash": "sha256-E5sHUrcNOURp7u9cYJOLUmhXqWPwQ8Y4WNSjgNC2ggY=",
+        "lastModified": 1707862023,
+        "narHash": "sha256-PPPteXL1tL+tpV1cAHfm4A2hwDH+pinXBBYHsM6Bz6o=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "81ff1f8f6f5dec432f6b71ddd5e8dd57ac424f58",
+        "rev": "6dd2eed61372cc6d9959fdcc6ec249d438363050",
         "type": "github"
       },
       "original": {
@@ -1463,47 +1438,23 @@
     },
     "ollama": {
       "inputs": {
-        "gomod2nix": "gomod2nix",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nixpkgs-unfree": "nixpkgs-unfree",
-        "ollama": "ollama_2",
-        "utils": [
-          "utils"
-        ]
+        "nixpkgs-unfree": "nixpkgs-unfree"
       },
       "locked": {
-        "lastModified": 1707569792,
-        "narHash": "sha256-ThjsyFspI4MquANx2Mym1d6K16ey0qvSlk+FGbD4fX0=",
+        "lastModified": 1707870853,
+        "narHash": "sha256-pVqQTyRK/jLxfsAs44GlxGzQohIqHxSgb3kJU0frg9c=",
         "owner": "abysssol",
         "repo": "ollama-flake",
-        "rev": "615b52feeec783ae6b713ac20e4847e4ab496793",
+        "rev": "2908747262ecbad0cc2f9e81268c64f8ee713c50",
         "type": "github"
       },
       "original": {
         "owner": "abysssol",
         "repo": "ollama-flake",
         "type": "github"
-      }
-    },
-    "ollama_2": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1707357331,
-        "narHash": "sha256-GwZA1QUH8I8m2bGToIcMMaB5MBnioQP4+n1SauUJYP8=",
-        "ref": "refs/tags/v0.1.24",
-        "rev": "69f392c9b7ea7c5cc3d46c29774e37fdef51abd8",
-        "revCount": 1967,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/jmorganca/ollama"
-      },
-      "original": {
-        "ref": "refs/tags/v0.1.24",
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/jmorganca/ollama"
       }
     },
     "pnpm2nix": {
@@ -1697,11 +1648,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707790272,
-        "narHash": "sha256-KQXPNl3BLdRbz7xx+mwIq/017fxLRk6JhXHxVWCKsTU=",
+        "lastModified": 1707876656,
+        "narHash": "sha256-urnZg6e2JjziBosarDB1MnjPeVqcu3PeSqIpqQKYrdg=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "8dfbe2dffc28c1a18a29ffa34d5d0b269622b158",
+        "rev": "3ad32bb27c700b59306224e285b66577e3532dfc",
         "type": "github"
       },
       "original": {
