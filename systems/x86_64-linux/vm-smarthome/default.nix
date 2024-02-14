@@ -13,16 +13,16 @@
     vcpu = 2;
 
     interfaces = [
-        {
-          type = "macvtap";
-          id = "vm-${config.networking.hostName}";
-          mac = "02:00:00:01:01:10";
-          macvtap = {
-            link = "eth0";
-            mode = "bridge";
-          };
-        }
-      ];
+      {
+        type = "macvtap";
+        id = "vm-${config.networking.hostName}";
+        mac = "02:00:00:01:01:10";
+        macvtap = {
+          link = "enp0s20f0u4c2";
+          mode = "bridge";
+        };
+      }
+    ];
 
     shares =
       [
