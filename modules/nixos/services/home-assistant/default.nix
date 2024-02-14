@@ -61,6 +61,7 @@ in {
               pyebus
               hatasmota
               kegtron-ble
+              zwave-js-server-python
             ];
         })
         .overrideAttrs (oldAttrs: {doInstallCheck = false;});
@@ -266,6 +267,7 @@ in {
         "snmp"
         "google"
         "spotify"
+
         #"python_script"
         "bluetooth_tracker"
         "bluetooth_le_tracker"

@@ -20,6 +20,8 @@ in {
       secretsConfigFile = config.age.secrets.zwave-js-keys.path;
     };
 
+    networking.firewall.allowedTCPPorts = [3090];
+
     age.secrets.zwave-js-keys = {
       file = ../../../../secrets/zwave-js-keys.json;
       mode = "444";
