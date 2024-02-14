@@ -266,6 +266,7 @@ in {
         "snmp"
         "google"
         "spotify"
+        "zwave_js_server"
         #"python_script"
         "bluetooth_tracker"
         "bluetooth_le_tracker"
