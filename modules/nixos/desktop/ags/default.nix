@@ -27,7 +27,7 @@ in {
         cfg.package
       ];
 
-      xdg.configFile = {
+      xdg.dataFile = {
         "ags/types" = {
           source = "${inputs.ags.packages.${pkgs.system}.agsWithTypes}/share/com.github.Aylur.ags/types";
           recursive = true;
