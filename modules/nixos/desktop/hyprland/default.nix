@@ -10,6 +10,14 @@ with lib.chr; let
 in {
   options.chr.desktop.hyprland = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether or not enable Hyprland Desktop.";
+    scale = lib.mkOption {
+      type = lib.types.str;
+      default = "1";
+    };
+    layout = lib.mkOption {
+      type = lib.types.str;
+      default = "de";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -161,12 +169,12 @@ in {
           };
 
           monitor = [
-            ",preferred,auto,1"
+            ",preferred,auto,${cfg.scale}"
           ];
 
           input = {
             follow_mouse = 1;
-            kb_layout = "de";
+            kb_layout = cfg.layout;
 
             touchpad = {
               natural_scroll = "no";

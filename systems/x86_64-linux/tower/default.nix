@@ -12,6 +12,8 @@ with lib.chr; {
     type = "desktop";
     gaming.enable = true;
     system.boot.efi = true;
+    desktop.hyprland.scale = "2";
+    desktop.hyprland.layout = "us-german-umlaut";
   };
   chr.system.filesystem = {
     enable = true;
