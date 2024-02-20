@@ -268,11 +268,13 @@ in {
       };
 
       xdg.configFile."hyprshade/config.toml".source = toTOML "config.toml" {
-        shades = {
-          name = "blue-light-filter";
-          start_time = "19:00:00";
-          end_time = "08:00:00";
-        };
+        shades = [
+          {
+            name = "blue-light-filter";
+            start_time = "19:00:00";
+            end_time = "08:00:00";
+          }
+        ];
       };
     };
   };
