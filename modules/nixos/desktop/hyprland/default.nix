@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib;
@@ -200,7 +201,6 @@ in {
           bind = [
             "$mod, Return, exec, kitty"
             "$mod, c, killactive "
-            "$mod + SHIFT, r, exec, anyrun"
             "$mod, r, exec, ags -t applauncher"
             "$mod, f, fullscreen,0"
             "$mod, v, togglefloating"
@@ -216,6 +216,8 @@ in {
             "$mod, 8, workspace, 8"
             "$mod, 9, workspace, 9"
             "$mod, 0, workspace, 10"
+            "$mod + SHIFT, R, exec, ${inputs.anyrun.packages.${pkgs.system}.anyrun}/bin/anyrun"
+            "$mod + SHIFT, F, exec, ${pkgs.gnome.nautilus}/bin/nautilus"
           ];
 
           bindm = [
