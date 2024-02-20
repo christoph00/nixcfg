@@ -102,7 +102,7 @@ in {
             "${config.chr.desktop.ags.package}/bin/ags"
             "wl-paste --type text --watch cliphist store" #Stores only text data
             "wl-paste --type image --watch cliphist store"
-            "wlsunset -S 8:00 -s 20:00"
+            "${pkgs.hyprshade}/bin/hyprshade auto"
           ];
           animations = {
             enabled = "yes";
@@ -149,7 +149,7 @@ in {
             # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
             force_split = 0;
             preserve_split = true; # you probably want this
-            pseudotile = true; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+            pseudotile = true; # master switch for pseudotiling. Enabling is bound to mod + P in the keybinds section below
           };
 
           general = {
@@ -204,8 +204,13 @@ in {
             "$mod, r, exec, ags -t applauncher"
             "$mod, f, fullscreen,0"
             "$mod, v, togglefloating"
+            "$mod, R, pseudo, # dwindle"
+            "$mod, E, togglesplit, # dwindle"
+
             "$mod + SHIFT, p, exec, hyprland-relative-workspace b"
             "$mod + SHIFT, n, exec, hyprland-relative-workspace f"
+
+            # Switch workspaces with mod + [0-9]
             "$mod, 1, workspace, 1"
             "$mod, 2, workspace, 2"
             "$mod, 3, workspace, 3"
@@ -216,6 +221,37 @@ in {
             "$mod, 8, workspace, 8"
             "$mod, 9, workspace, 9"
             "$mod, 0, workspace, 10"
+            "$mod, h, workspace, 11"
+            "$mod, j, workspace, 12"
+            "$mod, k, workspace, 13"
+            "$mod, l, workspace, 14"
+
+            # Move active window to a workspace with mod + SHIFT + [0-9]
+            "$mod + SHIFT, 1, movetoworkspacesilent, 1"
+            "$mod + SHIFT, 2, movetoworkspacesilent, 2"
+            "$mod + SHIFT, 3, movetoworkspacesilent, 3"
+            "$mod + SHIFT, 4, movetoworkspacesilent, 4"
+            "$mod + SHIFT, 5, movetoworkspacesilent, 5"
+            "$mod + SHIFT, 6, movetoworkspacesilent, 6"
+            "$mod + SHIFT, 7, movetoworkspacesilent, 7"
+            "$mod + SHIFT, 8, movetoworkspacesilent, 8"
+            "$mod + SHIFT, 9, movetoworkspacesilent, 9"
+            "$mod + SHIFT, 0, movetoworkspacesilent, 10"
+            "$mod + SHIFT, h, movetoworkspacesilent, 11"
+            "$mod + SHIFT, j, movetoworkspacesilent, 12"
+            "$mod + SHIFT, k, movetoworkspacesilent, 13"
+            "$mod + SHIFT, l, movetoworkspacesilent, 14"
+
+            # Move window with mod_SHIFT + arrow keys
+            "$mod + SHIFT, left, movewindow, l"
+            "$mod + SHIFT, right, movewindow, r"
+            "$mod + SHIFT, up, movewindow, u"
+            "$mod + SHIFT, down, movewindow, d"
+
+            # Scroll through existing workspaces with mod + scroll
+            "$mod, mouse_up, workspace, r+1"
+            "$mod, mouse_down, workspace, r-1"
+
             "$mod + SHIFT, R, exec, ${inputs.anyrun.packages.${pkgs.system}.anyrun}/bin/anyrun"
             "$mod + SHIFT, F, exec, ${pkgs.gnome.nautilus}/bin/nautilus"
           ];
@@ -225,6 +261,14 @@ in {
             "$mod, mouse:272, movewindow"
             "$mod, mouse:273, resizewindow"
           ];
+        };
+      };
+
+      xdg.configFile."hyprshade/config.toml".source = toTOML "config.toml" {
+        shades = {
+          name = "blue-light-filter";
+          start_time = "19:00:00";
+          end_time = "08:00:00";
         };
       };
     };
