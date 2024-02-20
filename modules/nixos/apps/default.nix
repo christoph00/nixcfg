@@ -45,7 +45,6 @@ in {
         vulkan-tools
         glxinfo
 
-        wlsunset
         wl-clipboard
 
         peazip
