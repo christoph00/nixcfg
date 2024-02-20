@@ -130,11 +130,11 @@
 in
   stdenv.mkDerivation rec {
     pname = "thorium";
-    version = "120.0.6099.235";
+    version = "121.0.6167.204";
 
     src = fetchurl {
-      url = "https://github.com/Alex313031/thorium/releases/download/M${version}/thorium-browser_${version}_amd64.deb";
-      sha256 = "01sly5j2ipbfv3bap6fy32f0r057im27n8j7arvycpi3b5g9h2ji";
+      url = "https://github.com/Alex313031/thorium/releases/download/M${version}/thorium-browser_${version}_AVX2.deb";
+      sha256 = "0v3xk3rb54jh9b3h7rd6ag7xw645b0zahajqbsvyhvy18lz8mz3h";
     };
 
     dontConfigure = true;
