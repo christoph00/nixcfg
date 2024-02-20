@@ -8,6 +8,7 @@
 with lib;
 with lib.chr; let
   cfg = config.chr.desktop.hyprland;
+  toTOML = (pkgs.formats.toml {}).generate;
 in {
   options.chr.desktop.hyprland = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether or not enable Hyprland Desktop.";
@@ -254,6 +255,8 @@ in {
 
             "$mod + SHIFT, R, exec, ${inputs.anyrun.packages.${pkgs.system}.anyrun}/bin/anyrun"
             "$mod + SHIFT, F, exec, ${pkgs.gnome.nautilus}/bin/nautilus"
+
+            "$mod, s, exec, ${pkgs.hyprshade}/bin/hyprshade toggle"
           ];
 
           bindm = [
