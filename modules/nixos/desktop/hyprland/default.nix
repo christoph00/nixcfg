@@ -8,7 +8,9 @@
 with lib;
 with lib.chr; let
   cfg = config.chr.desktop.hyprland;
-  toTOML = (pkgs.formats.toml {}).generate;
+  playerctl = "${pkgs.playerctl}/bin/playerctl";
+  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+  pactl = "${pkgs.pulseaudio}/bin/pactl";
 in {
   options.chr.desktop.hyprland = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether or not enable Hyprland Desktop.";
@@ -198,84 +200,107 @@ in {
             mouse_move_enables_dpms = true;
             vrr = 2;
           };
-          "$mod" = "SUPER";
-          bind = [
-            "$mod, Return, exec, kitty"
-            "$mod, c, killactive "
-            "$mod, r, exec, ags -t applauncher"
-            "$mod, f, fullscreen,0"
-            "$mod, v, togglefloating"
-            "$mod, R, pseudo, # dwindle"
-            "$mod, E, togglesplit, # dwindle"
 
-            "$mod + SHIFT, p, exec, hyprland-relative-workspace b"
-            "$mod + SHIFT, n, exec, hyprland-relative-workspace f"
+          windowrule = let
+            f = regex: "float, ^(${regex})$";
+          in [
+            (f "org.gnome.Calculator")
+            (f "org.gnome.Nautilus")
+            (f "pavucontrol")
+            (f "nm-connection-editor")
+            (f "blueberry.py")
+            (f "org.gnome.Settings")
+            (f "org.gnome.design.Palette")
+            (f "Color Picker")
+            (f "xdg-desktop-portal")
+            (f "xdg-desktop-portal-gnome")
+            (f "transmission-gtk")
+            (f "com.github.Aylur.ags")
+          ];
 
-            # Switch workspaces with mod + [0-9]
-            "$mod, 1, workspace, 1"
-            "$mod, 2, workspace, 2"
-            "$mod, 3, workspace, 3"
-            "$mod, 4, workspace, 4"
-            "$mod, 5, workspace, 5"
-            "$mod, 6, workspace, 6"
-            "$mod, 7, workspace, 7"
-            "$mod, 8, workspace, 8"
-            "$mod, 9, workspace, 9"
-            "$mod, 0, workspace, 10"
-            "$mod, h, workspace, 11"
-            "$mod, j, workspace, 12"
-            "$mod, k, workspace, 13"
-            "$mod, l, workspace, 14"
+          bind = let
+            binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
+            mvfocus = binding "SUPER" "movefocus";
+            ws = binding "SUPER" "workspace";
+            resizeactive = binding "SUPER CTRL" "resizeactive";
+            mvactive = binding "SUPER ALT" "moveactive";
+            mvtows = binding "SUPER SHIFT" "movetoworkspace";
+            e = "exec, ags -b hypr";
+            arr = [1 2 3 4 5 6 7 8 9];
+          in
+            [
+              "CTRL SHIFT, R,  ${e} quit; ags -b hypr"
+              "SUPER, R,       ${e} -t applauncher"
+              "SUPER, Tab,     ${e} -t overview"
+              ",XF86PowerOff,  ${e} -r 'powermenu.shutdown()'"
+              "SUPER, Return, exec, kitty"
+              "SUPER, W, exec, thorium"
+              "SUPER, E, exec, wezterm -e lf"
 
-            # Move active window to a workspace with mod + SHIFT + [0-9]
-            "$mod + SHIFT, 1, movetoworkspacesilent, 1"
-            "$mod + SHIFT, 2, movetoworkspacesilent, 2"
-            "$mod + SHIFT, 3, movetoworkspacesilent, 3"
-            "$mod + SHIFT, 4, movetoworkspacesilent, 4"
-            "$mod + SHIFT, 5, movetoworkspacesilent, 5"
-            "$mod + SHIFT, 6, movetoworkspacesilent, 6"
-            "$mod + SHIFT, 7, movetoworkspacesilent, 7"
-            "$mod + SHIFT, 8, movetoworkspacesilent, 8"
-            "$mod + SHIFT, 9, movetoworkspacesilent, 9"
-            "$mod + SHIFT, 0, movetoworkspacesilent, 10"
-            "$mod + SHIFT, h, movetoworkspacesilent, 11"
-            "$mod + SHIFT, j, movetoworkspacesilent, 12"
-            "$mod + SHIFT, k, movetoworkspacesilent, 13"
-            "$mod + SHIFT, l, movetoworkspacesilent, 14"
+              "SUPER SHIFT, R, exec, ${inputs.anyrun.packages.${pkgs.system}.anyrun}/bin/anyrun"
 
-            # Move window with mod_SHIFT + arrow keys
-            "$mod + SHIFT, left, movewindow, l"
-            "$mod + SHIFT, right, movewindow, r"
-            "$mod + SHIFT, up, movewindow, u"
-            "$mod + SHIFT, down, movewindow, d"
+              "$SUPER, s, exec, ${pkgs.hyprshade}/bin/hyprshade toggle"
 
-            # Scroll through existing workspaces with mod + scroll
-            "$mod, mouse_up, workspace, r+1"
-            "$mod, mouse_down, workspace, r-1"
+              "ALT, Tab, focuscurrentorlast"
+              "CTRL ALT, Delete, exit"
+              "ALT, Q, killactive"
+              "SUPER, F, togglefloating"
+              "SUPER, G, fullscreen"
+              "SUPER, O, fakefullscreen"
+              "SUPER, P, togglesplit"
 
-            "$mod + SHIFT, R, exec, ${inputs.anyrun.packages.${pkgs.system}.anyrun}/bin/anyrun"
-            "$mod + SHIFT, F, exec, ${pkgs.gnome.nautilus}/bin/nautilus"
+              (mvfocus "k" "u")
+              (mvfocus "j" "d")
+              (mvfocus "l" "r")
+              (mvfocus "h" "l")
+              (ws "left" "e-1")
+              (ws "right" "e+1")
+              (mvtows "left" "e-1")
+              (mvtows "right" "e+1")
+              (resizeactive "k" "0 -20")
+              (resizeactive "j" "0 20")
+              (resizeactive "l" "20 0")
+              (resizeactive "h" "-20 0")
+              (mvactive "k" "0 -20")
+              (mvactive "j" "0 20")
+              (mvactive "l" "20 0")
+              (mvactive "h" "-20 0")
+            ]
+            ++ (map (i: ws (toString i) (toString i)) arr)
+            ++ (map (i: mvtows (toString i) (toString i)) arr);
 
-            "$mod, s, exec, ${pkgs.hyprshade}/bin/hyprshade toggle"
+          bindle = [
+            ",XF86MonBrightnessUp,   exec, ${brightnessctl} set +5%"
+            ",XF86MonBrightnessDown, exec, ${brightnessctl} set  5%-"
+            ",XF86KbdBrightnessUp,   exec, ${brightnessctl} -d asus::kbd_backlight set +1"
+            ",XF86KbdBrightnessDown, exec, ${brightnessctl} -d asus::kbd_backlight set  1-"
+            ",XF86AudioRaiseVolume,  exec, ${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
+            ",XF86AudioLowerVolume,  exec, ${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
+          ];
+
+          bindl = [
+            ",XF86AudioPlay,    exec, ${playerctl} play-pause"
+            ",XF86AudioStop,    exec, ${playerctl} pause"
+            ",XF86AudioPause,   exec, ${playerctl} pause"
+            ",XF86AudioPrev,    exec, ${playerctl} previous"
+            ",XF86AudioNext,    exec, ${playerctl} next"
+            ",XF86AudioMicMute, exec, ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
           ];
 
           bindm = [
-            # Move/resize windows with $mod + LMB/RMB and dragging
-            "$mod, mouse:272, movewindow"
-            "$mod, mouse:273, resizewindow"
+            "SUPER, mouse:273, resizewindow"
+            "SUPER, mouse:272, movewindow"
           ];
         };
       };
 
-      xdg.configFile."hyprshade/config.toml".source = toTOML "config.toml" {
-        shades = [
-          {
-            name = "blue-light-filter";
-            start_time = "19:00:00";
-            end_time = "08:00:00";
-          }
-        ];
-      };
+      xdg.configFile."hyprshade/config.toml".text = ''
+        [[shades]]
+        name = blue-light-filter
+        start_time = 19:00:00
+        end_time = 08:00:00
+      '';
+
       xdg.configFile."hypr/shaders/blue-light-filter.glsl" = {
         # https://github.com/hyprwm/Hyprland/issues/1140#issuecomment-1335128437
         text = ''
