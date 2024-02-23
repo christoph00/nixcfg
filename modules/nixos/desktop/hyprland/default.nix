@@ -107,16 +107,8 @@ in {
         package = config.programs.hyprland.package;
         settings = {
           exec-once = [
-<<<<<<< Updated upstream
             "hyprlock"
             "${config.chr.desktop.ags.package}/bin/ags -b hypr"
-||||||| Stash base
-            "${pkgs.waylock}/bin/waylock -fork-on-lock"
-            "${config.chr.desktop.ags.package}/bin/ags"
-=======
-            "${pkgs.waylock}/bin/waylock -fork-on-lock"
-            "${config.chr.desktop.ags.package}/bin/ags -b hypr"
->>>>>>> Stashed changes
             "wl-paste --type text --watch cliphist store" #Stores only text data
             "wl-paste --type image --watch cliphist store"
             "${pkgs.hyprshade}/bin/hyprshade auto"
