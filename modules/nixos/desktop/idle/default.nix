@@ -16,7 +16,8 @@ in {
     services.hypridle = {
       enable = true;
       beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
-      lockCmd = lib.getExe config.programs.hyprlock.package;
+      #lockCmd = lib.getExe config.programs.hyprlock.package;
+      lockCmd = "hyprlock";
 
       listeners = [
         {
