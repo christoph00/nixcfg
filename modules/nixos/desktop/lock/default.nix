@@ -29,7 +29,7 @@ in {
         backgrounds = [
           {
             path = "";
-            color = "rgba(0, 0, 0, 0.5)";
+            color = "rgba(0, 0, 0, 1)";
 
             # Blur
             blur_passes = 3; # 0 disables blurring
@@ -91,7 +91,7 @@ in {
             valign = "top";
           }
           {
-            text = "Hi there, <i>$USER</i>!";
+            text = "$USER";
             color = "rgb(255, 255, 255)";
             font_size = 32;
             position = {
