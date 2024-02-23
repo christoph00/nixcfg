@@ -107,8 +107,8 @@ in {
         package = config.programs.hyprland.package;
         settings = {
           exec-once = [
-            "${pkgs.waylock}/bin/waylock -fork-on-lock"
-            "${config.chr.desktop.ags.package}/bin/ags"
+            "hyprlock"
+            "${config.chr.desktop.ags.package}/bin/ags -b hypr"
             "wl-paste --type text --watch cliphist store" #Stores only text data
             "wl-paste --type image --watch cliphist store"
             "${pkgs.hyprshade}/bin/hyprshade auto"
