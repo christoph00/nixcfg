@@ -107,8 +107,16 @@ in {
         package = config.programs.hyprland.package;
         settings = {
           exec-once = [
+<<<<<<< Updated upstream
             "hyprlock"
             "${config.chr.desktop.ags.package}/bin/ags -b hypr"
+||||||| Stash base
+            "${pkgs.waylock}/bin/waylock -fork-on-lock"
+            "${config.chr.desktop.ags.package}/bin/ags"
+=======
+            "${pkgs.waylock}/bin/waylock -fork-on-lock"
+            "${config.chr.desktop.ags.package}/bin/ags -b hypr"
+>>>>>>> Stashed changes
             "wl-paste --type text --watch cliphist store" #Stores only text data
             "wl-paste --type image --watch cliphist store"
             "${pkgs.hyprshade}/bin/hyprshade auto"
@@ -231,11 +239,11 @@ in {
             resizeactive = binding "SUPER CTRL" "resizeactive";
             mvactive = binding "SUPER ALT" "moveactive";
             mvtows = binding "SUPER SHIFT" "movetoworkspace";
-            e = "exec, ags -b hypr";
+            e = "exec, ${config.chr.desktop.ags.package}/bin/ags -b hypr";
             arr = [1 2 3 4 5 6 7 8 9];
           in
             [
-              "CTRL SHIFT, R,  ${e} quit; ags -b hypr"
+              "CTRL SHIFT, R,  ${e} quit; ${config.chr.desktop.ags.package}/bin/ags -b hypr"
               "SUPER, R,       ${e} -t applauncher"
               "SUPER, Tab,     ${e} -t overview"
               ",XF86PowerOff,  ${e} -r 'powermenu.shutdown()'"
