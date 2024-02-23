@@ -29,6 +29,7 @@ in {
   imports = [
     inputs.anyrun.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
+    inputs.hyprland.homeManagerModules.default
     inputs.hyprlock.homeManagerModules.default
     inputs.hypridle.homeManagerModules.default
   ];

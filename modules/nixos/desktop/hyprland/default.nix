@@ -12,6 +12,10 @@ with lib.chr; let
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
 in {
+  imports = [
+    inputs.hyprland.nixosModules.default
+  ];
+
   options.chr.desktop.hyprland = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether or not enable Hyprland Desktop.";
     scale = lib.mkOption {
@@ -80,6 +84,8 @@ in {
         };
       };
     };
+
+    environment.variables.NIXOS_OZONE_WL = "1";
 
     services = {
       gvfs.enable = true;
