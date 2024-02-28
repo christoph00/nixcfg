@@ -31,7 +31,7 @@ in {
   "secrets/ha-serviceaccount".publicKeys = [futro air13] ++ users;
   "secrets/ha-secrets.yaml".publicKeys = [futro air13] ++ users;
 
-  "secrets/zwave-js-keys.json".publicKeys = [air13] ++ users;
+  "secrets/zwave-js-keys.json".publicKeys = [air13 futro] ++ users;
 
   "secrets/christoph-password.age".publicKeys = all ++ users;
 
