@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.services.zwave;
 in {
   options.chr.services.zwave = with types; {
-    enable = mkBoolOpt false "Enable zwave Service.";
+    enable = mkBoolOpt config.chr.services.smart-home "Enable zwave Service.";
   };
   config = mkIf cfg.enable {
     services.zwave-js = {

@@ -49,6 +49,7 @@ in {
         (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka" "Agave" "IBMPlexMono" "Gohu" "Hermit" "IntelOneMono" "ComicShannsMono" "DaddyTimeMono"];})
         chr.operator-mono-nf
         #intel-one-mono
+        monaspace
       ];
 
       #   enableDefaultPackages = false;
