@@ -11,10 +11,8 @@ with lib.chr; let
   cfg = config.chr.desktop.plasma;
 in {
   options.chr.desktop.plasma = with types; {
-    enable = mkBoolOpt false "Whether or not to enable Plasma.";
+    enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Plasma.";
   };
-
-  imports = [inputs.kde2nix.nixosModules.plasma6];
 
   config = mkIf cfg.enable {
     security.pam.services.greetd.enableKwallet = true;
