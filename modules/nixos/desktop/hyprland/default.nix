@@ -17,7 +17,7 @@ in {
   ];
 
   options.chr.desktop.hyprland = with types; {
-    enable = mkBoolOpt false "Whether or not enable Hyprland Desktop.";
+    enable = mkBoolOpt config.chr.desktop.enable "Whether or not enable Hyprland Desktop.";
     scale = lib.mkOption {
       type = lib.types.str;
       default = "1";
