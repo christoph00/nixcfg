@@ -39,7 +39,7 @@ let
     rustc = pkgs.rust-bin.stable."1.75.0".default;
   };
 
-in pkgs.unstable.rustPlatform.buildRustPackage rec {
+in pkgs.rustPlatform.buildRustPackage rec {
   inherit version src;
 
   pname = "${name}";
