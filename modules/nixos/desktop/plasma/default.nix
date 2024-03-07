@@ -15,11 +15,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    security.pam.services.greetd.enableKwallet = true;
+    #    security.pam.services.greetd.enableKwallet = true;
 
     services.xserver = {
       enable = true;
       desktopManager.plasma6.enable = true;
+      displayManager.sddm.wayland.enable = true;
+      displayManager.sddm.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
