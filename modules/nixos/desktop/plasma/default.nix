@@ -11,7 +11,7 @@ with lib.chr; let
   cfg = config.chr.desktop.plasma;
 in {
   options.chr.desktop.plasma = with types; {
-    enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Plasma.";
+        enable = mkBoolOpt false "Whether or not to enable Plasma.";
   };
 
   config = mkIf cfg.enable {
