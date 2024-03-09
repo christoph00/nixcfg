@@ -14,7 +14,7 @@ in {
 
   config.chr.home.extraOptions = lib.mkIf cfg.enable {
     services.hypridle = {
-      enable = true;
+      enable = false;
       beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
       #lockCmd = lib.getExe config.programs.hyprlock.package;
       lockCmd = "hyprlock";
