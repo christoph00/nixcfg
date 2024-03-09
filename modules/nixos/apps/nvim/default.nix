@@ -151,140 +151,60 @@ in {
             luasnip.enable = true;
             cmp_luasnip.enable = true;
 
+            cmp-look.enable = true;
+
             nvim-cmp = {
               enable = true;
-              sources = [
-                {name = "buffer";}
-                {name = "codeium";}
-                {name = "path";}
-                {name = "treesitter";}
-                {name = "nvim_lsp";}
-                {name = "nvim_lua";}
-                {name = "nvim_lsp_document_symbol";}
-                {name = "nvim_lsp_signature_help";}
-                {name = "luasnip";}
-                # {name = "cmdline";}
-              ];
               snippet.expand = "luasnip";
-              window = {
-                completion = {
-                  # winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
-                  scrollbar = false;
-                  sidePadding = 0;
-                  inherit border;
-                };
-
-                documentation = {
-                  inherit border;
-                  # winhighlight = "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
-                };
-              };
-              formatting = {
-                fields = ["abbr" "kind" "menu"];
-                format =
-                  # lua
-                  ''
-                    function(_, item)
-                      local icons = {
-                        Namespace = "󰌗",
-                        Text = "󰉿",
-                        Method = "󰆧",
-                        Function = "󰆧",
-                        Constructor = "",
-                        Field = "󰜢",
-                        Variable = "󰀫",
-                        Class = "󰠱",
-                        Interface = "",
-                        Module = "",
-                        Property = "󰜢",
-                        Unit = "󰑭",
-                        Value = "󰎠",
-                        Enum = "",
-                        Keyword = "󰌋",
-                        Snippet = "",
-                        Color = "󰏘",
-                        File = "󰈚",
-                        Reference = "󰈇",
-                        Folder = "󰉋",
-                        EnumMember = "",
-                        Constant = "󰏿",
-                        Struct = "󰙅",
-                        Event = "",
-                        Operator = "󰆕",
-                        TypeParameter = "󰊄",
-                        Table = "",
-                        Object = "󰅩",
-                        Tag = "",
-                        Array = "[]",
-                        Boolean = "",
-                        Number = "",
-                        Null = "󰟢",
-                        String = "󰉿",
-                        Calendar = "",
-                        Watch = "󰥔",
-                        Package = "",
-                        Copilot = "",
-                        Codeium = "",
-                        TabNine = "",
-                      }
-
-                      local icon = icons[item.kind] or ""
-                      item.kind = string.format("%s %s", icon, item.kind or "")
-                      return item
-                    end
-                  '';
-              };
               mapping = {
-                "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+                "<C-d>" = "cmp.mapping.scroll_docs(-4)";
                 "<C-f>" = "cmp.mapping.scroll_docs(4)";
-                "<C-e>" = "cmp.mapping.abort()";
-                "<CR>" = "cmp.mapping.confirm({ select = false })";
-
-                "<Tab>" = {
+                "<C-Space>" = "cmp.mapping.complete()";
+                "<C-e>" = "cmp.mapping.close()";
+                # "<Tab>" = {
+                #   modes = ["i" "s"];
+                #   action = "cmp.mapping.select_next_item()";
+                # };
+                # "<S-Tab>" = {
+                #   modes = ["i" "s"];
+                #   action = "cmp.mapping.select_prev_item()";
+                # };
+                "<Down>" = {
                   modes = ["i" "s"];
-
-                  action = ''
-                    function(fallback)
-                      unpack = unpack or table.unpack
-                      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-
-                      if cmp.visible() then
-                        cmp.select_next_item()
-                      else
-                        local _, err = pcall(function()
-                          if vim.fn["vsnip#available"](1) == 1 then
-                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(vsnip-expand-or-jump)", true, true, true), "", true)
-                          else
-                            error({code=121})
-                          end
-                        end)
-
-                        if err.code == 121 and col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil then
-                          cmp.complete()
-                        else
-                          fallback()
-                        end
-                      end
-                    end
-                  '';
+                  action = "cmp.mapping.select_next_item()";
                 };
-
-                "<S-Tab>" = {
+                "<Up>" = {
                   modes = ["i" "s"];
-
-                  action = ''
-                    function()
-                      if cmp.visible() then
-                        cmp.select_next_item()
-                      elseif vim.call('vsnip#jumpable', -1) == 1 then
-                        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(vsnip-jump-prev)", true, true, true), "", true)
-                      end
-                    end
-                  '';
+                  action = "cmp.mapping.select_prev_item()";
                 };
+                "<C-j>" = {
+                  modes = ["i" "s"];
+                  action = "cmp.mapping.select_next_item()";
+                };
+                "<C-k>" = {
+                  modes = ["i" "s"];
+                  action = "cmp.mapping.select_prev_item()";
+                };
+                # "<CR>" = "cmp.mapping.confirm({ select = true })";
+                "<Tab>" = "cmp.mapping.confirm({ select = true })";
               };
-
-              mappingPresets = ["cmdline" "insert"];
+              sources = [
+                {name = "nvim_lsp";}
+                {name = "codeium";}
+                {name = "luasnip";}
+                {
+                  name = "look";
+                  keywordLength = 2;
+                  option = {
+                    convert_case = true;
+                    loud = true;
+                  };
+                }
+                {name = "path";}
+                {name = "buffer";}
+                {name = "nvim_lua";}
+                {name = "orgmode";}
+              ];
             };
             harpoon = {
               enable = false;
