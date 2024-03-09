@@ -153,7 +153,7 @@ in {
 
             cmp-look.enable = true;
 
-            nvim-cmp = {
+            cmp = {
               enable = true;
               snippet.expand = "luasnip";
               mapping = {
