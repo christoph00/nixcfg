@@ -21,7 +21,7 @@ with lib.chr; let
     };
 in {
   options.chr.apps.nvim = with types; {
-    enable = mkBoolOpt' config.chr.desktop.enable;
+    enable = mkBoolOpt' false;
 
     defaultEditor = mkBoolOpt' false;
   };
