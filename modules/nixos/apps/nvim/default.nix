@@ -45,7 +45,7 @@ in {
         programs.nixvim = let
           border = ["╭" "─" "╮" "│" "╯" "─" "╰" "│"];
         in {
-          enable = true;
+          enable = false;
           viAlias = true;
           vimAlias = true;
           clipboard.register = "unnamedplus";

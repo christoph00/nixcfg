@@ -73,6 +73,7 @@ in {
         #wpsoffice
 
         chr.gpucache
+
         chr.zed-editor
       ];
     };
