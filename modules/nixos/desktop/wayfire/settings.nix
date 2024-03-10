@@ -14,6 +14,7 @@
 
   update-environment = "exec ${pkgs.dbus}/bin/dbus-update-activation-environment";
   systemctl = "exec ${pkgs.systemd}/bin/systemctl --user";
+  ags = "${config.chr.desktop.ags.package}/bin/ags -b wayfire";
 in {
   chr.desktop.wayfire.settings = lib.mkIf config.chr.desktop.wayfire.enable {
     close_top_view = "<super> <shift> KEY_W";
@@ -38,6 +39,8 @@ in {
           # TODO: Stop wayfire-session.target when Wayfire closes, and unset all
           # set environment variables in the systemd user session.
           a0003_session = "${systemctl} start wayfire-session.target";
+
+          ags = "${ags}";
         };
       }
       {
@@ -186,8 +189,12 @@ in {
           command_terminal = "kitty";
 
           # Program/command launcher.
-          binding_launcher = "<super> KEY_SPACE";
-          command_launcher = "anyrun";
+          binding_launcher = "<super> KEY_R";
+          command_launcher = "${ags} -t applauncher";
+
+          # Program/command launcher (backup).
+          binding_launcher2 = "<super> KEY_SPACE";
+          command_launcher2 = "anyrun";
 
           # This monstrosity of a screenshot command trims the region selected
           # by slurp so that the region borders are not captured by grim.
@@ -214,6 +221,12 @@ in {
         settings = {
           mouse_accel_profile = "flat";
           xkb_layout = "de";
+        };
+      }
+      {
+        plugin = "idle";
+        settings = {
+          dpms_timeout = 4000;
         };
       }
     ];
