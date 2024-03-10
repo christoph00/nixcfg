@@ -145,7 +145,7 @@ in {
       };
 
     finalPackage = pkgs.wayfire-with-plugins.override {
-      wayfire = cfg.package;
+      wayfire = pkgs.wayfire;
       plugins = remove null (catAttrs "package" mergedPlugins);
     };
   in
@@ -164,7 +164,6 @@ in {
         extraPortals = [pkgs.xdg-desktop-portal-gtk];
       };
 
-      xdg.configFile."wayfire.ini".text = generators.toINI {} settings;
       services.greetd = {
         enable = true;
         settings = {
@@ -225,6 +224,8 @@ in {
           # Programs may use this for Wayland detection.
           XDG_SESSION_TYPE = "wayland";
         };
+
+        xdg.configFile."wayfire.ini".text = generators.toINI {} settings;
       };
 
       services = {

@@ -4,7 +4,17 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  variables = lib.concatStringsSep " " [
+    "DISPLAY"
+    "WAYLAND_DISPLAY"
+    "XDG_CURRENT_DESKTOP"
+    "XDG_SESSION_TYPE"
+  ];
+
+  update-environment = "exec ${pkgs.dbus}/bin/dbus-update-activation-environment";
+  systemctl = "exec ${pkgs.systemd}/bin/systemctl --user";
+in {
   chr.desktop.wayfire.settings = lib.mkIf config.chr.desktop.wayfire.enable {
     close_top_view = "<super> <shift> KEY_W";
     preferred_decoration_mode = "server";
@@ -53,17 +63,17 @@
         };
       }
 
-      {
-        package = pkgs.wayfirePlugins.shadows;
-        plugin = "winshadows";
-        settings = {
-          include_undecorated_views = true;
-          shadow_color = "\\#00000033";
-          shadow_radius = 20;
-          glow_color = "\\#97AFCD26";
-          glow_radius = 40;
-        };
-      }
+      # {
+      #   package = pkgs.wayfirePlugins.shadows;
+      #   plugin = "winshadows";
+      #   settings = {
+      #     include_undecorated_views = true;
+      #     shadow_color = "\\#00000033";
+      #     shadow_radius = 20;
+      #     glow_color = "\\#97AFCD26";
+      #     glow_radius = 40;
+      #   };
+      # }
       {
         plugin = "decoration";
         settings = {
@@ -173,11 +183,11 @@
         plugin = "command";
         settings = {
           binding_terminal = "<super> KEY_ENTER";
-          command_terminal = "${config.programs.kitty.package}/bin/kitty";
+          command_terminal = "kitty";
 
           # Program/command launcher.
           binding_launcher = "<super> KEY_SPACE";
-          command_launcher = "${config.programs.anyrun.package}/bin/anyrun";
+          command_launcher = "anyrun";
 
           # This monstrosity of a screenshot command trims the region selected
           # by slurp so that the region borders are not captured by grim.
