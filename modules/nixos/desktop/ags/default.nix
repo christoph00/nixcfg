@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.desktop.ags;
 in {
   options.chr.desktop.ags = with types; {
-    enable = mkBoolOpt config.chr.desktop.hyprland.enable "Whether or not enable Ags.";
+    enable = mkBoolOpt false "Whether or not enable Ags.";
     package = mkOption {
       type = types.package;
       default = inputs.ags.packages.${pkgs.system}.agsWithTypes;
