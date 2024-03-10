@@ -79,7 +79,7 @@ in {
         settings = {
           active_color = "\\#2D4F67FF";
           inactive_color = "\\#223249FF";
-          border_size = 4;
+          border_size = 2;
           title_height = 0;
         };
       }
