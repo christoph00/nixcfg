@@ -27,12 +27,12 @@ in {
         cfg.package
       ];
 
-      xdg.dataFile = {
-        "ags/types" = {
-          source = "${inputs.ags.packages.${pkgs.system}.agsWithTypes}/share/com.github.Aylur.ags/types";
-          recursive = true;
-        };
-      };
+      # xdg.dataFile = {
+      #   "ags/types" = {
+      #     source = "${inputs.ags.packages.${pkgs.system}.agsWithTypes}/share/com.github.Aylur.ags/types";
+      #     recursive = true;
+      #   };
+      # };
 
       # systemd.user.services.ags = {
       #   Unit.Description = "Aylurs GTK Shell";
