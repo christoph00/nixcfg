@@ -16,7 +16,7 @@ in {
     services.zwave-js = {
       enable = true;
       port = 3090;
-      serialPort = "/dev/ttyACM0";
+      serialPort = "/dev/ttyACM1";
       secretsConfigFile = config.age.secrets.zwave-js-keys.path;
     };
 
