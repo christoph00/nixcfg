@@ -62,6 +62,7 @@ in {
               hatasmota
               kegtron-ble
               zwave-js-server-python
+              paho-mqtt
             ];
         })
         .overrideAttrs (oldAttrs: {doInstallCheck = false;});
