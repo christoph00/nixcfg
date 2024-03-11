@@ -17,7 +17,7 @@
   ags = "${config.chr.desktop.ags.package}/bin/ags -b wayfire";
 in {
   chr.desktop.wayfire.settings = lib.mkIf config.chr.desktop.wayfire.enable {
-    close_top_view = "<super> <shift> KEY_W";
+    close_top_view = "<alt> KEY_Q";
     preferred_decoration_mode = "server";
     xwayland = true;
     vheight = 3;
