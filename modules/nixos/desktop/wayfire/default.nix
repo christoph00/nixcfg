@@ -175,7 +175,7 @@ in {
           # };
         };
       };
-      programs.regreet.enable = te;
+      programs.regreet.enable = true;
       environment.persistence."${config.chr.system.persist.stateDir}".directories = lib.mkIf config.chr.system.persist.enable ["/var/cache/regreet"];
 
       security = {
