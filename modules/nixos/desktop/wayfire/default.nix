@@ -169,13 +169,13 @@ in {
         settings = {
           # default_session.command = ''
           #   ${pkgs.greetd.tuigreet}/bin/tuigreet --remember --user-menu --asterisks --time --greeting "Welcome to NixOS" --cmd ${plasma}/bin/plasma'';
-          initial_session = {
-            command = "${finalPackage}/bin/wayfire";
-            user = config.chr.user.name;
-          };
+          # initial_session = {
+          #   command = "${finalPackage}/bin/wayfire";
+          #   user = config.chr.user.name;
+          # };
         };
       };
-      programs.regreet.enable = true;
+      programs.regreet.enable = te;
       environment.persistence."${config.chr.system.persist.stateDir}".directories = lib.mkIf config.chr.system.persist.enable ["/var/cache/regreet"];
 
       security = {
