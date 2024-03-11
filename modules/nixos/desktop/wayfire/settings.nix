@@ -127,6 +127,7 @@ in {
             send_win_up = "";
             send_win_left = "";
             send_win_right = "";
+            wraparound = false;
           }
           // workspacesAttrs;
       }

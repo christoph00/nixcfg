@@ -18,7 +18,7 @@ in {
       default = builtins.elem config.chr.type ["desktop" "laptop"];
     };
     wm = mkOption {
-      type = types.enum ["Hyprland" "plasma"];
+      type = types.enum ["Hyprland" "plasma" "wayfire"];
       default = "plasma";
     };
     autologin = mkOption {
@@ -32,6 +32,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    chr.desktop.plasma.enable = lib.mkIf (cfg.wm == "plasma");
+    chr.desktop.plasma.wayfire = lib.mkIf (cfg.wm == "wayfire");
+    chr.desktop.hyprland.enable = lib.mkIf (cfg.wm == "Hyprland");
+
     # Disable mitigations on desktop
     boot.kernelParams = [
       "splash"
@@ -52,104 +56,10 @@ in {
 
     boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
-    services.udev.packages = [
-      pkgs.android-udev-rules
-    ];
-
     hardware.opengl = {
       enable = true;
       driSupport = true;
     };
-
-    environment = {
-      variables = {
-        NIXOS_OZONE_WL = "1";
-        _JAVA_AWT_WM_NONEREPARENTING = "1";
-        GDK_BACKEND = "wayland,x11";
-        ANKI_WAYLAND = "1";
-        MOZ_ENABLE_WAYLAND = "1";
-        XDG_SESSION_TYPE = "wayland";
-        SDL_VIDEODRIVER = "wayland";
-        CLUTTER_BACKEND = "wayland";
-        WLR_DRM_NO_ATOMIC = "1";
-      };
-    };
-
-    # environment = {
-    #   variables = {
-    #     NIXOS_OZONE_WL = "1";
-    #     __GL_GSYNC_ALLOWED = "0";
-    #     __GL_VRR_ALLOWED = "0";
-    #     _JAVA_AWT_WM_NONEREPARENTING = "1";
-    #     SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
-    #     DISABLE_QT5_COMPAT = "0";
-    #     GDK_BACKEND = "wayland,x11";
-    #     ANKI_WAYLAND = "1";
-    #     DIRENV_LOG_FORMAT = "";
-    #     WLR_DRM_NO_ATOMIC = "1";
-    #     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    #     QT_QPA_PLATFORM = "wayland";
-    #     QT_WAYLAND_DISABLE_WINDOWDECORATION = "0";
-    #     MOZ_ENABLE_WAYLAND = "1";
-    #     WLR_BACKEND = "vulkan";
-    #     WLR_RENDERER = "vulkan";
-    #     WLR_NO_HARDWARE_CURSORS = "1";
-    #     XDG_SESSION_TYPE = "wayland";
-    #     SDL_VIDEODRIVER = "wayland";
-    #     CLUTTER_BACKEND = "wayland";
-    #     WLR_DRM_DEVICES = "/dev/dri/card0";
-    #   };
-    #   loginShellInit = ''
-    #      dbus-update-activation-environment --systemd DISPLAY
-    #     # eval $(gnome-keyring-daemon --start --components=ssh,secrets)
-    #     # eval $(ssh-agent)
-    #   '';
-    # };
-
-    # environment.etc."greetd/environments".text = ''
-    #   ${lib.optionalString (config.chr.desktop.wm == "Hyprland") "Hyprland"}
-    #   bash
-    # '';
-
-    # services.greetd = {
-    #   enable = true;
-    #   vt = 2;
-    #   restart = !config.chr.desktop.autologin;
-    #   settings = {
-    #     initial_session = mkIf config.chr.desktop.autologin {
-    #       command = "${config.chr.desktop.wm}";
-    #       user = "${config.chr.user.name}";
-    #     };
-
-    #     default_session =
-    #       if (!config.chr.desktop.autologin)
-    #       then {
-    #         command = lib.concatStringsSep " " [
-    #           (lib.getExe pkgs.greetd.tuigreet)
-    #           "--time"
-    #           "--remember"
-    #           "--remember-user-session"
-    #           "--asterisks"
-    #           "--sessions '${sessionPath}'"
-    #         ];
-    #         user = "greeter";
-    #       }
-    #       else {
-    #         command = "${config.chr.desktop.wm}";
-    #         user = "${config.chr.user.name}";
-    #       };
-    #   };
-    # };
-    #suspend-then-hibernate
-    # services.logind = {
-    #   killUserProcesses = true;
-    #   lidSwitch = "hibernate";
-    #   lidSwitchExternalPower = "hibernate";
-    #   extraConfig = ''
-    #     HandlePowerKey=hibernate
-    #     HibernateDelaySec=3600
-    #   '';
-    # };
 
     services.logind = {
       killUserProcesses = true;
@@ -208,10 +118,20 @@ in {
 
     hardware.uinput.enable = true;
 
-    environment.systemPackages = [pkgs.seatd pkgs.ddcutil pkgs.ddcui pkgs.nixd pkgs.grimblast pkgs.wl-clipboard pkgs.waylock];
-    # services.udev.packages = [ pkgs.light ];
+    environment.systemPackages = [
+      pkgs.seatd
+      pkgs.ddcutil
+      pkgs.ddcui
+      pkgs.nixd
+      pkgs.grimblast
+      pkgs.wl-clipboard
+      pkgs.waylock
+    ];
+    services.udev.packages = [
+      pkgs.light
+      pkgs.android-udev-rules
+    ];
     security.polkit.enable = true;
-    security.pam.services.waylock = {};
 
     services.dbus = {
       enable = true;
