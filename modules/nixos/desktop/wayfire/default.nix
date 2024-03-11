@@ -52,7 +52,7 @@ with lib.chr; let
 in {
   imports = [./settings.nix];
   options.chr.desktop.wayfire = with types; {
-    enable = mkBoolOpt config.chr.desktop.enable "Whether or not enable Wayfire Desktop.";
+    enable = mkBoolOpt false "Whether or not enable Wayfire Desktop.";
     scale = lib.mkOption {
       type = lib.types.str;
       default = "1";
@@ -214,7 +214,19 @@ in {
         };
       };
 
-      environment.variables.NIXOS_OZONE_WL = "1";
+      environment = {
+        variables = {
+          NIXOS_OZONE_WL = "1";
+          _JAVA_AWT_WM_NONEREPARENTING = "1";
+          GDK_BACKEND = "wayland,x11";
+          ANKI_WAYLAND = "1";
+          MOZ_ENABLE_WAYLAND = "1";
+          XDG_SESSION_TYPE = "wayland";
+          SDL_VIDEODRIVER = "wayland";
+          CLUTTER_BACKEND = "wayland";
+          WLR_DRM_NO_ATOMIC = "1";
+        };
+      };
 
       chr.home.extraOptions = {
         home.sessionVariables = {
