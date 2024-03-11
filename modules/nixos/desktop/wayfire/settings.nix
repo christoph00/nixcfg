@@ -77,14 +77,18 @@ in {
       #     glow_radius = 40;
       #   };
       # }
+      # {
+      #   plugin = "decoration";
+      #   settings = {
+      #     active_color = "\\#2D4F67FF";
+      #     inactive_color = "\\#223249FF";
+      #     border_size = 2;
+      #     title_height = 0;
+      #   };
+      # }
       {
-        plugin = "decoration";
-        settings = {
-          active_color = "\\#2D4F67FF";
-          inactive_color = "\\#223249FF";
-          border_size = 2;
-          title_height = 0;
-        };
+        plugin = "pixdecor";
+        package = pkgs.chr.wf-pixdecor;
       }
 
       {
