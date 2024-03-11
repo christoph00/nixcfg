@@ -57,7 +57,7 @@ in {
       }
       {
         plugin = "wm-actions";
-        settings.toggle_fullscreen = "<super> KEY_F11";
+        settings.toggle_fullscreen = "<super> KEY_F";
       }
       {
         plugin = "window-rules";
@@ -160,8 +160,8 @@ in {
         settings = {
           duration = 250;
           type = "crossfade";
-          restore = "<super> KEY_F";
-          slot_c = "<super> <shift> KEY_F";
+          restore = "<super> KEY_V";
+          slot_c = "<super> <shift> KEY_V";
           slot_b = "<super> KEY_S";
           slot_t = "<super> KEY_W";
           slot_l = "<super> KEY_A";
@@ -188,11 +188,12 @@ in {
           binding_terminal = "<super> KEY_ENTER";
           command_terminal = "kitty";
 
-          # Program/command launcher.
+          binding_browser = "<super> KEY_B";
+          command_broeser = "thorium";
+
           binding_launcher = "<super> KEY_R";
           command_launcher = "${ags} -t applauncher";
 
-          # Program/command launcher (backup).
           binding_launcher2 = "<super> KEY_SPACE";
           command_launcher2 = "anyrun";
 
