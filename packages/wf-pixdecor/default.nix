@@ -14,7 +14,7 @@
   libxkbcommon,
   librsvg,
   libGL,
-  xcbutilwm,
+  xorg,
 }:
 stdenv.mkDerivation rec {
   pname = "wf-pixdecor";
@@ -43,7 +43,7 @@ stdenv.mkDerivation rec {
     libxkbcommon
     librsvg
     libGL
-    xcbutilwm
+    xorg.xcbutilwm
   ];
 
   mesonFlags = ["--sysconfdir /etc"];

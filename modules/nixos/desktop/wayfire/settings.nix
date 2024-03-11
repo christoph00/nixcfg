@@ -91,6 +91,9 @@ in {
         package = pkgs.chr.wf-pixdecor;
       }
 
+      {plugin = "ipc";}
+      {plugin = "ipc-rules";}
+
       {
         plugin = "vswitch";
         settings = let
