@@ -32,9 +32,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    chr.desktop.plasma.enable = lib.mkIf (cfg.wm == "plasma");
-    chr.desktop.wayfire.enable = lib.mkIf (cfg.wm == "wayfire");
-    chr.desktop.hyprland.enable = lib.mkIf (cfg.wm == "Hyprland");
+    chr.desktop.plasma.enable = true;
 
     # Disable mitigations on desktop
     boot.kernelParams = [
