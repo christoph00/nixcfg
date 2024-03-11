@@ -32,7 +32,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    chr.desktop.plasma.enable = true;
+    chr.desktop.wayfire.enable = true;
 
     # Disable mitigations on desktop
     boot.kernelParams = [
