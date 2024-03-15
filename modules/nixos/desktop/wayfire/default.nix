@@ -50,7 +50,7 @@ with lib.chr; let
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
 in {
-  imports = [./settings.nix];
+  imports = [./settings.nix ./shell.nix];
   options.chr.desktop.wayfire = with types; {
     enable = mkBoolOpt false "Whether or not enable Wayfire Desktop.";
     scale = lib.mkOption {
@@ -61,8 +61,16 @@ in {
       type = lib.types.str;
       default = "de";
     };
-    shellSettings = mkOption {
-      type = types.submodule;
+    shell = {
+      enable = mkBoolOpt' config.chr.desktop.wayfire.enable;
+      dock = mkBoolOpt' config.chr.desktop.wayfire.shell.enable;
+      background = mkBoolOpt' config.chr.desktop.wayfire.shell.enable;
+      panel = mkBoolOpt' config.chr.desktop.wayfire.shell.enable;
+      settings = mkOption {
+        type = types.submodule {
+          freeformType = types.attrsOf allowedTypes;
+        };
+      };
     };
 
     settings = mkOption {
@@ -154,7 +162,6 @@ in {
   in
     mkIf cfg.enable {
       chr.desktop = {
-        ironbar.enable = true;
         anyrun.enable = true;
       };
 
@@ -172,10 +179,10 @@ in {
         settings = {
           # default_session.command = ''
           #   ${pkgs.greetd.tuigreet}/bin/tuigreet --remember --user-menu --asterisks --time --greeting "Welcome to NixOS" --cmd ${plasma}/bin/plasma'';
-          # initial_session = {
-          #   command = "${finalPackage}/bin/wayfire";
-          #   user = config.chr.user.name;
-          # };
+          initial_session = {
+            command = "${finalPackage}/bin/wayfire";
+            user = config.chr.user.name;
+          };
         };
       };
       programs.regreet.enable = true;
