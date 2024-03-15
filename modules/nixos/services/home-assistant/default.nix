@@ -127,22 +127,22 @@ in {
         media_extractor = {};
         zwave_js = {};
         proximity = {};
-        # zha = {
-        #   enable_quirks = true;
-        #   custom_quirks_path = "${config.services.home-assistant.configDir}/zha_quirks/";
-        #   device_config = {
-        #     "a4:c1:38:35:dd:d5:77:cc-1".type = "switch";
-        #     "a4:c1:38:35:dd:d5:77:cc-2".type = "switch";
-        #     "a4:c1:38:35:dd:d5:77:cc-3".type = "switch";
-        #     "a4:c1:38:35:dd:d5:77:cc-4".type = "switch";
-        #     "a4:c1:38:35:dd:d5:77:cc-5".type = "switch";
-        #   };
-        # };
+        zha = {
+          enable_quirks = true;
+          custom_quirks_path = "${config.services.home-assistant.configDir}/zha_quirks/";
+          device_config = {
+            "a4:c1:38:35:dd:d5:77:cc-1".type = "switch";
+            "a4:c1:38:35:dd:d5:77:cc-2".type = "switch";
+            "a4:c1:38:35:dd:d5:77:cc-3".type = "switch";
+            "a4:c1:38:35:dd:d5:77:cc-4".type = "switch";
+            "a4:c1:38:35:dd:d5:77:cc-5".type = "switch";
+          };
+        };
         #zha_toolkit = {};
-        # ebusd = mkIf config.chr.services.ebusd.enable {
-        #   host = "127.0.0.1";
-        #   circuit = "basv0";
-        # };
+        ebusd = mkIf config.chr.services.ebusd.enable {
+          host = "127.0.0.1";
+          circuit = "basv0";
+        };
         ssdp = {};
         # mqtt = {
         #   climate = [
