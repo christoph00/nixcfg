@@ -25,7 +25,7 @@ in {
     chr.home.extraOptions = {
       programs.ironbar = {
         enable = true;
-        config = {};
+        #config = {};
         systemd = false;
         package = cfg.package;
       };

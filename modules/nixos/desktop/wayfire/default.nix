@@ -240,7 +240,6 @@ in {
         };
 
         xdg.configFile."wayfire.ini".text = generators.toINI {} settings;
-        xdg.configFile."wf-shell.ini".text = generators.toINI {} cfg.shellSettings;
       };
 
       services = {
