@@ -49,6 +49,6 @@
   };
 
   chr.services = {
-    smart-home = true;
+    # smart-home = true;
   };
 }
