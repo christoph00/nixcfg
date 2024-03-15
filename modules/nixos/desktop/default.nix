@@ -26,7 +26,7 @@ in {
       default = true;
     };
     bar = mkOption {
-      type = types.enum ["waybar" "eww" "ags" "none"];
+      type = types.enum ["waybar" "eww" "ags" "ironbar" "none"];
       default = "waybar";
     };
   };
