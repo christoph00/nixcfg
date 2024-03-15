@@ -61,6 +61,11 @@ in {
       type = lib.types.str;
       default = "de";
     };
+    shellSettings = mkOption {
+      type = types.submodule {
+        freeformType = types.attrsOf allowedTypes;
+      };
+    };
 
     settings = mkOption {
       type = types.submodule {
@@ -180,7 +185,6 @@ in {
 
       security = {
         polkit.enable = true;
-        pam.services.ags = {};
       };
 
       environment.systemPackages = with pkgs.gnome; [
@@ -238,6 +242,7 @@ in {
         };
 
         xdg.configFile."wayfire.ini".text = generators.toINI {} settings;
+        xdg.configFile."wf-shell.ini".text = generators.toINI {} cfg.shellSettings;
       };
 
       services = {
