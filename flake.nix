@@ -9,7 +9,7 @@
   ];
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     snowfall-lib = {
       url = "github:snowfallorg/lib";
