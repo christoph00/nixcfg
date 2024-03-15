@@ -42,6 +42,10 @@ in {
           ironbar = lib.mkIf config.chr.desktop.ironbar.enable "${config.chr.desktop.ironbar.package}/bin/ironbar";
           waybar = lib.mkIf config.chr.desktop.waybar.enable "waybar";
 
+          wf_background = lib.mkIf config.chr.desktop.wayfire.shell.background "wf-background";
+          wf_panel = lib.mkIf config.chr.desktop.wayfire.shell.panel "wf-panel";
+          wf_dock = lib.mkIf config.chr.desktop.wayfire.shell.dock "wf-dock";
+
           autostart_wf_shell = false;
         };
       }
