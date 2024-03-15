@@ -47,8 +47,6 @@ in {
 
         wl-clipboard
 
-        peazip
-
         goldwarden
 
         # jetbrains.goland
