@@ -17,7 +17,7 @@ in {
     chr.home = {
       extraOptions = {
         home.packages = with pkgs; [
-          gimp-with-plugins
+          gimp
           inkscape
           darktable
         ];
