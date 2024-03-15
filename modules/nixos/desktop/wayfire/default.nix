@@ -154,7 +154,7 @@ in {
   in
     mkIf cfg.enable {
       chr.desktop = {
-        irobar.enable = true;
+        ironbar.enable = true;
         anyrun.enable = true;
       };
 
