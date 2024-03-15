@@ -40,7 +40,9 @@ in {
           # set environment variables in the systemd user session.
           a0003_session = "${systemctl} start wayfire-session.target";
 
-          ags = "${ags}";
+          #ags = "${ags}";
+          wf_dock = "wf-dock";
+          wf_panel = "wf-panel";
         };
       }
       {
@@ -93,6 +95,11 @@ in {
 
       {plugin = "ipc";}
       {plugin = "ipc-rules";}
+      {plugin = "wayfire-shell";}
+      {plugin = "gtk-shell";}
+      {plugin = "foreign-toplevel";}
+
+      {plugin = "xdg-activation";}
 
       {
         plugin = "vswitch";
@@ -199,8 +206,8 @@ in {
           binding_browser = "<super> KEY_B";
           command_broeser = "thorium";
 
-          binding_launcher = "<super> KEY_R";
-          command_launcher = "${ags} -t applauncher";
+          #          binding_launcher = "<super> KEY_R";
+          #         command_launcher = "${ags} -t applauncher";
 
           binding_launcher2 = "<super> KEY_SPACE";
           command_launcher2 = "anyrun";
