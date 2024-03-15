@@ -154,7 +154,7 @@ in {
   in
     mkIf cfg.enable {
       chr.desktop = {
-        ironbar.enable = true;
+        waybar.enable = true;
         anyrun.enable = true;
       };
 
