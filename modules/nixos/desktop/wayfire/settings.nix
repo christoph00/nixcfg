@@ -39,7 +39,10 @@ in {
           # set environment variables in the systemd user session.
           a0003_session = "${systemctl} start wayfire-session.target";
 
-          ironbar = "${config.chr.desktop.ironbar.package}/bin/ironbar";
+          ironbar = lib.mkIf config.chr.desktop.ironbar.enable "${config.chr.desktop.ironbar.package}/bin/ironbar";
+          waybar = lib.mkIf config.chr.desktop.waybar.enable "waybar";
+
+          autostart_wf_shell = false;
         };
       }
       {
@@ -240,6 +243,12 @@ in {
         plugin = "idle";
         settings = {
           dpms_timeout = 4000;
+        };
+      }
+      {
+        plugin = "output";
+        settings = {
+          vrr = true;
         };
       }
     ];
