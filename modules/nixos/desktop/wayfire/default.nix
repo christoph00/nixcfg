@@ -62,9 +62,7 @@ in {
       default = "de";
     };
     shellSettings = mkOption {
-      type = types.submodule {
-        freeformType = types.attrsOf allowedTypes;
-      };
+      type = types.submodule;
     };
 
     settings = mkOption {
@@ -156,7 +154,7 @@ in {
   in
     mkIf cfg.enable {
       chr.desktop = {
-        ags.enable = true;
+        irobar.enable = true;
         anyrun.enable = true;
       };
 

@@ -14,7 +14,6 @@
 
   update-environment = "exec ${pkgs.dbus}/bin/dbus-update-activation-environment";
   systemctl = "exec ${pkgs.systemd}/bin/systemctl --user";
-  ags = "${config.chr.desktop.ags.package}/bin/ags -b wayfire";
 in {
   chr.desktop.wayfire.settings = lib.mkIf config.chr.desktop.wayfire.enable {
     close_top_view = "<alt> KEY_Q";
@@ -40,9 +39,7 @@ in {
           # set environment variables in the systemd user session.
           a0003_session = "${systemctl} start wayfire-session.target";
 
-          #ags = "${ags}";
-          wf_dock = "wf-dock";
-          wf_panel = "wf-panel";
+          ironbar = "${config.chr.desktop.ironbar.package}/bin/ironbar";
         };
       }
       {
