@@ -52,9 +52,9 @@ with lib.chr; let
     categories = ["Game"];
   };
 in {
-  # imports = [
-  #   inputs.nix-gaming.nixosModules.steamCompat
-  # ];
+  imports = [
+    inputs.nix-gaming.nixosModules.steamCompat
+  ];
 
   options.chr.gaming = with types; {
     enable = mkBoolOpt (config.chr.type == "desktop") "Whether or not to enable Gaming Module.";
