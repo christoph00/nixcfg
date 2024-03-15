@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.services.z2m;
 in {
   options.chr.services.z2m = with types; {
-    enable = mkBoolOpt config.chr.services.smart-home "Enable zigbee2mqtt Service.";
+    enable = mkBoolOpt false "Enable zigbee2mqtt Service.";
   };
   config = mkIf cfg.enable {
     services.zigbee2mqtt = {
