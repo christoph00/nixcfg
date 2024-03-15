@@ -18,7 +18,7 @@ with lib.chr; let
 in {
   options.chr.nix = with types; {
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
-    package = mkOpt package pkgs.nixUnstable "Which nix package to use.";
+    package = mkOpt package pkgs.nix "Which nix package to use."; #nixUnstable
 
     default-substituter = {
       url = mkOpt str "https://cache.nixos.org" "The url for the substituter.";
@@ -45,7 +45,7 @@ in {
       package = cfg.package;
 
       settings = {
-        experimental-features = "nix-command flakes auto-allocate-uids configurable-impure-env";
+        experimental-features = "nix-command flakes auto-allocate-uids";
         http-connections = 50;
         warn-dirty = false;
         log-lines = 50;
