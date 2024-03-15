@@ -71,8 +71,8 @@ in {
       customComponents = with pkgs; [
         pkgs.home-assistant-custom-components.prometheus_sensor
         chr.ha-better-thermostat
-        chr.ha-home-llm
-        chr.ha-ollama
+        #chr.ha-home-llm
+        #chr.ha-ollama
       ];
       customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
         mini-graph-card
