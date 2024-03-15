@@ -32,6 +32,7 @@ in {
     inputs.hyprland.homeManagerModules.default
     inputs.hyprlock.homeManagerModules.default
     inputs.hypridle.homeManagerModules.default
+    inputs.ironbar.homeManagerModules.default
   ];
 
   config = mkIf cfg.enable (mkMerge [
