@@ -47,4 +47,8 @@
   networking = {
     hostName = "vm-smarthome";
   };
+
+  chr.services = {
+    smart-home = true;
+  };
 }
