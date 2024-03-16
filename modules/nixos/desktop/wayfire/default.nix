@@ -67,9 +67,7 @@ in {
       background = mkBoolOpt' config.chr.desktop.wayfire.shell.enable;
       panel = mkBoolOpt' config.chr.desktop.wayfire.shell.enable;
       settings = mkOption {
-        type = types.submodule {
-          freeformType = types.attrsOf allowedTypes;
-        };
+        type = with types; attrsOf (attrsOf (oneOf [str bool int]));
       };
     };
 
@@ -163,6 +161,9 @@ in {
     mkIf cfg.enable {
       chr.desktop = {
         anyrun.enable = true;
+        wayfire.shell.dock = true;
+        wayfire.shell.panel = false;
+        ags.enable = true;
       };
 
       programs.wayfire = {
@@ -247,6 +248,7 @@ in {
         };
 
         xdg.configFile."wayfire.ini".text = generators.toINI {} settings;
+        xdg.configFile."wf-shell.ini".text = generators.toINI {} cfg.shell.settings;
       };
 
       services = {
