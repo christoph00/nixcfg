@@ -25,7 +25,19 @@ in {
     chr.home.extraOptions = {
       programs.ironbar = {
         enable = true;
-        #config = {};
+        config = {
+          config = {
+            position = "bottom";
+            anchor_to_edges = true;
+            start = [
+              {type = "launcher";}
+            ];
+            end = [
+              {type = "tray";}
+              {type = "clock";}
+            ];
+          };
+        };
         systemd = false;
         package = cfg.package;
       };

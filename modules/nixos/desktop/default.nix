@@ -32,7 +32,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    chr.desktop.wayfire.enable = true;
+    chr.desktop.hyprland.enable = true;
+    # TODO enable multiple WMs + split greeter/general wayland settings
 
     # Disable mitigations on desktop
     boot.kernelParams = [

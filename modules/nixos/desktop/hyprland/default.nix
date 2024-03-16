@@ -29,6 +29,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    chr.desktop = {
+      ags.enable = true;
+      anyrun.enable = true;
+    };
+
     programs.hyprland = {
       enable = true;
     };
@@ -222,6 +227,7 @@ in {
             (f "xdg-desktop-portal-gnome")
             (f "transmission-gtk")
             (f "com.github.Aylur.ags")
+            #  (f "*") # float all
           ];
 
           bind = let
