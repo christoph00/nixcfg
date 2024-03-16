@@ -161,9 +161,10 @@ in {
     mkIf cfg.enable {
       chr.desktop = {
         anyrun.enable = true;
-        wayfire.shell.dock = true;
+        wayfire.shell.dock = false;
         wayfire.shell.panel = false;
         ags.enable = true;
+        waybar.enable = true;
       };
 
       programs.wayfire = {

@@ -50,15 +50,16 @@ in {
     };
     dock = {
       css_path = "${style}";
-      autohide = false;
-      dock_height = 64;
+      autohide = true;
+      dock_height = 48;
+      icon_height = 32;
       icon_mapping_code-url-handler = "${pkgs.vscode}/share/pixmaps/vscode.png";
     };
     panel = {
       css_path = "${style}";
-      position = "bottom";
+      position = "top";
       widgets_center = "none";
-      widgets_left = "menu spacing4 launchers window-list";
+      widgets_left = "";
       widgets_right = "notifications volume battery tray clock";
 
       launcher_nau = "org.gnome.Nautilus.desktop";

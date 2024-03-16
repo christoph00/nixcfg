@@ -11,19 +11,26 @@ with lib.chr; let
 in {
   options.chr.desktop.waybar = with types; {
     enable = mkBoolOpt false "Whether or not enable waybar.";
+    package = mkOption {
+      type = package;
+      default = pkgs.waybar;
+    };
   };
 
   config = mkIf cfg.enable {
     chr.home.extraOptions = {
       programs.waybar = {
+        package = cfg.package;
         enable = true;
         settings = {
           mainBar = {
-            position = "top";
+            position = "bottom";
             height = 30;
             layer = "top";
             modules-left = [
               "wlr/workspaces"
+
+              "wlr/taskbar"
             ];
             modules-right = [
               "network"
