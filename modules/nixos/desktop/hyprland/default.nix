@@ -113,16 +113,16 @@ in {
         package = config.programs.hyprland.package;
         plugins = [
           inputs.hy3.packages.${pkgs.system}.hy3
-          #  inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+          inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
           inputs.hyprgrass.packages.${pkgs.system}.default
         ];
         settings = {
           exec-once = [
-            "hyprlock"
+            #    "hyprlock"
             "${config.chr.desktop.ags.package}/bin/ags -b hypr"
             "wl-paste --type text --watch cliphist store" #Stores only text data
             "wl-paste --type image --watch cliphist store"
-            "${pkgs.hyprshade}/bin/hyprshade auto"
+            #  "${pkgs.hyprshade}/bin/hyprshade auto"
           ];
           animations = {
             enabled = "yes";
