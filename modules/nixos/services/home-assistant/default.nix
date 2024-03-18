@@ -233,6 +233,7 @@ in {
       extraComponents = [
         "caldav"
         "bluetooth"
+        "cloud"
         "calendar"
         "camera"
         "open_meteo"
