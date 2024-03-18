@@ -63,6 +63,7 @@ in {
               kegtron-ble
               zwave-js-server-python
               paho-mqtt
+              hass-nabucasa
             ];
         })
         .overrideAttrs (oldAttrs: {doInstallCheck = false;});
