@@ -112,7 +112,7 @@ in {
         package = config.programs.hyprland.package;
         plugins = [
           inputs.hy3.packages.${pkgs.system}.hy3
-          inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
+          #  inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
           inputs.hyprgrass.packages.${pkgs.system}.default
         ];
         settings = {
