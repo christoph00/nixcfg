@@ -64,6 +64,7 @@ in {
               zwave-js-server-python
               paho-mqtt
               hass-nabucasa
+              pyebus
             ];
         })
         .overrideAttrs (oldAttrs: {doInstallCheck = false;});
