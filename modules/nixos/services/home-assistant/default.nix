@@ -141,10 +141,10 @@ in {
           };
         };
         #zha_toolkit = {};
-        ebusd = mkIf config.chr.services.ebusd.enable {
-          host = "127.0.0.1";
-          circuit = "basv0";
-        };
+        # ebusd = mkIf config.chr.services.ebusd.enable {
+        #   host = "127.0.0.1";
+        #   circuit = "basv0";
+        # };
         ssdp = {};
         # mqtt = {
         #   climate = [
