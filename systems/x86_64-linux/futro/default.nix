@@ -42,8 +42,6 @@ in {
       paperless.enable = true;
       yarr.enable = true;
       vaultwarden.enable = true;
-      shiori.enable = true;
-      z2m.enable = true;
     };
   };
 
