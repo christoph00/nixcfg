@@ -130,6 +130,23 @@ in {
   };
   services.thermald.enable = true;
 
+  services.undervolt = {
+    temp = 90;
+    enable = true;
+    uncoreOffset = -50;
+    gpuOffset = -45;
+    coreOffset = -75;
+    analogioOffset = -50;
+    p1 = {
+      limit = 20;
+      window = 300;
+    };
+    p2 = {
+      limit = 15;
+      window = 224;
+    };
+  };
+
   networking.useNetworkd = true;
   systemd.network.networks."40-wired" = {
     matchConfig = {Name = lib.mkForce "enp* eth*";};
