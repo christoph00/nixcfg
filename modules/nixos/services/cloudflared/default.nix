@@ -24,9 +24,6 @@ in {
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       default = "http_status:404";
       credentialsFile = config.age.secrets.cf-tunnel.path;
-      ingress = {
-        "ha.r505.de" = "http://127.0.0.1:8123";
-      };
     };
     systemd.services."cloudflared-tunnel-${config.networking.hostName}" = {
       environment.TUNNEL_METRICS = "localhost:8927";
