@@ -54,12 +54,12 @@ in {
   chr = {
     type = "server";
     services = {
-      #   smart-home = true;
-      #   home-assistant.hostname = "home.r505.de";
+      smart-home = true;
+      home-assistant.hostname = "home.r505.de";
       #ollama.enable = true;
       vmetrics.enable = true;
       monitoring.scrapeExtra = true;
-      zwave.enable = true;
+      zwave.enable = false;
     };
     vms = {
       enable = true;
