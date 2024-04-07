@@ -296,7 +296,7 @@ in {
 
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
-        "ha.r505.de" = "http://127.0.0.1:8123";
+        "${cfg.hostname}" = "http://127.0.0.1:8123";
       };
     };
   };
