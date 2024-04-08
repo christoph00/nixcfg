@@ -136,8 +136,7 @@ in {
               };
             };
             # typst-vim.enable = true;
-   
-      
+
             harpoon = {
               enable = false;
               # enableTelescope = true;

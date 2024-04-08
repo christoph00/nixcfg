@@ -26,6 +26,7 @@ in {
     };
     services = {
       webserver.enable = true;
+      coder-server.enable = true;
     };
     home.enable = true;
     apps.nvim.enable = true;
