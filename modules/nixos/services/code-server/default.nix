@@ -16,7 +16,7 @@ in {
     services.openvscode-server = {
       enable = true;
       user = "christoph";
-      group = "christoph";
+      group = "users";
 
       extraPackages = with pkgs; [git nixd nixfmt alejandra];
       host = "0.0.0.0";
