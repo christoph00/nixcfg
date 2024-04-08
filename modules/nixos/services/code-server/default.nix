@@ -27,7 +27,7 @@ in {
     chr.services.cloudflared.enable = true;
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
-        "code.r505.de" = "http://127.0.0.1:${config.services.openvscode-server.port}";
+        "code.r505.de" = "http://127.0.0.1:${toString config.services.openvscode-server.port}";
       };
     };
   };
