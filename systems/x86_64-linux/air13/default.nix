@@ -87,6 +87,16 @@ in {
     };
   };
 
+  fileSystems."/media/data-hdd" = {
+    device = "/dev/disk/by-uuid/1c39c565-7d6c-4924-b709-2516b50b542f";
+    options = ["subvol=@data" "compress-force=zstd" "nofail"];
+  };
+
+  fileSystems."/mnt/userdata" = {
+    device = "/dev/disk/by-label/air13";
+    options = ["subvol=@userdata" "discard=async" "compress-force=zstd" "nofail"];
+  };
+
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
