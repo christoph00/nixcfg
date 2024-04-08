@@ -27,6 +27,9 @@ in {
     services = {
       webserver.enable = true;
     };
+    home.enable = true;
+    apps.nvim.enable = true;
+    apps.helix.enable = true;
   };
 
   networking.interfaces.eth0.useDHCP = true;
