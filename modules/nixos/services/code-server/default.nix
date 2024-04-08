@@ -20,7 +20,7 @@ in {
 
       extraPackages = with pkgs; [git nixd nixfmt alejandra];
       host = "0.0.0.0";
-      socketPath = "/run/openvscode/socket";
+      # socketPath = "/run/openvscode/socket";
       serverDataDir = "${config.users.users.christoph.home}/.config/openvscode-server";
       withoutConnectionToken = false;
     };
