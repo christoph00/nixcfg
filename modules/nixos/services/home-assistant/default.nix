@@ -128,7 +128,6 @@ in {
         #bthome = {};
         media_extractor = {};
         zwave_js = {};
-        proximity = {};
         zha = {
           enable_quirks = true;
           custom_quirks_path = "${config.services.home-assistant.configDir}/zha_quirks/";
