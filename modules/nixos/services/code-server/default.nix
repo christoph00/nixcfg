@@ -18,11 +18,11 @@ in {
       user = "christoph";
       group = "users";
 
-      extraPackages = with pkgs; [git nixd nixfmt alejandra];
+      extraPackages = with pkgs; [git nixd nixfmt-rfc-style alejandra];
       host = "0.0.0.0";
       # socketPath = "/run/openvscode/socket";
       serverDataDir = "${config.users.users.christoph.home}/.config/openvscode-server";
-      withoutConnectionToken = false;
+      withoutConnectionToken = true;
     };
     chr.services.cloudflared.enable = true;
     services.cloudflared.tunnels."${config.networking.hostName}" = {
