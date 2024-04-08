@@ -54,12 +54,14 @@ in {
   chr = {
     type = "server";
     services = {
-      smart-home = true;
-      home-assistant.hostname = "home.r505.de";
-      #ollama.enable = true;
       vmetrics.enable = true;
       monitoring.scrapeExtra = true;
-      zwave.enable = false;
+      nas.enable = true;
+      smart-home = true;
+      media.enable = true;
+      paperless.enable = true;
+      yarr.enable = true;
+      vaultwarden.enable = true;
     };
     vms = {
       enable = true;
