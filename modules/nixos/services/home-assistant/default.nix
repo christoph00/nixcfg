@@ -127,7 +127,6 @@ in {
         zeroconf = {};
         #bthome = {};
         media_extractor = {};
-        zwave_js = {};
         zha = {
           enable_quirks = true;
           custom_quirks_path = "${config.services.home-assistant.configDir}/zha_quirks/";
@@ -270,6 +269,8 @@ in {
         "snmp"
         "google"
         "spotify"
+
+        "zwave_js"
 
         #"python_script"
         "bluetooth_tracker"
