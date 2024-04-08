@@ -22,8 +22,6 @@ in {
       host = "0.0.0.0";
       socketPath = "/run/openvscode/socket";
       serverDataDir = "${config.users.users.christoph.home}/.config/openvscode-server";
-      telemetryLevel = "off";
-      use-immutable-settings = true;
       withoutConnectionToken = false;
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
