@@ -136,76 +136,8 @@ in {
               };
             };
             # typst-vim.enable = true;
-            cmp-buffer.enable = true;
-
-            cmp-emoji.enable = true;
-            cmp-latex-symbols.enable = true;
-            cmp-path.enable = true;
-            cmp-cmdline.enable = true;
-            cmp-treesitter.enable = true;
-
-            cmp-nvim-lsp.enable = true;
-            cmp-nvim-lsp-document-symbol.enable = true;
-            cmp-nvim-lsp-signature-help.enable = true;
-
-            luasnip.enable = true;
-            cmp_luasnip.enable = true;
-
-            cmp-look.enable = true;
-
-            cmp = {
-              enable = true;
-              snippet.expand = "luasnip";
-              mapping = {
-                "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-                "<C-f>" = "cmp.mapping.scroll_docs(4)";
-                "<C-Space>" = "cmp.mapping.complete()";
-                "<C-e>" = "cmp.mapping.close()";
-                # "<Tab>" = {
-                #   modes = ["i" "s"];
-                #   action = "cmp.mapping.select_next_item()";
-                # };
-                # "<S-Tab>" = {
-                #   modes = ["i" "s"];
-                #   action = "cmp.mapping.select_prev_item()";
-                # };
-                "<Down>" = {
-                  modes = ["i" "s"];
-                  action = "cmp.mapping.select_next_item()";
-                };
-                "<Up>" = {
-                  modes = ["i" "s"];
-                  action = "cmp.mapping.select_prev_item()";
-                };
-                "<C-j>" = {
-                  modes = ["i" "s"];
-                  action = "cmp.mapping.select_next_item()";
-                };
-                "<C-k>" = {
-                  modes = ["i" "s"];
-                  action = "cmp.mapping.select_prev_item()";
-                };
-                # "<CR>" = "cmp.mapping.confirm({ select = true })";
-                "<Tab>" = "cmp.mapping.confirm({ select = true })";
-              };
-              sources = [
-                {name = "nvim_lsp";}
-                {name = "codeium";}
-                {name = "luasnip";}
-                {
-                  name = "look";
-                  keywordLength = 2;
-                  option = {
-                    convert_case = true;
-                    loud = true;
-                  };
-                }
-                {name = "path";}
-                {name = "buffer";}
-                {name = "nvim_lua";}
-                {name = "orgmode";}
-              ];
-            };
+   
+      
             harpoon = {
               enable = false;
               # enableTelescope = true;
