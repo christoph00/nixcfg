@@ -25,8 +25,7 @@ in {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC5KqxXvpZ+R7/GYx99+W0rPHatXKf6/pG6rZ8z81/f6 christoph@x13"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPLfdKX4lkZqV5KlVfu2XyAUrg3IhI7NN3/gCD1f/VRG christoph@oca"
-"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGBdHb/vbNAa+PzunW66VbDlfg2RLxzrok7zweie
-H25D pkey"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGBdHb/vbNAa+PzunW66VbDlfg2RLxzrok7zweieH25D pkey@wrk"
     ] "Authorized Keys.";
 
     extraOptions = mkOpt attrs {} "Extra options.";
