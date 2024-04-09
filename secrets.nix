@@ -41,4 +41,6 @@ in {
   "secrets/vaultwarden.env".publicKeys = [futro air13] ++ users;
   "secrets/paperless-token.env".publicKeys = [futro air13] ++ users;
   "secrets/caddy.env".publicKeys = servers ++ users;
+
+  "secrets/nc-admin-pass".publicKeys = [air13 oca] ++ users;
 }

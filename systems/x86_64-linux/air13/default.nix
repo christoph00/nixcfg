@@ -59,9 +59,8 @@ in {
       nas.enable = true;
       smart-home = true;
       media.enable = true;
-      paperless.enable = true;
-      yarr.enable = true;
       vaultwarden.enable = true;
+      nextcloud.enable = true;
     };
     vms = {
       enable = true;
