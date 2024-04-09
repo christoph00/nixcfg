@@ -182,7 +182,7 @@ in {
       ];
     };
 
-    redis.servers.nextcloud.settings = {
+    services.redis.servers.nextcloud.settings = {
       maxmemory = "512m";
       maxmemory-policy = "volatile-lfu";
     };
