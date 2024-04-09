@@ -32,7 +32,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    chr.desktop.hyprland.enable = true;
+    chr.desktop.plasma.enable = true;
     # TODO enable multiple WMs + split greeter/general wayland settings
 
     # Disable mitigations on desktop
