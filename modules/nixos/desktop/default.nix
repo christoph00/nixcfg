@@ -61,7 +61,6 @@ in {
     };
 
     hardware.bluetooth.enable = true;
-    services.blueman.enable = true;
 
     services.logind = {
       killUserProcesses = true;
