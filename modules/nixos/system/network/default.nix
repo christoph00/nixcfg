@@ -16,6 +16,7 @@ in {
   options.chr.system.network = with types; {
     enable = mkOpt types.bool true "Enable Network Config.";
     tweaks = mkOpt types.bool true "Enable Network Tweaks.";
+    wifi-switch = mkOpt types.bool config.chr.system.laptop.enable "Disable wifi on Ethernet.";
   };
 
   config = mkIf cfg.enable {
