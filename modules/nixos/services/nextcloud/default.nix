@@ -13,8 +13,9 @@ in {
     enable = mkBoolOpt false "Enable nextcloud Service.";
   };
   config = mkIf cfg.enable {
-    chr.services.webserver = {
-      enable = true;
+    chr.services = {
+      webserver.enable = true;
+      postgresql.enable = true;
     };
     environment.systemPackages = with pkgs; [
       exiftool
@@ -102,6 +103,12 @@ in {
       ingress = {
         "cloud.r505.de" = "http://127.0.0.1:8070";
       };
+    };
+
+    # Ensure that postgres is running *before* running the setup
+    systemd.services."nextcloud-setup" = {
+      requires = ["postgresql.service"];
+      after = ["postgresql.service"];
     };
   };
 }
