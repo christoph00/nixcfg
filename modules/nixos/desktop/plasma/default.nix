@@ -25,7 +25,6 @@ in {
       kdePackages.kcalc
       kdePackages.kdenlive
       kdePackages.skanlite
-      vulkan-hdr-layer
     ];
 
     services.xserver = {
