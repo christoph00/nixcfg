@@ -23,8 +23,8 @@ in {
     ];
     age.secrets.nc-admin-pass = {
       file = ../../../../secrets/nc-admin-pass;
-      owner = config.services.nextcloud.user;
-      group = config.services.nextcloud.group;
+      owner = config.services.caddy.user;
+      group = config.services.caddy.group;
     };
     services.phpfpm.pools.nextcloud.settings = {
       "listen.owner" = config.services.caddy.user;
