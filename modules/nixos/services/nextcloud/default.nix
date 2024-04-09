@@ -114,6 +114,8 @@ in {
         # Admin user
         adminuser = "christoph";
         adminpassFile = "${config.age.secrets.nc-admin-pass.path}";
+
+        overwriteProtocol = "https";
       };
       settings = {
         trusted_proxies = cloudflareIpRanges;
