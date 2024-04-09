@@ -39,6 +39,7 @@ in {
       autoUpdateApps.enable = true;
       autoUpdateApps.startAt = "05:00:00";
       home = "/mnt/userdata/ncloud";
+      notify_push.enable = true;
       poolSettings = {
         pm = "dynamic";
         "pm.max_children" = "160";
