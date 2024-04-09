@@ -46,7 +46,7 @@ in {
     };
     environment.systemPackages = with pkgs; [
       exiftool
-      ffmpeg
+      ffmpeg-headless
     ];
     age.secrets.nc-admin-pass = {
       file = ../../../../secrets/nc-admin-pass;
@@ -62,12 +62,17 @@ in {
       enable = true;
       package = pkgs.nextcloud28;
       https = true;
+      configureRedis = true;
       hostName = "cloud.r505.de";
       autoUpdateApps.enable = true;
       autoUpdateApps.startAt = "05:00:00";
       caching.apcu = true;
 
-      notify_push.enable = true;
+      maxUploadSize = "10G";
+
+      enableImagemagick = true;
+
+      #notify_push.enable = true;
       poolSettings = {
         pm = "dynamic";
         "pm.max_children" = "160";
@@ -76,6 +81,29 @@ in {
         "pm.min_spare_servers" = "40";
         "pm.start_servers" = "40";
       };
+
+      phpOptions = {
+        "date.timezone" = config.time.timeZone;
+        "opcache.enable_cli" = "1";
+        "opcache.fast_shutdown" = "1";
+        "opcache.interned_strings_buffer" = "64";
+        "opcache.jit_buffer_size" = "256M";
+        "opcache.jit" = "1255";
+        "opcache.max_accelerated_files" = "150000";
+        "opcache.memory_consumption" = "256";
+        "opcache.revalidate_freq" = "60";
+        "opcache.save_comments" = "1";
+        "openssl.cafile" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+        catch_workers_output = "yes";
+        display_errors = "stderr";
+        error_reporting = "E_ALL & ~E_DEPRECATED & ~E_STRICT";
+        expose_php = "Off";
+        max_execution_time = "30";
+        max_input_time = "90";
+        output_buffering = "0";
+        short_open_tag = "Off";
+      };
+
       config = {
         # Database
         dbtype = "pgsql";
@@ -103,10 +131,15 @@ in {
           "OC\\Preview\\HEIC"
           "OC\\Preview\\Movie"
         ];
+        log_type = "file";
+        loglevel = 2;
+        maintenance_window_start = "12";
+        overwriteProtocol = "https";
+        profile.enabled = false;
       };
       extraAppsEnable = true;
       extraApps = with config.services.nextcloud.package.packages.apps; {
-        inherit calendar contacts mail news notify_push files_markdown;
+        inherit calendar contacts mail;
       };
     };
     services.caddy.virtualHosts = {
@@ -147,6 +180,11 @@ in {
           directory = "/var/lib/nextcloud";
         }
       ];
+    };
+
+    redis.servers.nextcloud.settings = {
+      maxmemory = "512m";
+      maxmemory-policy = "volatile-lfu";
     };
 
     # Ensure that postgres is running *before* running the setup
