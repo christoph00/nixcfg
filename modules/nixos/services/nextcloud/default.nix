@@ -147,8 +147,23 @@ in {
     services.caddy.virtualHosts = {
       ":8070".extraConfig = ''
 
+        header {
+            # enable HSTS
+            Strict-Transport-Security max-age=31536000;
+        }
+
         redir /.well-known/carddav /remote.php/dav 301
         redir /.well-known/caldav /remote.php/dav 301
+
+        # Apps paths
+        handle /nix-apps/* {
+            root * ${config.services.nextcloud.home}
+        }
+        handle /store-apps/* {
+            root * ${config.services.nextcloud.home}
+        }
+
+
 
         @forbidden {
             path /.htaccess
@@ -167,7 +182,7 @@ in {
 
         root * ${config.services.nextcloud.package}
         file_server
-        php_fastcgi unix//run/phpfpm/nextcloud.sock
+        php_fastcgi unix/${config.services.phpfpm.pools.nextcloud.socket}
       '';
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
