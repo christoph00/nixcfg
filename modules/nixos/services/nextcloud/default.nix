@@ -41,7 +41,6 @@ in {
   };
   config = mkIf cfg.enable {
     chr.services = {
-      webserver.enable = true;
       postgresql.enable = true;
     };
     environment.systemPackages = with pkgs; [
@@ -57,6 +56,14 @@ in {
       "listen.owner" = config.services.caddy.user;
       "listen.group" = config.services.caddy.group;
     };
+
+    services.nginx.enable = true;
+    services.nginx.virtualHosts."cloud.r505.de".listen = [
+      {
+        addr = "0.0.0.0";
+        port = 8070;
+      }
+    ];
 
     services.nextcloud = {
       enable = true;
@@ -114,8 +121,6 @@ in {
         # Admin user
         adminuser = "christoph";
         adminpassFile = "${config.age.secrets.nc-admin-pass.path}";
-
-        overwriteProtocol = "https";
       };
       settings = {
         trusted_proxies = cloudflareIpRanges;
@@ -144,47 +149,7 @@ in {
         inherit calendar contacts mail;
       };
     };
-    services.caddy.virtualHosts = {
-      ":8070".extraConfig = ''
 
-        header {
-            # enable HSTS
-            Strict-Transport-Security max-age=31536000;
-        }
-
-        redir /.well-known/carddav /remote.php/dav 301
-        redir /.well-known/caldav /remote.php/dav 301
-
-        # Apps paths
-        handle /nix-apps/* {
-            root * ${config.services.nextcloud.home}
-        }
-        handle /store-apps/* {
-            root * ${config.services.nextcloud.home}
-        }
-
-
-
-        @forbidden {
-            path /.htaccess
-            path /data/*
-            path /config/*
-            path /db_structure
-            path /.xml
-            path /README
-            path /3rdparty/*
-            path /lib/*
-            path /templates/*
-            path /occ
-            path /console.php
-        }
-        respond @forbidden 404
-
-        root * ${config.services.nextcloud.package}
-        file_server
-        php_fastcgi unix/${config.services.phpfpm.pools.nextcloud.socket}
-      '';
-    };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
         "cloud.r505.de" = "http://127.0.0.1:8070";
