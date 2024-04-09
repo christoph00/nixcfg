@@ -1,4 +1,4 @@
-final: prev: {
+inputs: _final: prev: {
   kdePackages =
     prev.kdePackages
     // {
@@ -6,7 +6,7 @@ final: prev: {
         patches =
           (old.patches or [])
           ++ [
-            (final.fetchpatch {
+            (prev.fetchpatch {
               url = "https://patch-diff.githubusercontent.com/raw/sddm/sddm/pull/1779.patch";
               sha256 = "sha256-8QP9Y8V9s8xrc+MIUlB7iHVNHbntGkw0O/N510gQ+bE=";
             })
