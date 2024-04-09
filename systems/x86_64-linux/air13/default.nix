@@ -56,7 +56,6 @@ in {
     services = {
       vmetrics.enable = true;
       monitoring.scrapeExtra = true;
-      nas.enable = true;
       smart-home = true;
       media.enable = true;
       vaultwarden.enable = true;
