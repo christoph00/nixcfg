@@ -52,10 +52,6 @@ in {
       owner = "nextcloud";
       group = "nextcloud";
     };
-    services.phpfpm.pools.nextcloud.settings = {
-      "listen.owner" = config.services.caddy.user;
-      "listen.group" = config.services.caddy.group;
-    };
 
     services.nginx.enable = true;
     services.nginx.virtualHosts."cloud.r505.de".listen = [

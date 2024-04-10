@@ -16,7 +16,7 @@ in {
     services.vaultwarden = {
       enable = true;
       config = {
-        DOMAIN = "https://pass.r505.de";
+        DOMAIN = "https://pw.r505.de";
         SIGNUPS_ALLOWED = false;
         SIGNUPS_VERIFY = false;
         INVITATIONS_ALLOWED = true;
@@ -36,9 +36,10 @@ in {
         }
       ];
     };
+    chr.services.cloudflared.enable = true;
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
-        "pass.r505.de" = "http://localhost:${builtins.toString config.services.vaultwarden.config.ROCKET_PORT}";
+        "pw.r505.de" = "http://localhost:${builtins.toString config.services.vaultwarden.config.ROCKET_PORT}";
       };
     };
   };
