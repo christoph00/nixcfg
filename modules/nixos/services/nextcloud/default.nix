@@ -145,7 +145,7 @@ in {
         inherit calendar contacts mail tasks memories previewgenerator notify_push;
         external = pkgs.fetchNextcloudApp rec {
           url = "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
-          sha256 = "01hg786biw0897fksz1b4fnrvljig55cpc18zblkzcabl7c6x42q";
+          sha256 = "sha256-RCL2RP5twRDLxI/KfAX6QLYQOzqZmSWsfrC5ZQIwTD4=";
           license = "agpl3Only";
         };
       };
