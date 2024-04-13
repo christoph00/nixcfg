@@ -73,6 +73,8 @@ in {
         chr.gpucache
 
         chr.zed-editor
+
+        ciscoPacketTracer8
       ];
     };
   };
