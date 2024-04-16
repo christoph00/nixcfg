@@ -73,8 +73,14 @@ in {
         chr.gpucache
 
         chr.zed-editor
+<<<<<<< Updated upstream
 
         
+||||||| Stash base
+
+        ciscoPacketTracer8
+=======
+>>>>>>> Stashed changes
       ];
     };
   };
