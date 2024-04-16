@@ -74,7 +74,7 @@ in {
 
         chr.zed-editor
 
-        ciscoPacketTracer8
+        
       ];
     };
   };
