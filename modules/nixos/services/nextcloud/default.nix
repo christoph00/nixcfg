@@ -170,6 +170,8 @@ in {
       maxmemory-policy = "volatile-lfu";
     };
 
+    users.users.nextcloud.extraGroups = ["media"];
+
     # Ensure that postgres is running *before* running the setup
     systemd.services."nextcloud-setup" = {
       requires = ["postgresql.service"];
