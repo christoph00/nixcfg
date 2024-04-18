@@ -180,8 +180,6 @@ in {
           memories
           previewgenerator
           notify_push
-          files_markdown
-          files_pdfviewer
           ;
         external = pkgs.fetchNextcloudApp rec {
           url = "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
