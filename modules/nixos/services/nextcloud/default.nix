@@ -46,7 +46,7 @@ in {
     };
     environment.systemPackages = with pkgs; [
       exiftool
-      ffmpeg-headless
+      ffmpeg-jellyfin
       perl
     ];
     age.secrets.nc-admin-pass = {
@@ -128,6 +128,8 @@ in {
       };
       settings = {
         trusted_proxies = cloudflareIpRanges;
+        preview_imaginary_url = "http://localhost:8088";
+
         enabledPreviewProviders = [
           "OC\\Preview\\BMP"
           "OC\\Preview\\GIF"
@@ -159,8 +161,8 @@ in {
         profile.enabled = false;
         default_phone_region = "DE";
 
-        "memories.vod.ffmpeg" = lib.getExe pkgs.ffmpeg-headless;
-        "memories.vod.ffprobe" = "${pkgs.ffmpeg-headless}/bin/ffprobe";
+        "memories.vod.ffmpeg" = "${pkgs.jellyfin-ffmpeg}/bin/ffmpeg";
+        "memories.vod.ffprobe" = "${pkgs.jellyfin-ffmpeg}/bin/ffprobe";
         "memories.exiftool" = "${lib.getExe pkgs.exiftool}";
         "memories.exiftool_no_local" = true;
 
@@ -172,7 +174,16 @@ in {
       };
       extraAppsEnable = true;
       extraApps = with config.services.nextcloud.package.packages.apps; {
-        inherit calendar contacts mail tasks memories previewgenerator notify_push;
+        inherit
+          calendar
+          contacts
+          mail
+          tasks
+          memories
+          previewgenerator
+          notify_push
+          files_markdown
+          ;
         external = pkgs.fetchNextcloudApp rec {
           url = "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
           sha256 = "sha256-RCL2RP5twRDLxI/KfAX6QLYQOzqZmSWsfrC5ZQIwTD4=";
