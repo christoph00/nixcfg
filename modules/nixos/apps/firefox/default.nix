@@ -29,7 +29,7 @@ with lib.chr; let
   };
 in {
   options.chr.apps.firefox = with types; {
-    enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Firefox.";
+    enable = mkBoolOpt false "Whether or not to enable Firefox.";
     settings = mkOpt attrs defaultSettings "Settings to apply to the profile.";
   };
 

@@ -38,6 +38,7 @@ with lib.chr; let
 in {
   options.chr.services.nextcloud = with types; {
     enable = mkBoolOpt false "Enable nextcloud Service.";
+    enableImaginary = mkBoolOpt true "Enable Imaginary Service.";
   };
   config = mkIf cfg.enable {
     chr.services = {
@@ -45,7 +46,8 @@ in {
     };
     environment.systemPackages = with pkgs; [
       exiftool
-      ffmpeg-headless
+      ffmpeg-jellyfin
+      perl
     ];
     age.secrets.nc-admin-pass = {
       file = ../../../../secrets/nc-admin-pass;
@@ -60,6 +62,12 @@ in {
         port = 8070;
       }
     ];
+
+    services.imaginary = lib.mkIf cfg.enableImaginary {
+      enable = true;
+      address = "127.0.0.1";
+      settings.return-size = true;
+    };
 
     services.nextcloud = {
       enable = true;
@@ -120,6 +128,8 @@ in {
       };
       settings = {
         trusted_proxies = cloudflareIpRanges;
+        preview_imaginary_url = "http://localhost:8088";
+
         enabledPreviewProviders = [
           "OC\\Preview\\BMP"
           "OC\\Preview\\GIF"
@@ -133,22 +143,59 @@ in {
           "OC\\Preview\\XBitmap"
           "OC\\Preview\\HEIC"
           "OC\\Preview\\Movie"
+
+          "OC\\Preview\\Image" # alias for png,jpeg,gif,bmp
+
+          "OC\\Preview\\Imaginary"
+
+          "OC\\Preview\\Font"
+          "OC\\Preview\\PDF"
+          "OC\\Preview\\SVG"
+          "OC\\Preview\\WebP"
         ];
+
         log_type = "file";
         loglevel = 2;
         maintenance_window_start = "12";
         overwriteProtocol = "https";
         profile.enabled = false;
+        default_phone_region = "DE";
+
+        "memories.vod.ffmpeg" = "${pkgs.jellyfin-ffmpeg}/bin/ffmpeg";
+        "memories.vod.ffprobe" = "${pkgs.jellyfin-ffmpeg}/bin/ffprobe";
+        "memories.exiftool" = "${lib.getExe pkgs.exiftool}";
+        "memories.exiftool_no_local" = true;
+
+        jpeg_quality = 60;
+        preview_max_filesize_image = 128; # MB
+        preview_max_memory = 512; # MB
+        preview_max_x = 2048; # px
+        preview_max_y = 2048; # px
       };
       extraAppsEnable = true;
       extraApps = with config.services.nextcloud.package.packages.apps; {
-        inherit calendar contacts mail tasks memories previewgenerator notify_push;
+        inherit
+          calendar
+          contacts
+          mail
+          tasks
+          memories
+          previewgenerator
+          notify_push
+          files_markdown
+          ;
         external = pkgs.fetchNextcloudApp rec {
           url = "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
           sha256 = "sha256-RCL2RP5twRDLxI/KfAX6QLYQOzqZmSWsfrC5ZQIwTD4=";
           license = "agpl3Only";
         };
       };
+    };
+
+    services.phpfpm.pools = {
+      # add user packages to phpfpm process PATHs, required to find ffmpeg for preview generator
+      # beginning taken from https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-apps/nextcloud.nix#L985
+      nextcloud.phpEnv.PATH = lib.mkForce "/run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin:/bin:/etc/profiles/per-user/nextcloud/bin";
     };
 
     services.cloudflared.tunnels."${config.networking.hostName}" = {
