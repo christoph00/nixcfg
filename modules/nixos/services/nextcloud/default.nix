@@ -159,10 +159,10 @@ in {
         profile.enabled = false;
         default_phone_region = "DE";
 
-        "memories.exiftool" = lib.getExe pkgs.exiftool;
-        # "memories.vod.vaapi" = true;
         "memories.vod.ffmpeg" = lib.getExe pkgs.ffmpeg-headless;
         "memories.vod.ffprobe" = "${pkgs.ffmpeg-headless}/bin/ffprobe";
+        "memories.exiftool" = "${lib.getExe pkgs.exiftool}";
+        "memories.exiftool_no_local" = true;
 
         jpeg_quality = 60;
         preview_max_filesize_image = 128; # MB
