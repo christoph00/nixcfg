@@ -165,7 +165,6 @@ in {
         "memories.vod.ffprobe" = "${pkgs.jellyfin-ffmpeg}/bin/ffprobe";
         "memories.exiftool" = "${lib.getExe pkgs.exiftool}";
         "memories.exiftool_no_local" = true;
-
         jpeg_quality = 60;
         preview_max_filesize_image = 128; # MB
         preview_max_memory = 512; # MB
@@ -178,11 +177,11 @@ in {
           calendar
           contacts
           mail
-          tasks
           memories
           previewgenerator
           notify_push
           files_markdown
+          files_pdfviewer
           ;
         external = pkgs.fetchNextcloudApp rec {
           url = "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
