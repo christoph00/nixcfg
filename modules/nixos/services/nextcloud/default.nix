@@ -195,6 +195,15 @@ in {
       nextcloud.phpEnv.PATH = lib.mkForce "/run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin:/bin:/etc/profiles/per-user/nextcloud/bin";
     };
 
+    systemd.services.nextcloud-cron = {
+      path = [pkgs.perl];
+    };
+
+    systemd.services."phpfpm-nextcloud".serviceConfig = {
+      DeviceAllow = ["/dev/dri/renderD128"];
+      SupplementaryGroups = ["render" "video"];
+    };
+
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
         "cloud.r505.de" = "http://127.0.0.1:8070";
@@ -216,10 +225,22 @@ in {
 
     users.users.nextcloud.extraGroups = ["media"];
 
-    # Ensure that postgres is running *before* running the setup
     systemd.services."nextcloud-setup" = {
       requires = ["postgresql.service"];
       after = ["postgresql.service"];
     };
+
+    # systemd.services."go-vod" = {
+    #   path = with pkgs; [
+    #     jellyfin-ffmpeg
+    #   ];
+    #   serviceConfig = {
+    #     DynamicUser = true;
+    #     ExecStart = "${pkgs.chr.go-vod}/bin/go-vod";
+    #     DeviceAllow = ["/dev/dri/renderD128" "/dev/dri/renderD129"];
+    #     ReadOnlyPaths = config.services.nextcloud.home;
+    #     SupplementaryGroups = ["nextcloud"];
+    #   };
+    # };
   };
 }
