@@ -46,7 +46,7 @@ in {
     };
     environment.systemPackages = with pkgs; [
       exiftool
-      ffmpeg-jellyfin
+      jellyfin-ffmpeg
       perl
     ];
     age.secrets.nc-admin-pass = {
