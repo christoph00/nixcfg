@@ -114,14 +114,13 @@ in {
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
     open = false;
 
-    nvidiaPersistenced = true;
+   # nvidiaPersistenced = true;
   };
   hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
   };
 
-  virtualisation.podman.enableNvidia = true;
   services.xserver.videoDrivers = ["nvidia"];
 
   services.upower = {
