@@ -61,7 +61,7 @@ in {
 
         filezilla
 
-        evolution
+        
 
         neovide
 
