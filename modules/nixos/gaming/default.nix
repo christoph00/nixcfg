@@ -109,7 +109,7 @@ in {
       enable = true;
       package = steam;
       extraCompatPackages = [
-        inputs.nix-gaming.packages.${pkgs.system}.proton-ge
+        pkgs.proton-ge-bin
       ];
     };
     programs.gamemode.enable = true;
@@ -122,7 +122,6 @@ in {
           gamemode
           protontricks
           radeontop
-          inputs.nix-gaming.packages.${pkgs.system}.wine-ge
           rare
           heroic
           gogdl
