@@ -109,7 +109,7 @@ in {
       enable = true;
       package = steam;
       extraCompatPackages = [
-        proton-ge-bin
+        pkgs.proton-ge-bin
       ];
     };
     programs.gamemode.enable = true;
