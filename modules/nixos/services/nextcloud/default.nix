@@ -194,7 +194,7 @@ in {
         };
         integration_google = pkgs.fetchNextcloudApp {
           url = "https://github.com/nextcloud-releases/integration_google/releases/download/v2.2.0/integration_google-v2.2.0.tar.gz";
-          sha256 = "1h6gmrsilbs4rxymf9fbswlkhvpqfrbwm20pjar0s8yklfpwkdj0";
+          sha256 = "sha256-so6k8kB+o9PJ+FHX32riZhMJLRbGqrySRpzMmC3VzJI=";
           license = "agpl3Only";
         };
         integration_github = pkgs.fetchNextcloudApp {
