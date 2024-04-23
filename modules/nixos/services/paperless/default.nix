@@ -10,7 +10,7 @@ with lib.chr; let
   cfg = config.chr.services.paperless;
 in {
   options.chr.services.paperless = with types; {
-    enable = mkBoolOpt' config.chr.services.nas.enable;
+    enable = mkBoolOpt' false;
   };
   config = mkIf cfg.enable {
     services.paperless = {
