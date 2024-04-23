@@ -88,10 +88,24 @@ in {
 
     # diffie-hellman-group-exchange-sha256 diffie-hellman-group-exchange-sha1 diffie-hellman-group14-sha1
 
-    systemd.services.sftpgo.serviceConfig.RuntimeDirectory = "sftpgo";
-    systemd.services.sftpgo.serviceConfig.RuntimeDirectoryMode = "0755";
-    systemd.services.sftpgo.serviceConfig.ReadWritePaths = [cfg.userdataDir];
-    systemd.services.sftpgo.serviceConfig.UMask = mkForce "007";
+    systemd.services.sftpgo = {
+      serviceConfig = {
+        UMask = mkForce "007";
+        RuntimeDirectory = "sftpgo";
+        RuntimeDirectoryMode = "0755";
+        ReadWritePaths = [cfg.userdataDir];
+      };
+      preStart = ''
+        set -x
+        ${pkgs.acl}/bin/setfacl -m group:media:rwx /mnt/userdata
+
+        ${pkgs.acl}/bin/setfacl -m group:media:rwx /media/data-hdd/Movies
+        ${pkgs.acl}/bin/setfacl -m group:media:rwx /media/data-hdd/TVShows
+
+        set +x
+      '';
+      unitConfig.RequiresMountsFor = "/mnt/userdata";
+    };
 
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
@@ -102,8 +116,6 @@ in {
     users.users.sftpgo.extraGroups = mkIf config.chr.services.paperless.enable ["paperless"];
 
     services.nginx.clientMaxBodySize = "10G";
-
-    environment.systemPackages = [pkgs.caddy-cloudflare];
 
     users.users.nginx.extraGroups = ["acme" "media"];
     services.nginx.enable = true;
