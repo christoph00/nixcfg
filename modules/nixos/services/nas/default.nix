@@ -97,7 +97,7 @@ in {
         ReadWritePaths = [cfg.userdataDir];
       };
       preStart = ''
-        while [ ! -d /run/sftpgo ]; do
+        while [ ! -d "/run/sftpgo" ]; do
             sleep 1
         done
         chmod 770 /run/sftpgo/*.sock
