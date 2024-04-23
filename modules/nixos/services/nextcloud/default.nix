@@ -228,6 +228,7 @@ in {
     systemd.services."phpfpm-nextcloud".serviceConfig = {
       DeviceAllow = ["/dev/dri/renderD128"];
       SupplementaryGroups = ["render" "video"];
+      UMask = "0077";
     };
 
     services.cloudflared.tunnels."${config.networking.hostName}" = {
