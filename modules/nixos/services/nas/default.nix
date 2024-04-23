@@ -96,7 +96,7 @@ in {
         RuntimeDirectoryMode = "0755";
         ReadWritePaths = [cfg.userdataDir];
       };
-      preStart = ''
+      postStart = ''
         while [ ! -e "/run/sftpgo/httpd.sock" ]; do
             sleep 1
         done
