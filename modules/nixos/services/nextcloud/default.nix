@@ -180,6 +180,7 @@ in {
           memories
           previewgenerator
           notify_push
+          notes
           ;
         external = pkgs.fetchNextcloudApp rec {
           url = "https://github.com/nextcloud-releases/external/releases/download/v5.3.1/external-v5.3.1.tar.gz";
@@ -189,6 +190,26 @@ in {
         integration_excalidraw = pkgs.fetchNextcloudApp {
           url = "https://github.com/nextcloud-releases/integration_excalidraw/releases/download/v2.1.0/integration_excalidraw-v2.1.0.tar.gz";
           sha256 = "sha256-NZGu6+KxeXQP23brkpkUbrzglDAy1P9dyQEAf7muwKE=";
+          license = "agpl3Only";
+        };
+        integration_google = pkgs.fetchNextcloudApp {
+          url = "https://github.com/nextcloud-releases/integration_google/releases/download/v2.2.0/integration_google-v2.2.0.tar.gz";
+          sha256 = "1h6gmrsilbs4rxymf9fbswlkhvpqfrbwm20pjar0s8yklfpwkdj0";
+          license = "agpl3Only";
+        };
+        integration_github = pkgs.fetchNextcloudApp {
+          url = "https://github.com/nextcloud-releases/integration_github/releases/download/v2.0.7/integration_github-v2.0.7.tar.gz";
+          sha256 = "1a02z970zv35ywq8np34xbjc2vk3q19fhjy6cmqbg6ggv82np067";
+          license = "agpl3Only";
+        };
+        fulltextsearch = pkgs.fetchNextcloudApp {
+          url = "https://github.com/nextcloud-releases/fulltextsearch/releases/download/28.0.1/fulltextsearch-28.0.1.tar.gz";
+          sha256 = "11gknndll0i6flxjia3x1qlk62a68la9n81a0ls7v2byh3kmld4y";
+          license = "agpl3Only";
+        };
+        tables = pkgs.fetchNextcloudApp {
+          url = "https://github.com/nextcloud-releases/tables/releases/download/v0.7.0-beta.2/tables.tar.gz";
+          sha256 = "1zhwc8wvpclkaj7qrix9wddh81x9hgja0vgzrk3y375vai6hsm47";
           license = "agpl3Only";
         };
       };
