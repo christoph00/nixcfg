@@ -90,7 +90,7 @@ in {
 
     systemd.services.sftpgo = {
       serviceConfig = {
-        UMask = mkForce "007";
+        UMask = mkForce "0077";
         RuntimeDirectory = "sftpgo";
         RuntimeDirectoryMode = "0755";
         ReadWritePaths = [cfg.userdataDir];
