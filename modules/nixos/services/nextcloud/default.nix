@@ -209,7 +209,7 @@ in {
         };
         tables = pkgs.fetchNextcloudApp {
           url = "https://github.com/nextcloud-releases/tables/releases/download/v0.7.0-beta.2/tables.tar.gz";
-          sha256 = "1zhwc8wvpclkaj7qrix9wddh81x9hgja0vgzrk3y375vai6hsm47";
+          sha256 = "sha256-so6k8kB+o9PJ+FHX32riZhMJLRbGqrySRpzMmC3VzJI=";
           license = "agpl3Only";
         };
       };
