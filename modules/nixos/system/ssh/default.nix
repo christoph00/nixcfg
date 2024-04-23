@@ -15,6 +15,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    services.sshguard = {
+      enable = true;
+      whitelist = ["192.168.2.0/24" "100.77.0.0/16"];
+    };
     services.openssh = {
       enable = true;
       openFirewall = true;
