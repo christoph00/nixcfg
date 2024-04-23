@@ -60,6 +60,7 @@ in {
       media.enable = true;
       vaultwarden.enable = true;
       nextcloud.enable = true;
+      nas.enable = true;
     };
     vms = {
       enable = true;
@@ -114,7 +115,7 @@ in {
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
     open = false;
 
-   # nvidiaPersistenced = true;
+    # nvidiaPersistenced = true;
   };
   hardware.opengl = {
     enable = true;
