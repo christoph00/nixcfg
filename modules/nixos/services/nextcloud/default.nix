@@ -199,7 +199,7 @@ in {
         };
         integration_github = pkgs.fetchNextcloudApp {
           url = "https://github.com/nextcloud-releases/integration_github/releases/download/v2.0.7/integration_github-v2.0.7.tar.gz";
-          sha256 = "1a02z970zv35ywq8np34xbjc2vk3q19fhjy6cmqbg6ggv82np067";
+          sha256 = "sha256-2X/bNQNs3gC/EKeLQKjzMTslUPY6uHWcoT7wayhFQXk=";
           license = "agpl3Only";
         };
         fulltextsearch = pkgs.fetchNextcloudApp {
