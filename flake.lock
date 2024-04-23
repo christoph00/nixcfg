@@ -2289,7 +2289,8 @@
         "snowfall-flake": "snowfall-flake",
         "snowfall-frost": "snowfall-frost",
         "snowfall-lib": "snowfall-lib_3",
-        "utils": "utils"
+        "utils": "utils",
+        "vscode-server": "vscode-server"
       }
     },
     "rust-analyzer-src": {
@@ -2889,6 +2890,29 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "vscode-server": {
+      "inputs": {
+        "flake-utils": [
+          "utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709622318,
+        "narHash": "sha256-bTscF0366xtoIXgH7Zq+Mn0mpX3w4h/2xKpHiYMyLNc=",
+        "owner": "nix-community",
+        "repo": "nixos-vscode-server",
+        "rev": "d0ed9b8cf1f0a71f110df9119489ab047e0726bd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-vscode-server",
         "type": "github"
       }
     },

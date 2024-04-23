@@ -49,7 +49,6 @@
     ollama = {
       url = "github:abysssol/ollama-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "utils";
     };
 
     impermanence.url = "github:nix-community/impermanence";
@@ -174,6 +173,12 @@
 
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
+
+    vscode-server = {
+      url = "github:nix-community/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "utils";
+    };
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
