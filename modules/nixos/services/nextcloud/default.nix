@@ -186,6 +186,11 @@ in {
           sha256 = "sha256-RCL2RP5twRDLxI/KfAX6QLYQOzqZmSWsfrC5ZQIwTD4=";
           license = "agpl3Only";
         };
+        integration_excalidraw = pkgs.fetchNextcloudApp {
+          url = "https://github.com/nextcloud-releases/integration_excalidraw/releases/download/v2.1.0/integration_excalidraw-v2.1.0.tar.gz";
+          sha256 = "sha256-ufYw6pVcvHy/ASRuXzsEUCviEVe2kkhsvc75eGDfRFs=";
+          license = "agpl3";
+        };
       };
     };
 
