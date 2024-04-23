@@ -113,7 +113,7 @@ in {
       };
     };
 
-    users.users.sftpgo.extraGroups = mkIf config.chr.services.paperless.enable ["paperless"];
+    users.users.sftpgo.extraGroups = ["media"];
 
     services.nginx.clientMaxBodySize = "10G";
 
