@@ -188,7 +188,7 @@ in {
         };
         integration_excalidraw = pkgs.fetchNextcloudApp {
           url = "https://github.com/nextcloud-releases/integration_excalidraw/releases/download/v2.1.0/integration_excalidraw-v2.1.0.tar.gz";
-          sha256 = "sha256-ufYw6pVcvHy/ASRuXzsEUCviEVe2kkhsvc75eGDfRFs=";
+          sha256 = "sha256-NZGu6+KxeXQP23brkpkUbrzglDAy1P9dyQEAf7muwKE=";
           license = "agpl3Only";
         };
       };
