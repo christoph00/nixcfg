@@ -35,9 +35,8 @@ in {
       wget
       btrfs-progs
       unrar
-      xplr
+
       unzip
-      ffmpeg-full
     ];
 
     users.users.sabnzbd.extraGroups = ["media"];
