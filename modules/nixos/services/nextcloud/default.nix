@@ -204,7 +204,7 @@ in {
         };
         fulltextsearch = pkgs.fetchNextcloudApp {
           url = "https://github.com/nextcloud-releases/fulltextsearch/releases/download/28.0.1/fulltextsearch-28.0.1.tar.gz";
-          sha256 = "11gknndll0i6flxjia3x1qlk62a68la9n81a0ls7v2byh3kmld4y";
+          sha256 = "sha256-so6k8kB+o9PJ+FHX32riZhMJLRbGqrySRpzMmC3VzJI=";
           license = "agpl3Only";
         };
         tables = pkgs.fetchNextcloudApp {
