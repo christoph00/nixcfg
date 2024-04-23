@@ -38,6 +38,7 @@ in {
           };
           proxy_protocol = 0;
           proxy_allowed = ["127.0.0.1" "::1"];
+          umask = "0077";
         };
         webdavd.bindings = mkIf cfg.webdav [
           {
