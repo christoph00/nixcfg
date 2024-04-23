@@ -95,15 +95,15 @@ in {
         RuntimeDirectoryMode = "0755";
         ReadWritePaths = [cfg.userdataDir];
       };
-      preStart = ''
-        set -x
-        ${pkgs.acl}/bin/setfacl -m group:media:rwx /mnt/userdata
+      # preStart = ''
+      #   set -x
+      #   ${pkgs.acl}/bin/setfacl -m group:media:rwx /mnt/userdata
 
-        ${pkgs.acl}/bin/setfacl -m group:media:rwx /media/data-hdd/Movies
-        ${pkgs.acl}/bin/setfacl -m group:media:rwx /media/data-hdd/TVShows
+      #   ${pkgs.acl}/bin/setfacl -m group:media:rwx /media/data-hdd/Movies
+      #   ${pkgs.acl}/bin/setfacl -m group:media:rwx /media/data-hdd/TVShows
 
-        set +x
-      '';
+      #   set +x
+      # '';
       unitConfig.RequiresMountsFor = "/mnt/userdata";
     };
 
