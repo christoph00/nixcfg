@@ -96,15 +96,9 @@ in {
         RuntimeDirectoryMode = "0755";
         ReadWritePaths = [cfg.userdataDir];
       };
-      # preStart = ''
-      #   set -x
-      #   ${pkgs.acl}/bin/setfacl -m group:media:rwx /mnt/userdata
-
-      #   ${pkgs.acl}/bin/setfacl -m group:media:rwx /media/data-hdd/Movies
-      #   ${pkgs.acl}/bin/setfacl -m group:media:rwx /media/data-hdd/TVShows
-
-      #   set +x
-      # '';
+      preStart = ''
+        chmod 770 /run/sftpgo/*.sock
+      '';
       unitConfig.RequiresMountsFor = "/mnt/userdata";
     };
 
