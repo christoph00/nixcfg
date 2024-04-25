@@ -14,6 +14,10 @@ with lib.chr; {
     system.boot.efi = true;
     desktop.hyprland.scale = "2";
     desktop.hyprland.layout = "us-german-umlaut";
+    services.gns3 = {
+      enable = true;
+      gui = true;
+    };
   };
   chr.system.filesystem = {
     enable = true;
