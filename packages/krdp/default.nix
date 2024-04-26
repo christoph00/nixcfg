@@ -1,39 +1,21 @@
 {
   lib,
-  stdenv,
-  fetchFromGitLab,
-  cmake,
-  extra-cmake-modules,
+  mkKdeDerivation ,
   pkg-config,
   wayland,
   freerdp,
-  kdePackages,
 }:
-stdenv.mkDerivation rec {
+mkKdeDerivation rec {
   pname = "krdp";
-  version = "unstable-2024-04-23";
 
-  src = fetchFromGitLab {
-    domain = "invent.kde.org";
-    owner = "plasma";
-    repo = "krdp";
-    rev = "668672c506d9b9754e97a4e8507b6cbb58b5c050";
-    hash = "sha256-k1Od4C/g9mFBRJniOSeVcRuGrfI2+fJubBxi1a6RRGQ=";
-  };
+  
 
-  nativeBuildInputs = [
-    cmake
-    extra-cmake-modules
+
+
+  extraBuildInputs  = with kdePackages; [
     pkg-config
-    kdePackages.wrapQtAppsHook
-  ];
-
-  buildInputs = with kdePackages; [
-    qtbase
-    qtwayland
-    wayland
     freerdp
-    kpipewire
+    wayland
   ];
 
   meta = with lib; {
