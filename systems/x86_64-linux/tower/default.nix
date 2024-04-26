@@ -13,6 +13,7 @@ with lib.chr; {
     gaming.enable = true;
     system.boot.efi = true;
     desktop.hyprland.scale = "2";
+    desktop.remote.enable = true;
     desktop.hyprland.layout = "us-german-umlaut";
     services.gns3 = {
       enable = true;
