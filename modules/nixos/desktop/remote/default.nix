@@ -38,7 +38,11 @@ in {
     #   startSession = true;
     # };
 
-    services.xrdp.enable = true;
+    services.xrdp = {
+      enable = true;
+      openFirewall = true;
+      defaultWindowManager = "xfce4-session";
+    };
     chr.services.cloudflared.enable = true;
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
