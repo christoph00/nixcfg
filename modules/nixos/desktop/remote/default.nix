@@ -13,38 +13,35 @@ in {
     enable = mkBoolOpt false "Enable Remote Desktop Service.";
   };
   config = mkIf cfg.enable {
-
-     systemd.services.krdp = {
-          wantedBy = [ "multi-user.target" ];
-          after = [ "network.target" ];
-          description = "krdp daemon";
-          preStart = ''
-        
-          '';
-          serviceConfig = {
-            User = "krdp";
-            Group = "krdp";
-            PermissionsStartOnly = true;
-            ExecStart = "${pkgs.chr.krdp}/bin/krdp ";
-          };
-        };
-
-        users.users.krdp = {
-        description   = "krdp daemon user";
-        isSystemUser  = true;
-        group         = "krdp";
+    systemd.services.krdp = {
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
+      description = "krdp daemon";
+      #preStart = '''';
+      serviceConfig = {
+        User = "krdp";
+        Group = "krdp";
+        PermissionsStartOnly = true;
+        ExecStart = "${pkgs.chr.krdp}/bin/krdp ";
       };
-      users.groups.krdp = {};
+    };
 
-      security.pam.services.krdp = {
-        allowNullPassword = true;
-        startSession = true;
-      };
+    users.users.krdp = {
+      description = "krdp daemon user";
+      isSystemUser = true;
+      group = "krdp";
+    };
+    users.groups.krdp = {};
 
-     services.cloudflared.tunnels."${config.networking.hostName}" = {
+    security.pam.services.krdp = {
+      allowNullPassword = true;
+      startSession = true;
+    };
+
+    services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
         "desk.r505.de" = "rdp://127.0.0.1:3389";
       };
-    }; 
+    };
   };
 }
