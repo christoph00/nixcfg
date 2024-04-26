@@ -27,11 +27,6 @@ in {
       kdePackages.skanlite
     ];
 
-    services.rustdesk-server = {
-      enable = true;
-      relayIP = "0.0.0.0";
-    };
-
     services.xserver = {
       enable = true;
       displayManager.sddm.wayland.enable = true;
