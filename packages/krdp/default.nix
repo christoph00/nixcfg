@@ -4,9 +4,6 @@
   fetchFromGitLab,
   cmake,
   extra-cmake-modules,
-  qtbase,
-  wrapQtAppsHook,
-  qtwayland,
   pkg-config,
   wayland,
   freerdp,
@@ -31,12 +28,12 @@ stdenv.mkDerivation rec {
     wrapQtAppsHook
   ];
 
-  buildInputs = [
+  buildInputs = with kdePackages; [
     qtbase
     qtwayland
     wayland
     freerdp
-    kdePackages.kpipewire
+    kpipewire
   ];
 
   meta = with lib; {
