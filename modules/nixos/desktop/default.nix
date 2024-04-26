@@ -127,6 +127,7 @@ in {
       pkgs.grimblast
       pkgs.wl-clipboard
       pkgs.waylock
+      pkgs.rustdesk
     ];
     services.udev.packages = [
       pkgs.light
