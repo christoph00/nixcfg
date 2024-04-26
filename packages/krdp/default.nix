@@ -1,5 +1,7 @@
 {
   lib,
+  stdenv,
+  fetchFromGitLab,
   kdePackages ,
   pkg-config,
   wayland,
@@ -7,8 +9,15 @@
 }:
 kdePackages.mkKdeDerivation rec {
   pname = "krdp";
+  version = "unstable-2024-04-23";
 
-  extraNativeBuildInputs = [pkg-config];
+  src = fetchFromGitLab {
+    domain = "invent.kde.org";
+    owner = "plasma";
+    repo = "krdp";
+    rev = "668672c506d9b9754e97a4e8507b6cbb58b5c050";
+    hash = "sha256-k1Od4C/g9mFBRJniOSeVcRuGrfI2+fJubBxi1a6RRGQ=";
+  };
 
 
   extraBuildInputs  = [
