@@ -39,7 +39,7 @@ in {
     # };
 
     services.xrdp.enable = true;
-    services.cloudflared.enable = true;
+    chr.services.cloudflared.enable = true;
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
         "desk.r505.de" = "rdp://127.0.0.1:3389";
