@@ -10,7 +10,7 @@
   pkg-config,
   wayland,
   freerdp,
-  kpipewire,
+  kdePackages,
 }:
 stdenv.mkDerivation rec {
   pname = "krdp";
@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
     qtwayland
     wayland
     freerdp
-    kpipewire
+    kdePackages.kpipewire
   ];
 
   meta = with lib; {
