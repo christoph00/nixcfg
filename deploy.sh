@@ -2,12 +2,8 @@
 
 set -e
 
-USAGE=<<EOF
-apply.sh {dry-build|build|activate|dry-activate|switch} TARGET_HOST [ ... ]
+rm -rf ~/.gtkrc-2.0
 
-This expects to be run from under the flake repository.
-Extra args are passed to nixos-rebuild directly.
-EOF
 
 local_hostname="$(hostname -s)"
 command="${1?}"
