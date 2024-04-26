@@ -26,6 +26,11 @@ in {
     };
   };
 
+  services.rustdesk-server = {
+    enable = true;
+    relayIP = "0.0.0.0";
+  };
+
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
