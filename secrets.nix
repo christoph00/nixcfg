@@ -24,6 +24,7 @@ in {
   "secrets/cf-tunnel-futro".publicKeys = [futro] ++ users;
   "secrets/cf-tunnel-air13".publicKeys = [air13] ++ users;
   "secrets/cf-tunnel-oca".publicKeys = [oca] ++ users;
+  "secrets/cf-tunnel-tower".publicKeys = [tower] ++ users;
 
   "secrets/netbird.env".publicKeys = all ++ users;
   "secrets/tailscale-auth-key".publicKeys = all ++ users;
