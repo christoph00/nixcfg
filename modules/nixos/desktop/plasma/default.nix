@@ -25,8 +25,9 @@ in {
       kdePackages.kcalc
       kdePackages.kdenlive
       kdePackages.skanlite
-      chr.krdp
     ];
+
+    services.rustdesk-server.enable = true;
 
     services.xserver = {
       enable = true;
