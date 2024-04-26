@@ -12,7 +12,7 @@ mkKdeDerivation rec {
 
 
 
-  extraBuildInputs  = with kdePackages; [
+  extraBuildInputs  = [
     pkg-config
     freerdp
     wayland
