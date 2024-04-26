@@ -27,12 +27,12 @@ in {
       kdePackages.skanlite
     ];
 
-    services.xserver = {
-      enable = true;
+    services = {
+      xserver.enable = true;
       displayManager.sddm.wayland.enable = true;
       displayManager.sddm.enable = true;
+      desktopManager.plasma6.enable = true;
     };
-    services.desktopManager.plasma6.enable = true;
 
     programs = {
       kdeconnect.enable = true;

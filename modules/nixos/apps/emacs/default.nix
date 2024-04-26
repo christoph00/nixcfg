@@ -11,7 +11,7 @@ with lib.chr; let
   cfg = config.chr.apps.emacs;
 in {
   options.chr.apps.emacs = with types; {
-    enable = mkBoolOpt' config.chr.desktop.enable;
+    enable = mkBoolOpt' false;
     defaultEditor = mkBoolOpt' false;
   };
 
@@ -26,8 +26,6 @@ in {
           package = pkgs.emacs29-gtk3;
           extraPackages = epkgs: [epkgs.mu4e];
         };
-
-        home.packages = with pkgs; [nixpkgs-fmt nixfmt mu];
       };
     };
   };
