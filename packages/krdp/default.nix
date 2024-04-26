@@ -3,6 +3,7 @@
   stdenv,
   fetchFromGitLab,
   kdePackages ,
+  extra-cmake-modules,
   pkg-config,
   wayland,
   freerdp,
@@ -18,6 +19,11 @@ kdePackages.mkKdeDerivation rec {
     rev = "668672c506d9b9754e97a4e8507b6cbb58b5c050";
     hash = "sha256-k1Od4C/g9mFBRJniOSeVcRuGrfI2+fJubBxi1a6RRGQ=";
   };
+
+  extraNativeBuildInputs = [
+    extra-cmake-modules
+    pkg-config
+  ];
 
 
   extraBuildInputs  = [
