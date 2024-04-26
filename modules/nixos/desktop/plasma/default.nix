@@ -25,6 +25,7 @@ in {
       kdePackages.kcalc
       kdePackages.kdenlive
       kdePackages.skanlite
+	chr.krdp
     ];
 
     services.xserver = {
