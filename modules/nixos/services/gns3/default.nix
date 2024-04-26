@@ -14,8 +14,7 @@ in {
     gui = mkBoolOpt false "Enable gns3 GUI.";
   };
   config = mkIf cfg.enable {
-
-  services.gns3-server = {
+    services.gns3-server = {
       enable = true;
       settings = {
         "Server" = {
@@ -36,10 +35,8 @@ in {
 
     systemd.services.gns3-server.path = [pkgs.qemu];
 
-
     environment.systemPackages = with pkgs; [
       gns3-gui
     ];
-
   };
 }

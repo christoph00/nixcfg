@@ -61,8 +61,6 @@ in {
 
         filezilla
 
-        
-
         neovide
 
         yt-dlp
