@@ -1,8 +1,9 @@
-{ lib
-, stdenv
-, fetchFromGitLab
-, cmake
-extra-cmake-modules,
+{
+  lib,
+  stdenv,
+  fetchFromGitLab,
+  cmake,
+  extra-cmake-modules,
   qtbase,
   wrapQtAppsHook,
   qtwayland,
@@ -11,7 +12,6 @@ extra-cmake-modules,
   freerdp,
   kpipewire,
 }:
-
 stdenv.mkDerivation rec {
   pname = "krdp";
   version = "unstable-2024-04-23";
@@ -26,12 +26,12 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     cmake
- extra-cmake-modules
+    extra-cmake-modules
     pkg-config
     wrapQtAppsHook
   ];
 
-buildInputs = [
+  buildInputs = [
     qtbase
     qtwayland
     wayland
@@ -43,7 +43,7 @@ buildInputs = [
     description = "Library and examples for creating an RDP server";
     homepage = "https://invent.kde.org/plasma/krdp";
     license = licenses.unfree; # FIXME: nix-init did not found a license
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "krdp";
     platforms = platforms.all;
   };
