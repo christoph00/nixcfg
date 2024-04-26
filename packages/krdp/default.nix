@@ -1,19 +1,17 @@
 {
   lib,
-  mkKdeDerivation ,
+  kdePackages ,
   pkg-config,
   wayland,
   freerdp,
 }:
-mkKdeDerivation rec {
+kdePackages.mkKdeDerivation rec {
   pname = "krdp";
 
-  
-
+  extraNativeBuildInputs = [pkg-config];
 
 
   extraBuildInputs  = [
-    pkg-config
     freerdp
     wayland
   ];
