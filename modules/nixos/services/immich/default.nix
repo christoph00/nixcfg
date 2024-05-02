@@ -1,0 +1,154 @@
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib;
+with lib.chr; let
+  cfg = config.chr.services.immich;
+in {
+  options.chr.services.immich = with types; {
+    enable = mkBoolOpt false "Enable immich Service.";
+       port = mkOption {
+        type = types.port;
+        default = 8080;
+        description = ''
+         Port the listener should listen on
+        '';
+      };
+      version = mkOption {
+        type = types.str;
+        default = "latest";
+        description = ''
+          Version of the immich server to use
+        '';
+      };
+      dataDir = mkOption {
+        type = types.str;
+        default = "/var/lib/immich";
+        description = ''
+          Directory to store data
+        '';
+      
+      dbHostname = mkOption {
+        type = types.str;
+        default = "localhost";
+        description = ''
+          Hostname of the database
+        '';
+        dbPort = mkOption {
+        type = types.int;
+        default = 5432;
+        description = ''
+          Port of the database
+        '';
+      };
+
+      
+      dbDatabase = mkOption {
+        type = types.str;
+        default = "immich";
+        description = ''
+          Database name
+        '';
+      };
+      dbUsername = mkOption {
+        type = types.str;
+        default = "immich";
+        description = ''
+          Database username
+        '';
+      };
+      dbPasswordFile = mkOption {
+        type = types.str;
+        default = "/run/secrets/immich-db-password";
+        description = ''
+          Database password file
+        '';
+      };
+
+      redisHostname = mkOption {
+        type = types.str;
+        default = "localhost";
+        description = ''
+          Hostname of the redis server
+        '';
+      };
+
+      redisPort = mkOption {
+        type = types.int;
+        default = 6379;
+        description = ''
+          Port of the redis server
+        '';
+      };
+  };
+  config = mkIf cfg.enable {
+
+     virtualisation.oci-containers.containers = {
+      "immich-server" = {
+        image = "ghcr.io/immich-app/immich-server:${cfg.version}";
+        cmd = [ "start.sh" "immich" ];
+        volumes = [ 
+          "${cfg.dataDir}:/usr/src/app/upload"
+          "/run/agenix:/run/agenix"
+        ];
+        environment = {
+          DB_HOSTNAME = cfg.dbHostname;
+          DB_DATABASE_NAME = cfg.dbDatabase;
+          DB_USERNAME = cfg.dbUsername;
+          DB_PASSWORD_FILE = cfg.dbPasswordFile;
+          DB_PORT = toString cfg.dbPort;
+          REDIS_HOSTNAME = "redis.joukamachi.net";
+          REDIS_PORT = "6380";
+        };
+        autoStart = true;
+        extraOptions = [ "--pod=immich" ];
+      };
+      "immich-microservices" = {
+        image = "ghcr.io/immich-app/immich-server:${cfg.version}";
+        cmd = [ "start.sh" "microservices" ];
+        volumes = [ 
+          "${cfg.dataDir}:/usr/src/app/upload" 
+          "/run/agenix:/run/agenix"
+        ];
+        environment = {
+          DB_HOSTNAME = cfg.dbHostname;
+          DB_DATABASE_NAME = cfg.dbDatabase;
+          DB_USERNAME = cfg.dbUsername;
+          DB_PASSWORD_FILE = cfg.dbPasswordFile;
+          DB_PORT = toString cfg.dbPort;
+          REDIS_HOSTNAME = "redis.joukamachi.net";
+          REDIS_PORT = "6380";
+        };
+        autoStart = true;
+        extraOptions = [ "--pod=immich" ];
+      };
+      "immich-machine-learning" = {
+        image = "ghcr.io/immich-app/immich-machine-learning:${cfg.version}";
+        volumes = [ "model-cache:/usr/src/app/upload" ];
+        autoStart = true;
+        extraOptions = [ "--pod=immich" ];
+      };
+    };
+
+    systemd.services.podman-immich-server.serviceConfig.Type = lib.mkForce "exec";
+    systemd.services.podman-immich-microservices.serviceConfig.Type = lib.mkForce "exec";
+    systemd.services.podman-immich-machine-learning.serviceConfig.Type = lib.mkForce "exec";
+
+    systemd.services.podman-create-pod-immich = {
+      serviceConfig.Type = "oneshot";
+      wantedBy = [ 
+        "podman-immich-server.service" 
+        "podman-immich-microservices.service" 
+        "podman-immich-machinelearning.service" 
+      ];
+
+      script = ''
+        ${pkgs.podman}/bin/podman pod create --name immich --replace -p '${toString cfg.port}:3001'
+      '';
+    };
+  };
+}
