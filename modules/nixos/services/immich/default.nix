@@ -104,9 +104,8 @@ in
           "/run/postgresql:/run/postgresql:ro"
         ];
         environment = {
-          DB_URL = "postgresql://immich@/immich";
-          REDIS_HOSTNAME = cfg.redisHostname;
-          REDIS_PORT = toString cfg.redisPort;
+          DB_URL = "socket://immich:@/run/postgresql?db=immich";
+          REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         };
         autoStart = true;
         extraOptions = [ "--pod=immich" ];
@@ -123,9 +122,8 @@ in
           "/run/postgresql:/run/postgresql:ro"
         ];
         environment = {
-          DB_URL = "postgresql://immich@/immich";
-          REDIS_HOSTNAME = cfg.redisHostname;
-          REDIS_PORT = toString cfg.redisPort;
+          DB_URL = "socket://immich:@/run/postgresql?db=immich";
+          REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         };
         autoStart = true;
         extraOptions = [ "--pod=immich" ];
@@ -153,6 +151,10 @@ in
       script = ''
         ${pkgs.podman}/bin/podman pod create --name immich --replace -p '${toString cfg.port}:3001'
       '';
+    };
+
+    services.redis.servers.immich = {
+      enable = true;
     };
   };
 }
