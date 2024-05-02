@@ -6,15 +6,17 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.apps.gtkcord;
-in {
+in
+{
   options.chr.apps.gtkcord = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether to enable gtkcord.";
   };
 
   config.chr.home.extraOptions = mkIf cfg.enable {
-    home.packages = with pkgs; [gtkcord4];
+    home.packages = with pkgs; [ gtkcord4 ];
     xdg.enable = true;
     xdg.desktopEntries."so.libdb.gtkcord4" = {
       name = "gtkcord4";
@@ -24,7 +26,12 @@ in {
       icon = "gtkcord4";
       terminal = false;
       type = "Application";
-      categories = ["GNOME" "GTK" "Network" "Chat"];
+      categories = [
+        "GNOME"
+        "GTK"
+        "Network"
+        "Chat"
+      ];
       startupNotify = true;
       settings = {
         DBusActivatable = "false";

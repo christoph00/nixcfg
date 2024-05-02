@@ -7,12 +7,13 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.gaming;
 
   steam = pkgs.steam.override {
-    extraPkgs = pkgs:
-      with pkgs; [
+    extraPkgs =
+      pkgs: with pkgs; [
         xorg.libXcursor
         xorg.libXi
         xorg.libXinerama
@@ -31,17 +32,14 @@ with lib.chr; let
         gamemode
         mangohud
       ];
-    extraLibraries = p:
-      with p; [
-        (lib.getLib pkgs.networkmanager)
-      ];
+    extraLibraries = p: with p; [ (lib.getLib pkgs.networkmanager) ];
   };
   gamescopeSteam = pkgs.makeDesktopItem {
     name = "Steam (Gamescope)";
     exec = "${pkgs.gamescope}/bin/gamescope -e -F fsr -S integer --framerate-limit 60 -r 60 -- ${steam}/bin/steam -fulldesktopres";
     comment = "Steam big picture running in gamescope";
     desktopName = "Steam (Gamescope)";
-    categories = ["Game"];
+    categories = [ "Game" ];
   };
 
   gamescopeSteamFull = pkgs.makeDesktopItem {
@@ -49,9 +47,10 @@ with lib.chr; let
     exec = "${pkgs.gamescope}/bin/gamescope -W 2560 -H 1440 -w 2560 -h 1440 -f -e -F fsr -S integer --framerate-limit 60 -r 60 -- ${steam}/bin/steam -tenfoot -steamos -fulldesktopres";
     comment = "Steam big picture running in gamescope";
     desktopName = "Steam (Fullscreen)";
-    categories = ["Game"];
+    categories = [ "Game" ];
   };
-in {
+in
+{
   options.chr.gaming = with types; {
     enable = mkBoolOpt (config.chr.type == "desktop") "Whether or not to enable Gaming Module.";
   };
@@ -90,14 +89,14 @@ in {
 
     systemd.user.services = {
       steam = {
-        partOf = ["graphical-session.target"];
+        partOf = [ "graphical-session.target" ];
         environment = {
           SDL_VIDEODRIVER = "x11";
         };
         serviceConfig = {
           StartLimitInterval = 5;
           StartLimitBurst = 1;
-          ExecStart = "${steam}/bin/steam -language german -silent -pipewire"; #
+          ExecStart = "${steam}/bin/steam -language german -silent -pipewire";
           Type = "simple";
           Restart = "on-failure";
         };
@@ -108,9 +107,7 @@ in {
     programs.steam = {
       enable = true;
       package = steam;
-      extraCompatPackages = [
-        pkgs.proton-ge-bin
-      ];
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
     programs.gamemode.enable = true;
 

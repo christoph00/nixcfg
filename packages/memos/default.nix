@@ -13,7 +13,8 @@
   inputs,
   system,
   buf,
-}: let
+}:
+let
   version = "0.19.0";
   src = fetchFromGitHub {
     owner = "usememos";
@@ -22,40 +23,39 @@
     hash = "sha256-bsIdioZ8Ak5A9W+XdqJhNlJqLulXlqRwSgq6473Yx6U=";
   };
 
-  frontend = let
-    mkPnpmPackage = inputs.pnpm2nix.packages."${system}".mkPnpmPackage;
-    proto = stdenvNoCC.mkDerivation {
-      pname = "memos-proto";
-      inherit version;
-      src = "${src}/proto";
+  frontend =
+    let
+      mkPnpmPackage = inputs.pnpm2nix.packages."${system}".mkPnpmPackage;
+      proto = stdenvNoCC.mkDerivation {
+        pname = "memos-proto";
+        inherit version;
+        src = "${src}/proto";
 
-      nativeBuildInputs = [
-        buf
-      ];
+        nativeBuildInputs = [ buf ];
 
-      doCheck = false;
+        doCheck = false;
 
-      postPatch = ''
-        substituteInPlace buf.gen.yaml \
-          --replace-fail '../web' './web'
+        postPatch = ''
+          substituteInPlace buf.gen.yaml \
+            --replace-fail '../web' './web'
 
-        substituteInPlace buf.gen.yaml \
-          --replace-fail '../api' './api'
-      '';
+          substituteInPlace buf.gen.yaml \
+            --replace-fail '../api' './api'
+        '';
 
-      buildPhase = ''
-        runHook preBuild
-        export SSL_CERT_FILE="${cacert}/etc/ssl/certs/ca-bundle.crt"
-        HOME=$TMPDIR buf generate
-        runHook postBuild
-      '';
+        buildPhase = ''
+          runHook preBuild
+          export SSL_CERT_FILE="${cacert}/etc/ssl/certs/ca-bundle.crt"
+          HOME=$TMPDIR buf generate
+          runHook postBuild
+        '';
 
-      installPhase = ''
-        cp -r ${src}/web $out
-        cp -r ${src}/api $out
-      '';
-    };
-  in
+        installPhase = ''
+          cp -r ${src}/web $out
+          cp -r ${src}/api $out
+        '';
+      };
+    in
     mkPnpmPackage {
       pname = "memos-web";
       inherit version;
@@ -79,24 +79,24 @@
       '';
     };
 in
-  buildGoModule rec {
-    pname = "memos";
-    inherit version src;
+buildGoModule rec {
+  pname = "memos";
+  inherit version src;
 
-    # check will unable to access network in sandbox
-    doCheck = false;
-    vendorHash = lib.fakeHash;
+  # check will unable to access network in sandbox
+  doCheck = false;
+  vendorHash = lib.fakeHash;
 
-    # Inject frontend assets into go embed
-    prePatch = ''
-      rm -rf server/dist
-      cp -r ${frontend} server/dist
-    '';
+  # Inject frontend assets into go embed
+  prePatch = ''
+    rm -rf server/dist
+    cp -r ${frontend} server/dist
+  '';
 
-    meta = with lib; {
-      homepage = "https://usememos.com";
-      description = "A lightweight, self-hosted memo hub";
-      license = licenses.mit;
-      mainProgram = "memos";
-    };
-  }
+  meta = with lib; {
+    homepage = "https://usememos.com";
+    description = "A lightweight, self-hosted memo hub";
+    license = licenses.mit;
+    mainProgram = "memos";
+  };
+}

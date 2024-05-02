@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.desktop.waybar;
-in {
+in
+{
   options.chr.desktop.waybar = with types; {
     enable = mkBoolOpt false "Whether or not enable waybar.";
     package = mkOption {

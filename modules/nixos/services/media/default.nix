@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.services.media;
-in {
+in
+{
   options.chr.services.media = with types; {
     enable = mkBoolOpt false "Enable Media Service.";
   };
@@ -26,7 +28,10 @@ in {
       ];
     };
 
-    networking.firewall.allowedTCPPorts = [8080 8096];
+    networking.firewall.allowedTCPPorts = [
+      8080
+      8096
+    ];
 
     environment.systemPackages = with pkgs; [
       rclone
@@ -39,8 +44,8 @@ in {
       unzip
     ];
 
-    users.users.sabnzbd.extraGroups = ["media"];
-    users.users.jellyfin.extraGroups = ["media"];
+    users.users.sabnzbd.extraGroups = [ "media" ];
+    users.users.jellyfin.extraGroups = [ "media" ];
     services.jellyfin = {
       enable = true;
       openFirewall = false;

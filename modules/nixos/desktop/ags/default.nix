@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.desktop.ags;
-in {
+in
+{
   options.chr.desktop.ags = with types; {
     enable = mkBoolOpt false "Whether or not enable Ags.";
     package = mkOption {
@@ -23,9 +25,7 @@ in {
 
   config = mkIf cfg.enable {
     chr.home.extraOptions = {
-      home.packages = [
-        cfg.package
-      ];
+      home.packages = [ cfg.package ];
 
       # xdg.dataFile = {
       #   "ags/types" = {

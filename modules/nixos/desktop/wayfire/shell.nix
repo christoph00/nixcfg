@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   style = pkgs.writeText "style.css" ''
     *:selected {
         background: none;
@@ -43,7 +44,8 @@
         background: rgba(255, 255, 255, 0.3);
     }
   '';
-in {
+in
+{
   chr.desktop.wayfire.shell.settings = lib.mkIf config.chr.desktop.wayfire.shell.enable {
     background = {
       image = "~/Bilder/Wallpaper";

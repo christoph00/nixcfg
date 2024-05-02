@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.services.nas;
-in {
+in
+{
   options.chr.services.nas = with types; {
     enable = mkBoolOpt false "Enable NAS Service.";
     userdataDir = mkOpt (types.nullOr types.str) "/mnt/userdata" "NAS Userdata Dir.";
@@ -16,8 +18,15 @@ in {
     sftp = mkBoolOpt true "Enable Sftp Service.";
   };
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [80 443 2022];
-    networking.firewall.allowedUDPPorts = [443 2022];
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+      2022
+    ];
+    networking.firewall.allowedUDPPorts = [
+      443
+      2022
+    ];
 
     # security.acme.certs."data.r505.de" = {
     #   #server = "https://acme.zerossl.com/v2/DV90";
@@ -37,7 +46,10 @@ in {
             enabled = true;
           };
           proxy_protocol = 0;
-          proxy_allowed = ["127.0.0.1" "::1"];
+          proxy_allowed = [
+            "127.0.0.1"
+            "::1"
+          ];
           umask = "0077";
         };
         webdavd.bindings = mkIf cfg.webdav [
@@ -94,7 +106,7 @@ in {
         UMask = mkForce "0077";
         RuntimeDirectory = "sftpgo";
         RuntimeDirectoryMode = "0755";
-        ReadWritePaths = [cfg.userdataDir];
+        ReadWritePaths = [ cfg.userdataDir ];
       };
       postStart = ''
         while [ ! -e "/run/sftpgo/httpd.sock" ]; do
@@ -111,11 +123,14 @@ in {
       };
     };
 
-    users.users.sftpgo.extraGroups = ["media"];
+    users.users.sftpgo.extraGroups = [ "media" ];
 
     services.nginx.clientMaxBodySize = "10G";
 
-    users.users.nginx.extraGroups = ["acme" "media"];
+    users.users.nginx.extraGroups = [
+      "acme"
+      "media"
+    ];
     services.nginx.enable = true;
     services.nginx.virtualHosts."data.r505.de" = {
       listen = [

@@ -5,9 +5,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.apps;
-in {
+in
+{
   options.chr.apps = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };

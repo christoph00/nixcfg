@@ -6,19 +6,27 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.services.blocky;
-in {
+in
+{
   options.chr.services.blocky = with types; {
     enable = mkBoolOpt false "Enable blocky DNS Server.";
   };
   config = mkIf cfg.enable {
     networking.firewall = {
-      allowedTCPPorts = [53 5335];
-      allowedUDPPorts = [53 5335];
+      allowedTCPPorts = [
+        53
+        5335
+      ];
+      allowedUDPPorts = [
+        53
+        5335
+      ];
     };
 
-    environment.systemPackages = with pkgs; [blocky];
+    environment.systemPackages = with pkgs; [ blocky ];
 
     services = {
       resolved.enable = lib.mkForce false;
@@ -40,10 +48,8 @@ in {
             timeout = "10s";
           };
           blocking = {
-            blackLists.default = [
-              "https://v.firebog.net/hosts/Easyprivacy.txt"
-            ];
-            clientGroupsBlock.default = ["default"];
+            blackLists.default = [ "https://v.firebog.net/hosts/Easyprivacy.txt" ];
+            clientGroupsBlock.default = [ "default" ];
           };
           caching = {
             prefetching = true;
@@ -61,7 +67,10 @@ in {
           ports.http = 4040;
           ports.dns = "127.0.0.1:53,[::1]:53,192.168.2.194:53";
 
-          bootstrapDns = ["tcp+udp:1.1.1.1" "https://1.1.1.1/dns-query"];
+          bootstrapDns = [
+            "tcp+udp:1.1.1.1"
+            "https://1.1.1.1/dns-query"
+          ];
           ede.enable = true;
           clientLookup.upstream = "192.168.2.1";
           conditional.mapping = {
@@ -78,16 +87,17 @@ in {
         {
           job_name = "blocky";
           static_configs = [
-            {
-              targets = ["localhost:${toString config.services.blocky.settings.ports.http}"];
-            }
+            { targets = [ "localhost:${toString config.services.blocky.settings.ports.http}" ]; }
           ];
         }
       ];
     };
-    networking.nameservers = ["127.0.0.1" ":::"];
+    networking.nameservers = [
+      "127.0.0.1"
+      ":::"
+    ];
     systemd.services.blocky = {
-      after = ["netbird.service"];
+      after = [ "netbird.service" ];
       serviceConfig = {
         Restart = "on-failure";
         RestartSec = "1";

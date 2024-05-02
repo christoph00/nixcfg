@@ -6,12 +6,21 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.type;
-in {
+in
+{
   options.chr = with types; {
     type = mkOption {
-      type = enum ["laptop" "desktop" "server" "vm" "microvm" "bootstrap"];
+      type = enum [
+        "laptop"
+        "desktop"
+        "server"
+        "vm"
+        "microvm"
+        "bootstrap"
+      ];
     };
     isMicroVM = mkBoolOpt (config.chr.type == "microvm") "Whether or not this is a microvm.";
   };

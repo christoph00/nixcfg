@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.services.z2m;
-in {
+in
+{
   options.chr.services.z2m = with types; {
     enable = mkBoolOpt false "Enable zigbee2mqtt Service.";
   };
@@ -30,6 +32,6 @@ in {
       };
     };
 
-    networking.firewall.allowedTCPPorts = [3080];
+    networking.firewall.allowedTCPPorts = [ 3080 ];
   };
 }

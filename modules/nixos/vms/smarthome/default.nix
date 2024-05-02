@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.vms.smarthome;
-in {
+in
+{
   options.chr.vms.smarthome = with types; {
     enable = mkBoolOpt' false;
   };

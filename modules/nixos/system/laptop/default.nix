@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.system.laptop;
-in {
+in
+{
   options.chr.system.laptop = with types; {
     enable = mkBoolOpt' (config.chr.type == "laptop");
   };
@@ -17,7 +19,10 @@ in {
     services.power-profiles-daemon.enable = true;
     services.thermald.enable = false;
 
-    environment.systemPackages = [pkgs.powertop pkgs.powerstat];
+    environment.systemPackages = [
+      pkgs.powertop
+      pkgs.powerstat
+    ];
 
     services.fprintd.enable = true;
 
@@ -45,9 +50,7 @@ in {
       '';
     };
     environment.persistence."/nix/persist" = {
-      directories = [
-        "/var/lib/iwd"
-      ];
+      directories = [ "/var/lib/iwd" ];
     };
 
     networking.networkmanager.wifi.backend = "iwd";

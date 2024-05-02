@@ -2,40 +2,46 @@
   lib,
   php82,
   fetchFromGitHub,
-}: let
-  phpPackage = php82.withExtensions ({
-    enabled,
-    all,
-  }:
-    enabled ++ [all.imap all.gd all.intl all.pdo_sqlite]);
+}:
+let
+  phpPackage = php82.withExtensions (
+    { enabled, all }:
+    enabled
+    ++ [
+      all.imap
+      all.gd
+      all.intl
+      all.pdo_sqlite
+    ]
+  );
 in
-  phpPackage.buildComposerProject rec {
-    pname = "davis";
-    version = "4.4.1";
+phpPackage.buildComposerProject rec {
+  pname = "davis";
+  version = "4.4.1";
 
-    src = fetchFromGitHub {
-      owner = "tchapi";
-      repo = "davis";
-      rev = "v${version}";
-      hash = "sha256-UBekmxKs4dveHh866Ix8UzY2NL6ygb8CKor+V3Cblns=";
-    };
+  src = fetchFromGitHub {
+    owner = "tchapi";
+    repo = "davis";
+    rev = "v${version}";
+    hash = "sha256-UBekmxKs4dveHh866Ix8UzY2NL6ygb8CKor+V3Cblns=";
+  };
 
-    php = phpPackage;
+  php = phpPackage;
 
-    vendorHash = "sha256-WGeNwBRzfUXa7kPIwd7/5dPXDjaBxXirAJcm6lNzueY=";
+  vendorHash = "sha256-WGeNwBRzfUXa7kPIwd7/5dPXDjaBxXirAJcm6lNzueY=";
 
-    composerNoPlugins = false;
-    composerStrictValidation = false;
+  composerNoPlugins = false;
+  composerStrictValidation = false;
 
-    passthru = {
-      phpPackage = phpPackage;
-    };
+  passthru = {
+    phpPackage = phpPackage;
+  };
 
-    meta = with lib; {
-      description = "A simple, fully translatable admin interface for sabre/dav based on Symfony 5 and Bootstrap 5, initially inspired by Baïkal";
-      homepage = "https://github.com/tchapi/davis";
-      license = licenses.mit;
-      maintainers = with maintainers; [];
-      platforms = platforms.all;
-    };
-  }
+  meta = with lib; {
+    description = "A simple, fully translatable admin interface for sabre/dav based on Symfony 5 and Bootstrap 5, initially inspired by Baïkal";
+    homepage = "https://github.com/tchapi/davis";
+    license = licenses.mit;
+    maintainers = with maintainers; [ ];
+    platforms = platforms.all;
+  };
+}

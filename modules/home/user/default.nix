@@ -2,20 +2,24 @@
   lib,
   config,
   pkgs,
-  osConfig ? {},
+  osConfig ? { },
   inputs,
   ...
-}: let
-  inherit (lib) types mkIf mkDefault mkMerge;
+}:
+let
+  inherit (lib)
+    types
+    mkIf
+    mkDefault
+    mkMerge
+    ;
   inherit (lib.chr) mkOpt;
 
   cfg = config.chr.user;
 
-  home-directory =
-    if cfg.name == null
-    then null
-    else "/home/${cfg.name}";
-in {
+  home-directory = if cfg.name == null then null else "/home/${cfg.name}";
+in
+{
   options.chr.user = {
     enable = mkOpt types.bool false "Whether to configure the user account.";
     name = mkOpt (types.nullOr types.str) "christoph" "The user account.";

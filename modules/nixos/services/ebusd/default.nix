@@ -7,7 +7,8 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.services.ebusd;
   package = pkgs.ebusd;
 
@@ -28,9 +29,7 @@ with lib.chr; let
       "--log=all:${cfg.logs.all}"
       "--accesslevel=*"
     ]
-    ++ lib.optionals cfg.readonly [
-      "--readonly"
-    ]
+    ++ lib.optionals cfg.readonly [ "--readonly" ]
     ++ lib.optionals cfg.mqtt.enable [
       "--mqtthost=${cfg.mqtt.host}"
       "--mqttport=${toString cfg.mqtt.port}"
@@ -42,15 +41,14 @@ with lib.chr; let
       "--mqttint=${package}/etc/ebusd/mqtt-hassio.cfg"
       "--mqttjson"
     ]
-    ++ lib.optionals cfg.mqtt.retain [
-      "--mqttretain"
-    ]
+    ++ lib.optionals cfg.mqtt.retain [ "--mqttretain" ]
     ++ cfg.extraArguments;
 
   usesDev = hasPrefix "/" cfg.device;
 
   command = concatStringsSep " " arguments;
-in {
+in
+{
   options.chr.services.ebusd = with types; {
     enable = mkBoolOpt config.chr.services.smart-home "Enable eBUSd Service.";
     device = mkOption {
@@ -104,7 +102,12 @@ in {
 
     logs = {
       main = mkOption {
-        type = types.enum ["error" "notice" "info" "debug"];
+        type = types.enum [
+          "error"
+          "notice"
+          "info"
+          "debug"
+        ];
         default = "info";
         description = lib.mdDoc ''
           Only write log for matching AREAs (main|network|bus|update|other|all) below or equal to LEVEL (error|notice|info|debug) [all:notice].
@@ -112,7 +115,12 @@ in {
       };
 
       network = mkOption {
-        type = types.enum ["error" "notice" "info" "debug"];
+        type = types.enum [
+          "error"
+          "notice"
+          "info"
+          "debug"
+        ];
         default = "info";
         description = lib.mdDoc ''
           Only write log for matching AREAs (main|network|bus|update|other|all) below or equal to LEVEL (error|notice|info|debug) [all:notice].
@@ -120,7 +128,12 @@ in {
       };
 
       bus = mkOption {
-        type = types.enum ["error" "notice" "info" "debug"];
+        type = types.enum [
+          "error"
+          "notice"
+          "info"
+          "debug"
+        ];
         default = "info";
         description = lib.mdDoc ''
           Only write log for matching AREAs (main|network|bus|update|other|all) below or equal to LEVEL (error|notice|info|debug) [all:notice].
@@ -128,7 +141,12 @@ in {
       };
 
       update = mkOption {
-        type = types.enum ["error" "notice" "info" "debug"];
+        type = types.enum [
+          "error"
+          "notice"
+          "info"
+          "debug"
+        ];
         default = "info";
         description = lib.mdDoc ''
           Only write log for matching AREAs (main|network|bus|update|other|all) below or equal to LEVEL (error|notice|info|debug) [all:notice].
@@ -136,7 +154,12 @@ in {
       };
 
       other = mkOption {
-        type = types.enum ["error" "notice" "info" "debug"];
+        type = types.enum [
+          "error"
+          "notice"
+          "info"
+          "debug"
+        ];
         default = "info";
         description = lib.mdDoc ''
           Only write log for matching AREAs (main|network|bus|update|other|all) below or equal to LEVEL (error|notice|info|debug) [all:notice].
@@ -144,7 +167,12 @@ in {
       };
 
       all = mkOption {
-        type = types.enum ["error" "notice" "info" "debug"];
+        type = types.enum [
+          "error"
+          "notice"
+          "info"
+          "debug"
+        ];
         default = "info";
         description = lib.mdDoc ''
           Only write log for matching AREAs (main|network|bus|update|other|all) below or equal to LEVEL (error|notice|info|debug) [all:notice].
@@ -213,18 +241,18 @@ in {
 
     extraArguments = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = lib.mdDoc ''
         Extra arguments to the ebus daemon
       '';
     };
   };
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [cfg.port];
+    networking.firewall.allowedTCPPorts = [ cfg.port ];
     systemd.services.ebusd = {
       description = "EBUSd Service";
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
       serviceConfig = {
         ExecStart = command;
         DynamicUser = true;
@@ -232,9 +260,7 @@ in {
 
         # Hardening
         CapabilityBoundingSet = "";
-        DeviceAllow = lib.optionals usesDev [
-          cfg.device
-        ];
+        DeviceAllow = lib.optionals usesDev [ cfg.device ];
         DevicePolicy = "closed";
         LockPersonality = true;
         MemoryDenyWriteExecute = false;
@@ -260,9 +286,7 @@ in {
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
-        SupplementaryGroups = [
-          "dialout"
-        ];
+        SupplementaryGroups = [ "dialout" ];
         SystemCallArchitectures = "native";
         SystemCallFilter = [
           "@system-service @pkey"

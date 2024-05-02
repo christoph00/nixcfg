@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.apps.wezterm;
-in {
+in
+{
   options.chr.apps.wezterm = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether to enable Wezterm.";
   };

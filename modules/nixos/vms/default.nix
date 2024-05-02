@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.vms;
-in {
+in
+{
   options.chr.vms = with types; {
     enable = mkBoolOpt false "Enable VMs.";
   };
@@ -47,9 +49,7 @@ in {
     };
     environment.persistence."${config.chr.system.persist.stateDir}" = mkIf cfg.enable {
       hideMounts = true;
-      directories = [
-        "/var/lib/microvms"
-      ];
+      directories = [ "/var/lib/microvms" ];
     };
   };
 }

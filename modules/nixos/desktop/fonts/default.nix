@@ -6,7 +6,8 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.desktop.fonts;
   mkFontOption = kind: {
     family = lib.mkOption {
@@ -20,10 +21,10 @@ with lib.chr; let
       description = "Package for ${kind} font profile";
     };
   };
-in {
+in
+{
   options.chr.desktop.fonts = with types; {
-    enable =
-      mkBoolOpt config.chr.desktop.enable "Enable Font Config";
+    enable = mkBoolOpt config.chr.desktop.enable "Enable Font Config";
     fontProfiles = {
       monospace = mkFontOption "monospace";
       regular = mkFontOption "regular";
@@ -46,7 +47,20 @@ in {
         ubuntu_font_family
         unifont
         roboto
-        (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka" "Agave" "IBMPlexMono" "Gohu" "Hermit" "IntelOneMono" "ComicShannsMono" "DaddyTimeMono"];})
+        (nerdfonts.override {
+          fonts = [
+            "FiraCode"
+            "JetBrainsMono"
+            "Iosevka"
+            "Agave"
+            "IBMPlexMono"
+            "Gohu"
+            "Hermit"
+            "IntelOneMono"
+            "ComicShannsMono"
+            "DaddyTimeMono"
+          ];
+        })
         chr.operator-mono-nf
         #intel-one-mono
         monaspace
@@ -56,10 +70,19 @@ in {
       fontconfig = {
         enable = true;
         defaultFonts = {
-          serif = ["Lexend" "Noto Color Emoji"];
-          sansSerif = ["Lexend" "Noto Color Emoji"];
-          monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-          emoji = ["Noto Color Emoji"];
+          serif = [
+            "Lexend"
+            "Noto Color Emoji"
+          ];
+          sansSerif = [
+            "Lexend"
+            "Noto Color Emoji"
+          ];
+          monospace = [
+            "JetBrainsMono Nerd Font"
+            "Noto Color Emoji"
+          ];
+          emoji = [ "Noto Color Emoji" ];
         };
       };
     };

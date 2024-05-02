@@ -6,13 +6,15 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.services.home-assistant;
-in {
+in
+{
   services.home-assistant.config.sensor = mkIf cfg.enable [
     {
       platform = "prometheus_sensor";
-      url = "http://air13.netbird.cloud:8428"; #TODO: fix hardcoded url
+      url = "http://air13.netbird.cloud:8428"; # TODO: fix hardcoded url
       queries = [
         {
           name = "Futro Load";
