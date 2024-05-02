@@ -100,14 +100,11 @@ in
         ];
         volumes = [
           "${cfg.dataDir}:/usr/src/app/upload"
-          "/run/agenix:/run/agenix"
+          "/run/agenix:/run/agenix:ro"
+          "/run/postgresql:/run/postgresql:ro"
         ];
         environment = {
-          DB_HOSTNAME = cfg.dbHostname;
-          DB_DATABASE_NAME = cfg.dbDatabase;
-          DB_USERNAME = cfg.dbUsername;
-          DB_PASSWORD_FILE = cfg.dbPasswordFile;
-          DB_PORT = toString cfg.dbPort;
+          DB_URL = "postgresql://immich@/immich";
           REDIS_HOSTNAME = cfg.redisHostname;
           REDIS_PORT = toString cfg.redisPort;
         };
@@ -122,14 +119,11 @@ in
         ];
         volumes = [
           "${cfg.dataDir}:/usr/src/app/upload"
-          "/run/agenix:/run/agenix"
+          "/run/agenix:/run/agenix:ro"
+          "/run/postgresql:/run/postgresql:ro"
         ];
         environment = {
-          DB_HOSTNAME = cfg.dbHostname;
-          DB_DATABASE_NAME = cfg.dbDatabase;
-          DB_USERNAME = cfg.dbUsername;
-          DB_PASSWORD_FILE = cfg.dbPasswordFile;
-          DB_PORT = toString cfg.dbPort;
+          DB_URL = "postgresql://immich@/immich";
           REDIS_HOSTNAME = cfg.redisHostname;
           REDIS_PORT = toString cfg.redisPort;
         };
