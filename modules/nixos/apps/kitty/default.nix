@@ -1,12 +1,10 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.apps.kitty;
-in {
+in
+{
   options.chr.apps.kitty = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
@@ -24,10 +22,12 @@ in {
             # font_family = "IntoneMono Nerd Font Mono";
             # font_family = "DaddyTimeMono Nerd Font";
           };
-          extraConfig = builtins.readFile (builtins.fetchurl {
-            url = "https://raw.githubusercontent.com/folke/tokyonight.nvim/eede574f9ef57137e6d7e4bab37b09db636c5a56/extras/kitty_tokyonight_night.conf";
-            sha256 = "0l9yl3qmgf7b10x7hy7q5hma0hsyamq3n14lfbw31cimm6snwim6";
-          });
+          extraConfig = builtins.readFile (
+            builtins.fetchurl {
+              url = "https://raw.githubusercontent.com/folke/tokyonight.nvim/eede574f9ef57137e6d7e4bab37b09db636c5a56/extras/kitty_tokyonight_night.conf";
+              sha256 = "0l9yl3qmgf7b10x7hy7q5hma0hsyamq3n14lfbw31cimm6snwim6";
+            }
+          );
         };
       };
     };

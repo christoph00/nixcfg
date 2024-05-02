@@ -16,32 +16,77 @@ let
   x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE+DRHaQYXS4jLpb6TQ72zP3prgkcb2X0YVGIXtUCHUY";
   turtle = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGs1EldBV90G7uqmUgewt+4Lfcot9WSgDBpZZ4c5184E";
 
-  all = [air13 futro cube tower oca oc1 oc2 star x13 turtle];
-  servers = [air13 futro oca oc1 oc2];
-  desktops = [tower x13];
-  users = [christoph_tower christoph_x13];
-in {
-  "secrets/cf-tunnel-futro".publicKeys = [futro] ++ users;
-  "secrets/cf-tunnel-air13".publicKeys = [air13] ++ users;
-  "secrets/cf-tunnel-oca".publicKeys = [oca] ++ users;
-  "secrets/cf-tunnel-tower".publicKeys = [tower] ++ users;
+  all = [
+    air13
+    futro
+    cube
+    tower
+    oca
+    oc1
+    oc2
+    star
+    x13
+    turtle
+  ];
+  servers = [
+    air13
+    futro
+    oca
+    oc1
+    oc2
+  ];
+  desktops = [
+    tower
+    x13
+  ];
+  users = [
+    christoph_tower
+    christoph_x13
+  ];
+in
+{
+  "secrets/cf-tunnel-futro".publicKeys = [ futro ] ++ users;
+  "secrets/cf-tunnel-air13".publicKeys = [ air13 ] ++ users;
+  "secrets/cf-tunnel-oca".publicKeys = [ oca ] ++ users;
+  "secrets/cf-tunnel-tower".publicKeys = [ tower ] ++ users;
 
   "secrets/netbird.env".publicKeys = all ++ users;
   "secrets/tailscale-auth-key".publicKeys = all ++ users;
 
-  "secrets/ha-serviceaccount".publicKeys = [futro air13] ++ users;
-  "secrets/ha-secrets.yaml".publicKeys = [futro air13] ++ users;
+  "secrets/ha-serviceaccount".publicKeys = [
+    futro
+    air13
+  ] ++ users;
+  "secrets/ha-secrets.yaml".publicKeys = [
+    futro
+    air13
+  ] ++ users;
 
-  "secrets/zwave-js-keys.json".publicKeys = [air13 futro] ++ users;
+  "secrets/zwave-js-keys.json".publicKeys = [
+    air13
+    futro
+  ] ++ users;
 
   "secrets/christoph-password.age".publicKeys = all ++ users;
 
-  "secrets/yarr-auth".publicKeys = [futro air13] ++ users;
+  "secrets/yarr-auth".publicKeys = [
+    futro
+    air13
+  ] ++ users;
 
   "secrets/grafana-password".publicKeys = all ++ users;
-  "secrets/vaultwarden.env".publicKeys = [futro air13] ++ users;
-  "secrets/paperless-token.env".publicKeys = [futro air13] ++ users;
+  "secrets/vaultwarden.env".publicKeys = [
+    futro
+    air13
+  ] ++ users;
+  "secrets/paperless-token.env".publicKeys = [
+    futro
+    air13
+  ] ++ users;
   "secrets/caddy.env".publicKeys = servers ++ users;
 
-  "secrets/nc-admin-pass".publicKeys = [air13 oca] ++ users;
+  "secrets/nc-admin-pass".publicKeys = [
+    air13
+    oca
+  ] ++ users;
 }

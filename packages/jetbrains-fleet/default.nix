@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
 
   dontBuild = true;
 
-  nativeBuildInputs = [autoPatchelfHook];
+  nativeBuildInputs = [ autoPatchelfHook ];
 
   buildInputs =
     [
@@ -60,6 +60,6 @@ stdenv.mkDerivation rec {
     icon = "Fleet";
     desktopName = "JetBrains Fleet";
     genericName = "JetBrains Fleet";
-    categories = ["Development"];
+    categories = [ "Development" ];
   };
 }

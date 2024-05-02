@@ -1,13 +1,22 @@
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 
 {
   # https://devenv.sh/basics/
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git pkgs.alejandra pkgs.nixfmt-rfc-style ];
+  packages = [
+    pkgs.git
+    pkgs.alejandra
+    pkgs.nixfmt-rfc-style
+  ];
 
   # https://devenv.sh/scripts/
-
 
   # https://devenv.sh/services/
   # services.postgres.enable = true;

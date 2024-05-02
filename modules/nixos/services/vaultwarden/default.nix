@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.services.vaultwarden;
-in {
+in
+{
   options.chr.services.vaultwarden = with types; {
     enable = mkBoolOpt false "Enable vaultwarden Service.";
   };
@@ -30,11 +32,7 @@ in {
     age.secrets.vaultwarden-env.file = ../../../../secrets/vaultwarden.env;
 
     environment.persistence."${config.chr.system.persist.stateDir}" = {
-      directories = [
-        {
-          directory = "/var/lib/bitwarden_rs";
-        }
-      ];
+      directories = [ { directory = "/var/lib/bitwarden_rs"; } ];
     };
     chr.services.cloudflared.enable = true;
     services.cloudflared.tunnels."${config.networking.hostName}" = {

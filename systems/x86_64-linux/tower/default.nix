@@ -6,7 +6,8 @@
   ...
 }:
 with lib;
-with lib.chr; {
+with lib.chr;
+{
   system.stateVersion = "23.11";
   chr = {
     type = "desktop";
@@ -33,27 +34,41 @@ with lib.chr; {
     "/media/Games" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
-      options = ["subvol=@games" "noatime" "compress-force=zstd"];
+      options = [
+        "subvol=@games"
+        "noatime"
+        "compress-force=zstd"
+      ];
     };
 
     "/media/ssd-data" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
-      options = ["subvol=@data" "noatime" "compress-force=zstd"];
+      options = [
+        "subvol=@data"
+        "noatime"
+        "compress-force=zstd"
+      ];
     };
   };
 
-  swapDevices = [{device = "/dev/nvme0n1p2";}];
+  swapDevices = [ { device = "/dev/nvme0n1p2"; } ];
 
   services.fstrim.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
   boot.initrd = {
-    availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
-    kernelModules = ["amdgpu"];
+    availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "nvme"
+      "usb_storage"
+      "sd_mod"
+    ];
+    kernelModules = [ "amdgpu" ];
   };
 
-  services.xserver.videoDrivers = ["modesetting"];
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   hardware.opengl = {
     enable = true;
@@ -69,11 +84,19 @@ with lib.chr; {
     gpuOverclock.ppfeaturemask = "0xffffffff";
     gpuOverclock.enable = true;
   };
-  users.users.christoph.extraGroups = ["corectrl"];
+  users.users.christoph.extraGroups = [ "corectrl" ];
 
-  environment.systemPackages = [pkgs.amdgpu_top pkgs.lact];
-  boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
-  boot.blacklistedKernelModules = ["dm_mod"];
+  environment.systemPackages = [
+    pkgs.amdgpu_top
+    pkgs.lact
+  ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "acpi_call"
+    "i2c_dev"
+    "amdgpu"
+  ];
+  boot.blacklistedKernelModules = [ "dm_mod" ];
   boot.kernelParams = [
     "quiet"
     "rcutree.rcu_idle_gp_delay=1"

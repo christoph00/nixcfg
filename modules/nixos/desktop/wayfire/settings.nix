@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   variables = lib.concatStringsSep " " [
     "DISPLAY"
     "WAYLAND_DISPLAY"
@@ -14,7 +15,8 @@
 
   update-environment = "exec ${pkgs.dbus}/bin/dbus-update-activation-environment";
   systemctl = "exec ${pkgs.systemd}/bin/systemctl --user";
-in {
+in
+{
   chr.desktop.wayfire.settings = lib.mkIf config.chr.desktop.wayfire.enable {
     close_top_view = "<alt> KEY_Q";
     preferred_decoration_mode = "server";
@@ -97,32 +99,41 @@ in {
       #        package = pkgs.chr.wf-pixdecor;
       #      }
 
-      {plugin = "ipc";}
-      {plugin = "ipc-rules";}
-      {plugin = "wayfire-shell";}
-      {plugin = "gtk-shell";}
-      {plugin = "foreign-toplevel";}
+      { plugin = "ipc"; }
+      { plugin = "ipc-rules"; }
+      { plugin = "wayfire-shell"; }
+      { plugin = "gtk-shell"; }
+      { plugin = "foreign-toplevel"; }
 
-      {plugin = "xdg-activation";}
+      { plugin = "xdg-activation"; }
 
       {
         plugin = "vswitch";
-        settings = let
-          workspaces = builtins.genList (x: x + 1) 9;
-          mkBinding = lprefix: rprefix:
-            builtins.map (a: let
-              replace = builtins.replaceStrings ["{}"] [(toString a)];
-              left = replace lprefix;
-              right = replace rprefix;
-            in {"${left}" = "${right}";})
-            workspaces;
-          mergeAttrs = lib.foldl lib.recursiveUpdate {};
-          workspacesAttrs = mergeAttrs (lib.flatten [
-            (mkBinding "binding_{}" "<super> KEY_{}")
-            (mkBinding "with_win_{}" "<super> <shift> KEY_{}")
-            (mkBinding "send_win_{}" "<super> <ctrl> KEY_{}")
-          ]);
-        in
+        settings =
+          let
+            workspaces = builtins.genList (x: x + 1) 9;
+            mkBinding =
+              lprefix: rprefix:
+              builtins.map (
+                a:
+                let
+                  replace = builtins.replaceStrings [ "{}" ] [ (toString a) ];
+                  left = replace lprefix;
+                  right = replace rprefix;
+                in
+                {
+                  "${left}" = "${right}";
+                }
+              ) workspaces;
+            mergeAttrs = lib.foldl lib.recursiveUpdate { };
+            workspacesAttrs = mergeAttrs (
+              lib.flatten [
+                (mkBinding "binding_{}" "<super> KEY_{}")
+                (mkBinding "with_win_{}" "<super> <shift> KEY_{}")
+                (mkBinding "send_win_{}" "<super> <ctrl> KEY_{}")
+              ]
+            );
+          in
           {
             # Disable default keybinds
             binding_down = "";
@@ -153,24 +164,36 @@ in {
           title_overlay = "mouse";
           title_font_size = 12;
           title_position = "bottom";
-          bg_color = [0.086 0.086 0.114 1.0];
-          text_color = [0.863 0.843 0.729 1.0];
+          bg_color = [
+            8.6e-2
+            8.6e-2
+            0.114
+            1.0
+          ];
+          text_color = [
+            0.863
+            0.843
+            0.729
+            1.0
+          ];
         };
       }
       {
         plugin = "expo";
-        settings = let
-          workspaces = builtins.genList (x: x + 1) 9;
-          bindings =
-            builtins.map (a: {
-              "select_workspace_${toString a}" = "KEY_${toString a}";
-            })
-            workspaces;
-          workspacesAttrs = lib.foldl (a: b: a // b) {} bindings;
-        in
+        settings =
+          let
+            workspaces = builtins.genList (x: x + 1) 9;
+            bindings = builtins.map (a: { "select_workspace_${toString a}" = "KEY_${toString a}"; }) workspaces;
+            workspacesAttrs = lib.foldl (a: b: a // b) { } bindings;
+          in
           {
             toggle = "<super> <shift>";
-            background = [0.086 0.086 0.114 1.0];
+            background = [
+              8.6e-2
+              8.6e-2
+              0.114
+              1.0
+            ];
           }
           // workspacesAttrs;
       }
@@ -219,21 +242,23 @@ in {
           # This monstrosity of a screenshot command trims the region selected
           # by slurp so that the region borders are not captured by grim.
           binding_screenshot_interactive = "<super> <shift> KEY_S";
-          command_screenshot_interactive = lib.getExe (pkgs.writeShellApplication {
-            name = "screenshot";
-            runtimeInputs = with pkgs; [
-              slurp
-              gawk
-              grim
-              wl-clipboard
-            ];
-            text = ''
-              slurp -d -b \#16161daa -c \#dcd7baff -s \#00000000 -w 4 \
-              | awk -F'[, x]' -v B=4 '{printf("%d,%d %dx%d",$1+B/2,$2+B/2,$3-B,$4-B)}' \
-              | grim -g - - \
-              | wl-copy
-            '';
-          });
+          command_screenshot_interactive = lib.getExe (
+            pkgs.writeShellApplication {
+              name = "screenshot";
+              runtimeInputs = with pkgs; [
+                slurp
+                gawk
+                grim
+                wl-clipboard
+              ];
+              text = ''
+                slurp -d -b \#16161daa -c \#dcd7baff -s \#00000000 -w 4 \
+                | awk -F'[, x]' -v B=4 '{printf("%d,%d %dx%d",$1+B/2,$2+B/2,$3-B,$4-B)}' \
+                | grim -g - - \
+                | wl-copy
+              '';
+            }
+          );
         };
       }
       {

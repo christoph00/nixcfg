@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.system.ssh;
-in {
+in
+{
   options.chr.system.ssh = with types; {
     enable = mkBoolOpt true "Whether or not to enable ssh server.";
     hostKeyDir = mkOpt' str "/etc/ssh";
@@ -17,7 +19,10 @@ in {
   config = mkIf cfg.enable {
     services.sshguard = {
       enable = true;
-      whitelist = ["192.168.2.0/24" "100.77.0.0/16"];
+      whitelist = [
+        "192.168.2.0/24"
+        "100.77.0.0/16"
+      ];
     };
     services.openssh = {
       enable = true;

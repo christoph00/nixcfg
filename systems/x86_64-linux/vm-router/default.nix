@@ -1,8 +1,5 @@
+{ pkgs, config, ... }:
 {
-  pkgs,
-  config,
-  ...
-}: {
   chr = {
     type = "microvm";
   };
@@ -23,13 +20,18 @@
         }
       ]
       ++ map
-      (dir: {
-        source = "/var/lib/microvms/${config.networking.hostName}/${dir}";
-        mountPoint = "/${dir}";
-        tag = dir;
-        proto = "virtiofs";
-        socket = "${dir}.socket";
-      }) ["etc" "var" "home"];
+        (dir: {
+          source = "/var/lib/microvms/${config.networking.hostName}/${dir}";
+          mountPoint = "/${dir}";
+          tag = dir;
+          proto = "virtiofs";
+          socket = "${dir}.socket";
+        })
+        [
+          "etc"
+          "var"
+          "home"
+        ];
   };
 
   networking = {
@@ -44,7 +46,7 @@
     }
   ];
 
-  networking.firewall.allowedUDPPorts = [67]; # dhcp
+  networking.firewall.allowedUDPPorts = [ 67 ]; # dhcp
 
   systemd.network = {
     enable = true;
@@ -61,9 +63,7 @@
         DHCPServer = true;
         IPv6SendRA = true;
       };
-      addresses = [
-        {addressConfig.Address = "192.168.10.1/24";}
-      ];
+      addresses = [ { addressConfig.Address = "192.168.10.1/24"; } ];
     };
   };
 }

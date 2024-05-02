@@ -6,7 +6,8 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.desktop.theme;
   gtkcss = ''
     @define-color accent_color #a9b1d6;
@@ -88,8 +89,9 @@ with lib.chr; let
     @define-color dark_4 #241f31;
     @define-color dark_5 #000000;
   '';
-in {
-  imports = [inputs.matugen.nixosModules.default];
+in
+{
+  imports = [ inputs.matugen.nixosModules.default ];
   options.chr.desktop.theme = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
@@ -99,7 +101,7 @@ in {
       enable = true;
     };
     chr.home.extraOptions = {
-      home.packages = [inputs.matugen.packages.${pkgs.system}.default];
+      home.packages = [ inputs.matugen.packages.${pkgs.system}.default ];
       fonts.fontconfig.enable = true;
       gtk = {
         enable = true;

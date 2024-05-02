@@ -2,7 +2,7 @@
   lib,
   stdenv,
   fetchFromGitLab,
-  kdePackages ,
+  kdePackages,
   extra-cmake-modules,
   pkg-config,
   wayland,
@@ -25,8 +25,7 @@ kdePackages.mkKdeDerivation rec {
     pkg-config
   ];
 
-
-  extraBuildInputs  = [
+  extraBuildInputs = [
     freerdp
     wayland
   ];
@@ -35,7 +34,7 @@ kdePackages.mkKdeDerivation rec {
     description = "Library and examples for creating an RDP server";
     homepage = "https://invent.kde.org/plasma/krdp";
     license = licenses.unfree; # FIXME: nix-init did not found a license
-    maintainers = with maintainers; [];
+    maintainers = with maintainers; [ ];
     mainProgram = "krdp";
     platforms = platforms.all;
   };

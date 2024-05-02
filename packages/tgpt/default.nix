@@ -16,14 +16,17 @@ buildGoModule rec {
 
   vendorHash = "sha256-g8mfJmp27dyl/xOViprYF5p+XYWeKwKlZVw1/lNhWOU=";
 
-  ldflags = ["-s" "-w"];
+  ldflags = [
+    "-s"
+    "-w"
+  ];
   doCheck = false;
 
   meta = with lib; {
     description = "ChatGPT in terminal without needing API keys";
     homepage = "https://github.com/aandrew-me/tgpt";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [];
+    maintainers = with maintainers; [ ];
     mainProgram = "tgpt";
   };
 }

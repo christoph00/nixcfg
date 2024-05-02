@@ -46,20 +46,23 @@ stdenv.mkDerivation rec {
     xorg.xcbutilwm
   ];
 
-  mesonFlags = ["--sysconfdir /etc"];
+  mesonFlags = [ "--sysconfdir /etc" ];
 
-  postPatch = let
-    substitute = ''--replace-warn "wayfire.get_variable( pkgconfig: 'metadatadir' )" "join_paths(get_option('prefix'), 'share/wayfire/metadata')"'';
-  in ''    substituteInPlace meson.build ${substitute} && \
-          substituteInPlace src/meson.build ${substitute} && \
-          substituteInPlace metadata/meson.build ${substitute}
-  '';
+  postPatch =
+    let
+      substitute = ''--replace-warn "wayfire.get_variable( pkgconfig: 'metadatadir' )" "join_paths(get_option('prefix'), 'share/wayfire/metadata')"'';
+    in
+    ''
+      substituteInPlace meson.build ${substitute} && \
+            substituteInPlace src/meson.build ${substitute} && \
+            substituteInPlace metadata/meson.build ${substitute}
+    '';
 
   meta = with lib; {
     description = "Pixdecor plugin";
     homepage = "https://github.com/soreau/pixdecor";
     license = licenses.mit;
-    maintainers = with maintainers; [];
+    maintainers = with maintainers; [ ];
     mainProgram = "wf-pixdecor";
     inherit (wayfire.meta) platforms;
   };

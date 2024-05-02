@@ -6,12 +6,13 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.system.kvm;
-in {
+in
+{
   options.chr.system.kvm = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to configure kvm.";
+    enable = mkBoolOpt false "Whether or not to configure kvm.";
     externalInterface = mkOption {
       type = types.str;
       default = "ens5";
@@ -20,6 +21,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.qemu_kvm pkgs.qemu-utils pkgs.firecracker pkgs.firectl];
+    environment.systemPackages = [
+      pkgs.qemu_kvm
+      pkgs.qemu-utils
+      pkgs.firecracker
+      pkgs.firectl
+    ];
   };
 }

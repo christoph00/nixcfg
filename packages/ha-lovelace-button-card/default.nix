@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/custom-cards/button-card";
     changelog = "https://github.com/custom-cards/button-card/blob/${src.rev}/CHANGELOG.md";
     license = licenses.mit;
-    maintainers = with maintainers; [];
+    maintainers = with maintainers; [ ];
     mainProgram = "ha-lovelace-button-card";
     platforms = platforms.all;
   };

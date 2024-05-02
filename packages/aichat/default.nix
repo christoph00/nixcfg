@@ -20,14 +20,10 @@ rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-dRanZt4R1welqp+U/714rOU++/nSs60ZBSeiYimBNZA=";
 
-  nativeBuildInputs = [
-    pkg-config
-  ];
+  nativeBuildInputs = [ pkg-config ];
 
   buildInputs =
-    [
-      oniguruma
-    ]
+    [ oniguruma ]
     ++ lib.optionals stdenv.isDarwin [
       darwin.apple_sdk.frameworks.AppKit
       darwin.apple_sdk.frameworks.Security
@@ -40,8 +36,11 @@ rustPlatform.buildRustPackage rec {
   meta = with lib; {
     description = "Use ChatGPT, LocalAI and other LLMs in the terminal";
     homepage = "https://github.com/sigoden/aichat/";
-    license = with licenses; [mit asl20];
-    maintainers = with maintainers; [];
+    license = with licenses; [
+      mit
+      asl20
+    ];
+    maintainers = with maintainers; [ ];
     mainProgram = "aichat";
   };
 }

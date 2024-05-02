@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.system.network;
-in {
-  imports = [
-    ./netbird.nix
-  ];
+in
+{
+  imports = [ ./netbird.nix ];
   options.chr.system.network = with types; {
     enable = mkOpt types.bool true "Enable Network Config.";
     tweaks = mkOpt types.bool true "Enable Network Tweaks.";
@@ -24,9 +24,7 @@ in {
     networking.useNetworkd = mkDefault true;
 
     #networking.hostName = "${hostname}";
-    networking.hostId = builtins.substring 0 8 (
-      builtins.hashString "md5" config.networking.hostName
-    );
+    networking.hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
     # networking.useHostResolvConf = false;
     # services.resolved = {
     #   enable = builtins.elem config.chr.type ["server" "vm"];
@@ -46,8 +44,11 @@ in {
     services.avahi.enable = true;
 
     networking.networkmanager = {
-      enable = builtins.elem config.chr.type ["desktop" "laptop"];
-      plugins = []; # disable all plugins, we don't need them
+      enable = builtins.elem config.chr.type [
+        "desktop"
+        "laptop"
+      ];
+      plugins = [ ]; # disable all plugins, we don't need them
       # dns = "systemd-resolved"; # use systemd-resolved as dns backend
       wifi = {
         powersave = true; # enable wifi powersaving
@@ -57,7 +58,10 @@ in {
     systemd.network.wait-online.enable = false;
 
     boot = mkIf cfg.tweaks {
-      kernelModules = ["tls" "tcp_bbr"];
+      kernelModules = [
+        "tls"
+        "tcp_bbr"
+      ];
       kernel.sysctl = {
         # TCP hardening
         # Prevent bogus ICMP errors from filling up logs.

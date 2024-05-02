@@ -4,13 +4,10 @@
   pciutils,
   ...
 }:
-writeShellApplication
-{
+writeShellApplication {
   name = "list-iommu";
   checkPhase = "";
-  runtimeInputs = [
-    pciutils
-  ];
+  runtimeInputs = [ pciutils ];
   text = ''
     shopt -s nullglob
 

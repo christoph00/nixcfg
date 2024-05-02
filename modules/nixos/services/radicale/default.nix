@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.services.radicale;
-in {
+in
+{
   options.chr.services.radicale = with types; {
     enable = mkBoolOpt' false;
   };
@@ -17,7 +19,10 @@ in {
       enable = true;
       settings = {
         server = {
-          hosts = ["0.0.0.0:5232" "[::]:5232"];
+          hosts = [
+            "0.0.0.0:5232"
+            "[::]:5232"
+          ];
         };
         auth = {
           type = "htpasswd";

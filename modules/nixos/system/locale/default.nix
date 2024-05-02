@@ -6,12 +6,13 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.system.locale;
-in {
+in
+{
   options.chr.system.locale = with types; {
-    enable =
-      mkBoolOpt true "Whether or not to configure locale information.";
+    enable = mkBoolOpt true "Whether or not to configure locale information.";
   };
 
   config = mkIf cfg.enable {
@@ -19,6 +20,8 @@ in {
 
     i18n.defaultLocale = "de_DE.UTF-8";
 
-    console = {keyMap = mkForce "us";};
+    console = {
+      keyMap = mkForce "us";
+    };
   };
 }

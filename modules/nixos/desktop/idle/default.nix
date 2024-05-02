@@ -5,9 +5,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.desktop.idle;
-in {
+in
+{
   options.chr.desktop.idle = with types; {
     enable = mkBoolOpt' config.chr.desktop.hyprland.enable;
   };

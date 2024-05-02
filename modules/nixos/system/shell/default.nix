@@ -6,16 +6,18 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.system.shell;
-in {
+in
+{
   options.chr.system.shell = with types; {
     enable = mkBoolOpt true "Whether or not to enable shell config.";
   };
 
   config = mkIf cfg.enable {
     environment = {
-      shells = with pkgs; [bash];
+      shells = with pkgs; [ bash ];
 
       shellAliases = {
         ll = "ls -lah";

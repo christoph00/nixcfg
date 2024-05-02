@@ -5,9 +5,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.desktop.lock;
-in {
+in
+{
   options.chr.desktop.lock = with types; {
     enable = mkBoolOpt' config.chr.desktop.hyprland.enable;
   };
@@ -34,7 +36,7 @@ in {
             # Blur
             blur_passes = 3; # 0 disables blurring
             blur_size = 10;
-            noise = 0.0117;
+            noise = 1.17e-2;
             contrast = 0.8916;
             brightness = 0.8172;
             vibrancy = 0.1696;

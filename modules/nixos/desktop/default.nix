@@ -6,19 +6,28 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.desktop;
   plasma = pkgs.writeScriptBin "plasma" ''
     ${pkgs.plasma-workspace}/bin/startplasma-wayland &> /dev/null
   '';
-in {
+in
+{
   options.chr.desktop = with types; {
     enable = mkOption {
       type = types.bool;
-      default = builtins.elem config.chr.type ["desktop" "laptop"];
+      default = builtins.elem config.chr.type [
+        "desktop"
+        "laptop"
+      ];
     };
     wm = mkOption {
-      type = types.enum ["Hyprland" "plasma" "wayfire"];
+      type = types.enum [
+        "Hyprland"
+        "plasma"
+        "wayfire"
+      ];
       default = "plasma";
     };
     autologin = mkOption {
@@ -26,7 +35,13 @@ in {
       default = true;
     };
     bar = mkOption {
-      type = types.enum ["waybar" "eww" "ags" "ironbar" "none"];
+      type = types.enum [
+        "waybar"
+        "eww"
+        "ags"
+        "ironbar"
+        "none"
+      ];
       default = "waybar";
     };
   };
@@ -80,13 +95,28 @@ in {
         noto-fonts
         noto-fonts-emoji
         roboto
-        (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka"];})
+        (nerdfonts.override {
+          fonts = [
+            "FiraCode"
+            "JetBrainsMono"
+            "Iosevka"
+          ];
+        })
       ];
       fontconfig.defaultFonts = {
-        serif = ["Roboto Serif" "Noto Color Emoji"];
-        sansSerif = ["Roboto" "Noto Color Emoji"];
-        monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-        emoji = ["Noto Color Emoji"];
+        serif = [
+          "Roboto Serif"
+          "Noto Color Emoji"
+        ];
+        sansSerif = [
+          "Roboto"
+          "Noto Color Emoji"
+        ];
+        monospace = [
+          "JetBrainsMono Nerd Font"
+          "Noto Color Emoji"
+        ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
 
@@ -138,14 +168,20 @@ in {
     services.dbus = {
       enable = true;
       # implementation = "broker";
-      packages = [pkgs.gcr pkgs.dconf];
+      packages = [
+        pkgs.gcr
+        pkgs.dconf
+      ];
     };
 
     services.xserver.xkb = {
       layout = "us-german-umlaut,us";
       extraLayouts.us-german-umlaut = {
         description = "US Layout with German Umlauts";
-        languages = ["eng" "ger"];
+        languages = [
+          "eng"
+          "ger"
+        ];
         symbolsFile = pkgs.writeText "us-german-umlaut" ''
           default partial alphanumeric_keys
           xkb_symbols "basic" {

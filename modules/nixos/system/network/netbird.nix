@@ -5,11 +5,13 @@
   self,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.chr.system.network.netbird;
   kernel = config.boot.kernelPackages;
   interfaceName = "wt0";
-in {
+in
+{
   options.chr.system.network.netbird = {
     enable = mkOption {
       type = types.bool;
@@ -35,14 +37,14 @@ in {
 
     age.secrets.netbirdenv.file = ../../../../secrets/netbird.env;
 
-    environment.systemPackages = [cfg.package];
+    environment.systemPackages = [ cfg.package ];
 
-    networking.dhcpcd.denyInterfaces = [interfaceName];
+    networking.dhcpcd.denyInterfaces = [ interfaceName ];
 
     networking.firewall = {
-      trustedInterfaces = [interfaceName];
+      trustedInterfaces = [ interfaceName ];
       checkReversePath = "loose";
-      allowedUDPPorts = [51820];
+      allowedUDPPorts = [ 51820 ];
     };
 
     systemd.network.networks."50-netbird" = mkIf config.networking.useNetworkd {
@@ -57,12 +59,10 @@ in {
 
     systemd.services.netbird = {
       description = "A WireGuard-based mesh network that connects your devices into a single private network";
-      documentation = ["https://netbird.io/docs/"];
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
-      path = with pkgs; [
-        openresolv
-      ];
+      documentation = [ "https://netbird.io/docs/" ];
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      path = with pkgs; [ openresolv ];
       serviceConfig = {
         EnvironmentFile = cfg.environmentFile;
         ExecStart = "${cfg.package}/bin/netbird up --foreground-mode -c /var/lib/netbird/config.json --log-file console";
@@ -77,6 +77,8 @@ in {
       };
       stopIfChanged = false;
     };
-    environment.persistence."${config.chr.system.persist.stateDir}".directories = lib.mkIf config.chr.system.persist.enable ["/var/lib/netbird"];
+    environment.persistence."${config.chr.system.persist.stateDir}".directories =
+      lib.mkIf config.chr.system.persist.enable
+        [ "/var/lib/netbird" ];
   };
 }

@@ -7,10 +7,17 @@
   ...
 }:
 with lib;
-with lib.chr; {
-  imports = [inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga];
+with lib.chr;
+{
+  imports = [ inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+    "rtsx_pci_sdmmc"
+  ];
   boot.kernelParams = [
     "quiet"
     "pcie_port_pm=off"
@@ -29,9 +36,9 @@ with lib.chr; {
     "mem_sleep_default=deep"
     "ahci.mobile_lpm_policy=3"
   ];
-  boot.kernelModules = ["kvm-intel"];
+  boot.kernelModules = [ "kvm-intel" ];
 
-  swapDevices = [{device = "/dev/nvme0n1p2";}];
+  swapDevices = [ { device = "/dev/nvme0n1p2"; } ];
 
   services.fstrim.enable = true;
 

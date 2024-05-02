@@ -6,18 +6,22 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.system.printer;
-in {
+in
+{
   options.chr.system.printer = with types; {
-    enable =
-      mkBoolOpt config.chr.desktop.enable "Whether or not to configure printer.";
+    enable = mkBoolOpt config.chr.desktop.enable "Whether or not to configure printer.";
   };
 
   config = mkIf cfg.enable {
     services.printing = {
       enable = true;
-      drivers = with pkgs; [chr.xr6515dn gutenprint];
+      drivers = with pkgs; [
+        chr.xr6515dn
+        gutenprint
+      ];
     };
     hardware.printers.ensurePrinters = [
       {

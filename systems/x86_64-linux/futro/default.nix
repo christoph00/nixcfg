@@ -7,9 +7,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   inherit (inputs) nixos-hardware;
-in {
+in
+{
   imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-cpu-amd
@@ -40,7 +42,15 @@ in {
     };
   };
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "ohci_pci" "ehci_pci" "usb_storage" "usbhid" "sd_mod"];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "ohci_pci"
+    "ehci_pci"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+  ];
   # boot.kernelParams = ["radeon.cik_support=0" "amdgpu.cik_support=1"];
 
   networking.interfaces.enp5s0.useDHCP = true;
@@ -55,21 +65,41 @@ in {
 
   fileSystems."/media/data-ssd" = {
     device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
-    options = ["subvol=@data" "discard=async" "compress-force=zstd" "nofail"];
+    options = [
+      "subvol=@data"
+      "discard=async"
+      "compress-force=zstd"
+      "nofail"
+    ];
   };
 
   fileSystems."/mnt/ncdata" = {
     device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
-    options = ["subvol=@ncdata" "discard=async" "compress-force=zstd" "nofail"];
+    options = [
+      "subvol=@ncdata"
+      "discard=async"
+      "compress-force=zstd"
+      "nofail"
+    ];
   };
   fileSystems."/mnt/vm" = {
     device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
-    options = ["subvol=@vm" "discard=async" "compress-force=zstd" "nofail"];
+    options = [
+      "subvol=@vm"
+      "discard=async"
+      "compress-force=zstd"
+      "nofail"
+    ];
   };
 
   fileSystems."/mnt/userdata" = {
     device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
-    options = ["subvol=@userdata" "discard=async" "compress-force=zstd" "nofail"];
+    options = [
+      "subvol=@userdata"
+      "discard=async"
+      "compress-force=zstd"
+      "nofail"
+    ];
   };
 
   swapDevices = [

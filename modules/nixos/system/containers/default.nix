@@ -6,12 +6,13 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.system.containers;
-in {
+in
+{
   options.chr.system.containers = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to configure containers.";
+    enable = mkBoolOpt false "Whether or not to configure containers.";
     externalInterface = mkOption {
       type = types.str;
       default = "ens5";
@@ -21,10 +22,10 @@ in {
 
   config = mkIf cfg.enable {
     networking.firewall = {
-      trustedInterfaces = ["podman0"];
-      interfaces."podman+".allowedUDPPorts = [53];
-      interfaces."podman+".allowedTCPPorts = [53];
-      allowedUDPPorts = [53];
+      trustedInterfaces = [ "podman0" ];
+      interfaces."podman+".allowedUDPPorts = [ 53 ];
+      interfaces."podman+".allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 ];
     };
 
     virtualisation = {
@@ -34,7 +35,7 @@ in {
         autoPrune = {
           enable = true;
           dates = "daily";
-          flags = ["--all"];
+          flags = [ "--all" ];
         };
       };
       oci-containers = {

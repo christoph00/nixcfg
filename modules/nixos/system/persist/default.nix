@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.system.persist;
-in {
-  imports = [
-    inputs.impermanence.nixosModules.impermanence
-  ];
+in
+{
+  imports = [ inputs.impermanence.nixosModules.impermanence ];
   options.chr.system.persist = with types; {
     enable = mkOpt types.bool config.chr.system.filesystem.persist "Whether to persist.";
     stateDir = mkOpt (types.nullOr types.str) "/nix/persist" "The State Dir.";
@@ -44,12 +44,8 @@ in {
 
     boot.initrd.systemd.services.rollback = lib.mkIf (!config.chr.system.filesystem.rootOnTmpfs) {
       description = "Rollback BTRFS root subvolume to a pristine state";
-      wantedBy = [
-        "initrd.target"
-      ];
-      before = [
-        "sysroot.mount"
-      ];
+      wantedBy = [ "initrd.target" ];
+      before = [ "sysroot.mount" ];
       unitConfig.DefaultDependencies = "no";
       serviceConfig.Type = "oneshot";
       script = ''

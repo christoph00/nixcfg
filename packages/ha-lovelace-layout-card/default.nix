@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     description = "Get more control over the placement of lovelace cards";
     homepage = "https://github.com/thomasloven/lovelace-layout-card";
     license = licenses.mit;
-    maintainers = with maintainers; [];
+    maintainers = with maintainers; [ ];
     platforms = platforms.all;
   };
 }

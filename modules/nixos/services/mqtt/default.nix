@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.services.mqtt;
-in {
+in
+{
   options.chr.services.mqtt = with types; {
     enable = mkBoolOpt config.chr.services.smart-home "Enable mqtt Service.";
   };
@@ -17,13 +19,13 @@ in {
       enable = true;
       listeners = [
         {
-          acl = ["pattern readwrite #"];
+          acl = [ "pattern readwrite #" ];
           omitPasswordAuth = true;
           settings.allow_anonymous = true;
         }
       ];
     };
-    networking.firewall.allowedTCPPorts = [1883];
-    environment.systemPackages = [pkgs.mqttui];
+    networking.firewall.allowedTCPPorts = [ 1883 ];
+    environment.systemPackages = [ pkgs.mqttui ];
   };
 }

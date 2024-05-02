@@ -18,9 +18,16 @@ stdenv.mkDerivation rec {
     hash = "sha256-2qs30L7U5kf1Yf+4Pgsjsyaqf9iIaeuRK25Xtn47AYI=";
   };
 
-  outputs = ["bin" "dev" "out"];
+  outputs = [
+    "bin"
+    "dev"
+    "out"
+  ];
 
-  nativeBuildInputs = [extra-cmake-modules plasma5Packages.wrapQtAppsHook];
+  nativeBuildInputs = [
+    extra-cmake-modules
+    plasma5Packages.wrapQtAppsHook
+  ];
 
   buildInputs = with plasma5Packages; [
     frameworkintegration
@@ -40,7 +47,11 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "A highly customizable binary Window Decoration and Application Style plugin for recent versions of the KDE Plasma desktop";
     inherit (src.meta) homepage;
-    license = with licenses; [bsd3 gpl2Plus mit];
+    license = with licenses; [
+      bsd3
+      gpl2Plus
+      mit
+    ];
     platforms = platforms.linux;
   };
 }

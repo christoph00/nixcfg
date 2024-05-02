@@ -6,15 +6,15 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   cfg = config.chr.desktop.hyprland;
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
-in {
-  imports = [
-    inputs.hyprland.nixosModules.default
-  ];
+in
+{
+  imports = [ inputs.hyprland.nixosModules.default ];
 
   options.chr.desktop.hyprland = with types; {
     enable = mkBoolOpt false "Whether or not enable Hyprland Desktop.";
@@ -40,7 +40,7 @@ in {
     };
     xdg.portal = {
       enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
     services.greetd = {
       enable = true;
@@ -54,11 +54,13 @@ in {
       };
     };
     programs.regreet.enable = true;
-    environment.persistence."${config.chr.system.persist.stateDir}".directories = lib.mkIf config.chr.system.persist.enable ["/var/cache/regreet"];
+    environment.persistence."${config.chr.system.persist.stateDir}".directories =
+      lib.mkIf config.chr.system.persist.enable
+        [ "/var/cache/regreet" ];
 
     security = {
       polkit.enable = true;
-      pam.services.ags = {};
+      pam.services.ags = { };
     };
 
     environment.systemPackages = with pkgs.gnome; [
@@ -78,9 +80,9 @@ in {
     systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
-        wantedBy = ["graphical-session.target"];
-        wants = ["graphical-session.target"];
-        after = ["graphical-session.target"];
+        wantedBy = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
         serviceConfig = {
           Type = "simple";
           ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -120,7 +122,7 @@ in {
           exec-once = [
             #    "hyprlock"
             "${config.chr.desktop.ags.package}/bin/ags -b hypr"
-            "wl-paste --type text --watch cliphist store" #Stores only text data
+            "wl-paste --type text --watch cliphist store" # Stores only text data
             "wl-paste --type image --watch cliphist store"
             #  "${pkgs.hyprshade}/bin/hyprshade auto"
           ];
@@ -155,7 +157,12 @@ in {
               passes = 4;
               size = 5;
             };
-            blurls = ["gtk-layer-shell" "waybar" "lockscreen" "ironbar"];
+            blurls = [
+              "gtk-layer-shell"
+              "waybar"
+              "lockscreen"
+              "ironbar"
+            ];
 
             drop_shadow = true;
             shadow_ignore_window = true;
@@ -189,9 +196,7 @@ in {
             workspace_swipe_invert = false;
           };
 
-          monitor = [
-            ",preferred,auto,${cfg.scale}"
-          ];
+          monitor = [ ",preferred,auto,${cfg.scale}" ];
 
           input = {
             follow_mouse = 1;
@@ -218,34 +223,49 @@ in {
             vrr = 2;
           };
 
-          windowrule = let
-            f = regex: "float, ^(${regex})$";
-          in [
-            (f "org.gnome.Calculator")
-            (f "org.gnome.Nautilus")
-            (f "pavucontrol")
-            (f "nm-connection-editor")
-            (f "blueberry.py")
-            (f "org.gnome.Settings")
-            (f "org.gnome.design.Palette")
-            (f "Color Picker")
-            (f "xdg-desktop-portal")
-            (f "xdg-desktop-portal-gnome")
-            (f "transmission-gtk")
-            (f "com.github.Aylur.ags")
-            #  (f "*") # float all
-          ];
+          windowrule =
+            let
+              f = regex: "float, ^(${regex})$";
+            in
+            [
+              (f "org.gnome.Calculator")
+              (f "org.gnome.Nautilus")
+              (f "pavucontrol")
+              (f "nm-connection-editor")
+              (f "blueberry.py")
+              (f "org.gnome.Settings")
+              (f "org.gnome.design.Palette")
+              (f "Color Picker")
+              (f "xdg-desktop-portal")
+              (f "xdg-desktop-portal-gnome")
+              (f "transmission-gtk")
+              (f "com.github.Aylur.ags")
+              #  (f "*") # float all
+            ];
 
-          bind = let
-            binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
-            mvfocus = binding "SUPER" "movefocus";
-            ws = binding "SUPER" "workspace";
-            resizeactive = binding "SUPER CTRL" "resizeactive";
-            mvactive = binding "SUPER ALT" "moveactive";
-            mvtows = binding "SUPER SHIFT" "movetoworkspace";
-            e = "exec, ${config.chr.desktop.ags.package}/bin/ags -b hypr";
-            arr = [1 2 3 4 5 6 7 8 9];
-          in
+          bind =
+            let
+              binding =
+                mod: cmd: key: arg:
+                "${mod}, ${key}, ${cmd}, ${arg}";
+              mvfocus = binding "SUPER" "movefocus";
+              ws = binding "SUPER" "workspace";
+              resizeactive = binding "SUPER CTRL" "resizeactive";
+              mvactive = binding "SUPER ALT" "moveactive";
+              mvtows = binding "SUPER SHIFT" "movetoworkspace";
+              e = "exec, ${config.chr.desktop.ags.package}/bin/ags -b hypr";
+              arr = [
+                1
+                2
+                3
+                4
+                5
+                6
+                7
+                8
+                9
+              ];
+            in
             [
               "CTRL SHIFT, R,  ${e} quit; ${config.chr.desktop.ags.package}/bin/ags -b hypr"
               "SUPER, R,       ${e} -t applauncher"

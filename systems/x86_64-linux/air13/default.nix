@@ -9,19 +9,34 @@
   ...
 }:
 with lib;
-with lib.chr; let
+with lib.chr;
+let
   inherit (inputs) nixos-hardware;
-in {
+in
+{
   imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-cpu-intel
     common-pc
     common-pc-ssd
   ];
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod"];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+  ];
 
-  boot.kernelModules = ["kvm-intel" "acpi_call"];
-  boot.blacklistedKernelModules = ["nouveau" "iwlwifi" "snd_hda_intel"];
+  boot.kernelModules = [
+    "kvm-intel"
+    "acpi_call"
+  ];
+  boot.blacklistedKernelModules = [
+    "nouveau"
+    "iwlwifi"
+    "snd_hda_intel"
+  ];
   boot.kernelParams = [
     "quiet"
     "splash"
@@ -45,7 +60,7 @@ in {
   #   ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
   # '';
 
-  swapDevices = [{device = "/dev/nvme0n1p2";}];
+  swapDevices = [ { device = "/dev/nvme0n1p2"; } ];
 
   services.fstrim.enable = true;
 
@@ -91,12 +106,21 @@ in {
 
   fileSystems."/media/data-hdd" = {
     device = "/dev/disk/by-uuid/1c39c565-7d6c-4924-b709-2516b50b542f";
-    options = ["subvol=@data" "compress-force=zstd" "nofail"];
+    options = [
+      "subvol=@data"
+      "compress-force=zstd"
+      "nofail"
+    ];
   };
 
   fileSystems."/mnt/userdata" = {
     device = "/dev/disk/by-label/air13";
-    options = ["subvol=@userdata" "discard=async" "compress-force=zstd" "nofail"];
+    options = [
+      "subvol=@userdata"
+      "discard=async"
+      "compress-force=zstd"
+      "nofail"
+    ];
   };
 
   hardware.nvidia = {
@@ -125,7 +149,7 @@ in {
     driSupport32Bit = true;
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   services.upower = {
     enable = true;
@@ -162,7 +186,9 @@ in {
 
   networking.useNetworkd = true;
   systemd.network.networks."40-wired" = {
-    matchConfig = {Name = lib.mkForce "enp* eth*";};
+    matchConfig = {
+      Name = lib.mkForce "enp* eth*";
+    };
     DHCP = "yes";
     networkConfig = {
       IPv6PrivacyExtensions = "yes";

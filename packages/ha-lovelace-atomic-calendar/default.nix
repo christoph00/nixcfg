@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     description = "An advanced calendar card for Home Assistant Lovelace";
     homepage = "https://github.com/totaldebug/atomic-calendar-revive";
     license = licenses.mit;
-    maintainers = with maintainers; [];
+    maintainers = with maintainers; [ ];
     mainProgram = "ha-lovelace-atomic-calendar";
     platforms = platforms.all;
   };

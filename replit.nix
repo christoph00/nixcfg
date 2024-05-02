@@ -1,4 +1,5 @@
-{pkgs}: {
+{ pkgs }:
+{
   deps = [
     pkgs.bashInteractive
     pkgs.nixd
