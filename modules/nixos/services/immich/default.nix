@@ -87,6 +87,8 @@ in {
   };
   config = mkIf cfg.enable {
 
+    chr.system.containers.enable = true;
+
      virtualisation.oci-containers.containers = {
       "immich-server" = {
         image = "ghcr.io/immich-app/immich-server:${cfg.version}";
