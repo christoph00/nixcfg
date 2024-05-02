@@ -68,6 +68,7 @@ in
 
   chr = {
     type = "server";
+    system.containers.enable = true;
     services = {
       vmetrics.enable = true;
       monitoring.scrapeExtra = true;
@@ -79,10 +80,6 @@ in
       immich = {
         enable = true;
       };
-    };
-    vms = {
-      enable = true;
-      smarthome.enable = true;
     };
   };
   chr.system.filesystem = {

@@ -90,7 +90,6 @@ in
   };
   config = mkIf cfg.enable {
 
-    chr.system.containers.enable = true;
 
     virtualisation.oci-containers.containers = {
       "immich-server" = {
