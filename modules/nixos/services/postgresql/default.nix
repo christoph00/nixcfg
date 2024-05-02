@@ -26,6 +26,8 @@ in
         local all  all           peer
         host  all  all 0.0.0.0/0 scram-sha-256
       '';
+      settings = {shared_preload_libraries = "vectors.so";};
+
     };
   };
 }
