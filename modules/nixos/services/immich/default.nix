@@ -90,6 +90,12 @@ in
   };
   config = mkIf cfg.enable {
 
+    users.users.immich = {
+              isSystemUser = true;
+              group = "immich";
+      };
+      users.groups.immich = { };
+
 
     virtualisation.oci-containers.containers = {
       "immich-server" = {
@@ -98,6 +104,7 @@ in
           "start.sh"
           "immich"
         ];
+        user = "immich:immich";
         volumes = [
           "${cfg.dataDir}:/usr/src/app/upload"
           "/run/agenix:/run/agenix:ro"
@@ -105,7 +112,7 @@ in
           "/run/redis-immich:/run/redis-immich:ro"
         ];
         environment = {
-          DB_URL = "socket://immich:@/run/postgresql.5432?db=immich";
+          DB_URL = "socket://immich:@/run/postgresql?db=immich";
           REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         };
         autoStart = true;
@@ -117,6 +124,8 @@ in
           "start.sh"
           "microservices"
         ];
+        user = "immich:immich";
+
         volumes = [
           "${cfg.dataDir}:/usr/src/app/upload"
           "/run/agenix:/run/agenix:ro"
@@ -133,6 +142,7 @@ in
       };
       "immich-machine-learning" = {
         image = "ghcr.io/immich-app/immich-machine-learning:${cfg.version}";
+        user = "immich:immich";
         volumes = [ "model-cache:/usr/src/app/upload" ];
         autoStart = true;
         extraOptions = [ "--pod=immich" ];
@@ -157,6 +167,7 @@ in
     };
 
     services.redis.servers.immich = {
+      user = "immich";
       enable = true;
     };
   };
