@@ -61,6 +61,9 @@ in {
       vaultwarden.enable = true;
       nextcloud.enable = true;
       nas.enable = true;
+      immich = {
+        enable = true;
+      };
     };
     vms = {
       enable = true;
