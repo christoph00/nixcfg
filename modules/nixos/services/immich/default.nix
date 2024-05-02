@@ -102,6 +102,7 @@ in
           "${cfg.dataDir}:/usr/src/app/upload"
           "/run/agenix:/run/agenix:ro"
           "/run/postgresql:/run/postgresql:ro"
+          "/run/redis-immich:/run/redis-immich:ro"
         ];
         environment = {
           DB_URL = "socket://immich:@/run/postgresql?db=immich";
@@ -120,6 +121,8 @@ in
           "${cfg.dataDir}:/usr/src/app/upload"
           "/run/agenix:/run/agenix:ro"
           "/run/postgresql:/run/postgresql:ro"
+          "/run/redis-immich:/run/redis-immich:ro"
+
         ];
         environment = {
           DB_URL = "socket://immich:@/run/postgresql?db=immich";
