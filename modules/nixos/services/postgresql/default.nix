@@ -21,6 +21,11 @@ in
       enableTCPIP = false;
       package = pkgs.postgresql_14;
       dataDir = "${config.chr.system.persist.stateDir}/pgDB/${config.services.postgresql.package.psqlSchema}";
+      extraPlugins = [ pkgs.pgvecto-rs ];
+      authentication = lib.mkForce ''
+        local all  all           peer
+        host  all  all 0.0.0.0/0 scram-sha-256
+      '';
     };
   };
 }
