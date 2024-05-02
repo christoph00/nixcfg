@@ -13,6 +13,11 @@ in
 {
   options.chr.system.containers = with types; {
     enable = mkBoolOpt false "Whether or not to configure containers.";
+    externalInterface = mkOption {
+      type = types.str;
+      default = "ens5";
+      description = "External network interface to use for containers.";
+    };
   };
 
   config = mkIf cfg.enable {
