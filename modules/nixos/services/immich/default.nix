@@ -15,7 +15,7 @@ in
     enable = mkBoolOpt false "Enable immich Service.";
     port = mkOption {
       type = types.port;
-      default = 8080;
+      default = 8081;
       description = ''
         Port the listener should listen on
       '';
