@@ -20,14 +20,14 @@ in {
       };
       version = mkOption {
         type = types.str;
-        default = "latest";
+        default = "release";
         description = ''
           Version of the immich server to use
         '';
       };
       dataDir = mkOption {
         type = types.str;
-        default = "/var/lib/immich";
+        default = "/nix/persist/immich";
         description = ''
           Directory to store data
         '';
@@ -103,8 +103,8 @@ in {
           DB_USERNAME = cfg.dbUsername;
           DB_PASSWORD_FILE = cfg.dbPasswordFile;
           DB_PORT = toString cfg.dbPort;
-          REDIS_HOSTNAME = "redis.joukamachi.net";
-          REDIS_PORT = "6380";
+          REDIS_HOSTNAME = cfg.redisHostname;
+          REDIS_PORT = toString cfg.redisPort;
         };
         autoStart = true;
         extraOptions = [ "--pod=immich" ];
@@ -122,8 +122,8 @@ in {
           DB_USERNAME = cfg.dbUsername;
           DB_PASSWORD_FILE = cfg.dbPasswordFile;
           DB_PORT = toString cfg.dbPort;
-          REDIS_HOSTNAME = "redis.joukamachi.net";
-          REDIS_PORT = "6380";
+          REDIS_HOSTNAME = cfg.redisHostname;
+          REDIS_PORT = toString cfg.redisPort;
         };
         autoStart = true;
         extraOptions = [ "--pod=immich" ];
