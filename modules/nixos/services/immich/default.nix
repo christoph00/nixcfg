@@ -105,7 +105,7 @@ in
           "/run/redis-immich:/run/redis-immich:ro"
         ];
         environment = {
-          DB_URL = "socket://immich:@/run/postgresql?db=immich";
+          DB_URL = "socket://immich:@/run/postgresql.5432?db=immich";
           REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         };
         autoStart = true;
