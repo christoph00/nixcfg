@@ -31,6 +31,7 @@ in {
         description = ''
           Directory to store data
         '';
+      };
       
       dbHostname = mkOption {
         type = types.str;
@@ -38,6 +39,7 @@ in {
         description = ''
           Hostname of the database
         '';
+      };
         dbPort = mkOption {
         type = types.int;
         default = 5432;
@@ -153,5 +155,5 @@ in {
       '';
     };
   };
-};
+
   }
