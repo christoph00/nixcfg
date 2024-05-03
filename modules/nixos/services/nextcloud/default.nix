@@ -71,7 +71,7 @@ in {
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud29;
+      package = pkgs.nextcloud28;
       https = true;
       configureRedis = true;
       hostName = "cloud.r505.de";
