@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.immich;
-in
-{
+in {
   options.chr.services.immich = with types; {
     enable = mkBoolOpt false "Enable immich Service.";
     port = mkOption {
@@ -89,13 +87,11 @@ in
     };
   };
   config = mkIf cfg.enable {
-
     users.users.immich = {
-              isSystemUser = true;
-              group = "immich";
-      };
-      users.groups.immich = { };
-
+      isSystemUser = true;
+      group = "immich";
+    };
+    users.groups.immich = {};
 
     virtualisation.oci-containers.containers = {
       "immich-server" = {
@@ -116,7 +112,7 @@ in
           REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         };
         autoStart = true;
-        extraOptions = [ "--pod=immich" ];
+        extraOptions = ["--pod=immich"];
       };
       "immich-microservices" = {
         image = "ghcr.io/immich-app/immich-server:${cfg.version}";
@@ -131,21 +127,20 @@ in
           "/run/agenix:/run/agenix:ro"
           "/run/postgresql:/run/postgresql:ro"
           "/run/redis-immich:/run/redis-immich:ro"
-
         ];
         environment = {
           DB_URL = "socket://immich:@/run/postgresql?db=immich";
           REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         };
         autoStart = true;
-        extraOptions = [ "--pod=immich" ];
+        extraOptions = ["--pod=immich"];
       };
       "immich-machine-learning" = {
         image = "ghcr.io/immich-app/immich-machine-learning:${cfg.version}";
         user = "immich:immich";
-        volumes = [ "model-cache:/usr/src/app/upload" ];
+        volumes = ["model-cache:/usr/src/app/upload"];
         autoStart = true;
-        extraOptions = [ "--pod=immich" ];
+        extraOptions = ["--pod=immich"];
       };
     };
 

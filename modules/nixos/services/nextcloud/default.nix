@@ -6,8 +6,7 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.nextcloud;
   cloudflareIpRanges = [
     # Cloudflare IPv4: https://www.cloudflare.com/ips-v4
@@ -36,8 +35,7 @@ let
     "2a06:98c0::/29"
     "2c0f:f248::/32"
   ];
-in
-{
+in {
   options.chr.services.nextcloud = with types; {
     enable = mkBoolOpt false "Enable nextcloud Service.";
     enableImaginary = mkBoolOpt true "Enable Imaginary Service.";
@@ -73,7 +71,7 @@ in
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud28;
+      package = pkgs.nextcloud29;
       https = true;
       configureRedis = true;
       hostName = "cloud.r505.de";
@@ -224,11 +222,11 @@ in
     };
 
     systemd.services.nextcloud-cron = {
-      path = [ pkgs.perl ];
+      path = [pkgs.perl];
     };
 
     systemd.services."phpfpm-nextcloud".serviceConfig = {
-      DeviceAllow = [ "/dev/dri/renderD128" ];
+      DeviceAllow = ["/dev/dri/renderD128"];
       SupplementaryGroups = [
         "render"
         "video"
@@ -243,7 +241,7 @@ in
     };
 
     environment.persistence."${config.chr.system.persist.stateDir}" = {
-      directories = [ { directory = "/var/lib/nextcloud"; } ];
+      directories = [{directory = "/var/lib/nextcloud";}];
     };
 
     services.redis.servers.nextcloud.settings = {
@@ -251,11 +249,11 @@ in
       maxmemory-policy = "volatile-lfu";
     };
 
-    users.users.nextcloud.extraGroups = [ "media" ];
+    users.users.nextcloud.extraGroups = ["media"];
 
     systemd.services."nextcloud-setup" = {
-      requires = [ "postgresql.service" ];
-      after = [ "postgresql.service" ];
+      requires = ["postgresql.service"];
+      after = ["postgresql.service"];
     };
 
     # systemd.services."go-vod" = {
