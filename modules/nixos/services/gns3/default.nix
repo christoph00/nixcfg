@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.gns3;
-in
-{
+in {
   options.chr.services.gns3 = with types; {
     enable = mkBoolOpt false "Enable gns3 Service.";
     gui = mkBoolOpt false "Enable gns3 GUI.";
@@ -35,8 +33,11 @@ in
       };
     };
 
-    systemd.services.gns3-server.path = [ pkgs.qemu ];
+    virtualisation.docker.enable = true;
+    virtualisation.libvirtd.enable = true;
 
-    environment.systemPackages = with pkgs; [ gns3-gui ];
+    systemd.services.gns3-server.path = [pkgs.qemu];
+
+    environment.systemPackages = mkIf cfg.gui [pkgs.gns3-gui];
   };
 }
