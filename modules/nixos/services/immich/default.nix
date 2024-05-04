@@ -8,6 +8,10 @@
 with lib;
 with lib.chr; let
   cfg = config.chr.services.immich;
+  user = "immich";
+  group = user;
+  uid = 15015;
+  gid = uid;
 in {
   options.chr.services.immich = with types; {
     enable = mkBoolOpt false "Enable immich Service.";
@@ -87,11 +91,11 @@ in {
     };
   };
   config = mkIf cfg.enable {
-    users.users.immich = {
+    users.users.${user} = {
+      inherit group uid;
       isSystemUser = true;
-      group = "immich";
     };
-    users.groups.immich = {};
+    users.groups.${group} = {inherit gid;};
 
     virtualisation.oci-containers.containers = {
       "immich-server" = {
@@ -100,7 +104,6 @@ in {
           "start.sh"
           "immich"
         ];
-        user = "immich:immich";
         volumes = [
           "${cfg.dataDir}:/usr/src/app/upload"
           "/run/agenix:/run/agenix:ro"
@@ -108,6 +111,8 @@ in {
           "/run/redis-immich:/run/redis-immich:ro"
         ];
         environment = {
+          PUID = toString uid;
+          PGID = toString gid;
           DB_URL = "socket://immich:@/run/postgresql?db=immich";
           REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         };
@@ -129,6 +134,8 @@ in {
           "/run/redis-immich:/run/redis-immich:ro"
         ];
         environment = {
+          PUID = toString uid;
+          PGID = toString gid;
           DB_URL = "socket://immich:@/run/postgresql?db=immich";
           REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         };
@@ -137,7 +144,6 @@ in {
       };
       "immich-machine-learning" = {
         image = "ghcr.io/immich-app/immich-machine-learning:${cfg.version}";
-        user = "immich:immich";
         volumes = ["model-cache:/usr/src/app/upload"];
         autoStart = true;
         extraOptions = ["--pod=immich"];
@@ -162,7 +168,7 @@ in {
     };
 
     services.redis.servers.immich = {
-      user = "immich";
+      inherit user;
       enable = true;
     };
   };
