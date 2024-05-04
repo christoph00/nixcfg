@@ -125,7 +125,6 @@ in {
           "start.sh"
           "microservices"
         ];
-        user = "immich:immich";
 
         volumes = [
           "${cfg.dataDir}:/usr/src/app/upload"
@@ -146,6 +145,10 @@ in {
         image = "ghcr.io/immich-app/immich-machine-learning:${cfg.version}";
         volumes = ["model-cache:/usr/src/app/upload"];
         autoStart = true;
+        environment = {
+          PUID = toString uid;
+          PGID = toString gid;
+        };
         extraOptions = ["--pod=immich"];
       };
     };
