@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.monitoring;
-in
-{
+in {
   options.chr.services.monitoring = with types; {
     enable = mkBoolOpt true "Enable monitoring Service.";
     scrapeExtra = mkBoolOpt false "Enable scraping External entpoints.";
@@ -20,7 +18,7 @@ in
       exporters = {
         node = {
           enable = true;
-          enabledCollectors = [ "systemd" ];
+          enabledCollectors = ["systemd"];
           port = 9100;
         };
       };
@@ -28,8 +26,8 @@ in
     services.vmagent = {
       enable = true;
       package = pkgs.victoriametrics;
-      remoteWriteUrl = lib.mkForce "http://air13.netbird.cloud:8428/api/v1/write"; # TODO: fix hardcoded URL
-      extraArgs = lib.mkForce [ "-remoteWrite.label=instance=${config.networking.hostName}" ];
+      remoteWrite.url = lib.mkForce "http://air13.netbird.cloud:8428/api/v1/write"; # TODO: fix hardcoded URL
+      extraArgs = lib.mkForce ["-remoteWrite.label=instance=${config.networking.hostName}"];
       prometheusConfig = {
         global = {
           scrape_interval = "1m";
@@ -40,14 +38,14 @@ in
             {
               job_name = "node";
               static_configs = [
-                { targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ]; }
+                {targets = ["localhost:${toString config.services.prometheus.exporters.node.port}"];}
               ];
             }
           ]
           ++ lib.optionals cfg.scrapeExtra [
             {
               job_name = "openwrt";
-              static_configs = [ { targets = [ "192.168.2.1:9100" ]; } ];
+              static_configs = [{targets = ["192.168.2.1:9100"];}];
             }
           ];
       };
