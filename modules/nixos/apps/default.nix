@@ -75,6 +75,7 @@ in {
         kdePackages.merkuro
         kdePackages.tokodon
         kdePackages.zanshin
+        kdePackages.okular
       ];
     };
   };
