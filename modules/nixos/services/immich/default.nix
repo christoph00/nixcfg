@@ -112,7 +112,7 @@ in {
           ${pkgs.nodejs}/bin/node ${pkgs.chr.immich-server}/main.js immich
         '';
         WorkingDirectory = "${pkgs.chr.immich-server}/";
-        Restart = "always";
+        Restart = "on-failure";
         RestartSec = "5";
       };
       environment = {
