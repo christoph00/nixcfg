@@ -110,9 +110,9 @@ in {
         User = user;
         Group = group;
         ExecStart = ''
-          ${pkgs.nodejs}/bin/node ${pkgs.chr.immich}/main.js immich
+          ${pkgs.nodejs}/bin/node ${pkgs.chr.immich-server}/main.js immich
         '';
-        WorkingDirectory = "${pkgs.chr.immich}";
+        WorkingDirectory = "${pkgs.chr.immich-server}";
         Restart = "always";
         RestartSec = "5";
         Environment = {
