@@ -107,12 +107,17 @@ in {
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       serviceConfig = {
+        inherit user group;
         ExecStart = ''
           ${pkgs.nodejs}/bin/node ${pkgs.chr.immich-server}/main.js immich
         '';
         WorkingDirectory = "${pkgs.chr.immich-server}/";
         Restart = "always";
         RestartSec = "5";
+      };
+      environment = {
+        DB_URL = "socket://immich:@/run/postgresql?db=immich";
+        REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
       };
     };
   };
