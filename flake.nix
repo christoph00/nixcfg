@@ -1,7 +1,7 @@
 {
   description = "nixos config";
 
-  nixConfig.extra-substituters = [ "https://cache.garnix.io" ];
+  nixConfig.extra-substituters = ["https://cache.garnix.io"];
   nixConfig.extra-trusted-public-keys = [
     "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
   ];
@@ -109,11 +109,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprland.url = "github:hyprwm/Hyprland";
 
     hyprland-contrib = {
@@ -178,23 +173,21 @@
       inputs.flake-utils.follows = "utils";
     };
   };
-  outputs =
-    inputs:
-    let
-      lib = inputs.snowfall-lib.mkLib {
-        inherit inputs;
-        src = ./.;
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
+      src = ./.;
 
-        snowfall = {
-          meta = {
-            name = "chr";
-            title = "Christoph's NixOS Config";
-          };
-
-          namespace = "chr";
+      snowfall = {
+        meta = {
+          name = "chr";
+          title = "Christoph's NixOS Config";
         };
+
+        namespace = "chr";
       };
-    in
+    };
+  in
     lib.mkFlake {
       channels-config = {
         allowUnfree = true;
