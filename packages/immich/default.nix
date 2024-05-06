@@ -1,6 +1,7 @@
 {
   lib,
   buildNpmPackage,
+  substituteAll,
   fetchFromGitHub,
   vips,
   pkg-config,
@@ -24,19 +25,7 @@
     pname = "${pname}-openapi";
     src = "${src}/open-api/typescript-sdk";
 
-    buildPhase = ''
-      runHook preBuild
-      mkdir dist
-      npm run build --offline -- --output-path=dist
-      runHook postBuild
-    '';
-
-    installPhase = ''
-      runHook preInstall
-      mkdir $out
-      cp -r dist/* $out
-      runHook postInstall
-    '';
+    npmDepsHash = "sha256-tKuhaheR0l6/9XmnYpUod+g8GLup/6LZ3K0dftdfw0s=";
   };
 
   web = buildNpmPackage {
@@ -44,14 +33,32 @@
     pname = "${pname}-web";
     src = "${src}/web";
 
-    npmDepsHash = "sha256-yzDGBrhG3FvgZzQG1d5Bv6GzQB1fybYFqjgePgLn3m0=";
+    npmDepsHash = "sha256-vs6QEGIfbGCtTCXQDmWYBf/eKbB7lPEJzvTHzPfjQvY=";
+
+    makeCacheWritable = true;
 
     postPatch = ''
-      substituteInPlace package.json --replace 'file:../open-api/typescript-sdk' "file:${openapi}"
+      substituteInPlace package.json --replace-fail 'file:../open-api/typescript-sdk' "${version}"
+
+      substituteInPlace package-lock.json --replace-fail 'file:../open-api/typescript-sdk' "${version}"
+    '';
+
+    postConfigure = ''
+      npm install ${openapi}/lib/node_modules/@immich/sdk
+    '';
+
+    installPhase = ''
+      mkdir -p $out
+      cp -a \
+        build/* \
+        static \
+        $out/
     '';
   };
 in
   buildNpmPackage rec {
+    inherit pname src version;
+
     npmDepsHash = "sha256-hrdswSsQFKu7i214H082FU7BpS/OUp+6tCw4rY5ccRQ=";
 
     sourceRoot = "${src.name}/server";
