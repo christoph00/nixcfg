@@ -2,12 +2,12 @@
   lib,
   config,
   pkgs,
-  osConfig ? { },
+  osConfig ? {},
   inputs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     types
     mkIf
     mkDefault
@@ -17,9 +17,11 @@ let
 
   cfg = config.chr.user;
 
-  home-directory = if cfg.name == null then null else "/home/${cfg.name}";
-in
-{
+  home-directory =
+    if cfg.name == null
+    then null
+    else "/home/${cfg.name}";
+in {
   options.chr.user = {
     enable = mkOpt types.bool false "Whether to configure the user account.";
     name = mkOpt (types.nullOr types.str) "christoph" "The user account.";
@@ -35,7 +37,6 @@ in
     inputs.nixvim.homeManagerModules.nixvim
     inputs.hyprland.homeManagerModules.default
     inputs.hyprlock.homeManagerModules.default
-    inputs.hypridle.homeManagerModules.default
     inputs.ironbar.homeManagerModules.default
   ];
 
