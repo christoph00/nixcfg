@@ -117,6 +117,7 @@ in {
         RestartSec = "5";
       };
       environment = {
+        NODE_ENV = "production";
         DB_URL = "socket://immich:@/run/postgresql?db=immich";
         REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         IMMICH_MEDIA_LOCATION = "/nix/persist/immich/upload";
