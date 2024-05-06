@@ -116,7 +116,7 @@ in {
         RestartSec = "5";
       };
       environment = {
-        DB_URL = "socket://immich:@/run/postgresql?db=immich";
+        DB_URL = "postgresql://immich@/immich";
         REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
       };
     };
