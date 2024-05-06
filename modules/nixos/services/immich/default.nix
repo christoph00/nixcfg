@@ -107,8 +107,6 @@ in {
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       serviceConfig = {
-        User = user;
-        Group = group;
         ExecStart = ''
           ${pkgs.nodejs}/bin/node ${pkgs.chr.immich-server}/main.js immich
         '';
