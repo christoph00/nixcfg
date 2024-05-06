@@ -97,82 +97,29 @@ in {
     };
     users.groups.${group} = {inherit gid;};
 
-    virtualisation.oci-containers.containers = {
-      "immich-server" = {
-        image = "ghcr.io/immich-app/immich-server:${cfg.version}";
-        cmd = [
-          "start.sh"
-          "immich"
-        ];
-        volumes = [
-          "${cfg.dataDir}:/usr/src/app/upload"
-          "/run/agenix:/run/agenix:ro"
-          "/run/postgresql:/run/postgresql:ro"
-          "/run/redis-immich:/run/redis-immich:ro"
-        ];
-        environment = {
-          PUID = toString uid;
-          PGID = toString gid;
-          DB_URL = "socket://immich:@/run/postgresql?db=immich";
-          REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
-        };
-        autoStart = true;
-        extraOptions = ["--pod=immich"];
-      };
-      "immich-microservices" = {
-        image = "ghcr.io/immich-app/immich-server:${cfg.version}";
-        cmd = [
-          "start.sh"
-          "microservices"
-        ];
-
-        volumes = [
-          "${cfg.dataDir}:/usr/src/app/upload"
-          "/run/agenix:/run/agenix:ro"
-          "/run/postgresql:/run/postgresql:ro"
-          "/run/redis-immich:/run/redis-immich:ro"
-        ];
-        environment = {
-          PUID = toString uid;
-          PGID = toString gid;
-          DB_URL = "socket://immich:@/run/postgresql?db=immich";
-          REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
-        };
-        autoStart = true;
-        extraOptions = ["--pod=immich"];
-      };
-      "immich-machine-learning" = {
-        image = "ghcr.io/immich-app/immich-machine-learning:${cfg.version}";
-        volumes = ["model-cache:/usr/src/app/upload"];
-        autoStart = true;
-        environment = {
-          PUID = toString uid;
-          PGID = toString gid;
-        };
-        extraOptions = ["--pod=immich"];
-      };
-    };
-
-    systemd.services.podman-immich-server.serviceConfig.Type = lib.mkForce "exec";
-    systemd.services.podman-immich-microservices.serviceConfig.Type = lib.mkForce "exec";
-    systemd.services.podman-immich-machine-learning.serviceConfig.Type = lib.mkForce "exec";
-
-    systemd.services.podman-create-pod-immich = {
-      serviceConfig.Type = "oneshot";
-      wantedBy = [
-        "podman-immich-server.service"
-        "podman-immich-microservices.service"
-        "podman-immich-machinelearning.service"
-      ];
-
-      script = ''
-        ${pkgs.podman}/bin/podman pod create --name immich --replace -p '${toString cfg.port}:3001'
-      '';
-    };
-
     services.redis.servers.immich = {
       inherit user;
       enable = true;
+    };
+
+    systemd.services.immich-server = {
+      description = "immich server";
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
+      serviceConfig = {
+        User = user;
+        Group = group;
+        ExecStart = ''
+          ${pkgs.nodejs}/bin/node ${pkgs.chr.immich}/main.js immich
+        '';
+        WorkingDirectory = "${pkgs.chr.immich}";
+        Restart = "always";
+        RestartSec = "5";
+        Environment = {
+          DB_URL = "socket://immich:@/run/postgresql?db=immich";
+          REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
+        };
+      };
     };
   };
 }
