@@ -9,11 +9,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   inherit (inputs) nixos-hardware;
-in
-{
+in {
   imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-cpu-intel
@@ -60,7 +58,7 @@ in
   #   ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
   # '';
 
-  swapDevices = [ { device = "/dev/nvme0n1p2"; } ];
+  swapDevices = [{device = "/dev/nvme0n1p2";}];
 
   services.fstrim.enable = true;
 
@@ -68,7 +66,6 @@ in
 
   chr = {
     type = "server";
-    system.containers.enable = true;
     services = {
       vmetrics.enable = true;
       monitoring.scrapeExtra = true;
@@ -146,7 +143,7 @@ in
     driSupport32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   services.upower = {
     enable = true;
