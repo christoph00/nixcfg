@@ -112,7 +112,7 @@ in {
         ExecStart = ''
           ${pkgs.nodejs}/bin/node ${pkgs.chr.immich-server}/main.js immich
         '';
-        WorkingDirectory = "${pkgs.chr.immich-server}";
+        WorkingDirectory = "${pkgs.chr.immich-server}/";
         Restart = "always";
         RestartSec = "5";
         Environment = {
