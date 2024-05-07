@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.paperless;
-in
-{
+in {
   options.chr.services.paperless = with types; {
     enable = mkBoolOpt' false;
   };
@@ -36,40 +34,38 @@ in
     };
 
     environment.persistence."${config.chr.system.persist.stateDir}" = {
-      directories = [ { directory = "/var/lib/paperless"; } ];
+      directories = [{directory = "/var/lib/paperless";}];
     };
 
     age.secrets.paperless-token-env.file = ../../../../secrets/paperless-token.env;
 
     systemd.services.paperless-sftpgo = {
       description = "Move files from sftpgo inbox to paperless consumption directory";
-      wantedBy = [ "paperless-consumer.service" ];
+      wantedBy = ["paperless-consumer.service"];
       serviceConfig = {
         EnvironmentFile = config.age.secrets.paperless-token-env.path;
         # ExecStart = let
         #   plurl = "http://localhost:${builtins.toString config.services.paperless.port}";
         # in "${pkgs.chr.scantopl}/bin/scantopl -scandir /mnt/userdata/inbox -plurl ${plurl}";
       };
-      script =
-        let
-          plurl = "http://localhost:${builtins.toString config.services.paperless.port}";
-        in
-        ''
-          ${pkgs.inotify-tools}/bin/inotifywait -m -e close_write "/mnt/userdata/inbox" |
-          while read -r directory action file; do
-            echo "Neue Datei $file erkannt. Sende an Paperless..."
-            ${pkgs.curl}/bin/curl ${plurl}/api/documents/post_document/ -X POST \
-              -H "Authorization: Token $PLTOKEN" \
-              -F "document=@/mnt/userdata/inbox/$file" \
-              -F "title=$file"
-            if [ $? -eq 0 ]; then
-              echo "Datei $file erfolgreich gesendet. Lösche Datei..."
-              rm "/mnt/userdata/inbox/$file"
-            else
-              echo "Fehler beim Senden der Datei $file."
-            fi
-          done
-        '';
+      script = let
+        plurl = "http://localhost:${builtins.toString config.services.paperless.port}";
+      in ''
+        ${pkgs.inotify-tools}/bin/inotifywait -m -e close_write "/mnt/userdata/inbox" |
+        while read -r directory action file; do
+          echo "Neue Datei $file erkannt. Sende an Paperless..."
+          ${pkgs.curl}/bin/curl ${plurl}/api/documents/post_document/ -X POST \
+            -H "Authorization: Token $PLTOKEN" \
+            -F "document=@/mnt/userdata/inbox/$file" \
+            -F "title=$file"
+          if [ $? -eq 0 ]; then
+            echo "Datei $file erfolgreich gesendet. Lösche Datei..."
+            rm "/mnt/userdata/inbox/$file"
+          else
+            echo "Fehler beim Senden der Datei $file."
+          fi
+        done
+      '';
     };
 
     systemd.services.paperless.serviceConfig.RestartSec = "600"; # Retry every 10 minutes

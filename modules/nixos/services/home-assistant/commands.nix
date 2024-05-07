@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
-let
+{
+  pkgs,
+  config,
+  ...
+}: let
   sshCmd = "${pkgs.openssh}/bin/ssh -i ${config.age.secrets.agent-key.path} -o 'StrictHostKeyChecking=no' agent@{{ host }}";
   mkSSHSensor = host: name: cmd: minutes: {
     platform = "command_line";
@@ -7,8 +10,7 @@ let
     scan_interval = minutes * 60;
     command = "${pkgs.openssh}/bin/ssh -i ${config.age.secrets.agent-key.path} -o 'StrictHostKeyChecking=no' ${host} ${cmd}";
   };
-in
-{
+in {
   services.home-assistant.config = {
     shell_command = {
       suspend_host = ''${sshCmd} "sudo /run/current-system/sw/bin/systemctl suspend"'';

@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.nas;
-in
-{
+in {
   options.chr.services.nas = with types; {
     enable = mkBoolOpt false "Enable NAS Service.";
     userdataDir = mkOpt (types.nullOr types.str) "/mnt/userdata" "NAS Userdata Dir.";
@@ -106,7 +104,7 @@ in
         UMask = mkForce "0077";
         RuntimeDirectory = "sftpgo";
         RuntimeDirectoryMode = "0755";
-        ReadWritePaths = [ cfg.userdataDir ];
+        ReadWritePaths = [cfg.userdataDir];
       };
       postStart = ''
         while [ ! -e "/run/sftpgo/httpd.sock" ]; do
@@ -123,7 +121,7 @@ in
       };
     };
 
-    users.users.sftpgo.extraGroups = [ "media" ];
+    users.users.sftpgo.extraGroups = ["media"];
 
     services.nginx.clientMaxBodySize = "10G";
 

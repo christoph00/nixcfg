@@ -7,14 +7,12 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.vms.openwrt;
-in
-{
+in {
   options.chr.vms.openwrt = with types; {
     enable = mkBoolOpt' false;
   };
 
-  config = mkIf cfg.enable { };
+  config = mkIf cfg.enable {};
 }

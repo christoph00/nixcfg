@@ -20,10 +20,10 @@ rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-dRanZt4R1welqp+U/714rOU++/nSs60ZBSeiYimBNZA=";
 
-  nativeBuildInputs = [ pkg-config ];
+  nativeBuildInputs = [pkg-config];
 
   buildInputs =
-    [ oniguruma ]
+    [oniguruma]
     ++ lib.optionals stdenv.isDarwin [
       darwin.apple_sdk.frameworks.AppKit
       darwin.apple_sdk.frameworks.Security
@@ -40,7 +40,7 @@ rustPlatform.buildRustPackage rec {
       mit
       asl20
     ];
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "aichat";
   };
 }

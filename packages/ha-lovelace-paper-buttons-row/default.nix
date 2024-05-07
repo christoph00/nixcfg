@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     description = "Adds highly configurable buttons that use actions and per-state styling";
     homepage = "https://github.com/jcwillox/lovelace-paper-buttons-row";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     platforms = platforms.all;
   };
 }

@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.desktop.anyrun;
-in
-{
+in {
   options.chr.desktop.anyrun = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };

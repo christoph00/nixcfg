@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.apps.emacs;
-in
-{
+in {
   options.chr.apps.emacs = with types; {
     enable = mkBoolOpt' false;
     defaultEditor = mkBoolOpt' false;
@@ -20,11 +18,11 @@ in
   config = mkIf cfg.enable {
     chr.home = {
       extraOptions = {
-        home.sessionVariables = mkIf cfg.defaultEditor { EDITOR = "emacs"; };
+        home.sessionVariables = mkIf cfg.defaultEditor {EDITOR = "emacs";};
         programs.emacs = {
           enable = true;
           package = pkgs.emacs29-gtk3;
-          extraPackages = epkgs: [ epkgs.mu4e ];
+          extraPackages = epkgs: [epkgs.mu4e];
         };
       };
     };

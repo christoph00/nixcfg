@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.desktop.wayfire;
-  allowedTypes =
-    with types;
+  allowedTypes = with types;
     oneOf [
       str
       int
@@ -47,8 +45,8 @@ let
       };
 
       settings = mkOption {
-        type = types.submodule { freeformType = types.attrsOf allowedTypes; };
-        default = { };
+        type = types.submodule {freeformType = types.attrsOf allowedTypes;};
+        default = {};
         description = ''
           Key-value style attribute set of settings for an individual
           plugin. Valid values: int, float, bool, str, or list or floats.
@@ -60,8 +58,7 @@ let
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
-in
-{
+in {
   imports = [
     ./settings.nix
     ./shell.nix
@@ -82,8 +79,7 @@ in
       background = mkBoolOpt' config.chr.desktop.wayfire.shell.enable;
       panel = mkBoolOpt' config.chr.desktop.wayfire.shell.enable;
       settings = mkOption {
-        type =
-          with types;
+        type = with types;
           attrsOf (
             attrsOf (oneOf [
               str
@@ -100,7 +96,7 @@ in
 
         options.plugins = mkOption {
           type = types.listOf plugin;
-          default = [ ];
+          default = [];
           example = literalExpression ''
             [
               { plugin = "move"; settings.activate = "<super> BTN_LEFT"; }
@@ -128,56 +124,56 @@ in
     };
   };
 
-  config =
-    let
-      # Merge plugin config if defined multiple times
-      mergedPlugins = builtins.attrValues (
-        mapAttrs (_: foldl (a: b: recursiveUpdate b a) { }) (groupBy (x: x.plugin) cfg.settings.plugins)
-      );
+  config = let
+    # Merge plugin config if defined multiple times
+    mergedPlugins = builtins.attrValues (
+      mapAttrs (_: foldl (a: b: recursiveUpdate b a) {}) (groupBy (x: x.plugin) cfg.settings.plugins)
+    );
 
-      # Convert lists to strings for generators.toINI
-      listToString =
-        list: concatStrings (intersperse " " (map (generators.mkValueStringDefault { }) list));
+    # Convert lists to strings for generators.toINI
+    listToString = list: concatStrings (intersperse " " (map (generators.mkValueStringDefault {}) list));
 
-      pluginsSettings =
-        let
-          mkSettings =
-            p:
-            let
-              name = p.plugin;
-              content = mapAttrs (_: v: if isList v then listToString v else v) p.settings;
-            in
-            nameValuePair name content;
-          pluginsWithSettings = filter (p: p.settings != { }) mergedPlugins;
-        in
-        listToAttrs (map mkSettings pluginsWithSettings);
+    pluginsSettings = let
+      mkSettings = p: let
+        name = p.plugin;
+        content = mapAttrs (_: v:
+          if isList v
+          then listToString v
+          else v)
+        p.settings;
+      in
+        nameValuePair name content;
+      pluginsWithSettings = filter (p: p.settings != {}) mergedPlugins;
+    in
+      listToAttrs (map mkSettings pluginsWithSettings);
 
-      # Configuration not part of any plugins goes into the `core` attrset,
-      # and each plugin will have its own attrset with corresponding settings
-      settings = pluginsSettings // {
+    # Configuration not part of any plugins goes into the `core` attrset,
+    # and each plugin will have its own attrset with corresponding settings
+    settings =
+      pluginsSettings
+      // {
         core = overrideExisting cfg.settings {
           # `input` and `output` are `core` plugins and are loaded by default,
           # it is unnecessary to put them in the plugins list
-          plugins =
-            let
-              filterFn =
-                p:
-                let
-                  notInput = p.plugin != "input";
-                  notInputDevice = (builtins.match "(input-device:.*)" p.plugin) == null;
-                  notOutput = (builtins.match "(output:.*)" p.plugin) == null;
-                in
-                if notInput && notInputDevice && notOutput then p.plugin else "";
+          plugins = let
+            filterFn = p: let
+              notInput = p.plugin != "input";
+              notInputDevice = (builtins.match "(input-device:.*)" p.plugin) == null;
+              notOutput = (builtins.match "(output:.*)" p.plugin) == null;
             in
+              if notInput && notInputDevice && notOutput
+              then p.plugin
+              else "";
+          in
             listToString (map filterFn mergedPlugins);
         };
       };
 
-      finalPackage = pkgs.wayfire-with-plugins.override {
-        wayfire = pkgs.wayfire;
-        plugins = remove null (catAttrs "package" mergedPlugins);
-      };
-    in
+    finalPackage = pkgs.wayfire-with-plugins.override {
+      wayfire = pkgs.wayfire;
+      plugins = remove null (catAttrs "package" mergedPlugins);
+    };
+  in
     mkIf cfg.enable {
       chr.desktop = {
         anyrun.enable = true;
@@ -193,7 +189,7 @@ in
       };
       xdg.portal = {
         enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        extraPortals = [pkgs.xdg-desktop-portal-gtk];
       };
 
       services.greetd = {
@@ -210,7 +206,7 @@ in
       programs.regreet.enable = true;
       environment.persistence."${config.chr.system.persist.stateDir}".directories =
         lib.mkIf config.chr.system.persist.enable
-          [ "/var/cache/regreet" ];
+        ["/var/cache/regreet"];
 
       security = {
         polkit.enable = true;
@@ -234,9 +230,9 @@ in
       systemd = {
         user.services.polkit-gnome-authentication-agent-1 = {
           description = "polkit-gnome-authentication-agent-1";
-          wantedBy = [ "graphical-session.target" ];
-          wants = [ "graphical-session.target" ];
-          after = [ "graphical-session.target" ];
+          wantedBy = ["graphical-session.target"];
+          wants = ["graphical-session.target"];
+          after = ["graphical-session.target"];
           serviceConfig = {
             Type = "simple";
             ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -270,8 +266,8 @@ in
           XDG_SESSION_TYPE = "wayland";
         };
 
-        xdg.configFile."wayfire.ini".text = generators.toINI { } settings;
-        xdg.configFile."wf-shell.ini".text = generators.toINI { } cfg.shell.settings;
+        xdg.configFile."wayfire.ini".text = generators.toINI {} settings;
+        xdg.configFile."wf-shell.ini".text = generators.toINI {} cfg.shell.settings;
       };
 
       services = {

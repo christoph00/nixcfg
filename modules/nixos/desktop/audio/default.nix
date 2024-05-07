@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.desktop.audio;
-in
-{
+in {
   options.chr.desktop.audio = with types; {
     enable = mkOpt types.bool config.chr.desktop.enable "Whether to enable Audio Config.";
   };

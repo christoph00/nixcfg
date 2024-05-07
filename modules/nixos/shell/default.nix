@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.shell;
-in
-{
+in {
   options.chr.shell = with types; {
     enable = mkBoolOpt' true;
   };

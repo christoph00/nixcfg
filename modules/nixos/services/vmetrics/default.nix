@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.vmetrics;
-in
-{
+in {
   options.chr.services.vmetrics = {
     enable = mkBoolOpt' false;
   };
@@ -22,7 +20,7 @@ in
       retentionPeriod = 2;
     };
     environment.persistence."${config.chr.system.persist.stateDir}" = {
-      directories = [ { directory = "/var/lib/private/victoriametrics"; } ];
+      directories = [{directory = "/var/lib/private/victoriametrics";}];
     };
   };
 }

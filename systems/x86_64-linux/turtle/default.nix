@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   inherit (inputs) nixos-hardware;
-in
-{
+in {
   imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-pc
@@ -56,8 +54,8 @@ in
     "sr_mod"
     "virtio_blk"
   ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-intel"];
 
   boot.kernel.sysctl = {
     "net.ipv6.conf.all.accept_ra" = lib.mkForce "0";

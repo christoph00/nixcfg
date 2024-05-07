@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.home-assistant;
-in
-{
+in {
   options.chr.services.home-assistant = with types; {
     enable = mkBoolOpt config.chr.services.smart-home "Enable Home-Assistant Service.";
     hostname = lib.mkOption {
@@ -18,10 +16,10 @@ in
       default = "ha.r505.de";
     };
   };
-  imports = [ ./metrics.nix ];
+  imports = [./metrics.nix];
   config = lib.mkIf cfg.enable {
     users.users.hass = {
-      extraGroups = [ "dialout" ];
+      extraGroups = ["dialout"];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX christoph@air13"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower"
@@ -33,8 +31,8 @@ in
       enable = true;
       package =
         (pkgs.home-assistant.override {
-          extraPackages =
-            python3Packages: with python3Packages; [
+          extraPackages = python3Packages:
+            with python3Packages; [
               aiodiscover
               aiogithubapi
               scapy
@@ -68,10 +66,11 @@ in
               hass-nabucasa
               pyebus
             ];
-        }).overrideAttrs
-          (oldAttrs: {
-            doInstallCheck = false;
-          });
+        })
+        .overrideAttrs
+        (oldAttrs: {
+          doInstallCheck = false;
+        });
       openFirewall = true;
       configDir = "${config.chr.system.persist.stateDir}/hass";
       customComponents = with pkgs; [
@@ -99,7 +98,7 @@ in
           packages = "!include_dir_named pkgs";
           #customize.zone.home.radius = 20;
         };
-        default_config = { };
+        default_config = {};
         # device_tracker = [
         #   # {
         #   #   platform = "bluetooth_le_tracker";
@@ -127,14 +126,14 @@ in
         "automation editor" = "!include automations.yaml";
         "scene editor" = "!include scenes.yaml";
         "script editor" = "!include scripts.yaml";
-        automation = { };
-        frontend = { };
-        mobile_app = { };
-        dhcp = { };
-        ssdp = { };
-        zeroconf = { };
+        automation = {};
+        frontend = {};
+        mobile_app = {};
+        dhcp = {};
+        ssdp = {};
+        zeroconf = {};
         #bthome = {};
-        media_extractor = { };
+        media_extractor = {};
         zha = {
           enable_quirks = true;
           custom_quirks_path = "${config.services.home-assistant.configDir}/zha_quirks/";
@@ -151,7 +150,7 @@ in
         #   host = "127.0.0.1";
         #   circuit = "basv0";
         # };
-        ssdp = { };
+        ssdp = {};
         # mqtt = {
         #   climate = [
         #     {
@@ -212,8 +211,8 @@ in
         #   ];
         # };
         #tasmota = {};
-        dhcp = { };
-        conversation = { };
+        dhcp = {};
+        conversation = {};
         ffmpeg = {
           ffmpeg_bin = "${pkgs.ffmpeg}/bin/ffmpeg";
         };

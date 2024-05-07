@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   inherit (inputs) nixos-hardware;
-in
-{
+in {
   networking.hostName = "oca";
 
   chr = {
@@ -43,7 +41,7 @@ in
     "virtio_scsi"
     "usbhid"
   ];
-  boot.kernelParams = [ "net.ifnames=0" ];
+  boot.kernelParams = ["net.ifnames=0"];
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 
   boot.loader = {
@@ -56,7 +54,7 @@ in
     };
   };
 
-  swapDevices = [ { device = "/dev/sda2"; } ];
+  swapDevices = [{device = "/dev/sda2";}];
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 

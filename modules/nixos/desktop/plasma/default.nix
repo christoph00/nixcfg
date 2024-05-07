@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.desktop.plasma;
-in
-{
+in {
   options.chr.desktop.plasma = with types; {
     enable = mkBoolOpt false "Whether or not to enable Plasma.";
   };

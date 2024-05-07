@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.code-server;
-in
-{
+in {
   options.chr.services.code-server = with types; {
     enable = mkBoolOpt false "Enable Code-Server Service.";
   };

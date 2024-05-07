@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.blocky;
-in
-{
+in {
   options.chr.services.blocky = with types; {
     enable = mkBoolOpt false "Enable blocky DNS Server.";
   };
@@ -26,7 +24,7 @@ in
       ];
     };
 
-    environment.systemPackages = with pkgs; [ blocky ];
+    environment.systemPackages = with pkgs; [blocky];
 
     services = {
       resolved.enable = lib.mkForce false;
@@ -48,8 +46,8 @@ in
             timeout = "10s";
           };
           blocking = {
-            blackLists.default = [ "https://v.firebog.net/hosts/Easyprivacy.txt" ];
-            clientGroupsBlock.default = [ "default" ];
+            blackLists.default = ["https://v.firebog.net/hosts/Easyprivacy.txt"];
+            clientGroupsBlock.default = ["default"];
           };
           caching = {
             prefetching = true;
@@ -87,7 +85,7 @@ in
         {
           job_name = "blocky";
           static_configs = [
-            { targets = [ "localhost:${toString config.services.blocky.settings.ports.http}" ]; }
+            {targets = ["localhost:${toString config.services.blocky.settings.ports.http}"];}
           ];
         }
       ];
@@ -97,7 +95,7 @@ in
       ":::"
     ];
     systemd.services.blocky = {
-      after = [ "netbird.service" ];
+      after = ["netbird.service"];
       serviceConfig = {
         Restart = "on-failure";
         RestartSec = "1";

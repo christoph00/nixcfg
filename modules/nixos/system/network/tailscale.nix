@@ -5,12 +5,10 @@
   self,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.chr.system.network.tailscale;
   kernel = config.boot.kernelPackages;
-in
-{
+in {
   options.chr.system.network.tailscale = {
     enable = mkOption {
       type = types.bool;
@@ -29,12 +27,12 @@ in
   config = mkIf cfg.enable {
     age.secrets.tailscale-auth-key.file = ../../../../secrets/tailscale-auth-key;
 
-    environment.systemPackages = [ pkgs.tailscale ];
+    environment.systemPackages = [pkgs.tailscale];
 
-    networking.dhcpcd.denyInterfaces = [ interfaceName ];
+    networking.dhcpcd.denyInterfaces = [interfaceName];
 
     networking.firewall = {
-      trustedInterfaces = [ interfaceName ];
+      trustedInterfaces = [interfaceName];
     };
 
     systemd.network.networks."50-tailscale" = mkIf config.networking.useNetworkd {
@@ -56,6 +54,6 @@ in
 
     environment.persistence."${config.chr.system.persist.stateDir}".directories =
       lib.mkIf config.chr.system.persist.enable
-        [ "/var/lib/tailscale" ];
+      ["/var/lib/tailscale"];
   };
 }

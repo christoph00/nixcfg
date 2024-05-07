@@ -4,11 +4,9 @@
   pkgs,
   ...
 }:
-with pkgs;
-let
+with pkgs; let
   cfg = config.chr.services.yarr;
-in
-{
+in {
   options = with lib; {
     chr.services.yarr = {
       enable = mkEnableOption "Enable yarr";
@@ -46,8 +44,7 @@ in
       };
 
       user = mkOption {
-        type =
-          with types;
+        type = with types;
           oneOf [
             str
             int
@@ -59,8 +56,7 @@ in
       };
 
       group = mkOption {
-        type =
-          with types;
+        type = with types;
           oneOf [
             str
             int
@@ -81,7 +77,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    users.groups.yarr = { };
+    users.groups.yarr = {};
     users.users.yarr = {
       description = "Yarr service user";
       isSystemUser = true;
@@ -93,8 +89,8 @@ in
     systemd.services.yarr = {
       enable = true;
       description = "Yet Another Rss Reader server";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "networking.service" ];
+      wantedBy = ["multi-user.target"];
+      after = ["networking.service"];
 
       serviceConfig = {
         User = cfg.user;

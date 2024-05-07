@@ -26,7 +26,7 @@ buildGoModule rec {
     description = "ChatGPT in terminal without needing API keys";
     homepage = "https://github.com/aandrew-me/tgpt";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "tgpt";
   };
 }

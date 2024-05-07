@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.system.filesystem;
-in
-{
+in {
   options.chr.system.filesystem = with types; {
     enable = mkBoolOpt false "Whether or not to configure filesystems.";
     persist = mkBoolOpt false "rollback root";
@@ -41,65 +39,63 @@ in
     swap = mkBoolOpt' false;
     swapSize = mkOpt' str "8G";
     home = mkBoolOpt true "Enable Home Partition";
-    extraSubvolumes = mkOpt attrs { } "Extra Subvolumes for the Main Disk";
+    extraSubvolumes = mkOpt attrs {} "Extra Subvolumes for the Main Disk";
   };
 
   config = mkIf cfg.enable {
-    fileSystems =
-      let
-        device = cfg.mainDisk;
-      in
-      {
-        "/" = mkIf cfg.rootOnTmpfs {
-          device = "none";
-          fsType = "tmpfs";
-          options = [
-            "defaults"
-            "size=2G"
-            "mode=755"
-          ];
-        };
-        # else {
-        #   inherit device;
-        #   fsType = "btrfs";
-        #   options = ["subvol=@root" "noatime" "compress-force=zstd"];
-        # };
-
-        "/nix" = mkIf cfg.btrfs {
-          inherit device;
-          fsType = "btrfs";
-          options = [
-            "subvol=@nix"
-            "noatime"
-            "compress-force=zstd"
-          ];
-        };
-
-        "/boot" = {
-          device = cfg.efiDisk;
-          fsType = "vfat";
-        };
-
-        "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist) {
-          inherit device;
-          fsType = "btrfs";
-          options = [
-            "subvol=@persist"
-            "noatime"
-            "compress-force=zstd"
-          ];
-          neededForBoot = true;
-        };
-
-        "/home" = mkIf cfg.btrfs {
-          inherit device;
-          fsType = "btrfs";
-          options = [
-            "subvol=@home"
-            "noatime"
-            "compress-force=zstd"
-          ];
-        };
+    fileSystems = let
+      device = cfg.mainDisk;
+    in {
+      "/" = mkIf cfg.rootOnTmpfs {
+        device = "none";
+        fsType = "tmpfs";
+        options = [
+          "defaults"
+          "size=2G"
+          "mode=755"
+        ];
       };
+      # else {
+      #   inherit device;
+      #   fsType = "btrfs";
+      #   options = ["subvol=@root" "noatime" "compress-force=zstd"];
+      # };
+
+      "/nix" = mkIf cfg.btrfs {
+        inherit device;
+        fsType = "btrfs";
+        options = [
+          "subvol=@nix"
+          "noatime"
+          "compress-force=zstd"
+        ];
+      };
+
+      "/boot" = {
+        device = cfg.efiDisk;
+        fsType = "vfat";
+      };
+
+      "${cfg.stateDir}" = mkIf (cfg.btrfs && cfg.persist) {
+        inherit device;
+        fsType = "btrfs";
+        options = [
+          "subvol=@persist"
+          "noatime"
+          "compress-force=zstd"
+        ];
+        neededForBoot = true;
+      };
+
+      "/home" = mkIf cfg.btrfs {
+        inherit device;
+        fsType = "btrfs";
+        options = [
+          "subvol=@home"
+          "noatime"
+          "compress-force=zstd"
+        ];
+      };
+    };
   };
 }

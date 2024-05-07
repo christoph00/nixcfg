@@ -7,8 +7,7 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.apps.firefox;
   defaultSettings = {
     "identity.fxaccounts.enabled" = false;
@@ -28,8 +27,7 @@ let
     "widget.dmabuf.force-enabled" = true;
     "widget.use-xdg-desktop-portal" = true;
   };
-in
-{
+in {
   options.chr.apps.firefox = with types; {
     enable = mkBoolOpt false "Whether or not to enable Firefox.";
     settings = mkOpt attrs defaultSettings "Settings to apply to the profile.";

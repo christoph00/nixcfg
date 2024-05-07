@@ -6,14 +6,12 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.desktop;
   plasma = pkgs.writeScriptBin "plasma" ''
     ${pkgs.plasma-workspace}/bin/startplasma-wayland &> /dev/null
   '';
-in
-{
+in {
   options.chr.desktop = with types; {
     enable = mkOption {
       type = types.bool;
@@ -116,7 +114,7 @@ in
           "JetBrainsMono Nerd Font"
           "Noto Color Emoji"
         ];
-        emoji = [ "Noto Color Emoji" ];
+        emoji = ["Noto Color Emoji"];
       };
     };
 

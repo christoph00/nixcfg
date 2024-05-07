@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   inherit (inputs) nixos-hardware;
-in
-{
+in {
   imports = with nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-pc
@@ -41,13 +39,13 @@ in
     "xen_blkfront"
     "vmw_pvscsi"
   ];
-  boot.initrd.kernelModules = [ "nvme" ];
+  boot.initrd.kernelModules = ["nvme"];
 
   fileSystems."/" = {
     device = "/dev/sda3";
     fsType = "xfs";
   };
-  swapDevices = [ { device = "/dev/sda2"; } ];
+  swapDevices = [{device = "/dev/sda2";}];
 
   networking.interfaces.ens3.useDHCP = true;
 

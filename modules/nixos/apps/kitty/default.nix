@@ -1,10 +1,12 @@
-{ config, lib, ... }:
-with lib;
-with lib.chr;
-let
-  cfg = config.chr.apps.kitty;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib;
+with lib.chr; let
+  cfg = config.chr.apps.kitty;
+in {
   options.chr.apps.kitty = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };

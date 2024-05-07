@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.system.boot;
-in
-{
+in {
   options.chr.system.boot = with types; {
     enable = mkBoolOpt (!config.chr.isMicroVM) "Whether or not to enable booting.";
     efi = mkBoolOpt false "Whether or not to enable efi booting.";
@@ -39,7 +37,7 @@ in
 
     boot.kernelPackages = mkDefault pkgs.linuxPackages_xanmod_latest;
 
-    boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
     boot.initrd = {
       systemd.enable = true;

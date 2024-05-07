@@ -4,9 +4,7 @@
   config,
   inputs,
   ...
-}:
-
-{
+}: {
   # https://devenv.sh/basics/
 
   # https://devenv.sh/packages/

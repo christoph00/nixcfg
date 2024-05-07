@@ -5,11 +5,9 @@
   ...
 }:
 with pkgs;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.memos;
-in
-{
+in {
   options = with lib; {
     chr.services.memos = {
       enable = mkEnableOption "Enable memos";
@@ -42,8 +40,7 @@ in
       };
 
       user = mkOption {
-        type =
-          with types;
+        type = with types;
           oneOf [
             str
             int
@@ -55,8 +52,7 @@ in
       };
 
       group = mkOption {
-        type =
-          with types;
+        type = with types;
           oneOf [
             str
             int
@@ -77,7 +73,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    users.groups.memos = { };
+    users.groups.memos = {};
     users.users.memos = {
       description = "memos service user";
       isSystemUser = true;
@@ -89,8 +85,8 @@ in
     systemd.services.memos = lib.mkIf (!cfg.container) {
       enable = true;
       description = "Lightweight note-taking service";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "networking.service" ];
+      wantedBy = ["multi-user.target"];
+      after = ["networking.service"];
 
       serviceConfig = {
         User = cfg.user;
@@ -104,8 +100,8 @@ in
       image = "ghcr.io/usememos/memos:${cfg.version}";
       autoStart = true;
       hostname = "memos";
-      volumes = [ "${cfg.directory}:/var/opt/memos" ];
-      ports = [ "7030:7030" ];
+      volumes = ["${cfg.directory}:/var/opt/memos"];
+      ports = ["7030:7030"];
 
       environment = {
         MEMOS_PORT = "${toString cfg.port}";

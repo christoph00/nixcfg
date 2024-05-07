@@ -26,7 +26,7 @@ buildHomeAssistantComponent rec {
     description = "A Home Assistant integration that allows you to control your house using an LLM running locally";
     homepage = "https://github.com/acon96/home-llm";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "ha-home-llm";
     platforms = platforms.all;
   };

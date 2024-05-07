@@ -4,8 +4,7 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   variables = lib.concatStringsSep " " [
     "DISPLAY"
     "WAYLAND_DISPLAY"
@@ -15,8 +14,7 @@ let
 
   update-environment = "exec ${pkgs.dbus}/bin/dbus-update-activation-environment";
   systemctl = "exec ${pkgs.systemd}/bin/systemctl --user";
-in
-{
+in {
   chr.desktop.wayfire.settings = lib.mkIf config.chr.desktop.wayfire.enable {
     close_top_view = "<alt> KEY_Q";
     preferred_decoration_mode = "server";
@@ -99,41 +97,38 @@ in
       #        package = pkgs.chr.wf-pixdecor;
       #      }
 
-      { plugin = "ipc"; }
-      { plugin = "ipc-rules"; }
-      { plugin = "wayfire-shell"; }
-      { plugin = "gtk-shell"; }
-      { plugin = "foreign-toplevel"; }
+      {plugin = "ipc";}
+      {plugin = "ipc-rules";}
+      {plugin = "wayfire-shell";}
+      {plugin = "gtk-shell";}
+      {plugin = "foreign-toplevel";}
 
-      { plugin = "xdg-activation"; }
+      {plugin = "xdg-activation";}
 
       {
         plugin = "vswitch";
-        settings =
-          let
-            workspaces = builtins.genList (x: x + 1) 9;
-            mkBinding =
-              lprefix: rprefix:
-              builtins.map (
-                a:
-                let
-                  replace = builtins.replaceStrings [ "{}" ] [ (toString a) ];
-                  left = replace lprefix;
-                  right = replace rprefix;
-                in
-                {
-                  "${left}" = "${right}";
-                }
-              ) workspaces;
-            mergeAttrs = lib.foldl lib.recursiveUpdate { };
-            workspacesAttrs = mergeAttrs (
-              lib.flatten [
-                (mkBinding "binding_{}" "<super> KEY_{}")
-                (mkBinding "with_win_{}" "<super> <shift> KEY_{}")
-                (mkBinding "send_win_{}" "<super> <ctrl> KEY_{}")
-              ]
-            );
-          in
+        settings = let
+          workspaces = builtins.genList (x: x + 1) 9;
+          mkBinding = lprefix: rprefix:
+            builtins.map (
+              a: let
+                replace = builtins.replaceStrings ["{}"] [(toString a)];
+                left = replace lprefix;
+                right = replace rprefix;
+              in {
+                "${left}" = "${right}";
+              }
+            )
+            workspaces;
+          mergeAttrs = lib.foldl lib.recursiveUpdate {};
+          workspacesAttrs = mergeAttrs (
+            lib.flatten [
+              (mkBinding "binding_{}" "<super> KEY_{}")
+              (mkBinding "with_win_{}" "<super> <shift> KEY_{}")
+              (mkBinding "send_win_{}" "<super> <ctrl> KEY_{}")
+            ]
+          );
+        in
           {
             # Disable default keybinds
             binding_down = "";
@@ -180,12 +175,11 @@ in
       }
       {
         plugin = "expo";
-        settings =
-          let
-            workspaces = builtins.genList (x: x + 1) 9;
-            bindings = builtins.map (a: { "select_workspace_${toString a}" = "KEY_${toString a}"; }) workspaces;
-            workspacesAttrs = lib.foldl (a: b: a // b) { } bindings;
-          in
+        settings = let
+          workspaces = builtins.genList (x: x + 1) 9;
+          bindings = builtins.map (a: {"select_workspace_${toString a}" = "KEY_${toString a}";}) workspaces;
+          workspacesAttrs = lib.foldl (a: b: a // b) {} bindings;
+        in
           {
             toggle = "<super> <shift>";
             background = [

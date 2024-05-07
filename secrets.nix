@@ -43,50 +43,63 @@ let
     christoph_tower
     christoph_x13
   ];
-in
-{
-  "secrets/cf-tunnel-futro".publicKeys = [ futro ] ++ users;
-  "secrets/cf-tunnel-air13".publicKeys = [ air13 ] ++ users;
-  "secrets/cf-tunnel-oca".publicKeys = [ oca ] ++ users;
-  "secrets/cf-tunnel-tower".publicKeys = [ tower ] ++ users;
+in {
+  "secrets/cf-tunnel-futro".publicKeys = [futro] ++ users;
+  "secrets/cf-tunnel-air13".publicKeys = [air13] ++ users;
+  "secrets/cf-tunnel-oca".publicKeys = [oca] ++ users;
+  "secrets/cf-tunnel-tower".publicKeys = [tower] ++ users;
 
   "secrets/netbird.env".publicKeys = all ++ users;
   "secrets/tailscale-auth-key".publicKeys = all ++ users;
 
-  "secrets/ha-serviceaccount".publicKeys = [
-    futro
-    air13
-  ] ++ users;
-  "secrets/ha-secrets.yaml".publicKeys = [
-    futro
-    air13
-  ] ++ users;
+  "secrets/ha-serviceaccount".publicKeys =
+    [
+      futro
+      air13
+    ]
+    ++ users;
+  "secrets/ha-secrets.yaml".publicKeys =
+    [
+      futro
+      air13
+    ]
+    ++ users;
 
-  "secrets/zwave-js-keys.json".publicKeys = [
-    air13
-    futro
-  ] ++ users;
+  "secrets/zwave-js-keys.json".publicKeys =
+    [
+      air13
+      futro
+    ]
+    ++ users;
 
   "secrets/christoph-password.age".publicKeys = all ++ users;
 
-  "secrets/yarr-auth".publicKeys = [
-    futro
-    air13
-  ] ++ users;
+  "secrets/yarr-auth".publicKeys =
+    [
+      futro
+      air13
+    ]
+    ++ users;
 
   "secrets/grafana-password".publicKeys = all ++ users;
-  "secrets/vaultwarden.env".publicKeys = [
-    futro
-    air13
-  ] ++ users;
-  "secrets/paperless-token.env".publicKeys = [
-    futro
-    air13
-  ] ++ users;
+  "secrets/vaultwarden.env".publicKeys =
+    [
+      futro
+      air13
+    ]
+    ++ users;
+  "secrets/paperless-token.env".publicKeys =
+    [
+      futro
+      air13
+    ]
+    ++ users;
   "secrets/caddy.env".publicKeys = servers ++ users;
 
-  "secrets/nc-admin-pass".publicKeys = [
-    air13
-    oca
-  ] ++ users;
+  "secrets/nc-admin-pass".publicKeys =
+    [
+      air13
+      oca
+    ]
+    ++ users;
 }
