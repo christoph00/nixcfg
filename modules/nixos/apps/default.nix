@@ -59,6 +59,8 @@ in {
 
         armcord
 
+        immich-go
+
         filezilla
 
         neovide
