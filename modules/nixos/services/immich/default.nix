@@ -44,6 +44,10 @@ in {
 
     environment.systemPackages = with pkgs; [
       immich-go
+      perlPackages.ImageExifTool
+      perlPackages.FileMimeInfo
+      exiftool
+      jellyfin-ffmpeg
     ];
 
     systemd.services = let
