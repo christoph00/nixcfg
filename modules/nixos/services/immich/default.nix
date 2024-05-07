@@ -83,11 +83,10 @@ in {
           RestartSec = "5";
         };
       };
-
-      services.cloudflared.tunnels."${config.networking.hostName}" = {
-        ingress = {
-          "img.r505.de" = "http://127.0.0.1:3001";
-        };
+    };
+    services.cloudflared.tunnels."${config.networking.hostName}" = {
+      ingress = {
+        "img.r505.de" = "http://127.0.0.1:3001";
       };
     };
   };
