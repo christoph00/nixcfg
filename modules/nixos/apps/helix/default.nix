@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.apps.helix;
-in
-{
+in {
   options.chr.apps.helix = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
     defaultEditor = mkBoolOpt' true;
@@ -20,9 +18,9 @@ in
   config = mkIf cfg.enable {
     chr.home = {
       extraOptions = {
-        home.sessionVariables = mkIf cfg.defaultEditor { EDITOR = "hx"; };
+        home.sessionVariables = mkIf cfg.defaultEditor {EDITOR = "hx";};
 
-        home.packages = [ pkgs.templ ];
+        home.packages = [pkgs.templ];
 
         programs.helix = {
           enable = true;
@@ -102,7 +100,7 @@ in
             nixd.command = "${pkgs.nixd}/bin/nixd";
             deno = {
               command = "${pkgs.deno}/bin/deno";
-              args = [ "lsp" ];
+              args = ["lsp"];
               config = {
                 enable = true;
                 unstable = true;
@@ -115,18 +113,18 @@ in
                 pkgs.nodePackages_latest."@tailwindcss/language-server"
               }/bin/tailwindcss-language-server";
               language-id = "tailwindcss";
-              args = [ "--stdio" ];
-              config = { };
+              args = ["--stdio"];
+              config = {};
             };
           };
           languages.language = [
             {
               name = "nix";
-              language-servers = [ "nixd" ];
+              language-servers = ["nixd"];
               auto-format = true;
               formatter = {
                 command = "${pkgs.alejandra}/bin/alejandra";
-                args = [ "-" ];
+                args = ["-"];
               };
             }
           ];

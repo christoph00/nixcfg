@@ -6,11 +6,10 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.apps.nemo;
   # Remove services that make Nemo hide most of my devices...
-  gvfs = pkgs.runCommandLocal "gvfs-remove-junk" { } ''
+  gvfs = pkgs.runCommandLocal "gvfs-remove-junk" {} ''
     mkdir -p "$out"/share/dbus-1
     cp --no-preserve=mode -r "${pkgs.gnome.gvfs}"/share/{systemd,dbus-1} "$out"/share/.
     for file in "$out"/share/systemd/user/gvfs-*; do
@@ -26,8 +25,7 @@ let
       esac
     done
   '';
-in
-{
+in {
   options.chr.apps.nemo = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
@@ -46,7 +44,7 @@ in
         };
 
         xdg.mimeApps.defaultApplications = {
-          "inode/directory" = [ "nemo.desktop" ];
+          "inode/directory" = ["nemo.desktop"];
         };
 
         xdg.dataFile."nemo/actions/extract-here.nemo_action".text = ''

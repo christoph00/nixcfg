@@ -5,11 +5,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.apps.chromium;
-in
-{
+in {
   options.chr.apps.chromium = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Chromium.";
   };
@@ -17,23 +15,23 @@ in
   config = mkIf cfg.enable {
     chr.home = {
       extraOptions = {
-        home.packages = [ pkgs.widevine-cdm ];
+        home.packages = [pkgs.widevine-cdm];
         programs.chromium = {
           enable = true;
           package = pkgs.chr.thorium;
           extensions = [
-            { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # Ublock Origin
-            { id = "jhnleheckmknfcgijgkadoemagpecfol"; } # Auto-Tab-Discard
-            { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
+            {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # Ublock Origin
+            {id = "jhnleheckmknfcgijgkadoemagpecfol";} # Auto-Tab-Discard
+            {id = "nngceckbapebfimnlniiiahkandclblb";} # Bitwarden
             {
               id = "dcpihecpambacapedldabdbpakmachpb";
               updateUrl = "https://raw.githubusercontent.com/iamadamdev/bypass-paywalls-chrome/master/updates.xml";
             }
             #{id = "pmcmeagblkinmogikoikkdjiligflglb";} # Privacy Redirect
             #{id = "hfmolcaikbnbminafcmeiejglbeelilh";} # CNL Decryptor
-            { id = "hceobhjokpdbogjkplmfjeomkeckkngi"; } # New Bing Anywhere
-            { id = "jinjaccalgkegednnccohejagnlnfdag"; } # Violentmonkey
-            { id = "hlkenndednhfkekhgcdicdfddnkalmdm"; } # Cookie Editor
+            {id = "hceobhjokpdbogjkplmfjeomkeckkngi";} # New Bing Anywhere
+            {id = "jinjaccalgkegednnccohejagnlnfdag";} # Violentmonkey
+            {id = "hlkenndednhfkekhgcdicdfddnkalmdm";} # Cookie Editor
           ];
           commandLineArgs = [
             "--ignore-gpu-blocklist"

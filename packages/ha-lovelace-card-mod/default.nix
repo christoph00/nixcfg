@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     description = "Add CSS styles to (almost) any lovelace card";
     homepage = "https://github.com/thomasloven/lovelace-card-mod";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     platforms = platforms.all;
   };
 }

@@ -7,14 +7,12 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.desktop.cosmic;
-in
-{
+in {
   options.chr.desktop.cosmic = with types; {
     enable = mkBoolOpt false "Whether or not enable Cosmic Desktop.";
   };
 
-  config = mkIf cfg.enable { };
+  config = mkIf cfg.enable {};
 }

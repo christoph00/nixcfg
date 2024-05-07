@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.system.kvm;
-in
-{
+in {
   options.chr.system.kvm = with types; {
     enable = mkBoolOpt false "Whether or not to configure kvm.";
     externalInterface = mkOption {

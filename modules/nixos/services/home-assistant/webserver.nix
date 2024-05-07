@@ -4,12 +4,10 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.chr.services.home-assistant;
   haDir = config.services.home-assistant.configDir;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     chr.services.webserver.enable = true;
 

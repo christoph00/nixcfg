@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.zwave;
-in
-{
+in {
   options.chr.services.zwave = with types; {
     enable = mkBoolOpt config.chr.services.smart-home "Enable zwave Service.";
   };
@@ -22,7 +20,7 @@ in
       secretsConfigFile = config.age.secrets.zwave-js-keys.path;
     };
 
-    networking.firewall.allowedTCPPorts = [ 3090 ];
+    networking.firewall.allowedTCPPorts = [3090];
 
     age.secrets.zwave-js-keys = {
       file = ../../../../secrets/zwave-js-keys.json;

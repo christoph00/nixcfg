@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.system.lxd;
-in
-{
+in {
   options.chr.system.lxd = with types; {
     enable = mkBoolOpt false "Whether or not to configure lxd.";
     externalInterface = mkOption {

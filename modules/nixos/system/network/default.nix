@@ -7,12 +7,10 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.system.network;
-in
-{
-  imports = [ ./netbird.nix ];
+in {
+  imports = [./netbird.nix];
   options.chr.system.network = with types; {
     enable = mkOpt types.bool true "Enable Network Config.";
     tweaks = mkOpt types.bool true "Enable Network Tweaks.";
@@ -48,7 +46,7 @@ in
         "desktop"
         "laptop"
       ];
-      plugins = [ ]; # disable all plugins, we don't need them
+      plugins = []; # disable all plugins, we don't need them
       # dns = "systemd-resolved"; # use systemd-resolved as dns backend
       wifi = {
         powersave = true; # enable wifi powersaving

@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.desktop.ironbar;
-in
-{
+in {
   options.chr.desktop.ironbar = with types; {
     enable = mkBoolOpt false "Whether or not enable Ironbar.";
     package = mkOption {
@@ -31,10 +29,10 @@ in
           config = {
             position = "bottom";
             anchor_to_edges = true;
-            start = [ { type = "launcher"; } ];
+            start = [{type = "launcher";}];
             end = [
-              { type = "tray"; }
-              { type = "clock"; }
+              {type = "tray";}
+              {type = "clock";}
             ];
           };
         };

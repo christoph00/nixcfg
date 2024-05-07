@@ -6,14 +6,12 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.apps.thunderbird;
   defaultSettings = {
     "privacy.donottrackheader.enabled" = true;
   };
-in
-{
+in {
   options.chr.apps.thunderbird = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Whether or not to enable Thunderbird.";
     extraConfig = mkOpt str "" "Extra configuration for the user profile JS file.";

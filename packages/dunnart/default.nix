@@ -25,7 +25,7 @@ buildGoModule rec {
     description = "Lightweight remote system monitoring over MQTT for Home Assistant";
     homepage = "https://github.com/warthog618/dunnart";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "dunnart";
   };
 }

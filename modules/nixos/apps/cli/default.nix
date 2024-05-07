@@ -7,13 +7,11 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.apps.cli;
   localeGerman = "de_DE.UTF-8";
   localeEnglish = "en_US.UTF-8";
-in
-{
+in {
   options.chr.apps.cli = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };

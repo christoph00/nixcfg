@@ -6,17 +6,14 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.home-assistant;
 
-  createResources = types: map (type: { inherit type; }) types;
+  createResources = types: map (type: {inherit type;}) types;
 
-  createResourcesWithArg = arg: types: map (type: { inherit type arg; }) types;
-  createResourcesWithArgs =
-    args: types: lib.flatten (map (arg: createResourcesWithArg arg types) args);
-in
-{
+  createResourcesWithArg = arg: types: map (type: {inherit type arg;}) types;
+  createResourcesWithArgs = args: types: lib.flatten (map (arg: createResourcesWithArg arg types) args);
+in {
   services.home-assistant.config.sensor = mkIf cfg.enable [
     {
       platform = "systemmonitor";
@@ -34,7 +31,7 @@ in
           "/nix"
           "/media/data-hdd"
           "/media/data-ssd"
-        ] [ "disk_use_percent" ]);
+        ] ["disk_use_percent"]);
       # ++ (createResourcesWithArgs ["pppoe-wan" "br-lan0"] [
       #   "ipv4_address"
       #   "throughput_network_in"

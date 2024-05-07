@@ -7,11 +7,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.vms.router;
-in
-{
+in {
   options.chr.vms.router = with types; {
     enable = mkBoolOpt' false;
   };

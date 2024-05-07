@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.apps.office;
-in
-{
+in {
   options.chr.apps.office = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
@@ -18,7 +16,7 @@ in
   config = mkIf cfg.enable {
     chr.home = {
       extraOptions = {
-        home.packages = with pkgs; [ libreoffice-qt ];
+        home.packages = with pkgs; [libreoffice-qt];
       };
     };
   };

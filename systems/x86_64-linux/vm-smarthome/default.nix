@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   chr = {
     type = "microvm";
   };
@@ -32,18 +35,18 @@
         }
       ]
       ++ map
-        (dir: {
-          source = "/var/lib/microvms/${config.networking.hostName}/${dir}";
-          mountPoint = "/${dir}";
-          tag = dir;
-          proto = "virtiofs";
-          socket = "${dir}.socket";
-        })
-        [
-          "etc"
-          "var"
-          "home"
-        ];
+      (dir: {
+        source = "/var/lib/microvms/${config.networking.hostName}/${dir}";
+        mountPoint = "/${dir}";
+        tag = dir;
+        proto = "virtiofs";
+        socket = "${dir}.socket";
+      })
+      [
+        "etc"
+        "var"
+        "home"
+      ];
   };
 
   networking = {

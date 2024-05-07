@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.system.laptop;
-in
-{
+in {
   options.chr.system.laptop = with types; {
     enable = mkBoolOpt' (config.chr.type == "laptop");
   };
@@ -50,7 +48,7 @@ in
       '';
     };
     environment.persistence."/nix/persist" = {
-      directories = [ "/var/lib/iwd" ];
+      directories = ["/var/lib/iwd"];
     };
 
     networking.networkmanager.wifi.backend = "iwd";

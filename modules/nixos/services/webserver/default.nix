@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.webserver;
-in
-{
+in {
   options.chr.services.webserver = with types; {
     enable = mkBoolOpt false "Enable Webserver";
   };

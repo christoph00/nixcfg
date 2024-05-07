@@ -6,18 +6,16 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.user;
-in
-{
+in {
   options.chr.user = with types; {
     name = mkOpt str "christoph" "The name to use for the user account.";
     fullName = mkOpt str "christoph" "The full name of the user.";
     email = mkOpt str "christoph@asche.co" "The email of the user.";
     hashedPasswordFile = mkOpt str config.age.secrets.user-password.path "Hashed Password File";
     icon = mkOpt (nullOr package) defaultIcon "The profile picture to use for the user.";
-    extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
+    extraGroups = mkOpt (listOf str) [] "Groups for the user to be assigned.";
     authorizedKeys = mkOpt (listOf str) [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBCs+VL1FAip0JZ2wWnop9lUZHcs30mibUwwrMJpfAX christoph@air13"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8 christoph@tower"
@@ -26,7 +24,7 @@ in
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmHJIHJYMl/0awPcEeftLSxDKGVWmN0jhYPQ5hCINxD christoph@wrk"
     ] "Authorized Keys.";
 
-    extraOptions = mkOpt attrs { } "Extra options.";
+    extraOptions = mkOpt attrs {} "Extra options.";
   };
 
   config = {
@@ -37,29 +35,33 @@ in
     users.mutableUsers = false;
     users.groups.media.gid = 900;
 
-    users.users.${cfg.name} = {
-      isNormalUser = true;
+    users.users.${cfg.name} =
+      {
+        isNormalUser = true;
 
-      inherit (cfg) name hashedPasswordFile;
+        inherit (cfg) name hashedPasswordFile;
 
-      home = "/home/${cfg.name}";
-      group = "users";
+        home = "/home/${cfg.name}";
+        group = "users";
 
-      # shell = pkgs.nushell;
+        # shell = pkgs.nushell;
 
-      uid = 1000;
+        uid = 1000;
 
-      extraGroups = [
-        "wheel"
-        "lp"
-        "input"
-        "dbus"
-        "tty"
-        "dialout"
-        "adbusers"
-      ] ++ cfg.extraGroups;
+        extraGroups =
+          [
+            "wheel"
+            "lp"
+            "input"
+            "dbus"
+            "tty"
+            "dialout"
+            "adbusers"
+          ]
+          ++ cfg.extraGroups;
 
-      openssh.authorizedKeys.keys = [ ] ++ cfg.authorizedKeys;
-    } // cfg.extraOptions;
+        openssh.authorizedKeys.keys = [] ++ cfg.authorizedKeys;
+      }
+      // cfg.extraOptions;
   };
 }

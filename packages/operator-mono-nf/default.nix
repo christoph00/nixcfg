@@ -23,6 +23,6 @@ stdenvNoCC.mkDerivation rec {
     description = "The famous $600 Operator Mono font, but for free and with nerd fonts patched";
     license = licenses.unfree;
     homepage = "https://github.com/TarunDaCoder/OperatorMono_NerdFont";
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }

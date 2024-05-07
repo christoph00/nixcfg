@@ -6,18 +6,15 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.apps.vscode;
-  marketplace-extensions =
-    with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
-      visualstudioexptteam.vscodeintellicode
-      johnnymorganz.stylua
-      sndst00m.markdown-github-dark-pack
-      codeium.codeium
-    ];
-in
-{
+  marketplace-extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+    visualstudioexptteam.vscodeintellicode
+    johnnymorganz.stylua
+    sndst00m.markdown-github-dark-pack
+    codeium.codeium
+  ];
+in {
   options.chr.apps.vscode = with types; {
     enable = mkBoolOpt' config.chr.desktop.enable;
   };
@@ -30,8 +27,7 @@ in
           enable = true;
           # package = pkgs.vscodium;
           mutableExtensionsDir = true;
-          extensions =
-            with pkgs.vscode-extensions;
+          extensions = with pkgs.vscode-extensions;
             [
               redhat.vscode-yaml
               jnoortheen.nix-ide

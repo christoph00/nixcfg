@@ -7,8 +7,7 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.ebusd;
   package = pkgs.ebusd;
 
@@ -29,7 +28,7 @@ let
       "--log=all:${cfg.logs.all}"
       "--accesslevel=*"
     ]
-    ++ lib.optionals cfg.readonly [ "--readonly" ]
+    ++ lib.optionals cfg.readonly ["--readonly"]
     ++ lib.optionals cfg.mqtt.enable [
       "--mqtthost=${cfg.mqtt.host}"
       "--mqttport=${toString cfg.mqtt.port}"
@@ -41,14 +40,13 @@ let
       "--mqttint=${package}/etc/ebusd/mqtt-hassio.cfg"
       "--mqttjson"
     ]
-    ++ lib.optionals cfg.mqtt.retain [ "--mqttretain" ]
+    ++ lib.optionals cfg.mqtt.retain ["--mqttretain"]
     ++ cfg.extraArguments;
 
   usesDev = hasPrefix "/" cfg.device;
 
   command = concatStringsSep " " arguments;
-in
-{
+in {
   options.chr.services.ebusd = with types; {
     enable = mkBoolOpt config.chr.services.smart-home "Enable eBUSd Service.";
     device = mkOption {
@@ -241,18 +239,18 @@ in
 
     extraArguments = mkOption {
       type = types.listOf types.str;
-      default = [ ];
+      default = [];
       description = lib.mdDoc ''
         Extra arguments to the ebus daemon
       '';
     };
   };
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ cfg.port ];
+    networking.firewall.allowedTCPPorts = [cfg.port];
     systemd.services.ebusd = {
       description = "EBUSd Service";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
       serviceConfig = {
         ExecStart = command;
         DynamicUser = true;
@@ -260,7 +258,7 @@ in
 
         # Hardening
         CapabilityBoundingSet = "";
-        DeviceAllow = lib.optionals usesDev [ cfg.device ];
+        DeviceAllow = lib.optionals usesDev [cfg.device];
         DevicePolicy = "closed";
         LockPersonality = true;
         MemoryDenyWriteExecute = false;
@@ -286,7 +284,7 @@ in
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
-        SupplementaryGroups = [ "dialout" ];
+        SupplementaryGroups = ["dialout"];
         SystemCallArchitectures = "native";
         SystemCallFilter = [
           "@system-service @pkey"

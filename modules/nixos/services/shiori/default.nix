@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.shiori;
-in
-{
+in {
   options.chr.services.shiori = with types; {
     enable = mkBoolOpt false "Enable shiori Service.";
   };
@@ -20,7 +18,7 @@ in
       port = 9119;
     };
     systemd.services.shiori = {
-      serviceConfig = { };
+      serviceConfig = {};
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {

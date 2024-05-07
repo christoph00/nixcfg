@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     description = "Bubble Card is a minimalist card collection for Home Assistant with a nice pop-up touch";
     homepage = "https://github.com/Clooos/Bubble-Card";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "ha-lovelace-bubble";
     platforms = platforms.all;
   };

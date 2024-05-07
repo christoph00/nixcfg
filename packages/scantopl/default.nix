@@ -25,7 +25,7 @@ buildGoModule rec {
     description = "Automatically upload file to paperless when filename match a prefix";
     homepage = "https://github.com/Celedhrim/scantopl/";
     license = licenses.wtfpl;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "scantopl";
   };
 }

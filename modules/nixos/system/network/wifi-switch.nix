@@ -7,8 +7,7 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.system.network;
 
   exclusive-lan = pkgs.writeShellScriptBin "70-wifi-wired-exclusive.sh" ''
@@ -45,8 +44,7 @@ let
         enable_disable_wifi
     fi
   '';
-in
-{
+in {
   networking = mkIf cfg.wifi-switch {
     wireless.enable = false; # use network manager instead of wpa supplicanmt
     networkmanager = {

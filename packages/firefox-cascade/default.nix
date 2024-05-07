@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
     description = "A responsive One-Line CSS Theme for Firefox";
     homepage = "https://github.com/andreasgrafen/cascade";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "firefox-cascade";
     platforms = platforms.all;
   };

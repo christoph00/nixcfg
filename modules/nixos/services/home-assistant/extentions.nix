@@ -6,8 +6,7 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.services.home-assistant;
   haDir = config.services.home-assistant.configDir;
 
@@ -18,8 +17,7 @@ let
   paper-buttons-row = "${pkgs.chr.ha-lovelace-paper-buttons-row}/paper-buttons-row.js";
   layout-card = "${pkgs.chr.ha-lovelace-layout-card}/layout-card.js";
   decluttering-card = "${pkgs.chr.ha-lovelace-decluttering-card}/decluttering-card.js";
-in
-{
+in {
   options.chr.services.home-assistant = with types; {
     customCards = mkOption {
       default = {

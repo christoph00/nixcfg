@@ -6,8 +6,7 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.desktop.fonts;
   mkFontOption = kind: {
     family = lib.mkOption {
@@ -21,8 +20,7 @@ let
       description = "Package for ${kind} font profile";
     };
   };
-in
-{
+in {
   options.chr.desktop.fonts = with types; {
     enable = mkBoolOpt config.chr.desktop.enable "Enable Font Config";
     fontProfiles = {
@@ -82,7 +80,7 @@ in
             "JetBrainsMono Nerd Font"
             "Noto Color Emoji"
           ];
-          emoji = [ "Noto Color Emoji" ];
+          emoji = ["Noto Color Emoji"];
         };
       };
     };

@@ -6,11 +6,9 @@
   ...
 }:
 with lib;
-with lib.chr;
-let
+with lib.chr; let
   cfg = config.chr.desktop.remote;
-in
-{
+in {
   options.chr.desktop.remote = with types; {
     enable = mkBoolOpt false "Enable Remote Desktop Service.";
   };

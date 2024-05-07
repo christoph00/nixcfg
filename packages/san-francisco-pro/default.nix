@@ -1,4 +1,8 @@
-{ lib, fetchFromGitHub, ... }:
+{
+  lib,
+  fetchFromGitHub,
+  ...
+}:
 fetchFromGitHub {
   pname = "San-Francisco-Pro-Fonts";
   owner = "sahibjotsaggu";
