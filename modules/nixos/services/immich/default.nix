@@ -56,6 +56,7 @@ in {
         DB_URL = "socket://immich:@/run/postgresql?db=immich";
         REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
         IMMICH_MEDIA_LOCATION = "/nix/persist/immich/upload";
+        IMMICH_REVERSE_GEOCODING_ROOT = "/nix/persist/immich/geocoding";
         IMMICH_WEB_ROOT = "${pkgs.chr.immich}/web";
       };
     in {
