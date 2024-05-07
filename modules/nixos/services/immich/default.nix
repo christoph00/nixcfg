@@ -12,6 +12,13 @@ with lib.chr; let
   group = user;
   uid = 15015;
   gid = uid;
+  environment = {
+    NODE_ENV = "production";
+    DB_URL = "socket://immich:@/run/postgresql?db=immich";
+    REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
+    IMMICH_MEDIA_LOCATION = "/nix/persist/immich/upload";
+    IMMICH_WEB_ROOT = "${pkgs.chr.immich}/web";
+  };
 in {
   options.chr.services.immich = with types; {
     enable = mkBoolOpt false "Enable immich Service.";
@@ -103,6 +110,7 @@ in {
     };
 
     systemd.services.immich-server = {
+      inherit environment;
       description = "immich server";
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
@@ -116,12 +124,21 @@ in {
         Restart = "on-failure";
         RestartSec = "5";
       };
-      environment = {
-        NODE_ENV = "production";
-        DB_URL = "socket://immich:@/run/postgresql?db=immich";
-        REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
-        IMMICH_MEDIA_LOCATION = "/nix/persist/immich/upload";
-        IMMICH_WEB_ROOT = "${pkgs.chr.immich}/web";
+    };
+    systemd.services.immich-microservices = {
+      inherit environment;
+      description = "immich microservices";
+      wantedBy = ["immich-server.service"];
+      after = ["immich-server.service"];
+      serviceConfig = {
+        User = user;
+        Group = group;
+        ExecStart = ''
+          ${pkgs.nodejs}/bin/node ${pkgs.chr.immich}/main.js microservices
+        '';
+        WorkingDirectory = "${pkgs.chr.immich}/";
+        Restart = "on-failure";
+        RestartSec = "5";
       };
     };
   };
