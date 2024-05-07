@@ -42,6 +42,10 @@ in {
       enable = true;
     };
 
+    environment.systemPackages = with pkgs; [
+      immich-go
+    ];
+
     systemd.services = let
       environment = {
         NODE_ENV = "production";
@@ -70,7 +74,7 @@ in {
       immich-microservices = {
         inherit environment;
         description = "immich microservices";
-        wantedBy = ["immich-server.service"];
+        wantedBy = ["multi-user.target"];
         after = ["immich-server.service"];
         serviceConfig = {
           User = user;
