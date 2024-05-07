@@ -44,10 +44,6 @@ in {
 
     environment.systemPackages = with pkgs; [
       immich-go
-      perlPackages.ImageExifTool
-      perlPackages.FileMimeInfo
-      exiftool
-      jellyfin-ffmpeg
     ];
 
     systemd.services = let
@@ -59,9 +55,15 @@ in {
         IMMICH_REVERSE_GEOCODING_ROOT = "/nix/persist/immich/geocoding";
         IMMICH_WEB_ROOT = "${pkgs.chr.immich}/web";
       };
+      path = with pkgs; [
+        perlPackages.ImageExifTool
+        perlPackages.FileMimeInfo
+        exiftool
+        jellyfin-ffmpeg
+      ];
     in {
       immich-server = {
-        inherit environment;
+        inherit environment path;
         description = "immich server";
         wantedBy = ["multi-user.target"];
         after = ["network.target"];
@@ -77,7 +79,7 @@ in {
         };
       };
       immich-microservices = {
-        inherit environment;
+        inherit environment path;
         description = "immich microservices";
         wantedBy = ["multi-user.target"];
         after = ["immich-server.service"];
