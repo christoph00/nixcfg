@@ -94,6 +94,20 @@ in {
           RestartSec = "5";
         };
       };
+      immich-ml = {
+        inherit environment path;
+        description = "immich machine-learning";
+        wantedBy = ["multi-user.target"];
+        after = ["immich-server.service"];
+        serviceConfig = {
+          ExecStart = ''
+            ${pkgs.chr.immich-ml.python.pkgs.gunicorn}/bin/gunicorn app.main:app -k app.config.CustomUvicornWorker
+          '';
+          WorkingDirectory = "${pkgs.chr.immich-ml}/lib/python3.11/site-packages";
+          Restart = "on-failure";
+          RestartSec = "5";
+        };
+      };
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
