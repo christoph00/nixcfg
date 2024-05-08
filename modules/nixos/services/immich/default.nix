@@ -101,7 +101,12 @@ in {
         after = ["immich-server.service"];
         serviceConfig = {
           ExecStart = ''
-            ${pkgs.chr.immich-ml.python.pkgs.gunicorn}/bin/gunicorn app.main:app -k app.config.CustomUvicornWorker
+            ${pkgs.chr.immich-ml.python.pkgs.gunicorn}/bin/gunicorn app.main:app \
+              -k app.config.CustomUvicornWorker \
+              -w 1 \
+              -b 127.0.0.1:3002 \
+              -t 120 \
+              --graceful-timeout 0
           '';
           WorkingDirectory = "${pkgs.chr.immich-ml}/lib/python3.11/site-packages";
           Restart = "on-failure";
