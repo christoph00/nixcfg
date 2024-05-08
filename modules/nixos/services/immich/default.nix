@@ -95,7 +95,7 @@ in {
         };
       };
       immich-ml = {
-        inherit environment path;
+        inherit path;
         description = "immich machine-learning";
         wantedBy = ["multi-user.target"];
         after = ["immich-server.service"];
