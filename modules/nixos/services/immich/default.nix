@@ -107,6 +107,11 @@ in {
           Restart = "on-failure";
           RestartSec = "5";
         };
+        environment =
+          environment
+          // {
+            PYTHONPATH = "${pkgs.chr.immich-ml.python.pkgs.makePythonPath pkgs.chr.immich-ml.propagatedBuildInputs}";
+          };
       };
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
