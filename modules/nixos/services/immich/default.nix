@@ -63,6 +63,7 @@ in {
         perlPackages.FileMimeInfo
         exiftool
         jellyfin-ffmpeg
+        perl
       ];
     in {
       immich-server = {
@@ -107,7 +108,7 @@ in {
             ${gunicorn}/bin/gunicorn app.main:app \
               -k app.config.CustomUvicornWorker \
               -w 1 \
-              -b 127.0.0.1:3002 \
+              -b 127.0.0.1:3003 \
               -t 120 \
               --graceful-timeout 0
           '';
