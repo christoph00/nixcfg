@@ -98,30 +98,30 @@ in {
           RestartSec = "5";
         };
       };
-      immich-ml = {
-        inherit path;
-        description = "immich machine-learning";
-        wantedBy = ["multi-user.target"];
-        after = ["immich-server.service"];
-        serviceConfig = {
-          ExecStart = ''
-            ${gunicorn}/bin/gunicorn app.main:app \
-              -k app.config.CustomUvicornWorker \
-              -w 1 \
-              -b 127.0.0.1:3003 \
-              -t 120 \
-              --graceful-timeout 0
-          '';
-          WorkingDirectory = "${pkgs.chr.immich-ml}/lib/python3.11/site-packages";
-          Restart = "on-failure";
-          RestartSec = "5";
-        };
-        environment =
-          environment
-          // {
-            PYTHONPATH = "${python.pkgs.makePythonPath pkgs.chr.immich-ml.propagatedBuildInputs}";
-          };
-      };
+      # immich-ml = {
+      #   inherit path;
+      #   description = "immich machine-learning";
+      #   wantedBy = ["multi-user.target"];
+      #   after = ["immich-server.service"];
+      #   serviceConfig = {
+      #     ExecStart = ''
+      #       ${gunicorn}/bin/gunicorn app.main:app \
+      #         -k app.config.CustomUvicornWorker \
+      #         -w 1 \
+      #         -b 127.0.0.1:3003 \
+      #         -t 120 \
+      #         --graceful-timeout 0
+      #     '';
+      #     WorkingDirectory = "${pkgs.chr.immich-ml}/lib/python3.11/site-packages";
+      #     Restart = "on-failure";
+      #     RestartSec = "5";
+      #   };
+      #   environment =
+      #     environment
+      #     // {
+      #       PYTHONPATH = "${python.pkgs.makePythonPath pkgs.chr.immich-ml.propagatedBuildInputs}";
+      #     };
+      # };
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
