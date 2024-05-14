@@ -12,9 +12,6 @@ with lib.chr; let
   group = user;
   uid = 15015;
   gid = uid;
-
-  gunicorn = pkgs.python3Packages.gunicorn;
-  python = pkgs.python3Packages.python;
 in {
   options.chr.services.immich = with types; {
     enable = mkBoolOpt false "Enable immich Service.";
@@ -104,22 +101,10 @@ in {
         after = ["immich-server.service"];
         serviceConfig = {
           ExecStart = ''
-            ${gunicorn}/bin/gunicorn app.main:app \
-              -k app.config.CustomUvicornWorker \
-              -w 1 \
-              -b 127.0.0.1:3003 \
-              -t 120 \
-              --graceful-timeout 0
+            ${pkgs.chr.immich-ml}/bin/immich-ml
           '';
           Restart = "on-failure";
           RestartSec = "5";
-        };
-        environment = let
-          penv = python.buildEnv.override {
-            extraLibs = [pkgs.chr.immich-ml];
-          };
-        in {
-          PYTHONPATH = "${penv}/${python.sitePackages}/";
         };
       };
     };
