@@ -124,6 +124,7 @@ in {
         environment = {
           MACHINE_LEARNING_ANN = "0";
           MACHINE_LEARNING_CACHE_FOLDER = "cache";
+          MPLCONFIGDIR = "mpl";
         };
       };
     })
