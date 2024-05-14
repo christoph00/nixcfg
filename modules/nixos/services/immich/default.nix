@@ -122,7 +122,7 @@ in {
           RestartSec = "5";
         };
         environment = {
-          IMMICH_MACHINE_LEARNING_ANN = false;
+          IMMICH_MACHINE_LEARNING_ANN = "0";
           IMMICH_MACHINE_LEARNING_CACHE_FOLDER = "cache";
         };
       };
