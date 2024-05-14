@@ -111,12 +111,12 @@ in {
               -t 120 \
               --graceful-timeout 0
           '';
-          WorkingDirectory = "${pkgs.chr.immich-ml}/lib/python3.11/site-packages";
+          WorkingDirectory = "${pkgs.chr.immich-ml}/lib/site-packages";
           Restart = "on-failure";
           RestartSec = "5";
         };
         environment = let
-          penv = pkgs.python.buildEnv.override {
+          penv = python.buildEnv.override {
             extraLibs = [pkgs.chr.immich-ml];
           };
         in {
