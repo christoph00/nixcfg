@@ -6,12 +6,13 @@
   fetchFromGitHub,
 }: let
   pname = "immich-ml";
-  version = "1.105.0";
+  version = "1.104.0";
   src = fetchFromGitHub {
     owner = "immich-app";
     repo = "immich";
     rev = "v${version}";
     hash = "sha256-xHRAxPC7juO4g4f2TvNC87p8YnzcjPS2Vn3wP7NSTi8=";
+
     fetchSubmodules = true;
   };
   python = python3.override {
