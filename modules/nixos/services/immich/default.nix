@@ -111,7 +111,6 @@ in {
               -t 120 \
               --graceful-timeout 0
           '';
-          WorkingDirectory = "${pkgs.chr.immich-ml}/lib/site-packages";
           Restart = "on-failure";
           RestartSec = "5";
         };
