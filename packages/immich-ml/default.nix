@@ -31,15 +31,17 @@
     pname = "${pname}-ann";
     sourceRoot = "${src.name}/machine-learning/ann";
 
-    buildPhase = ''
-      g++ -shared -O3 -o libann.so -fuse-ld=gold -std=c++17 -larmnn -larmnnDeserializer -larmnnTfLiteParser -larmnnOnnxParser  ann.cpp
-    '';
+    # buildPhase = ''
+    #   g++ -shared -O3 -o libann.so -fuse-ld=gold -std=c++17 -larmnn -larmnnDeserializer -larmnnTfLiteParser -larmnnOnnxParser  ann.cpp
+    # '';
+
+    dontBuild = true;
 
     installPhase = ''
-      mkdir -p "$out"/ann
-      cp libann.so "$out/ann"
-      cp export "$out/ann"
-      cp *.py "$out/ann"
+       mkdir -p "$out"/ann
+      # cp libann.so "$out/ann"
+      # cp export "$out/ann"
+       cp *.py "$out/ann"
     '';
   };
 in
@@ -60,28 +62,26 @@ in
       "setuptools"
     ];
 
-    pythonRemoveDeps = ["opencv-python-headless" "python-multipart" "pydantic"];
+    pythonRemoveDeps = ["opencv-python-headless" "pydantic"];
 
     # dontWrapPythonPrograms = true;
 
-    propagatedBuildInputs = with python.pkgs;
-      [
-        insightface
-        opencv4
-        pillow
-        fastapi
-        uvicorn
-        aiocache
-        rich
-        ftfy
-        setuptools
-        multipart
-        orjson
-        gunicorn
-        huggingface-hub
-        tokenizers
-      ]
-      ++ [ann];
+    propagatedBuildInputs = with python.pkgs; [
+      insightface
+      opencv4
+      pillow
+      fastapi
+      uvicorn
+      aiocache
+      rich
+      ftfy
+      setuptools
+      python-multipart
+      orjson
+      gunicorn
+      huggingface-hub
+      tokenizers
+    ];
 
     # No tests available
     doCheck = false;
@@ -93,8 +93,11 @@ in
     in ''
       rm -f $out/bin/*
 
+      cp -r ${ann}/ann $out/${python.sitePackages}/
+
       makeWrapper ${start_script} $out/bin/immich-ml \
-        --set PYTHONPATH "$out/${python.sitePackages}:${python.pkgs.makePythonPath propagatedBuildInputs}"
+        --set PYTHONPATH "$out/${python.sitePackages}:${python.pkgs.makePythonPath propagatedBuildInputs} ß
+        --set MACHINE_LEARNING_ANN false"
     '';
 
     meta = with lib; {
