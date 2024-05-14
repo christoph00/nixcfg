@@ -19,6 +19,7 @@ with lib.chr; {
       enable = true;
       gui = true;
     };
+    services.immich.enableML = true;
   };
   chr.system.filesystem = {
     enable = true;
