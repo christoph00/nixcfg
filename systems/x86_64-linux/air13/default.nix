@@ -117,7 +117,7 @@ in {
     ];
   };
 
-  filesystems."/mnt/img" = {
+  fileSystems."/mnt/img" = {
     device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
     options = [
       "subvol=@img"
