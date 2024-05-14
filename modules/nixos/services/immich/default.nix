@@ -111,11 +111,19 @@ in {
         after = ["immich-server.service"];
         serviceConfig = {
           DynamicUser = true;
+          StateDirectory = "immich-ml";
+          WorkingDirectory = workingDir;
+          RuntimeDirectory = "immich-ml";
+          RuntimeDirectoryMode = "0700";
           ExecStart = ''
             ${pkgs.chr.immich-ml}/bin/immich-ml
           '';
           Restart = "on-failure";
           RestartSec = "5";
+        };
+        environment = {
+          IMMICH_MACHINE_LEARNING_ANN = false;
+          IMMICH_MACHINE_LEARNING_CACHE_FOLDER = "cache";
         };
       };
     })
