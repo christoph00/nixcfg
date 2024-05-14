@@ -36,7 +36,6 @@ in {
     inputs.anyrun.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
     inputs.hyprland.homeManagerModules.default
-    inputs.hyprlock.homeManagerModules.default
     inputs.ironbar.homeManagerModules.default
   ];
 
