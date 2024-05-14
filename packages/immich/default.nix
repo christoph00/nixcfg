@@ -11,12 +11,13 @@
   bash,
 }: let
   pname = "immich";
-  version = "1.103.1";
+  version = "1.104.0";
   src = fetchFromGitHub {
     owner = "immich-app";
     repo = "immich";
     rev = "v${version}";
-    hash = "sha256-/NtL24C2eUeDDJjJ8jwlpqtEQOwqDkIxv8w2VMtD1yg=";
+    hash = "sha256-xHRAxPC7juO4g4f2TvNC87p8YnzcjPS2Vn3wP7NSTi8=";
+    #hash = lib.fakeHash;
     fetchSubmodules = true;
   };
 
@@ -25,7 +26,7 @@
     pname = "${pname}-openapi";
     src = "${src}/open-api/typescript-sdk";
 
-    npmDepsHash = "sha256-tKuhaheR0l6/9XmnYpUod+g8GLup/6LZ3K0dftdfw0s=";
+    npmDepsHash = "sha256-TjOhEUCn5SE7xgSwMsFK0wiHkgVmQa13jGezX3KBLWc=";
   };
 
   web = buildNpmPackage {
@@ -33,7 +34,8 @@
     pname = "${pname}-web";
     src = "${src}/web";
 
-    npmDepsHash = "sha256-vs6QEGIfbGCtTCXQDmWYBf/eKbB7lPEJzvTHzPfjQvY=";
+    npmDepsHash = "sha256-VOJhmv+hq8g3KXYPTdbPDPqw/NAltl+tO/VrvKDabiU=";
+    #npmDepshash = lib.fakeHash;
 
     makeCacheWritable = true;
 
@@ -59,7 +61,7 @@ in
   buildNpmPackage rec {
     inherit pname src version;
 
-    npmDepsHash = "sha256-hrdswSsQFKu7i214H082FU7BpS/OUp+6tCw4rY5ccRQ=";
+    npmDepsHash = "sha256-ePTKbrCQh9p3MxjeIMJqBoiS9th5Wb0Vk/3WMACKh0o=";
 
     sourceRoot = "${src.name}/server";
 
