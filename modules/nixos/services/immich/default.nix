@@ -122,8 +122,8 @@ in {
           RestartSec = "5";
         };
         environment = {
-          IMMICH_MACHINE_LEARNING_ANN = "0";
-          IMMICH_MACHINE_LEARNING_CACHE_FOLDER = "cache";
+          MACHINE_LEARNING_ANN = "0";
+          MACHINE_LEARNING_CACHE_FOLDER = "cache";
         };
       };
     })
