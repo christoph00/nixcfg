@@ -96,8 +96,7 @@ in
       cp -r ${ann}/ann $out/${python.sitePackages}/
 
       makeWrapper ${start_script} $out/bin/immich-ml \
-        --set PYTHONPATH "$out/${python.sitePackages}:${python.pkgs.makePythonPath propagatedBuildInputs} ß
-        --set MACHINE_LEARNING_ANN false"
+        --set PYTHONPATH "$out/${python.sitePackages}:${python.pkgs.makePythonPath propagatedBuildInputs}"
     '';
 
     meta = with lib; {
