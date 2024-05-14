@@ -54,7 +54,7 @@ in {
         NODE_ENV = "production";
         DB_URL = "socket://immich:@/run/postgresql?db=immich";
         REDIS_SOCKET = config.services.redis.servers.immich.unixSocket;
-        IMMICH_MEDIA_LOCATION = "/nix/persist/immich/upload";
+        IMMICH_MEDIA_LOCATION = "/mnt/img";
         IMMICH_REVERSE_GEOCODING_ROOT = "/nix/persist/immich/geocoding";
         IMMICH_WEB_ROOT = "${pkgs.chr.immich}/web";
       };
@@ -98,30 +98,31 @@ in {
           RestartSec = "5";
         };
       };
-      # immich-ml = {
-      #   inherit path;
-      #   description = "immich machine-learning";
-      #   wantedBy = ["multi-user.target"];
-      #   after = ["immich-server.service"];
-      #   serviceConfig = {
-      #     ExecStart = ''
-      #       ${gunicorn}/bin/gunicorn app.main:app \
-      #         -k app.config.CustomUvicornWorker \
-      #         -w 1 \
-      #         -b 127.0.0.1:3003 \
-      #         -t 120 \
-      #         --graceful-timeout 0
-      #     '';
-      #     WorkingDirectory = "${pkgs.chr.immich-ml}/lib/python3.11/site-packages";
-      #     Restart = "on-failure";
-      #     RestartSec = "5";
-      #   };
-      #   environment =
-      #     environment
-      #     // {
-      #       PYTHONPATH = "${python.pkgs.makePythonPath pkgs.chr.immich-ml.propagatedBuildInputs}";
-      #     };
-      # };
+      immich-ml = {
+        description = "immich machine-learning";
+        wantedBy = ["multi-user.target"];
+        after = ["immich-server.service"];
+        serviceConfig = {
+          ExecStart = ''
+            ${gunicorn}/bin/gunicorn app.main:app \
+              -k app.config.CustomUvicornWorker \
+              -w 1 \
+              -b 127.0.0.1:3003 \
+              -t 120 \
+              --graceful-timeout 0
+          '';
+          WorkingDirectory = "${pkgs.chr.immich-ml}/lib/python3.11/site-packages";
+          Restart = "on-failure";
+          RestartSec = "5";
+        };
+        environment = let
+          penv = pkgs.python.buildEnv.override {
+            extraLibs = [pkgs.chr.immich-ml];
+          };
+        in {
+          PYTHONPATH = "${penv}/${python.sitePackages}/";
+        };
+      };
     };
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {

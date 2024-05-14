@@ -117,6 +117,16 @@ in {
     ];
   };
 
+  filesystems."/mnt/img" = {
+    device = "/dev/disk/by-uuid/1cf7a829-5a31-4d01-aa94-e142826a1ed3";
+    options = [
+      "subvol=@img"
+      "discard=async"
+      "compress-force=zstd"
+      "nofail"
+    ];
+  };
+
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
