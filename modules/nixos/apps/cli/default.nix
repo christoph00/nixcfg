@@ -36,7 +36,6 @@ in {
         nixd
         gcc
         alejandra
-        cachix
 
         chr.aichat
         chr.tgpt

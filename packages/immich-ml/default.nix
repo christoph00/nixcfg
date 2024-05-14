@@ -1,5 +1,6 @@
 {
   lib,
+  stdenv,
   python3,
   makeWrapper,
   writeShellScript,
@@ -25,6 +26,22 @@
       };
     };
   };
+  ann = stdenv.mkDerivation {
+    inherit version src;
+    pname = "${pname}-ann";
+    sourceRoot = "${src.name}/machine-learning/ann";
+
+    buildPhase = ''
+      g++ -shared -O3 -o libann.so -fuse-ld=gold -std=c++17 -larmnn -larmnnDeserializer -larmnnTfLiteParser -larmnnOnnxParser  ann.cpp
+    '';
+
+    installPhase = ''
+      mkdir -p "$out"/ann
+      cp libann.so "$out/ann"
+      cp export "$out/ann"
+      cp *.py "$out/ann"
+    '';
+  };
 in
   python.pkgs.buildPythonApplication rec {
     inherit pname src version;
@@ -47,29 +64,31 @@ in
 
     # dontWrapPythonPrograms = true;
 
-    propagatedBuildInputs = with python.pkgs; [
-      insightface
-      opencv4
-      pillow
-      fastapi
-      uvicorn
-      aiocache
-      rich
-      ftfy
-      setuptools
-      multipart
-      orjson
-      gunicorn
-      huggingface-hub
-      tokenizers
-    ];
+    propagatedBuildInputs = with python.pkgs;
+      [
+        insightface
+        opencv4
+        pillow
+        fastapi
+        uvicorn
+        aiocache
+        rich
+        ftfy
+        setuptools
+        multipart
+        orjson
+        gunicorn
+        huggingface-hub
+        tokenizers
+      ]
+      ++ [ann];
 
     # No tests available
     doCheck = false;
 
     postInstall = let
       start_script = writeShellScript "start-immich-ml" ''
-        ${lib.getExe python.pkgs.gunicorn} "$@" -k app.config.CustomUvicornWorker app.main:app;
+        ${lib.getExe python.pkgs.gunicorn} "$@" -k app.config.CustomUvicornWorker -w 1 -b 0.0.0.0:3003 -t 120 app.main:app;
       '';
     in ''
       rm -f $out/bin/*
