@@ -109,7 +109,7 @@ in {
         description = "immich machine-learning";
         wantedBy = ["multi-user.target"];
         after = ["immich-server.service"];
-        serviceConfig = {
+        serviceConfig = rec {
           DynamicUser = true;
           StateDirectory = "immich-ml";
           WorkingDirectory = workingDir;
