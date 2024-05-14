@@ -1,12 +1,12 @@
 {
   lib,
-  python3Packages,
+  python3,
   makeWrapper,
   writeShellScript,
   fetchFromGitHub,
 }: let
   pname = "immich-ml";
-  version = "1.103.1";
+  version = "1.105.0";
   src = fetchFromGitHub {
     owner = "immich-app";
     repo = "immich";
@@ -14,12 +14,16 @@
     hash = "sha256-xHRAxPC7juO4g4f2TvNC87p8YnzcjPS2Vn3wP7NSTi8=";
     fetchSubmodules = true;
   };
-  pythonpkgs = python3Packages.override {
-    overrides = self: super: {
-      pydantic = python3Packages.pydantic_1;
+  python = python3.override {
+    packageOverrides = self: super: {
+      pydantic = super.pydantic_1;
+
+      versioningit = super.versioningit.overridePythonAttrs {
+        # checkPhase requires pydantic>=2
+        doCheck = false;
+      };
     };
   };
-  python = pythonpkgs.python;
 in
   python.pkgs.buildPythonApplication rec {
     inherit pname src version;
@@ -28,7 +32,7 @@ in
 
     sourceRoot = "${src.name}/machine-learning";
 
-    nativeBuildInputs = with pythonpkgs; [
+    nativeBuildInputs = with python.pkgs; [
       poetry-core
       pythonRelaxDepsHook
       makeWrapper
@@ -61,6 +65,17 @@ in
 
     # No tests available
     doCheck = false;
+
+    postInstall = let
+      start_script = writeShellScript "start-immich-ml" ''
+        ${lib.getExe python.pkgs.gunicorn} "$@" -k app.config.CustomUvicornWorker app.main:app;
+      '';
+    in ''
+      rm -f $out/bin/*
+
+      makeWrapper ${start_script} $out/bin/immich-ml \
+        --set PYTHONPATH "$out/${python.sitePackages}:${python.pkgs.makePythonPath propagatedBuildInputs}"
+    '';
 
     meta = with lib; {
       description = "High performance self-hosted photo and video management solution";
