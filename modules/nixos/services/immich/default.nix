@@ -62,7 +62,7 @@ in {
         perlPackages.ImageExifTool
         perlPackages.FileMimeInfo
         exiftool
-        jellyfin-ffmpeg
+        ffmpeg-headless
         perl
       ];
     in {

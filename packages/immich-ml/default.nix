@@ -11,7 +11,7 @@
     owner = "immich-app";
     repo = "immich";
     rev = "v${version}";
-    hash = "sha256-/NtL24C2eUeDDJjJ8jwlpqtEQOwqDkIxv8w2VMtD1yg=";
+    hash = "sha256-xHRAxPC7juO4g4f2TvNC87p8YnzcjPS2Vn3wP7NSTi8=";
     fetchSubmodules = true;
   };
   pythonpkgs = python3Packages.override {
