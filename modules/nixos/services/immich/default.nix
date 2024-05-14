@@ -109,10 +109,10 @@ in {
         description = "immich machine-learning";
         wantedBy = ["multi-user.target"];
         after = ["immich-server.service"];
-        serviceConfig = rec {
+        serviceConfig = {
           DynamicUser = true;
           StateDirectory = "immich-ml";
-          WorkingDirectory = workingDir;
+          WorkingDirectory = "%S/immich-ml";
           RuntimeDirectory = "immich-ml";
           RuntimeDirectoryMode = "0700";
           ExecStart = ''
