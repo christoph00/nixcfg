@@ -18,7 +18,7 @@ in {
     enableML = mkBoolOpt cfg.enable "Enable immich ML Service.";
     port = mkOption {
       type = types.port;
-      default = 8081;
+      default = 3001;
       description = ''
         Port the listener should listen on
       '';
