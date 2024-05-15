@@ -34,6 +34,13 @@ in {
 
       api.dashboard = true;
 
+      experimental.localPlugins = {
+        bouncer.moduleName = "github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin";
+        cloudflarewarp.moduleName = "github.com/BilikoX/cloudflarewarp";
+      };
+      log = {};
+      accessLog = {};
+
       entryPoints = {
         http = {
           address = ":80";
