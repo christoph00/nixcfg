@@ -62,7 +62,7 @@ in
       "setuptools"
     ];
 
-    pythonRemoveDeps = ["opencv-python-headless" "pydantic"];
+    pythonRemoveDeps = ["opencv-python-headless" "pydantic" "fastapi-slim"];
 
     # dontWrapPythonPrograms = true;
 
