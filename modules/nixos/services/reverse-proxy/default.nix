@@ -26,7 +26,7 @@ in {
       log.level = "INFO";
       certificatesResolvers.cfWildcard.acme = {
         email = "cert@r505.de";
-        storage = "acme.json";
+        storage = "/var/lib/traefik/acme.json";
         # caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
         dnsChallenge.provider = "cloudflare";
         dnsChallenge.resolvers = ["1.1.1.1:53" "8.8.8.8:53"];
