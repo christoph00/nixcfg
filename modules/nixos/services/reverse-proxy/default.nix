@@ -17,6 +17,9 @@ in {
       file = ../../../../secrets/traefik.env;
       owner = "traefik";
     };
+    environment.persistence."${config.chr.system.persist.stateDir}" = {
+      directories = [{directory = "/var/lib/traefik";}];
+    };
     services.traefik.enable = true;
     systemd.services.traefik.serviceConfig.EnvironmentFile = [config.age.secrets.traefik.path];
     services.traefik.staticConfigOptions = {
