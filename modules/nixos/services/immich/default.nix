@@ -67,11 +67,11 @@ in {
         servers = [
           {
             url = "http://tower.netbird.cloud:${toString cfg.mlPort}";
-            weight = 10;
+            #  weight = 10;
           }
           {
             url = "http://127.0.0.1:${toString cfg.mlPort}";
-            weight = 3;
+            # weight = 3;
           }
         ];
       };
