@@ -90,7 +90,6 @@ in {
         # media-sort
         #phockup
         #ffmpeg-full
-        inputs.devenv.packages.${system}.devenv
 
         wireguard-tools
       ];
