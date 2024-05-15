@@ -8,7 +8,7 @@
   python3,
   nest-cli,
   nodejs,
-  bash,
+  makeWrapper,
 }: let
   pname = "immich";
   version = "1.105.1";
@@ -71,6 +71,7 @@ in
       pkg-config
       python3
       nest-cli
+      makeWrapper
     ];
 
     buildPhase = ''
@@ -79,14 +80,23 @@ in
 
     installPhase = ''
       mkdir -p $out
-      cp -r dist/* $out/
+      cp -r dist $out/
       cp -r ${web}  $out/web
       cp -a \
-      resources \
-      package.json \
-      package-lock.json \
-      node_modules \
-      $out/
+        resources \
+        package.json \
+        package-lock.json \
+        node_modules \
+        $out/
+
+      makeWrapper ${nodejs}/bin/node $out/bin/immich \
+        --add-flags $out/dist/main.js \
+        --set NODE_ENV production \
+        --set NODE_PATH "$out/node_modules"
+    '';
+
+    postFixup = ''
+
     '';
 
     buildInputs = [
