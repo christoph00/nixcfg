@@ -123,13 +123,12 @@ in {
           Restart = "on-failure";
           RestartSec = "5";
         };
-        environment =
-          {
-            MACHINE_LEARNING_ANN = "0";
-            MACHINE_LEARNING_CACHE_FOLDER = "cache";
-            MPLCONFIGDIR = "mpl";
-          }
-          // environment;
+        environment = {
+          MACHINE_LEARNING_ANN = "0";
+          MACHINE_LEARNING_CACHE_FOLDER = "cache";
+          MPLCONFIGDIR = "mpl";
+          LD_PRELOAD = "${pkgs.mimalloc}/lib/libmimalloc.so";
+        };
       };
     })
   ];

@@ -25,7 +25,6 @@ in {
       rootOnTmpfs = true;
     };
     services = {
-      webserver.enable = true;
       code-server.enable = true;
     };
     home.enable = true;
