@@ -7,12 +7,12 @@
   fetchFromGitHub,
 }: let
   pname = "immich-ml";
-  version = "1.104.0";
+  version = "1.105.1";
   src = fetchFromGitHub {
     owner = "immich-app";
     repo = "immich";
     rev = "v${version}";
-    hash = "sha256-xHRAxPC7juO4g4f2TvNC87p8YnzcjPS2Vn3wP7NSTi8=";
+    hash = "sha256-94OPpruPaj1+6nswWoDnG//FI0R1TMf8sF9VAYnvDM0=";
 
     fetchSubmodules = true;
   };
