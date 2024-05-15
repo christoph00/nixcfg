@@ -25,7 +25,7 @@ in {
     services.traefik.staticConfigOptions = {
       log.level = "INFO";
 
-      api.dashboard = true;
+      api.dashboard = false;
       api.insecure = true;
 
       certificatesResolvers.cfWildcard.acme = {
