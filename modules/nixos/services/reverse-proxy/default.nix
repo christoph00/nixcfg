@@ -24,10 +24,6 @@ in {
     systemd.services.traefik.serviceConfig.EnvironmentFile = [config.age.secrets.traefik.path];
     services.traefik.staticConfigOptions = {
       log.level = "INFO";
-
-      api.dashboard = false;
-      api.insecure = true;
-
       certificatesResolvers.cfWildcard.acme = {
         email = "cert@r505.de";
         storage = "acme.json";
@@ -55,15 +51,6 @@ in {
         test = {
           address = ":1313";
           forwardedHeaders.insecure = true;
-        };
-      };
-    };
-    services.traefik.dynamicConfigOptions = {
-      http.routers = {
-        api = {
-          entrypoints = ["traefik"];
-          rule = "PathPrefix(`/api/`)";
-          service = "api@internal";
         };
       };
     };
