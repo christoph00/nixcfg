@@ -23,6 +23,13 @@ in {
         Port the listener should listen on
       '';
     };
+    mlPort = mkOption {
+      type = types.port;
+      default = 3003;
+      description = ''
+        Port the ML listener should listen on
+      '';
+    };
     dataDir = mkOption {
       type = types.str;
       default = "/nix/persist/immich";
@@ -43,9 +50,30 @@ in {
         tls.domains = [{main = "*.internal.r505.de";}];
         tls.certResolver = "cfWildcard";
       };
+      services.traefik.dynamicConfigOptions.http.routers.immich-ml = {
+        entryPoints = ["https" "http"];
+        rule = "Host(`img-ml.internal.r505.de`)";
+        service = "immich-ml";
+        tls.domains = [{main = "*.internal.r505.de";}];
+        tls.certResolver = "cfWildcard";
+      };
       services.traefik.dynamicConfigOptions.http.services.immich.loadBalancer = {
         passHostHeader = false;
         servers = [{url = "http://127.0.0.1:${toString cfg.port}";}];
+      };
+
+      services.traefik.dynamicConfigOptions.http.services.immich-ml.loadBalancer = {
+        passHostHeader = false;
+        servers = [
+          {
+            url = "http://tower.netbird.cloud:${toString cfg.mlPort}";
+            weight = 10;
+          }
+          {
+            url = "http://127.0.0.1:${toString cfg.mlPort}";
+            weight = 3;
+          }
+        ];
       };
 
       users.users.${user} = {
@@ -141,6 +169,7 @@ in {
           RestartSec = "5";
         };
         environment = {
+          MACHINE_LEARNING_PORT = toString cfg.mlPort;
           MACHINE_LEARNING_ANN = "0";
           MACHINE_LEARNING_CACHE_FOLDER = "cache";
           MPLCONFIGDIR = "mpl";
