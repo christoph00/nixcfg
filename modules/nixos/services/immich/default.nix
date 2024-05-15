@@ -72,7 +72,7 @@ in {
           IMMICH_REVERSE_GEOCODING_ROOT = "/nix/persist/immich/geocoding";
           IMMICH_WEB_ROOT = "${pkgs.chr.immich}/web";
 
-          SERVER_PORT = cfg.port;
+          SERVER_PORT = toString cfg.port;
 
           LD_PRELOAD = "${pkgs.mimalloc}/lib/libmimalloc.so";
         };
