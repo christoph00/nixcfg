@@ -33,7 +33,6 @@ in {
       };
 
       api.dashboard = true;
-      api.insecure = true;
 
       entryPoints = {
         http = {
@@ -63,6 +62,8 @@ in {
           entrypoints = ["https" "http"];
           rule = "Host(`traefik.lan.r505.de`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))";
           service = "api@internal";
+          tls.domains = [{main = "*.internal.r505.de";}];
+          tls.certResolver = "cfWildcard";
         };
       };
     };
