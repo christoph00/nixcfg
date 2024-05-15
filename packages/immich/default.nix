@@ -11,12 +11,12 @@
   bash,
 }: let
   pname = "immich";
-  version = "1.104.0";
+  version = "1.105.1";
   src = fetchFromGitHub {
     owner = "immich-app";
     repo = "immich";
     rev = "v${version}";
-    hash = "sha256-xHRAxPC7juO4g4f2TvNC87p8YnzcjPS2Vn3wP7NSTi8=";
+    hash = "sha256-94OPpruPaj1+6nswWoDnG//FI0R1TMf8sF9VAYnvDM0=";
     #hash = lib.fakeHash;
     fetchSubmodules = true;
   };
@@ -26,24 +26,25 @@
     pname = "${pname}-openapi";
     src = "${src}/open-api/typescript-sdk";
 
-    npmDepsHash = "sha256-TjOhEUCn5SE7xgSwMsFK0wiHkgVmQa13jGezX3KBLWc=";
+    npmDepsHash = "sha256-nWL59R3m9wqxo7tZl4c7izA0ct74ge8q/GPH+WY7XMU=";
+    #npmDepshash = lib.fakeHash;
   };
 
   web = buildNpmPackage {
-    inherit version;
+    inherit version src;
     pname = "${pname}-web";
-    src = "${src}/web";
 
-    npmDepsHash = "sha256-VOJhmv+hq8g3KXYPTdbPDPqw/NAltl+tO/VrvKDabiU=";
+    sourceRoot = "${src.name}/web";
+
+    npmDepsHash = "sha256-8SKgC+RCnZNoVN4q5GEs6oh3FzdU2ePZyNuQDd9JOBA=";
     #npmDepshash = lib.fakeHash;
 
-    makeCacheWritable = true;
-
-    postPatch = ''
-      substituteInPlace package.json --replace-fail 'file:../open-api/typescript-sdk' "${version}"
-
-      substituteInPlace package-lock.json --replace-fail 'file:../open-api/typescript-sdk' "${version}"
-    '';
+    #postPatch = ''
+    #  substituteInPlace package.json --replace-fail 'file:../open-api/typescript-sdk' "${version}"#
+    #
+    #'';
+    #   substituteInPlace package-lock.json --replace-fail 'file:../open-api/typescript-sdk' "${version}"
+    #  substituteInPlace package-lock.json --replace-fail "../open-api/typescript-sdk" "${openapi}/lib/node_modules/@immich/sdk"
 
     postConfigure = ''
       npm install ${openapi}/lib/node_modules/@immich/sdk
@@ -61,7 +62,8 @@ in
   buildNpmPackage rec {
     inherit pname src version;
 
-    npmDepsHash = "sha256-ePTKbrCQh9p3MxjeIMJqBoiS9th5Wb0Vk/3WMACKh0o=";
+    npmDepsHash = "sha256-GqSzo16RHGvr75vE5EEyVljVI/tdOoictE46dWDz8bg=";
+    #npmDepshash = lib.fakeHash;
 
     sourceRoot = "${src.name}/server";
 
