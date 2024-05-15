@@ -36,6 +36,17 @@ in {
       chr.services.reverse-proxy = {
         enable = true;
       };
+      services.traefik.dynamicConfigOptions.http.routers.immich = {
+        entryPoints = ["https" "http"];
+        rule = "Host(`img.internal.r505.de`)";
+        service = "immich";
+        tls.domains = [{main = "*.internal.r505.de";}];
+        tls.certResolver = "cfWildcard";
+      };
+      services.traefik.dynamicConfigOptions.http.services.immich.loadBalancer = {
+        passHostHeader = false;
+        servers = [{url = "http://127.0.0.1:${toString cfg.port}";}];
+      };
 
       users.users.${user} = {
         inherit group uid;
@@ -60,6 +71,8 @@ in {
           IMMICH_MEDIA_LOCATION = "/mnt/img";
           IMMICH_REVERSE_GEOCODING_ROOT = "/nix/persist/immich/geocoding";
           IMMICH_WEB_ROOT = "${pkgs.chr.immich}/web";
+
+          SERVER_PORT = cfg.port;
 
           LD_PRELOAD = "${pkgs.mimalloc}/lib/libmimalloc.so";
         };
@@ -106,7 +119,7 @@ in {
       };
       services.cloudflared.tunnels."${config.networking.hostName}" = {
         ingress = {
-          "img.r505.de" = "http://127.0.0.1:3001";
+          "img.r505.de" = "http://127.0.0.1:${toString cfg.port}";
         };
       };
     })

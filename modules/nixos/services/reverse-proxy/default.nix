@@ -15,8 +15,7 @@ in {
   config = mkIf cfg.enable {
     age.secrets.traefik = {
       file = ../../../../secrets/traefik.env;
-      owner = config.services.traefik.user;
-      group = config.services.traefik.group;
+      owner = "traefik";
     };
     services.traefik.enable = true;
     systemd.services.traefik.serviceConfig.EnvironmentFile = [config.age.secrets.traefik.path];
