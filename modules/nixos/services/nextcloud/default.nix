@@ -39,6 +39,11 @@ in {
   options.chr.services.nextcloud = with types; {
     enable = mkBoolOpt false "Enable nextcloud Service.";
     enableImaginary = mkBoolOpt true "Enable Imaginary Service.";
+    port = mkOption {
+      type = types.int;
+      default = 8070;
+      description = "Port nextcloud listens on.";
+    };
   };
   config = mkIf cfg.enable {
     chr.services = {
@@ -59,7 +64,7 @@ in {
     services.nginx.virtualHosts."cloud.r505.de".listen = [
       {
         addr = "0.0.0.0";
-        port = 8070;
+        port = cfg.port;
       }
     ];
 
@@ -236,8 +241,20 @@ in {
 
     services.cloudflared.tunnels."${config.networking.hostName}" = {
       ingress = {
-        "cloud.r505.de" = "http://127.0.0.1:8070";
+        "cloud.r505.de" = "http://127.0.0.1:${toString cfg.port}";
       };
+    };
+
+    services.traefik.dynamicConfigOptions.http.routers.nextcloud = {
+      entryPoints = ["https" "http"];
+      rule = "Host(`cloud.internal.r505.de`)";
+      service = "nextcloud";
+      tls.domains = [{main = "*.internal.r505.de";}];
+      tls.certResolver = "cfWildcard";
+    };
+    services.traefik.dynamicConfigOptions.http.services.nextcloud.loadBalancer = {
+      passHostHeader = false;
+      servers = [{url = "http://127.0.0.1:${toString cfg.port}";}];
     };
 
     environment.persistence."${config.chr.system.persist.stateDir}" = {
