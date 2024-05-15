@@ -33,6 +33,10 @@ in {
   };
   config = mkMerge [
     (mkIf cfg.enable {
+      chr.services.reverse-proxy = {
+        enable = true;
+      };
+
       users.users.${user} = {
         inherit group uid;
         isSystemUser = true;
