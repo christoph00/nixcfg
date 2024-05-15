@@ -32,6 +32,8 @@ in {
         dnsChallenge.resolvers = ["1.1.1.1:53" "8.8.8.8:53"];
       };
 
+      api.dashboard = true;
+
       entryPoints = {
         http = {
           address = ":80";
@@ -51,6 +53,15 @@ in {
         test = {
           address = ":1313";
           forwardedHeaders.insecure = true;
+        };
+      };
+    };
+    services.traefik.dynamicConfigOptions = {
+      http.routers = {
+        api = {
+          entrypoints = ["https" "http"];
+          rule = "Host(`traefik.lan.r505.de`)";
+          service = "api@internal";
         };
       };
     };
