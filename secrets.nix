@@ -49,6 +49,8 @@ in {
   "secrets/cf-tunnel-oca".publicKeys = [oca] ++ users;
   "secrets/cf-tunnel-tower".publicKeys = [tower] ++ users;
 
+  "secrets/traefik.env".publicKeys = [oca air13] ++ users;
+
   "secrets/netbird.env".publicKeys = all ++ users;
   "secrets/tailscale-auth-key".publicKeys = all ++ users;
 
