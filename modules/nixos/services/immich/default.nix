@@ -45,16 +45,16 @@ in {
       };
       services.traefik.dynamicConfigOptions.http.routers.immich = {
         entryPoints = ["https" "http"];
-        rule = "Host(`img.internal.r505.de`)";
+        rule = "Host(`img.lan.r505.de`)";
         service = "immich";
-        tls.domains = [{main = "*.internal.r505.de";}];
+        tls.domains = [{main = "*.lan.r505.de";}];
         tls.certResolver = "cfWildcard";
       };
       services.traefik.dynamicConfigOptions.http.routers.immich-ml = {
         entryPoints = ["https" "http"];
-        rule = "Host(`img-ml.internal.r505.de`)";
+        rule = "Host(`img-ml.lan.r505.de`)";
         service = "immich-ml";
-        tls.domains = [{main = "*.internal.r505.de";}];
+        tls.domains = [{main = "*.lan.r505.de";}];
         tls.certResolver = "cfWildcard";
       };
       services.traefik.dynamicConfigOptions.http.services.immich.loadBalancer = {
