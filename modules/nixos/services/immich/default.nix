@@ -56,6 +56,8 @@ in {
           IMMICH_MEDIA_LOCATION = "/mnt/img";
           IMMICH_REVERSE_GEOCODING_ROOT = "/nix/persist/immich/geocoding";
           IMMICH_WEB_ROOT = "${pkgs.chr.immich}/web";
+
+          LD_PRELOAD = "${pkgs.mimalloc}/lib/libmimalloc.so";
         };
         path = with pkgs; [
           perlPackages.ImageExifTool
@@ -74,7 +76,7 @@ in {
             User = user;
             Group = group;
             ExecStart = ''
-              ${pkgs.nodejs}/bin/node ${pkgs.chr.immich}/main.js immich
+              ${pkgs.chr.immich}/bin/immich immich
             '';
             WorkingDirectory = "${pkgs.chr.immich}/";
             Restart = "on-failure";
@@ -90,7 +92,7 @@ in {
             User = user;
             Group = group;
             ExecStart = ''
-              ${pkgs.nodejs}/bin/node ${pkgs.chr.immich}/main.js microservices
+              ${pkgs.chr.immich}/bin/immich microservices
             '';
             WorkingDirectory = "${pkgs.chr.immich}/";
             Restart = "on-failure";
@@ -121,11 +123,13 @@ in {
           Restart = "on-failure";
           RestartSec = "5";
         };
-        environment = {
-          MACHINE_LEARNING_ANN = "0";
-          MACHINE_LEARNING_CACHE_FOLDER = "cache";
-          MPLCONFIGDIR = "mpl";
-        };
+        environment =
+          {
+            MACHINE_LEARNING_ANN = "0";
+            MACHINE_LEARNING_CACHE_FOLDER = "cache";
+            MPLCONFIGDIR = "mpl";
+          }
+          // environment;
       };
     })
   ];
