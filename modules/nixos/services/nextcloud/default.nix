@@ -247,9 +247,9 @@ in {
 
     services.traefik.dynamicConfigOptions.http.routers.nextcloud = {
       entryPoints = ["https" "http"];
-      rule = "Host(`cloud.internal.r505.de`)";
+      rule = "Host(`cloud.lan.r505.de`) || Host(`cloud.r505.de`)";
       service = "nextcloud";
-      tls.domains = [{main = "*.internal.r505.de";}];
+      tls.domains = [{main = "*.r505.de";}];
       tls.certResolver = "cfWildcard";
     };
     services.traefik.dynamicConfigOptions.http.services.nextcloud.loadBalancer = {

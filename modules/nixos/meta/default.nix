@@ -1,40 +1,71 @@
 {
   options,
   config,
-  pkgs,
   lib,
-  inputs,
   ...
 }:
 with lib;
 with lib.chr; let
   cfg = config.chr.meta;
-  jsonValue = with types; let
-    valueType =
-      nullOr (oneOf [
-        bool
-        int
-        float
-        str
-        (lazyAttrsOf valueType)
-        (listOf valueType)
-      ])
-      // {
-        description = "JSON value";
-        emptyValue.value = {};
-      };
-  in
-    valueType;
-in {
-  options.chr.meta = mkOption {
-    type = jsonValue;
-    default = {domain = "example.com";};
-  };
-  config = {
-    warnings =
-      lib.optional (!(config.chr.meta.hosts ? ${config.networking.hostName}))
-      "no network configuration for ${config.networking.hostName} found in meta.json";
+  hostOptions = with lib;
+  with types; {
+    zone = mkOption {
+      type = str;
+      default = "net";
+    };
+    ipv4 = mkOption {
+      type = str;
+    };
 
-    chr.meta = builtins.fromJSON (builtins.readFile ../../../meta.json);
+    wg = mkOption {
+      type = nullOr str;
+      default = null;
+    };
+
+    services = mkOption {
+      type = nullOr (listOf str);
+      default = null;
+    };
+  };
+in {
+  options.chr.meta = with lib;
+  with types; {
+    tldomain = mkOption {
+      type = str;
+    };
+    domain = mkOption {
+      type = str;
+      default = "${config.chr.meta.currentHost.zone}.${config.chr.meta.tldomain}";
+    };
+    hosts = mkOption {
+      type = attrsOf (submodule [{options = hostOptions;}]);
+    };
+    currentHost = mkOption {
+      type = submodule [{options = hostOptions;}];
+      default = config.chr.meta.hosts.${config.networking.hostName};
+    };
+  };
+  config.chr.meta = {
+    tldomain = "r505.de";
+    hosts = {
+      tower = {
+        zone = "home";
+        type = "desktop";
+        wg = "10.10.10.32";
+      };
+      x13 = {
+        zone = "home";
+        type = "laptop";
+        wg = "10.10.10.31";
+      };
+      air13 = {
+        zone = "home";
+        wg = "10.10.10.10";
+      };
+      oca = {
+        ipv4 = "130.162.232.230";
+        wg = "10.10.10.20";
+      };
+    };
   };
 }
