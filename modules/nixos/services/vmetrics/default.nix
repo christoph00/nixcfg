@@ -25,13 +25,12 @@ in {
 
     services.traefik.dynamicConfigOptions.http.routers.vmetrics = {
       entryPoints = ["https" "http"];
-      rule = "Host(`metrics.internal.r505.de`)";
+      rule = "Host(`metrics.lan.r505.de`)";
       service = "vmetrics";
       tls.domains = [{main = "*.r505.de";}];
       tls.certResolver = "cfWildcard";
     };
     services.traefik.dynamicConfigOptions.http.services.vmetrics.loadBalancer = {
-      passHostHeader = false;
       servers = [{url = "http://127.0.0.1:8428";}];
     };
   };
