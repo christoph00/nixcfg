@@ -5,6 +5,7 @@
   makeWrapper,
   writeShellScript,
   fetchFromGitHub,
+  fetchurl,
 }: let
   pname = "immich-ml";
   version = "1.105.1";
@@ -25,7 +26,24 @@
         doCheck = false;
       };
 
-      albumentations = super.albumentations.overridePythonAttrs {
+      albumentations = super.buildPythonPackage rec {
+        pname = "albumentations";
+        version = "1.3.0";
+        format = "wheel";
+
+        src = fetchurl {
+          url = "https://files.pythonhosted.org/packages/4f/55/3c2ce84c108fc1d422afd6de153e4b0a3e6f96ecec4cb9afcf0284ce3538/albumentations-1.3.0-py3-none-any.whl";
+          sha256 = "294165d87d03bc8323e484927f0a5c1a3c64b0e7b9c32a979582a6c93c363bdf";
+        };
+
+        propagatedBuildInputs = with super; [
+          scipy
+          scikit-learn
+          scikitimage
+          python.pkgs.qudida
+        ];
+
+        pipInstallFlags = ["--no-dependencies"];
         doCheck = false;
       };
     };
