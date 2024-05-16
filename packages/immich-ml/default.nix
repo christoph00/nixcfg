@@ -24,6 +24,10 @@
         # checkPhase requires pydantic>=2
         doCheck = false;
       };
+
+      albumentations = super.albumentations.overridePythonAttrs  {
+        pythonImportsCheck = [ ];
+      };
     };
   };
   ann = stdenv.mkDerivation {
