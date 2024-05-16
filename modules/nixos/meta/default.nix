@@ -11,7 +11,7 @@ with lib.chr; let
   with types; {
     zone = mkOption {
       type = str;
-      default = "net";
+      default = "public";
     };
     ipv4 = mkOption {
       type = str;
@@ -65,6 +65,14 @@ in {
       oca = {
         ipv4 = "130.162.232.230";
         wg = "10.10.10.20";
+      };
+      oc1 = {
+        ipv4 = "130.162.235.43";
+        wg = "10.10.10.21";
+      };
+      oc2 = {
+        ipv4 = "158.101.166.142";
+        wg = "10.10.10.22";
       };
     };
   };
