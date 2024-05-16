@@ -30,10 +30,11 @@ in {
     type = jsonValue;
     default = {domain = "example.com";};
   };
+  config = {
+    warnings =
+      lib.optional (!(config.chr.meta.hosts ? ${config.networking.hostName}))
+      "no network configuration for ${config.networking.hostName} found in meta.json";
 
-  warnings =
-    lib.optional (!(config.chr.meta.hosts ? ${config.networking.hostName}))
-    "no network configuration for ${config.networking.hostName} found in meta.json";
-
-  config.chr.meta = builtins.fromJSON (builtins.readFile ../../meta.json);
+    chr.meta = builtins.fromJSON (builtins.readFile ../../meta.json);
+  };
 }
