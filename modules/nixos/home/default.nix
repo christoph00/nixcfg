@@ -42,7 +42,7 @@ in {
     home-manager = {
       useUserPackages = true;
       useGlobalPkgs = true;
-      home-manager.backupFileExtension = "hbak";
+      backupFileExtension = "hbak";
 
       users.${config.chr.user.name} = mkAliasDefinitions options.chr.home.extraOptions;
     };
