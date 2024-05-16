@@ -35,6 +35,6 @@ in {
       lib.optional (!(config.chr.meta.hosts ? ${config.networking.hostName}))
       "no network configuration for ${config.networking.hostName} found in meta.json";
 
-    chr.meta = builtins.fromJSON (builtins.readFile ../../meta.json);
+    chr.meta = builtins.fromJSON (builtins.readFile ../../../meta.json);
   };
 }
