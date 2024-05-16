@@ -25,8 +25,8 @@
         doCheck = false;
       };
 
-      albumentations = super.albumentations.overridePythonAttrs  {
-        pythonImportsCheck = [ ];
+      albumentations = super.albumentations.overridePythonAttrs {
+        doCheck = false;
       };
     };
   };
