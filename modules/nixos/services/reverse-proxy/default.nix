@@ -69,7 +69,7 @@ in {
           entrypoints = ["https" "http"];
           rule = "Host(`traefik.lan.r505.de`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))";
           service = "api@internal";
-          tls.domains = [{main = "*.internal.r505.de";}];
+          tls.domains = [{main = "*.r505.de";}];
           tls.certResolver = "cfWildcard";
         };
       };
