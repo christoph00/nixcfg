@@ -253,7 +253,6 @@ in {
       tls.certResolver = "cfWildcard";
     };
     services.traefik.dynamicConfigOptions.http.services.nextcloud.loadBalancer = {
-      passHostHeader = false;
       servers = [{url = "http://127.0.0.1:${toString cfg.port}";}];
     };
 
