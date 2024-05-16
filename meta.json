@@ -5,12 +5,7 @@
       "network": {
         "zone": "home",
         "ipv4": "192.168.2.50"
-      },
-      "roles": [
-        "desktop",
-        "gaming",
-        "immich-ml"
-      ]
+      }
     }
   }
 }
