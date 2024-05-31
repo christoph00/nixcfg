@@ -1,8 +1,8 @@
 name: update-flake-lock
 on:
   workflow_dispatch: # allows manual triggering
-  schedule:
-    - cron: "10 2 * * *"
+  #schedule:
+    #- cron: "10 2 * * *"
 jobs:
   lockfile:
     runs-on: ubuntu-latest
