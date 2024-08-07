@@ -10,6 +10,17 @@
 
     snowfall-lib.url = "github:snowfallorg/lib?ref=v3.0.3";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Snowfall Flake
+    flake.url = "github:snowfallorg/flake?ref=v1.4.1";
+    flake.inputs.nixpkgs.follows = "unstable";
+
+    # Snowfall Thaw
+    thaw.url = "github:snowfallorg/thaw?ref=v1.0.7";
+
   };
 
   outputs =
