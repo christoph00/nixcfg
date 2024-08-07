@@ -1,66 +1,30 @@
 {
-	"name": "Debian",
-	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+
+	"remoteUser": "dev",
+  
 	"features": {
-		"ghcr.io/devcontainers/features/nix:1": {
-			"multiUser": true,
-			"version": "latest",
-			"packages": ["nil"],
-			"extraNixConfig": "experimental-features = nix-command flakes,trusted-users = root vscode"
-		},
-		"ghcr.io/devcontainers/features/common-utils:2": {
-			"installZsh": true,
-			"configureZshAsDefaultShell": true
-		},
-		"ghcr.io/christophermacgown/devcontainer-features/direnv:1": {},
-		"ghcr.io/devcontainers-contrib/features/starship:1": {}
+	  "ghcr.io/devcontainers/features/common-utils:2": {
+		"userUid": 1000,
+		"userGid": 1000
+	  },
+	  "ghcr.io/devcontainers-contrib/features/apt-packages:1": {
+		"packages": "vim"
+	  },
+  
+
+  
+
+	  "ghcr.io/audacioustux/devcontainers/taskfile:1": {},
+
+	  "ghcr.io/devcontainers/features/nix:1": {
+		"packages": "nil, alejandra",
+		"extraNixConfig": "extra-experimental-features = flakes nix-command"
+	  }
 	},
-	"onCreateCommand": {},
-	// "postCreateCommand": "nix develop --check",
-	// "updateContentCommand": "nix develop --build --accept-flake-config",
-	"postStartCommand": "direnv allow",
-	"mounts": [
-		"source=nix,target=/nix,type=volume",
-		"source=target,target=${containerWorkspaceFolder}/target,type=volume",
-		"source=direnv,target=${containerWorkspaceFolder}/.direnv,type=volume"
-	],
-	"remoteUser": "root",
-	"containerEnv": {
-		"RUST_LOG": "INFO"
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"jnoortheen.nix-ide",
-				"task.vscode-task",
-				"Equinusocio.vsc-material-theme-icons",
-				"tamasfe.even-better-toml",
-				"wayou.vscode-todo-highlight",
-				"yzhang.markdown-all-in-one",
-				"github.vscode-github-actions"
-			],
-			"settings": {
-				"nix.enableLanguageServer": true,
-				"nix.serverPath": "nil",
-				"nix.serverSettings": {
-					"nil": {
-						"nix": {
-							"flake": {
-								"autoArchive": true
-							}
-						}
-					}
-				},
-				"editor.semanticTokenColorCustomizations": {
-					"enabled": true
-				},
-				"editor.bracketPairColorization.enabled": false,
-				"editor.guides.bracketPairs": "active",
-				"[nix]": {
-					"editor.formatOnSave": true,
-					"editor.defaultFormatter": "jnoortheen.nix-ide"
-				}
-			}
-		}
-	}
-}
+  
+	"overrideFeatureInstallOrder": [
+	  "ghcr.io/devcontainers/features/common-utils:2",
+	  "ghcr.io/audacioustux/devcontainers/taskfile:1",
+	  "ghcr.io/devcontainers/features/nix:1"
+	]
+  }
