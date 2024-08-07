@@ -21,7 +21,8 @@ in
       mdDoc "A set of files to be managed by home-manager's `xdg.configFile`."
     );
     extraOptions = mkOpt attrs { } "Options to pass directly to home-manager.";
-    
+
+    persist = mkOpt attrs { } "Files and directories to persist in the home";
   };
 
   config = {
@@ -39,5 +40,10 @@ in
       useUserPackages = true;
       useGlobalPkgs = true;
     };
+
+    environment.persistence."/persist".users.${config.user.name} = mkIf options.impermanence.enable.value (
+      mkAliasDefinitions options.home.persist
+    );
+
   };
 }
