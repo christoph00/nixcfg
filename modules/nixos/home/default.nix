@@ -9,7 +9,7 @@
 }:
 
 let
-  inherit (lib) mDoc types;
+  inherit (lib) mDoc types mkAliasDefinitions;
   inherit (lib.${namespace}) mkOpt;
 
   cfg = config.${namespace}.home;
@@ -21,6 +21,7 @@ in
       mdDoc "A set of files to be managed by home-manager's `xdg.configFile`."
     );
     extraOptions = mkOpt attrs { } "Options to pass directly to home-manager.";
+    
   };
 
   config = {
