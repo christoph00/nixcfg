@@ -53,6 +53,7 @@
 
       systems.modules.nixos = with inputs; [
         agenix.nixosModules.default
+        chaotic.nixosModules.default
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
         nix-flatpak.nixosModules.nix-flatpak
