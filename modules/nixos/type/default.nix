@@ -10,7 +10,8 @@ let
   inherit (lib) mDoc types listOf;
   inherit (lib.${namespace}) mkOpt mkBoolOpt;
   cfg = config.chr.type;
-in {
+in
+{
   options.${namespace} = with types; {
     type = mkOption {
       type = enum [
