@@ -7,39 +7,23 @@
   namespace,
   ...
 }:
- {
-    imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   networking.hostName = "oc1";
 
-  ${namespace} = {
+  ${namespace}.meta = {
     type = "server";
+    primaryNic = "ens3";
   };
 
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    # efiInstallAsRemovable = true;
-    device = "nodev";
-  };
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.initrd.availableKernelModules = [
+  boot.initrd.kernelModules = [
     "ata_piix"
     "uhci_hcd"
     "xen_blkfront"
     "vmw_pvscsi"
+    "nvme"
   ];
-  boot.initrd.kernelModules = ["nvme"];
-
-  fileSystems."/" = {
-    device = "/dev/sda3";
-    fsType = "xfs";
-  };
-  swapDevices = [{device = "/dev/sda2";}];
-
-  networking.interfaces.ens3.useDHCP = true;
 
   powerManagement.cpuFreqGovernor = "performance";
 
