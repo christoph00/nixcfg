@@ -94,5 +94,6 @@ mkShell {
     nixos-anywhere
     agenix
     nh
+    just
   ];
 }

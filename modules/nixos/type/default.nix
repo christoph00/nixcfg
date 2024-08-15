@@ -7,12 +7,18 @@
   ...
 }:
 let
-  inherit (lib) mDoc types listOf;
-  inherit (lib.${namespace}) mkOpt mkBoolOpt;
+  inherit (lib)
+    types
+    listOf
+    mkIf
+    mkMerge
+    mkDefault
+    ;
+  inherit (lib.internal) mkBoolOpt;
   cfg = config.chr.type;
 in
 {
-  options.${namespace} = with types; {
+  options.internal = with types; {
     type = mkOption {
       type = enum [
         "laptop"
@@ -21,11 +27,26 @@ in
         "vm"
         "microvm"
         "bootstrap"
+        "none"
+        "container"
       ];
     };
-    isMicroVM = mkBoolOpt (config.${namespace}.type == "microvm") "Whether or not this is a microvm.";
-    isLaptop = mkBoolOpt (config.${namespace}.type == "laptop") "Whether or not this is a laptop.";
-    isDesktop = mkBoolOpt (config.${namespace}.type == "desktop") "Whether or not this is a desktop.";
-    isServer = mkBoolOpt (config.${namespace}.type == "server") "Whether or not this is a server.";
+    enable = mkBoolOpt true "Whether or not to enable common config.";
+    isMicroVM = mkBoolOpt (config.internal.type == "microvm") "Whether or not this is a microvm.";
+    isVM = mkBoolOpt (config.internal.type == "vm") "Whether or not this is a vm.";
+    isLaptop = mkBoolOpt (config.internal.type == "laptop") "Whether or not this is a laptop.";
+    isGraphical = mkBoolOpt (
+      config.internal.type == "desktop" || config.internal.type == "laptop"
+    ) "Whether or not this is a graphical system.";
+    isServer = mkBoolOpt (config.internal.type == "server") "Whether or not this is a server.";
+    isHeadless = mkBoolOpt (
+      config.internal.type == "server"
+      || config.internal.type == "microvm"
+      || config.internal.type == "vm"
+    ) "Whether or not this is a headless server.";
+    isDesktop = mkBoolOpt (config.internal.type == "desktop") "Whether or not this is a desktop.";
+    isContainer = mkBoolOpt (config.internal.type == "container") "Whether or not this is a container.";
+
   };
+
 }
