@@ -26,24 +26,15 @@ with lib;
 with lib.internal;
 
 let
-  cfg = config.internal.system.disk;
+  cfg = config.internal.graphical;
 in
 {
-  options.internal.system.disk = with types; {
-    disk = mkStrOpt' null; # nvme0n1
-    espSize = mkStrOpt' "1G";
-    swapSize = mkStrOpt' "8G";
-    layout = mkStrOpt' "luks-xfs";
-  };
 
-  config = (
-    mkMerge [
-      (mkIf (cfg.layout == "luks-xfs") (
-        import ./layouts/luks-xfs.nix { inherit (cfg) disk espSize swapSize; }
-      ))
-      (mkIf (cfg.layout == "luks-btrfs") (
-        import ./layouts/btrfs.nix { inherit (cfg) disk espSize swapSize; }
-      ))
-    ]
-  );
+  config = mkIf config.internal.graphical.enable {
+    internal.user.extraGroups = [ "video" "audio" "input" "tty" ];
+
+    services.displayManager.cosmix-greeter.enable = true;
+
+    };
+
 }

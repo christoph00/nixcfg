@@ -16,6 +16,11 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
 
+    agenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake?ref=v1.4.1";
     flake.inputs.nixpkgs.follows = "unstable";
@@ -29,7 +34,10 @@
 
     # Snowfall Thaw
     thaw.url = "github:snowfallorg/thaw?ref=v1.0.7";
-
+    nixos-cosmic = {
+       url = "github:lilyinstarlight/nixos-cosmic";
+       inputs.nixpkgs.follows = "nixpkgs";
+     };
   };
 
   outputs =
@@ -55,6 +63,7 @@
         agenix.nixosModules.default
         chaotic.nixosModules.default
         disko.nixosModules.disko
+        nixos-cosmic.nixosModules.default
         impermanence.nixosModules.impermanence
         nix-flatpak.nixosModules.nix-flatpak
         lanzaboote.nixosModules.lanzaboote

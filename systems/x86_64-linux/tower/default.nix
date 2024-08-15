@@ -10,17 +10,15 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  networking.hostName = "oc1";
+  networking.hostName = "tower";
 
-  internal.type = "vm";
-  internal.system.disk.disk = "/dev/sda";
-  internal.system.disk.swapSize = "1G";
+  internal.type = "desktop";
+  internal.system.disk.disk = "/dev/nvme0n1";
+  internal.system.disk.swapSize = "16G";
 
   boot.initrd.kernelModules = [
     "ata_piix"
     "uhci_hcd"
-    "xen_blkfront"
-    "vmw_pvscsi"
     "nvme"
   ];
 

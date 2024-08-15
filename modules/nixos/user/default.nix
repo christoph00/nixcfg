@@ -7,14 +7,19 @@
   ...
 }:
 let
-  inherit (lib) mDoc types listOf;
-  inherit (lib.${namespace}) mkOpt mkBoolOpt;
+  inherit (lib)
+    mDoc
+    types
+    listOf
+    mkIf
+    ;
+  inherit (lib.internal) mkOpt mkBoolOpt;
 
-  cfg = config.${namespace}.user;
+  cfg = config.internal.user;
 
 in
 {
-  options.${namespace}.user = with types; {
+  options.internal.user = with types; {
     name = mkOpt str "christoph" "The name to use for the user account.";
     fullName = mkOpt str "Christoph" "The full name of the user.";
     email = mkOpt str "christoph@asche.co" "The email of the user.";
@@ -33,7 +38,7 @@ in
     };
 
     ${namespace}.home = {
-      file = {
+      file = mkIf config.internal.isGraphical {
         "Desktop/.keep".text = "";
         "Documents/.keep".text = "";
         "Downloads/.keep".text = "";
