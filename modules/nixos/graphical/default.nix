@@ -31,10 +31,15 @@ in
 {
 
   config = mkIf config.internal.graphical.enable {
-    internal.user.extraGroups = [ "video" "audio" "input" "tty" ];
+    internal.user.extraGroups = [
+      "video"
+      "audio"
+      "input"
+      "tty"
+    ];
 
     services.displayManager.cosmix-greeter.enable = true;
 
-    };
+  };
 
 }

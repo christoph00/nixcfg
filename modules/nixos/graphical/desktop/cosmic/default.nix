@@ -30,6 +30,10 @@ let
 in
 {
 
+  options.internal.graphical.desktop.cosmic = {
+    enable = mkBoolOpt config.internal.isGraphical "Enable the Cosmic desktop environment.";
+  };
+
   config = mkIf cfg.enable { services.desktopManager.cosmic.enable = true; };
 
 }

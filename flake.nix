@@ -35,9 +35,9 @@
     # Snowfall Thaw
     thaw.url = "github:snowfallorg/thaw?ref=v1.0.7";
     nixos-cosmic = {
-       url = "github:lilyinstarlight/nixos-cosmic";
-       inputs.nixpkgs.follows = "nixpkgs";
-     };
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
