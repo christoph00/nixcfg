@@ -12,7 +12,7 @@
 
   networking.hostName = "tower";
 
-  internal.type = "desktop";
+  #internal.type = "desktop";
   internal.system.disk.disk = "/dev/nvme0n1";
   internal.system.disk.swapSize = "16G";
 
