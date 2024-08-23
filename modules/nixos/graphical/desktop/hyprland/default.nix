@@ -1,4 +1,3 @@
-
 {
   # Snowfall Lib provides a customized `lib` instance with access to your flake's library
   # as well as the libraries available from your flake's inputs.
@@ -35,6 +34,6 @@ in
     enable = mkBoolOpt config.internal.isGraphical "Enable the Hyprland desktop environment.";
   };
 
-  config = mkIf cfg.enable {  programs.hyprland.enable = true;};
+  config = mkIf cfg.enable { programs.hyprland.enable = true; };
 
 }
