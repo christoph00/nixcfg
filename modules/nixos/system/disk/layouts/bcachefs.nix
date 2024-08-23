@@ -50,7 +50,7 @@
               content = {
                 type = "swap";
                 resumeDevice = true;
-                randomEncryption = true;
+                #randomEncryption = true;
                 priority = 100;
               };
             };
