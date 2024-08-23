@@ -14,7 +14,7 @@
 
   internal.type = "laptop";
   internal.system.disk.disk = "/dev/nvme0n1";
-  internal.system.disk.swapSize = "16G";
+  #internal.system.disk.swapSize = "16G";
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"

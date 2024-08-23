@@ -32,8 +32,8 @@ in
   options.internal.system.disk = with types; {
     disk = mkStrOpt' null; # nvme0n1
     espSize = mkStrOpt' "1G";
-    swapSize = mkStrOpt' "8G";
-    layout = mkStrOpt' "luks-xfs";
+    swapSize = mkStrOpt' "1G";
+    layout = mkStrOpt' "bcachefs";
   };
 
   config = (
@@ -43,6 +43,9 @@ in
       ))
       (mkIf (cfg.layout == "luks-btrfs") (
         import ./layouts/luks-btrfs.nix { inherit (cfg) disk espSize swapSize; }
+      ))
+      (mkIf (cfg.layout == "bcachefs") (
+        import ./layouts/bcachefs.nix { inherit (cfg) disk espSize swapSize; }
       ))
     ]
   );

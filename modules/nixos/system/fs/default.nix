@@ -25,6 +25,9 @@ in
     xfs = with types; {
       enable = mkBoolOpt' (config.internal.system.disk.layout == "luks-xfs");
     };
+    bcachefs = with types; {
+      enable = mkBoolOpt' (config.internal.system.disk.layout == "bcachefs");
+    };
   };
 
   config = (
@@ -39,6 +42,19 @@ in
             "/home"
           ];
         };
+      })
+      (mkIf cfg.bcachefs.enable {
+      boot = {
+              supportedFilesystems = ["bcachefs"];
+              kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
+              initrd.availableKernelModules = [
+                #        "crypted"
+                "aesni_intel"
+              ];
+            };
+
+            environment.systemPackages = with pkgs; [bcachefs-tools];
+
       })
       (mkIf cfg.xfs.enable {
         fileSystems = {
