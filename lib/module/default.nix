@@ -50,7 +50,9 @@ rec {
     #@ true
     enable = true;
   };
+  mkStrOpt = mkOpt types.str;
 
+  mkStrOpt' = mkOpt' types.str;
   disabled = {
     ## Quickly disable an option.
     ##

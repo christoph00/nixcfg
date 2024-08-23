@@ -50,7 +50,7 @@
                       mountOptions = [
                         "subvol=@root"
                         "noatime"
-                        "compress=zstd"
+                        "compress-force=zstd"
                       ];
                       mountpoint = "/";
                     };
@@ -58,7 +58,7 @@
                       mountOptions = [
                         "subvol=@state"
                         "noatime"
-                        "compress=zstd"
+                        "compress-force=zstd"
                       ];
                       mountpoint = "/state";
                     };
@@ -66,7 +66,7 @@
                       mountOptions = [
                         "subvol=@nix"
                         "noatime"
-                        "compress=zstd"
+                        "compress-force=zstd"
                       ];
                       mountpoint = "/nix";
                     };
@@ -74,7 +74,7 @@
                       mountOptions = [
                         "subvol=@home"
                         "noatime"
-                        "compress=zstd"
+                        "compress-force=zstd"
                       ];
                       mountpoint = "/home";
                     };

@@ -55,7 +55,7 @@ in
 
         # secureboot keys are generated manually after first boot
         # and stored here.
-        internal.features.impermanence.directories = [ "/etc/secureboot" ];
+        # internal.features.impermanence.directories = [ "/etc/secureboot" ];
       }
       (mkIf cfg.secureBoot {
         # Lanzaboote currently replaces the systemd-boot module.
