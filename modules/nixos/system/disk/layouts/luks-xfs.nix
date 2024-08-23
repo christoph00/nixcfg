@@ -8,7 +8,7 @@
   internal.system.fs.xfs.enable = true;
   disko.devices = {
     disk = {
-      "${disk}" = {
+      main = {
         type = "disk";
         device = "/dev/${disk}";
         content = {

@@ -1,3 +1,4 @@
+
 {
   # Snowfall Lib provides a customized `lib` instance with access to your flake's library
   # as well as the libraries available from your flake's inputs.
@@ -26,14 +27,14 @@ with lib;
 with lib.internal;
 
 let
-  cfg = config.internal.graphical.desktop.cosmic;
+  cfg = config.internal.graphical.desktop.hyprland;
 in
 {
 
-  options.internal.graphical.desktop.cosmic = {
-    enable = mkBoolOpt false "Enable the Cosmic desktop environment.";
+  options.internal.graphical.desktop.hyprland = {
+    enable = mkBoolOpt config.internal.isGraphical "Enable the Hyprland desktop environment.";
   };
 
-  config = mkIf cfg.enable { services.desktopManager.cosmic.enable = true; };
+  config = mkIf cfg.enable {  programs.hyprland.enable = true;};
 
 }

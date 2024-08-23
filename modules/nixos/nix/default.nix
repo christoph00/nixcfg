@@ -42,7 +42,6 @@ in
       nixfmt-rfc-style
       nix-output-monitor
       flake-checker
-      snowfallorg.drift
     ];
 
     nix =
