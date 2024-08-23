@@ -20,10 +20,10 @@ in
 
   options.internal.system.fs = {
     btrfs = with types; {
-      enable = mkBoolOpt' false;
+      enable = mkBoolOpt' (config.internal.system.disk.layout == "luks-btrfs");
     };
     xfs = with types; {
-      enable = mkBoolOpt' false;
+      enable = mkBoolOpt' (config.internal.system.disk.layout == "luks-xfs");
     };
   };
 
@@ -39,11 +39,10 @@ in
             "/home"
           ];
         };
-        filesystems."/state".neededForBoot = true;
       })
       (mkIf cfg.xfs.enable {
-        filesystems = {
-          "/state" = {
+        fileSystems = {
+          "/mnt/state" = {
             neededForBoot = true;
           };
           "/nix" = {
@@ -54,6 +53,16 @@ in
           "/home" = {
             device = "/mnt/state/home";
             options = [ "bind" ];
+          };
+          "/" = {
+            options = [
+              "defaults"
+              "noatime"
+              "nosuid"
+              "nodev"
+              "mode=755"
+            ];
+            device = "tmpfs";
           };
 
         };

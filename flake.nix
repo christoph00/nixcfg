@@ -2,12 +2,12 @@
   description = "nixcfg";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
 
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     snowfall-lib.url = "github:snowfallorg/lib?ref=v3.0.3";
@@ -23,7 +23,7 @@
 
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake?ref=v1.4.1";
-    flake.inputs.nixpkgs.follows = "unstable";
+    flake.inputs.nixpkgs.follows = "nixpkgs";
 
     impermanence.url = "github:nix-community/impermanence";
 
@@ -31,11 +31,18 @@
       url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Snowfall Thaw
     thaw.url = "github:snowfallorg/thaw?ref=v1.0.7";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -65,7 +72,6 @@
         disko.nixosModules.disko
         nixos-cosmic.nixosModules.default
         impermanence.nixosModules.impermanence
-        nix-flatpak.nixosModules.nix-flatpak
         lanzaboote.nixosModules.lanzaboote
         home-manager.nixosModules.home-manager
       ];

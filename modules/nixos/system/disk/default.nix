@@ -42,7 +42,7 @@ in
         import ./layouts/luks-xfs.nix { inherit (cfg) disk espSize swapSize; }
       ))
       (mkIf (cfg.layout == "luks-btrfs") (
-        import ./layouts/btrfs.nix { inherit (cfg) disk espSize swapSize; }
+        import ./layouts/luks-btrfs.nix { inherit (cfg) disk espSize swapSize; }
       ))
     ]
   );

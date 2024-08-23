@@ -25,12 +25,9 @@ with builtins;
 with lib;
 with lib.internal;
 
-let
-  cfg = config.internal.graphical;
-in
 {
 
-  config = mkIf config.internal.graphical.enable {
+  config = mkIf config.internal.isGraphical {
     internal.user.extraGroups = [
       "video"
       "audio"
@@ -38,7 +35,7 @@ in
       "tty"
     ];
 
-    services.displayManager.cosmix-greeter.enable = true;
+    services.displayManager.cosmic-greeter.enable = true;
 
   };
 

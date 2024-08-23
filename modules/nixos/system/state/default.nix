@@ -42,7 +42,6 @@ with lib.internal;
 
 let
   cfg = config.internal.system.state;
-  users = user.users;
 
   defaultDirectories = [
     "/var/lib/nixos"
@@ -82,22 +81,6 @@ in
       hideMounts = true;
       directories = cfg.directories ++ defaultDirectories;
       files = cfg.files ++ defaultFiles;
-      users = (
-        (
-          users: value:
-          let
-            acc = { };
-          in
-          builtins.foldl' (acc: user: acc // { "${user}" = value; }) acc (
-            filter (e: e != "root" && users."${e}".isNormalUser == true) (mapAttrsToList (name: _: name) users)
-          )
-        )
-          users
-          {
-            directories = cfg.userDirectories ++ defaultUserDirectories;
-            files = cfg.userFiles ++ defaultUserFiles;
-          }
-      );
     };
   };
 }

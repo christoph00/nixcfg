@@ -41,9 +41,5 @@ in
       useGlobalPkgs = true;
     };
 
-    environment.persistence."/persist".users.${config.user.name} = lib.kIf options.impermanence.enable.value (
-      mkAliasDefinitions options.home.persist
-    );
-
   };
 }
