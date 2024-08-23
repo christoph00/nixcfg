@@ -42,7 +42,7 @@
     "ahci.mobile_lpm_policy=3"
     "mitigations=off"
   ];
-  boot.kernelModules = ["kvm-intel"];
+  boot.kernelModules = [ "kvm-intel" ];
 
   services.fstrim.enable = true;
 
@@ -51,7 +51,6 @@
   services.throttled = {
     enable = true;
   };
-
 
   services.thinkfan.enable = true;
 
