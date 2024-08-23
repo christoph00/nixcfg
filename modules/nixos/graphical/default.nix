@@ -35,7 +35,7 @@ with lib.internal;
       "tty"
     ];
 
-    services.displayManager.cosmic-greeter.enable = true;
+    services.displayManager.ly.enable = true;
 
   };
 
