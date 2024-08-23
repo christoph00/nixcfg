@@ -67,7 +67,7 @@ mkShell {
       sysdecrypt ssh_host_ed25519_key > "$key" && chmod 600 "$key"
       openssl pkey -in "$key" -pubout > "$key.pub" && chmod 644 "$key.pub"
 
-      ./shells/bootstrap/nixos-anywhere.sh "root@$ip" \
+      ./shells/devel/nixos-anywhere.sh "root@$ip" \
         --flake ".#$hostname" \
         --build-on-remote \
         --print-build-logs \
