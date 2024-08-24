@@ -65,19 +65,17 @@ in
 {
   options.internal.system.state = with types; {
     enable = mkBoolOpt' (config.internal.isDesktop || config.internal.isServer || config.internal.isVM);
-    persist = mkStrOpt' "/mnt/state";
+    stateDir = mkStrOpt' "/mnt/state";
 
     directories = mkOpt' (listOf anything) [ ];
     files = mkOpt' (listOf anything) [ ];
-    userDirectories = mkOpt' (listOf anything) [ ];
-    userFiles = mkOpt' (listOf anything) [ ];
   };
 
   config = mkIf cfg.enable {
     users.mutableUsers = false;
     programs.fuse.userAllowOther = true;
-    fileSystems."${cfg.persist}".neededForBoot = true;
-    environment.persistence."${cfg.persist}" = {
+    fileSystems."${cfg.stateDir}".neededForBoot = true;
+    environment.persistence."${cfg.stateDir}" = {
       hideMounts = true;
       directories = cfg.directories ++ defaultDirectories;
       files = cfg.files ++ defaultFiles;
