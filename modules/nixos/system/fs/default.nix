@@ -44,16 +44,13 @@ in
         };
       })
       (mkIf cfg.bcachefs.enable {
-      boot = {
-              supportedFilesystems = ["bcachefs"];
-              kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
-              initrd.availableKernelModules = [
-                #        "crypted"
-                "aesni_intel"
-              ];
-            };
+        boot = {
+          supportedFilesystems = [ "bcachefs" ];
+          kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
+          initrd.availableKernelModules = [ "aesni_intel" ];
+        };
 
-            environment.systemPackages = with pkgs; [bcachefs-tools];
+        environment.systemPackages = with pkgs; [ bcachefs-tools ];
 
       })
       (mkIf cfg.xfs.enable {

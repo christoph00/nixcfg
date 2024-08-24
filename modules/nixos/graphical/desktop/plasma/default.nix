@@ -25,18 +25,15 @@ with builtins;
 with lib;
 with lib.internal;
 
+let
+  cfg = config.internal.graphical.desktop.cosmic;
+in
 {
 
-  config = mkIf config.internal.isGraphical {
-    internal.user.extraGroups = [
-      "video"
-      "audio"
-      "input"
-      "tty"
-    ];
-
-    services.displayManager.sddm.enable = true;
-
+  options.internal.graphical.desktop.cosmic = {
+    enable = mkBoolOpt config.internal.isGraphical "Enable the Cosmic desktop environment.";
   };
+
+  config = mkIf cfg.enable { services.desktopManager.plasma6.enable = true; };
 
 }
