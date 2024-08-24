@@ -34,7 +34,7 @@
                   "-f"
                   "--compression=lz4"
                   "--discard"
-                  "--encrypted"
+                  #"--encrypted"
                 ];
                 mountOptions = [
                   "defaults"
