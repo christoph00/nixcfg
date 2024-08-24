@@ -26,11 +26,11 @@ with lib;
 with lib.internal;
 
 let
-  cfg = config.internal.graphical.desktop.cosmic;
+  cfg = config.internal.graphical.desktop.plasma;
 in
 {
 
-  options.internal.graphical.desktop.cosmic = {
+  options.internal.graphical.desktop.plasma = {
     enable = mkBoolOpt config.internal.isGraphical "Enable the Cosmic desktop environment.";
   };
 

@@ -37,7 +37,7 @@
               content = {
                 type = "luks";
                 name = "crypted";
-                passwordFile = "/tmp/disk.key";
+                #passwordFile = "/tmp/disk.key";
                 settings = {
                   # keyFile = "/tmp/disk.key";
                   allowDiscards = true;
