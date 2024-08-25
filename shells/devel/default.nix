@@ -95,5 +95,6 @@ mkShell {
     agenix
     nh
     just
+    disko-install
   ];
 }
