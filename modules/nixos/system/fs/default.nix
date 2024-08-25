@@ -19,40 +19,67 @@ in
 {
 
   options.internal.system.fs = {
-    btrfs = with types; {
-      enable = mkBoolOpt' (config.internal.system.disk.layout == "luks-btrfs");
+    enable = mkBoolOpt' true;
+    type = mkOption {
+      type = enum [
+        "btrfs"
+        "bcachefs"
+        "xfs"
+      ];
+      default = "xfs";
     };
-    xfs = with types; {
-      enable = mkBoolOpt' (config.internal.system.disk.layout == "luks-xfs");
-    };
-    bcachefs = with types; {
-      enable = mkBoolOpt' (config.internal.system.disk.layout == "bcachefs");
-    };
+    device = mkStrOpt "/dev/nvme0n1" "Device to use for the root filesystem.";
+    encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot "Whether or not the root filesystem is encrypted.";
+    tmpRoot = mkBoolOpt config.internal.systen.state.enable "Whether or not the root filesystem is a tmpfs.";
   };
 
   config = (
     mkMerge [
-      (mkIf cfg.btrfs.enable {
-        services.btrfs.autoScrub = {
-          enable = true;
-          interval = "monthly";
-          fileSystems = [
-            "/nix"
-            "/state"
-            "/home"
-          ];
+      {
+        disko.devices = {
+          nodev."/" = mkIf cfg.tmpRoot {
+            fsType = "tmpfs";
+            mountOptions = [
+              "size=4G"
+              "defaults"
+              # set mode to 755, otherwise systemd will set it to 777, which cause problems.
+              # relatime: Update inode access times relative to modify or change time.
+              "mode=755"
+            ];
+          };
+          disk.main.type = "disk";
+          disk.main.device = cfg.device; # The device to partition
         };
-      })
-      (mkIf cfg.bcachefs.enable {
-        boot = {
-          supportedFilesystems = [ "bcachefs" ];
-          initrd.availableKernelModules = [ "aesni_intel" ];
+      }
+
+      ((mkIf cfg.type == "xfs") {
+        disko.disk.main.content = {
+          type = "gpt";
+          partitions = {
+            # The EFI & Boot partition
+            ESP = {
+              size = "800M";
+              type = "EF00";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+                mountOptions = [ "defaults" ];
+              };
+            };
+            state = {
+              name = "state";
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "xfs";
+                mountpoint = "/mnt/state";
+              };
+            };
+          };
         };
 
-        environment.systemPackages = with pkgs; [ bcachefs-tools ];
-
-      })
-      (mkIf cfg.xfs.enable {
+        ## Bind Mounts
         fileSystems = {
           "/mnt/state" = {
             neededForBoot = true;
@@ -65,16 +92,6 @@ in
           "/home" = {
             device = "/mnt/state/home";
             options = [ "bind" ];
-          };
-          "/" = {
-            options = [
-              "defaults"
-              "noatime"
-              "nosuid"
-              "nodev"
-              "mode=755"
-            ];
-            device = "tmpfs";
           };
 
         };
