@@ -18,6 +18,8 @@
   # All other arguments come from the module system.
   config,
 
+  self,
+
   ...
 }:
 
@@ -26,14 +28,22 @@ with lib;
 with lib.internal;
 
 let
-  cfg = config.internal.graphical.desktop.hyprland;
+  cfg = config.internal.system.kernel;
 in
 {
 
-  options.internal.graphical.desktop.hyprland = {
-    enable = mkBoolOpt false "Enable the Hyprland desktop environment.";
-  };
+  options.internal.system.kernel = with types; { };
 
-  config = mkIf cfg.enable { programs.hyprland.enable = true; };
-
+  config = (
+    mkMerge [
+      { }
+      (mkIf config.internal.isGraphical {
+        boot.kernelPackages = pkgs.linuxPackages_cachyos;
+        chaotic.scx.enable = true; # by default uses scx_rustland scheduler
+      })
+      (mkIf config.internal.isHeadless {
+        boot.kernelPackages = pkgs.linuxPackages_cachyos-server;
+      })
+    ]
+  );
 }
