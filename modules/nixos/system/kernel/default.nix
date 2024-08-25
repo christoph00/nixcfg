@@ -18,8 +18,6 @@
   # All other arguments come from the module system.
   config,
 
-  self,
-
   ...
 }:
 
@@ -41,9 +39,7 @@ in
         boot.kernelPackages = pkgs.linuxPackages_cachyos;
         chaotic.scx.enable = true; # by default uses scx_rustland scheduler
       })
-      (mkIf config.internal.isHeadless {
-        boot.kernelPackages = pkgs.linuxPackages_cachyos-server;
-      })
+      (mkIf config.internal.isHeadless { boot.kernelPackages = pkgs.linuxPackages_cachyos-server; })
     ]
   );
 }

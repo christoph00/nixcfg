@@ -46,7 +46,6 @@ in
       (mkIf cfg.bcachefs.enable {
         boot = {
           supportedFilesystems = [ "bcachefs" ];
-          kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
           initrd.availableKernelModules = [ "aesni_intel" ];
         };
 

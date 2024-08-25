@@ -37,7 +37,9 @@ with lib.internal;
 
     services.displayManager.sddm.enable = true;
     services.displayManager.sddm.wayland.enable = true;
+    environment.memoryAllocator.provider = "mimalloc";
 
+    nixpkgs.overlays = [ (_: prev: { dhcpcd = prev.dhcpcd.override { enablePrivSep = false; }; }) ];
   };
 
 }

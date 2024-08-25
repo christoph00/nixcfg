@@ -3,9 +3,9 @@
 
   inputs = {
 
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -64,11 +64,18 @@
         ];
       };
 
-      overlays = with inputs; [ flake.overlays.default ];
+      overlays = with inputs; [
+        flake.overlays.default
+        chaotic.overlays.default
+      ];
 
       systems.modules.nixos = with inputs; [
         agenix.nixosModules.default
         chaotic.nixosModules.default
+        {
+          # manually import overlay
+          chaotic.nyx.overlay.enable = false;
+        }
         disko.nixosModules.disko
         nixos-cosmic.nixosModules.default
         impermanence.nixosModules.impermanence
