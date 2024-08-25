@@ -18,7 +18,7 @@ let
 in
 {
 
-  options.internal.system.fs = {
+  options.internal.system.fs = with types; {
     enable = mkBoolOpt' true;
     type = mkOption {
       type = enum [
@@ -30,7 +30,7 @@ in
     };
     device = mkStrOpt "/dev/nvme0n1" "Device to use for the root filesystem.";
     encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot "Whether or not the root filesystem is encrypted.";
-    tmpRoot = mkBoolOpt config.internal.systen.state.enable "Whether or not the root filesystem is a tmpfs.";
+    tmpRoot = mkBoolOpt config.internal.system.state.enable "Whether or not the root filesystem is a tmpfs.";
   };
 
   config = (
@@ -52,8 +52,8 @@ in
         };
       }
 
-      ((mkIf cfg.type == "xfs") {
-        disko.disk.main.content = {
+      (mkIf (cfg.type == "xfs") {
+        disko.devices.disk.main.content = {
           type = "gpt";
           partitions = {
             # The EFI & Boot partition
