@@ -64,7 +64,9 @@ let
 in
 {
   options.internal.system.state = with types; {
-    enable = mkBoolOpt' (config.internal.isGraphical || config.internal.isServer || config.internal.isVM);
+    enable = mkBoolOpt' (
+      config.internal.isGraphical || config.internal.isServer || config.internal.isVM
+    );
     stateDir = mkStrOpt' "/mnt/state";
 
     directories = mkOpt' (listOf anything) [ ];
