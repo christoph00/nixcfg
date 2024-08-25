@@ -18,7 +18,6 @@
   # All other arguments come from the module system.
   config,
 
-
   ...
 }:
 
@@ -43,7 +42,6 @@ in
     mkMerge [
       {
         boot.initrd.systemd.enable = true;
-        boot.bootspec.enabled = true;
         boot.loader.systemd-boot.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
 
