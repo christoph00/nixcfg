@@ -34,11 +34,16 @@ in
     enable = mkBoolOpt config.internal.isGraphical "Enable the misc desktop apps.";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
 
-    environment.systemPackages = [ pkgs.firefox pkgs.floorp pkgs.chromium pkgs.rio pkgs.wezterm ];
+    environment.systemPackages = [
+      pkgs.firefox
+      pkgs.floorp
+      pkgs.chromium
+      pkgs.rio
+      pkgs.wezterm
+    ];
 
-
-   };
+  };
 
 }
