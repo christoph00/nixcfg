@@ -37,7 +37,7 @@ in
       { }
       (mkIf config.internal.isGraphical {
         boot.kernelPackages = pkgs.linuxPackages_cachyos;
-        chaotic.scx.enable = true; # by default uses scx_rustland scheduler
+        #chaotic.scx.enable = true; # by default uses scx_rustland scheduler
       })
       (mkIf config.internal.isHeadless { boot.kernelPackages = pkgs.linuxPackages_cachyos-server; })
     ]
