@@ -40,7 +40,7 @@ in
           nodev."/" = mkIf cfg.tmpRoot {
             fsType = "tmpfs";
             mountOptions = [
-              "size=4G"
+              "size=95%"
               "defaults"
               # set mode to 755, otherwise systemd will set it to 777, which cause problems.
               # relatime: Update inode access times relative to modify or change time.
@@ -79,23 +79,31 @@ in
           };
         };
 
-        ## Bind Mounts
         fileSystems = {
           "/mnt/state" = {
             neededForBoot = true;
           };
-          "/nix" = {
-            device = "/mnt/state/nix";
-            options = [ "bind" ];
-            neededForBoot = true;
-          };
-          "/home" = {
-            device = "/mnt/state/home";
-            options = [ "bind" ];
-          };
 
         };
 
+      })
+
+      (mkIf (config.internal.system.state.enable) {
+        disko.devices = {
+          nodev."/home" = {
+            fsType = "auto";
+            device = "/mnt/state/home";
+            mountOptions = [ "bind" ];
+          };
+          nodev."/nix" = {
+            fsType = "auto";
+            device = "/mnt/state/nix";
+            mountOptions = [
+              "bind"
+              "noatime"
+            ];
+          };
+        };
       })
 
     ]

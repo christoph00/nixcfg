@@ -13,7 +13,7 @@
   networking.hostName = "x13";
 
   internal.type = "laptop";
- # internal.system.fs.disk = "/dev/nvme0n1";
+  # internal.system.fs.disk = "/dev/nvme0n1";
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
