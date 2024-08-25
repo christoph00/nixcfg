@@ -18,6 +18,7 @@
   # All other arguments come from the module system.
   config,
 
+
   ...
 }:
 
@@ -33,12 +34,16 @@ in
   options.internal.system.boot = with types; {
     secureBoot = mkBoolOpt' false;
     silentBoot = mkBoolOpt' false;
+    encryptedRoot = mkBoolOpt' false;
+    cryptName = mkStrOpt "cryptroot";
+    secretFile = mkStrOpt "../../../../${system}/${config.networking.hostName}/main.jwe";
   };
 
   config = (
     mkMerge [
       {
         boot.initrd.systemd.enable = true;
+        boot.bootspec.enabled = true;
         boot.loader.systemd-boot.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
 
@@ -68,6 +73,14 @@ in
           pkiBundle = "/etc/secureboot";
         };
       })
+      (mkIf cfg.encryptedRoot {
+        boot.initrd.clevis = {
+          enable = true;
+          devices."${cfg.cryptName}".secretFile = cfg.secretFile;
+        };
+        boot.initrd.systemd.enableTpm2 = true;
+      })
+
       (mkIf cfg.silentBoot {
         boot.plymouth.enable = true;
         boot.kernelParams = [ "quiet" ];

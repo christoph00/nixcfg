@@ -44,11 +44,5 @@ in
       ];
     };
 
-    internal.system.state.userDirectories = [
-      {
-        directory = ".ssh";
-        mode = "0700";
-      }
-    ];
   };
 }
