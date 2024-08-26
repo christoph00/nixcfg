@@ -13,7 +13,7 @@
   networking.hostName = "oc1";
 
   internal.type = "vm";
-  internal.system.fs.disk = "/dev/sda";
+  internal.system.fs.device = "/dev/sda";
 
   boot.initrd.kernelModules = [
     "ata_piix"
