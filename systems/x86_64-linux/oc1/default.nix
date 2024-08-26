@@ -13,8 +13,7 @@
   networking.hostName = "oc1";
 
   internal.type = "vm";
-  internal.system.disk.disk = "/dev/sda";
-  internal.system.disk.swapSize = "1G";
+  internal.system.fs.disk = "/dev/sda";
 
   boot.initrd.kernelModules = [
     "ata_piix"
