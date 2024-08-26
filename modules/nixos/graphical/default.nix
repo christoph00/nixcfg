@@ -32,6 +32,8 @@ with lib.internal;
 
     internal.graphical.desktop.wayfire.enable = true;
 
+    hardware.opengl.enable = true;
+
     internal.user.extraGroups = [
       "video"
       "audio"
@@ -44,6 +46,8 @@ with lib.internal;
   ];
     
   services.xserver.displayManager.startx.enable = true;
+
+  
 
   services.greetd = {
     enable = true;
