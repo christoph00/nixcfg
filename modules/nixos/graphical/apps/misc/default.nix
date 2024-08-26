@@ -42,6 +42,8 @@ in
       pkgs.chromium
       pkgs.rio
       pkgs.wezterm
+      pkgs.zed-editor
+      pkgs.vscode
     ];
 
   };
