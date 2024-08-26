@@ -28,6 +28,28 @@ with lib.internal;
 {
 
   config = {
+    console.font = "Lat2-Terminus16";
+
+    programs.less.enable = true;
+    programs.command-not-found.enable = false;
+
+    # enable realtime capabilities to user processes
+    security.rtkit.enable = true;
+
+
+    security.sudo = { enable = false; }; 
+    security.doas = { 
+      enable = true;
+      wheelNeedsPassword = false;
+      extraRules = [
+          {
+            groups = [ "wheel" ];
+            noPass = true;
+            keepEnv = true;
+          }
+      ];
+    };
+
     environment.memoryAllocator.provider = "mimalloc";
     nixpkgs.overlays = [ (_: prev: { dhcpcd = prev.dhcpcd.override { enablePrivSep = false; }; }) ];
   };
