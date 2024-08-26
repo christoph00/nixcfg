@@ -37,6 +37,9 @@ in
       (mkIf config.internal.isGraphical {
         boot.kernelPackages = pkgs.linuxPackages_cachyos;
         chaotic.scx.enable = true; # by default uses scx_rustland scheduler
+        
+        boot.kernelParams = [ "mitigations=off" ]; # disable mitigations on desktop
+
       })
       (mkIf config.internal.isHeadless { boot.kernelPackages = pkgs.linuxPackages_cachyos-server; })
     ]

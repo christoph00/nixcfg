@@ -41,11 +41,12 @@ with lib.internal;
       "tty"
     ];
 
+
     environment.systemPackages = with pkgs; [
     greetd.gtkgreet
-  ];
+    ];
     
-  services.xserver.displayManager.startx.enable = true;
+    services.xserver.displayManager.startx.enable = true;
 
   
 
