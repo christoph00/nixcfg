@@ -26,19 +26,25 @@ with lib;
 with lib.internal;
 
 let
-  cfg = config.internal.system.kernel;
+  cfg = config.internal.graphical.desktop.wayfire;
 in
 {
 
-  options.internal.system.kernel = with types; { };
+  options.internal.graphical.desktop.wayfire = {
+    enable = mkBoolOpt false "Enable the wayfire desktop environment.";
+  };
 
-  config = (
-    mkMerge [
-      (mkIf config.internal.isGraphical {
-        boot.kernelPackages = pkgs.linuxPackages_cachyos;
-        chaotic.scx.enable = true; # by default uses scx_rustland scheduler
-      })
-      (mkIf config.internal.isHeadless { boot.kernelPackages = pkgs.linuxPackages_cachyos-server; })
-    ]
-  );
+  config = mkIf cfg.enable { 
+    programs.wayfire = {
+      enable = true;
+      plugins = with pkgs.wayfirePlugins; [
+        wcm
+        wf-shell
+        wayfire-plugins-extra
+      ];
+};
+
+
+   };
+
 }

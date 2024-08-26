@@ -28,6 +28,10 @@ with lib.internal;
 {
 
   config = mkIf config.internal.isGraphical {
+
+
+    internal.graphical.desktop.wayfire.enable = true;
+
     internal.user.extraGroups = [
       "video"
       "audio"
@@ -35,11 +39,31 @@ with lib.internal;
       "tty"
     ];
 
-    services.displayManager.sddm.enable = true;
-    services.displayManager.sddm.wayland.enable = true;
-    environment.memoryAllocator.provider = "mimalloc";
+    environment.systemPackages = with pkgs; [
+    greetd.gtkgreet
+  ];
+    
+  services.xserver.displayManager.startx.enable = true;
 
-    nixpkgs.overlays = [ (_: prev: { dhcpcd = prev.dhcpcd.override { enablePrivSep = false; }; }) ];
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session.command =
+        "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l";
+        initial_session = {
+          command = "wayfire >/dev/null";
+          user = "christoph";
+        };
+    };
+  };
+
+    environment.etc."greetd/environments".text = ''
+      Hyprland >/dev/null
+      wayfire >/dev/null
+      bash
+    '';
+
+
   };
 
 }

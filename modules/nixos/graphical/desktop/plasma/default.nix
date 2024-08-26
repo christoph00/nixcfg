@@ -31,7 +31,7 @@ in
 {
 
   options.internal.graphical.desktop.plasma = {
-    enable = mkBoolOpt config.internal.isGraphical "Enable the Cosmic desktop environment.";
+    enable = mkBoolOpt false "Enable the Cosmic desktop environment.";
   };
 
   config = mkIf cfg.enable { services.desktopManager.plasma6.enable = true; };
