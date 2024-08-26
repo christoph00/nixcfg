@@ -10,7 +10,7 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  networking.hostName = "oc1";
+  networking.hostName = "oca";
 
   internal.type = "vm";
   internal.system.fs.device = "/dev/sda";
