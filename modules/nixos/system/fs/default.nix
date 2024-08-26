@@ -30,7 +30,7 @@ in
     };
     device = mkStrOpt "/dev/nvme0n1" "Device to use for the root filesystem.";
     encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot "Whether or not the root filesystem is encrypted.";
-    tmpRoot = mkBoolOpt config.internal.system.state.enable "Whether or not the root filesystem is a tmpfs.";
+    tmpRoot = mkBoolOpt false "Whether or not the root filesystem is a tmpfs.";
   };
 
   config = (
@@ -67,44 +67,22 @@ in
                 mountOptions = [ "defaults" ];
               };
             };
-            state = {
-              name = "state";
+            root = {
+              name = "root";
               size = "100%";
               content = {
                 type = "filesystem";
                 format = "xfs";
-                mountpoint = "/mnt/state";
+                mountpoint = "/";
               };
             };
           };
         };
 
-        fileSystems = {
-          "/mnt/state" = {
-            neededForBoot = true;
-          };
-
-        };
 
       })
 
-      (mkIf (config.internal.system.state.enable) {
-        disko.devices = {
-          nodev."/home" = {
-            fsType = "auto";
-            device = "/mnt/state/home";
-            mountOptions = [ "bind" ];
-          };
-          nodev."/nix" = {
-            fsType = "auto";
-            device = "/mnt/state/nix";
-            mountOptions = [
-              "bind"
-              "noatime"
-            ];
-          };
-        };
-      })
+  
 
     ]
   );
