@@ -90,7 +90,7 @@ in
         };
       }
 
-      (mkif (cfg.encrypted) {
+      (mkIf (cfg.encrypted) {
         disko.devices.disk.main.content = {
           type = "gpt";
           partitions = {
