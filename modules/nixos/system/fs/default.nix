@@ -95,7 +95,7 @@ in
           type = "gpt";
           partitions = {
             inherit ESP;
-            cryptroot = {
+            luks = {
               type = "luks";
               name = "cryptroot";
               settings = {
