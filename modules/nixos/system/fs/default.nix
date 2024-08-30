@@ -100,11 +100,10 @@ in
               content = {
                 type = "luks";
                 name = "cryptroot";
-                settings = {
-                  allowDiscards = true;
-                  # echo -n "<password" > /tmp/secret.key
-                  passwordFile = "/tmp/secret.key";
-                };
+                settings.allowDiscards = true;
+                # echo -n "<password" > /tmp/secret.key
+                passwordFile = "/tmp/secret.key";
+
                 content = {
                   type = "filesystem";
                   format = cfg.type;
