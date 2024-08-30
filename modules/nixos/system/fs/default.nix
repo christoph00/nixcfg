@@ -104,7 +104,8 @@ in
                 passwordFile = "/tmp/secret.key";
               };
               content = {
-                type = cfg.type;
+                type = "filesystem";
+                format = cfg.type;
                 mountpoint = mkIf (cfg.type == "xfs" && state.enable) "/mnt/state";
               };
             };
