@@ -96,17 +96,20 @@ in
           partitions = {
             inherit ESP;
             luks = {
-              type = "luks";
-              name = "cryptroot";
-              settings = {
-                allowDiscards = true;
-                # echo -n "<password" > /tmp/secret.key
-                passwordFile = "/tmp/secret.key";
-              };
+              size = "100%";
               content = {
-                type = "filesystem";
-                format = cfg.type;
-                mountpoint = mkIf (cfg.type == "xfs" && state.enable) "/mnt/state";
+                type = "luks";
+                name = "cryptroot";
+                settings = {
+                  allowDiscards = true;
+                  # echo -n "<password" > /tmp/secret.key
+                  passwordFile = "/tmp/secret.key";
+                };
+                content = {
+                  type = "filesystem";
+                  format = cfg.type;
+                  mountpoint = mkIf (cfg.type == "xfs" && state.enable) "/mnt/state";
+                };
               };
             };
           };
