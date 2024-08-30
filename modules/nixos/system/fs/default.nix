@@ -66,8 +66,7 @@ in
         disko.devices.disk.main.content = {
           type = "gpt";
           partitions = {
-            # The EFI & Boot partition
-           inherit ESP;
+            inherit ESP;
             root = {
               name = "root";
               size = "100%";
