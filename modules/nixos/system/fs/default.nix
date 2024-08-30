@@ -67,7 +67,7 @@ in
     };
     device = mkStrOpt "/dev/nvme0n1" "Device to use for the root filesystem.";
     encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot "Whether or not the root filesystem is encrypted.";
-    tmpRoot = mkBoolOpt config.internal.ssystem.state.enable "Whether or not the root filesystem is a tmpfs.";
+    tmpRoot = mkBoolOpt config.internal.system.state.enable "Whether or not the root filesystem is a tmpfs.";
     swap = mkBoolOpt true "Whether or not to use a swap partition.";
   };
 
