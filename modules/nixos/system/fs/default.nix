@@ -25,6 +25,27 @@ let
                 mountOptions = [ "defaults" ];
               };
             };
+
+     btrfsLayout = {
+                type = "btrfs";
+                extraArgs = [ "-f" ];
+                subvolumes = {
+                  "@state" = {
+                    mountpoint = "/mnt/state";
+                    mountOptions = [ "compress-force=zstd:1" "noatime" ];
+                  };
+                  "@nix" = {
+                    mountOptions = [ "compress-force=zstd:1" "noatime" ];
+                    mountpoint = "/nix";
+                  };
+                  "@swap" = {
+                    mountpoint = "/.swapvol";
+                    swap = {
+                      swapfile.size = "16G";
+                    };
+                  };
+                };
+              };
 in
 {
 
