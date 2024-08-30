@@ -113,6 +113,7 @@ in
         };
         nodev."/home" = {
           fsType = "auto";
+          preMountHook = "mkdir -p /mnt/state/home";
           device = "/mnt/state/home";
           mountOptions = [
             "bind"
@@ -121,6 +122,7 @@ in
         };
         nodev."/nix" = {
           fsType = "auto";
+          preMountHook = "mkdir -p /mnt/state/nix";
           device = "/mnt/state/nix";
           mountOptions = [
             "bind"
@@ -130,7 +132,7 @@ in
       })
 
       (mkIf (cfg.swap) {
-        disko.devices.disk.main.content.encryptedSwap = {
+        disko.devices.disk.main.content.partitions.encryptedSwap = {
           size = "8G";
           content = {
             type = "swap";
