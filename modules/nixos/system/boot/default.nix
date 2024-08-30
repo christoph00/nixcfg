@@ -43,6 +43,7 @@ in
       {
         boot.initrd.systemd.enable = true;
         boot.loader.systemd-boot.enable = true;
+        boot.loader.systemd-boot.netbootxyz.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
 
         # secure boot configs are kept here in the common

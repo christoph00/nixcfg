@@ -15,6 +15,16 @@ with lib.internal;
 let
   cfg = config.internal.system.fs;
   state = config.internal.system.state;
+   ESP = {
+              size = "800M";
+              type = "EF00";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+                mountOptions = [ "defaults" ];
+              };
+            };
 in
 {
 
@@ -52,21 +62,12 @@ in
         };
       }
 
-      (mkIf (cfg.type == "xfs") {
+      (mkIf (cfg.type == "xfs" && !state.enable) {
         disko.devices.disk.main.content = {
           type = "gpt";
           partitions = {
             # The EFI & Boot partition
-            ESP = {
-              size = "800M";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-                mountOptions = [ "defaults" ];
-              };
-            };
+           inherit ESP;
             root = {
               name = "root";
               size = "100%";
