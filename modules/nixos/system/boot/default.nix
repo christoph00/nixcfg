@@ -77,10 +77,10 @@ in
         };
       })
       (mkIf cfg.encryptedRoot {
-       # boot.initrd.clevis = {
-       #   enable = true;
-       #   devices."${cfg.cryptName}".secretFile = cfg.secretFile;
-       # };
+        # boot.initrd.clevis = {
+        #   enable = true;
+        #   devices."${cfg.cryptName}".secretFile = cfg.secretFile;
+        # };
         boot.initrd.systemd.enableTpm2 = true;
       })
 
