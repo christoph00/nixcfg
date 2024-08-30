@@ -34,7 +34,7 @@ in
     enable = mkBoolOpt false "Enable the wayfire desktop environment.";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     programs.wayfire = {
       enable = true;
       plugins = with pkgs.wayfirePlugins; [
@@ -42,9 +42,8 @@ in
         wf-shell
         wayfire-plugins-extra
       ];
-};
+    };
 
-
-   };
+  };
 
 }

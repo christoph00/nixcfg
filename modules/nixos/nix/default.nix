@@ -71,7 +71,6 @@ in
           ] ++ (mapAttrsToList (name: value: value.key) cfg.extra-substituters);
         };
 
-
       };
 
   };
