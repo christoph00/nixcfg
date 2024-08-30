@@ -44,6 +44,7 @@ let
   cfg = config.internal.system.state;
 
   defaultDirectories = [
+    "/etc/secureboot"
     "/var/lib/nixos"
     "/var/lib/systemd"
     "/var/log/journal"
@@ -76,7 +77,7 @@ in
   config = mkIf cfg.enable {
     users.mutableUsers = false;
     programs.fuse.userAllowOther = true;
-    #fileSystems."${cfg.stateDir}".neededForBoot = true;
+    fileSystems."${cfg.stateDir}".neededForBoot = true;
     environment.persistence."${cfg.stateDir}" = {
       hideMounts = true;
       directories = cfg.directories ++ defaultDirectories;

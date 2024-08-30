@@ -44,6 +44,7 @@ in
       pkgs.wezterm
       pkgs.zed-editor
       pkgs.vscode
+      pkgs.kitty
     ];
 
   };

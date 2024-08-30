@@ -31,9 +31,9 @@ in
 {
 
   options.internal.system.boot = with types; {
-    secureBoot = mkBoolOpt' false;
-    silentBoot = mkBoolOpt' false;
-    encryptedRoot = mkBoolOpt' false;
+    secureBoot = mkBoolOpt' true;
+    silentBoot = mkBoolOpt' config.internal.isGraphical;
+    encryptedRoot = mkBoolOpt' true;
     cryptName = mkStrOpt "cryptroot";
     secretFile = mkStrOpt "../../../../${system}/${config.networking.hostName}/main.jwe";
   };
@@ -66,6 +66,10 @@ in
         # This setting is usually set to true in configuration.nix
         # generated at installation time. So we force it to false
         # for now.
+        boot.initrd.availableKernelModules = [
+          "tpm-crb"
+          "tpm-tis"
+        ];
         boot.loader.systemd-boot.enable = mkForce false;
         boot.lanzaboote = {
           enable = true;

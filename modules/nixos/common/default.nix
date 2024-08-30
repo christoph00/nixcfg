@@ -36,17 +36,18 @@ with lib.internal;
     # enable realtime capabilities to user processes
     security.rtkit.enable = true;
 
-
-    security.sudo = { enable = false; }; 
-    security.doas = { 
+    security.sudo = {
+      enable = false;
+    };
+    security.doas = {
       enable = true;
       wheelNeedsPassword = false;
       extraRules = [
-          {
-            groups = [ "wheel" ];
-            noPass = true;
-            keepEnv = true;
-          }
+        {
+          groups = [ "wheel" ];
+          noPass = true;
+          keepEnv = true;
+        }
       ];
     };
 

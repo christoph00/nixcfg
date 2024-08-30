@@ -15,37 +15,43 @@ with lib.internal;
 let
   cfg = config.internal.system.fs;
   state = config.internal.system.state;
-   ESP = {
-              size = "800M";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-                mountOptions = [ "defaults" ];
-              };
-            };
+  ESP = {
+    size = "800M";
+    type = "EF00";
+    content = {
+      type = "filesystem";
+      format = "vfat";
+      mountpoint = "/boot";
+      mountOptions = [ "defaults" ];
+    };
+  };
 
-     btrfsLayout = {
-                type = "btrfs";
-                extraArgs = [ "-f" ];
-                subvolumes = {
-                  "@state" = {
-                    mountpoint = "/mnt/state";
-                    mountOptions = [ "compress-force=zstd:1" "noatime" ];
-                  };
-                  "@nix" = {
-                    mountOptions = [ "compress-force=zstd:1" "noatime" ];
-                    mountpoint = "/nix";
-                  };
-                  "@swap" = {
-                    mountpoint = "/.swapvol";
-                    swap = {
-                      swapfile.size = "16G";
-                    };
-                  };
-                };
-              };
+  btrfsLayout = {
+    type = "btrfs";
+    extraArgs = [ "-f" ];
+    subvolumes = {
+      "@state" = {
+        mountpoint = "/mnt/state";
+        mountOptions = [
+          "compress-force=zstd:1"
+          "noatime"
+        ];
+      };
+      "@nix" = {
+        mountOptions = [
+          "compress-force=zstd:1"
+          "noatime"
+        ];
+        mountpoint = "/nix";
+      };
+      "@swap" = {
+        mountpoint = "/.swapvol";
+        swap = {
+          swapfile.size = "16G";
+        };
+      };
+    };
+  };
 in
 {
 
@@ -61,7 +67,8 @@ in
     };
     device = mkStrOpt "/dev/nvme0n1" "Device to use for the root filesystem.";
     encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot "Whether or not the root filesystem is encrypted.";
-    tmpRoot = mkBoolOpt false "Whether or not the root filesystem is a tmpfs.";
+    tmpRoot = mkBoolOpt config.internal.ssystem.state.enable "Whether or not the root filesystem is a tmpfs.";
+    swap = mkBoolOpt true "Whether or not to use a swap partition.";
   };
 
   config = (
@@ -83,6 +90,54 @@ in
         };
       }
 
+      (mkif (cfg.encrypted) {
+        disko.devices.disk.main.content = {
+          type = "gpt";
+          partitions = {
+            inherit ESP;
+            cryptroot = {
+              type = "luks";
+              name = "cryptroot";
+              settings = {
+                allowDiscards = true;
+                # echo -n "<password" > /tmp/secret.key
+                passwordFile = "/tmp/secret.key";
+              };
+              content = {
+                type = cfg.type;
+                mountpoint = mkIf (cfg.type == "xfs" && state.enable) "/mnt/state";
+              };
+            };
+          };
+        };
+        nodev."/home" = {
+          fsType = "auto";
+          device = "/mnt/state/home";
+          mountOptions = [
+            "bind"
+            "noatime"
+          ];
+        };
+        nodev."/nix" = {
+          fsType = "auto";
+          device = "/mnt/state/nix";
+          mountOptions = [
+            "bind"
+            "noatime"
+          ];
+        };
+      })
+
+      (mkIf (cfg.swap) {
+        disko.devices.disk.main.content.encryptedSwap = {
+          size = "8G";
+          content = {
+            type = "swap";
+            randomEncryption = true;
+          };
+        };
+      })
+
       (mkIf (cfg.type == "xfs" && !state.enable) {
         disko.devices.disk.main.content = {
           type = "gpt";
@@ -100,10 +155,7 @@ in
           };
         };
 
-
       })
-
-  
 
     ]
   );
