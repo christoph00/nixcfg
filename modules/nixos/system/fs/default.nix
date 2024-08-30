@@ -114,23 +114,25 @@ in
             };
           };
         };
-        nodev."/home" = {
-          fsType = "auto";
-          preMountHook = "mkdir -p /mnt/state/home";
-          device = "/mnt/state/home";
-          mountOptions = [
-            "bind"
-            "noatime"
-          ];
-        };
-        nodev."/nix" = {
-          fsType = "auto";
-          preMountHook = "mkdir -p /mnt/state/nix";
-          device = "/mnt/state/nix";
-          mountOptions = [
-            "bind"
-            "noatime"
-          ];
+        disko.devices.nodev = {
+          "/home" = {
+            fsType = "auto";
+            preMountHook = "mkdir -p /mnt/state/home";
+            device = "/mnt/state/home";
+            mountOptions = [
+              "bind"
+              "noatime"
+            ];
+          };
+          "/nix" = {
+            fsType = "auto";
+            preMountHook = "mkdir -p /mnt/state/nix";
+            device = "/mnt/state/nix";
+            mountOptions = [
+              "bind"
+              "noatime"
+            ];
+          };
         };
       })
 
