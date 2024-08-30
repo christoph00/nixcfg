@@ -131,16 +131,6 @@ in
         };
       })
 
-      (mkIf (cfg.swap) {
-        disko.devices.disk.main.content.partitions.encryptedSwap = {
-          size = "8G";
-          content = {
-            type = "swap";
-            randomEncryption = true;
-          };
-        };
-      })
-
       (mkIf (cfg.type == "xfs" && !state.enable) {
         disko.devices.disk.main.content = {
           type = "gpt";
