@@ -7,7 +7,7 @@
   ...
 }:
 with lib;
-with lib.interal;
+with lib.internal;
 let
   cfg = config.internal.shell;
 
