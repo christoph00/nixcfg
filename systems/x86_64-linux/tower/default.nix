@@ -13,6 +13,7 @@
   networking.hostName = "tower";
 
   internal.type = "desktop";
+  internal.isV3 = true;
 
   boot.initrd.kernelModules = [
     "ata_piix"

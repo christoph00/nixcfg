@@ -32,6 +32,8 @@ in
         "container"
       ];
     };
+    isV3 = mkBoolOpt' config.internal.isV4;
+    isV4 = mkBoolOpt' false;
     isMicroVM = mkBoolOpt (config.internal.type == "microvm") "Whether or not this is a microvm.";
     isVM = mkBoolOpt (config.internal.type == "vm") "Whether or not this is a vm.";
     isLaptop = mkBoolOpt (config.internal.type == "laptop") "Whether or not this is a laptop.";
