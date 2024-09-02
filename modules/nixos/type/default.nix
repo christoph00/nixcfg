@@ -32,8 +32,8 @@ in
         "container"
       ];
     };
-    isV3 = mkBoolOpt' config.internal.isV4;
-    isV4 = mkBoolOpt' false;
+    isV3 = mkBoolOpt config.internal.isV4 "CPU has v4 features";
+    isV4 = mkBoolOpt false "CPU has v3 features";
     isMicroVM = mkBoolOpt (config.internal.type == "microvm") "Whether or not this is a microvm.";
     isVM = mkBoolOpt (config.internal.type == "vm") "Whether or not this is a vm.";
     isLaptop = mkBoolOpt (config.internal.type == "laptop") "Whether or not this is a laptop.";
