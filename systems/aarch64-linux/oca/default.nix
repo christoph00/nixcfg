@@ -22,6 +22,6 @@
     "vmw_pvscsi"
     "nvme"
   ];
-
+boot.kernelPackages =  pkgs.linuxPackages_latest;
   system.stateVersion = "24.05";
 }
