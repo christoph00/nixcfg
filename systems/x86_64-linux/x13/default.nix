@@ -13,6 +13,7 @@
   networking.hostName = "x13";
 
   internal.type = "laptop";
+  internal.isV4 = true;
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
