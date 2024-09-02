@@ -18,8 +18,6 @@
   boot.initrd.kernelModules = [
     "ata_piix"
     "uhci_hcd"
-    "xen_blkfront"
-    "vmw_pvscsi"
     "nvme"
   ];
 boot.kernelPackages =  pkgs.linuxPackages_latest;
