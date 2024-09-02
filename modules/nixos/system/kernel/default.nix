@@ -84,7 +84,7 @@ in
         boot.kernelParams = [ "mitigations=off" ]; # disable mitigations on desktop
 
       })
-      (mkIf config.internal.isHeadless { boot.kernelPackages = pkgs.linuxPackages_cachyos-server; })
+      (mkIf config.internal.isHeadless { boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos-server; })
     ]
   );
 }
