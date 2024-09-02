@@ -31,7 +31,7 @@ with lib.internal;
 
     internal.graphical.desktop.wayfire.enable = true;
 
-    hardware.opengl.enable = true;
+    hardware.graphics.enable = true;
 
     internal.user.extraGroups = [
       "video"

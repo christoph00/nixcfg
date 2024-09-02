@@ -46,11 +46,6 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  services.throttled = {
-    enable = true;
-  };
-
-  services.thinkfan.enable = true;
 
   system.stateVersion = "24.05";
 }
