@@ -31,7 +31,7 @@ in
 
     environment.systemPackages = with pkgs; [
       fzf
-    ] ++ mkIf config.internal.isV3 v3
+    ] ++ mkIf config.internal.isV3 v3;
     
    };
 }
