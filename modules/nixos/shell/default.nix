@@ -29,9 +29,5 @@ in
 
   config = mkIf cfg.enable { 
 
-    environment.systemPackages = with pkgs; [
-      fzf
-    ] ++ mkIf config.internal.isV3 v3;
-    
    };
 }
