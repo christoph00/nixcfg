@@ -145,7 +145,7 @@ in
             ];
           };
         };
-      }
+      })
       (mkIf (cfg.type == "xfs" && !state.enable) {
         disko.devices.disk.main.content = {
           type = "gpt";
