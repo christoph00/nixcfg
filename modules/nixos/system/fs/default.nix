@@ -30,8 +30,20 @@ let
     type = "btrfs";
     extraArgs = [ "-f" ];
     subvolumes = {
+      "@root" = {
+        mountpoint = "/";
+        mountOptions = [ "compress-force=zstd:1"
+          "noatime" ];
+      };
       "@state" = {
         mountpoint = "/mnt/state";
+        mountOptions = [
+          "compress-force=zstd:1"
+          "noatime"
+        ];
+      };
+      "@home" = {
+        mountpoint = "/home";
         mountOptions = [
           "compress-force=zstd:1"
           "noatime"
@@ -63,7 +75,7 @@ in
         "bcachefs"
         "xfs"
       ];
-      default = "xfs";
+      default = "btrfs";
     };
     device = mkStrOpt "/dev/nvme0n1" "Device to use for the root filesystem.";
     encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot "Whether or not the root filesystem is encrypted.";
@@ -104,15 +116,15 @@ in
                 # echo -n "<password" > /tmp/secret.key
                 passwordFile = "/tmp/secret.key";
 
-                content = {
-                  type = "filesystem";
-                  format = cfg.type;
-                  mountpoint = mkIf (cfg.type == "xfs" && state.enable) "/mnt/state";
-                };
+                content = btrfsLayout;
               };
             };
           };
         };
+      
+      })
+      (mkIf (cfg.type == "xfs" && state.enable) {
+
         disko.devices.nodev = {
           "/home" = {
             fsType = "auto";
@@ -133,8 +145,7 @@ in
             ];
           };
         };
-      })
-
+      }
       (mkIf (cfg.type == "xfs" && !state.enable) {
         disko.devices.disk.main.content = {
           type = "gpt";
