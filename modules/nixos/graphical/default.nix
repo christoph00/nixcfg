@@ -30,7 +30,7 @@ with lib.internal;
   config = mkIf config.internal.isGraphical {
 
     internal.graphical.desktop.wayfire.enable = true;
-    internal.graphical.desktop.hyprland.enable = true;
+    internal.graphical.desktop.cosmic.enable = true;
     hardware.graphics.enable = true;
 
     internal.user.extraGroups = [
@@ -53,8 +53,9 @@ with lib.internal;
 
     services.xserver.displayManager.startx.enable = true;
 
+services.displayManager.cosmic-greeter.enable = true;
     services.greetd = {
-      enable = true;
+      enable = false;
       settings = {
         default_session.command = "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l";
         initial_session = {

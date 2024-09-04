@@ -28,6 +28,7 @@ in
   };
 
   config = mkIf cfg.enable { 
+    environment.systemPackages = [pkgs.neovim pkgs.git pkgs.htop];
 
    };
 }
