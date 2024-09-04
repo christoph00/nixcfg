@@ -125,7 +125,7 @@ in
       })
 
 
-       (mkIf (!cfg.encrypted && cfg.type == btrfs) {
+       (mkIf (!cfg.encrypted && cfg.type == "btrfs") {
         disko.devices.disk.main.content = {
           type = "gpt";
           partitions = {
