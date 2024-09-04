@@ -40,9 +40,9 @@ with lib.internal;
       "tty"
     ];
 
-    environment.systemPackages = with pkgs; [ greetd.gtkgreet 
-  xdg-desktop-portal-gtk
-  xdg-desktop-portal-hyprland
+    environment.systemPackages = with pkgs; [ 
+      greetd.gtkgreet 
+
   xwayland
 
     meson
@@ -64,9 +64,6 @@ services.displayManager.cosmic-greeter.enable = true;
 xdg.portal = {
   enable = true;
   wlr.enable = true;
-  extraPortals = [
-    pkgs.xdg-desktop-portal-gtk
-  ];
 };
 
 
