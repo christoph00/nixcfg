@@ -30,7 +30,7 @@ let
     type = "btrfs";
     extraArgs = [ "-f" ];
     subvolumes = {
-      "@root" = {
+      "@root" = = mkIf (!cfg.tmpRoot) {
         mountpoint = "/";
         mountOptions = [ "compress-force=zstd:1"
           "noatime" ];
