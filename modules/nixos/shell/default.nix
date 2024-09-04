@@ -27,8 +27,8 @@ in
     enable = mkBoolOpt true "Whether or not to configure shell config.";
   };
 
-  config = mkIf cfg.enable { 
-    environment.systemPackages = [pkgs.neovim pkgs.git pkgs.htop];
+  config = mkIf cfg.enable {
+    environment.systemPackages = [pkgs.neovim pkgs.git pkgs.htop pkgs.nixd];
 
    };
 }
