@@ -14,6 +14,7 @@
 
   internal.type = "laptop";
   internal.isV4 = true;
+  internal.system.boot.secureBoot = true;
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"

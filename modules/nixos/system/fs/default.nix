@@ -123,6 +123,23 @@ in
         };
       
       })
+
+
+       (mkIf (!cfg.encrypted && cfg.type == btrfs) {
+        disko.devices.disk.main.content = {
+          type = "gpt";
+          partitions = {
+            inherit ESP;
+            luks = {
+              size = "100%";
+              content = btrfsLayout;
+            };
+          };
+        };
+      
+      })
+
+
       (mkIf (cfg.type == "xfs" && state.enable) {
 
         disko.devices.nodev = {
