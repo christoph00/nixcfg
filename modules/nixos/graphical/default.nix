@@ -31,8 +31,10 @@ with lib.internal;
 
     internal.graphical.desktop.wayfire.enable = true;
     internal.graphical.desktop.hyprland.enable = true;
-    hardware.graphics.enable = true;
-
+    hardware.graphics = {
+      enable = true;
+driSupport = true;
+    };
     internal.user.extraGroups = [
       "video"
       "audio"
