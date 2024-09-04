@@ -54,16 +54,7 @@ with lib.internal;
     services.xserver.displayManager.startx.enable = true;
 
 services.displayManager.cosmic-greeter.enable = true;
-    services.greetd = {
-      enable = false;
-      settings = {
-        default_session.command = "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l";
-        initial_session = {
-          command = "wayfire >/dev/null";
-          user = "christoph";
-        };
-      };
-    };
+
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -77,11 +68,6 @@ xdg.portal = {
     pkgs.xdg-desktop-portal-gtk
   ];
 };
-    environment.etc."greetd/environments".text = ''
-      Hyprland >/dev/null
-      wayfire >/dev/null
-      zsh
-    '';
 
 
 fonts.fonts = with pkgs; [
