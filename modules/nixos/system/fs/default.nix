@@ -26,14 +26,32 @@ let
     };
   };
 
+  rollback = ''
+    mkdir /btrfs
+    mount -t btrfs /dev/mapper/cryptroot /mnt
+
+    echo "Cleaning subvolume"
+            btrfs subvolume list -o /mnt/@root | cut -f9 -d ' ' |
+            while read subvolume; do
+              btrfs subvolume delete "/mnt/$subvolume"
+            done && btrfs subvolume delete /mnt/@root
+
+            echo "Restoring blank subvolume"
+            btrfs subvolume snapshot /mnt/@root-blank /mnt/@root
+
+            umount /mnt
+  '';
+
   btrfsLayout = {
     type = "btrfs";
     extraArgs = [ "-f" ];
     subvolumes = {
       "@root" = mkIf (!cfg.tmpRoot) {
         mountpoint = "/";
-        mountOptions = [ "compress-force=zstd:1"
-          "noatime" ];
+        mountOptions = [
+          "compress-force=zstd:1"
+          "noatime"
+        ];
       };
       "@state" = {
         mountpoint = "/mnt/state";
@@ -100,6 +118,8 @@ in
           disk.main.type = "disk";
           disk.main.device = cfg.device; # The device to partition
         };
+
+
       }
 
       (mkIf (cfg.encrypted) {
@@ -121,11 +141,10 @@ in
             };
           };
         };
-      
+
       })
 
-
-       (mkIf (!cfg.encrypted && cfg.type == "btrfs") {
+      (mkIf (!cfg.encrypted && cfg.type == "btrfs") {
         disko.devices.disk.main.content = {
           type = "gpt";
           partitions = {
@@ -136,9 +155,8 @@ in
             };
           };
         };
-      
-      })
 
+      })
 
       (mkIf (cfg.type == "xfs" && state.enable) {
 

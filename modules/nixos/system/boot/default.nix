@@ -85,7 +85,11 @@ in
       })
 
       (mkIf cfg.silentBoot {
-        boot.kernelParams = [ "quiet" "udev.log_level=3" "splash"];
+        boot.kernelParams = [
+          "quiet"
+          "udev.log_level=3"
+          "splash"
+        ];
         boot.initrd.verbose = false;
         boot.consoleLogLevel = 0;
         boot.loader.timeout = 0;

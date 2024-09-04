@@ -17,12 +17,15 @@ in
 
   };
 
-  config = (mkIf cfg.enable){
+  config = (mkIf cfg.enable) {
     networking.networkmanager.enable = mkDefault true;
     networking.wireless.enable = mkDefault false;
     systemd.services.NetworkManager-wait-online = {
       serviceConfig = {
-        ExecStart = [ "" "${pkgs.networkmanager}/bin/nm-online -q" ];
+        ExecStart = [
+          ""
+          "${pkgs.networkmanager}/bin/nm-online -q"
+        ];
       };
     };
 

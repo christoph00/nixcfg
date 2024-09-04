@@ -48,6 +48,5 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
-
   system.stateVersion = "24.05";
 }

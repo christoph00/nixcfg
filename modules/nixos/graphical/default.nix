@@ -40,60 +40,55 @@ with lib.internal;
       "tty"
     ];
 
-    environment.systemPackages = with pkgs; [ 
-      greetd.gtkgreet 
+    environment.systemPackages = with pkgs; [
+      greetd.gtkgreet
 
-  xwayland
+      xwayland
 
-    meson
-  wayland-protocols
-  wayland-utils
-  wl-clipboard
-  wlroots ];
+      meson
+      wayland-protocols
+      wayland-utils
+      wl-clipboard
+      wlroots
+    ];
 
     services.xserver.displayManager.startx.enable = true;
 
+    environment.sessionVariables = {
+      MOZ_ENABLE_WAYLAND = "1";
+      NIXOS_OZONE_WL = "1";
+      XDG_CURRENT_DESKTOP = "KDE";
+    };
 
+    programs.dconf.enable = true;
 
-  environment.sessionVariables = {
-    MOZ_ENABLE_WAYLAND = "1";
-    NIXOS_OZONE_WL = "1";
-    XDG_CURRENT_DESKTOP = "KDE";
-  };
+    services.dbus.enable = true;
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        #xdg-desktop-portal
+        xdg-desktop-portal-kde
+        #xdg-desktop-portal-wlr
 
-  programs.dconf.enable = true;
-  
-  services.dbus.enable = true;
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      #xdg-desktop-portal
-      xdg-desktop-portal-kde
-      #xdg-desktop-portal-wlr
+        # for Firefox cursor, fixes Vesktop?
+        #xdg-desktop-portal-gtk
+      ];
+    };
 
-      # for Firefox cursor, fixes Vesktop?
-      #xdg-desktop-portal-gtk
+    services.displayManager.sddm.enable = true;
+    services.displayManager.sddm.wayland.enable = true;
+
+    fonts.packages = with pkgs; [
+      noto-fonts
+      meslo-lgs-nf
     ];
-  };
 
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-
-  
-
-
-
-fonts.packages = with pkgs; [
-  noto-fonts
-  meslo-lgs-nf
-];
-
-services.pipewire = {
-  enable = true;
-  alsa.enable = true;
-  alsa.support32Bit = true;
-  pulse.enable = true;
-};
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
 
   };
 
