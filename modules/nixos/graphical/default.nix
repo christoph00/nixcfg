@@ -88,7 +88,6 @@ fonts.fonts = with pkgs; [
   meslo-lgs-nf
 ];
 
-sound.enable = true;
 services.pipewire = {
   enable = true;
   alsa.enable = true;
