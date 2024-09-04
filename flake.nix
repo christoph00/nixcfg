@@ -4,6 +4,7 @@
     experimental-features = [
       "nix-command"
       "flakes"
+      "auto-allocate-uids"
     ];
     extra-substituters = [
       "https://cache.nixos.org"
