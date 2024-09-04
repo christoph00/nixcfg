@@ -77,7 +77,7 @@ with lib.internal;
   };
 
   services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = false;
+  services.displayManager.sddm.wayland.enable = true;
 
   
 
