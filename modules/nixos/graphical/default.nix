@@ -42,7 +42,16 @@ driSupport = true;
       "tty"
     ];
 
-    environment.systemPackages = with pkgs; [ greetd.gtkgreet ];
+    environment.systemPackages = with pkgs; [ greetd.gtkgreet 
+  xdg-desktop-portal-gtk
+  xdg-desktop-portal-hyprland
+  xwayland
+
+    meson
+  wayland-protocols
+  wayland-utils
+  wl-clipboard
+  wlroots ];
 
     services.xserver.displayManager.startx.enable = true;
 
@@ -72,21 +81,9 @@ xdg.portal = {
     environment.etc."greetd/environments".text = ''
       Hyprland >/dev/null
       wayfire >/dev/null
-      bash
+      zsh
     '';
 
-    environment.systemPackages = with pkgs; [
-
-  xdg-desktop-portal-gtk
-  xdg-desktop-portal-hyprland
-  xwayland
-
-    meson
-  wayland-protocols
-  wayland-utils
-  wl-clipboard
-  wlroots
-];
 
 fonts.fonts = with pkgs; [
   noto-fonts
