@@ -57,8 +57,8 @@ with lib.internal;
     useXkbConfig = true;
   };
 
-    environment.memoryAllocator.provider = "mimalloc";
-    nixpkgs.overlays = [ (_: prev: { dhcpcd = prev.dhcpcd.override { enablePrivSep = false; }; }) ];
+    #environment.memoryAllocator.provider = "mimalloc";
+    #nixpkgs.overlays = [ (_: prev: { dhcpcd = prev.dhcpcd.override { enablePrivSep = false; }; }) ];
   };
 
 }
