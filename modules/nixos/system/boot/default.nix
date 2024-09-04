@@ -85,10 +85,14 @@ in
       })
 
       (mkIf cfg.silentBoot {
-        boot.plymouth.enable = true;
-        boot.kernelParams = [ "quiet" ];
+        boot.kernelParams = [ "quiet" "udev.log_level=3" "splash"];
         boot.initrd.verbose = false;
         boot.consoleLogLevel = 0;
+        boot.loader.timeout = 0;
+
+        boot.plymouth.enable = true;
+        boot.plymouth.theme = "nixos-bgrt";
+        boot.plymouth.themePackages = [ pkgs.nixos-bgrt-plymouth ];
       })
     ]
   );
