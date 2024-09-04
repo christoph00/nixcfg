@@ -37,14 +37,14 @@ in
   config = mkIf cfg.enable {
 
     environment.systemPackages = [
-      pkgs.firefox
+      pkgs.zen-browser
       pkgs.floorp
       pkgs.chromium
-      pkgs.rio
       pkgs.wezterm
       pkgs.zed-editor
       pkgs.vscode
       pkgs.kitty
+      pkgs.foot
     ];
 
   };
