@@ -28,7 +28,6 @@ with lib.internal;
 {
 
   config = {
-    console.font = "Lat2-Terminus16";
 
     programs.less.enable = true;
     programs.command-not-found.enable = false;
