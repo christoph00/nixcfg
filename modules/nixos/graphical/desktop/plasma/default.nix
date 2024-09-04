@@ -34,6 +34,11 @@ in
     enable = mkBoolOpt false "Enable the Cosmic desktop environment.";
   };
 
-  config = mkIf cfg.enable { services.desktopManager.plasma6.enable = true; };
+  config = mkIf cfg.enable { services.desktopManager.plasma6.enable = true;
+  
+  environment.systemPackages = [pkgs.kdePackages.kde-gtk-config]; 
+  
+
+  };
 
 }

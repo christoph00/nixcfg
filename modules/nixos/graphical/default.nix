@@ -30,7 +30,7 @@ with lib.internal;
   config = mkIf config.internal.isGraphical {
 
     internal.graphical.desktop.wayfire.enable = true;
-    internal.graphical.desktop.cosmic.enable = true;
+    internal.graphical.desktop.plasma.enable = true;
     hardware.graphics.enable = true;
 
     internal.user.extraGroups = [
@@ -53,18 +53,33 @@ with lib.internal;
 
     services.xserver.displayManager.startx.enable = true;
 
-services.displayManager.cosmic-greeter.enable = true;
 
 
   environment.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
+    XDG_CURRENT_DESKTOP = "KDE";
   };
+
+  programs.dconf.enable = true;
   
   services.dbus.enable = true;
-xdg.portal = {
-  enable = true;
-  wlr.enable = true;
-};
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      #xdg-desktop-portal
+      xdg-desktop-portal-kde
+      #xdg-desktop-portal-wlr
+
+      # for Firefox cursor, fixes Vesktop?
+      #xdg-desktop-portal-gtk
+    ];
+  };
+
+  services-displayManager.sddm.enable = true;
+
+  
+
 
 
 fonts.packages = with pkgs; [
