@@ -760,7 +760,7 @@
       "inputs": {
         "flake-parts": "flake-parts_3",
         "nix-github-actions": "nix-github-actions_2",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
@@ -957,6 +957,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1725448034,
+        "narHash": "sha256-YWbVeDERbIHAEQCtDtUunHYUNH31ReIdJIP8juXfdpM=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9b40840066f93767bb528810ea7dc9caacd8997f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1723221148,
         "narHash": "sha256-7pjpeQlZUNQ4eeVntytU3jkw9dFK3k1Htgk2iuXjaD8=",
         "owner": "NixOS",
@@ -971,7 +987,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1725183711,
         "narHash": "sha256-gkjg8FfjL92azt3gzZUm1+v+U4y+wbQE630uIf4Aybo=",
@@ -987,7 +1003,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1700794826,
         "narHash": "sha256-RyJTnTNKhO0yqRpDISk03I/4A67/dp96YRxc86YOPgU=",
@@ -1041,14 +1057,12 @@
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "nixos-cosmic": "nixos-cosmic",
-        "nixpkgs": [
-          "srvos",
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "snowfall-lib": "snowfall-lib_2",
         "srvos": "srvos",
-        "thaw": "thaw"
+        "thaw": "thaw",
+        "zen-browser": "zen-browser"
       }
     },
     "rust-analyzer-src": {
@@ -1207,7 +1221,7 @@
     },
     "srvos": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1725238235,
@@ -1330,7 +1344,7 @@
     },
     "thaw": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "snowfall-lib": "snowfall-lib_3"
       },
       "locked": {
@@ -1432,6 +1446,26 @@
       "original": {
         "owner": "UbiqueLambda",
         "repo": "yafas",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1725438139,
+        "narHash": "sha256-huKh54tzjtsNRVOw08candbPLHpf09jnQ0PSSct40K0=",
+        "owner": "MarceColl",
+        "repo": "zen-browser-flake",
+        "rev": "7af3f77cf6a3c60dc2410e163cc1c71e15c857b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MarceColl",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

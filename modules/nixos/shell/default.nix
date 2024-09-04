@@ -11,7 +11,7 @@ with lib.internal;
 let
   cfg = config.internal.shell;
 
-   v3 = with pkgs.pkgsx86_64_v3-core; [
+  v3 = with pkgs.pkgsx86_64_v3-core; [
     curl
     bash
     elfutils
@@ -28,7 +28,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.neovim pkgs.git pkgs.htop pkgs.nixd];
+    environment.systemPackages = [
+      pkgs.neovim
+      pkgs.git
+      pkgs.htop
+      pkgs.nixd
+      pkgs.agenix
+    ];
 
-   };
+  };
 }

@@ -51,11 +51,11 @@ with lib.internal;
     };
 
     console = {
-    earlySetup = true;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
-    packages = [pkgs.terminus_font];
-    useXkbConfig = true;
-  };
+      earlySetup = true;
+      font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
+      packages = [ pkgs.terminus_font ];
+      useXkbConfig = true;
+    };
 
     #environment.memoryAllocator.provider = "mimalloc";
     #nixpkgs.overlays = [ (_: prev: { dhcpcd = prev.dhcpcd.override { enablePrivSep = false; }; }) ];
