@@ -34,6 +34,12 @@ in
     enable = mkBoolOpt false "Enable the Hyprland desktop environment.";
   };
 
-  config = mkIf cfg.enable { programs.hyprland.enable = true; };
+  config = mkIf cfg.enable {  
+    programs.hyprland = {
+
+    enable = true;
+
+    xwayland.enable = true;
+  };};
 
 }

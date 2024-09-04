@@ -30,7 +30,7 @@ with lib.internal;
   config = mkIf config.internal.isGraphical {
 
     internal.graphical.desktop.wayfire.enable = true;
-
+    internal.graphical.desktop.hyprland.enable = true;
     hardware.graphics.enable = true;
 
     internal.user.extraGroups = [
@@ -55,11 +55,49 @@ with lib.internal;
       };
     };
 
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+  
+  services.dbus.enable = true;
+xdg.portal = {
+  enable = true;
+  wlr.enable = true;
+  extraPortals = [
+    pkgs.xdg-desktop-portal-gtk
+  ];
+};
     environment.etc."greetd/environments".text = ''
       Hyprland >/dev/null
       wayfire >/dev/null
       bash
     '';
+
+    environment.systemPackages = with pkgs; [
+
+  xdg-desktop-portal-gtk
+  xdg-desktop-portal-hyprland
+  xwayland
+
+    meson
+  wayland-protocols
+  wayland-utils
+  wl-clipboard
+  wlroots
+];
+
+fonts.fonts = with pkgs; [
+  noto-fonts
+  meslo-lgs-nf
+];
+
+sound.enable = true;
+services.pipewire = {
+  enable = true;
+  alsa.enable = true;
+  alsa.support32Bit = true;
+  pulse.enable = true;
+};
 
   };
 
