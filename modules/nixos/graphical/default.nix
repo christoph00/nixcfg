@@ -67,7 +67,7 @@ xdg.portal = {
 };
 
 
-fonts.fonts = with pkgs; [
+fonts.packages = with pkgs; [
   noto-fonts
   meslo-lgs-nf
 ];
