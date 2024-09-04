@@ -26,14 +26,6 @@ in
     enable = mkBoolOpt true "Whether or not to manage nix configuration.";
     package = mkOpt package pkgs.nix "Which nix package to use.";
 
-    default-substituter = {
-      url = mkOpt str "https://cache.nixos.org" "The url for the substituter.";
-      key =
-        mkOpt str "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-          "The trusted public key for the substituter.";
-    };
-
-    extra-substituters = mkOpt (attrsOf substituters-submodule) { } "Extra substituters to configure.";
   };
 
   config = mkIf cfg.enable {
@@ -63,12 +55,25 @@ in
           trusted-users = users;
           allowed-users = users;
 
-          substituters = [
-            cfg.default-substituter.url
-          ] ++ (mapAttrsToList (name: value: name) cfg.extra-substituters);
-          trusted-public-keys = [
-            cfg.default-substituter.key
-          ] ++ (mapAttrsToList (name: value: value.key) cfg.extra-substituters);
+          experimental-features = [
+      "nix-command"
+      "flakes"
+      "auto-allocate-uids"
+    ];
+    extra-substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://nyx.chaotic.cx/"
+      "https://chaotic-nyx.cachix.org"
+      "https://cache.garnix.io"
+    ];
+    extra-trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+    ];
         };
 
       };
