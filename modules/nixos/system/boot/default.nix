@@ -31,7 +31,7 @@ in
 {
 
   options.internal.system.boot = with types; {
-    secureBoot = mkBoolOpt' true;
+    secureBoot = mkBoolOpt' false;
     silentBoot = mkBoolOpt' config.internal.isGraphical;
     encryptedRoot = mkBoolOpt' true;
     #cryptName = mkStrOpt "cryptroot";
