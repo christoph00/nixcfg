@@ -36,9 +36,7 @@ in
       pkgs.agenix
       pkgs.doas-sudo-shim
 
-      pkgs.snow
       pkgs.flake
-      pkgs.thaw
     ];
 
     programs.nh = {
