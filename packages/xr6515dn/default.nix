@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
     sha256 = "1mbxwsggm13vigs4avci7d1nl16n87lvyl7h01f9bydmysijzz72";
   };
 
-  phases = ["installPhase"];
+  phases = [ "installPhase" ];
 
   sourceRoot = ".";
 
