@@ -79,12 +79,12 @@ in
     };
 
     # Allows streaming with KMS
-    security.wrappers.sunshine = mkIf cfg.enableStreaming {
-      source = "${pkgs.sunshine}/bin/sunshine";
-      capabilities = "cap_sys_admin+pie";
-      owner = "root";
-      group = "root";
-    };
+    # security.wrappers.sunshine = mkIf cfg.enableStreaming {
+    #   source = "${pkgs.sunshine}/bin/sunshine";
+    #   capabilities = "cap_sys_admin+pie";
+    #   owner = "root";
+    #   group = "root";
+    # };
 
   };
 
