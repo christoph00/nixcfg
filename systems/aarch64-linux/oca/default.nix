@@ -20,7 +20,15 @@
     "ata_piix"
     "uhci_hcd"
     "nvme"
+    "usbhid"
   ];
+  boot.kernelParams = ["net.ifnames=0"];
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+
+  powerManagement.cpuFreqGovernor = lib.mkForce "performance";
+
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+
   system.stateVersion = "24.05";
 }
