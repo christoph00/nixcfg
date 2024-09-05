@@ -14,7 +14,7 @@
 
   internal.type = "desktop";
   internal.isV3 = true;
-  internal.system.boot.secureBoot = false;
+  internal.system.boot.secureBoot = true;
 
   environment.systemPackages = [pkgs.amdgpu_top];
   boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
