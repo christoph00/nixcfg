@@ -16,8 +16,13 @@
   internal.isV3 = true;
   internal.system.boot.secureBoot = true;
 
-  environment.systemPackages = [pkgs.amdgpu_top];
-  boot.kernelModules = ["kvm-intel" "acpi_call" "i2c_dev" "amdgpu"];
+  environment.systemPackages = [ pkgs.amdgpu_top ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "acpi_call"
+    "i2c_dev"
+    "amdgpu"
+  ];
   boot.kernelParams = [
     "rcutree.rcu_idle_gp_delay=1"
     "mem_sleep_default=deep"
@@ -26,11 +31,15 @@
   ];
 
   boot.initrd = {
-    availableKernelModules = ["xhci_pci" "ahci" "nvme"];
-    kernelModules = ["amdgpu"];
+    availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "nvme"
+    ];
+    kernelModules = [ "amdgpu" ];
   };
 
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   system.stateVersion = "24.05";
 }

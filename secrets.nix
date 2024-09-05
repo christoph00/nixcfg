@@ -28,9 +28,9 @@ let
     christoph_x13
     christoph_oca
   ];
-in {
+in
+{
 
-"secrets/tailscale-auth-key".publicKeys = all;
+  "secrets/tailscale-auth-key".publicKeys = all;
 
- 
 }

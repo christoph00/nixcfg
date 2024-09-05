@@ -8,7 +8,7 @@
   ...
 }:
 {
-  imports = [ (modulesPath + "/profiles/qemu-guest.nix")];
+  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   networking.hostName = "oca";
 
@@ -22,11 +22,12 @@
     "uhci_hcd"
     "nvme"
     "usbhid"
-    "xhci_pci" "virtio_pci" "virtio_scsi" 
+    "xhci_pci"
+    "virtio_pci"
+    "virtio_scsi"
   ];
-  boot.kernelParams = ["net.ifnames=0"];
+  boot.kernelParams = [ "net.ifnames=0" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 
