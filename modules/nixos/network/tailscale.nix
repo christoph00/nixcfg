@@ -6,7 +6,7 @@
   ...
 }:
 with lib; let
-  cfg = config.chr.system.network.tailscale;
+  cfg = config.internal.system.network.tailscale;
   kernel = config.boot.kernelPackages;
 in {
   options.internal.system.network.tailscale = {
