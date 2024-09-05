@@ -34,6 +34,7 @@ in
       pkgs.htop
       pkgs.nixd
       pkgs.agenix
+      pkgs.doas-sudo-shim
     ];
 
   };
