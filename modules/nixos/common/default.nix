@@ -31,6 +31,7 @@ with lib.internal;
 
     programs.less.enable = true;
     programs.command-not-found.enable = false;
+    programs.nix-ld.enable = true;
 
     # enable realtime capabilities to user processes
     security.rtkit.enable = true;
