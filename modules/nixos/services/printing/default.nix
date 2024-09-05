@@ -25,28 +25,27 @@ with builtins;
 with lib;
 with lib.internal;
 
-let
-  cfg = config.internal.graphical.desktop.plasma;
-in
 {
 
-  options.internal.graphical.desktop.plasma = {
-    enable = mkBoolOpt false "Enable the Cosmic desktop environment.";
-  };
-
-  config = mkIf cfg.enable {
-    services.desktopManager.plasma6.enable = true;
-
-    environment.systemPackages = [ pkgs.kdePackages.kde-gtk-config ];
-
-    environment.plasma6.excludePackages = with pkgs; [
-
-      oxygen
-      plasma-browser-integration
+  config = {
+    services.printing = {
+      enable = config.internal.isGraphical;
+      drivers = [
+        pkgs.gutenprint
+        pkgs.internal.xr6515dn
+      ];
+    };
+    hardware.printers.ensurePrinters = [
+      {
+        name = "Xerox";
+        model = "xerox-workcentre-6515DN/xr6515dn.ppd";
+        ppdOptions = {
+          Duplex = "DuplexNoTumble";
+          PageSize = "A4";
+        };
+        deviceUri = "ipps://xerox.lan";
+      }
     ];
 
-    chaotic.appmenu-gtk3-module.enable = true;
-
   };
-
 }
