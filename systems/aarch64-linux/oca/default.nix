@@ -14,6 +14,7 @@
 
   internal.type = "vm";
   internal.system.fs.device = "/dev/sda";
+  internal.system.fs.tmpRoot = true;
   internal.system.boot.encryptedRoot = false;
 
   boot.initrd.kernelModules = [
