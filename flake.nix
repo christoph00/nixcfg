@@ -32,6 +32,7 @@
     #nixpkgs.follows = "srvos/nixpkgs";
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    chaotic.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -62,8 +63,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Snowfall Thaw
-    thaw.url = "github:snowfallorg/thaw";
-    snow.url = "github:snowfallorg/snow";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
