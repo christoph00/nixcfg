@@ -37,5 +37,12 @@ in
       pkgs.doas-sudo-shim
     ];
 
+    programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "github:christoph00/nixcfg";
+  };
+
   };
 }
