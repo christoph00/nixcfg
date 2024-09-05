@@ -47,7 +47,7 @@ in
       };
     };
 
-    service.tailscale = {
+    services.tailscale = {
       enable = true;
       interfaceName = cfg.interfaceName;
       authKeyFile = cfg.authKeyFile;
