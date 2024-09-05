@@ -119,7 +119,6 @@ in
           disk.main.device = cfg.device; # The device to partition
         };
 
-
       }
 
       (mkIf (cfg.encrypted) {

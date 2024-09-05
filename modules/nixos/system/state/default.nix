@@ -66,7 +66,7 @@ in
 {
   options.internal.system.state = with types; {
     enable = mkBoolOpt' true;
-    
+
     stateDir = mkStrOpt' "/mnt/state";
 
     directories = mkOpt' (listOf anything) [ ];
