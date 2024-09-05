@@ -17,12 +17,13 @@ in {
     authKeyFile = mkOption {
       type = types.nullOr types.path;
       default = config.age.secrets.tailscale-auth-key.path;
+    };
       interfaceName = mkOption {
         type = types.string;
         default = "ts0";
       };
     };
-  };
+  
 
   config = mkIf cfg.enable {
     age.secrets.tailscale-auth-key.file = ../../../secrets/tailscale-auth-key;
