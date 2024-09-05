@@ -149,7 +149,7 @@ in
           type = "gpt";
           partitions = {
             inherit ESP;
-            luks = {
+            root = {
               size = "100%";
               content = btrfsLayout;
             };
