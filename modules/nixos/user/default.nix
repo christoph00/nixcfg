@@ -78,6 +78,13 @@ in
 
       uid = 1000;
 
+      openssh.authorizedKeys.keys = [
+"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRlMoMsGWPbUR9nC0XavzLmcolpF8hRbvQYALJQNMg8"
+"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF0THsTwuzDioonRmt3AxoqkFp7mkIkbmc0ZLtBS58zK"
+"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC33M1GqTGJYD4XKTm/tdxf2oFa+3uVeGRNx+stPF9vK"
+"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHoppzmns1lt6TT2otVKHn1ErtUn5pNzJXbViaYymrLn"
+];
+
       extraGroups = [
         "wheel"
         "audio"

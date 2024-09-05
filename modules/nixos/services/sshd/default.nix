@@ -27,7 +27,6 @@ with lib.internal;
 
 let
   cfg = config.internal.services.sshd;
-  public-keys = (import ../../../../ssh-public-keys.nix);
 in
 {
 
