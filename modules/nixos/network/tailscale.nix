@@ -31,15 +31,15 @@ in
 
     environment.systemPackages = [ pkgs.tailscale ];
 
-    networking.dhcpcd.denyInterfaces = [ interfaceName ];
+    networking.dhcpcd.denyInterfaces = [ cfg.interfaceName ];
 
     networking.firewall = {
-      trustedInterfaces = [ interfaceName ];
+      trustedInterfaces = [ cfg.interfaceName ];
     };
 
     systemd.network.networks."50-tailscale" = mkIf config.networking.useNetworkd {
       matchConfig = {
-        Name = interfaceName;
+        Name = cfg.interfaceName;
       };
       linkConfig = {
         Unmanaged = true;
