@@ -29,21 +29,14 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.neovim
+      #pkgs.neovim
       pkgs.git
-      pkgs.htop
-      pkgs.nixd
-      pkgs.agenix
+      #pkgs.htop
+      #pkgs.nixd
+      #pkgs.agenix
       pkgs.doas-sudo-shim
 
-      pkgs.flake
+      #pkgs.flake
     ];
-
-    programs.nh = {
-      enable = true;
-      clean.enable = true;
-      clean.extraArgs = "--keep-since 4d --keep 3";
-    };
-
   };
 }

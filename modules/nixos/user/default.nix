@@ -24,48 +24,6 @@ in
 
   config = {
 
-    programs.zsh = {
-      enable = true;
-      autosuggestions.enable = true;
-      histFile = "$XDG_CACHE_HOME/zsh.history";
-    };
-
-    internal.home = {
-      extraOptions = {
-        programs = {
-          starship = {
-            enable = true;
-            settings = {
-              character = {
-                success_symbol = "[➜](bold green)";
-                error_symbol = "[✗](bold red) ";
-                vicmd_symbol = "[](bold blue) ";
-              };
-            };
-          };
-
-          zsh = {
-            enable = true;
-            enableCompletion = true;
-            syntaxHighlighting.enable = true;
-
-            autosuggestion.enable = true;
-
-            initExtra = ''
-              # Fix an issue with tmux.
-              export KEYTIMEOUT=1
-
-              # Use vim bindings.
-              set -o vi
-
-              # Improved vim bindings.
-              source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-            '';
-          };
-        };
-      };
-    };
-
     users.users.${cfg.name} = {
       isNormalUser = true;
 
@@ -74,7 +32,7 @@ in
       home = "/home/${cfg.name}";
       group = "users";
 
-      shell = pkgs.zsh;
+      shell = pkgs.bash;
 
       uid = 1000;
 
