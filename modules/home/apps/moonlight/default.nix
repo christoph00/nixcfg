@@ -12,11 +12,11 @@ let
     mkIf
     ;
   inherit (lib.internal) mkBoolOpt;
-  cfg = config.internal.apps.moonlight;
+  cfg = config.profiles.internal.apps.moonlight;
 in
 {
-  options.internal.apps.moonlight = with types; {
-    enable = mkBoolOpt config.internal.desktop.enable "Enable App Moonlight";
+  options.profiles.internal.apps.moonlight = with types; {
+    enable = mkBoolOpt config.profiles.internal.desktop.enable "Enable App Moonlight";
   };
 
   config = mkIf cfg.enable {

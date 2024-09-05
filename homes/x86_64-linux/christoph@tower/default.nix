@@ -21,8 +21,8 @@
 }:
 
 {
-  internal.desktop.enable = true;
-  internal.gaming.enable = true;
+  profiles.internal.desktop.enable = true;
+  profiles.internal.gaming.enable = true;
 
   home.stateVersion = "24.05";
 }

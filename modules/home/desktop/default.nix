@@ -16,11 +16,15 @@ let
     mkOption
     ;
   inherit (lib.internal) mkBoolOpt;
-  cfg = config.internal.desktop;
+  cfg = config.profiles.internal.desktop;
 in
 {
-  options.internal.desktop = with types; {
+  options.profiles.internal.desktop = with types; {
     enable = mkBoolOpt false "Enable Desktop Options";
+  };
+
+  config = mkIf cfg.enable {
+    fonts.fontconfig.enable = true;
   };
 
 }

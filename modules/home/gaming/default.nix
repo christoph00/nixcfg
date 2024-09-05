@@ -16,10 +16,10 @@ let
     mkOption
     ;
   inherit (lib.internal) mkBoolOpt;
-  cfg = config.internal.desktop;
+  cfg = config.profiles.internal.gaming;
 in
 {
-  options.internal.desktop = with types; {
+  options.profiles.internal.gaming = with types; {
     enable = mkBoolOpt false "Enable Gaming Options";
   };
 

@@ -16,10 +16,10 @@ let
     mkOption
     ;
   inherit (lib.internal) mkBoolOpt;
-  cfg = config.internal.desktop;
+  cfg = config.profiles.internal.shell;
 in
 {
-  options.internal.desktop = with types; {
+  options.profiles.internal.shell = with types; {
     enable = mkBoolOpt true "Enable Shell Options";
   };
 
@@ -28,7 +28,60 @@ in
       pkgs.flake
       pkgs.neovim
       pkgs.htop
+      pkgs.tmux
+      pkgs.rclone
     ];
+    programs.starship = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+
+    programs.bottom = {
+      enable = true;
+    };
+    programs.gh = {
+      enable = true;
+      settings = {
+        version = 1;
+        git_protocol = "https";
+        editor = "micro";
+        prompt = "enabled";
+        aliases = {
+          co = "pr checkout";
+        };
+      };
+      extensions = [ pkgs.gh-poi ];
+    };
+
+    programs.git = {
+      enable = true;
+      ignores = [
+        ".envrc"
+        "key.properties"
+        "keystore.properties"
+        "*.jks"
+        ".direnv/"
+        "fleet.toml"
+        ".DS_Store"
+      ];
+      lfs.enable = true;
+      extraConfig = {
+        branch.sort = "-committerdate";
+        core = {
+          autocrlf = "input";
+        };
+        commit.verbose = true;
+        fetch = {
+          fsckobjects = true;
+          prune = true;
+        };
+        init.defaultBranch = "main";
+        merge.conflictstyle = "zdiff3";
+        push.autoSetupRemote = true;
+        receive.fsckObjects = true;
+        transfer.fsckobjects = true;
+      };
+    };
 
     programs.bash = {
       enable = true;
