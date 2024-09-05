@@ -28,6 +28,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.enableAllTerminfo = true;
     environment.systemPackages = [
       #pkgs.neovim
       pkgs.git
