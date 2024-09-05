@@ -9,7 +9,7 @@ with lib; let
   cfg = config.chr.system.network.tailscale;
   kernel = config.boot.kernelPackages;
 in {
-  options.chr.system.network.tailscale = {
+  options.internal.system.network.tailscale = {
     enable = mkOption {
       type = types.bool;
       default = true;
