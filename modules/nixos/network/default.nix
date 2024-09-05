@@ -12,6 +12,8 @@ let
   cfg = config.internal.network;
 in
 {
+    imports = [./tailscale.nix];
+
   options.internal.network = with types; {
     enable = mkBoolOpt' true;
 
