@@ -39,6 +39,13 @@ in
 
     environment.systemPackages = [ pkgs.kdePackages.kde-gtk-config ];
 
+    environment.plasma6.excludePackages = with pkgs; [
+      # Pulls in 600 mb worth of mbrola (via espeak), which is a bit silly
+      okular
+      oxygen
+      plasma-browser-integration
+    ];
+
   };
 
 }
