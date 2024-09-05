@@ -62,7 +62,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Snowfall Thaw
-    thaw.url = "github:snowfallorg/thaw?ref=v1.0.7";
+    thaw.url = "github:snowfallorg/thaw";
+    snow.url = "github:snowfallorg/snow";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
