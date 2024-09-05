@@ -1,5 +1,6 @@
 builds:
   include:
     - nixosConfigurations.*
+    - homeConfigurations.*
   #  - packages.x86_64-linux.*
   #  - packages.aarch64-linux.*
