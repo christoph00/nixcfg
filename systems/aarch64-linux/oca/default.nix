@@ -21,6 +21,7 @@
     "uhci_hcd"
     "nvme"
     "usbhid"
+    "xhci_pci" "virtio_pci"
   ];
   boot.kernelParams = ["net.ifnames=0"];
   boot.kernelPackages = pkgs.linuxPackages_latest;
