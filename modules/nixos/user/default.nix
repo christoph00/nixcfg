@@ -88,6 +88,8 @@ in
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFXvfa+PwkdnF9PIOT0T3qb42Kduklar59uog8ugm2fx christoph@oca"
 
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmHJIHJYMl/0awPcEeftLSxDKGVWmN0jhYPQ5hCINxD christoph@wrk"
+
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB//5XxnAj4gdYeasWBSZxuGKzmkqI7iMHUN60tZC4Jx christoph@csrv"
       ];
 
       extraGroups = [
