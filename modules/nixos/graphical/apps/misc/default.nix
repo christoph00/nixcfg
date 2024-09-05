@@ -38,10 +38,10 @@ in
 
     environment.systemPackages = [
       pkgs.zen-browser
-      pkgs.floorp
+      pkgs.firedragon
       pkgs.chromium
       pkgs.wezterm
-      pkgs.zed-editor
+      pkgs.zed-editor_git
       pkgs.vscode
       pkgs.kitty
       pkgs.foot
