@@ -41,7 +41,12 @@ in
       proton-ge-custom
     ];
 
-    # OpenCL
+    environment.systemPackages = [
+      pkgs.heroic
+      pkgs.cartridges
+    ];
+    #
+    #
     chaotic.mesa-git.extraPackages = with pkgs; [
       rocmPackages.clr.icd
       rocmPackages.clr
