@@ -26,7 +26,7 @@ with lib;
 with lib.internal;
 
 let
- plasma = pkgs.writeScriptBin "plasma" ''
+  plasma = pkgs.writeScriptBin "plasma" ''
     ${pkgs.kdePackages.plasma-workspace}/bin/startplasma-wayland &> /dev/null
   '';
 
@@ -70,15 +70,13 @@ in
     programs.dconf.enable = true;
 
     services.dbus.enable = true;
+
     xdg.portal = {
       enable = true;
+      xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
-        #xdg-desktop-portal
         xdg-desktop-portal-kde
-        #xdg-desktop-portal-wlr
-
-        # for Firefox cursor, fixes Vesktop?
-        #xdg-desktop-portal-gtk
+        xdg-desktop-portal-gtk
       ];
     };
 
@@ -88,10 +86,9 @@ in
     services.greetd = {
       enable = true;
       settings = {
-       default_session.command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd ${plasma}/bin/plasma'';
+        default_session.command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd startplasma-wayland'';
         initial_session = {
-          command = "${plasma}/bin/plasma";
+          command = "startplasma-wayland";
           user = "christoph";
         };
       };
