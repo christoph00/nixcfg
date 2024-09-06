@@ -48,10 +48,7 @@ in
     ];
 
     environment.systemPackages = with pkgs; [
-      greetd.gtkgreet
-
       xwayland
-
       meson
       wayland-protocols
       wayland-utils
@@ -86,6 +83,8 @@ in
     services.greetd = {
       enable = true;
       settings = {
+        vt = 2; # The virtual console (tty) that greetd should use.
+
         default_session.command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd startplasma-wayland'';
         initial_session = {
           command = "startplasma-wayland";
