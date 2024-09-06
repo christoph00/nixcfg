@@ -46,7 +46,7 @@ in
     chaotic.mesa-git.extraPackages = with pkgs; [
       rocmPackages.clr.icd
       rocmPackages.clr
-     # mesa_git.opencl
+      # mesa_git.opencl
     ];
     environment.variables.RADV_PERFTEST = "sam,video_decode,transfer_queue";
 

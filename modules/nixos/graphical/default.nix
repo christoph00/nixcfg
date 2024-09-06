@@ -25,19 +25,12 @@ with builtins;
 with lib;
 with lib.internal;
 
-let
-  plasma = pkgs.writeScriptBin "plasma" ''
-    ${pkgs.kdePackages.plasma-workspace}/bin/startplasma-wayland &> /dev/null
-  '';
-
-in
-
 {
 
   config = mkIf config.internal.isGraphical {
 
     internal.graphical.desktop.wayfire.enable = true;
-    internal.graphical.desktop.plasma.enable = true;
+    internal.graphical.desktop.plasma.enable = false;
     hardware.graphics.enable = true;
 
     internal.user.extraGroups = [
@@ -61,7 +54,6 @@ in
     environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
-      XDG_CURRENT_DESKTOP = "KDE";
     };
 
     programs.dconf.enable = true;
@@ -71,8 +63,8 @@ in
     xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;
+      wlr.enable = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-kde
         xdg-desktop-portal-gtk
       ];
     };
@@ -85,14 +77,13 @@ in
       settings = {
         vt = 2; # The virtual console (tty) that greetd should use.
 
-        default_session.command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd startplasma-wayland'';
+        default_session.command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd wayfire'';
         initial_session = {
-          command = "startplasma-wayland";
+          command = "wayfire";
           user = "christoph";
         };
       };
     };
-    security.pam.services.greetd.enableKwallet = true;
 
     fonts.packages = with pkgs; [
       noto-fonts
