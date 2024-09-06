@@ -75,8 +75,19 @@ with lib.internal;
       ];
     };
 
-    services.displayManager.sddm.enable = true;
-    services.displayManager.sddm.wayland.enable = true;
+    #services.displayManager.sddm.enable = true;
+    #services.displayManager.sddm.wayland.enable = true;
+
+    services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+          user = "christoph";
+        };
+      };
+    };
+    security.pam.services.greetd.enableKwallet = true;
 
     fonts.packages = with pkgs; [
       noto-fonts
