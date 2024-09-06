@@ -43,16 +43,15 @@ in
 
     environment.systemPackages = [
       pkgs.heroic
-      pkgs.cartridges
     ];
-    #
-    #
     chaotic.mesa-git.extraPackages = with pkgs; [
       rocmPackages.clr.icd
       rocmPackages.clr
       mesa_git.opencl
     ];
     environment.variables.RADV_PERFTEST = "sam,video_decode,transfer_queue";
+
+    chaotic.mesa-git.enable = true;
 
     programs.steam = {
       enable = true;
@@ -82,21 +81,44 @@ in
       autoStart = true;
       capSysAdmin = true;
       openFirewall = true;
+      settings = {
+        encoder = "amdvce";
+        fec_percentage = "7";
+      };
       applications = {
 
-        apps = [
-          {
-            name = "1080p Desktop";
-            prep-cmd = [
+        env = {
+          PATH = "$(PATH)";
+        };
+
+        apps =
+          let
+            prep = {
+              do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.disable output.HDMI-A-1.mode.1920x1080@60 output.HDMI-A-1.enable";
+              undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.HDMI-A-1.disable output.DP-2.mode.1 output.DP-2.enable ";
+            };
+            mk-icon =
+              { icon-name }:
+              pkgs.runCommand "${icon-name}-scaled.png" { }
+                ''${pkgs.imagemagick}/bin/convert -density 1200 -resize 500x -background none ${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark/128x128/apps/${icon-name}.svg -gravity center -extent 600x800 $out'';
+            download-image =
               {
-                do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.disable output.HDMI-A-1.mode.1920x1080@60 output.HDMI-A-1.enable";
-                undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.HDMI-A-1.disable output.DP-2.mode.1 output.DP-2.enable ";
-              }
-            ];
-            exclude-global-prep-cmd = "false";
-            auto-detach = "true";
-          }
-        ];
+                url,
+                hash,
+              }:
+              let
+                image = pkgs.fetchurl { inherit url hash; };
+              in
+              pkgs.runCommand "${lib.nameFromURL url "."}.png" { }
+                ''${pkgs.imagemagick}/bin/convert ${image} -background none -gravity center -extent 600x800 $out'';
+          in
+          [
+            {
+              name = "1080p Desktop";
+              prep-cmd = [ prep ];
+              image-path = mk-icon { icon-name = "cinnamon-virtual-keyboard"; };
+            }
+          ];
       };
     };
 
