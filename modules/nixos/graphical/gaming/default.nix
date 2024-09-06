@@ -89,7 +89,7 @@ in
           name = "1080p Desktop";
           prep-cmd = [
             {
-              do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.disable output.HDMI-A-1.mode.1 output.HDMI-A-1.enable";
+              do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.disable output.HDMI-A-1.mode.1920x1080@60 output.HDMI-A-1.enable";
               undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.HDMI-A-1.disable output.DP-2.mode.1 output.DP-2.enable ";
             }
           ];
