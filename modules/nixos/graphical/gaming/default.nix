@@ -37,7 +37,6 @@ in
 
   config = mkIf config.internal.isGraphical {
     chaotic.steam.extraCompatPackages = with pkgs; [
-      luxtorpeda
       proton-ge-custom
     ];
 
@@ -47,11 +46,11 @@ in
     chaotic.mesa-git.extraPackages = with pkgs; [
       rocmPackages.clr.icd
       rocmPackages.clr
-      mesa_git.opencl
+     # mesa_git.opencl
     ];
     environment.variables.RADV_PERFTEST = "sam,video_decode,transfer_queue";
 
-    chaotic.mesa-git.enable = true;
+    #chaotic.mesa-git.enable = true;
 
     programs.steam = {
       enable = true;
