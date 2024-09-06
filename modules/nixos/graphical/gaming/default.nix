@@ -76,11 +76,28 @@ in
       package = pkgs.gamescope_git;
     };
 
+    ## DP-2 = Monitor  HDMI-A-1 = Dummy
     services.sunshine = mkIf cfg.enableStreaming {
       enable = true;
       autoStart = true;
       capSysAdmin = true;
       openFirewall = true;
+      applications = {
+
+        apps = [
+           {
+          name = "1080p Desktop";
+          prep-cmd = [
+            {
+              do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.disable output.HDMI-A-1.mode.1 output.HDMI-A-1.enable";
+              undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.HDMI-A-1.disable output.DP-2.mode.1 output.DP-2.enable ";
+            }
+          ];
+          exclude-global-prep-cmd = "false";
+          auto-detach = "true";
+        }
+        ];
+      };
     };
 
     # Allows streaming with KMS
