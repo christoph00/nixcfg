@@ -25,6 +25,13 @@ with builtins;
 with lib;
 with lib.internal;
 
+let
+ plasma = pkgs.writeScriptBin "plasma" ''
+    ${pkgs.kdePackages.plasma-workspace}/bin/startplasma-wayland &> /dev/null
+  '';
+
+in
+
 {
 
   config = mkIf config.internal.isGraphical {
@@ -81,8 +88,10 @@ with lib.internal;
     services.greetd = {
       enable = true;
       settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+       default_session.command = ''
+          ${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd ${plasma}/bin/plasma'';
+        initial_session = {
+          command = "${plasma}/bin/plasma";
           user = "christoph";
         };
       };
