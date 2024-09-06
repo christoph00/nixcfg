@@ -93,6 +93,7 @@ in
 
         apps =
           let
+            steam = lib.getExe config.programs.steam.package + " --";
             prep = {
               do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.disable output.HDMI-A-1.mode.1920x1080@60 output.HDMI-A-1.enable";
               undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.HDMI-A-1.disable output.DP-2.mode.1 output.DP-2.enable ";
@@ -114,9 +115,22 @@ in
           in
           [
             {
-              name = "1080p Desktop";
+              name = "Desktop";
               prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "cinnamon-virtual-keyboard"; };
+            }
+
+            {
+              name = "Steam Big Picture";
+              cmd = "${steam} -gamepadui";
+              prep-cmd = [ prep ];
+              image-path = mk-icon { icon-name = "steamlink"; };
+            }
+            {
+              name = "Steam (Regular UI)";
+              cmd = "${steam}";
+              prep-cmd = [ prep ];
+              image-path = mk-icon { icon-name = "steam"; };
             }
           ];
       };
