@@ -48,6 +48,7 @@ in
               start_session = "systemctl --user start wayfire-session.target";
               wf_panel = "wf-panel";
               dock = "wf-dock";
+              background = "wf-background";
               # env = "systemctl --user import-environment";
             };
           }
