@@ -49,7 +49,6 @@ with lib.internal;
       wlroots
     ];
 
-    services.xserver.displayManager.startx.enable = true;
 
     environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
@@ -67,22 +66,6 @@ with lib.internal;
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
       ];
-    };
-
-    #services.displayManager.sddm.enable = true;
-    #services.displayManager.sddm.wayland.enable = true;
-
-    services.greetd = {
-      enable = true;
-      settings = {
-        vt = 2; # The virtual console (tty) that greetd should use.
-
-        default_session.command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd wayfire'';
-        initial_session = {
-          command = "wayfire";
-          user = "christoph";
-        };
-      };
     };
 
     fonts.packages = with pkgs; [
