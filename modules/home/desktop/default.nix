@@ -51,7 +51,7 @@ in
               wf_panel = "${wf}/bin/wf-panel";
               dock = "${wf}/bin/wf-dock";
               background = "${wf}/bin/wf-background";
-              # env = "systemctl --user import-environment";
+              #env = "systemctl --user import-environment";
             };
           }
           {

@@ -52,12 +52,14 @@ in
 
   config = mkIf cfg.enable {
 
-    home.packages = [pkgs.wayvnc pkgs.wlr-randr];
+    home.packages = [
+      pkgs.wayvnc
+      pkgs.wlr-randr
+    ];
 
     xdg.configFile."wayvnc/config".text = ''
       port=${toString cfg.vnc.port}
     '';
-
 
     profiles.internal.desktop.wayfire.settings = {
       plugins = [
@@ -72,30 +74,33 @@ in
       ];
     };
 
-
     systemd.user.services.wayvnc = {
       Unit = {
         Description = "a VNC server for wlroots based Wayland compositors";
-        After = ["graphical-session-pre.target"];
-        PartOf = ["graphical-session.target"];
+        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "graphical-session.target" ];
       };
 
       Service = {
         Restart = "on-failure";
-        ExecStart = ''          ${pkgs.wayvnc}/bin/wayvnc -g \
-                    -f ${assert asserts.assertMsg (cfg.vnc.maxFps > 0) "Rate limit for WayVNC must be a positive integer!"; toString cfg.vnc.maxFps} \
+        ExecStart = ''
+          ${pkgs.wayvnc}/bin/wayvnc -g \
+                    -f ${
+                      assert asserts.assertMsg (cfg.vnc.maxFps > 0) "Rate limit for WayVNC must be a positive integer!";
+                      toString cfg.vnc.maxFps
+                    } \
                     ${cfg.vnc.addr}
         '';
       };
 
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
 
     systemd.user.services.headless-desktop = {
       Unit = {
-        Description = "Systemd service for Lan Mouse";
+        Description = "Headless Desktop";
         PartOf = [ "graphical-session.target" ];
         After = [ "graphical-session-pre.target" ];
 
@@ -107,8 +112,8 @@ in
       #environment.PATH = lib.mkForce null;
       Service = {
         Type = "simple";
-        #ExecStart = "wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
-        ExecStart = " ${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire";
+        #ExecStartPre =  "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP; systemctl --user import-environment"; 
+        ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec ${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire'";
 
       };
 
