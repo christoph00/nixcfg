@@ -50,6 +50,10 @@ in
             };
           }
           {
+            plugin = "wf-shell";
+            package = pkgs.wayfirePlugins.wf-shell;
+          }
+          {
             package = pkgs.wayfirePlugins.firedecor;
             plugin = "firedecor";
             settings = {
