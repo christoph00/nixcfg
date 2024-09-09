@@ -57,10 +57,7 @@ in
         wantedBy = optional cfg.autorun "default.target";
         description = "Graphical headless Desktop";
         serviceConfig = {
-          ExecStart = pkgs.writeShellScript "wayfire" ''
-            . /etc/set-environment
-            wayfire
-          '';
+          ExecStart = "${pkgs.dbus}/bin/dbus-run-session ${pkgs.wayfire}/bin/wayfire";;
         };
       };
       users.extraUsers."${cfg.user}".linger = mkDefault true;
