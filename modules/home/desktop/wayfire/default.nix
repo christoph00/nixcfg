@@ -73,6 +73,8 @@ in
   options.profiles.internal.desktop.wayfire = {
     enable = mkEnableOption "Wayfire 3D wayland compositor";
 
+    xdgAutostart = mkBoolOpt false "Enable XDG Autostart";
+
     package = mkOption {
       type = types.package;
       default = pkgs.wayfire;
@@ -172,6 +174,20 @@ in
       home.packages = [ cfg.finalPackage ];
 
       xdg.configFile."wayfire.ini".text = generators.toINI { } settings;
+
+
+      systemd.user.targets.wayfire-session =  {
+        Unit = {
+          Description = "sway compositor session";
+          Documentation = [ "man:systemd.special(7)" ];
+          BindsTo = [ "graphical-session.target" ];
+          Wants = [ "graphical-session-pre.target" "xdg-desktop-autostart.target" ]
+            ++ optional cfg.xdgAutostart ;
+          After = [ "graphical-session-pre.target" ];
+          Before =
+            optional cfg.xdgAutostart "xdg-desktop-autostart.target";
+        };
+      };
 
       systemd.user.targets.tray.Unit = {
         Description = "Home-Manager System Tray";
