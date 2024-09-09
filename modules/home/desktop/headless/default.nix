@@ -63,11 +63,11 @@ in
       plugins = [
         {
           plugin = "output:HEADLESS-1";
-          mode = "1920x1080@60000";
+          settings.mode = "1920x1080@60000";
         }
         {
           plugin = "output:HDMI-A-1";
-          mode = "off";
+          settings.mode = "off";
         }
       ];
     };
