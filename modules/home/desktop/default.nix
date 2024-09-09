@@ -27,7 +27,7 @@ in
       default = [
         "DISPLAY"
         "WAYLAND_DISPLAY"
-        "SWAYSOCK"
+        "WAYFIRE_SOCKET"
         "XDG_CURRENT_DESKTOP"
         "XDG_SESSION_TYPE"
         "NIXOS_OZONE_WL"
