@@ -67,7 +67,7 @@ in
           {
             plugin = "autostart";
             settings = {
-              dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd ";
+              #dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd ";
               # env = "systemctl --user import-environment";
             };
           }
