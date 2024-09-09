@@ -29,14 +29,27 @@ in
   config = mkIf cfg.enable {
 
     systemd.user.services.headless-desktop = {
+        Unit = {
+        Description = "Systemd service for Lan Mouse";
+        PartOf = [ "graphical-session.target" ];
+         After = [ "graphical-session-pre.target" ];
 
-      wantedBy = optional cfg.autorun "default.target";
-      # bindsTo = "graphical-session.target";
-      # wants = "graphical-session-pre.target";
-      # after = "graphical-session-pre.target";
-      description = "Graphical headless Desktop";
-      environment.PATH = lib.mkForce null;
-      serviceConfig = {
+      };
+      Service = {
+        Type = "simple";
+        ExecStart = "${cfg.package}/bin/lan-mouse --daemon";
+      };
+      Install.WantedBy = [
+        (lib.mkIf cfg.autorun "default.target")
+      ];
+
+
+    Service = {
+
+  
+      #environment.PATH = lib.mkForce null;
+      Service = {
+        Type = "simple";
         #ExecStart = "wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
         ExecStart = "${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire";
 
