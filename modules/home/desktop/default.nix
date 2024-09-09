@@ -39,6 +39,9 @@ in
             plugin = "place";
             settings.mode = "cascade";
           }
+          {plugin = "autostart"; settings = {
+            env = "systemctl --user import-environment";
+          };}
           {
             package = pkgs.wayfirePlugins.firedecor;
             plugin = "firedecor";
