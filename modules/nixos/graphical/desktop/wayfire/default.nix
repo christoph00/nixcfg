@@ -36,6 +36,13 @@ in
 
   config = mkIf cfg.enable {
 
+       xdg.portal = {
+      enable = lib.mkDefault true;
+      wlr.enable = lib.mkDefault true;
+      # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1050914
+      config.wayfire.default = lib.mkDefault [ "wlr" "gtk" ];
+    };
+
   };
 
 }
