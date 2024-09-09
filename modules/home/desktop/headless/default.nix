@@ -43,7 +43,7 @@ in
       Service = {
         Type = "simple";
         #ExecStart = "wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
-        ExecStart = "${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire";
+        ExecStart = "${pkgs.dbus}/bin/dbus-run-session  ${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire";
 
       };
 
