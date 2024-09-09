@@ -14,7 +14,8 @@ let
     mkMerge
     mkDefault
     mkOption
-    ;
+    optional
+        ;
   inherit (lib.internal) mkBoolOpt;
   cfg = config.profiles.internal.desktop;
   
