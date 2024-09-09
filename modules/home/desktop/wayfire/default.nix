@@ -76,7 +76,7 @@ in
     };
 
     finalPackage = mkOption {
-      type. types.package;
+      type = types.package;
       default = pkgs.wayfire-with-plugins.override {
         wayfire = cfg.package;
         plugins = remove null (catAttrs "package" mergedPlugins);
