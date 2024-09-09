@@ -35,13 +35,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.wayfire = {
-      enable = true;
-      plugins = with pkgs.wayfirePlugins; [
-        wcm
-        wf-shell
-        wayfire-plugins-extra
-      ];
+    xdg.portal = {
+      enable = lib.mkDefault true;
+      wlr.enable = lib.mkDefault true;
+      # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1050914
+      config.wayfire.default = lib.mkDefault [ "wlr" "gtk" ];
     };
 
   };
