@@ -1,4 +1,4 @@
-  {
+{
   options,
   config,
   lib,
@@ -15,10 +15,10 @@ let
     mkDefault
     mkOption
     optional
-        ;
+    ;
   inherit (lib.internal) mkBoolOpt;
   cfg = config.profiles.internal.desktop;
-  
+
 in
 {
   options.profiles.internal.desktop = with types; {
@@ -28,22 +28,20 @@ in
 
   config = mkIf cfg.enable {
 
-  
-  
-  systemd.user.services.headless-desktop = {
-   
-        wantedBy = optional cfg.autorun "default.target";
-        bindsTo = [ "graphical-session.target" ];
-        wants = [ "graphical-session-pre.target" ];
-        after = [ "graphical-session-pre.target" ];
-        description = "Graphical headless Desktop";
-        environment.PATH = lib.mkForce null;
-        serviceConfig = {
-          #ExecStart = "wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
-          ExecStart = "${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire";
-          
-        };
+    systemd.user.services.headless-desktop = {
+
+      wantedBy = optional cfg.autorun "default.target";
+      bindsTo = [ "graphical-session.target" ];
+      wants = [ "graphical-session-pre.target" ];
+      after = [ "graphical-session-pre.target" ];
+      description = "Graphical headless Desktop";
+      environment.PATH = lib.mkForce null;
+      serviceConfig = {
+        #ExecStart = "wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
+        ExecStart = "${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire";
+
       };
+    };
 
   };
 }

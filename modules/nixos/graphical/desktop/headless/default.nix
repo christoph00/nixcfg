@@ -57,7 +57,7 @@ in
     services.graphical-desktop.enable = true;
 
     services.seatd.enable = true;
-    
+
     users.extraUsers."${cfg.user}".linger = mkDefault true;
 
   };
