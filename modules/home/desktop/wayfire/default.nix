@@ -51,7 +51,7 @@ let
     };
   };
 in {
-  options.wayland.windowManager.wayfire = {
+  options.profiles.internal.desktop.wayfire = {
     enable = mkEnableOption "Wayfire 3D wayland compositor";
 
     package = mkOption {
@@ -94,23 +94,7 @@ in {
       '';
 
 
-      default = {
-        close_top_view = "<super> KEY_Q | <alt> KEY_F4";
-        plugins =  [
-              { plugin = "move"; settings.activate = "<super> BTN_LEFT"; }
-              { plugin = "place"; settings.mode = "cascade"; }
-              { package = pkgs.wayfirePlugins.firedecor;
-                plugin = "firedecor";
-                settings = {
-                  layout = "-";
-                  border_size = 8;
-                  active_border = [ 0.121569 0.121569 0.156863 1.000000 ];
-                  inactive_border = [ 0.121569 0.121569 0.156863 1.000000 ];
-                };
-              }
-            ];
-
-      };
+    
     };
   };
 
