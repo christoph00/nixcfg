@@ -104,7 +104,7 @@ in
                 ''${pkgs.imagemagick}/bin/convert -density 1200 -resize 500x -background none ${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark/128x128/apps/${icon-name}.svg -gravity center -extent 600x800 $out'';
             download-image =
               {
-                url,
+                url,/
                 hash,
               }:
               let
@@ -116,20 +116,20 @@ in
           [
             {
               name = "Desktop";
-              #prep-cmd = [ prep ];
+              prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "cinnamon-virtual-keyboard"; };
             }
 
             {
               name = "Steam Big Picture";
               cmd = "${steam} -gamepadui";
-              #prep-cmd = [ prep ];
+              prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "steamlink"; };
             }
             {
               name = "Steam (Regular UI)";
               cmd = "${steam}";
-              #prep-cmd = [ prep ];
+              prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "steam"; };
             }
           ];
