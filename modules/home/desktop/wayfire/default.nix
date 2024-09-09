@@ -24,6 +24,11 @@ let
       ]))
     ];
 
+      # Merge plugin config if defined multiple times
+      mergedPlugins = builtins.attrValues (
+        mapAttrs (_: foldl (a: b: recursiveUpdate b a) { }) (groupBy (x: x.plugin) cfg.settings.plugins)
+      );
+
   # NOTE: Consumers of this module may use `lib.mkOrder 0` for plugin
   # configuration defined in multiple modules to control order of
   # `lib.types.listOf` merge (list concatenation) behaviour. Plugin
@@ -123,10 +128,7 @@ in
 
   config =
     let
-      # Merge plugin config if defined multiple times
-      mergedPlugins = builtins.attrValues (
-        mapAttrs (_: foldl (a: b: recursiveUpdate b a) { }) (groupBy (x: x.plugin) cfg.settings.plugins)
-      );
+
 
       # Convert lists to strings for generators.toINI
       listToString =
