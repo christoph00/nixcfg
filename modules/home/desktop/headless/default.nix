@@ -44,7 +44,7 @@ in
       ];
 
 
-    Service = {
+
 
   
       #environment.PATH = lib.mkForce null;
@@ -54,7 +54,8 @@ in
         ExecStart = "${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire";
 
       };
-    };
+    
 
+  };
   };
 }
