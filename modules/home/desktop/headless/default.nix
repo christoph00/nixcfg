@@ -17,11 +17,11 @@ let
     optional
     ;
   inherit (lib.internal) mkBoolOpt;
-  cfg = config.profiles.internal.desktop;
+  cfg = config.profiles.internal.desktop.headless;
 
 in
 {
-  options.profiles.internal.desktop = with types; {
+  options.profiles.internal.desktop.headless = with types; {
     enable = mkBoolOpt false "Enable Headless Desktop";
     autorun = mkBoolOpt true "Auto Start Service";
   };
