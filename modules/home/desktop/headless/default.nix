@@ -58,6 +58,18 @@ in
       port=${toString cfg.vnc.port}
     '';
 
+    services.kanshi.profiles = {
+        headless = {
+    outputs = [
+      {
+        criteria = "HEADLESS-1";
+        mode = "1920x1080@60Hz";
+      }
+      {criteria = "HDMI-A-1"; status = "disabled";}
+    ];
+  };
+    };
+
     systemd.user.services.wayvnc = {
       Unit = {
         Description = "a VNC server for wlroots based Wayland compositors";
