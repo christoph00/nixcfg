@@ -17,7 +17,7 @@ let
     ;
   inherit (lib.internal) mkBoolOpt;
   cfg = config.profiles.internal.desktop;
-  
+
 in
 {
   options.profiles.internal.desktop = with types; {
@@ -28,21 +28,38 @@ in
     fonts.fontconfig.enable = true;
     profiles.internal.desktop.wayfire = {
       enable = true;
-        settings = {
+      settings = {
         close_top_view = "<super> KEY_Q | <alt> KEY_F4";
-        plugins =  [
-              { plugin = "move"; settings.activate = "<super> BTN_LEFT"; }
-              { plugin = "place"; settings.mode = "cascade"; }
-              { package = pkgs.wayfirePlugins.firedecor;
-                plugin = "firedecor";
-                settings = {
-                  layout = "-";
-                  border_size = 8;
-                  active_border = [ 0.121569 0.121569 0.156863 1.000000 ];
-                  inactive_border = [ 0.121569 0.121569 0.156863 1.000000 ];
-                };
-              }
-            ];
+        plugins = [
+          {
+            plugin = "move";
+            settings.activate = "<super> BTN_LEFT";
+          }
+          {
+            plugin = "place";
+            settings.mode = "cascade";
+          }
+          {
+            package = pkgs.wayfirePlugins.firedecor;
+            plugin = "firedecor";
+            settings = {
+              layout = "-";
+              border_size = 8;
+              active_border = [
+                0.121569
+                0.121569
+                0.156863
+                1.0
+              ];
+              inactive_border = [
+                0.121569
+                0.121569
+                0.156863
+                1.0
+              ];
+            };
+          }
+        ];
 
       };
     };

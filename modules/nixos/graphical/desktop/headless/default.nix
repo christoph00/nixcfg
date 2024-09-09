@@ -33,50 +33,49 @@ in
   options.internal.graphical.desktop.headless = {
     enable = mkBoolOpt false "Enable Headless Desktop.";
     autorun = mkBoolOpt true "Autorun";
-          user = mkOption {
-        type = types.str;
-        default = "christoph";
- 
-      };
+    user = mkOption {
+      type = types.str;
+      default = "christoph";
+
+    };
   };
-
-
 
   config = mkIf cfg.enable {
 
-      environment.sessionVariables = {
+    environment.sessionVariables = {
       WLR_BACKENDS = "drm,headless,libinput";
       NIXOS_OZONE_WL = "1";
       WAYLAND_DISPLAY = "wayland-1";
       WLR_LIBINPUT_NO_DEVICES = "1";
-      WLR_RENDERER="pixman";
+      WLR_RENDERER = "pixman";
       #XDG_RUNTIME_DIR="/tmp";
       XDG_RUNTIME_DIR = "/run/user/1000";
       WLR_RENDER_DRM_DEVICE = "/dev/dri/card0";
-      
+
     };
     services.xserver.autorun = false;
     services.graphical-desktop.enable = true;
 
     services.seatd.enable = true;
 
-      systemd.user.services.headless-desktop = {
-   
-        wantedBy = optional cfg.autorun "default.target";
-        bindsTo = [ "graphical-session.target" ];
-        wants = [ "graphical-session-pre.target" ];
-        after = [ "graphical-session-pre.target" ];
-        description = "Graphical headless Desktop";
-        
-        serviceConfig = {
-          #ExecStart = "wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
-          ExecStart = pkgs.writeShellScript "start" ''
-            systemctl --user import-environment
-            wayfire
-          '';
-        };
+    systemd.user.services.headless-desktop = {
+
+      wantedBy = optional cfg.autorun "default.target";
+      bindsTo = [ "graphical-session.target" ];
+      wants = [ "graphical-session-pre.target" ];
+      after = [ "graphical-session-pre.target" ];
+      description = "Graphical headless Desktop";
+
+      serviceConfig = {
+        #ExecStart = "wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
+        ExecStart = pkgs.writeShellScript "start" ''
+          
+                      systemctl --user import-environment
+                      wayfire
+        '';
       };
-      users.extraUsers."${cfg.user}".linger = mkDefault true;
+    };
+    users.extraUsers."${cfg.user}".linger = mkDefault true;
 
   };
 

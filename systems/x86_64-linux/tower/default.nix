@@ -18,7 +18,6 @@
   internal.graphical.desktop.display-manager.enable = false;
   internal.graphical.desktop.headless.enable = true;
 
-
   environment.systemPackages = [ pkgs.amdgpu_top ];
   boot.kernelModules = [
     "kvm-intel"
