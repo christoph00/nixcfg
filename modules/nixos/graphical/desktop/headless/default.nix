@@ -42,6 +42,11 @@ in
 
   config = mkIf cfg.enable {
 
+    boot.kernelModules = [ "uinput" ];
+    services.udev.extraRules = ''
+      KERNEL=="uinput", SUBSYSTEM=="misc", OPTIONS+="static_node=uinput", TAG+="uaccess"
+    '';
+
     environment.sessionVariables = {
       WLR_BACKENDS = "drm,headless,libinput";
       NIXOS_OZONE_WL = "1";
