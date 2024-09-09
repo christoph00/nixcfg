@@ -26,7 +26,7 @@ in
 
   config = mkIf cfg.enable {
     fonts.fontconfig.enable = true;
-    config.profiles.internal.desktop.wayfire = {
+    profiles.internal.desktop.wayfire = {
       enable = true;
         settings = {
         close_top_view = "<super> KEY_Q | <alt> KEY_F4";
