@@ -18,7 +18,7 @@ let
   inherit (lib.internal) mkBoolOpt;
   cfg = config.profiles.internal.desktop;
 
-  wf = profiles.internal.desktop.wayfire.finalPackage;
+  wf = config.profiles.internal.desktop.wayfire.finalPackage;
 
 in
 {
