@@ -43,8 +43,12 @@ in
   config = mkIf cfg.enable {
 
       environment.sessionVariables = {
-      WLR_BACKENDS = "headless";
+      WLR_BACKENDS = "drm,headless,libinput";
       NIXOS_OZONE_WL = "1";
+      WAYLAND_DISPLAY = "wayland-1";
+      WLR_LIBINPUT_NO_DEVICES = "1";
+      WLR_RENDERER="pixman";
+      XDG_RUNTIME_DIR="/tmp";
     };
     services.xserver.autorun = false;
     services.graphical-desktop.enable = true;
