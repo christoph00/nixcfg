@@ -64,7 +64,7 @@ in
         wantedBy = optional cfg.autorun "default.target";
         description = "Graphical headless Desktop";
         serviceConfig = {
-          ExecStart = "${pkgs.wayfire}/bin/wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
+          ExecStart = "wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
         };
       };
       users.extraUsers."${cfg.user}".linger = mkDefault true;
