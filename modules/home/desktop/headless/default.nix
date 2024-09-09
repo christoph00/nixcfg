@@ -52,23 +52,26 @@ in
 
   config = mkIf cfg.enable {
 
-    home.packages = [pkgs.wayvnc];
+    home.packages = [pkgs.wayvnc pkgs.wlr-randr];
 
     xdg.configFile."wayvnc/config".text = ''
       port=${toString cfg.vnc.port}
     '';
 
-    services.kanshi.profiles = {
-        headless = {
-    outputs = [
-      {
-        criteria = "HEADLESS-1";
-        mode = "1920x1080@60Hz";
-      }
-      {criteria = "HDMI-A-1"; status = "disable";}
-    ];
-  };
+
+    profiles.internal.desktop.wayfire.settings = {
+      plugins = [
+        {
+          plugin = "output:HEADLESS-1";
+          mode = "1920x1080@60000";
+        }
+        {
+          plugin = "output:HDMI-A-1";
+          mode = "off";
+        }
+      ];
     };
+
 
     systemd.user.services.wayvnc = {
       Unit = {
@@ -79,7 +82,7 @@ in
 
       Service = {
         Restart = "on-failure";
-        ExecStart = ''          ${pkgs.wayvnc}/bin/wayvnc \
+        ExecStart = ''          ${pkgs.wayvnc}/bin/wayvnc -g \
                     -f ${assert asserts.assertMsg (cfg.vnc.maxFps > 0) "Rate limit for WayVNC must be a positive integer!"; toString cfg.vnc.maxFps} \
                     ${cfg.vnc.addr}
         '';

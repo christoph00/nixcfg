@@ -27,10 +27,7 @@ in
 
   config = mkIf cfg.enable {
     fonts.fontconfig.enable = true;
-    services.kanshi = {
-      enable = true;
-      systemdTarget = "wayfire-session.target";
-    };
+
     profiles.internal.desktop.wayfire = {
       enable = true;
       settings = {
