@@ -16,6 +16,30 @@
   internal.isV4 = true;
   internal.system.boot.secureBoot = true;
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages =
+      if devInfo.gpu.vendor == "intel" then
+        [
+          pkgs.intel-media-driver
+          pkgs.intel-vaapi-driver
+          pkgs.libvdpau-va-gl
+        ]
+      else if devInfo.gpu.vendor == "amd" then
+        [
+          pkgs.rocmPackages.clr.icd
+        ]
+      else
+        [ ];
+  };
+
+  environment.sessionVariables = {
+    GST_VAAPI_ALL_DRIVERS = "1";
+    LIBVA_DRIVER_NAME = "iHD";
+    VDPAU_DRIVER = "va_gl";
+  };
+
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "nvme"
@@ -42,7 +66,10 @@
     "ahci.mobile_lpm_policy=3"
     "mitigations=off"
   ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "i915"
+  ];
 
   services.fstrim.enable = true;
 
