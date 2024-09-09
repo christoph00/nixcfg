@@ -22,23 +22,6 @@ in
 {
   options.profiles.internal.desktop = with types; {
     enable = mkBoolOpt false "Enable Desktop Options";
-    variables = mkOption {
-      type = types.listOf types.str;
-      default = [
-        "DISPLAY"
-        "WAYLAND_DISPLAY"
-        "WAYFIRE_SOCKET"
-        "XDG_CURRENT_DESKTOP"
-        "XDG_SESSION_TYPE"
-        "NIXOS_OZONE_WL"
-        "XCURSOR_THEME"
-        "XCURSOR_SIZE"
-      ];
-      example = [ "-all" ];
-      description = ''
-        Environment variables imported into the systemd and D-Bus user environment.
-      '';
-    };
 
   };
 
@@ -60,7 +43,7 @@ in
           {
             plugin = "autostart";
             settings = {
-              dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd ${cfg.variables}";
+              dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
               start_session = "systemctl --user start wayfire-session.target";
               # env = "systemctl --user import-environment";
             };
