@@ -61,12 +61,17 @@ in
     services.seatd.enable = true;
 
       systemd.user.services.headless-desktop = {
+   
         wantedBy = optional cfg.autorun "default.target";
+        bindsTo = [ "graphical-session.target" ];
+        wants = [ "graphical-session-pre.target" ];
+        after = [ "graphical-session-pre.target" ];
         description = "Graphical headless Desktop";
+        
         serviceConfig = {
           #ExecStart = "wayfire"; #${pkgs.dbus}/bin/dbus-run-session 
           ExecStart = pkgs.writeShellScript "start" ''
-            . /etc/set-environment
+            systemctl --user import-environment
             wayfire
           '';
         };
