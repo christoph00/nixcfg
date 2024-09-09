@@ -19,19 +19,11 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages =
-      if devInfo.gpu.vendor == "intel" then
-        [
-          pkgs.intel-media-driver
-          pkgs.intel-vaapi-driver
-          pkgs.libvdpau-va-gl
-        ]
-      else if devInfo.gpu.vendor == "amd" then
-        [
-          pkgs.rocmPackages.clr.icd
-        ]
-      else
-        [ ];
+    extraPackages = [
+      pkgs.intel-media-driver
+      pkgs.intel-vaapi-driver
+      pkgs.libvdpau-va-gl
+    ];
   };
 
   environment.sessionVariables = {
