@@ -40,13 +40,6 @@ in
       '';
     };
 
-    extraCommands = mkOption {
-      type = types.listOf types.str;
-      default = [ "systemctl --user start wayfire-session.target" ];
-      description = ''
-        Extra commands to run after D-Bus activation.
-      '';
-    };
   };
 
   config = mkIf cfg.enable {
@@ -67,7 +60,8 @@ in
           {
             plugin = "autostart";
             settings = {
-              #dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd ";
+              dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd ${cfg.variables}";
+              start_session = "systemctl --user start wayfire-session.target";
               # env = "systemctl --user import-environment";
             };
           }
