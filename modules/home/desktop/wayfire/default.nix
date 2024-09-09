@@ -21,7 +21,7 @@ let
 in
 {
   options.profiles.internal.desktop.wayfire = with types; {
-    enable = mkBoolOpt config.profiles.interal.desktop.enable "Enable Wayfire Options";
+    enable = mkBoolOpt config.profiles.internal.desktop.enable "Enable Wayfire Options";
   };
 
   config = mkIf cfg.enable {
@@ -29,6 +29,8 @@ in
 wayland.windowManager.wayfire = {
   enable = true;
   setting = {
+
+    close_top_view = "<super> KEY_Q | <alt> KEY_F4";
 
     plugins =        [
               { plugin = "move"; settings.activate = "<super> BTN_LEFT"; }
