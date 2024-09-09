@@ -65,7 +65,7 @@ in
         criteria = "HEADLESS-1";
         mode = "1920x1080@60Hz";
       }
-      {criteria = "HDMI-A-1"; status = "disabled";}
+      {criteria = "HDMI-A-1"; status = "disable";}
     ];
   };
     };
