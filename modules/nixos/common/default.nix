@@ -36,6 +36,8 @@ with lib.internal;
     # enable realtime capabilities to user processes
     security.rtkit.enable = true;
 
+    hardware.enableRedistributableFirmware = true;
+
     security.sudo = {
       enable = false;
     };
