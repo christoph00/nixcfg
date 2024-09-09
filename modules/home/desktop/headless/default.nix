@@ -31,9 +31,9 @@ in
     systemd.user.services.headless-desktop = {
 
       wantedBy = optional cfg.autorun "default.target";
-      bindsTo = "graphical-session.target";
-      wants = "graphical-session-pre.target";
-      after = "graphical-session-pre.target";
+      # bindsTo = "graphical-session.target";
+      # wants = "graphical-session-pre.target";
+      # after = "graphical-session-pre.target";
       description = "Graphical headless Desktop";
       environment.PATH = lib.mkForce null;
       serviceConfig = {
