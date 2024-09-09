@@ -20,33 +20,33 @@ let
 
 in
 {
-  options.profiles.internal.desktop= with types; {
+  options.profiles.internal.desktop = with types; {
     enable = mkBoolOpt false "Enable Desktop Options";
- variables = mkOption {
-        type = types.listOf types.str;
-        default = [
-          "DISPLAY"
-          "WAYLAND_DISPLAY"
-          "SWAYSOCK"
-          "XDG_CURRENT_DESKTOP"
-          "XDG_SESSION_TYPE"
-          "NIXOS_OZONE_WL"
-          "XCURSOR_THEME"
-          "XCURSOR_SIZE"
-        ];
-        example = [ "-all" ];
-        description = ''
-          Environment variables imported into the systemd and D-Bus user environment.
-        '';
-      };
+    variables = mkOption {
+      type = types.listOf types.str;
+      default = [
+        "DISPLAY"
+        "WAYLAND_DISPLAY"
+        "SWAYSOCK"
+        "XDG_CURRENT_DESKTOP"
+        "XDG_SESSION_TYPE"
+        "NIXOS_OZONE_WL"
+        "XCURSOR_THEME"
+        "XCURSOR_SIZE"
+      ];
+      example = [ "-all" ];
+      description = ''
+        Environment variables imported into the systemd and D-Bus user environment.
+      '';
+    };
 
-      extraCommands = mkOption {
-        type = types.listOf types.str;
-        default = [ "systemctl --user start wayfire-session.target" ];
-        description = ''
-          Extra commands to run after D-Bus activation.
-        '';
-      };
+    extraCommands = mkOption {
+      type = types.listOf types.str;
+      default = [ "systemctl --user start wayfire-session.target" ];
+      description = ''
+        Extra commands to run after D-Bus activation.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -68,7 +68,7 @@ in
             plugin = "autostart";
             settings = {
               dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd ${config.profiles.internal.desktop.wayfire.variables}; ${config.profiles.internal.desktop.wayfire.extraCommands}";
-             # env = "systemctl --user import-environment";
+              # env = "systemctl --user import-environment";
             };
           }
           {
