@@ -82,7 +82,7 @@ in
         plugins = remove null (catAttrs "package" mergedPlugins);
       };
       internal = true;
-    }
+    };
 
     settings = mkOption {
       type = types.submodule {
