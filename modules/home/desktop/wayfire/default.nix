@@ -73,8 +73,6 @@ in
   options.profiles.internal.desktop.wayfire = {
     enable = mkEnableOption "Wayfire 3D wayland compositor";
 
-    xdgAutostart = mkBoolOpt false "Enable XDG Autostart";
-
     package = mkOption {
       type = types.package;
       default = pkgs.wayfire;
@@ -183,9 +181,9 @@ in
           Wants = [
             "graphical-session-pre.target"
             "xdg-desktop-autostart.target"
-          ] ++ optional cfg.xdgAutostart;
+          ];
           After = [ "graphical-session-pre.target" ];
-          Before = optional cfg.xdgAutostart "xdg-desktop-autostart.target";
+
         };
       };
 
