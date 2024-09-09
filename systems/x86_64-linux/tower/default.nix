@@ -12,7 +12,7 @@
 
   networking.hostName = "tower";
 
-  internal.type = "server";
+  internal.type = "desktop";
   internal.isV3 = true;
   internal.system.boot.secureBoot = true;
   internal.graphical.desktop.display-manager.enable = false;
