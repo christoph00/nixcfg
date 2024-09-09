@@ -23,6 +23,7 @@
 {
   profiles.internal.desktop.enable = true;
   profiles.internal.gaming.enable = true;
+  profiles.internal.desktop.headless.enable = true;
 
   home.stateVersion = "24.05";
 }
