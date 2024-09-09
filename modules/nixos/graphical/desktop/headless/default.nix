@@ -48,7 +48,7 @@ in
       WAYLAND_DISPLAY = "wayland-1";
       WLR_LIBINPUT_NO_DEVICES = "1";
       WLR_RENDERER="pixman";
-      XDG_RUNTIME_DIR="/tmp";
+      #XDG_RUNTIME_DIR="/tmp";
     };
     services.xserver.autorun = false;
     services.graphical-desktop.enable = true;

@@ -57,6 +57,9 @@ with lib.internal;
 
     programs.dconf.enable = true;
 
+
+services.dbus.implementation = "broker";
+
     services.dbus.enable = true;
 
     xdg.portal = {
