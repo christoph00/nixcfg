@@ -75,6 +75,15 @@ in
       description = "Package to use";
     };
 
+    finalPackage = mkOption {
+      type. types.package;
+      default = pkgs.wayfire-with-plugins.override {
+        wayfire = cfg.package;
+        plugins = remove null (catAttrs "package" mergedPlugins);
+      };
+      internal = true;
+    }
+
     settings = mkOption {
       type = types.submodule {
         freeformType = types.attrsOf allowedTypes;
@@ -157,14 +166,11 @@ in
         };
       };
 
-      finalPackage = pkgs.wayfire-with-plugins.override {
-        wayfire = cfg.package;
-        plugins = remove null (catAttrs "package" mergedPlugins);
-      };
+
 
     in
     mkIf cfg.enable {
-      home.packages = [ finalPackage ];
+      home.packages = [ cfg.finalPackage ];
 
       xdg.configFile."wayfire.ini".text = generators.toINI { } settings;
 
