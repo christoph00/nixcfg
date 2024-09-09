@@ -31,7 +31,7 @@ let
   };
 
   theme = {
-    name = "adw-gtk3-dark";
+    name = "adw-gtk3-light";
     package = pkgs.adw-gtk3;
   };
   font = {
