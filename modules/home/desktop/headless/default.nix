@@ -15,6 +15,7 @@ let
     mkDefault
     mkOption
     optional
+    asserts
     ;
   inherit (lib.internal) mkBoolOpt;
   cfg = config.profiles.internal.desktop.headless;
