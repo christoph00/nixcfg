@@ -14,6 +14,7 @@ let
     mkMerge
     mkDefault
     mkOption
+    overrideExisting
     ;
   inherit (lib.internal) mkBoolOpt;
   cfg = config.profiles.internal.desktop.wayfire;
