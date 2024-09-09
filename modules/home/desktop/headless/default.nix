@@ -68,7 +68,7 @@ in
       Service = {
         Restart = "on-failure";
         ExecStart = ''          ${pkgs.wayvnc}/bin/wayvnc \
-                    -f ${assert asserts.assertMsg (cfg.vnc.maxFps > 0) "Rate limit for WayVNC must be a positive integer!"; toString maxFps} \
+                    -f ${assert asserts.assertMsg (cfg.vnc.maxFps > 0) "Rate limit for WayVNC must be a positive integer!"; toString cfg.vnc.maxFps} \
                     ${cfg.vnc.addr}
         '';
       };
