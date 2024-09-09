@@ -33,6 +33,11 @@ in
   options.internal.graphical.desktop.headless = {
     enable = mkBoolOpt false "Enable Headless Desktop.";
     autorun = mkBoolOpt true "Autorun";
+          user = mkOption {
+        type = types.str;
+        default = "christoph";
+ 
+      };
   };
 
   config = mkIf cfg.enable {
@@ -54,7 +59,7 @@ in
           '';
         };
       };
-      users.extraUsers."christoph".linger = mkDefault true;
+      users.extraUsers."${cfg.user}".linger = mkDefault true;
 
   };
 
