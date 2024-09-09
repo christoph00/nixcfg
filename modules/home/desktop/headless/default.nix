@@ -29,10 +29,10 @@ in
   config = mkIf cfg.enable {
 
     systemd.user.services.headless-desktop = {
-        Unit = {
+      Unit = {
         Description = "Systemd service for Lan Mouse";
         PartOf = [ "graphical-session.target" ];
-         After = [ "graphical-session-pre.target" ];
+        After = [ "graphical-session-pre.target" ];
 
       };
       Service = {
@@ -43,10 +43,6 @@ in
         (lib.mkIf cfg.autorun "default.target")
       ];
 
-
-
-
-  
       #environment.PATH = lib.mkForce null;
       Service = {
         Type = "simple";
@@ -54,8 +50,7 @@ in
         ExecStart = "${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire";
 
       };
-    
 
-  };
+    };
   };
 }
