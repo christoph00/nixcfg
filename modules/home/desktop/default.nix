@@ -66,7 +66,7 @@ in
           {
             plugin = "autostart";
             settings = {
-              dbus = ""${pkgs.dbus}/bin/dbus-update-activation-environment --systemd ${config.profiles.internal.desktop.wayfire.variables}; ${config.profiles.internal.desktop.wayfire.extraCommands}""
+              dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd ${config.profiles.internal.desktop.wayfire.variables}; ${config.profiles.internal.desktop.wayfire.extraCommands}";
              # env = "systemctl --user import-environment";
             };
           }
