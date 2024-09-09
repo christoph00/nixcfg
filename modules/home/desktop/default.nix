@@ -27,6 +27,10 @@ in
 
   config = mkIf cfg.enable {
     fonts.fontconfig.enable = true;
+    services.kanshi = {
+      enable = true;
+      systemdTarget = "wayfire-session.target";
+    };
     profiles.internal.desktop.wayfire = {
       enable = true;
       settings = {
@@ -45,7 +49,8 @@ in
             settings = {
               dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
               start_session = "systemctl --user start wayfire-session.target";
-              autostart_wf_shell = "true";
+              wf_panel = "wf-panel";
+              dock = "wf-dock";
               # env = "systemctl --user import-environment";
             };
           }
