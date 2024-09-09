@@ -46,6 +46,7 @@ in
         description = ''
           Extra commands to run after D-Bus activation.
         '';
+      };
   };
 
   config = mkIf cfg.enable {
