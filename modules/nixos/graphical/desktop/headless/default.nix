@@ -40,6 +40,8 @@ in
       };
   };
 
+
+
   config = mkIf cfg.enable {
 
       environment.sessionVariables = {
@@ -53,6 +55,8 @@ in
     };
     services.xserver.autorun = false;
     services.graphical-desktop.enable = true;
+
+    services.seatd.enable = true;
 
       systemd.user.services.headless-desktop = {
         wantedBy = optional cfg.autorun "default.target";
