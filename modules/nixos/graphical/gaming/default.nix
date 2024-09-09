@@ -35,7 +35,7 @@ in
     enableStreaming = mkBoolOpt cfg.enable "Enable Game Streaming Host.";
   };
 
-  config = mkIf config.internal.isGraphical {
+  config = mkIf cfg.enable {
     chaotic.steam.extraCompatPackages = with pkgs; [
       proton-ge-custom
     ];
