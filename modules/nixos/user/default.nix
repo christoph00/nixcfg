@@ -58,6 +58,7 @@ in
         "networkmanager"
         "input"
         "tty"
+        "seat"
       ] ++ cfg.extraGroups;
     } // cfg.extraOptions;
   };
