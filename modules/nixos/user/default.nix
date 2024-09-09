@@ -59,6 +59,7 @@ in
         "input"
         "tty"
         "seat"
+        "render"
       ] ++ cfg.extraGroups;
     } // cfg.extraOptions;
   };
