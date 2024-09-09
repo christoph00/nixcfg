@@ -24,10 +24,10 @@ let
       ]))
     ];
 
-      # Merge plugin config if defined multiple times
-      mergedPlugins = builtins.attrValues (
-        mapAttrs (_: foldl (a: b: recursiveUpdate b a) { }) (groupBy (x: x.plugin) cfg.settings.plugins)
-      );
+  # Merge plugin config if defined multiple times
+  mergedPlugins = builtins.attrValues (
+    mapAttrs (_: foldl (a: b: recursiveUpdate b a) { }) (groupBy (x: x.plugin) cfg.settings.plugins)
+  );
 
   # NOTE: Consumers of this module may use `lib.mkOrder 0` for plugin
   # configuration defined in multiple modules to control order of
@@ -40,19 +40,19 @@ let
         type = with types; nullOr package;
         default = null;
         description = ''
-          
-                    Optional package containing one or more wayfire plugins not bundled
-                    with wayfire. If the plugin comes from a package, specify the package
-                    here so its provided plugins are properly loaded by Wayfire.
+
+          Optional package containing one or more wayfire plugins not bundled
+          with wayfire. If the plugin comes from a package, specify the package
+          here so its provided plugins are properly loaded by Wayfire.
         '';
       };
 
       plugin = mkOption {
         type = types.str;
         description = ''
-          
-                    Name of the plugin. Name can be obtained from the plugin documentation
-                    and/or the metadata XML files.
+
+          Name of the plugin. Name can be obtained from the plugin documentation
+          and/or the metadata XML files.
         '';
       };
 
@@ -60,10 +60,10 @@ let
         type = types.submodule { freeformType = types.attrsOf allowedTypes; };
         default = { };
         description = ''
-          
-                    Key-value style attribute set of settings for an individual
-                    plugin. Valid values: int, float, bool, str, or list or floats.
-                    Nested attribute sets are not valid.
+
+          Key-value style attribute set of settings for an individual
+          plugin. Valid values: int, float, bool, str, or list or floats.
+          Nested attribute sets are not valid.
         '';
       };
     };
@@ -97,30 +97,30 @@ in
           type = types.listOf plugin;
           default = [ ];
           example = literalExpression ''
-            
-                        [
-                          { plugin = "move"; settings.activate = "<super> BTN_LEFT"; }
-                          { plugin = "place"; settings.mode = "cascade"; }
-                          { package = pkgs.wayfirePlugins.firedecor;
-                            plugin = "firedecor";
-                            settings = {
-                              layout = "-";
-                              border_size = 8;
-                              active_border = [ 0.121569 0.121569 0.156863 1.000000 ];
-                              inactive_border = [ 0.121569 0.121569 0.156863 1.000000 ];
-                            };
-                          }
-                        ]
+
+            [
+              { plugin = "move"; settings.activate = "<super> BTN_LEFT"; }
+              { plugin = "place"; settings.mode = "cascade"; }
+              { package = pkgs.wayfirePlugins.firedecor;
+                plugin = "firedecor";
+                settings = {
+                  layout = "-";
+                  border_size = 8;
+                  active_border = [ 0.121569 0.121569 0.156863 1.000000 ];
+                  inactive_border = [ 0.121569 0.121569 0.156863 1.000000 ];
+                };
+              }
+            ]
           '';
           description = "List of plugins to enable and configure";
         };
       };
       description = ''
-        
-                Configuration options as defined in
-                https://github.com/WayfireWM/wayfire/wiki/Configuration.
-                Options in the #core section are implied as top-level attributes
-                of the `settings` set.
+
+        Configuration options as defined in
+        https://github.com/WayfireWM/wayfire/wiki/Configuration.
+        Options in the #core section are implied as top-level attributes
+        of the `settings` set.
       '';
 
     };
@@ -128,7 +128,6 @@ in
 
   config =
     let
-
 
       # Convert lists to strings for generators.toINI
       listToString =
@@ -167,8 +166,6 @@ in
             listToString (map filterFn mergedPlugins);
         };
       };
-
-
 
     in
     mkIf cfg.enable {
