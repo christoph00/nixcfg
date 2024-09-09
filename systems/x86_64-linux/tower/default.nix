@@ -19,6 +19,20 @@
   internal.graphical.desktop.headless.enable = true;
 
   environment.systemPackages = [ pkgs.amdgpu_top ];
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = [
+      pkgs.rocmPackages.clr.icd
+    ];
+  };
+
+  environment.sessionVariables = {
+
+    AMD_VULKAN_ICD = "RADV";
+  };
+
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
