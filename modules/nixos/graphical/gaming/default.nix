@@ -116,20 +116,20 @@ in
           [
             {
               name = "Desktop";
-              prep-cmd = [ prep ];
+              #prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "cinnamon-virtual-keyboard"; };
             }
 
             {
               name = "Steam Big Picture";
               cmd = "${steam} -gamepadui";
-              prep-cmd = [ prep ];
+              #prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "steamlink"; };
             }
             {
               name = "Steam (Regular UI)";
               cmd = "${steam}";
-              prep-cmd = [ prep ];
+              #prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "steam"; };
             }
           ];
