@@ -79,7 +79,6 @@ in
               dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
               start_session = "systemctl --user start wayfire-session.target";
               wf_panel = "${wf}/bin/wf-panel";
-              dock = "${wf}/bin/wf-dock";
               background = "${wf}/bin/wf-background";
               #env = "systemctl --user import-environment";
             };
