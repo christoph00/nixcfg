@@ -83,6 +83,7 @@ in
       settings = {
         encoder = "amdvce";
         fec_percentage = "7";
+        capture = "wlr";
       };
       applications = {
 

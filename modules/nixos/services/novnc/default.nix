@@ -39,9 +39,8 @@ in
 
     services.nginx.enable = true;
 
-    services.nginx.virtualHosts.novnc = {
+    services.nginx.virtualHosts."_" = {
       enableACME = false;
-      root = pkgs.novnc;
       listen = [
         {
           addr = "0.0.0.0";
@@ -52,7 +51,7 @@ in
       locations = {
         "/websockify" = {
           proxyWebsockets = true;
-          proxyPass = "http://127.0.0.1:5901";
+          proxyPass = "http://127.0.0.1:5921";
           extraConfig = ''
             proxy_read_timeout 61s;
             proxy_buffering off;
@@ -60,6 +59,7 @@ in
         };
 
         "/" = {
+          root = "${pkgs.novnc}/share/webapps/novnc";
           index = "vnc.html";
         };
       };
@@ -70,7 +70,7 @@ in
       wantedBy = [ "default.target" ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.python3Packages.websockify}/bin/websockify 5900 127.0.0.1:5901";
+        ExecStart = "${pkgs.python3Packages.websockify}/bin/websockify 5921 127.0.0.1:5900";
         Restart = "always";
       };
     };
