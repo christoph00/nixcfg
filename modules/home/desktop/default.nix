@@ -35,6 +35,10 @@ in
       settings = {
         close_top_view = "<super> KEY_Q | <alt> KEY_F4";
         plugins = [
+        {
+        plugin = "input";
+        settings.xkb_layout = "de";
+        }
           {
             plugin = "move";
             settings.activate = "<super> BTN_LEFT";
