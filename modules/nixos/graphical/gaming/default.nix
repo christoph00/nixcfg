@@ -95,8 +95,8 @@ in
           let
             steam = lib.getExe config.programs.steam.package + " --";
             prep = {
-              do = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.disable output.HDMI-A-1.mode.1920x1080@60 output.HDMI-A-1.enable";
-              undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.HDMI-A-1.disable output.DP-2.mode.1 output.DP-2.enable ";
+              do = "${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --off --output HEADLESS-1 --custom-mode ''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS}";
+              undo = "${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --off --output HEADLESS-1 --custom-mode 1920x1080@60";
             };
             mk-icon =
               { icon-name }:
