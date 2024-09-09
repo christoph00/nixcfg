@@ -35,10 +35,6 @@ in
         After = [ "graphical-session-pre.target" ];
 
       };
-      Service = {
-        Type = "simple";
-        ExecStart = "${cfg.package}/bin/lan-mouse --daemon";
-      };
       Install.WantedBy = [
         (lib.mkIf cfg.autorun "default.target")
       ];
