@@ -23,7 +23,6 @@ in
 {
   options.profiles.internal.desktop.headless = with types; {
     enable = mkBoolOpt false "Enable Headless Desktop";
-    autorun = mkBoolOpt true "Auto Start Service";
   };
 
   config = mkIf cfg.enable {
@@ -35,9 +34,7 @@ in
         After = [ "graphical-session-pre.target" ];
 
       };
-      Install.WantedBy = [
-        (lib.mkIf cfg.autorun "default.target")
-      ];
+
 
       #environment.PATH = lib.mkForce null;
       Service = {
