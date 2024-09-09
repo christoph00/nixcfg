@@ -51,7 +51,7 @@ let
 in
 {
   options.profiles.internal.theme = with types; {
-    enable = mkBoolOpt config.profiles.internal.desktop.enable "Enable Theme Options";
+    enable = mkBoolOpt false "Enable Theme Options";
   };
   config = mkIf cfg.enable {
     home = {
