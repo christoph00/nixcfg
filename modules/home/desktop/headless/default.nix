@@ -46,7 +46,7 @@ in
           Set the port to listen on.
         '';
       };
-    }
+    };
   };
 
   config = mkIf cfg.enable {
