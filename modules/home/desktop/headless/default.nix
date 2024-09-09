@@ -24,7 +24,7 @@ in
   options.profiles.internal.desktop.headless = with types; {
     enable = mkBoolOpt false "Enable Headless Desktop";
     autorun = mkBoolOpt true "Auto Start Service";
-    vnc {
+    vnc = {
       addr = mkOption {
         type = types.str;
         default = "0.0.0.0";
