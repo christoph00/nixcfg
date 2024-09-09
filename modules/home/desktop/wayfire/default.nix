@@ -6,16 +6,8 @@
   namespace,
   ...
 }:
+with lib;
 let
-  inherit (lib)
-    types
-    listOf
-    mkIf
-    mkMerge
-    mkDefault
-    mkOption
-    overrideExisting
-    ;
   inherit (lib.internal) mkBoolOpt;
   cfg = config.profiles.internal.desktop.wayfire;
   
