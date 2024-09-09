@@ -34,11 +34,17 @@ in
       enable = true;
       settings = {
         close_top_view = "<super> KEY_Q | <alt> KEY_F4";
+        # Workspaces arranged into a grid: 3 × 3.
+        vwidth = 3;
+        vheight = 3;
+
+        # Prefer client-side decoration or server-side decoration
+        preferred_decoration_mode = "client";
         plugins = [
-        {
-        plugin = "input";
-        settings.xkb_layout = "de";
-        }
+          {
+            plugin = "input";
+            settings.xkb_layout = "de";
+          }
           {
             plugin = "move";
             settings.activate = "<super> BTN_LEFT";
@@ -47,6 +53,26 @@ in
             plugin = "place";
             settings.mode = "cascade";
           }
+          {
+            plugin = "resize";
+            settings.activate = "<super> BTN_RIGHT";
+          }
+          {
+            plugin = "grid";
+            settings = {
+              slot_l = "<super> KEY_LEFT";
+              slot_c = "<super> KEY_UP";
+              slot_r = "<super> KEY_RIGHT";
+
+              restore = "<super> KEY_DOWN";
+            };
+          }
+          {
+            plugin = "switcher";
+            settings.next_view = "<super> KEY_TAB";
+          }
+          { plugin = "foreign-toplevel"; }
+          { plugin = "gtk-shell"; }
           {
             plugin = "autostart";
             settings = {
