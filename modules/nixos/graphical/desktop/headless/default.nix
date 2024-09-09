@@ -54,7 +54,7 @@ in
           '';
         };
       };
-      users.extraUsers."${cfg.user}".linger = mkDefault true;
+      users.extraUsers."christoph".linger = mkDefault true;
 
   };
 
