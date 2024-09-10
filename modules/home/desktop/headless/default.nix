@@ -78,7 +78,7 @@ in
       Unit = {
         Description = "a VNC server for wlroots based Wayland compositors";
         After = [ "graphical-session-pre.target" ];
-        PartOf = [ "graphical-session.target" ];
+        # PartOf = [ "graphical-session.target" ];
       };
 
       Service = {
@@ -93,9 +93,9 @@ in
         '';
       };
 
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
+      # Install = {
+      #   WantedBy = [ "graphical-session.target" ];
+      # };
     };
 
     systemd.user.services.headless-desktop = {
@@ -112,7 +112,7 @@ in
       #environment.PATH = lib.mkForce null;
       Service = {
         Type = "simple";
-        #ExecStartPre =  "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP; systemctl --user import-environment"; 
+        #ExecStartPre =  "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP; systemctl --user import-environment";
         ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec ${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire'";
 
       };
