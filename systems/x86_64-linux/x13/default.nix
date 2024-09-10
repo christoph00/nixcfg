@@ -30,7 +30,7 @@
     ];
   };
 
-  environment.sessionVariables = {
+  environment.variables = {
     GST_VAAPI_ALL_DRIVERS = "1";
     LIBVA_DRIVER_NAME = "iHD";
     VDPAU_DRIVER = "va_gl";

@@ -33,9 +33,11 @@
 
 
 
-  environment.sessionVariables = {
+  environment.variables = {
     RADV_PERFTEST = "sam,video_decode,transfer_queue";
     AMD_VULKAN_ICD = "RADV";
+    LIBVA_DRIVER_NAME = "radeonsi";
+    VDPAU_DRIVER = "radeonsi";
   };
 
   boot.kernelModules = [
