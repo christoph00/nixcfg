@@ -21,7 +21,7 @@ in
       default = config.age.secrets.tailscale-auth-key.path;
     };
     interfaceName = mkOption {
-      type = types.string;
+      type = types.str;
       default = "ts0";
     };
   };
