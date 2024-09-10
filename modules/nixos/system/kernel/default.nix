@@ -83,7 +83,9 @@ in
         boot.kernelModules = [ "tcp_bbr" ];
       }
       (mkIf config.internal.isGraphical {
-        boot.kernelPackages = pkgs.linuxPackages_cachyos;
+        boot.kernelPackages = pkgs.linuxPackages_latest;
+        #boot.kernelPackages = pkgs.linuxPackages_cachyos;
+
         #chaotic.scx.enable = true; # by default uses scx_rustland scheduler
         #chaotic.scx.scheduler = "scx_bpfland";
         #systemd.services.scx.serviceConfig.LogNamespace = "sched-ext";
