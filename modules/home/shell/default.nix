@@ -31,12 +31,15 @@ in
       pkgs.tmux
       pkgs.rclone
       pkgs.uv
+      pkgs.direnv
       pkgs.devenv
     ];
     programs.starship = {
       enable = true;
       enableBashIntegration = true;
     };
+
+    programs.direnv.enable = true;
 
     programs.bottom = {
       enable = true;
