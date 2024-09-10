@@ -34,7 +34,6 @@ in
 
     networking.networkmanager.wifi.backend = "iwd";
 
-
     systemd.services.NetworkManager-wait-online = {
       serviceConfig = {
         ExecStart = [
