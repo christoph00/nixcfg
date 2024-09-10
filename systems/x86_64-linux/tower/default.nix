@@ -25,11 +25,16 @@
     enable32Bit = true;
     extraPackages = [
       pkgs.rocmPackages.clr.icd
+      pkgs.rocmPackages.clr
+      pkgs.mesa.opencl
+      pkgs.libvdpau-va-gl
     ];
   };
 
-  environment.sessionVariables = {
 
+
+  environment.sessionVariables = {
+    RADV_PERFTEST = "sam,video_decode,transfer_queue";
     AMD_VULKAN_ICD = "RADV";
   };
 

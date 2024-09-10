@@ -32,7 +32,7 @@ in
 {
 
   options.internal.services.novnc = {
-    enable = mkBoolOpt config.internal.graphical.desktop.headless.enable "Enable noVNC Service.";
+    enable = mkBoolOpt false "Enable noVNC Service.";
   };
 
   config = mkIf cfg.enable {
