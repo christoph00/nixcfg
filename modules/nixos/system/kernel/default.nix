@@ -74,7 +74,7 @@ in
           # Bufferbloat mitigations + slight improvement in throughput & latency
           "net.ipv4.tcp_congestion_control" = "bbr";
 
-          "net.core.default_qdisc" = "fq";
+          "net.core.default_qdisc" = "cake";
           "net.core.wmem_max" = 1073741824;
           "net.core.rmem_max" = 1073741824;
           "net.ipv4.tcp_rmem" = "4096 87380 1073741824";
@@ -84,9 +84,9 @@ in
       }
       (mkIf config.internal.isGraphical {
         boot.kernelPackages = pkgs.linuxPackages_cachyos;
-        chaotic.scx.enable = true; # by default uses scx_rustland scheduler
-        chaotic.scx.scheduler = "scx_bpfland";
-        systemd.services.scx.serviceConfig.LogNamespace = "sched-ext";
+        #chaotic.scx.enable = true; # by default uses scx_rustland scheduler
+        #chaotic.scx.scheduler = "scx_bpfland";
+        #systemd.services.scx.serviceConfig.LogNamespace = "sched-ext";
         boot.kernelParams = [ "mitigations=off" ]; # disable mitigations on desktop
 
       })
