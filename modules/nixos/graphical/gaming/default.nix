@@ -74,7 +74,7 @@ in
       openFirewall = true;
       settings = {
         encoder = "amdvce";
-        fec_percentage = "7";
+        fec_percentage = "20";
         capture = "wlr";
       };
       applications = {
