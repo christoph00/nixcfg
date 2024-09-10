@@ -21,17 +21,25 @@
   environment.systemPackages = [ pkgs.amdgpu_top ];
 
   hardware.graphics = {
-    enable = true;
     enable32Bit = true;
-    extraPackages = [
-      pkgs.rocmPackages.clr.icd
-      pkgs.rocmPackages.clr
-      pkgs.mesa.opencl
-      pkgs.libvdpau-va-gl
-    ];
+};
+
+  hardware.amdgpu = {
+    amdvlk = {
+      enable = true;
+      supportExperimental.enable = true;
+      support32Bit.enable = true;
+      settings = {
+        AllowVkPipelineCachingToDisk = 1;
+        EnableVmAlwaysValid = 1;
+        IFH = 0;
+        IdleAfterSubmitGpuMask = 1;
+        ShaderCacheMode = 1;
+      };
+    };
+    opencl.enable = true;
+    initrd.enable = true;
   };
-
-
 
   environment.variables = {
     RADV_PERFTEST = "sam,video_decode,transfer_queue";
@@ -59,7 +67,6 @@
       "ahci"
       "nvme"
     ];
-    kernelModules = [ "amdgpu" ];
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
