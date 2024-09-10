@@ -31,6 +31,7 @@ in
       pkgs.tmux
       pkgs.rclone
       pkgs.uv
+      pkgs.devenv
     ];
     programs.starship = {
       enable = true;
