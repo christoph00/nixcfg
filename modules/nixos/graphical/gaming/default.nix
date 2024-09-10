@@ -43,14 +43,6 @@ in
     environment.systemPackages = [
       pkgs.heroic
     ];
-    chaotic.mesa-git.extraPackages = with pkgs; [
-      rocmPackages.clr.icd
-      rocmPackages.clr
-      # mesa_git.opencl
-    ];
-    environment.variables.RADV_PERFTEST = "sam,video_decode,transfer_queue";
-
-    #chaotic.mesa-git.enable = true;
 
     programs.steam = {
       enable = true;

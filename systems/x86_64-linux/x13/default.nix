@@ -23,6 +23,10 @@
       pkgs.intel-media-driver
       pkgs.intel-vaapi-driver
       pkgs.libvdpau-va-gl
+      pkgs.mesa.opencl
+      pkgs.vaapiIntel
+      pkgs.intel-media-driver
+      pkgs.intel-compute-runtime
     ];
   };
 
