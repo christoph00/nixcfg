@@ -55,10 +55,9 @@
     "amdgpu"
   ];
   boot.kernelParams = [
-    "rcutree.rcu_idle_gp_delay=1"
     "mem_sleep_default=deep"
     "amdgpu.gartsize=4096"
-    "adgpu.ignore_crat=1"
+    "amdgpu.ignore_crat=1"
   ];
 
   boot.initrd = {
@@ -69,7 +68,6 @@
     ];
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
 
   system.stateVersion = "24.05";
 }
