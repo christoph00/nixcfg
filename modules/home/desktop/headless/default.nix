@@ -61,65 +61,21 @@ in
 
     wayland.windowManager.sway = {
       enable = true;
+      systemd.enable = true;
       wrapperFeatures.gtk = true;
-      extraSessionCommands = ''
-        # https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md#basic-steps
-        export SDL_VIDEODRIVER=wayland
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export QT_QPA_PLATFORM=wayland
-        export XDG_SESSION_DESKTOP=sway
-        # TODO export XDG_SESSION_DESKTOP="''${XDG_SESSION_DESKTOP:-sway}"
-      '';
-      extraConfig = ''
-                        exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-                        exec hash dbus-update-activation-environment 2>/dev/null && \
-                          dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+      startup = [
+        {command = "${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --off --output HEADLESS-1 --custom-mode 1920x1080@60"}
 
-                	exec output HDMI-A-1 disable
-
-                        exec ${pkgs.sunshine}/bin/sunshine
-        		
-
-      '';
-      config = {
-        output.Headless-1 = {
-          mode = "1920x1080";
-          pos = "0 0";
-        };
-        keybindings =
-          let
-            modifier = "Alt";
-          in
-          lib.mkOptionDefault {
-            # Desktop Utilities
-            "${modifier}+c" = "exec ${pkgs.clipman}/bin/clipman pick -t wofi";
-            #"${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
-            "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
-
-            # Main app shortcuts
-            "${modifier}+Shift+w" = "exec ${pkgs.zen-browser}/bin/zen-browser";
-            "${modifier}+Shift+v" = "exec ${pkgs.pavucontrol}/bin/pavucontrol";
-          };
-      };
-    };
-
-    systemd.user.services.headless-desktop = {
-      Unit = {
-        Description = "Headless Desktop";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session-pre.target" ];
-
-      };
-      Install.WantedBy = [
-        (lib.mkIf cfg.autorun "default.target")
+        {command = "${pkgs.sunshine}/bin/sunshine";}
       ];
 
-      Service = {
-        Type = "simple";
-        ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec sway'";
 
+      config = {
+        output.HEADLESS-1 = {
+          mode = "1920x1080@60";
+          pos = "0 0";
+        };
       };
-
     };
   };
 }
