@@ -27,6 +27,7 @@ with lib.internal;
 
 let
   cfg = config.internal.graphical.gaming;
+  username = "christoph";
 in
 {
 
@@ -46,41 +47,80 @@ in
 
     programs.steam = {
       enable = true;
-      gamescopeSession = {
-        enable = true; # Gamescope session is better for AAA gaming.
-        args = [
-          "--immediate-flips"
-          "--"
-          "bigsteam"
-        ];
-      };
     };
-    programs.gamescope = {
-      enable = true;
-      capSysNice = false; # capSysNice freezes gamescopeSession for me.
-      args = [ ];
-      env = lib.mkForce {
-        # I set DXVK_HDR in the alternative-sessions script.
-        ENABLE_GAMESCOPE_WSI = "1";
+
+    wayland.windowManager.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraSessionCommands = ''
+      # https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md#basic-steps
+      export SDL_VIDEODRIVER=wayland
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export QT_QPA_PLATFORM=wayland
+      export XDG_SESSION_DESKTOP=sway
+      # TODO export XDG_SESSION_DESKTOP="''${XDG_SESSION_DESKTOP:-sway}"
+    '';
+    extraConfig = ''
+      exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+      exec hash dbus-update-activation-environment 2>/dev/null && \
+        dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+      # create virtual output on boot for sunshine host
+      exec swaymsg create_output HEADLESS-1
+      exec swaymsg output HEADLESS-1 resolution 1920x1080
+
+      exec ${pkgs.sunshine}/bin/sunshine
+
+      exec ${getExe pkgs.bash} -c "while true; do ${getExe pkgs.gamescope} -f -W 1920 -H 1080 -r 60 -- ${getExe inputs.jovian.legacyPackages.${pkgs.system}.gamescope-session}; done"
+
+    '';
+    config = {
+      modifier = "Mod4";
+      menu = "wofi --show run";
+      bars = [
+        {
+          command = "waybar";
+        }
+      ];
+      output.Headless-1 = {
+        mode = "1920x1080";
+        pos = "0 0";
       };
-      package = pkgs.gamescope_git;
+      keybindings = let
+        modifier = config.wayland.windowManager.sway.config.modifier;
+      in
+        lib.mkOptionDefault {
+          # Desktop Utilities
+          "${modifier}+c" = "exec ${pkgs.clipman}/bin/clipman pick -t wofi";
+          #"${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
+          "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
+
+          # Main app shortcuts
+          "${modifier}+Shift+w" = "exec ${pkgs.zen-browser}/bin/zen-browser";
+          "${modifier}+Shift+v" = "exec ${pkgs.pavucontrol}/bin/pavucontrol";
+        };
     };
+  };
+
 
     ## DP-2 = Monitor  HDMI-A-1 = Dummy
     services.sunshine = mkIf cfg.enableStreaming {
       enable = true;
-      autoStart = true;
+      autoStart = false;
       capSysAdmin = true;
       openFirewall = true;
       settings = {
-        encoder = "amdvce";
-        fec_percentage = "20";
+        min_log_level = "info";
         capture = "wlr";
+        encoder = "vaapi";
+        address_family = "both";
+        controller = "enabled";
+        gamepad = "x360";
       };
       applications = {
 
         env = {
-          PATH = "$(PATH)";
+          PATH = "/run/current-system/sw/bin:/run/wrappers/bin:/home/${username}/.nix-profile/bin:/etc/profiles/per-user/${username}/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
         };
 
         apps =
