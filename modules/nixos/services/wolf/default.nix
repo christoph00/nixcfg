@@ -85,7 +85,7 @@ in
       environment = {
         WOLF_LOG_LEVEL = "INFO";
         HOST_APPS_STATE_FOLDER = "/data/wolf";
-        XDG_RUNTIME_DIR = "/data/wolf/sockets";
+        XDG_RUNTIME_DIR = "/tmp/sockets";
         WOLF_CFG_FILE = "/data/wolf/cfg/config.toml";
         WOLF_PRIVATE_KEY_FILE = "/data/wolf/cfg/key.pem";
         WOLF_PRIVATE_CERT_FILE = "/data/wolf/cfg/cert.pem";
