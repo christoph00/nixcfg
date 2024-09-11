@@ -76,8 +76,10 @@ in
           dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
         # create virtual output on boot for sunshine host
+
         exec swaymsg create_output HEADLESS-1
         exec swaymsg output HEADLESS-1 resolution 1920x1080
+	exec output HDMI-A-1 disable
 
         exec ${pkgs.sunshine}/bin/sunshine
 
