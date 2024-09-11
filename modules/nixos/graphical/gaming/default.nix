@@ -87,7 +87,7 @@ in
         pos = "0 0";
       };
       keybindings = let
-        modifier = config.wayland.windowManager.sway.config.modifier;
+        modifier = "Alt";
       in
         lib.mkOptionDefault {
           # Desktop Utilities
@@ -101,8 +101,6 @@ in
         };
     };
   };
-
-
     ## DP-2 = Monitor  HDMI-A-1 = Dummy
     services.sunshine = mkIf cfg.enableStreaming {
       enable = true;
