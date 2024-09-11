@@ -47,6 +47,24 @@ in
 
     programs.steam = {
       enable = true;
+      gamescopeSession = {
+        enable = true; # Gamescope session is better for AAA gaming.
+        args = [
+          "--immediate-flips"
+          "--"
+          "bigsteam"
+        ];
+      };
+    };
+    programs.gamescope = {
+      enable = true;
+      capSysNice = false; # capSysNice freezes gamescopeSession for me.
+      args = [ ];
+      env = lib.mkForce {
+        # I set DXVK_HDR in the alternative-sessions script.
+        ENABLE_GAMESCOPE_WSI = "1";
+      };
+      package = pkgs.gamescope_git;
     };
 
     ## DP-2 = Monitor  HDMI-A-1 = Dummy
