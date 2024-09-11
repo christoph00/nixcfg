@@ -67,14 +67,14 @@ in
       volumes = [
         "/dev/input:/dev/input:rw"
         "/run/udev:/run/udev:rw"
-        "/data/wolf:/data/wolf:rw"
+        "/mnt/state/wolf:/data/wolf:rw"
         # TODO: Restore when podman works.
         # "/run/podman/podman.sock:/run/podman/podman.sock:rw"
         "/var/run/docker.sock:/var/run/docker.sock"
       ];
       environment = {
         WOLF_LOG_LEVEL = "INFO";
-        HOST_APPS_STATE_FOLDER = "/mnt/state/wolf";
+        HOST_APPS_STATE_FOLDER = "/data/wolf";
         #XDG_RUNTIME_DIR = "/mnt/state/wolf/sockets";
         #WOLF_CFG_FILE = "/mnt/state/wolf/cfg/config.toml";
         #WOLF_PRIVATE_KEY_FILE = "/mnt/state/wolf/cfg/key.pem";
