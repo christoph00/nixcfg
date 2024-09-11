@@ -63,7 +63,7 @@ in
     virtualisation.docker.enable = true;
     virtualisation.oci-containers.containers.wolf = {
       autoStart = true;
-      image = "ghcr.io/games-on-whales/wolf:latest";
+      image = "ghcr.io/games-on-whales/wolf:stable";
       volumes = [
         "/dev/input:/dev/input:rw"
         "/run/udev:/run/udev:rw"
