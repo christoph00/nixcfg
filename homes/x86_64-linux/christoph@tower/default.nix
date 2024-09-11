@@ -21,9 +21,7 @@
 }:
 
 {
-  profiles.internal.desktop.enable = false;
-  profiles.internal.gaming.enable = false;
-  profiles.internal.desktop.headless.enable = false;
+
 
   home.stateVersion = "24.05";
 }

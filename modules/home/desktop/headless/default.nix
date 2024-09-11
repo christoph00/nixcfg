@@ -58,25 +58,5 @@ in
     home.packages = [
       pkgs.wlr-randr
     ];
-
-    wayland.windowManager.sway = {
-      enable = true;
-      systemd.enable = true;
-      wrapperFeatures.gtk = true;
-      startup = [
-        {
-          command = "${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --off --output HEADLESS-1 --custom-mode 1920x1080@60";
-        }
-
-        { command = "${pkgs.sunshine}/bin/sunshine"; }
-      ];
-
-      config = {
-        output.HEADLESS-1 = {
-          mode = "1920x1080@60";
-          pos = "0 0";
-        };
-      };
-    };
   };
 }
