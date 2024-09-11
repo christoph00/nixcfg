@@ -37,15 +37,6 @@ in
 
   config = mkIf cfg.enable {
 
-  security.rtkit.enable = true;
-  services.pipewire = {
-  enable = true;
-  alsa.enable = true;
-  alsa.support32Bit = true;
-  pulse.enable = true;
-  # If you want to use JACK applications, uncomment this
-  #jack.enable = true;
-};
 
     users.users = {
       wolf = {
@@ -77,18 +68,18 @@ in
       volumes = [
         "/dev/input:/dev/input:rw"
         "/run/udev:/run/udev:rw"
-        "/mnt/state/wolf:/data/wolf:rw"
+        "/mnt/state/wolf:/mnt/state/wolf:rw"
         # TODO: Restore when podman works.
         # "/run/podman/podman.sock:/run/podman/podman.sock:rw"
         "/var/run/docker.sock:/var/run/docker.sock"
       ];
       environment = {
         WOLF_LOG_LEVEL = "INFO";
-        HOST_APPS_STATE_FOLDER = "/data/wolf";
+        HOST_APPS_STATE_FOLDER = "/mnt/state/wolf";
         XDG_RUNTIME_DIR = "/tmp/sockets";
-        WOLF_CFG_FILE = "/data/wolf/cfg/config.toml";
-        WOLF_PRIVATE_KEY_FILE = "/data/wolf/cfg/key.pem";
-        WOLF_PRIVATE_CERT_FILE = "/data/wolf/cfg/cert.pem";
+        WOLF_CFG_FILE = "/mnt/state/wolf/cfg/config.toml";
+        WOLF_PRIVATE_KEY_FILE = "/mnt/state/wolf/cfg/key.pem";
+        WOLF_PRIVATE_CERT_FILE = "/mnt/state/wolf/cfg/cert.pem";
         # TODO: Restore when Podman works
         # WOLF_DOCKER_SOCKET = "/run/podman/podman.sock";
         WOLF_DOCKER_SOCKET = "/var/run/docker.sock";
