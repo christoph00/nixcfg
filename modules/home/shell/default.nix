@@ -33,6 +33,7 @@ in
       pkgs.uv
       pkgs.direnv
       pkgs.devenv
+      pkgs.nixd
     ];
     programs.starship = {
       enable = true;
