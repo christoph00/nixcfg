@@ -37,41 +37,42 @@ in
   };
 
   config = mkIf cfg.enable {
-    chaotic.steam.extraCompatPackages = with pkgs; [
-      proton-ge-custom
-    ];
 
     environment.systemPackages = [
       pkgs.heroic
     ];
 
-    programs.steam = {
-      enable = true;
-      gamescopeSession = {
-        enable = true; # Gamescope session is better for AAA gaming.
-        args = [
-          "--immediate-flips"
-          "--"
-          "bigsteam"
-        ];
+    programs = {
+      steam = {
+        enable = true;
+        package = pkgs.steam.override {
+          extraLibraries =
+            pkgs: with pkgs; [
+              xz
+              openssl
+            ];
+        };
       };
-    };
-    programs.gamescope = {
-      enable = true;
-      capSysNice = false; # capSysNice freezes gamescopeSession for me.
-      args = [ ];
-      env = lib.mkForce {
-        # I set DXVK_HDR in the alternative-sessions script.
-        ENABLE_GAMESCOPE_WSI = "1";
+      gamescope = {
+        enable = true;
+        # capSysNice = true;
+        package = pkgs.gamescope_git;
       };
-      package = pkgs.gamescope_git;
+
+      gamemode.enable = true;
     };
+
+    chaotic.steam.extraCompatPackages = with pkgs; [
+      luxtorpeda
+      proton-ge-custom
+      steamtinkerlaunch
+    ];
 
     ## DP-2 = Monitor  HDMI-A-1 = Dummy
     services.sunshine = mkIf cfg.enableStreaming {
       enable = true;
       autoStart = false;
-      capSysAdmin = true;
+      capSysAdmin = false;
       openFirewall = true;
       settings = {
         min_log_level = "info";
@@ -115,20 +116,20 @@ in
           [
             {
               name = "Desktop";
-              prep-cmd = [ prep ];
+              #prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "cinnamon-virtual-keyboard"; };
             }
 
             {
               name = "Steam Big Picture";
               cmd = "${steam} -gamepadui";
-              prep-cmd = [ prep ];
+              #prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "steamlink"; };
             }
             {
               name = "Steam (Regular UI)";
               cmd = "${steam}";
-              prep-cmd = [ prep ];
+              #prep-cmd = [ prep ];
               image-path = mk-icon { icon-name = "steam"; };
             }
           ];

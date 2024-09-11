@@ -116,6 +116,8 @@
         impermanence.nixosModules.impermanence
         lanzaboote.nixosModules.lanzaboote
         home-manager.nixosModules.home-manager
+
+        jovian.nixosModules.default
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };

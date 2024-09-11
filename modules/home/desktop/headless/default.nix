@@ -71,27 +71,17 @@ in
         # TODO export XDG_SESSION_DESKTOP="''${XDG_SESSION_DESKTOP:-sway}"
       '';
       extraConfig = ''
-        exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-        exec hash dbus-update-activation-environment 2>/dev/null && \
-          dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+                        exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+                        exec hash dbus-update-activation-environment 2>/dev/null && \
+                          dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
-        # create virtual output on boot for sunshine host
+                	exec output HDMI-A-1 disable
 
-        exec swaymsg create_output HEADLESS-1
-        exec swaymsg output HEADLESS-1 resolution 1920x1080
-	exec output HDMI-A-1 disable
-
-        exec ${pkgs.sunshine}/bin/sunshine
+                        exec ${pkgs.sunshine}/bin/sunshine
+        		
 
       '';
       config = {
-        modifier = "Mod4";
-        menu = "wofi --show run";
-        bars = [
-          {
-            command = "waybar";
-          }
-        ];
         output.Headless-1 = {
           mode = "1920x1080";
           pos = "0 0";
