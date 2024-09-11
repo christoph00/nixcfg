@@ -53,40 +53,63 @@ in
   config = mkIf cfg.enable {
 
     home.packages = [
-      pkgs.wayvnc
       pkgs.wlr-randr
     ];
 
-    xdg.configFile."wayvnc/config".text = ''
-      port=${toString cfg.vnc.port}
-    '';
+    wayland.windowManager.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+      extraSessionCommands = ''
+        # https://github.com/flameshot-org/flameshot/blob/master/docs/Sway%20and%20wlroots%20support.md#basic-steps
+        export SDL_VIDEODRIVER=wayland
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export QT_QPA_PLATFORM=wayland
+        export XDG_SESSION_DESKTOP=sway
+        # TODO export XDG_SESSION_DESKTOP="''${XDG_SESSION_DESKTOP:-sway}"
+      '';
+      extraConfig = ''
+        exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+        exec hash dbus-update-activation-environment 2>/dev/null && \
+          dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
+        # create virtual output on boot for sunshine host
+        exec swaymsg create_output HEADLESS-1
+        exec swaymsg output HEADLESS-1 resolution 1920x1080
 
+        exec ${pkgs.sunshine}/bin/sunshine
 
+        exec ${getExe pkgs.bash} -c "while true; do ${getExe pkgs.gamescope} -f -W 1920 -H 1080 -r 60 -- ${
+          getExe inputs.jovian.legacyPackages.${pkgs.system}.gamescope-session
+        }; done"
 
+      '';
+      config = {
+        modifier = "Mod4";
+        menu = "wofi --show run";
+        bars = [
+          {
+            command = "waybar";
+          }
+        ];
+        output.Headless-1 = {
+          mode = "1920x1080";
+          pos = "0 0";
+        };
+        keybindings =
+          let
+            modifier = "Alt";
+          in
+          lib.mkOptionDefault {
+            # Desktop Utilities
+            "${modifier}+c" = "exec ${pkgs.clipman}/bin/clipman pick -t wofi";
+            #"${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
+            "${modifier}+Shift+s" = "exec ${pkgs.flameshot}/bin/flameshot gui";
 
-    systemd.user.services.wayvnc = {
-      Unit = {
-        Description = "a VNC server for wlroots based Wayland compositors";
-        After = [ "graphical-session-pre.target" ];
-        # PartOf = [ "graphical-session.target" ];
+            # Main app shortcuts
+            "${modifier}+Shift+w" = "exec ${pkgs.zen-browser}/bin/zen-browser";
+            "${modifier}+Shift+v" = "exec ${pkgs.pavucontrol}/bin/pavucontrol";
+          };
       };
-
-      Service = {
-        Restart = "on-failure";
-        ExecStart = ''
-          ${pkgs.wayvnc}/bin/wayvnc -g \
-                    -f ${
-                      assert asserts.assertMsg (cfg.vnc.maxFps > 0) "Rate limit for WayVNC must be a positive integer!";
-                      toString cfg.vnc.maxFps
-                    } \
-                    ${cfg.vnc.addr}
-        '';
-      };
-
-      # Install = {
-      #   WantedBy = [ "graphical-session.target" ];
-      # };
     };
 
     systemd.user.services.headless-desktop = {
@@ -100,10 +123,8 @@ in
         (lib.mkIf cfg.autorun "default.target")
       ];
 
-      #environment.PATH = lib.mkForce null;
       Service = {
         Type = "simple";
-        #ExecStartPre =  "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP; systemctl --user import-environment";
         ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec ${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire'";
 
       };

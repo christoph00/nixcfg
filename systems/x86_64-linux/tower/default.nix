@@ -22,7 +22,7 @@
 
   hardware.graphics = {
     enable32Bit = true;
-};
+  };
 
   hardware.amdgpu = {
     amdvlk = {
@@ -67,7 +67,6 @@
       "nvme"
     ];
   };
-
 
   system.stateVersion = "24.05";
 }
