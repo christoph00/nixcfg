@@ -4,6 +4,7 @@
   lib,
   pkgs,
   namespace,
+  inputs,
   ...
 }:
 let
@@ -16,7 +17,9 @@ let
     mkOption
     optional
     asserts
+    getExe
     ;
+
   inherit (lib.internal) mkBoolOpt;
   cfg = config.profiles.internal.desktop.headless;
 
@@ -78,10 +81,6 @@ in
 
         exec ${pkgs.sunshine}/bin/sunshine
 
-        exec ${getExe pkgs.bash} -c "while true; do ${getExe pkgs.gamescope} -f -W 1920 -H 1080 -r 60 -- ${
-          getExe inputs.jovian.legacyPackages.${pkgs.system}.gamescope-session
-        }; done"
-
       '';
       config = {
         modifier = "Mod4";
@@ -125,7 +124,7 @@ in
 
       Service = {
         Type = "simple";
-        ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec ${config.profiles.internal.desktop.wayfire.finalPackage}/bin/wayfire'";
+        ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec sway'";
 
       };
 
