@@ -61,18 +61,9 @@ in
       port=${toString cfg.vnc.port}
     '';
 
-    profiles.internal.desktop.wayfire.settings = {
-      plugins = [
-        {
-          plugin = "output:HEADLESS-1";
-          settings.mode = "1920x1080@60000";
-        }
-        {
-          plugin = "output:HDMI-A-1";
-          settings.mode = "off";
-        }
-      ];
-    };
+
+
+
 
     systemd.user.services.wayvnc = {
       Unit = {
