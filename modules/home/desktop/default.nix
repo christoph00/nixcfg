@@ -30,6 +30,12 @@ in
   config = mkIf cfg.enable {
     fonts.fontconfig.enable = true;
 
+    home.packages = [
+      pkgs.ironbar
+      pkgs.anyrun
+      pkgs.xwayland
+    ];
+
     profiles.internal.desktop.wayfire = {
       enable = true;
       settings = {
@@ -91,8 +97,8 @@ in
               dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
               start_session = "systemctl --user start wayfire-session.target";
               #wf_panel = "${wf}/bin/wf-panel";
-              ironbar = "${pkgs.ironbar}/bin/ironbar";
-              background = "${wf}/bin/wf-background";
+              #ironbar = "${pkgs.ironbar}/bin/ironbar";
+              #background = "${wf}/bin/wf-background";
               #env = "systemctl --user import-environment";
             };
           }
