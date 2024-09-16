@@ -91,6 +91,9 @@ in
           }
           { plugin = "foreign-toplevel"; }
           { plugin = "gtk-shell"; }
+          { plugin = "xdg-activation"; }
+          { plugin = "session-lock"; }
+          { plugin = "input-method-v1"; }
           {
             plugin = "autostart";
             settings = {
@@ -102,6 +105,7 @@ in
               #env = "systemctl --user import-environment";
             };
           }
+          { plugin = "wayfire-shell"; }
           {
             plugin = "wf-shell";
             package = pkgs.wayfirePlugins.wf-shell;
