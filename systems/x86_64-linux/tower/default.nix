@@ -15,7 +15,7 @@
   internal.type = "server";
   internal.isV3 = true;
   internal.system.boot.secureBoot = true;
-  internal.graphical.desktop.headless = true;
+  internal.graphical.desktop.headless.enable = true;
 
   environment.systemPackages = [ pkgs.amdgpu_top ];
 
