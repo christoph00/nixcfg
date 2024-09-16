@@ -16,6 +16,7 @@
   internal.isV3 = true;
   internal.system.boot.secureBoot = true;
   internal.services.wolf.enable = true;
+  internal.graphical.gaming.enableStreaming = true;
 
   environment.systemPackages = [ pkgs.amdgpu_top ];
 
