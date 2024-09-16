@@ -48,7 +48,7 @@ in
     '';
 
     environment.sessionVariables = {
-      WLR_BACKENDS = "drm,headless,libinput";
+      WLR_BACKENDS = "headless,libinput";
       NIXOS_OZONE_WL = "1";
       WAYLAND_DISPLAY = "wayland-1";
       #WLR_LIBINPUT_NO_DEVICES = "1";
