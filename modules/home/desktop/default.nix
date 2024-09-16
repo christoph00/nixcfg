@@ -42,6 +42,14 @@ in
         preferred_decoration_mode = "client";
         plugins = [
           {
+            plugin = "command";
+            settings = {
+              command_menu = "${pkgs.anyrun}/bin/anyrun";
+              binding_menu = "<super> KEY_R";
+            };
+
+          }
+          {
             plugin = "input";
             settings.xkb_layout = "de";
           }
@@ -57,6 +65,10 @@ in
             plugin = "resize";
             settings.activate = "<super> BTN_RIGHT";
           }
+          {
+            plugin = "ipc";
+          }
+          { plugin = "ipc-rules"; }
           {
             plugin = "grid";
             settings = {
@@ -78,7 +90,8 @@ in
             settings = {
               dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
               start_session = "systemctl --user start wayfire-session.target";
-              wf_panel = "${wf}/bin/wf-panel";
+              #wf_panel = "${wf}/bin/wf-panel";
+              ironbar = "${pkgs.ironbar}/bin/ironbar";
               background = "${wf}/bin/wf-background";
               #env = "systemctl --user import-environment";
             };
@@ -87,6 +100,8 @@ in
             plugin = "wf-shell";
             package = pkgs.wayfirePlugins.wf-shell;
           }
+          { plugin = "alpha"; }
+          { plugin = "animate"; }
           {
             package = pkgs.wayfirePlugins.firedecor;
             plugin = "firedecor";
