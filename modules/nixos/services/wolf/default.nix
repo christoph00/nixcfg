@@ -37,7 +37,6 @@ in
 
   config = mkIf cfg.enable {
 
-
     users.users = {
       wolf = {
         isNormalUser = true;
