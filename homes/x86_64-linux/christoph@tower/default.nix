@@ -21,6 +21,6 @@
 }:
 
 {
-
+  profiles.internal.desktop.headless.enable = true;
   home.stateVersion = "24.05";
 }
