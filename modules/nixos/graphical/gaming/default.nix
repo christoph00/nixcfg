@@ -40,6 +40,7 @@ in
 
     environment.systemPackages = [
       pkgs.heroic
+      pkgs.sunshine
     ];
 
     programs = {
