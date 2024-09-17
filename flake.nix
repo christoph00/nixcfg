@@ -79,6 +79,11 @@
     zen-browser.url = "github:MarceColl/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
+    ironbar = {
+      url = "github:JakeStanger/ironbar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -107,6 +112,8 @@
 
       homes.modules = with inputs; [
         vscode-server.homeModules.default
+        ironbar.homeManagerModules.default
+
       ];
 
       systems.modules.nixos = with inputs; [

@@ -31,9 +31,10 @@ in
     fonts.fontconfig.enable = true;
 
     home.packages = [
-      pkgs.waybar
+      pkgs.ironbar
       pkgs.anyrun
       pkgs.xwayland
+      pkgs.wayfirePlugins.wcm
     ];
 
     profiles.internal.desktop.wayfire = {
