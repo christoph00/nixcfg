@@ -41,43 +41,25 @@ in
     };
 
     programs.tmux = {
-    enable = true;
+      enable = true;
 
-    terminal = "screen-256color";
+      prefix = "C-Space";
+      shortcut = "Space";
 
-    prefix = "C-Space";
-    shortcut = "Space";
+      newSession = true;
+      baseIndex = 1;
+      historyLimit = 100000;
+      aggressiveResize = true;
 
+      mouse = true;
+      terminal = "screen-256color";
 
-    newSession = true;
-    baseIndex = 1;
-    historyLimit = 100000;
-    aggressiveResize = true;
+      sensibleOnTop = true;
+      plugins = with pkgs.tmuxPlugins; [
+        vim-tmux-navigator
+      ];
 
-    sensibleOnTop = true;
-    plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator
-    ];
-
-    extraConfig = ''
-      # Enable mouse mode
-      set -g mouse on
-       # Use Alt-arrow keys WITHOUT PREFIX KEY to switch panes
-      bind -n M-Left select-pane -L
-      bind -n M-Right select-pane -R
-      bind -n M-Up select-pane -U
-      bind -n M-Down select-pane -D
-      bind -n S-Left previous-window
-      bind -n S-Right next-window
-      bind -n C-T new-window
-
-      #-------------------------------------------------------#
-      # Set window name to folder name
-      set-option -g status-interval 5
-      set-option -g automatic-rename on
-      set-option -g automatic-rename-format '#{b:pane_current_path}'
-    '';
-      };
+    };
 
     programs.direnv.enable = true;
 
