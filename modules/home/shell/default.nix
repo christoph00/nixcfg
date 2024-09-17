@@ -52,7 +52,7 @@ in
       aggressiveResize = true;
 
       mouse = true;
-      terminal = "screen-256color";
+      terminal = "xterm-256color";
 
       sensibleOnTop = true;
       plugins = with pkgs.tmuxPlugins; [
@@ -60,6 +60,9 @@ in
       ];
 
     };
+
+    programs.zellij.enableBashIntegration = true;
+    programs.zellij.enable = true;
 
     programs.direnv.enable = true;
 
