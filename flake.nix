@@ -78,6 +78,8 @@
     };
     zen-browser.url = "github:MarceColl/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
   outputs =
@@ -118,6 +120,8 @@
         home-manager.nixosModules.home-manager
 
         jovian.nixosModules.default
+
+        vscode-server.nixosModules.default
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };

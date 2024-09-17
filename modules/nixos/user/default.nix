@@ -52,6 +52,9 @@ in
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAHqEQOgEdi3e8uPWqE2nqzyiKC9Y792C5tNKco6lz4o christoph@tower"
       ];
 
+      users.extraUsers."${cfg.name}".linger = mkDefault true;
+
+
       extraGroups = [
         "wheel"
         "audio"
