@@ -173,7 +173,121 @@ in
 
       xdg.configFile."wayfire.ini".text = generators.toINI { } settings;
 
-    
+      programs.ironbar = {
+        enable = true;
+        systemd = false; # not support niri
+        config = {
+          anchor_to_edges = true;
+          position = "bottom";
+          icon_theme = "Paper";
+          start = [
+            {
+              type = "launcher";
+              favorites = [
+                 "zen-browser",
+                # "vscodium",
+                # "wezterm",
+              ];
+              show_names = false;
+              show_icons = true;
+            }
+            {
+              type = "focused";
+            }
+          ];
+          end = [
+ 
+            {
+              type = "sys_info";
+              format = [
+                # " {cpu_percent}% | {temp_c:k10temp_Tccd1}°C"
+                " {memory_used}/{memory_total} GB ({memory_percent}%)"
+                # "| {swap_used} / {swap_total} GB ({swap_percent}%)"
+                # "󰋊 {disk_used:/nix}/{disk_total:/nix} GB ({disk_percent:/nix}%)"
+                "󰓢 {net_up:enp3s0}/{net_down:enp3s0} Mbps"
+                "󰖡 {load_average:5}"
+                # "󰥔 {uptime}"
+              ];
+              interval = {
+                memory = 30;
+                cpu = 1;
+                temps = 5;
+                disks = 300;
+                networks = 3;
+              };
+            }
+            {
+              type = "volume";
+              format = "{icon} {percentage}%";
+              max_volume = 100;
+              icons = {
+                volume_high = "󰕾";
+                volume_medium = "󰖀";
+                volume_low = "󰕿";
+                muted = "󰝟";
+              };
+            }
+            {
+              type = "clipboard";
+              max_items = 5;
+              truncate = {
+                mode = "end";
+                length = 50;
+              };
+            }
+            {
+              "type" = "custom";
+              "class" = "power-menu";
+              "bar" = [
+                {
+                  "type" = "button";
+                  "name" = "power-btn";
+                  "label" = "";
+                  "on_click" = "popup:toggle";
+                }
+              ];
+              "popup" = [
+                {
+                  "type" = "box";
+                  "orientation" = "vertical";
+                  "widgets" = [
+                    {
+                      "type" = "label";
+                      "name" = "header";
+                      "label" = "Power menu";
+                    }
+                    {
+                      "type" = "box";
+                      "widgets" = [
+                        {
+                          "type" = "button";
+                          "class" = "power-btn";
+                          "label" = "<span font-size='40pt'></span>";
+                          "on_click" = "!shutdown now";
+                        }
+                        {
+                          "type" = "button";
+                          "class" = "power-btn";
+                          "label" = "<span font-size='40pt'></span>";
+                          "on_click" = "!reboot";
+                        }
+                      ];
+                    }
+
+                  ];
+                }
+              ];
+            }
+            {
+              type = "clock";
+              format = "%H:%M";
+            }
+          ];
+        };
+        style = "";
+        package = pkgs.ironbar;
+      };
+
       systemd.user.targets.wayfire-session = {
         Unit = {
           Description = "compositor session";
