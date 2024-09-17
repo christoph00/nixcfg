@@ -40,18 +40,21 @@ in
     #services.displayManager.sddm.enable = true;
     #services.displayManager.sddm.wayland.enable = true;
 
-    services.greetd = {
-      enable = true;
-      settings = {
-        vt = 2; # The virtual console (tty) that greetd should use.
+    services.displayManager.cosmic-greeter.enable = true;
 
-        default_session.command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd wayfire'';
-        initial_session = {
-          command = "wayfire";
-          user = "christoph";
-        };
-      };
-    };
+
+    # services.greetd = {
+    #   enable = true;
+    #   settings = {
+    #     vt = 2; # The virtual console (tty) that greetd should use.
+
+    #     default_session.command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd wayfire'';
+    #     initial_session = {
+    #       command = "wayfire";
+    #       user = "christoph";
+    #     };
+    #   };
+    # };
 
   };
 

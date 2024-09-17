@@ -72,10 +72,12 @@ in
             plugin = "resize";
             settings.activate = "<super> BTN_RIGHT";
           }
+          { plugin ="workarounds"; settings.app_id_mode = "gtk-shell";}
           {
             plugin = "ipc";
           }
           { plugin = "ipc-rules"; }
+          {plugin ="fast-switcher";}
           {
             plugin = "grid";
             settings = {
