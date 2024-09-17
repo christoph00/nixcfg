@@ -43,6 +43,11 @@ in
     services.displayManager.cosmic-greeter.enable = true;
 
 
+  environment.etc."greetd/environments".text = ''
+    wayfire >/dev/null
+    bash
+  '';
+
     # services.greetd = {
     #   enable = true;
     #   settings = {

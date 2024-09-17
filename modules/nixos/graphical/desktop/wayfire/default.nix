@@ -36,6 +36,8 @@ in
 
   config = mkIf cfg.enable {
 
+    services.displayManager.sessionPackages = [ pkgs.internal.wayfire-session ];
+
     xdg.portal = {
       enable = lib.mkDefault true;
       wlr.enable = lib.mkDefault true;
