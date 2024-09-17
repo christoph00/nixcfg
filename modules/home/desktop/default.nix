@@ -101,16 +101,21 @@ in
               dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
               start_session = "systemctl --user start wayfire-session.target";
               #wf_panel = "${wf}/bin/wf-panel";
-              ironbar = "${pkgs.ironbar}/bin/ironbar";
+              #ironbar = "${pkgs.ironbar}/bin/ironbar";
               #background = "${wf}/bin/wf-background";
               #env = "systemctl --user import-environment";
             };
           }
+          { plugin = "blur"; }
+          {
+            plugins = "expo";
+            settings.toggle = "<super> KEY_E";
+          }
           { plugin = "wayfire-shell"; }
-          # {
-          #   plugin = "wf-shell";
-          #   package = pkgs.wayfirePlugins.wf-shell;
-          # }
+          {
+            plugin = "wf-shell";
+            package = pkgs.wayfirePlugins.wf-shell;
+          }
           { plugin = "alpha"; }
           { plugin = "animate"; }
           {
