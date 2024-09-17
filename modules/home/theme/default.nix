@@ -31,7 +31,7 @@ let
   };
 
   theme = {
-    name = "adw-gtk3-light";
+    name = "adw-gtk3";
     package = pkgs.adw-gtk3;
   };
   font = {
@@ -44,10 +44,10 @@ let
     size = 24;
     package = pkgs.qogir-icon-theme;
   };
-  iconTheme = {
-    name = "Paper";
-    package = pkgs.paper-icon-theme;
-  };
+   iconTheme = {
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
+    };
 in
 {
   options.profiles.internal.theme = with types; {
@@ -64,6 +64,7 @@ in
         iconTheme.package
         adwaita-icon-theme
         papirus-icon-theme
+        paper-icon-theme
       ];
       sessionVariables = {
         XCURSOR_THEME = cursorTheme.name;
