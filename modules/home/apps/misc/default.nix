@@ -12,15 +12,31 @@ let
     mkIf
     ;
   inherit (lib.internal) mkBoolOpt;
-  cfg = config.profiles.internal.apps.moonlight;
+  cfg = config.profiles.internal.apps.misc;
 in
 {
-  options.profiles.internal.apps.moonlight = with types; {
-    enable = mkBoolOpt config.profiles.internal.desktop.enable "Enable App Moonlight";
+  options.profiles.internal.apps.misc = with types; {
+    enable = mkBoolOpt config.profiles.internal.desktop.enable "Enable Misc Apps";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.moonlight-qt ];
+    home.packages = with pkgs; [
+      nautilus
+      sushi
+      nautilus-open-any-terminal
+    ];
+
+    programs.foot = {
+      enable = true;
+      server.enable = true;
+      settings = {
+        main = {
+          font = "JetBrainsMono Nerd Font:size=8";
+          term = "foot";
+          dpi-aware = "yes";
+        };
+      };
+    };
   };
 
 }
