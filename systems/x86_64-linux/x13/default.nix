@@ -70,13 +70,12 @@
   services.fstrim.enable = true;
 
   services.upower = {
-      enable = true;
-      percentageLow = 15;
-      percentageCritical = 5;
-      percentageAction = 4;
-      criticalPowerAction = "Hibernate";
-    };
-  
+    enable = true;
+    percentageLow = 15;
+    percentageCritical = 5;
+    percentageAction = 4;
+    criticalPowerAction = "Hibernate";
+  };
 
   hardware.cpu.intel.updateMicrocode = true;
 

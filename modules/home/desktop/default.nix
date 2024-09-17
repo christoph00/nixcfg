@@ -44,17 +44,35 @@ in
         # Workspaces arranged into a grid: 3 × 3.
         vwidth = 3;
         vheight = 3;
-
-        # Prefer client-side decoration or server-side decoration
+        max_render_time = 7;
         preferred_decoration_mode = "client";
+        xwayland = true;
+        background-color = "#000000";
+
         plugins = [
           {
             plugin = "command";
             settings = {
               command_menu = "${pkgs.anyrun}/bin/anyrun";
               binding_menu = "<super> KEY_R";
+
+              command_light_up = "${pkgs.light}/bin/light -A 10";
+              command_light_down = "${pkgs.light}/bin/light  -T 0.7";
+              command_volume_up = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
+              command_volume_down = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
+
+              repeatable_binding_light_down = "KEY_BRIGHTNESSDOWN";
+              repeatable_binding_light_up = "KEY_BRIGHTNESSUP";
+              repeatable_binding_volume_down = "KEY_VOLUMEDOWN";
+              repeatable_binding_volume_up = "KEY_VOLUMEUP";
             };
 
+          }
+          {
+            plugin = "idle";
+            settings = {
+              dpms_timeout = 4000;
+            };
           }
           {
             plugin = "input";
@@ -72,12 +90,19 @@ in
             plugin = "resize";
             settings.activate = "<super> BTN_RIGHT";
           }
-          { plugin ="workarounds"; settings.app_id_mode = "gtk-shell";}
+          {
+            plugin = "workarounds";
+            settings.app_id_mode = "gtk-shell";
+          }
           {
             plugin = "ipc";
           }
           { plugin = "ipc-rules"; }
-          {plugin ="fast-switcher";}
+          {
+            plugin = "fast-switcher";
+            settings.activate = "<super> KEY_TAB";
+          }
+
           {
             plugin = "grid";
             settings = {
@@ -88,10 +113,7 @@ in
               restore = "<super> KEY_DOWN";
             };
           }
-          {
-            plugin = "switcher";
-            settings.next_view = "<super> KEY_TAB";
-          }
+
           { plugin = "foreign-toplevel"; }
           { plugin = "gtk-shell"; }
           { plugin = "xdg-activation"; }
@@ -100,8 +122,16 @@ in
           {
             plugin = "autostart";
             settings = {
-              dbus = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP";
+              activate = ''${pkgs.writeShellScript "import-user-env-to-dbus-systemd" ''
+                if [ -d "/etc/profiles/per-user/$USER/etc/profile.d" ]; then
+                  . "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
+                fi
+                ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd \
+                  XDG_CONFIG_HOME XDG_DATA_HOME XDG_BACKEND DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+              ''}'';
               start_session = "systemctl --user start wayfire-session.target";
+              gammastep = "${pkgs.gammastep}/bin/gammastep -m wayland  -l 52.373920:9.735603";
+              mako = "${pkgs.mako}/bin/mako";
               #wf_panel = "${wf}/bin/wf-panel";
               #ironbar = "${pkgs.ironbar}/bin/ironbar";
               #background = "${wf}/bin/wf-background";

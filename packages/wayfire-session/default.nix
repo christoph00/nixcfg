@@ -1,4 +1,9 @@
-{ lib, stdenv, pkgs, ... }:
+{
+  lib,
+  stdenv,
+  pkgs,
+  ...
+}:
 let
   wayfire = ''
     [Desktop Entry]
@@ -7,7 +12,8 @@ let
     Exec=wayfire
     Type=Application
   '';
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   name = "wayfire-session";
 
   dontUnpack = true;

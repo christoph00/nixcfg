@@ -44,10 +44,10 @@ let
     size = 24;
     package = pkgs.qogir-icon-theme;
   };
-   iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
-    };
+  iconTheme = {
+    name = "WhiteSur-Light";
+    package = pkgs.whitesur-icon-theme;
+  };
 in
 {
   options.profiles.internal.theme = with types; {
@@ -65,10 +65,12 @@ in
         adwaita-icon-theme
         papirus-icon-theme
         paper-icon-theme
+        whitesur-icon-theme
       ];
       sessionVariables = {
         XCURSOR_THEME = cursorTheme.name;
         XCURSOR_SIZE = "${toString cursorTheme.size}";
+        GTK_THEME = theme.name;
       };
       pointerCursor = cursorTheme // {
         gtk.enable = true;
