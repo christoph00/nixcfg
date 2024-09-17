@@ -55,6 +55,9 @@ in
               command_menu = "${pkgs.anyrun}/bin/anyrun";
               binding_menu = "<super> KEY_R";
 
+              command_terminal = "${pkgs.foot}/bin/footclient";
+              binding_terminal = "<super> KEY_RETURN";
+
               command_light_up = "${pkgs.light}/bin/light -A 10";
               command_light_down = "${pkgs.light}/bin/light  -T 0.7";
               command_volume_up = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
