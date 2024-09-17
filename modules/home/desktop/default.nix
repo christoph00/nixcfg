@@ -108,7 +108,7 @@ in
           }
           { plugin = "blur"; }
           {
-            plugins = "expo";
+            plugin = "expo";
             settings.toggle = "<super> KEY_E";
           }
           { plugin = "wayfire-shell"; }
