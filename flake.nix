@@ -106,7 +106,7 @@
       ];
 
       homes.modules = with inputs; [
-        vcode-server.homeModules.default
+        vscode-server.homeModules.default
       ];
 
       systems.modules.nixos = with inputs; [
