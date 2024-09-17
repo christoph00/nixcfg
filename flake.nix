@@ -126,7 +126,6 @@
 
         jovian.nixosModules.default
 
-      
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
