@@ -27,6 +27,9 @@ let
       "FantasqueSansMono"
       "FiraCode"
       "Mononoki"
+      "IBMPlexMono"
+      "Iosevka"
+      "JetBrainsMono"
     ];
   };
 
