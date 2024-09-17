@@ -129,9 +129,24 @@ in
                 ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd \
                   XDG_CONFIG_HOME XDG_DATA_HOME XDG_BACKEND DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
               ''}'';
+
               start_session = "systemctl --user start wayfire-session.target";
               gammastep = "${pkgs.gammastep}/bin/gammastep -m wayland  -l 52.373920:9.735603";
               mako = "${pkgs.mako}/bin/mako";
+
+              configure_gtk =
+                let
+                  schema = pkgs.gsettings-desktop-schemas;
+                  datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+                in
+                ''${pkgs.writeShellScript "configure-gtk" ''
+                    export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+                      gnome_schema=org.gnome.desktop.interface
+                      ${pkgs.glib}/bin/gsettings set $gnome_schema gtk-theme '${config.gtk.theme.name}'
+                      ${pkgs.glib}/bin/gsettings set $gnome_schema icon-theme '${config.gtk.iconTheme.name}'
+                      ${pkgs.glib}/bin/gsettings set $gnome_schema cursor-theme '${config.gtk.cursorTheme.name}'
+                  ''}'';
+
               #wf_panel = "${wf}/bin/wf-panel";
               #ironbar = "${pkgs.ironbar}/bin/ironbar";
               #background = "${wf}/bin/wf-background";

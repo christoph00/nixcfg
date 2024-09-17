@@ -45,8 +45,8 @@ let
     package = pkgs.qogir-icon-theme;
   };
   iconTheme = {
-    name = "WhiteSur-Light";
-    package = pkgs.whitesur-icon-theme;
+    name = "Papirus";
+    package = pkgs.papirus-icon-theme;
   };
 in
 {
@@ -66,6 +66,7 @@ in
         papirus-icon-theme
         paper-icon-theme
         whitesur-icon-theme
+        gnome.gnome-tweaks
       ];
       sessionVariables = {
         XCURSOR_THEME = cursorTheme.name;
