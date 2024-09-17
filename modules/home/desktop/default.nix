@@ -31,7 +31,7 @@ in
     fonts.fontconfig.enable = true;
 
     home.packages = [
-      pkgs.ironbar
+      pkgs.waybar
       pkgs.anyrun
       pkgs.xwayland
     ];
@@ -106,10 +106,10 @@ in
             };
           }
           { plugin = "wayfire-shell"; }
-          {
-            plugin = "wf-shell";
-            package = pkgs.wayfirePlugins.wf-shell;
-          }
+          # {
+          #   plugin = "wf-shell";
+          #   package = pkgs.wayfirePlugins.wf-shell;
+          # }
           { plugin = "alpha"; }
           { plugin = "animate"; }
           {
