@@ -105,6 +105,10 @@
         chaotic.overlays.default
       ];
 
+      homes.modules = with inputs; [
+        code-server.homeModules.default
+      ];
+
       systems.modules.nixos = with inputs; [
         srvos.nixosModules.common
         srvos.nixosModules.mixins-nix-experimental
@@ -122,7 +126,7 @@
 
         jovian.nixosModules.default
 
-        vscode-server.nixosModules.default
+      
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
