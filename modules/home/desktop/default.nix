@@ -58,8 +58,8 @@ in
               command_terminal = "${pkgs.foot}/bin/footclient";
               binding_terminal = "<super> KEY_RETURN";
 
-              command_light_up = "${pkgs.light}/bin/light -A 10";
-              command_light_down = "${pkgs.light}/bin/light  -T 0.7";
+              command_light_up = "${pkgs.brightnessctl}/bin/brightnessctl set +5%";
+              command_light_down = "${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
               command_volume_up = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
               command_volume_down = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
 
