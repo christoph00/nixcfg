@@ -40,7 +40,7 @@ in
       enableBashIntegration = true;
     };
 
-     programs.tmux = {
+    programs.tmux = {
     enable = true;
 
     terminal = "screen-256color";
@@ -48,13 +48,11 @@ in
     prefix = "C-Space";
     shortcut = "Space";
 
-    shell = "${pkgs.zsh}/bin/zsh";
 
     newSession = true;
     baseIndex = 1;
     historyLimit = 100000;
     aggressiveResize = true;
-    secureSocket = true;
 
     sensibleOnTop = true;
     plugins = with pkgs.tmuxPlugins; [
