@@ -17,6 +17,9 @@
   internal.system.fs.tmpRoot = true;
   internal.system.boot.encryptedRoot = false;
 
+  services.tinyproxy.enable = true;
+  services.tinyproxy.settings.Listen = "0.0.0.0";
+
   boot.initrd.kernelModules = [
     "ata_piix"
     "uhci_hcd"
