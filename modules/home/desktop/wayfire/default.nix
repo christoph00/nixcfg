@@ -184,9 +184,7 @@ in
             {
               type = "launcher";
               favorites = [
-                 "zen-browser",
-                # "vscodium",
-                # "wezterm",
+                 "zen-browser"
               ];
               show_names = false;
               show_icons = true;
