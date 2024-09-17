@@ -61,7 +61,7 @@ in
       port=${toString cfg.vnc.port}
     '';
 
-     profiles.internal.desktop.wayfire.settings = {
+    profiles.internal.desktop.wayfire.settings = {
       plugins = [
         {
           plugin = "output:HEADLESS-1";
@@ -77,10 +77,6 @@ in
         }
       ];
     };
-
-
-
-
 
     systemd.user.services.wayvnc = {
       Unit = {

@@ -23,6 +23,5 @@
 {
   profiles.internal.services.code-server.enable = true;
 
-
   home.stateVersion = "24.05";
 }

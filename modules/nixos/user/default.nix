@@ -54,7 +54,6 @@ in
 
       linger = mkDefault true;
 
-
       extraGroups = [
         "wheel"
         "audio"
