@@ -15,7 +15,7 @@ let
   cfg = config.profiles.internal.apps.misc;
 in
 {
-  options.profiles.internal.apps.moonlight = with types; {
+  options.profiles.internal.apps.misc = with types; {
     enable = mkBoolOpt config.profiles.internal.desktop.enable "Enable Misc Apps";
   };
 
@@ -25,6 +25,6 @@ in
       sushi
       nautilus-open-any-terminal
     ];
-
+  };
 
 }
