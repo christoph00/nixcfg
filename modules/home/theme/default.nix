@@ -45,8 +45,8 @@ let
     package = pkgs.qogir-icon-theme;
   };
   iconTheme = {
-    name = "MoreWaita";
-    package = pkgs.morewaita-icon-theme;
+    name = "Paper";
+    package = pkgs.paper-icon-theme;
   };
 in
 {
