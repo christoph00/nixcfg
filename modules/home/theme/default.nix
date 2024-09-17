@@ -70,6 +70,7 @@ in
         paper-icon-theme
         whitesur-icon-theme
         gnome.gnome-tweaks
+        fontpreview
       ];
       sessionVariables = {
         XCURSOR_THEME = cursorTheme.name;

@@ -12,19 +12,15 @@ let
     mkIf
     ;
   inherit (lib.internal) mkBoolOpt;
-  cfg = config.profiles.internal.apps.misc;
+  cfg = config.profiles.internal.apps.moonlight;
 in
 {
-  options.profiles.internal.apps.misc = with types; {
-    enable = mkBoolOpt config.profiles.internal.desktop.enable "Enable Misc Apps";
+  options.profiles.internal.apps.moonlight = with types; {
+    enable = mkBoolOpt config.profiles.internal.desktop.enable "Enable App Moonlight";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      nautilus
-      sushi
-      nautilus-open-any-terminal
-    ];
+    home.packages = [ pkgs.moonlight-qt ];
   };
 
 }
