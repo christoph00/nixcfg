@@ -49,6 +49,8 @@ with lib.internal;
       wlroots
     ];
 
+    gtk.iconCache.enable = true;
+
     environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
@@ -56,7 +58,7 @@ with lib.internal;
 
     programs.dconf.enable = true;
 
-    services.dbus.implementation = "broker";
+    #services.dbus.implementation = "broker";
 
     services.dbus.enable = true;
 
