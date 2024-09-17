@@ -46,14 +46,14 @@ tooltip label{
   color: @content_main;
 }
 
-#custom-os_button {
+#custom-launcher {
 	font-family: "JetBrainsMono Nerd Font";
   font-size: 24px;
 	padding-left: 12px;
 	padding-right: 20px;
 	transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-#custom-os_button:hover {
+#custom-launcher:hover {
   background:  @bg_hover;
 	color: @content_main;
 }

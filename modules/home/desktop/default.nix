@@ -31,7 +31,6 @@ in
     fonts.fontconfig.enable = true;
 
     home.packages = [
-      pkgs.ironbar
       pkgs.anyrun
       pkgs.xwayland
       pkgs.wayfirePlugins.wcm
@@ -151,7 +150,8 @@ in
                     ${pkgs.glib}/bin/gsettings set $gnome_schema cursor-theme '${config.gtk.cursorTheme.name}'
                 ''}'';
 
-              wf_panel = "${wf}/bin/wf-panel";
+              waybar = "${config.programs.waybar.package}/bin/waybar";
+              #wf_panel = "${wf}/bin/wf-panel";
               #ironbar = "${pkgs.ironbar}/bin/ironbar";
               #background = "${wf}/bin/wf-background";
               #env = "systemctl --user import-environment";
