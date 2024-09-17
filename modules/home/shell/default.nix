@@ -61,9 +61,6 @@ in
 
     };
 
-    programs.zellij.enableBashIntegration = true;
-    programs.zellij.enable = true;
-
     programs.direnv.enable = true;
 
     programs.bottom = {
