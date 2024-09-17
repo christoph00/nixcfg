@@ -122,6 +122,7 @@ in
           {
             plugin = "autostart";
             settings = {
+              autostart_wf_shell = false;
               activate = ''${pkgs.writeShellScript "import-user-env-to-dbus-systemd" ''
                 if [ -d "/etc/profiles/per-user/$USER/etc/profile.d" ]; then
                   . "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
@@ -134,20 +135,23 @@ in
               gammastep = "${pkgs.gammastep}/bin/gammastep -m wayland  -l 52.373920:9.735603";
               mako = "${pkgs.mako}/bin/mako";
 
+              desktop-portal = "${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal";
+              desktop-portal-wlr = "${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr";
+
               configure_gtk =
                 let
                   schema = pkgs.gsettings-desktop-schemas;
                   datadir = "${schema}/share/gsettings-schemas/${schema.name}";
                 in
                 ''${pkgs.writeShellScript "configure-gtk" ''
-                    export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-                      gnome_schema=org.gnome.desktop.interface
-                      ${pkgs.glib}/bin/gsettings set $gnome_schema gtk-theme '${config.gtk.theme.name}'
-                      ${pkgs.glib}/bin/gsettings set $gnome_schema icon-theme '${config.gtk.iconTheme.name}'
-                      ${pkgs.glib}/bin/gsettings set $gnome_schema cursor-theme '${config.gtk.cursorTheme.name}'
-                  ''}'';
+                  export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+                    gnome_schema=org.gnome.desktop.interface
+                    ${pkgs.glib}/bin/gsettings set $gnome_schema gtk-theme '${config.gtk.theme.name}'
+                    ${pkgs.glib}/bin/gsettings set $gnome_schema icon-theme '${config.gtk.iconTheme.name}'
+                    ${pkgs.glib}/bin/gsettings set $gnome_schema cursor-theme '${config.gtk.cursorTheme.name}'
+                ''}'';
 
-              #wf_panel = "${wf}/bin/wf-panel";
+              wf_panel = "${wf}/bin/wf-panel";
               #ironbar = "${pkgs.ironbar}/bin/ironbar";
               #background = "${wf}/bin/wf-background";
               #env = "systemctl --user import-environment";
