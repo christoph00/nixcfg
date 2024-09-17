@@ -30,6 +30,7 @@ with lib.internal;
   config = mkIf config.internal.isGraphical {
 
     internal.graphical.desktop.wayfire.enable = true;
+    internal.graphical.desktop.cosmic.enable = true;
     hardware.graphics.enable = true;
 
     internal.user.extraGroups = [
