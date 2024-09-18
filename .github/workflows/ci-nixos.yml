@@ -51,6 +51,10 @@ jobs:
         root-reserve-mb: 50192
     - uses: actions/checkout@v4
     - uses: DeterminateSystems/nix-installer-action@v14
+      with:
+        extra-conf: |
+          experimental-features = nix-command flakes
+          extra-platforms = aarch64-linux arm-linux i686-linux
     - uses: DeterminateSystems/flake-checker-action@v4
     - uses: DeterminateSystems/magic-nix-cache-action@v8
     - uses: cachix/cachix-action@v15
