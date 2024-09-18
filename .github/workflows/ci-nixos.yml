@@ -1,0 +1,29 @@
+name: nixos
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ci-nixos.yml'
+      #- '**.nix'
+      - 'flake.*'
+  pull_request:
+    paths:
+      - '.github/workflows/ci-nixos.yml'
+      - '**.nix'
+      - 'flake.*'
+  #schedule:
+    #- cron: '11 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  nixos:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        machine: [tower x13]
+    steps:
+    - uses: actions/checkout@v4
+    - uses: DeterminateSystems/nix-installer-action@v14
+    - uses: DeterminateSystems/flake-checker-action@v4
+    - uses: DeterminateSystems/magic-nix-cache-action@v8
+    - run: nix build '.#nixosConfigurations."${{ matrix.machine }}.nixos.org".config.system.build.toplevel'
