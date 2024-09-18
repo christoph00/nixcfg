@@ -86,6 +86,11 @@
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
+
+    nvimcfg = {
+      url = "github:christoph00/nvimcfg";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -108,6 +113,7 @@
       overlays = with inputs; [
         flake.overlays.default
         chaotic.overlays.default
+	nvimcfg.overlays.default
       ];
 
       homes.modules = with inputs; [

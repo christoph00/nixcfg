@@ -30,14 +30,10 @@ in
   config = mkIf cfg.enable {
     environment.enableAllTerminfo = true;
     environment.systemPackages = [
-      #pkgs.neovim
       pkgs.git
-      #pkgs.htop
-      #pkgs.nixd
-      #pkgs.agenix
+      pkgs.htop
       pkgs.doas-sudo-shim
-
-      #pkgs.flake
+      pkgs.flake
     ];
   };
 }
