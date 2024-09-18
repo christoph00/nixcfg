@@ -63,11 +63,11 @@ in
       gamemode.enable = true;
     };
 
-    chaotic.steam.extraCompatPackages = with pkgs; [
-      luxtorpeda
-      proton-ge-custom
-      steamtinkerlaunch
-    ];
+   # chaotic.steam.extraCompatPackages = with pkgs; [
+   #   luxtorpeda
+   #   proton-ge-custom
+   #   steamtinkerlaunch
+   # ];
 
     ## DP-2 = Monitor  HDMI-A-1 = Dummy
     services.sunshine = mkIf cfg.enableStreaming {
