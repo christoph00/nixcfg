@@ -140,19 +140,6 @@ in
               desktop-portal = "${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal";
               desktop-portal-wlr = "${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr";
 
-              configure_gtk =
-                let
-                  schema = pkgs.gsettings-desktop-schemas;
-                  datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-                in
-                ''${pkgs.writeShellScript "configure-gtk" ''
-                  export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-                    gnome_schema=org.gnome.desktop.interface
-                    ${pkgs.glib}/bin/gsettings set $gnome_schema gtk-theme '${config.gtk.theme.name}'
-                    ${pkgs.glib}/bin/gsettings set $gnome_schema icon-theme '${config.gtk.iconTheme.name}'
-                    ${pkgs.glib}/bin/gsettings set $gnome_schema cursor-theme '${config.gtk.cursorTheme.name}'
-                ''}'';
-
               waybar = "${config.programs.waybar.package}/bin/waybar";
               #wf_panel = "${wf}/bin/wf-panel";
               #ironbar = "${pkgs.ironbar}/bin/ironbar";
