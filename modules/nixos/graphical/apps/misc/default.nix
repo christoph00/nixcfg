@@ -38,9 +38,7 @@ in
 
     environment.systemPackages = [
       pkgs.zen-browser
-      pkgs.firedragon
       pkgs.chromium
-      pkgs.wezterm
       pkgs.zed-editor_git
       pkgs.vscode
       pkgs.kitty
