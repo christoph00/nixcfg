@@ -20,10 +20,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        machine: [tower x13]
+        hostname: 
+          - tower
+          - x13
     steps:
     - uses: actions/checkout@v4
     - uses: DeterminateSystems/nix-installer-action@v14
     - uses: DeterminateSystems/flake-checker-action@v4
     - uses: DeterminateSystems/magic-nix-cache-action@v8
-    - run: nix build '.#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel'
+    - uses: cachix/cachix-action@v15
+      with:
+        name: chr 
+        extraPullNames: 'nix-community'
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+    - run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
