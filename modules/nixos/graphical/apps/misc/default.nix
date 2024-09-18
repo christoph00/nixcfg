@@ -43,6 +43,7 @@ in
       pkgs.vscode
       pkgs.kitty
       pkgs.foot
+      pkgs.anyrun
     ];
 
   };
