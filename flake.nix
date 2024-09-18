@@ -117,7 +117,7 @@
       overlays = with inputs; [
         flake.overlays.default
         chaotic.overlays.default
-	nvimcfg.overlays.default
+        nvimcfg.overlays.default
       ];
 
       homes.modules = with inputs; [

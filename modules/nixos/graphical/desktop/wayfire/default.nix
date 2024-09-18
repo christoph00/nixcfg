@@ -36,7 +36,44 @@ in
 
   config = mkIf cfg.enable {
 
-    services.displayManager.sessionPackages = [ pkgs.internal.wayfire-session ];
+    #services.displayManager.sessionPackages = [ pkgs.internal.wayfire-session ];
+
+    programs = {
+      wayfire = {
+        enable = true;
+        plugins = with pkgs.wayfirePlugins; [
+          wcm
+          wf-shell
+          wayfire-plugins-extra
+          firedecor
+        ];
+      };
+      waybar.enable = true;
+      uwsm = {
+        enable = true;
+        waylandCompositors.wayfire = {
+          prettyName = "Wayfire";
+          comment = "Wayfire compositor managed by UWSM";
+          binPath = getExe config.programs.wayfire.package;
+        };
+      };
+    };
+
+    systemd = {
+      user.services.polkit-gnome-authentication-agent-1 = {
+        description = "polkit-gnome-authentication-agent-1";
+        wantedBy = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+      };
+    };
 
     xdg.portal = {
       enable = lib.mkDefault true;
