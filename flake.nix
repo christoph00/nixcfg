@@ -38,9 +38,6 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     chaotic.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -83,16 +80,17 @@
     zen-browser.url = "github:MarceColl/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
-    ironbar = {
-      url = "github:JakeStanger/ironbar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
 
     nvimcfg = {
       url = "github:christoph00/nvimcfg";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    wrapper-manager = {
+      url = "github:viperML/wrapper-manager";
+      # WM's nixpkgs is only used for tests, you can safely drop this if needed.
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -120,12 +118,6 @@
         nvimcfg.overlays.default
       ];
 
-      homes.modules = with inputs; [
-        vscode-server.homeModules.default
-        ironbar.homeManagerModules.default
-
-      ];
-
       systems.modules.nixos = with inputs; [
         srvos.nixosModules.common
         srvos.nixosModules.mixins-nix-experimental
@@ -139,8 +131,6 @@
         nixos-cosmic.nixosModules.default
         impermanence.nixosModules.impermanence
         lanzaboote.nixosModules.lanzaboote
-        home-manager.nixosModules.home-manager
-
         jovian.nixosModules.default
 
       ];
