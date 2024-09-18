@@ -24,7 +24,31 @@ jobs:
         hostname: 
           - tower
           - x13
+          - oca
     steps:
+    - run: |
+        sudo rm -rf $AGENT_TOOLSDIRECTORY
+        sudo rm -rf /usr/local/.ghcup
+        sudo rm -rf /usr/local/share/powershell
+        sudo rm -rf /usr/local/share/chromium
+        sudo rm -rf /usr/local/lib/node_modules
+        sudo rm -rf /usr/local/lib/heroku
+        sudo rm -rf /var/lib/docker/overlay2
+        sudo rm -rf /home/linuxbrew
+        sudo rm -rf /home/runner/.rustup 
+    - run: |
+         DEBIAN_FRONTEND=noninteractive
+         sudo apt-get update -q -y && sudo apt-get install -q -y qemu-system-aarch64 qemu-efi binfmt-support qemu-user-static
+      if: contains(matrix.hostname, 'oca')
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@v9
+      with:
+        remove-android: 'true'
+        remove-dotnet: 'true'
+        remove-haskell: 'true'
+        #build-mount-path: /nix
+        swap-size-mb: 1024
+        root-reserve-mb: 50192
     - uses: actions/checkout@v4
     - uses: DeterminateSystems/nix-installer-action@v14
     - uses: DeterminateSystems/flake-checker-action@v4
