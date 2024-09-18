@@ -26,7 +26,7 @@ in
   config = mkIf cfg.enable {
     home.packages = [
       pkgs.flake
-      pkgs.neovim
+      pkgs.nvim-pkg
       pkgs.htop
       pkgs.tmux
       pkgs.rclone
