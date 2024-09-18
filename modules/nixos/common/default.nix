@@ -31,7 +31,40 @@ with lib.internal;
 
     programs.less.enable = true;
     programs.command-not-found.enable = false;
-    programs.nix-ld.enable = true;
+
+    programs.rust-motd = {
+      enable = true;
+      settings = {
+        banner = {
+          color = "white";
+          command = "${pkgs.fortune-kind}/bin/fortune-kind | ${pkgs.neo-cowsay}/bin/cowsay --random";
+        };
+        uptime = {
+          prefix = "Up";
+        };
+        filesystems = {
+          Root = "/";
+          home = "/home";
+          nix = "/nix";
+          state = "/mnt/state";
+        };
+        memory = {
+          swap_pos = "beside";
+        };
+        last_login = {
+          "christoph" = 1;
+        };
+        last_run = { };
+      };
+      order = [
+        "banner"
+        "last_login"
+        "uptime"
+        "memory"
+        "filesystems"
+        "last_run"
+      ];
+    };
 
     # enable realtime capabilities to user processes
     security.rtkit.enable = true;
@@ -55,8 +88,6 @@ with lib.internal;
 
     console = {
       earlySetup = true;
-      font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
-      packages = [ pkgs.terminus_font ];
       useXkbConfig = true;
     };
 

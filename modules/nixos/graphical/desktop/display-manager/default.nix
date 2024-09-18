@@ -42,7 +42,6 @@ in
 
     services.displayManager.cosmic-greeter.enable = true;
 
-
     # services.greetd = {
     #   enable = true;
     #   settings = {
