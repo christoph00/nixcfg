@@ -26,4 +26,4 @@ jobs:
     - uses: DeterminateSystems/nix-installer-action@v14
     - uses: DeterminateSystems/flake-checker-action@v4
     - uses: DeterminateSystems/magic-nix-cache-action@v8
-    - run: nix build '.#nixosConfigurations."${{ matrix.machine }}.nixos.org".config.system.build.toplevel'
+    - run: nix build '.#nixosConfigurations.${{ matrix.machine }}.config.system.build.toplevel'
