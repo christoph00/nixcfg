@@ -79,7 +79,6 @@ in
         controller = "enabled";
         gamepad = "x360";
         adapter_name = "/dev/dri/renderD129";
-       min_threads = 4;
       };
       applications = {
 
