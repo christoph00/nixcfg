@@ -1086,6 +1086,26 @@
         "type": "github"
       }
     },
+    "quickshell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1726641881,
+        "narHash": "sha256-ee2YIeFbYhm/gGs26grUW37BxqqDoFNElW1Vy5PIuHA=",
+        "ref": "refs/heads/master",
+        "rev": "7f9762be5368ca33b84e7b2b3e23a626d432436d",
+        "revCount": 348,
+        "type": "git",
+        "url": "https://github.com/outfoxxed/quickshell"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/outfoxxed/quickshell"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -1100,6 +1120,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nvimcfg": "nvimcfg",
+        "quickshell": "quickshell",
         "snowfall-lib": "snowfall-lib_2",
         "srvos": "srvos",
         "vscode-server": "vscode-server",

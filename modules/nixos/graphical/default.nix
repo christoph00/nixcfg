@@ -47,6 +47,14 @@ with lib.internal;
       wayland-utils
       wl-clipboard
       wlroots
+
+      brightnessctl
+      gammastep
+
+      whitesur-gtk-theme
+      whitesur-icon-theme
+
+      quickshell
     ];
 
     gtk.iconCache.enable = true;
@@ -86,6 +94,8 @@ with lib.internal;
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+
+
 
   };
 
