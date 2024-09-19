@@ -69,73 +69,7 @@ in
     #   steamtinkerlaunch
     # ];
 
-    ## DP-2 = Monitor  HDMI-A-1 = Dummy
-    services.sunshine = mkIf cfg.enableStreaming {
-      enable = true;
-      autoStart = true;
-      capSysAdmin = false;
-      openFirewall = true;
-      settings = {
-        min_log_level = "info";
-        capture = "wlr";
-        encoder = "vaapi";
-        address_family = "both";
-        controller = "enabled";
-        gamepad = "x360";
-      };
-      applications = {
 
-        env = {
-          PATH = "/run/current-system/sw/bin:/run/wrappers/bin:/home/${username}/.nix-profile/bin:/etc/profiles/per-user/${username}/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
-        };
-
-        apps =
-          let
-            steam = lib.getExe config.programs.steam.package + " --";
-            prep = {
-              do = pkgs.writeScript "set-wlr-res" ''
-                #!/bin/sh
-                ${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --off --output HEADLESS-1 --custom-mode ''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS}
-              '';
-              undo = ''${pkgs.bash}/bin/bash -c "${pkgs.wlr-randr}/bin/wlr-randr --output HDMI-A-1 --off --output HEADLESS-1 --custom-mode 1920x1080@60"'';
-            };
-            mk-icon =
-              { icon-name }:
-              pkgs.runCommand "${icon-name}-scaled.png" { }
-                ''${pkgs.imagemagick}/bin/convert -density 1200 -resize 500x -background none ${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark/128x128/apps/${icon-name}.svg -gravity center -extent 600x800 $out'';
-            download-image =
-              {
-                url,
-                hash,
-              }:
-              let
-                image = pkgs.fetchurl { inherit url hash; };
-              in
-              pkgs.runCommand "${lib.nameFromURL url "."}.png" { }
-                ''${pkgs.imagemagick}/bin/convert ${image} -background none -gravity center -extent 600x800 $out'';
-          in
-          [
-            {
-              name = "Desktop";
-              #prep-cmd = [ prep ];
-              image-path = mk-icon { icon-name = "cinnamon-virtual-keyboard"; };
-            }
-
-            {
-              name = "Steam Big Picture";
-              cmd = "${steam} -gamepadui";
-              #prep-cmd = [ prep ];
-              image-path = mk-icon { icon-name = "steamlink"; };
-            }
-            {
-              name = "Steam (Regular UI)";
-              cmd = "${steam}";
-              #prep-cmd = [ prep ];
-              image-path = mk-icon { icon-name = "steam"; };
-            }
-          ];
-      };
-    };
 
   };
 
