@@ -62,7 +62,7 @@
     LIBVA_DRIVER_NAME = "radeonsi";
     VDPAU_DRIVER = "radeonsi";
   };
-l
+
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
