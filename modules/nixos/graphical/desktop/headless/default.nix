@@ -66,7 +66,7 @@ in
 
     
     ## DP-2 = Monitor  HDMI-A-1 = Dummy
-    services.sunshine = mkIf cfg.enableStreaming {
+    services.sunshine =  {
       enable = true;
       autoStart = true;
       capSysAdmin = false;
