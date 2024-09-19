@@ -66,7 +66,7 @@ in
     
 services.sunshine = {
   enable = true;
-  
+
 
 };
 
