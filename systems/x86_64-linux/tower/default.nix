@@ -1,3 +1,8 @@
+##
+# Z170 Extreme4 P7.50
+# i7-6700k
+# RX580 Sapphire
+##
 {
   config,
   lib,
@@ -57,6 +62,12 @@
     LIBVA_DRIVER_NAME = "radeonsi";
     VDPAU_DRIVER = "radeonsi";
   };
+
+  boot.loader.systemd-boot.extraEntries = { "modgrubshell.conf" = ''
+  title mod Grub Shell
+  efi /efi/memtest86/modGRUBShell.efi
+  sort-key z_modshell
+''; }
 
   boot.kernelModules = [
     "kvm-intel"
