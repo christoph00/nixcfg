@@ -32,6 +32,7 @@
       amdvlk
       libvdpau-va-gl
       vaapiVdpau
+      rocmPackages.clr.icd
       # vulkan-loader
       # vulkan-extension-layer
       # vulkan-validation-layers
@@ -61,6 +62,8 @@
     AMD_VULKAN_ICD = "RADV";
     LIBVA_DRIVER_NAME = "radeonsi";
     VDPAU_DRIVER = "radeonsi";
+    ROC_ENABLE_PRE_VEGA = "1";
+
   };
 
   boot.kernelModules = [
