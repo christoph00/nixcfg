@@ -37,23 +37,52 @@ in
   config = mkIf cfg.enable {
     services.xserver.displayManager.startx.enable = true;
 
-    #services.displayManager.sddm.enable = true;
-    #services.displayManager.sddm.wayland.enable = true;
+      services.greetd = {
+    enable = true;
+    settings = {
+      default_session.command = let
+        gtkgreetStyle = pkgs.writeText "greetd-gtkgreet.css" ''
+          window {
+            background-image: url("${wall}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: black;
+          }
+          box#body {
+            background-color: #${colors.base00};
+            border-radius: 10px;
+            padding: 50px;
+            border-style: solid;
+            border-color: #${colors.base08};
+            border-width: 3px;
+          }
+          * { color: #${colors.base05}; border-style: none; font-family: "JetBrainsMono Nerd Font"; }
+          #clock { color: #${colors.base00}; }
+          entry { background: #${colors.base00}; border-style: none; }
+          entry:hover, entry:focus { background: #${colors.base00}; box-shadow: none; }
+          button { background: #${colors.base00}; border-style: none; }
+          button:hover { background: #${colors.base08}; }
+          button * { color: #${colors.base08}; }
+          button:hover * { color: #${colors.base00}; }
+          menu { background: #${colors.base01}; border-radius: 0px; }
+          menu *:hover { background: #${colors.base02}; }
+          button { box-shadow: none; text-shadow: none; }
+          button.combo:hover { border-bottom-left-radius: 5px; border-top-left-radius: 5px; }
+        ''; in 
+        "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${gtkgreetStyle}";
+        initial_session = {
+          command = "wayfire >/dev/null";
+          user = "christoph";
+        };
+    };
+  };
 
-    services.displayManager.cosmic-greeter.enable = true;
-
-    # services.greetd = {
-    #   enable = true;
-    #   settings = {
-    #     vt = 2; # The virtual console (tty) that greetd should use.
-
-    #     default_session.command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --remember --asterisks --time --greeting "Welcome to NixOS" --cmd wayfire'';
-    #     initial_session = {
-    #       command = "wayfire";
-    #       user = "christoph";
-    #     };
-    #   };
-    # };
+  environment.etc."greetd/environments".text = ''
+    wayfire >/dev/null
+    cosmic-session >/dev/null
+    bash
+  '';
 
   };
 
