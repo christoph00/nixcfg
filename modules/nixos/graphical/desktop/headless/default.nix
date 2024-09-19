@@ -65,7 +65,14 @@ in
     services.seatd.enable = true;
 
     
-   
+    ## DP-2 = Monitor  HDMI-A-1 = Dummy
+    services.sunshine = mkIf cfg.enableStreaming {
+      enable = true;
+      autoStart = true;
+      capSysAdmin = false;
+      openFirewall = true;
+    
+    };
 
      systemd.user.services.headless-desktop = {
         wantedBy = optional cfg.autorun "default.target";
