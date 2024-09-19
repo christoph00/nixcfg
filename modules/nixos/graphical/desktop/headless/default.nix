@@ -63,26 +63,16 @@ in
 
     services.seatd.enable = true;
 
-   systemd.user.services.headless-desktop = {
-      Unit = {
-        Description = "Headless Desktop";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session-pre.target" ];
-
+     systemd.user.services.headless-desktop = {
+        wantedBy = optional cfg.autorun "default.target";
+        description = "Graphical headless server";
+        serviceConfig = {
+          ExecStartPre =  "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_RUNTIME_DIR WLR_BACKENDS; systemctl --user import-environment";
+          ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec ${config.programs.wayfire.package}/bin/wayfire'";
+        };
       };
-      Install.WantedBy = [
-        (lib.mkIf cfg.autorun "default.target")
-      ];
+      users.extraUsers."${cfg.user}".linger = mkDefault true;
 
-      #environment.PATH = lib.mkForce null;
-      Service = {
-        Type = "simple";
-        ExecStartPre =  "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_RUNTIME_DIR WLR_BACKENDS; systemctl --user import-environment";
-        ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec ${config.programs.wayfire.package}/bin/wayfire'";
-
-      };
-
-    };
 
   };
 
