@@ -67,7 +67,7 @@
   title mod Grub Shell
   efi /efi/memtest86/modGRUBShell.efi
   sort-key z_modshell
-''; }
+''; };
 
   boot.kernelModules = [
     "kvm-intel"
