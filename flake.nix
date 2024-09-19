@@ -93,6 +93,11 @@
       # WM's nixpkgs is only used for tests, you can safely drop this if needed.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    quickshell = {
+      url = "git+https://github.com/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
