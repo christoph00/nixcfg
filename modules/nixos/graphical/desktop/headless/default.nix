@@ -63,6 +63,13 @@ in
 
     services.seatd.enable = true;
 
+    
+services.sunshine = {
+  enable = true;
+  
+
+};
+
      systemd.user.services.headless-desktop = {
         wantedBy = optional cfg.autorun "default.target";
         description = "Graphical headless server";
