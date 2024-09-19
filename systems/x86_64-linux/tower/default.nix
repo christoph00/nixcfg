@@ -62,13 +62,7 @@
     LIBVA_DRIVER_NAME = "radeonsi";
     VDPAU_DRIVER = "radeonsi";
   };
-
-  boot.loader.systemd-boot.extraEntries = { "modgrubshell.conf" = ''
-  title mod Grub Shell
-  efi /efi/memtest86/modGRUBShell.efi
-  sort-key z_modshell
-''; };
-
+l
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
@@ -77,7 +71,7 @@
   ];
   boot.kernelParams = [
     "mem_sleep_default=deep"
-    "amdgpu.gartsize=4096"
+    "amdgpu.gttsize=8192"
     "amdgpu.ignore_crat=1"
   ];
 

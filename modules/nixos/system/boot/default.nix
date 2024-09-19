@@ -46,6 +46,8 @@ in
         boot.loader.systemd-boot.netbootxyz.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
 
+        boot.loader.systemd-boot.configurationLimit = 5;
+
         # secure boot configs are kept here in the common
         # module because secureBoot must be set to false
         # for the first system boot.
