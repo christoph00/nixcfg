@@ -62,6 +62,10 @@ with lib.internal;
 
     services.dbus.enable = true;
 
+    services.graphical-desktop.enable = true;
+
+    services.seatd.enable = true;
+
     xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;

@@ -44,6 +44,7 @@ in
       pkgs.kitty
       pkgs.foot
       pkgs.anyrun
+      pkgs.moonlight-qt
     ];
 
   };
