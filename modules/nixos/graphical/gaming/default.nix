@@ -33,8 +33,7 @@ in
 
   options.internal.graphical.gaming = {
     enable = mkBoolOpt config.internal.isDesktop "Enable the Gaming.";
-    enableStreaming = mkBoolOpt cfg.enable "Enable Game Streaming Host.";
-  };
+      };
 
   config = mkIf cfg.enable {
 
@@ -62,12 +61,6 @@ in
 
       gamemode.enable = true;
     };
-
-    # chaotic.steam.extraCompatPackages = with pkgs; [
-    #   luxtorpeda
-    #   proton-ge-custom
-    #   steamtinkerlaunch
-    # ];
 
 
 
