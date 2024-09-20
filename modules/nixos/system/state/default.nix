@@ -50,6 +50,7 @@ let
     "/var/log/journal"
     "/var/lib/docker"
     "/var/lib/containers"
+    "/var/lib/taiscale"
   ];
   defaultFiles = [ ];
   defaultUserDirectories = [
