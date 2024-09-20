@@ -59,15 +59,21 @@
       "mitigations=off"
     ];
     initrd = {
-      includeDefaultModules = false;
-      kernelModules = [ "ledtrig-netdev" ];
-    };
-    blacklistedKernelModules = [
-      "hantro_vpu"
-      "drm"
-      "lima"
-      "videodev"
-    ];
+    includeDefaultModules = false;
+    extraUtilsCommands = ''
+      copy_bin_and_libs ${pkgs.haveged}/bin/haveged
+    '';
+    extraUtilsCommandsTest = ''
+      $out/bin/haveged --version
+    '';
+    # provide entropy with haveged in stage 1 for faster crng init
+    preLVMCommands = lib.mkBefore ''
+      haveged --once
+    '';
+  };
+
+    blacklistedKernelModules = [ "hantro_vpu" "drm" "lima" "rockchip_vdec" ];
+
     kernelModules = [ "ledtrig-netdev" ];
     tmp.useTmpfs = true;
   };
