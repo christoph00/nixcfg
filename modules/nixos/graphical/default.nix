@@ -47,6 +47,9 @@ with lib.internal;
       wayland-utils
       wl-clipboard
       wlroots
+      wlr-randr
+      waylock
+      wayvnc
 
       brightnessctl
       gammastep
@@ -54,7 +57,9 @@ with lib.internal;
       whitesur-gtk-theme
       whitesur-icon-theme
 
+
       quickshell
+      dynisland
     ];
 
     gtk.iconCache.enable = true;
