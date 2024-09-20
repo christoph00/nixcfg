@@ -34,6 +34,7 @@ in
       pkgs.htop
       pkgs.doas-sudo-shim
       pkgs.flake
+      pkgs.neovim
     ];
   };
 }
