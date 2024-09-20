@@ -35,6 +35,10 @@ in
       pkgs.doas-sudo-shim
       pkgs.flake
       pkgs.neovim
+      pkgs.github-cli
+      pkgs.gcc
+      pkgs.ripgrep
+      pkgs.unzip
     ];
   };
 }
