@@ -95,8 +95,6 @@ with lib.internal;
       pulse.enable = true;
     };
 
-
-
   };
 
 }

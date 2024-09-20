@@ -45,7 +45,7 @@ in
           wcm
           wf-shell
           wayfire-plugins-extra
-        #  firedecor
+          #  firedecor
         ];
       };
       #waybar.enable = true;
@@ -58,7 +58,6 @@ in
         };
       };
     };
-
 
     # systemd = {
     #   user.services.polkit-gnome-authentication-agent-1 = {
