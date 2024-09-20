@@ -86,5 +86,12 @@
     ];
   };
 
+  services.udev.extraRules = ''
+
+    #GPU bar size
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource0_resize}="8"
+
+  '';
+
   system.stateVersion = "24.05";
 }
