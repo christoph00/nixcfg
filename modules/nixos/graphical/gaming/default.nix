@@ -33,7 +33,7 @@ in
 
   options.internal.graphical.gaming = {
     enable = mkBoolOpt config.internal.isDesktop "Enable the Gaming.";
-      };
+  };
 
   config = mkIf cfg.enable {
 
@@ -61,8 +61,6 @@ in
 
       gamemode.enable = true;
     };
-
-
 
   };
 
