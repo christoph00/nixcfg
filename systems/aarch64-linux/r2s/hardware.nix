@@ -33,7 +33,7 @@
      };
      "/" = {
        device = "/dev/disk/by-label/NIXOS_SD";
-       fsType = "f2fs";
+       fsType = lib.mkForce "f2fs";
        options = ["compress_algorithm=zstd:6" "compress_chksum" "atgc" "gc_merge" "lazytime"];
      };
 
