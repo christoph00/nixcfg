@@ -52,9 +52,11 @@ with lib.internal;
       wlr-randr
       waylock
       wayvnc
+      wlogout
 
       brightnessctl
       gammastep
+      wlsunsetwlr/taskbar
 
       whitesur-gtk-theme
       whitesur-icon-theme
@@ -63,9 +65,15 @@ with lib.internal;
       quickshell
       waybar
 
+      rofi
+
       labwc-tweaks-gtk
       labwc-gtktheme
       labwc-menu-generator
+
+      swaynotificationcenter
+      nwg-drawer
+
     ];
 
     gtk.iconCache.enable = true;
