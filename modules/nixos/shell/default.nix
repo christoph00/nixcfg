@@ -33,7 +33,7 @@ in
       pkgs.git
       pkgs.htop
       pkgs.doas-sudo-shim
-      pkgs.flake
+      pkgs.wget
       pkgs.neovim
       pkgs.github-cli
       pkgs.gcc
