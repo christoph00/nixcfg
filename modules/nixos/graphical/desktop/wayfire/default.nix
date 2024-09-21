@@ -43,9 +43,11 @@ in
         enable = true;
         plugins = with pkgs.wayfirePlugins; [
           wcm
-          wf-shell
+          # wf-shell
           wayfire-plugins-extra
-          firedecor
+          # firedecor
+          wayfire-shadows
+          windecor
         ];
       };
       #waybar.enable = true;

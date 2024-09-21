@@ -45,6 +45,7 @@ in
       pkgs.foot
       pkgs.anyrun
       pkgs.moonlight-qt
+      pkgs.floorp
     ];
 
   };
