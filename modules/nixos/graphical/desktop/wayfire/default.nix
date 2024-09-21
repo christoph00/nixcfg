@@ -45,7 +45,7 @@ in
           wcm
           wf-shell
           wayfire-plugins-extra
-          #  firedecor
+          firedecor
         ];
       };
       #waybar.enable = true;
