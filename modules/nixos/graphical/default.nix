@@ -56,11 +56,10 @@ with lib.internal;
 
       brightnessctl
       gammastep
-      wlsunsetwlr/taskbar
+      wlsunset
 
       whitesur-gtk-theme
       whitesur-icon-theme
-
 
       quickshell
       waybar
