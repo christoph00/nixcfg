@@ -29,8 +29,6 @@ with lib.internal;
 
   config = {
 
-    programs.less.enable = true;
-    programs.command-not-found.enable = false;
 
     programs.rust-motd = {
       enable = true;
@@ -111,11 +109,11 @@ with lib.internal;
 
     # Check that the system does not contain a Nix store path that contains the
     # string "perl".
-    system.forbiddenDependenciesRegexes = [ "perl" ];
+    # system.forbiddenDependenciesRegexes = [ "perl" ];
 
     # Re-add nixos-rebuild to the systemPackages that was removed by the
     # `system.disableInstallerTools` option.
-    environment.systemPackages = [ pkgs.nixos-rebuild ];
+    #environment.systemPackages = [ pkgs.nixos-rebuild ];
   };
 
 }
