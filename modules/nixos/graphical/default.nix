@@ -33,6 +33,8 @@ with lib.internal;
     internal.graphical.desktop.cosmic.enable = true;
     hardware.graphics.enable = true;
 
+    programs.labwc.enable = true;
+
     internal.user.extraGroups = [
       "video"
       "audio"
@@ -59,7 +61,11 @@ with lib.internal;
 
 
       quickshell
-      dynisland
+      waybar
+
+      labwc-tweaks-gtk
+      labwc-gtktheme
+      labwc-menu-generator
     ];
 
     gtk.iconCache.enable = true;
