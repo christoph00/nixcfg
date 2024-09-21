@@ -39,6 +39,9 @@ in
       pkgs.gcc
       pkgs.ripgrep
       pkgs.unzip
+      pkgs.pcituils
+      pkgs.jq
+      pkgs.killall
     ];
   };
 }
