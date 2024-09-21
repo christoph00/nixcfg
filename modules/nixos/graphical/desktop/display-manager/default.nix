@@ -59,15 +59,16 @@ in
             '';
           in
           "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${gtkgreetStyle}";
-        initial_session = {
-          command = "wayfire >/dev/null";
-          user = "christoph";
-        };
+        #initial_session = {
+        #  command = "wayfire >/dev/null";
+        #  user = "christoph";
+        #};
       };
     };
 
     environment.etc."greetd/environments".text = ''
       wayfire >/dev/null
+      labwc >/dev/null
       cosmic-session >/dev/null
       bash
     '';
