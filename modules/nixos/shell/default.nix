@@ -39,7 +39,7 @@ in
       pkgs.gcc
       pkgs.ripgrep
       pkgs.unzip
-      pkgs.pcituils
+      pkgs.pciutils
       pkgs.jq
       pkgs.killall
       pkgs.nh
