@@ -42,6 +42,7 @@ in
       pkgs.pcituils
       pkgs.jq
       pkgs.killall
+      pkgs.nh
     ];
   };
 }
