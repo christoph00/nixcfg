@@ -34,6 +34,18 @@ in
     enable = mkBoolOpt false "Enable the Cosmic desktop environment.";
   };
 
-  config = mkIf cfg.enable { services.desktopManager.cosmic.enable = true; };
+  config = mkIf cfg.enable {
+    services.desktopManager.cosmic.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      cosmic-applet-emoji-selector
+      cosmic-calculator
+      cosmic-player
+      cosmic-reader
+      cosmic-tasks
+      drm_info
+      quick-webapps
+    ];
+  };
 
 }

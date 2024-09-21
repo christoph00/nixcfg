@@ -29,7 +29,6 @@ with lib.internal;
 
   config = {
 
-
     programs.rust-motd = {
       enable = true;
       settings = {

@@ -72,7 +72,10 @@ with lib.internal;
 
       swaynotificationcenter
       nwg-drawer
-
+      nwg-look
+      wlrctl
+      wpaperd
+      swww
     ];
 
     gtk.iconCache.enable = true;

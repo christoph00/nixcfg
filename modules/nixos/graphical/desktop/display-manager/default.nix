@@ -37,28 +37,12 @@ in
   config = mkIf cfg.enable {
     services.xserver.displayManager.startx.enable = true;
 
+    services.displayManager.cosmic-greeter.enable = true;
+
     services.greetd = {
       enable = true;
       settings = {
-        default_session.command =
-          let
-            gtkgreetStyle = pkgs.writeText "greetd-gtkgreet.css" ''
-                window {
-                  background-position: center;
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                  background-color: black;
-                }
-                box#body {
-                  border-radius: 10px;
-                  padding: 50px;
-                  border-style: solid;
-                  border-width: 3px;
-                }
-              }
-            '';
-          in
-          "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${gtkgreetStyle}";
+        default_session.command = "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l";
         #initial_session = {
         #  command = "wayfire >/dev/null";
         #  user = "christoph";
