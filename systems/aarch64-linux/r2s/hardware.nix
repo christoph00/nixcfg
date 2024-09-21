@@ -11,16 +11,16 @@
   # NanoPi R2S's DTS has not been actively updated, so just use the prebuilt one to avoid rebuilding
   hardware.deviceTree.package = pkgs.lib.mkForce (
     pkgs.runCommand "dtbs-nanopi-r2s" { } ''
-      
-            install -TDm644 ${./files/rk3328-nanopi-r2s.dtb} $out/rockchip/rk3328-nanopi-r2s.dtb
+
+      install -TDm644 ${./files/rk3328-nanopi-r2s.dtb} $out/rockchip/rk3328-nanopi-r2s.dtb
     ''
   );
 
   hardware.firmware = [
     (pkgs.runCommand "linux-firmware-r8152" { } ''
-      
-              install -TDm644 ${./files/rtl8153a-4.fw} $out/lib/firmware/rtl_nic/rtl8153a-4.fw
-              install -TDm644 ${./files/rtl8153b-2.fw} $out/lib/firmware/rtl_nic/rtl8153b-2.fw
+
+      install -TDm644 ${./files/rtl8153a-4.fw} $out/lib/firmware/rtl_nic/rtl8153a-4.fw
+      install -TDm644 ${./files/rtl8153b-2.fw} $out/lib/firmware/rtl_nic/rtl8153b-2.fw
     '')
   ];
 
@@ -59,20 +59,25 @@
       "mitigations=off"
     ];
     initrd = {
-    includeDefaultModules = false;
-    extraUtilsCommands = ''
-      copy_bin_and_libs ${pkgs.haveged}/bin/haveged
-    '';
-    extraUtilsCommandsTest = ''
-      $out/bin/haveged --version
-    '';
-    # provide entropy with haveged in stage 1 for faster crng init
-    preLVMCommands = lib.mkBefore ''
-      haveged --once
-    '';
-  };
+      includeDefaultModules = false;
+      extraUtilsCommands = ''
+        copy_bin_and_libs ${pkgs.haveged}/bin/haveged
+      '';
+      extraUtilsCommandsTest = ''
+        $out/bin/haveged --version
+      '';
+      # provide entropy with haveged in stage 1 for faster crng init
+      preLVMCommands = lib.mkBefore ''
+        haveged --once
+      '';
+    };
 
-    blacklistedKernelModules = [ "hantro_vpu" "drm" "lima" "rockchip_vdec" ];
+    blacklistedKernelModules = [
+      "hantro_vpu"
+      "drm"
+      "lima"
+      "rockchip_vdec"
+    ];
 
     kernelModules = [ "ledtrig-netdev" ];
     tmp.useTmpfs = true;
@@ -92,8 +97,8 @@
       Type = "simple";
     };
     script = ''
-      
-            systemctl is-system-running --wait
+
+      systemctl is-system-running --wait
     '';
   };
 
@@ -107,16 +112,16 @@
     };
     wantedBy = [ "sysinit.target" ];
     script = ''
-      
-            cd /sys/class/leds/nanopi-r2s:green:lan
-            echo netdev > trigger
-            echo 1 | tee link tx rx >/dev/null
-            echo intern0 > device_name
-      
-            cd /sys/class/leds/nanopi-r2s:green:wan
-            echo netdev > trigger
-            echo 1 | tee link tx rx >/dev/null
-            echo extern0 > device_name
+
+      cd /sys/class/leds/nanopi-r2s:green:lan
+      echo netdev > trigger
+      echo 1 | tee link tx rx >/dev/null
+      echo intern0 > device_name
+
+      cd /sys/class/leds/nanopi-r2s:green:wan
+      echo netdev > trigger
+      echo 1 | tee link tx rx >/dev/null
+      echo extern0 > device_name
     '';
   };
   systemd.services."setup-sys-led" = {
@@ -125,8 +130,8 @@
     after = [ "wait-system-running.service" ];
     wantedBy = [ "multi-user.target" ];
     script = ''
-      
-            echo default-on > /sys/class/leds/nanopi-r2s:red:sys/trigger
+
+      echo default-on > /sys/class/leds/nanopi-r2s:red:sys/trigger
     '';
   };
 }
