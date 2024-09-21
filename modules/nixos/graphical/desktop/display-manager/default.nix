@@ -42,7 +42,7 @@ in
     services.greetd = {
       enable = true;
       settings = {
-        default_session.command = "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l";
+        # default_session.command = "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l";
         #initial_session = {
         #  command = "wayfire >/dev/null";
         #  user = "christoph";
