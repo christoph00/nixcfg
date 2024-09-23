@@ -24,24 +24,6 @@
     '')
   ];
 
-  fileSystems = {
-    "/boot" = {
-      device = "/dev/disk/by-label/NIXOS_BOOT";
-      fsType = "ext4";
-    };
-    "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = lib.mkForce "f2fs";
-      options = [
-        "compress_algorithm=zstd:6"
-        "compress_chksum"
-        "atgc"
-        "gc_merge"
-        "lazytime"
-      ];
-    };
-
-  };
 
   boot = {
     loader = {
