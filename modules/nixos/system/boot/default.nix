@@ -88,17 +88,26 @@ in
 
       (mkIf cfg.silentBoot {
         boot.kernelParams = [
+
           "quiet"
+
+          # kernel log message level
+          "loglevel=3" # 1: system is unusable | 3: error condition | 7: very verbose
+
           "udev.log_level=3"
-          "splash"
+          "rd.udev.log_level=3"
+
+          "systemd.show_status=auto"
+          "rd.systemd.show_status=auto"
+          "vt.global_cursor_default=0"
         ];
         boot.initrd.verbose = false;
         boot.consoleLogLevel = 0;
         boot.loader.timeout = 0;
 
-        boot.plymouth.enable = true;
-        boot.plymouth.theme = "nixos-bgrt";
-        boot.plymouth.themePackages = [ pkgs.nixos-bgrt-plymouth ];
+        #boot.plymouth.enable = true;
+        #boot.plymouth.theme = "nixos-bgrt";
+        #boot.plymouth.themePackages = [ pkgs.nixos-bgrt-plymouth ];
       })
     ]
   );
