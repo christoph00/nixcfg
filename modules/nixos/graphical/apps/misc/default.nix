@@ -46,6 +46,9 @@ in
       pkgs.anyrun
       pkgs.moonlight-qt
       pkgs.floorp
+      pkgs.vesktop
+      pkgs.masterpdfeditor
+      pkgs.onlyoffice-bin_latest
     ];
 
   };
