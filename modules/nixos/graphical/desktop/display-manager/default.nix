@@ -37,25 +37,37 @@ in
   config = mkIf cfg.enable {
     services.xserver.displayManager.startx.enable = true;
 
-    services.displayManager.cosmic-greeter.enable = true;
+    services.displayManager.cosmic-greeter.enable = false;
 
-    services.greetd = {
+    environment.systemPackages = with pkgs; [
+      cage
+    ];
+
+    services.greetd.enable = true;
+
+    programs.regreet = {
       enable = true;
+      package = pkgs.greetd.regreet;
+      cageArgs = [
+        "-s"
+        "-m"
+        "last"
+      ];
+      theme.package = pkgs.canta-theme;
       settings = {
-        # default_session.command = "${pkgs.cage}/bin/cage -s  -- ${pkgs.greetd.gtkgreet}/bin/gtkgreet -l";
-        #initial_session = {
-        #  command = "wayfire >/dev/null";
-        #  user = "christoph";
-        #};
+
+        commands = {
+          reboot = [
+            "systemctl"
+            "reboot"
+          ];
+          poweroff = [
+            "systemctl"
+            "poweroff"
+          ];
+        };
       };
     };
-
-    environment.etc."greetd/environments".text = ''
-      wayfire >/dev/null
-      labwc >/dev/null
-      cosmic-session >/dev/null
-      bash
-    '';
 
   };
 

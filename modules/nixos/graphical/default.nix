@@ -61,7 +61,6 @@ with lib.internal;
       whitesur-gtk-theme
       whitesur-icon-theme
 
-      quickshell
       waybar
 
       rofi
