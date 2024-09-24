@@ -49,6 +49,7 @@ in
       pkgs.vesktop
       pkgs.masterpdfeditor
       pkgs.onlyoffice-bin_latest
+      pkgs.geary
     ];
 
   };
