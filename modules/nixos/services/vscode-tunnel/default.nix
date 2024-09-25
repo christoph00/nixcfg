@@ -25,9 +25,17 @@ with builtins;
 with lib;
 with lib.internal;
 
+let
+  cfg = config.internal.services.vscode-tunnel;
+in
+
 {
 
-  config = mkIf config.internal.isGraphical {
+  options.internal.services.vscode-tunnel = {
+    enable = mkBoolOpt false "Enable VSCode Tunnel Service.";
+  };
+
+  config = mkIf ccfg.enable {
 
     services.vscode-server.enable = true;
     services.vscode-server.installPath = "$HOME/.vscode";

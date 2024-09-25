@@ -24,6 +24,18 @@
     '')
   ];
 
+  fileSystems = lib.mkForce {
+
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "f2fs";
+    };
+
+    "/boot/firmware" = {
+      device = "/dev/disk/by-label/FIRMWARE";
+      fsType = "vfat";
+    };
+  };
   boot = {
     loader = {
       timeout = 1;

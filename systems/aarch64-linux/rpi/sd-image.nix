@@ -1,12 +1,11 @@
-{ ... }:
+{ lib, ... }:
 {
   imports = [
     <nixpkgs/nixos/modules/installer/sd-card/sd-image-aarch64.nix>
     ./hardware.nix
   ];
 
-
-  
+  boot.supportedFilesystems.zfs = lib.mkForce false;
 
   services.openssh = {
     enable = true;

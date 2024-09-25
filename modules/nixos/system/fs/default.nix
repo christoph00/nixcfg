@@ -104,6 +104,7 @@ in
   config = (
     mkMerge [
       {
+        boot.supportedFilesystems.zfs = lib.mkForce false;
         disko.devices = {
           nodev."/" = mkIf cfg.tmpRoot {
             fsType = "tmpfs";

@@ -29,6 +29,7 @@ in
 
   config = mkIf cfg.enable {
     environment.enableAllTerminfo = true;
+    programs.direnv.enable = true;
     environment.systemPackages = [
       pkgs.git
       pkgs.htop
@@ -43,6 +44,7 @@ in
       pkgs.jq
       pkgs.killall
       pkgs.nh
+      pkgs.devenv
     ];
   };
 }

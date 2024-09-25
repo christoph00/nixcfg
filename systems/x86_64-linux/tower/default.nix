@@ -23,6 +23,8 @@
   internal.graphical.desktop.display-manager.enable = false;
   internal.graphical.desktop.headless.enable = true;
 
+  internal.services.vscode-tunnel.enable = true;
+
   environment.systemPackages = [ pkgs.amdgpu_top ];
 
   hardware.graphics = {
@@ -41,7 +43,6 @@
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
 
   hardware.amdgpu = {
     amdvlk = {
