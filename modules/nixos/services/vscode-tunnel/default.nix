@@ -35,7 +35,7 @@ in
     enable = mkBoolOpt false "Enable VSCode Tunnel Service.";
   };
 
-  config = mkIf ccfg.enable {
+  config = mkIf cfg.enable {
 
     services.vscode-server.enable = true;
     services.vscode-server.installPath = "$HOME/.vscode";
