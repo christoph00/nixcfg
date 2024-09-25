@@ -103,7 +103,6 @@ with lib.internal;
       ];
     };
 
-
     fonts.packages = with pkgs; [
       recursive
       commit-mono
@@ -116,9 +115,14 @@ with lib.internal;
       redhat-official-fonts
       maple-mono-NF
       material-design-icons
-      (nerdfonts.override {fonts = ["JetBrainsMono" "CascadiaCode" "DaddyTimeMono"];})
+      (nerdfonts.override {
+        fonts = [
+          "JetBrainsMono"
+          "CascadiaCode"
+          "DaddyTimeMono"
+        ];
+      })
     ];
-
 
     services.pipewire = {
       enable = true;

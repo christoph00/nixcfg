@@ -135,6 +135,7 @@
         impermanence.nixosModules.impermanence
         lanzaboote.nixosModules.lanzaboote
         jovian.nixosModules.default
+        vscode-server.nixosModules.default
 
       ];
 
