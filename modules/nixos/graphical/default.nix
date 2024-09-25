@@ -103,10 +103,22 @@ with lib.internal;
       ];
     };
 
+
     fonts.packages = with pkgs; [
-      noto-fonts
-      meslo-lgs-nf
+      recursive
+      commit-mono
+      cascadia-code
+      martian-mono
+      pixel-code
+      mona-sans
+      monaspace
+      hubot-sans
+      redhat-official-fonts
+      maple-mono-NF
+      material-design-icons
+      (nerdfonts.override {fonts = ["JetBrainsMono" "CascadiaCode" "DaddyTimeMono"];})
     ];
+
 
     services.pipewire = {
       enable = true;
