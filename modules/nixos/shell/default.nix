@@ -31,10 +31,15 @@ in
     programs.nvf = {
       enable = true;
       settings = {
-        vim.viAlias = false;
-        vim.vimAlias = true;
-        vim.lsp = {
+        vim = { viAlias = false;
+        vimAlias = true;
+        lsp = {
           enable = true;
+        };
+    languages = {
+        php.enable = true:
+        nix.enable = true;
+    };
         };
       };
     };
