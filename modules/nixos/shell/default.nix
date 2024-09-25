@@ -45,6 +45,7 @@ in
       pkgs.killall
       pkgs.nh
       pkgs.devenv
+      pkgs.tmux
     ];
   };
 }
