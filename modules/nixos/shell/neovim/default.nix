@@ -1,9 +1,6 @@
 {
-  options,
   config,
-  pkgs,
   lib,
-  namespace,
   ...
 }:
 with lib;
@@ -47,9 +44,9 @@ in
 
         theme = {
           enable = true;
-          transparent = true;
-          name = "rose-pine";
-          style = "moon";
+          name = "tokyonight";
+          transparent = false;
+          style = "night";
         };
 
         maps = {
@@ -158,7 +155,7 @@ in
           enableLSP = true;
           enableTreesitter = true;
           bash.enable = true;
-	  php.enable = true;
+          php.enable = true;
           clang = {
             enable = true;
             cHeader = true;
