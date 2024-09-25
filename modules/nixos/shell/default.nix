@@ -28,21 +28,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.nvf = {
-      enable = true;
-      settings = {
-        vim = { viAlias = false;
-        vimAlias = true;
-        lsp = {
-          enable = true;
-        };
-    languages = {
-        php.enable = true:
-        nix.enable = true;
-    };
-        };
-      };
-    };
 
     environment.enableAllTerminfo = true;
     programs.direnv.enable = true;
