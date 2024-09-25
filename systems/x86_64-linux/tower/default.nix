@@ -40,6 +40,9 @@
     extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+
   hardware.amdgpu = {
     amdvlk = {
       enable = true;
