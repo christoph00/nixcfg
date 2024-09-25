@@ -27,7 +27,6 @@
   };
 
   inputs = {
-
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     srvos.url = "github:nix-community/srvos";
@@ -85,6 +84,11 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
 
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nvimcfg = {
       url = "github:christoph00/nvimcfg";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -95,7 +99,6 @@
       # WM's nixpkgs is only used for tests, you can safely drop this if needed.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs =
@@ -136,7 +139,7 @@
         lanzaboote.nixosModules.lanzaboote
         jovian.nixosModules.default
         vscode-server.nixosModules.default
-
+        nvf.nixosModules.default
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
@@ -154,5 +157,4 @@
     // {
       self = inputs.self;
     };
-
 }

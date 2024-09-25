@@ -28,6 +28,17 @@ in
   };
 
   config = mkIf cfg.enable {
+    programs.nvf = {
+      enable = true;
+      settings = {
+        vim.viAlias = false;
+        vim.vimAlias = true;
+        vim.lsp = {
+          enable = true;
+        };
+      };
+    };
+
     environment.enableAllTerminfo = true;
     programs.direnv.enable = true;
     environment.systemPackages = [
@@ -35,7 +46,7 @@ in
       pkgs.htop
       pkgs.doas-sudo-shim
       pkgs.wget
-      pkgs.neovim
+      # pkgs.neovim
       pkgs.github-cli
       pkgs.gcc
       pkgs.ripgrep
