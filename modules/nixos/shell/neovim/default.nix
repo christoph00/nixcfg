@@ -1,6 +1,7 @@
 {
   config,
   lib,
+pkgs,
   ...
 }:
 with lib;
@@ -48,6 +49,8 @@ in
           transparent = false;
           style = "night";
         };
+
+        dashboard.startify.enable = true;
 
         maps = {
           normal = {
@@ -155,7 +158,11 @@ in
           enableLSP = true;
           enableTreesitter = true;
           bash.enable = true;
-          php.enable = true;
+          php = {
+            enable = true;
+            lsp.enable = true;
+            treesitter.enable = true;
+          };
           clang = {
             enable = true;
             cHeader = true;
@@ -163,6 +170,10 @@ in
           markdown.enable = true;
           nix = {
             enable = true;
+            format.enable = true;
+            format.type = "nixpkgs-fmt";
+            lsp.enable = true;
+            treesitter.enable = true;
           };
         };
       };
