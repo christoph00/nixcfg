@@ -29,40 +29,6 @@ with lib.internal;
 
   config = {
 
-    programs.rust-motd = {
-      enable = true;
-      settings = {
-        banner = {
-          color = "white";
-          command = "${pkgs.fortune-kind}/bin/fortune-kind | ${pkgs.neo-cowsay}/bin/cowsay --random";
-        };
-        uptime = {
-          prefix = "Up";
-        };
-        filesystems = {
-          Root = "/";
-          home = "/home";
-          nix = "/nix";
-          state = "/mnt/state";
-        };
-        memory = {
-          swap_pos = "beside";
-        };
-        last_login = {
-          "christoph" = 1;
-        };
-        last_run = { };
-      };
-      order = [
-        "banner"
-        "last_login"
-        "uptime"
-        "memory"
-        "filesystems"
-        "last_run"
-      ];
-    };
-
     # enable realtime capabilities to user processes
     security.rtkit.enable = true;
 
@@ -94,7 +60,7 @@ with lib.internal;
     ## perlless
     # Remove perl from activation
     boot.initrd.systemd.enable = lib.mkDefault true;
-    system.etc.overlay.enable = lib.mkDefault true;
+    #system.etc.overlay.enable = lib.mkDefault true;
     services.userborn.enable = lib.mkDefault true;
 
     # Random perl remnants

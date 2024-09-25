@@ -30,39 +30,32 @@ with lib.internal;
   config = mkIf config.internal.isGraphical {
 
     services.vscode-server.enable = true;
-    services.vscode-server.enableFHS = true;
     services.vscode-server.installPath = "$HOME/.vscode";
-    services.vscode-server.extraRuntimeDependencies = with pkgs; [
-      nixd
-      nixpkgs-fmt-rfc-style
-    ];
+
+    environment.systemPackages = with pkgs; [ vscode ];
+
+    programs.nix-ld.enable = true;
 
     systemd.user.services.code-tunnel = {
-      Unit = {
-        Description = "Visual Studio Code Tunnel";
-        After = [
-          "network.target"
-          "multi-user.target"
-          "nix-deamon.socket"
-        ];
-      };
-      Service = {
-        Type = "idle";
-        Environment = "PATH=${
-          pkgs.lib.makeBinPath [
-            pkgs.vscode
-            pkgs.nixd
-            pkgs.devenv
-            pkgs.direnv
-            pkgs.nixpkgs-fmt-rfc-style
-            pkgs.bash
-            pkgs.coreutils
-          ]
-        }/bin:/run/current-system/sw/bin";
-        ExecStart = "${pkgs.vscode}/lib/vscode/bin/code-tunnel --verbose --cli-data-dir $HOME/.vscode/cli tunnel service internal-run";
+      enable = true;
+      description = "Visual Studio Code Tunnel";
+      after = [ "network.target" ];
+      startLimitIntervalSec = 0;
+      serviceConfig = {
+        Type = "simple";
         Restart = "always";
         RestartSec = 10;
       };
+      environment = {
+        NIX_LD_LIBRARY_PATH = "${lib.makeLibraryPath [
+          pkgs.stdenv.cc.cc
+        ]}";
+        NIX_LD = "${pkgs.glibc}/lib/ld-linux-x86-64.so.2";
+      };
+      script = ''
+        ${pkgs.vscode}/lib/vscode/bin/code-tunnel --verbose --log trace --cli-data-dir $HOME/.vscode tunnel service internal-run
+      '';
+      wantedBy = [ "default.target" ];
     };
 
   };
