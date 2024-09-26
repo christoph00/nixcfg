@@ -19,7 +19,7 @@
   hardware.firmware = [
     (pkgs.runCommand "linux-firmware-r8152" { } ''
 
-      install -TDm644 ${./files/rtl8153a-4.fw} $out/lib/firmware/rtl_nic/rtl8153a-4.fw
+      # install -TDm644 ${./files/rtl8153a-4.fw} $out/lib/firmware/rtl_nic/rtl8153a-4.fw
       install -TDm644 ${./files/rtl8153b-2.fw} $out/lib/firmware/rtl_nic/rtl8153b-2.fw
     '')
   ];
