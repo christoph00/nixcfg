@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib;
@@ -20,8 +19,8 @@ in
       enable = true;
 
       settings.vim = {
-        viAlias = false;
-        vimAlias = false;
+        viAlias = true;
+        vimAlias = true;
         enableLuaLoader = true;
         preventJunkFiles = true;
         tabWidth = 4;
@@ -88,7 +87,7 @@ in
           context.enable = true;
           highlight.enable = true;
           indent.enable = true;
-          addDefaultGrammars = false; # cuz its broken rn
+          addDefaultGrammars = false;
         };
 
         autocomplete = {
