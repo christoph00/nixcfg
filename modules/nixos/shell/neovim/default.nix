@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -17,6 +18,9 @@ in
 
     programs.nvf = {
       enable = true;
+      
+
+
 
       settings.vim = {
         viAlias = true;
@@ -29,6 +33,16 @@ in
         useSystemClipboard = true;
         mouseSupport = "a";
         scrollOffset = 6;
+
+        extraPlugins = with pkgs.vimPlugins; {
+          supermaven-nvim = {
+            package = supermaven-nvim;
+            setup = "require('supermaven-nvim').setup {
+              disable_inline_completion = true, -- disables inline completion for use with cmp
+              disable_keymaps =true, -- disables built in keymaps for more manual control
+            }";
+          };
+        };
 
         telescope.enable = true;
 
@@ -72,6 +86,8 @@ in
           };
         };
 
+      
+
         filetree.neo-tree = {
           enable = true;
         };
@@ -92,7 +108,25 @@ in
 
         autocomplete = {
           enable = true;
-          alwaysComplete = false;
+          alwaysComplete = true;
+
+          type = "nvim-cmp";
+
+          mappings = {
+            complete = "<C-Space>";
+            close = "<C-e>";
+            confirm = null; # set above
+
+            scrollDocsUp = "<C-d>";
+            scrollDocsDown = "<C-f>";
+
+            next = "<Tab>";
+            previous = "<S-Tab>";
+          };
+          sources = {
+            supermaven = "[SM]";
+          };
+
         };
 
         ui = {
@@ -117,6 +151,10 @@ in
           enable = true;
           setupOpts.direction = "tab";
           mappings.open = "<C-\\>";
+        };
+        binds = {
+          whichKey.enable = true;
+          cheatsheet.enable = true;
         };
 
         git = {
