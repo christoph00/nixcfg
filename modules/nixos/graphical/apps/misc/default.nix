@@ -39,14 +39,14 @@ in
     environment.systemPackages = [
       pkgs.zen-browser
       pkgs.chromium
-      pkgs.zed-editor_git
+      pkgs.zed-editor
       pkgs.vscode
       pkgs.kitty
       pkgs.foot
       pkgs.anyrun
       pkgs.moonlight-qt
       pkgs.floorp
-      pkgs.vesktop
+      # pkgs.vesktop
       pkgs.masterpdfeditor
       pkgs.onlyoffice-bin_latest
       pkgs.geary
