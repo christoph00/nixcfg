@@ -34,9 +34,12 @@
     # Alternatively we also support the latest nixos release and unstable
     nixpkgs.follows = "srvos/nixpkgs";
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    chaotic.inputs.nixpkgs.follows = "nixpkgs";
-    chaotic.inputs.jovian.follows = "jovian";
+    chaotic = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.jovian.follows = "jovian";
+
+    };
 
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
