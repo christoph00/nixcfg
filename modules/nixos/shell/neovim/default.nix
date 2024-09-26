@@ -46,8 +46,8 @@ in
         theme = {
           enable = true;
           name = "tokyonight";
-          transparent = false;
-          style = "night";
+          transparent = true;
+          style = "day";
         };
 
         dashboard.startify.enable = true;
