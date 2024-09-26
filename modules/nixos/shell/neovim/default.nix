@@ -15,13 +15,8 @@ in
   };
 
   config = mkIf cfg.enable {
-
     programs.nvf = {
       enable = true;
-      
-
-
-
       settings.vim = {
         viAlias = true;
         vimAlias = true;
@@ -137,7 +132,7 @@ in
           enable = true;
           indentBlankline = {
             enable = true;
-            #          eolChar = null;
+            #eolChar = null;
             #fillChar = null;
           };
           highlight-undo.enable = true;
@@ -169,6 +164,7 @@ in
           lspSignature.enable = true;
           lspconfig.enable = true;
           lsplines.enable = true;
+      	  # lspsaga.enable = true;
           mappings = {
             addWorkspaceFolder = "<leader>wa";
             codeAction = "<leader>a";
