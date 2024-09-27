@@ -63,7 +63,7 @@ with lib.internal;
 
       waybar
 
-      rofi
+      (rofi.override { plugins = [ rofi-emoji internal.rofi-games ]; })
 
       labwc-tweaks-gtk
       labwc-gtktheme
