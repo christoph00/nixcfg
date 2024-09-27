@@ -108,7 +108,7 @@ in
           type = "nvim-cmp";
 
           mappings = {
-            complete = "<C-Space>";
+            #complete = "<Return>";
             close = "<C-e>";
             confirm = null; # set above
 
@@ -131,7 +131,7 @@ in
         visuals = {
           enable = true;
           indentBlankline = {
-            enable = true;
+            enable = false;
             #eolChar = null;
             #fillChar = null;
           };
@@ -164,7 +164,6 @@ in
           lspSignature.enable = true;
           lspconfig.enable = true;
           lsplines.enable = true;
-      	  # lspsaga.enable = true;
           mappings = {
             addWorkspaceFolder = "<leader>wa";
             codeAction = "<leader>a";
