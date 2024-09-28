@@ -69,7 +69,6 @@ in
 
         dashboard.startify.enable = true;
 
-
         filetree.neo-tree = {
           enable = true;
         };
@@ -166,16 +165,12 @@ in
           formatOnSave = true;
           lspkind.enable = true;
           lightbulb.enable = false;
-<<<<<<< HEAD
-=======
-          lspsaga.enable = false;
->>>>>>> 75e147c2 (ok)
           trouble.enable = false;
           lspSignature.enable = true;
           # lsplines.enable = true;
           lspconfig.enable = true;
           nvim-docs-view.enable = false;
-
+          # lsplines.enable = true;
           mappings = {
             addWorkspaceFolder = "<leader>wa";
             codeAction = "<leader>a";
@@ -221,6 +216,7 @@ in
           };
         };
       };
+
     };
 
   };
