@@ -114,11 +114,17 @@ in
         ui = {
           noice.enable = true;
           illuminate.enable = true;
-
+          borders = {
+            enable = true;
+            globalStyle = "rounded";
+          };
+          colorizer.enable = true;
         };
 
         visuals = {
           enable = true;
+          nvimWebDevicons.enable = true;
+
           indentBlankline = {
             enable = false;
             #eolChar = null;
@@ -160,6 +166,10 @@ in
           formatOnSave = true;
           lspkind.enable = true;
           lightbulb.enable = false;
+<<<<<<< HEAD
+=======
+          lspsaga.enable = false;
+>>>>>>> 75e147c2 (ok)
           trouble.enable = false;
           lspSignature.enable = true;
           # lsplines.enable = true;
