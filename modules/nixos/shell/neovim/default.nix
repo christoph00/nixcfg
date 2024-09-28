@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.internal;
@@ -37,6 +36,9 @@ in
               disable_keymaps =true, -- disables built in keymaps for more manual control
             }";
           };
+          nvim-web-devicons = {
+            package = nvim-web-devicons;
+          };
         };
 
         telescope.enable = true;
@@ -51,6 +53,13 @@ in
           surround.enable = true;
         };
 
+
+        comments = {
+          comment-nvim = {
+            enable = true;
+          };
+        };
+
         theme = {
           enable = true;
           name = "tokyonight";
@@ -60,28 +69,6 @@ in
 
         dashboard.startify.enable = true;
 
-        maps = {
-          normal = {
-            "<leader>v" = {
-              action = "<CMD>Neotree toggle<CR>";
-              silent = true;
-            };
-            "<leader>m" = {
-              action = "<CMD>MarkdownPreviewToggle<CR>";
-              silent = true;
-            };
-          };
-
-          terminal = {
-            # get out of terminal mode in toggleterm
-            "<ESC>" = {
-              action = "<C-\\><C-n>";
-              silent = true;
-            };
-          };
-        };
-
-      
 
         filetree.neo-tree = {
           enable = true;
@@ -95,7 +82,7 @@ in
         treesitter = {
           enable = true;
           fold = true;
-          context.enable = true;
+          context.enable = false;
           highlight.enable = true;
           indent.enable = true;
           addDefaultGrammars = false;
@@ -126,6 +113,8 @@ in
 
         ui = {
           noice.enable = true;
+          illuminate.enable = true;
+
         };
 
         visuals = {
@@ -142,11 +131,6 @@ in
           nvim-notify.enable = true;
         };
 
-        terminal.toggleterm = {
-          enable = true;
-          setupOpts.direction = "tab";
-          mappings.open = "<C-\\>";
-        };
         binds = {
           whichKey.enable = true;
           cheatsheet.enable = true;
@@ -154,16 +138,34 @@ in
 
         git = {
           enable = true;
-          gitsigns = {
-            enable = false;
+        };
+
+        terminal.toggleterm = {
+          enable = true;
+
+          mappings.open = "<c-t>";
+          setupOpts = {
+            winbar.enabled = false;
+            direction = "float";
+          };
+
+          lazygit = {
+            enable = true;
+            mappings.open = "<leader>gl";
           };
         };
 
         lsp = {
           enable = true;
+          formatOnSave = true;
+          lspkind.enable = true;
+          lightbulb.enable = false;
+          trouble.enable = false;
           lspSignature.enable = true;
+          # lsplines.enable = true;
           lspconfig.enable = true;
-          lsplines.enable = true;
+          nvim-docs-view.enable = false;
+
           mappings = {
             addWorkspaceFolder = "<leader>wa";
             codeAction = "<leader>a";
