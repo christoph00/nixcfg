@@ -80,8 +80,7 @@ with lib.internal;
       wpaperd
       swww
 
-      nm-applet
-
+      networkmanagerapplet
       pipewire
       wireplumber
       pavucontrol
