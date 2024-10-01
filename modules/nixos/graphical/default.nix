@@ -84,6 +84,9 @@ with lib.internal;
       pipewire
       wireplumber
       pavucontrol
+
+      uv
+      internal.ignis
     ];
 
     gtk.iconCache.enable = true;
