@@ -1,11 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -62,12 +61,19 @@
     "ahci.mobile_lpm_policy=3"
     "mitigations=off"
   ];
-  boot.kernelModules = [
-    "kvm-intel"
+  boot.initrd.kernelModules = [
     "i915"
   ];
 
+  boot.kernelModules = [ "kvm-intel" "snd-seq" "snd-rawmidi" "snd-usb-audio" "btqca" "hci_qca" "hci_uart" ];
+
+  boot.extraModprobeConfig = ''
+    options snd-intel-dspcfg dsp_driver=1
+  '';
+
   services.fstrim.enable = true;
+
+  services.fwupd.enable = true;
 
   services.upower = {
     enable = true;
