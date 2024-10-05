@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  namespace,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, namespace
+, ...
 }:
 with lib;
 with lib.internal;
@@ -29,7 +28,7 @@ in
 
   config = mkIf cfg.enable {
 
-    environment.enableAllTerminfo = true;
+    # environment.enableAllTerminfo = true;
     programs.direnv.enable = true;
     environment.systemPackages = [
       pkgs.git
