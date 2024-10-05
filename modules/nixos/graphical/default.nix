@@ -85,8 +85,6 @@ with lib.internal;
       wireplumber
       pavucontrol
 
-      uv
-      internal.ignis
     ];
 
     gtk.iconCache.enable = true;
@@ -97,14 +95,23 @@ with lib.internal;
     };
 
     programs.dconf.enable = true;
+    services = {
 
-    services.dbus.implementation = "broker";
+      dbus.implementation = "broker";
 
-    services.dbus.enable = true;
+      dbus.enable = true;
 
-    services.graphical-desktop.enable = true;
+      graphical-desktop.enable = true;
 
-    services.seatd.enable = true;
+      seatd.enable = true;
+
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+      };
+    };
 
     xdg.portal = {
       enable = true;
@@ -135,13 +142,6 @@ with lib.internal;
         ];
       })
     ];
-
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
 
   };
 
