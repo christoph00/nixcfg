@@ -33,10 +33,10 @@ in
   config = mkIf cfg.enable {
 
     environment.systemPackages = [
-      # pkgs.zen-browser
+      pkgs.zen-browser
       pkgs.brave
       pkgs.zed-editor
-      pkgs.vivaldi
+      # pkgs.vivaldi
       pkgs.vscode
       pkgs.kitty
       # pkgs.foot
@@ -50,8 +50,6 @@ in
       pkgs.libreoffice-fresh
       pkgs.geary
       pkgs.rio
-      ignis
-      pkgs.cartridges
     ];
 
   };
