@@ -84,6 +84,10 @@ with lib.internal;
     # Re-add nixos-rebuild to the systemPackages that was removed by the
     # `system.disableInstallerTools` option.
     #environment.systemPackages = [ pkgs.nixos-rebuild ];
+
+    environment.sessionVariables = {
+      FLAKEREF = "$HOME/Code/nixcfg";
+    };
   };
 
 }
