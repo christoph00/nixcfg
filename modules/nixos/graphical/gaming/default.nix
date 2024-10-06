@@ -44,6 +44,8 @@ in
     environment.systemPackages = [
       pkgs.heroic
       pkgs.sunshine
+      pkgs.protontricks
+      pkgs.prontonplus
       # pkgs.lutris
       (pkgs.bottles.override {
         extraLibraries =
@@ -83,6 +85,7 @@ in
             pkgs: with pkgs; [
               xz
               openssl
+              protontricks
             ];
         };
       };
