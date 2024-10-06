@@ -83,7 +83,10 @@ with lib.internal;
       networkmanagerapplet
       pipewire
       wireplumber
+
       pavucontrol
+
+      unrar
 
     ];
 

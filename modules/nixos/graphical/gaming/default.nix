@@ -46,6 +46,7 @@ in
       pkgs.sunshine
       pkgs.protontricks
       pkgs.protonplus
+      pkgs.cartidges
       # pkgs.lutris
       (pkgs.bottles.override {
         extraLibraries =
