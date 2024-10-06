@@ -16,11 +16,6 @@ with lib.internal;
 
 let
   cfg = config.internal.graphical.apps.misc;
-  ignis = pkgs.writers.writePython3Bin "ignis" { libraries = [ pkgs.internal.ignis ]; } ''
-    if __name__ == "__main__":
-        from ignis.main import main
-        main()
-  '';
 
 
 in
@@ -50,6 +45,8 @@ in
       pkgs.libreoffice-fresh
       pkgs.geary
       pkgs.rio
+      pkgs.ente-auth
+      pkgs.gimp
     ];
 
   };
