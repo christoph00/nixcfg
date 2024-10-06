@@ -3,14 +3,13 @@
 # i7-6700k
 # RX580 Sapphire
 ##
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -38,8 +37,9 @@
       vulkan-loader
       vulkan-extension-layer
       vulkan-validation-layers
+      mangohud
     ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk mangohud ];
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
