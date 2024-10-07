@@ -40,13 +40,14 @@ in
       pkgs.floorp
       # pkgs.firefox
       pkgs.librewolf
-      # pkgs.vesktop
+      pkgs.vesktop
       # pkgs.masterpdfeditor
       pkgs.libreoffice-fresh
       pkgs.geary
       pkgs.rio
       pkgs.ente-auth
       pkgs.gimp
+      pkgs.wezterm
     ];
 
   };
