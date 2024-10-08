@@ -22,6 +22,28 @@
   internal.graphical.desktop.display-manager.enable = false;
   internal.graphical.desktop.headless.enable = true;
 
+
+  fileSystems = {
+    "/media/Games" = {
+      device = "/dev/disk/by-label/ssd-data";
+      fsType = "btrfs";
+      options = [ "subvol=@games" "noatime" "compress-force=zstd" ];
+    };
+
+    "/media/ssd-data" = {
+      device = "/dev/disk/by-label/ssd-data";
+      fsType = "btrfs";
+      options = [ "subvol=@data" "noatime" "compress-force=zstd" ];
+    };
+
+    # "/media/hdd-data" = {
+    #   device = "/dev/disk/by-uuid/25fc5836-72df-4881-8760-af49333fa485";
+    #   fsType = "btrfs";
+    #   options = ["subvol=@data" "noatime" "compress-force=zstd"];
+    # };
+
+  };
+
   internal.services.vscode-tunnel.enable = true;
 
   environment.systemPackages = [ pkgs.amdgpu_top ];
