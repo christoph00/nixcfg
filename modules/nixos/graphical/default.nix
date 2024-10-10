@@ -97,6 +97,7 @@ with lib.internal;
       NIXOS_OZONE_WL = "1";
     };
 
+
     programs.dconf.enable = true;
     services = {
 
