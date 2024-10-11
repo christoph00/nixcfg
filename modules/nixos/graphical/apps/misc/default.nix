@@ -61,6 +61,9 @@ in
       pkgs.wezterm
 
       wrapped
+      pkgs.gthumb
+      pkgs.gtkimageview
+      pkgs.digikam
     ];
 
   };
