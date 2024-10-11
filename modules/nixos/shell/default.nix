@@ -2,7 +2,7 @@
 , config
 , pkgs
 , lib
-, namespace
+, inputs
 , ...
 }:
 with lib;
