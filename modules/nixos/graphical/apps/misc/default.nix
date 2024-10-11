@@ -5,8 +5,8 @@
 , # An instance of `pkgs` with your overlays and packages applied is also available.
   pkgs
 , # You also have access to your flake's inputs.
-  # All other arguments come from the module system.
   config
+, inputs
 , ...
 }:
 
@@ -16,6 +16,18 @@ with lib.internal;
 
 let
   cfg = config.internal.graphical.apps.misc;
+
+  wrapped = inputs.wrapper-manager.lib.build {
+    inherit pkgs;
+    modules = [
+      {
+        wrappers = {
+          discord = { basePackage = pkgs.vesktop; };
+          obsidian = { basePackage = pkgs.obsidian; };
+        };
+      }
+    ];
+  };
 
 
 in
@@ -40,7 +52,6 @@ in
       pkgs.floorp
       # pkgs.firefox
       pkgs.librewolf
-      pkgs.vesktop
       # pkgs.masterpdfeditor
       pkgs.libreoffice-fresh
       pkgs.geary
@@ -48,6 +59,8 @@ in
       pkgs.ente-auth
       pkgs.gimp
       pkgs.wezterm
+
+      wrapped
     ];
 
   };
