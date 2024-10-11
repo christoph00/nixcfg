@@ -10,6 +10,17 @@ with lib.internal;
 let
   cfg = config.internal.shell;
 
+  wrapped = inputs.wrapper-manager.lib.build {
+    inherit pkgs;
+    modules = [
+      {
+        wrappers = {
+          git = { basePackage = pkgs.git; };
+        };
+      }
+    ];
+  };
+
   v3 = with pkgs.pkgsx86_64_v3-core; [
     curl
     bash
@@ -31,7 +42,7 @@ in
     # environment.enableAllTerminfo = true;
     programs.direnv.enable = true;
     environment.systemPackages = [
-      pkgs.git
+      wrapped
       pkgs.htop
       pkgs.doas-sudo-shim
       pkgs.wget
