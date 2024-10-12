@@ -18,16 +18,18 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = [
-      pkgs.intel-media-driver
-      pkgs.intel-vaapi-driver
-      pkgs.libvdpau-va-gl
-      pkgs.mesa.opencl
-      pkgs.vaapiIntel
-      pkgs.intel-media-driver
-      pkgs.intel-compute-runtime
+    extraPackages = with pkgs; [
+      intel-vaapi-driver
+      # pkgs.libvdpau-va-gl
+      # pkgs.mesa.opencl
+      intel-media-driver
+      # pkgs.intel-compute-runtime
+
     ];
   };
+
+  environment.systemPackages = [ pkgs.libva-utils pkgs.intel-gpu-tools ];
+
 
   environment.variables = {
     GST_VAAPI_ALL_DRIVERS = "1";
@@ -45,15 +47,17 @@
   boot.kernelParams = [
     "quiet"
     "pcie_port_pm=off"
-    "i915.i915_enable_rc6=1"
-    "i915.i915_enable_fbc=1"
-    "i915.enable_psr=2"
     "i915.lvds_downclock=1"
     "i915.perf_stream_paranoid=0"
     "i915.semaphores=1"
+    "i915.enable_fbc=1"
+    "i915.enable_guc=3"
+    "i915.enable_psr=2"
+    "i915.fastboot=1"
+    "i915.mitigations=off"
+    "i915.modeset=1"
     "rcutree.rcu_idle_gp_delay=1"
     "splash"
-    "i915.fastboot=1"
     "loglevel=3"
     "udev.log-priority=3"
     "vt.global_cursor_default=0"
