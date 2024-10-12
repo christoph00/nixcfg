@@ -64,6 +64,12 @@
     extraPackages32 = with pkgs; [ driversi686Linux.amdvlk mangohud ];
   };
 
+  chaotic.mesa-git = {
+    enable = true;
+    fallbackSpecialisation = false;
+    inherit (config.hardware.graphics) extraPackages;
+  };
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   hardware.amdgpu = {
