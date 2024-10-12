@@ -46,7 +46,7 @@
 
   internal.services.vscode-tunnel.enable = true;
 
-  environment.systemPackages = [ pkgs.amdgpu_top ];
+  environment.systemPackages = [ pkgs.amdgpu_top pkgs.libva-utils ];
 
   hardware.graphics = {
     enable = true;
@@ -89,14 +89,12 @@
     LIBVA_DRIVER_NAME = "radeonsi";
     VDPAU_DRIVER = "radeonsi";
     ROC_ENABLE_PRE_VEGA = "1";
-
   };
 
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
     "i2c_dev"
-    "amdgpu"
   ];
   boot.kernelParams = [
     "mem_sleep_default=deep"
@@ -109,14 +107,13 @@
       "xhci_pci"
       "ahci"
       "nvme"
+      "amdgpu"
     ];
   };
 
   services.udev.extraRules = ''
-
     #GPU bar size
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource0_resize}="8"
-
   '';
 
   system.stateVersion = "24.05";
