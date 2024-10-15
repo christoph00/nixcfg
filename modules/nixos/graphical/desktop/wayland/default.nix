@@ -63,6 +63,7 @@ in
       swww
 
       waybar
+      sysmenu
 
       inputs.ignis.packages.${system}.ignis
 
