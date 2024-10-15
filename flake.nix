@@ -104,7 +104,7 @@
     };
 
     ignis.url = "github:linkfrg/ignis";
-    ignis.nixpkgs.follows = "nixpkgs";
+    ignis.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
