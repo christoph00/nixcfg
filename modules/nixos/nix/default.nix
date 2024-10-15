@@ -1,11 +1,10 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  namespace,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, inputs
+, namespace
+, ...
 }:
 with lib;
 with lib.${namespace};
@@ -67,6 +66,7 @@ in
             "https://nyx.chaotic.cx/"
             "https://chaotic-nyx.cachix.org"
             "https://cache.garnix.io"
+            "https://nixpkgs-wayland.cachix.org"
           ];
           extra-trusted-public-keys = [
             "chr.cachix.org-1:8Z0vNVd8hK8lVU53Y26GHDNc6gv3eFzBNwSYOcUvsgA="
@@ -75,6 +75,7 @@ in
             "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
             "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
             "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+            "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
           ];
         };
 
