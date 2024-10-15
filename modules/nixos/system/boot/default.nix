@@ -83,7 +83,7 @@ in
         #   enable = true;
         #   devices."${cfg.cryptName}".secretFile = cfg.secretFile;
         # };
-        boot.initrd.systemd.enableTpm2 = true;
+        boot.initrd.systemd.tpm2.enable = true;
       })
 
       (mkIf cfg.silentBoot {

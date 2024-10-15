@@ -32,6 +32,8 @@ in
 
   options.internal.graphical.desktop.display-manager = {
     enable = mkBoolOpt true "Enable the Display Manager.";
+    x11 = mkBoolOpt false "Enable the X11 Display Manager.";
+    wayland = mkBoolOpt false "Enable the Wayland Display Manager.";
   };
 
   config = mkIf cfg.enable {
@@ -43,11 +45,11 @@ in
       cage
     ];
 
-    services.greetd.enable = config.internal.graphical.desktop.wayland.enable;
+    services.greetd.enable = cfg.wayland;
 
     services.xserver.displayManager = {
         lightdm = {
-          enable = !config.services.greetd.enable;
+          enable = cfg.x11;
           greeters.slick = {
             enable = true;
             theme.name = "Zukitre-dark";
@@ -55,8 +57,8 @@ in
         };
       };
 
-    programs.regreet = {
-      enable = config.services.greetd.enable;
+    programs.regreet = {;
+      enable = cfg.wayland;
       package = pkgs.greetd.regreet;
       cageArgs = [
         "-s"
