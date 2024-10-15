@@ -59,8 +59,8 @@ in
       pkgs.gtkimageview
       pkgs.digikam
 
-      qownnotes
-      rssguard
+      pkgs.qownnotes
+      pkgs.rssguard
     ];
 
   };
