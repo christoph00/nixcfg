@@ -93,6 +93,8 @@ in
       pkgs.nh
       pkgs.devenv
       pkgs.tmux
+
+      pkgs.uv
     ];
   };
 }
