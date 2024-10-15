@@ -33,7 +33,7 @@ in
   options.internal.graphical.desktop.display-manager = {
     enable = mkBoolOpt true "Enable the Display Manager.";
     x11 = mkBoolOpt false "Enable the X11 Display Manager.";
-    wayland = mkBoolOpt false "Enable the Wayland Display Manager.";
+    wayland = mkBoolOpt config.internal.graphical.desktop.wayland.enable "Enable the Wayland Display Manager.";
   };
 
   config = mkIf cfg.enable {
@@ -57,7 +57,7 @@ in
         };
       };
 
-    programs.regreet = {;
+    programs.regreet = {
       enable = cfg.wayland;
       package = pkgs.greetd.regreet;
       cageArgs = [

@@ -35,8 +35,7 @@ with lib.internal;
 
     internal.graphical.desktop.wayland.enable = true;
     internal.graphical.desktop.cosmic.enable = true;
-    internal.graphical.desktop.xfce.enable = false;
-    internal.graphical.desktop.display-manager.x11 = false;
+    internal.graphical.desktop.wayfire.enable = true;
     hardware.graphics.enable = true;
 
     #programs.labwc.enable = true;
@@ -61,13 +60,13 @@ with lib.internal;
 
       (rofi.override { plugins = [ rofi-emoji ]; })
 
-
+      font-manager
+      file-roller
+      pavucontrol
 
       networkmanagerapplet
       pipewire
       wireplumber
-
-      pavucontrol
 
       unrar
 

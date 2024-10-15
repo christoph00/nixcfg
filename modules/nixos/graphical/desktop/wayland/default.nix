@@ -64,6 +64,8 @@ in
 
       waybar
 
+      inputs.ignis.packages.${system}.ignis
+
  
 
     ];
