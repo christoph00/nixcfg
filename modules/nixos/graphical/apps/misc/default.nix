@@ -41,22 +41,16 @@ in
 
     environment.systemPackages = [
       pkgs.zen-browser
-      pkgs.brave
       pkgs.zed-editor
-      # pkgs.vivaldi
       pkgs.vscode
       pkgs.kitty
-      # pkgs.foot
+      pkgs.foot
       pkgs.anyrun
       pkgs.moonlight-qt
       pkgs.floorp
-      # pkgs.firefox
       pkgs.librewolf
-      # pkgs.masterpdfeditor
       pkgs.libreoffice-fresh
-      pkgs.geary
       pkgs.rio
-      pkgs.ente-auth
       pkgs.gimp
       pkgs.wezterm
 
@@ -64,6 +58,9 @@ in
       pkgs.gthumb
       pkgs.gtkimageview
       pkgs.digikam
+
+      qownnotes
+      rssguard
     ];
 
   };
