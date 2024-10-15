@@ -102,6 +102,9 @@
       # WM's nixpkgs is only used for tests, you can safely drop this if needed.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ignis.url = "github:linkfrg/ignis";
+    ignis.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

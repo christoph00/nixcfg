@@ -38,9 +38,7 @@ in
     environment = {
     systemPackages = with pkgs; [
       blueman
-      font-manager
-      gnome.file-roller
-      pavucontrol
+      picom
       wmctrl
       xclip
       xcolor
