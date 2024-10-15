@@ -33,11 +33,11 @@ with lib.internal;
 
   config = mkIf config.internal.isGraphical {
 
-    internal.graphical.desktop.wayfire.enable = true;
-    internal.graphical.desktop.cosmic.enable = true;
+    internal.graphical.desktop.xfce.enable = true;
+    #internal.graphical.desktop.cosmic.enable = true;
     hardware.graphics.enable = true;
 
-    programs.labwc.enable = true;
+    #programs.labwc.enable = true;
 
     internal.user.extraGroups = [
       "video"
@@ -47,16 +47,7 @@ with lib.internal;
     ];
 
     environment.systemPackages = with pkgs; [
-      xwayland
-      meson
-      wayland-protocols
-      wayland-utils
-      wl-clipboard
-      wlroots
-      wlr-randr
-      waylock
-      wayvnc
-      wlogout
+
 
       brightnessctl
       gammastep
@@ -65,20 +56,10 @@ with lib.internal;
       whitesur-gtk-theme
       whitesur-icon-theme
 
-      waybar
 
       (rofi.override { plugins = [ rofi-emoji ]; })
 
-      labwc-tweaks-gtk
-      labwc-gtktheme
-      labwc-menu-generator
 
-      swaynotificationcenter
-      nwg-drawer
-      nwg-look
-      wlrctl
-      wpaperd
-      swww
 
       networkmanagerapplet
       pipewire
@@ -92,10 +73,6 @@ with lib.internal;
 
     gtk.iconCache.enable = true;
 
-    environment.sessionVariables = {
-      MOZ_ENABLE_WAYLAND = "1";
-      NIXOS_OZONE_WL = "1";
-    };
 
 
     programs.dconf.enable = true;
@@ -117,14 +94,7 @@ with lib.internal;
       };
     };
 
-    xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      wlr.enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-      ];
-    };
+ 
 
     fonts.packages = with pkgs; [
       recursive
