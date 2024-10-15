@@ -20,5 +20,5 @@ final: prev: {
   # Or, to add a package that is not in Nixpkgs currently via an external flake:
   # my-package = inputs.my-input.packages.${prev.system}.my-package;
 
-  sway-unwrapped = inputs.wayland-nixpkgs.packages.${prev.system}.sway-unwrapped;
+  sway-unwrapped = inputs.nixpkgs-wayland.packages.${prev.system}.sway-unwrapped;
 }
