@@ -40,7 +40,9 @@ in
 
   config = mkIf cfg.enable {
 
-    #services.displayManager.sessionPackages = [ pkgs.internal.wayfire-session ];
+    #services.displayManager.sessionPackages = [ pkgs.internal.wayfire-session ];A
+
+    services.xserver.desktopManager.mate.enableWaylandSession = true;
 
     programs = {
       wayfire = {
@@ -56,7 +58,7 @@ in
       };
       #waybar.enable = true;
       uwsm = {
-        enable = true;
+        enable = false;
         waylandCompositors.wayfire = {
           prettyName = "Wayfire";
           comment = "Wayfire compositor managed by UWSM";
