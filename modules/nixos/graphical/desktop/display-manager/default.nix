@@ -31,7 +31,7 @@ in
 {
 
   options.internal.graphical.desktop.display-manager = {
-    enable = mkBoolOpt config.internal.isGraphical "Enable the Display Manager.";
+    enable = mkBoolOpt true "Enable the Display Manager.";
   };
 
   config = mkIf cfg.enable {
@@ -43,10 +43,20 @@ in
       cage
     ];
 
-    services.greetd.enable = true;
+    services.greetd.enable = config.internal.graphical.desktop.wayland.enable;
+
+    services.xserver.displayManager = {
+        lightdm = {
+          enable = !config.services.greetd.enable;
+          greeters.slick = {
+            enable = true;
+            theme.name = "Zukitre-dark";
+          };
+        };
+      };
 
     programs.regreet = {
-      enable = true;
+      enable = config.services.greetd.enable;
       package = pkgs.greetd.regreet;
       cageArgs = [
         "-s"
