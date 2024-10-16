@@ -1,10 +1,11 @@
-{ config
-, lib
-, pkgs
-, modulesPath
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
 }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -18,7 +19,6 @@
       boot.encryptedRoot = false;
     };
   };
-
 
   boot.initrd.kernelModules = [
     "ata_piix"

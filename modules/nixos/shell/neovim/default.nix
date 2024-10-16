@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 with lib.internal;
@@ -52,7 +53,6 @@ in
         utility = {
           surround.enable = true;
         };
-
 
         comments = {
           comment-nvim = {

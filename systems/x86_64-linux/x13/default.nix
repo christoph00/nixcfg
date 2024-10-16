@@ -1,10 +1,11 @@
-{ config
-, lib
-, pkgs
-, modulesPath
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
 }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -28,8 +29,10 @@
     ];
   };
 
-  environment.systemPackages = [ pkgs.libva-utils pkgs.intel-gpu-tools ];
-
+  environment.systemPackages = [
+    pkgs.libva-utils
+    pkgs.intel-gpu-tools
+  ];
 
   environment.variables = {
     GST_VAAPI_ALL_DRIVERS = "1";
@@ -69,7 +72,15 @@
     "i915"
   ];
 
-  boot.kernelModules = [ "kvm-intel" "snd-seq" "snd-rawmidi" "snd-usb-audio" "btqca" "hci_qca" "hci_uart" ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "snd-seq"
+    "snd-rawmidi"
+    "snd-usb-audio"
+    "btqca"
+    "hci_qca"
+    "hci_uart"
+  ];
 
   boot.extraModprobeConfig = ''
     options snd-intel-dspcfg dsp_driver=1

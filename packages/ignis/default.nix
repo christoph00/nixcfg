@@ -1,14 +1,14 @@
-{ lib
-, python3
-, fetchFromGitHub
-, gtk4-layer-shell
-, gtk-layer-shell
-, gobject-introspection
-, gtk4
-, pkg-config
-, wrapGAppsHook3
-, cairo
-,
+{
+  lib,
+  python3,
+  fetchFromGitHub,
+  gtk4-layer-shell,
+  gtk-layer-shell,
+  gobject-introspection,
+  gtk4,
+  pkg-config,
+  wrapGAppsHook3,
+  cairo,
 }:
 
 python3.pkgs.buildPythonApplication rec {
@@ -54,20 +54,16 @@ python3.pkgs.buildPythonApplication rec {
 
   doCheck = false;
 
-
   postPatch = ''
     # Fixes "Multiple top-level packages discovered in a flat-layout"
     sed -i '$ a\[project]' pyproject.toml
     sed -i '$ a\name  = "ignis"' pyproject.toml
-    sed -i '$ a\version = "${ builtins.toString version}"' pyproject.toml
+    sed -i '$ a\version = "${builtins.toString version}"' pyproject.toml
     sed -i '$ a\[tool.setuptools]' pyproject.toml
     sed -i '$ a\packages = ["ignis"]' pyproject.toml
   '';
 
   prePatch = ''export HOME=$NIX_BUILD_TOP'';
-
-
-
 
   meta = {
     description = "Full-featured Python framework for building desktop shells using GTK4";

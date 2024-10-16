@@ -48,14 +48,14 @@ in
     services.greetd.enable = cfg.wayland;
 
     services.xserver.displayManager = {
-        lightdm = {
-          enable = cfg.x11;
-          greeters.slick = {
-            enable = true;
-            theme.name = "Zukitre-dark";
-          };
+      lightdm = {
+        enable = cfg.x11;
+        greeters.slick = {
+          enable = true;
+          theme.name = "Zukitre-dark";
         };
       };
+    };
 
     programs.regreet = {
       enable = cfg.wayland;
