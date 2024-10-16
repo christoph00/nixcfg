@@ -32,7 +32,7 @@
     srvos.url = "github:nix-community/srvos";
     # Use the version of nixpkgs that has been tested to work with SrvOS
     # Alternatively we also support the latest nixos release and unstable
-   #nixpkgs.follows = "srvos/nixpkgs";
+    #nixpkgs.follows = "srvos/nixpkgs";
 
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
