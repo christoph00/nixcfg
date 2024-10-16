@@ -102,104 +102,105 @@ in
   };
 
   config = mkIf cfg.enable (
-  
-  mkMerge [
-    {
-      boot.supportedFilesystems.zfs = lib.mkForce false;
-      disko.devices = {
-        nodev."/" = mkIf cfg.tmpRoot {
-          fsType = "tmpfs";
-          mountOptions = [
-            "size=95%"
-            "defaults"
-            # set mode to 755, otherwise systemd will set it to 777, which cause problems.
-            # relatime: Update inode access times relative to modify or change time.
-            "mode=755"
-          ];
+
+    mkMerge [
+      {
+        boot.supportedFilesystems.zfs = lib.mkForce false;
+        disko.devices = {
+          nodev."/" = mkIf cfg.tmpRoot {
+            fsType = "tmpfs";
+            mountOptions = [
+              "size=95%"
+              "defaults"
+              # set mode to 755, otherwise systemd will set it to 777, which cause problems.
+              # relatime: Update inode access times relative to modify or change time.
+              "mode=755"
+            ];
+          };
+          disk.main.type = "disk";
+          disk.main.device = cfg.device; # The device to partition
         };
-        disk.main.type = "disk";
-        disk.main.device = cfg.device; # The device to partition
-      };
 
-    }
+      }
 
-    (mkIf (cfg.encrypted) {
-      disko.devices.disk.main.content = {
-        type = "gpt";
-        partitions = {
-          inherit ESP;
-          luks = {
-            size = "100%";
-            content = {
-              type = "luks";
-              name = "cryptroot";
-              settings.allowDiscards = true;
-              # echo -n "<password" > /tmp/secret.key
-              passwordFile = "/tmp/secret.key";
+      (mkIf (cfg.encrypted) {
+        disko.devices.disk.main.content = {
+          type = "gpt";
+          partitions = {
+            inherit ESP;
+            luks = {
+              size = "100%";
+              content = {
+                type = "luks";
+                name = "cryptroot";
+                settings.allowDiscards = true;
+                # echo -n "<password" > /tmp/secret.key
+                passwordFile = "/tmp/secret.key";
 
+                content = btrfsLayout;
+              };
+            };
+          };
+        };
+
+      })
+
+      (mkIf (!cfg.encrypted && cfg.type == "btrfs") {
+        disko.devices.disk.main.content = {
+          type = "gpt";
+          partitions = {
+            inherit ESP;
+            root = {
+              size = "100%";
               content = btrfsLayout;
             };
           };
         };
-      };
 
-    })
+      })
 
-    (mkIf (!cfg.encrypted && cfg.type == "btrfs") {
-      disko.devices.disk.main.content = {
-        type = "gpt";
-        partitions = {
-          inherit ESP;
-          root = {
-            size = "100%";
-            content = btrfsLayout;
+      (mkIf (cfg.type == "xfs" && state.enable) {
+
+        disko.devices.nodev = {
+          "/home" = {
+            fsType = "auto";
+            preMountHook = "mkdir -p /mnt/state/home";
+            device = "/mnt/state/home";
+            mountOptions = [
+              "bind"
+              "noatime"
+            ];
+          };
+          "/nix" = {
+            fsType = "auto";
+            preMountHook = "mkdir -p /mnt/state/nix";
+            device = "/mnt/state/nix";
+            mountOptions = [
+              "bind"
+              "noatime"
+            ];
           };
         };
-      };
-
-    })
-
-    (mkIf (cfg.type == "xfs" && state.enable) {
-
-      disko.devices.nodev = {
-        "/home" = {
-          fsType = "auto";
-          preMountHook = "mkdir -p /mnt/state/home";
-          device = "/mnt/state/home";
-          mountOptions = [
-            "bind"
-            "noatime"
-          ];
-        };
-        "/nix" = {
-          fsType = "auto";
-          preMountHook = "mkdir -p /mnt/state/nix";
-          device = "/mnt/state/nix";
-          mountOptions = [
-            "bind"
-            "noatime"
-          ];
-        };
-      };
-    })
-    (mkIf (cfg.type == "xfs" && !state.enable) {
-      disko.devices.disk.main.content = {
-        type = "gpt";
-        partitions = {
-          inherit ESP;
-          root = {
-            name = "root";
-            size = "100%";
-            content = {
-              type = "filesystem";
-              format = "xfs";
-              mountpoint = "/";
+      })
+      (mkIf (cfg.type == "xfs" && !state.enable) {
+        disko.devices.disk.main.content = {
+          type = "gpt";
+          partitions = {
+            inherit ESP;
+            root = {
+              name = "root";
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "xfs";
+                mountpoint = "/";
+              };
             };
           };
         };
-      };
 
-    })
+      })
 
-  ]);
+    ]
+  );
 }
