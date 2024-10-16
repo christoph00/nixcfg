@@ -36,6 +36,7 @@ with lib.internal;
     internal.graphical.desktop.wayland.enable = true;
     internal.graphical.desktop.cosmic.enable = true;
     internal.graphical.desktop.wayfire.enable = true;
+    internal.graphical.desktop.xfce.enable = true;
     hardware.graphics.enable = true;
 
     #programs.labwc.enable = true;
