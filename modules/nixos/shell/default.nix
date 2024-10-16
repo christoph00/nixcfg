@@ -1,9 +1,10 @@
-{ options
-, config
-, pkgs
-, lib
-, inputs
-, ...
+{
+  options,
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
 }:
 with lib;
 with lib.internal;
@@ -15,7 +16,9 @@ let
     modules = [
       {
         wrappers = {
-          git = { basePackage = pkgs.git; };
+          git = {
+            basePackage = pkgs.git;
+          };
           starship = {
             basePackage = pkgs.starship;
             env.STARSHIP_CONFIG.value = (pkgs.formats.toml { }).generate "starship-config" {
@@ -44,7 +47,12 @@ let
                   normal = "bar";
                 };
                 editor.statusline = {
-                  left = [ "mode" "spinner" "read-only-indicator" "file-modification-indicator" ];
+                  left = [
+                    "mode"
+                    "spinner"
+                    "read-only-indicator"
+                    "file-modification-indicator"
+                  ];
                   center = [ "file-name" ];
                 };
                 editor.indent-guides.render = true;

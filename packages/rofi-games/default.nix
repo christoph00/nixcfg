@@ -34,7 +34,7 @@ rustPlatform.buildRustPackage rec {
     description = "A rofi plugin which adds a mode that will list available games for launch along with their box art. Requires a good theme for the best results";
     homepage = "https://github.com/Rolv-Apneseth/rofi-games";
     license = licenses.gpl2Only;
-    maintainers = with maintainers; [];
+    maintainers = with maintainers; [ ];
     mainProgram = "rofi-games";
   };
 }

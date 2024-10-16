@@ -3,13 +3,14 @@
 # i7-6700k
 # RX580 Sapphire
 ##
-{ config
-, lib
-, pkgs
-, modulesPath
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
 }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -22,18 +23,25 @@
   internal.graphical.desktop.display-manager.enable = false;
   internal.graphical.desktop.headless.enable = true;
 
-
   fileSystems = {
     "/media/Games" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
-      options = [ "subvol=@games" "noatime" "compress-force=zstd" ];
+      options = [
+        "subvol=@games"
+        "noatime"
+        "compress-force=zstd"
+      ];
     };
 
     "/media/ssd-data" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
-      options = [ "subvol=@data" "noatime" "compress-force=zstd" ];
+      options = [
+        "subvol=@data"
+        "noatime"
+        "compress-force=zstd"
+      ];
     };
 
     # "/media/hdd-data" = {
@@ -46,7 +54,10 @@
 
   internal.services.vscode-tunnel.enable = true;
 
-  environment.systemPackages = [ pkgs.amdgpu_top pkgs.libva-utils ];
+  environment.systemPackages = [
+    pkgs.amdgpu_top
+    pkgs.libva-utils
+  ];
 
   hardware.graphics = {
     enable = true;
@@ -61,7 +72,10 @@
       vulkan-validation-layers
       mangohud
     ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk mangohud ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
+      mangohud
+    ];
   };
 
   # chaotic.mesa-git = {

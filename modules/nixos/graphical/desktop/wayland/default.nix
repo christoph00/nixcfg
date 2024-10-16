@@ -35,12 +35,12 @@ in
   };
 
   config = mkIf cfg.enable {
-        environment.sessionVariables = {
+    environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       NIXOS_OZONE_WL = "1";
     };
 
-       xdg.portal = {
+    xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;
       wlr.enable = true;
@@ -49,7 +49,7 @@ in
       ];
     };
 
- environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs; [
       xwayland
       wayland-protocols
       wayland-utils
@@ -66,8 +66,6 @@ in
       sysmenu
 
       inputs.ignis.packages.${system}.ignis
-
- 
 
     ];
 
