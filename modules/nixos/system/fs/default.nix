@@ -101,7 +101,9 @@ in
     swap = mkBoolOpt true "Whether or not to use a swap partition.";
   };
 
-  config = mkMerge [
+  config = mkIf cfg.enable (
+  
+  mkMerge [
     {
       boot.supportedFilesystems.zfs = lib.mkForce false;
       disko.devices = {
@@ -199,5 +201,5 @@ in
 
     })
 
-  ];
+  ]);
 }

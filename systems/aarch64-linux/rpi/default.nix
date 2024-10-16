@@ -13,12 +13,13 @@
   networking.hostName = "rpi";
 
   internal.type = "server";
+  internal.system.boot.enable = false;
   internal.system.fs.enable = false;
 
   raspberry-pi-nix.board = "bcm2711";
 
 
-  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+  nixpkgs.hostPlatform =  "aarch64-linux";
 
   system.stateVersion = "24.05";
 }
