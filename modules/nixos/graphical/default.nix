@@ -70,6 +70,8 @@ with lib.internal;
 
       unrar
 
+      phinger-cursors
+
     ];
 
     gtk.iconCache.enable = true;
@@ -95,7 +97,7 @@ with lib.internal;
       };
     };
 
- 
+
 
     fonts.packages = with pkgs; [
       recursive
