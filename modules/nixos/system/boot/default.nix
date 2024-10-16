@@ -31,6 +31,7 @@ in
 {
 
   options.internal.system.boot = with types; {
+    enable = mkBoolOpt' true;
     secureBoot = mkBoolOpt' false;
     silentBoot = mkBoolOpt' config.internal.isGraphical;
     encryptedRoot = mkBoolOpt' true;
@@ -38,7 +39,7 @@ in
     #secretFile = mkStrOpt "../../../../${system}/${config.networking.hostName}/main.jwe";
   };
 
-  config = (
+  config = mkIf cfg.enable (
     mkMerge [
       {
         boot.initrd.systemd.enable = true;
