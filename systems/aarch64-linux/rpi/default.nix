@@ -1,11 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   imports = [ inputs.raspberry-pi-nix.nixosModules.raspberry-pi ];
@@ -17,20 +16,19 @@
   internal.system.fs.enable = false;
   internal.system.state.enable = false;
 
-  raspberry-pi-nix.board = "bcm2711";
-
+  raspberry-pi-nix = {
+    board = "bcm2711";
+    kernel-version = "v6_10_12";
+    libcamera-overlay.enable = false;
+  };
   hardware = {
     raspberry-pi = {
       config = {
         all = {
-          base-dt-params = {
-            BOOT_UART = {
-              value = 1;
+          options = {
+            arm_64bit = {
               enable = true;
-            };
-            uart_2ndstage = {
-              value = 1;
-              enable = true;
+              value = true;
             };
           };
           dt-overlays = {
