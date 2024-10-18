@@ -38,38 +38,45 @@ in
 
   config = mkIf cfg.enable {
 
+    internal.services.container.enable = true;
+
     services.nginx.enable = true;
     security.acme.acceptTerms = true;
     security.acme.defaults.email = "chr@asche.co";
 
-    virtualisation.oci-containers.containers.collabora-office = {
-      image = "docker.io/collabora/code";
-      ports = [ "9980:9980" ];
-      environment =
-        let
-          mkAlias = domain: "https://" + (builtins.replaceStrings [ "." ] [ "\\." ] domain) + ":443";
-        in
-        {
-          server_name = "office.r505.de";
-          aliasgroup1 = mkAlias "office.r505.de";
-          aliasgroup2 = mkAlias "cloud.r505.de";
-          aliasgroup3 = mkAlias "cloud.kinderkiste-hannover.de";
-          extra_params = "--o:ssl.enable=false --o:ssl.termination=true";
-        };
-      extraOptions = [
-        "--runtime=crun"
-        "--uidmap=0:65534:1"
-        "--gidmap=0:65534:1"
-        "--uidmap=100:${toString uid}:1"
-        "--gidmap=101:${toString gid}:1"
-        "--network=host"
-        "--cap-add=MKNOD"
-        "--cap-add=CHOWN"
-        "--cap-add=FOWNER"
-        "--cap-add=SYS_CHROOT"
-        "--label=io.containers.autoupdate=registry"
-      ];
-    };
+    virtualisation.oci-containers.containers.collabora-office =
+      let
+        inherit (config.users.users.collabora-office) uid;
+        inherit (config.users.groups.collabora-office) gid;
+      in
+      {
+        image = "docker.io/collabora/code";
+        ports = [ "9980:9980" ];
+        environment =
+          let
+            mkAlias = domain: "https://" + (builtins.replaceStrings [ "." ] [ "\\." ] domain) + ":443";
+          in
+          {
+            server_name = "office.r505.de";
+            aliasgroup1 = mkAlias "office.r505.de";
+            aliasgroup2 = mkAlias "cloud.r505.de";
+            aliasgroup3 = mkAlias "cloud.kinderkiste-hannover.de";
+            extra_params = "--o:ssl.enable=false --o:ssl.termination=true";
+          };
+        extraOptions = [
+          "--runtime=crun"
+          "--uidmap=0:65534:1"
+          "--gidmap=0:65534:1"
+          "--uidmap=100:${toString uid}:1"
+          "--gidmap=101:${toString gid}:1"
+          "--network=host"
+          "--cap-add=MKNOD"
+          "--cap-add=CHOWN"
+          "--cap-add=FOWNER"
+          "--cap-add=SYS_CHROOT"
+          "--label=io.containers.autoupdate=registry"
+        ];
+      };
 
     services.nginx.virtualHosts."office.r505.de" = {
       forceSSL = true;
