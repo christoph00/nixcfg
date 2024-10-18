@@ -17,7 +17,8 @@
   internal.system.fs.tmpRoot = true;
   internal.system.boot.encryptedRoot = false;
 
-  internal.services.vscode-tunnel.enable = true;
+  #internal.services.vscode-tunnel.enable = true;
+  internal.services.office-server.enable = true;
 
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";
