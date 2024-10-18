@@ -1,11 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
@@ -17,8 +16,11 @@
   internal.system.fs.tmpRoot = true;
   internal.system.boot.encryptedRoot = false;
 
-  #internal.services.vscode-tunnel.enable = true;
+  internal.services.vscode-tunnel.enable = true;
   internal.services.office-server.enable = true;
+
+  networking.firewall.enable = false;
+
 
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";
