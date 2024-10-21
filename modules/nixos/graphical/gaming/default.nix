@@ -53,9 +53,7 @@ in
             giflib
             libpng
             gnutls
-            mpg123
             openal
-            v4l-utils
             libpulseaudio
             libgpg-error
             alsa-plugins
@@ -70,7 +68,6 @@ in
             libxslt
             libva
             gtk3
-            jansson
             vulkan-loader
           ];
       })
@@ -88,11 +85,11 @@ in
             ];
         };
       };
-      gamescope = {
-        enable = true;
-        # capSysNice = true;
-        package = pkgs.gamescope_git;
-      };
+      # gamescope = {
+      # enable = true;
+      # capSysNice = true;
+      # package = pkgs.gamescope_git;
+      # };
 
       gamemode.enable = true;
       # protontricks.enable = true;
