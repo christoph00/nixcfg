@@ -70,6 +70,9 @@ in
       pkgs.zenity
 
       pkgs.quickshell
+      pkgs.kdePackages.okular
+      pkgs.kdePackages.dolphin
+      pkgs.lxqt.pcmanfm-qt
     ];
 
   };

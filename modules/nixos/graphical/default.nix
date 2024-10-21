@@ -36,7 +36,7 @@ with lib.internal;
     internal.graphical.desktop.wayland.enable = true;
     internal.graphical.desktop.cosmic.enable = true;
     internal.graphical.desktop.wayfire.enable = true;
-    internal.graphical.desktop.xfce.enable = true;
+    internal.graphical.desktop.xfce.enable = false;
     hardware.graphics.enable = true;
 
     #programs.labwc.enable = true;
@@ -71,9 +71,17 @@ with lib.internal;
 
       phinger-cursors
 
+      kdePackages.qt6ct
+
+      kdePackages.qt5ct
+
+      catppuccin-qt5ct
+
     ];
 
     gtk.iconCache.enable = true;
+
+    qt.platformTheme = "qt5ct";
 
     services.gnome.gnome-keyring.enable = lib.mkForce false;
 
