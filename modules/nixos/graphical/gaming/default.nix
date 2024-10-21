@@ -47,30 +47,7 @@ in
       pkgs.protonplus
       pkgs.cartridges
       # pkgs.lutris
-      (pkgs.bottles.override {
-        extraLibraries =
-          pkgs: with pkgs; [
-            giflib
-            libpng
-            gnutls
-            openal
-            libpulseaudio
-            libgpg-error
-            alsa-plugins
-            alsa-lib
-            libjpeg
-            sqlite
-            xorg.libXcomposite
-            xorg.libXinerama
-            libgcrypt
-            ncurses
-            ocl-icd
-            libxslt
-            libva
-            gtk3
-            vulkan-loader
-          ];
-      })
+      pkgs.bottles
 
     ];
 
