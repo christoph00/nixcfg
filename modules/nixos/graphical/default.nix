@@ -73,7 +73,6 @@ with lib.internal;
 
       kdePackages.qt6ct
 
-      kdePackages.qt5ct
 
       catppuccin-qt5ct
 
@@ -81,8 +80,10 @@ with lib.internal;
 
     gtk.iconCache.enable = true;
 
-    qt.platformTheme = "qt5ct";
-
+    qt = {
+      enable = true;
+      platformTheme = "qt5ct";
+    };
     services.gnome.gnome-keyring.enable = lib.mkForce false;
 
     programs.dconf.enable = true;
