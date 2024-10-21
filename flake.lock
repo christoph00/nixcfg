@@ -58,11 +58,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729348269,
-        "narHash": "sha256-KCjrPNlEgEVFYs8wHIpd4iBelAV9L9QYsynoMYihIFw=",
+        "lastModified": 1729510449,
+        "narHash": "sha256-/EwjBMYBZ3/2ROT+4M/6tLomgJEgZBpKosWhqtYZkDI=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "528723447ef037a1c081add43f4fd46440c9c3b1",
+        "rev": "4e03e8d762623ca925c604800aa18f109cd3bd97",
         "type": "github"
       },
       "original": {
@@ -626,11 +626,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729027341,
-        "narHash": "sha256-IqWD7bA9iJVifvJlB4vs2KUXVhN+d9lECWdNB4jJ0tE=",
+        "lastModified": 1729414726,
+        "narHash": "sha256-Dtmm1OU8Ymiy9hVWn/a2B8DhRYo9Eoyx9veERdOBR4o=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2a4fd1cfd8ed5648583dadef86966a8231024221",
+        "rev": "fe56302339bb28e3471632379d733547caec8103",
         "type": "github"
       },
       "original": {
@@ -646,11 +646,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729442994,
-        "narHash": "sha256-Z4oB5WmkOebaMa1/KmVM1iTeOfyN8dND1wu5ywNBYfQ=",
+        "lastModified": 1729535369,
+        "narHash": "sha256-brPLNAUk4HeDz4RJvUycuGk4BsxW+pp+/yRIbhMLjs0=",
         "owner": "linkfrg",
         "repo": "ignis",
-        "rev": "fbb12068b7262edadf7e918fb5644e2422773108",
+        "rev": "a1df022c42362c79f384416f4dad8a98172cff80",
         "type": "github"
       },
       "original": {
@@ -684,11 +684,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728974938,
-        "narHash": "sha256-pTPEx6WlM+nJVGrRUGx7Di4ljZMwE9HfvlZ6f3NzNfo=",
+        "lastModified": 1729177642,
+        "narHash": "sha256-DdKal+ZhB9QD/tnEwFg4cZ4j4YnrkvSljBxnyG+3eE0=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "23170582b0658e6afd913149a58863af3a57b376",
+        "rev": "bb69165ff372ddbd3228a03513922acd783040e8",
         "type": "github"
       },
       "original": {
@@ -1024,11 +1024,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729455588,
-        "narHash": "sha256-HH4xctBNq2xD3eKYchS99SlDrcka86Zln7LH6NTtPrk=",
+        "lastModified": 1729520362,
+        "narHash": "sha256-zzdeTRJXEGUc6MEtaOWgBezwC5JUdGnDLxGPbWvgYcI=",
         "owner": "nix-community",
         "repo": "nixpkgs-wayland",
-        "rev": "7c64c3cdb7b2ca2d91ae2a3ce90e7c53146d9e85",
+        "rev": "f74cfe73a76d38ca3e8e9e12bb1c36331bac9859",
         "type": "github"
       },
       "original": {
@@ -2895,6 +2895,26 @@
         "type": "github"
       }
     },
+    "quickshell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729288633,
+        "narHash": "sha256-uItuxRuYGoWRwswpdoPIBN8eRzJNl1GbScjvyhjawqo=",
+        "owner": "quickshell-mirror",
+        "repo": "quickshell",
+        "rev": "1adad9e822a9ac66a962823e7d931639782d3558",
+        "type": "github"
+      },
+      "original": {
+        "owner": "quickshell-mirror",
+        "repo": "quickshell",
+        "type": "github"
+      }
+    },
     "raspberry-pi-nix": {
       "inputs": {
         "libcamera-src": "libcamera-src",
@@ -2962,6 +2982,7 @@
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nvf": "nvf",
         "nvimcfg": "nvimcfg",
+        "quickshell": "quickshell",
         "raspberry-pi-nix": "raspberry-pi-nix",
         "snowfall-lib": "snowfall-lib_2",
         "srvos": "srvos",

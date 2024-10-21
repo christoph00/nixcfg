@@ -68,6 +68,8 @@ in
       pkgs.keepassxc
       pkgs.nextcloud-client
       pkgs.zenity
+
+      pkgs.quickshell
     ];
 
   };
