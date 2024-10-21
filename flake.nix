@@ -109,6 +109,11 @@
     ignis.url = "github:linkfrg/ignis";
     ignis.inputs.nixpkgs.follows = "nixpkgs";
 
+    quickshell = {
+      url = "github:quickshell-mirror/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     raspberry-pi-nix.url = "github:nix-community/raspberry-pi-nix";
     raspberry-pi-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
