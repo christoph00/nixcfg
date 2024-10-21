@@ -66,6 +66,7 @@ in
       pkgs.rssguard
 
       pkgs.keepassxc
+      pkgs.nextcloud-client
     ];
 
   };
