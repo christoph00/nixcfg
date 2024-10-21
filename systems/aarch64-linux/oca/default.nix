@@ -1,10 +1,11 @@
-{ config
-, lib
-, pkgs
-, modulesPath
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
 }:
 {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
@@ -20,7 +21,6 @@
   internal.services.office-server.enable = true;
 
   networking.firewall.enable = false;
-
 
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";

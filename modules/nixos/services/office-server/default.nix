@@ -54,7 +54,7 @@ in
         inherit (config.users.groups.collabora-office) gid;
       in
       {
-        image = "ghcr.io/collaboraonline/code-nightly:latest";
+        image = "docker.io/collabora/code";
         ports = [ "9980:9980" ];
         environment =
           let
@@ -68,7 +68,6 @@ in
             extra_params = "--o:ssl.enable=false --o:ssl.termination=true";
           };
         extraOptions = [
-          "--runtime=crun"
           "--uidmap=0:65534:1"
           "--gidmap=0:65534:1"
           "--uidmap=100:${toString uid}:1"
