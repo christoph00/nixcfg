@@ -1,24 +1,28 @@
 {
   # Snowfall Lib provides a customized `lib` instance with access to your flake's library
   # as well as the libraries available from your flake's inputs.
-  lib,
-  # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs,
-  # You also have access to your flake's inputs.
-  inputs,
-
-  # Additional metadata is provided by Snowfall Lib.
-  namespace, # The namespace used for your flake, defaulting to "internal" if not set.
-  system, # The system architecture for this host (eg. `x86_64-linux`).
-  target, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format, # A normalized name for the system target (eg. `iso`).
-  virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems, # An attribute map of your defined hosts.
+  lib
+, # An instance of `pkgs` with your overlays and packages applied is also available.
+  pkgs
+, # You also have access to your flake's inputs.
+  inputs
+, # Additional metadata is provided by Snowfall Lib.
+  namespace
+, # The namespace used for your flake, defaulting to "internal" if not set.
+  system
+, # The system architecture for this host (eg. `x86_64-linux`).
+  target
+, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
+  format
+, # A normalized name for the system target (eg. `iso`).
+  virtual
+, # A boolean to determine whether this system is a virtual target using nixos-generators.
+  systems
+, # An attribute map of your defined hosts.
 
   # All other arguments come from the module system.
-  config,
-
-  ...
+  config
+, ...
 }:
 
 with builtins;
@@ -34,52 +38,23 @@ in
     enable = mkBoolOpt config.internal.isGraphical "Enable the Display Manager.";
     x11 = mkBoolOpt false "Enable the X11 Display Manager.";
     wayland = mkBoolOpt config.internal.graphical.desktop.wayland.enable "Enable the Wayland Display Manager.";
+    sddm = mkBoolOpt' true;
   };
 
   config = mkIf cfg.enable {
-    services.xserver.displayManager.startx.enable = true;
-
-    services.displayManager.cosmic-greeter.enable = false;
-
-    environment.systemPackages = with pkgs; [
-      cage
-    ];
-
-    services.greetd.enable = cfg.wayland;
-
-    services.xserver.displayManager = {
-      lightdm = {
-        enable = cfg.x11;
-        greeters.slick = {
+    services = {
+      xserver.displayManager.startx.enable = true;
+      displayManager.cosmic-greeter.enable = false;
+      displayManager.sddm = {
+        enable = true;
+        wayland = {
           enable = true;
-          theme.name = "Zukitre-dark";
+          compositor = "kwin";
         };
       };
+
     };
 
-    programs.regreet = {
-      enable = cfg.wayland;
-      package = pkgs.greetd.regreet;
-      cageArgs = [
-        "-s"
-        "-m"
-        "last"
-      ];
-      theme.package = pkgs.canta-theme;
-      settings = {
-
-        commands = {
-          reboot = [
-            "systemctl"
-            "reboot"
-          ];
-          poweroff = [
-            "systemctl"
-            "poweroff"
-          ];
-        };
-      };
-    };
 
   };
 
