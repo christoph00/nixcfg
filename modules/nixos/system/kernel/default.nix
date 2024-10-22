@@ -143,7 +143,12 @@ in
             "qnx4"
             "qnx6"
             "sysv"
+
           ];
+
+          zfs.enabled = false;
+
+          supportedFilesystems = lib.mkForce [ "btrfs" "vfat" "f2fs" "xfs" "ext4" "vfat" ];
         };
       }
       (mkIf config.internal.isGraphical {
