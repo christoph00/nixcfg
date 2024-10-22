@@ -36,6 +36,7 @@ with lib.internal;
     internal.graphical.desktop.wayland.enable = true;
     internal.graphical.desktop.cosmic.enable = true;
     internal.graphical.desktop.wayfire.enable = true;
+    internal.graphical.desktop.plasma.enable = true;
     internal.graphical.desktop.xfce.enable = false;
     hardware.graphics.enable = true;
 
@@ -80,10 +81,6 @@ with lib.internal;
 
     gtk.iconCache.enable = true;
 
-    qt = {
-      enable = true;
-      platformTheme = "qt5ct";
-    };
     services.gnome.gnome-keyring.enable = lib.mkForce false;
 
     programs.dconf.enable = true;
