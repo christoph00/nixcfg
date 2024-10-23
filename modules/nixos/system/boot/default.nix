@@ -43,7 +43,10 @@ in
     {
       boot.initrd = {
         compressor = "zstd";
-        compressorArgs = ["-19" "-T0"];
+        compressorArgs = [
+          "-19"
+          "-T0"
+        ];
         systemd.enable = true;
       };
       boot.loader.systemd-boot.enable = true;
@@ -59,7 +62,6 @@ in
       # sbctl for debugging and troubleshooting Secure Boot.
       # tpm2-tss for interacting with the tpm secure enclave.
 
-
       # secureboot keys are generated manually after first boot
       # and stored here.
       # internal.features.impermanence.directories = [ "/etc/secureboot" ];
@@ -70,7 +72,7 @@ in
       # generated at installation time. So we force it to false
       # for now.
       #
-       environment.systemPackages = [
+      environment.systemPackages = [
         pkgs.sbctl
         pkgs.tpm2-tss
       ];
