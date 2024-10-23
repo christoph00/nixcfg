@@ -146,7 +146,6 @@ in
 
           ];
 
-          zfs.enabled = false;
 
           supportedFilesystems = lib.mkForce [ "btrfs" "vfat" "f2fs" "xfs" "ext4" "vfat" ];
         };
