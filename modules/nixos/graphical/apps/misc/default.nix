@@ -73,6 +73,12 @@ in
       pkgs.kdePackages.okular
       pkgs.kdePackages.dolphin
       pkgs.lxqt.pcmanfm-qt
+
+
+      pkgs.php83
+      pkgs.php83Packages.composer
+      pkgs.nodejs
+      pkgs.laravel
     ];
 
   };
