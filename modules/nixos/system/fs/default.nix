@@ -1,8 +1,9 @@
-{ lib
-, pkgs
-, inputs
-, config
-, ...
+{
+  lib,
+  pkgs,
+  inputs,
+  config,
+  ...
 }:
 
 with builtins;
@@ -101,7 +102,6 @@ in
   };
 
   config = mkIf cfg.enable (
-
 
     mkMerge [
       {
