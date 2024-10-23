@@ -1,13 +1,13 @@
 {
   # Snowfall Lib provides a customized `lib` instance with access to your flake's library
   # as well as the libraries available from your flake's inputs.
-  lib,
-  # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs,
-  # You also have access to your flake's inputs.
-  config,
-  inputs,
-  ...
+  lib
+, # An instance of `pkgs` with your overlays and packages applied is also available.
+  pkgs
+, # You also have access to your flake's inputs.
+  config
+, inputs
+, ...
 }:
 
 with builtins;
@@ -47,13 +47,11 @@ in
       pkgs.zed-editor
       pkgs.vscode
       pkgs.kitty
-      pkgs.foot
       pkgs.anyrun
       pkgs.moonlight-qt
-      pkgs.floorp
       pkgs.librewolf
       pkgs.libreoffice-fresh
-      pkgs.rio
+      pkgs.breeze
       pkgs.gimp
       pkgs.wezterm
 
@@ -63,21 +61,20 @@ in
       pkgs.digikam
 
       pkgs.qownnotes
-      pkgs.rssguard
 
-      pkgs.keepassxc
       pkgs.nextcloud-client
-      pkgs.zenity
 
-      pkgs.quickshell
+      # pkgs.quickshell
       pkgs.kdePackages.okular
-      pkgs.kdePackages.dolphin
-      pkgs.lxqt.pcmanfm-qt
+      # pkgs.kdePackages.dolphin
+      # pkgs.lxqt.pcmanfm-qt
 
       pkgs.php83
       pkgs.php83Packages.composer
       pkgs.nodejs
       pkgs.laravel
+
+      pkgs.geary
     ];
 
   };
