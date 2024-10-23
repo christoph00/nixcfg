@@ -1,11 +1,8 @@
-{
-  lib,
-  pkgs,
-  inputs,
-
-  config,
-
-  ...
+{ lib
+, pkgs
+, inputs
+, config
+, ...
 }:
 
 with builtins;
@@ -105,6 +102,7 @@ in
 
   config = mkIf cfg.enable (
 
+
     mkMerge [
       {
         boot.supportedFilesystems.zfs = lib.mkForce false;
@@ -120,6 +118,7 @@ in
             ];
           };
           disk.main.type = "disk";
+          disk.main.imageSize = "6G";
           disk.main.device = cfg.device; # The device to partition
         };
 

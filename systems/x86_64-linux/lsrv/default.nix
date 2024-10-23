@@ -20,6 +20,7 @@
   internal.isV3 = true;
   internal.system.boot.encryptedRoot = false;
   internal.system.fs.swapSize = "1G";
+  internal.system.fs.device = "/dev/mmcblk0";
 
   boot.kernelModules = [
     "kvm-intel"
