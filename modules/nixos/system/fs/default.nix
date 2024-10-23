@@ -77,7 +77,7 @@ let
       "@swap" = {
         mountpoint = "/.swapvol";
         swap = {
-          swapfile.size = "16G";
+          swapfile.size = cfg.swapSize;
         };
       };
     };
@@ -95,10 +95,12 @@ in
       ];
       default = "btrfs";
     };
+
     device = mkStrOpt "/dev/nvme0n1" "Device to use for the root filesystem.";
     encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot "Whether or not the root filesystem is encrypted.";
     tmpRoot = mkBoolOpt false "Whether or not the root filesystem is a tmpfs.";
     swap = mkBoolOpt true "Whether or not to use a swap partition.";
+    swapSize = mkStrOpt "16G" "Swap size";
   };
 
   config = mkIf cfg.enable (

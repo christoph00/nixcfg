@@ -33,11 +33,11 @@ with lib.internal;
 
   config = mkIf config.internal.isGraphical {
 
-    internal.graphical.desktop.wayland.enable = true;
+    internal.graphical.desktop.wayland.enable = false;
     # internal.graphical.desktop.cosmic.enable = true;
     # internal.graphical.desktop.wayfire.enable = true;
-    internal.graphical.desktop.plasma.enable = true;
-    internal.graphical.desktop.xfce.enable = false;
+    # internal.graphical.desktop.plasma.enable = true;
+    internal.graphical.desktop.xfce.enable = true;
     hardware.graphics.enable = true;
 
     #programs.labwc.enable = true;

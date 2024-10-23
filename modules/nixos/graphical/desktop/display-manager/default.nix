@@ -44,11 +44,10 @@ in
   config = mkIf cfg.enable {
     services = {
       xserver.displayManager.startx.enable = true;
-      displayManager.cosmic-greeter.enable = false;
       displayManager.sddm = {
         enable = true;
         wayland = {
-          enable = true;
+          enable = cfg.wayland;
           compositor = "kwin";
         };
       };

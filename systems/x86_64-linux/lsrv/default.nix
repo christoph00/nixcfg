@@ -18,7 +18,8 @@
 
   internal.type = "server";
   internal.isV3 = true;
-  internal.system.boot.secureBoot = false;
+  internal.system.boot.encryptedRoot = false;
+  internal.system.fs.swapSize = "1G";
 
   boot.kernelModules = [
     "kvm-intel"
