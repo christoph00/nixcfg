@@ -41,7 +41,11 @@ in
 
   config = mkIf cfg.enable (mkMerge [
     {
-      boot.initrd.systemd.enable = true;
+      boot.initrd = {
+        compressor = "zstd";
+        compressorArgs = ["-19" "-T0"];
+        systemd.enable = true;
+      };
       boot.loader.systemd-boot.enable = true;
       boot.loader.systemd-boot.netbootxyz.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
@@ -54,10 +58,7 @@ in
 
       # sbctl for debugging and troubleshooting Secure Boot.
       # tpm2-tss for interacting with the tpm secure enclave.
-      environment.systemPackages = [
-        pkgs.sbctl
-        pkgs.tpm2-tss
-      ];
+
 
       # secureboot keys are generated manually after first boot
       # and stored here.
@@ -68,6 +69,11 @@ in
       # This setting is usually set to true in configuration.nix
       # generated at installation time. So we force it to false
       # for now.
+      #
+       environment.systemPackages = [
+        pkgs.sbctl
+        pkgs.tpm2-tss
+      ];
       boot.initrd.availableKernelModules = [
         "tpm-crb"
         "tpm-tis"
