@@ -76,7 +76,7 @@ with lib.internal;
 
       catppuccin-qt5ct
 
-      # chicago95
+      chicago95
 
     ];
 
@@ -109,7 +109,7 @@ with lib.internal;
     };
 
     fonts.packages = with pkgs; [
-      # chicago95
+      chicago95
       recursive
       commit-mono
       cascadia-code
