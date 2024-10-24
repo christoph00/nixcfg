@@ -47,6 +47,7 @@ in
       xserver.displayManager = {
         startx.enable = true;
         lightdm = {
+          enable = true;
           background = "#008080";
           greeters.gtk = {
             cursorTheme = {
@@ -66,9 +67,9 @@ in
             '';
           };
         };
-
       };
-
     };
 
-  }
+  };
+
+}

@@ -76,6 +76,8 @@ with lib.internal;
 
       catppuccin-qt5ct
 
+      internal.chicago95
+
     ];
 
     gtk.iconCache.enable = true;
@@ -84,6 +86,11 @@ with lib.internal;
 
     programs.dconf.enable = true;
     services = {
+
+      xserver = {
+        enable = true;
+        layout = "de";
+      };
 
       dbus.implementation = "broker";
 
