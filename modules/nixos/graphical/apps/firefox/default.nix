@@ -35,7 +35,7 @@ in
             {
               wrappers = {
                 firefox = {
-                  basePackage = pkgs.wrapFirefox pkgs.pkgsx86_64_v3.firefox-beta-unwrapped {
+                  basePackage = pkgs.wrapFirefox pkgs.firefox-beta-unwrapped {
                     extraPolicies.ExtensionSettings = import ./extensions.nix { inherit inputs pkgs lib; };
                     extraPrefs = import ./preferences.nix { inherit inputs; };
                   };
