@@ -20,5 +20,5 @@ final: prev: {
   # Or, to add a package that is not in Nixpkgs currently via an external flake:
   # my-package = inputs.my-input.packages.${prev.system}.my-package;
 
-  chicago95 = inputs.chicago95.packages.${prev.system}.default;
+  inherit (inputs.nix95.packages.${prev.system}) chicago95;
 }
