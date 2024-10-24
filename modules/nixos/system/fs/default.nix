@@ -1,9 +1,8 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  config,
-  ...
+{ lib
+, pkgs
+, inputs
+, config
+, ...
 }:
 
 with builtins;
@@ -118,7 +117,7 @@ in
             ];
           };
           disk.main.type = "disk";
-          disk.main.imageSize = "6G";
+          disk.main.imageSize = "8G";
           disk.main.device = cfg.device; # The device to partition
         };
 
