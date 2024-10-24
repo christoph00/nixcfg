@@ -3,25 +3,31 @@
 # i7-6700k
 # RX580 Sapphire
 ##
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   networking.hostName = "lsrv";
+  internal = {
 
-  internal.type = "server";
-  internal.isV3 = true;
-  internal.system.boot.encryptedRoot = false;
-  internal.system.fs.swapSize = "1G";
-  internal.system.fs.device = "/dev/mmcblk0";
+    type = "server";
+    isV3 = true;
+    system = {
+      boot.encryptedRoot = false;
+      fs = {
+        swapSize = "1G";
+        device = "/dev/mmcblk0";
+        tmpRoot = true;
+      };
+    };
+  };
 
   boot.kernelModules = [
     "kvm-intel"
@@ -34,7 +40,10 @@
       "xhci_pci"
       "ahci"
       "nvme"
-"usbhid" "usb_storage" "sd_mod" "sdhci_pci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+      "sdhci_pci"
     ];
   };
 
