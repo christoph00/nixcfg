@@ -51,7 +51,6 @@ in
       pkgs.moonlight-qt
       pkgs.librewolf
       pkgs.libreoffice-fresh
-      pkgs.breeze
       pkgs.gimp
       pkgs.wezterm
 

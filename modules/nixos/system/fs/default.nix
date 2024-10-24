@@ -95,7 +95,7 @@ in
 
     device = mkStrOpt "/dev/nvme0n1" "Device to use for the root filesystem.";
     encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot "Whether or not the root filesystem is encrypted.";
-    tmpRoot = mkBoolOpt false "Whether or not the root filesystem is a tmpfs.";
+    tmpRoot = mkBoolOpt true "Whether or not the root filesystem is a tmpfs.";
     swap = mkBoolOpt true "Whether or not to use a swap partition.";
     swapSize = mkStrOpt "16G" "Swap size";
   };
@@ -117,7 +117,7 @@ in
             ];
           };
           disk.main.type = "disk";
-          disk.main.imageSize = "8G";
+          # disk.main.imageSize = "6G";
           disk.main.device = cfg.device; # The device to partition
         };
 

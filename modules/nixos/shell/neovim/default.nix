@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.internal;
@@ -11,7 +10,7 @@ let
 in
 {
   options.internal.shell.neovim = with types; {
-    enable = mkBoolOpt true "Whether or not to configure neovim config.";
+    enable = mkBoolOpt config.internal.isGraphical "Whether or not to configure neovim config.";
   };
 
   config = mkIf cfg.enable {
