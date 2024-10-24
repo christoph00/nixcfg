@@ -109,8 +109,7 @@ with lib.internal;
     };
 
     fonts.packages = with pkgs; [
-      chicago95
-      recursive
+      # chicago95
       commit-mono
       cascadia-code
       martian-mono
@@ -118,7 +117,6 @@ with lib.internal;
       mona-sans
       monaspace
       hubot-sans
-      redhat-official-fonts
       maple-mono-NF
       material-design-icons
       (nerdfonts.override {
