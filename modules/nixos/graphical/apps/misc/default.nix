@@ -74,6 +74,8 @@ in
       pkgs.laravel
 
       pkgs.geary
+
+      pkgs.agenix
     ];
 
   };

@@ -6,6 +6,7 @@ let
 
   # Hosts
   csrv = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkYJjXoEofN3Nb/b9Dxsc0+J2S5fUU7fZOs6hqZCvGT";
+  lsrv = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICzHUtNXc40FOmE5MVbZQNYabaZHsDSj/D79lt7gmkYl";
   tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA9QsDiXxdI910DdpiwX7FnsTYASANTK7Xs/kM8hWCxN";
   oca = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIANvJNo6Vo6IaTx7ND2fBILxrpswvprOvFRCb+RYF1El";
   oc1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBxEMuue30m1zhq/03TMgJrj1t+8hRudPPpWMM3/5o9A";
@@ -14,6 +15,7 @@ let
 
   servers = [
     csrv
+    lsrv
     oca
     oc1
     oc2
