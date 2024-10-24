@@ -127,7 +127,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
   };
 
   outputs =
@@ -138,58 +137,53 @@
         src = ./.;
       };
     in
-    lib.mkFlake
-      {
-        inherit inputs;
-        channels-config = {
-          allowUnfree = true;
-          permittedInsecurePackages = [
-            "electron-25.9.0"
-            "electron-27.3.11"
-          ];
-        };
-
-
-        overlays = with inputs; [
-          flake.overlays.default
-          chaotic.overlays.default
-          nvimcfg.overlays.default
-          nixpkgs-wayland.overlay
+    lib.mkFlake {
+      inherit inputs;
+      channels-config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "electron-25.9.0"
+          "electron-27.3.11"
         ];
+      };
 
+      overlays = with inputs; [
+        flake.overlays.default
+        chaotic.overlays.default
+        nvimcfg.overlays.default
+        nixpkgs-wayland.overlay
+      ];
 
-        systems.modules.nixos = with inputs; [
-          srvos.nixosModules.common
-          srvos.nixosModules.mixins-nix-experimental
-          agenix.nixosModules.default
-          chaotic.nixosModules.default
-          {
-            # manually import overlay
-            chaotic.nyx.overlay.enable = false;
-          }
-          disko.nixosModules.disko
-          nixos-cosmic.nixosModules.default
-          impermanence.nixosModules.impermanence
-          lanzaboote.nixosModules.lanzaboote
-          # jovian.nixosModules.default
-          vscode-server.nixosModules.default
-          nvf.nixosModules.default
-        ];
+      systems.modules.nixos = with inputs; [
+        srvos.nixosModules.common
+        srvos.nixosModules.mixins-nix-experimental
+        agenix.nixosModules.default
+        chaotic.nixosModules.default
+        {
+          # manually import overlay
+          chaotic.nyx.overlay.enable = false;
+        }
+        disko.nixosModules.disko
+        nixos-cosmic.nixosModules.default
+        impermanence.nixosModules.impermanence
+        lanzaboote.nixosModules.lanzaboote
+        # jovian.nixosModules.default
+        vscode-server.nixosModules.default
+        nvf.nixosModules.default
+      ];
 
-        deploy = lib.mkDeploy { inherit (inputs) self; };
+      deploy = lib.mkDeploy { inherit (inputs) self; };
 
-        checks = builtins.mapAttrs
-          (
-            system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
-          )
-          inputs.deploy-rs.lib;
+      checks = builtins.mapAttrs (
+        system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
+      ) inputs.deploy-rs.lib;
 
-        outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
+      outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
 
-        alias = {
-          shells.default = "devel";
-        };
-      }
+      alias = {
+        shells.default = "devel";
+      };
+    }
     // {
       self = inputs.self;
     };
