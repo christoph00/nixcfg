@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.internal;
@@ -98,11 +97,16 @@ in
       pkgs.pciutils
       pkgs.jq
       pkgs.killall
-      pkgs.nh
       # pkgs.devenv
       pkgs.tmux
 
       # pkgs.uv
     ];
+
+    programs.nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+    };
   };
 }
