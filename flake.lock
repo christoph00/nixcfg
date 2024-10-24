@@ -904,6 +904,26 @@
         "type": "github"
       }
     },
+    "nix95": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729015832,
+        "narHash": "sha256-zLKER6jqXShN3VepKpsG5a/pYkDEpDQmsFfK7ItnTxo=",
+        "owner": "elohmeier",
+        "repo": "nix95",
+        "rev": "c95a2cc6c787e5a7d05d9131fda34e1ea9800d32",
+        "type": "github"
+      },
+      "original": {
+        "owner": "elohmeier",
+        "repo": "nix95",
+        "type": "github"
+      }
+    },
     "nixinate": {
       "inputs": {
         "nixpkgs": [
@@ -2994,6 +3014,7 @@
         "ignis": "ignis",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
+        "nix95": "nix95",
         "nixinate": "nixinate",
         "nixos-cosmic": "nixos-cosmic",
         "nixpkgs": [

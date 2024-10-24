@@ -51,15 +51,15 @@ in
           background = "#008080";
           greeters.gtk = {
             cursorTheme = {
-              package = pkgs.internal.chicago95;
+              package = pkgs.chicago95;
               name = "Chicago95_Animated_Hourglass_Cursors";
             };
             iconTheme = {
-              package = pkgs.internal.chicago95;
+              package = pkgs.chicago95;
               name = "Chicago95";
             };
             theme = {
-              package = pkgs.internal.chicago95;
+              package = pkgs.chicago95;
               name = "Chicago95";
             };
             extraConfig = ''
