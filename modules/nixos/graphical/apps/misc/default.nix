@@ -81,6 +81,8 @@ in
       pkgs.geary
 
       pkgs.agenix
+
+      pkgs.go-passbolt-cli
     ];
 
   };

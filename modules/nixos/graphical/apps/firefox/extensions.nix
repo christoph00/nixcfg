@@ -17,10 +17,11 @@ let
   };
 in
 {
-  "*".installation_mode = "blocked";
+ # "*".installation_mode = "blocked";
 }
 // lib.listToAttrs [
   (extension "dictionary-german" "de-DE@dictionaries.addons.mozilla.org")
   (extension "ublock-origin" "uBlock0@raymondhill.net")
   (extension "clearurls" "{74145f27-f039-47ce-a470-a662b129930a}")
+  (extension "passbolt" "passbolt@passbolt.com")
 ]
