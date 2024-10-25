@@ -1,7 +1,8 @@
-{ inputs
-, pkgs
-, lib
-, ...
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
 }:
 let
   extension = shortId: uuid: {
@@ -18,7 +19,7 @@ in
 {
   "*".installation_mode = "blocked";
 }
-  // lib.listToAttrs [
+// lib.listToAttrs [
   (extension "dictionary-german" "de-DE@dictionaries.addons.mozilla.org")
   (extension "ublock-origin" "uBlock0@raymondhill.net")
   (extension "clearurls" "{74145f27-f039-47ce-a470-a662b129930a}")

@@ -1,13 +1,13 @@
 {
   # Snowfall Lib provides a customized `lib` instance with access to your flake's library
   # as well as the libraries available from your flake's inputs.
-  lib
-, # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs
-, # You also have access to your flake's inputs.
-  config
-, inputs
-, ...
+  lib,
+  # An instance of `pkgs` with your overlays and packages applied is also available.
+  pkgs,
+  # You also have access to your flake's inputs.
+  config,
+  inputs,
+  ...
 }:
 
 with builtins;
@@ -16,7 +16,6 @@ with lib.internal;
 
 let
   cfg = config.internal.graphical.apps.firefox;
-
 
 in
 {
@@ -49,6 +48,18 @@ in
       in
       [
         wrapped
+        (pkgs.makeDesktopItem {
+          exec = "${wrapped}/bin/firefox";
+
+          name = "firefox";
+          desktopName = "Firefox";
+          genericName = "Webbrowser";
+          icon = "firefox";
+          categories = [
+            "Network"
+            "WebBrowser"
+          ];
+        })
       ];
 
   };
