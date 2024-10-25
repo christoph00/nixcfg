@@ -100,6 +100,9 @@
       flake = false;
     };
 
+    firefox-csshacks.url = "github:MrOtherGuy/firefox-csshacks";
+    firefox-csshacks.flake = false;
+
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";

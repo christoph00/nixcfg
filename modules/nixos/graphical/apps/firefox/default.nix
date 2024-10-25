@@ -35,7 +35,22 @@ in
               wrappers = {
                 firefox = {
                   basePackage = pkgs.wrapFirefox pkgs.firefox-beta-unwrapped {
-                    extraPolicies.ExtensionSettings = import ./extensions.nix { inherit inputs pkgs lib; };
+                    extraPolicies = {
+                      CaptivePortal = false;
+                      DisableFirefoxStudies = true;
+                      DisablePocket = true;
+                      DisableTelemetry = true;
+                      DisableFirefoxAccounts = true;
+                      FirefoxHome = {
+                        Pocket = false;
+                        Snippets = false;
+                      };
+                      UserMessaging = {
+                        ExtensionRecommendations = false;
+                        SkipOnboarding = true;
+                      };
+                      ExtensionSettings = import ./extensions.nix { inherit inputs pkgs lib; };
+                    };
                     extraPrefs = import ./preferences.nix { inherit inputs; };
                   };
 

@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.internal;
@@ -98,7 +97,7 @@ in
       pkgs.pciutils
       pkgs.jq
       pkgs.killall
-      # pkgs.devenv
+      pkgs.devenv
       pkgs.tmux
 
       # pkgs.uv
