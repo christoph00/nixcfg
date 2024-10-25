@@ -22,6 +22,10 @@ in
   pref("extensions.formautofill.creditCards.enabled", false);
   pref("browser.tabs.loadBookmarksInBackground", true);
 
+  pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+  pref("svg.context-properties.content.enable", true);
+  pref("layout.css.color-mix.enabled", true);
+
   pref("apz.overscroll.enabled", true); // DEFAULT NON-LINUX
   pref("general.smoothScroll", true); // DEFAULT
   pref("mousewheel.min_line_scroll_amount", 10); // 10-40; adjust this number to your liking; default=5
