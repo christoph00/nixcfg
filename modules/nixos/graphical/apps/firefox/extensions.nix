@@ -17,7 +17,7 @@ let
   };
 in
 {
- # "*".installation_mode = "blocked";
+  # "*".installation_mode = "blocked";
 }
 // lib.listToAttrs [
   (extension "dictionary-german" "de-DE@dictionaries.addons.mozilla.org")
