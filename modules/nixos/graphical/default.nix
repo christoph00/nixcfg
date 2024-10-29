@@ -33,9 +33,9 @@ with lib.internal;
 
   config = mkIf config.internal.isGraphical {
 
-    internal.graphical.desktop.wayland.enable = false;
+    internal.graphical.desktop.wayland.enable = true;
     # internal.graphical.desktop.cosmic.enable = true;
-    # internal.graphical.desktop.wayfire.enable = true;
+    internal.graphical.desktop.wayfire.enable = true;
     # internal.graphical.desktop.plasma.enable = true;
     internal.graphical.desktop.xfce.enable = true;
     hardware.graphics.enable = true;
@@ -84,7 +84,7 @@ with lib.internal;
     services = {
 
       xserver = {
-        enable = true;
+        enable = false;
         xkb.layout = "de";
       };
 
