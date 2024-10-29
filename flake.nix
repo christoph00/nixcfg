@@ -44,6 +44,10 @@
 
     };
 
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
+
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -138,6 +142,14 @@
     nix95 = {
       url = "github:elohmeier/nix95";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    microvm = {
+      url = "github:astro/microvm.nix";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
   };
