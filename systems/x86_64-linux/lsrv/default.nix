@@ -45,8 +45,11 @@
       "usb_storage"
       "sd_mod"
       "sdhci_pci"
+      #"r8169" 
     ];
   };
+  boot.extraModulePackages = [ config.boot.kernelPackages.r8168 ];
+  boot.blacklistedKernelModules = [ "r8169" ];
 
   system.stateVersion = "24.05";
 }
