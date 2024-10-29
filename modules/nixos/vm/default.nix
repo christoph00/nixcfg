@@ -1,20 +1,21 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.internal;
 let
   cfg = config.internal.vm;
 
-  hostNameToIpList = lib.imap1 (i: v: {
-    name = v;
-    value = "10.0.0.${toString (i + 1)}";
-  }) cfg.vms;
+  hostNameToIpList = lib.imap1
+    (i: v: {
+      name = v;
+      value = "10.0.0.${toString (i + 1)}";
+    })
+    cfg.vms;
 
   hostNameToIp = builtins.listToAttrs hostNameToIpList;
 
@@ -27,7 +28,7 @@ in
   imports = [ ./guest.nix ];
   options.internal.vm = with types; {
     enable = mkBoolOpt false "Whether or not to configure VM config.";
-    isHost = mkBoolOpt' cfg.enable;
+    isHost = mkBoolOpt' false;
     isGuest = mkBoolOpt' config.internal.isMicroVM;
 
     externalInterface = mkOption {
@@ -46,7 +47,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.isHost {
+  config = lib.mkIf cfg.enable {
     microvm.host.enable = true;
     microvm.guest.enable = false;
 

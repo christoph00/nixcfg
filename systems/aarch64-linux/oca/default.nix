@@ -1,11 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
@@ -14,8 +13,8 @@
 
   internal.type = "vm";
   internal.system.fs.device = "/dev/sda";
-  internal.system.fs.tmpRoot = true;
   internal.system.boot.encryptedRoot = false;
+  internal.vm.enable = false;
 
   internal.services.vscode-tunnel.enable = true;
   internal.services.office-server.enable = true;
@@ -33,7 +32,6 @@
     "virtio_pci"
     "virtio_scsi"
   ];
-  boot.kernelParams = [ "net.ifnames=0" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
