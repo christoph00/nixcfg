@@ -24,8 +24,7 @@
       boot.encryptedRoot = false;
       fs = {
         swapSize = "1G";
-        device = "/dev/mmcblk0";
-        tmpRoot = true;
+        device = "/dev/mmcblk1";
       };
     };
   };
