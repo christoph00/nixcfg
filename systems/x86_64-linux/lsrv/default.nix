@@ -45,7 +45,8 @@
       "usb_storage"
       "sd_mod"
       "sdhci_pci"
-      "r8169" 
+      "r8169"
+      "mmc_block"
     ];
   };
   #boot.extraModulePackages = [ config.boot.kernelPackages.r8168 ];
