@@ -1,11 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -84,6 +83,7 @@
 
   boot.extraModprobeConfig = ''
     options snd-intel-dspcfg dsp_driver=1
+    options thinkpad_acpi fan_control=1 experimental=1
   '';
 
   services.fstrim.enable = true;
@@ -97,6 +97,8 @@
     percentageAction = 4;
     criticalPowerAction = "Hibernate";
   };
+
+  services.thinkfan.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
 
