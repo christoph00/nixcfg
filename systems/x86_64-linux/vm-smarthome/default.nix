@@ -14,7 +14,5 @@
 
   internal.type = "microvm";
 
-
-
   system.stateVersion = "24.05";
 }

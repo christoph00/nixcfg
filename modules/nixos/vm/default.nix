@@ -24,7 +24,7 @@ let
   };
 in
 {
-  imports = [./guest.nix];
+  imports = [ ./guest.nix ];
   options.internal.vm = with types; {
     enable = mkBoolOpt false "Whether or not to configure VM config.";
     isHost = mkBoolOpt cfg.enable;
@@ -53,17 +53,14 @@ in
       "/var/lib/microvms"
     ];
 
-
-
   };
 
-
-#   config = lib.mkIf config.virtualisation.microVMs.enableJournalLinks {
-#     systemd.tmpfiles.rules = let
-#       makeJournalLink = vmName: 
-#         "L+ /var/log/journal/${config.internal.vm.vms.${vmName}.machine-id} - - - - " + 
-#         "/var/lib/microvms/${vmName}/storage/journal/${config.internal.vm.vms.${vmName}.machine-id}";
-#     in
-#       map makeJournalLink config.internal.vm.vms;
-#   };
+  #   config = lib.mkIf config.virtualisation.microVMs.enableJournalLinks {
+  #     systemd.tmpfiles.rules = let
+  #       makeJournalLink = vmName: 
+  #         "L+ /var/log/journal/${config.internal.vm.vms.${vmName}.machine-id} - - - - " + 
+  #         "/var/lib/microvms/${vmName}/storage/journal/${config.internal.vm.vms.${vmName}.machine-id}";
+  #     in
+  #       map makeJournalLink config.internal.vm.vms;
+  #   };
 }
