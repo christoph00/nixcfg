@@ -48,6 +48,7 @@ in
 
   config = lib.mkIf cfg.isHost {
     microvm.host.enable = true;
+    microvm.guest.enable = false;
 
     internal.system.state.directories = lib.mkIf config.internal.system.state.enable [
       "/var/lib/microvms"
