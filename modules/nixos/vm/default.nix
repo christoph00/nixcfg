@@ -27,7 +27,7 @@ in
   imports = [ ./guest.nix ];
   options.internal.vm = with types; {
     enable = mkBoolOpt false "Whether or not to configure VM config.";
-    isHost = mkBoolOpt cfg.enable;
+    isHost = mkBoolOpt' cfg.enable;
     isGuest = mkBoolOpt' config.internal.isMicroVM;
 
     externalInterface = mkOption {
