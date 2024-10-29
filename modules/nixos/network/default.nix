@@ -16,6 +16,8 @@ in
 
   options.internal.network = with types; {
     enable = mkBoolOpt' true;
+    enableWifi = mkBoolOpt' config.internal.isLaptop;
+
 
   };
 
@@ -31,7 +33,7 @@ in
       useDHCP = false;
 
       wireless.iwd = {
-        enable = config.internal.isLaptop;
+        enable = cfg.enableWifi;
         settings.General.EnableNetworkConfiguration = true;
         settings.General.AddressRandomization = "network";
         settings.General.AddressRandomizationRange = "full";
@@ -48,12 +50,12 @@ in
       enable = true;
       wait-online.enable = false;
       networks = {
-        "20-wireless" = {
+        "20-wireless" = lib.mkIf cfg.enableWifi {
           matchConfig.Name = "wlp*";
           networkConfig.DHCP = "yes";
           dhcpConfig.RouteMetric = 20;
         };
-        "50-wired" = lib.mkIf config.internal.isLaptop {
+        "50-wired" =  {
           matchConfig.Name = "en*";
           networkConfig.DHCP = "yes";
           dhcpConfig.RouteMetric = 50;
@@ -61,16 +63,7 @@ in
       };
     };
 
-    systemd.services.NetworkManager-wait-online = {
-      serviceConfig = {
-        ExecStart = [
-          ""
-          "${pkgs.networkmanager}/bin/nm-online -q"
-        ];
-      };
-    };
-
-    environment.systemPackages = mkIf config.internal.isLaptop [ pkgs.iwgtk ];
+    environment.systemPackages = mkIf cfg.enableWifi [ pkgs.iwgtk ];
 
   };
 }
