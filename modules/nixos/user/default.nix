@@ -23,10 +23,10 @@ in
   };
 
   config = {
-      snowfallorg.users.${cfg.name} = {
-        home = {
-            enable = false;
-        };
+    snowfallorg.users.${cfg.name} = {
+      home = {
+        enable = false;
+      };
     };
 
     users.users.${cfg.name} = {
