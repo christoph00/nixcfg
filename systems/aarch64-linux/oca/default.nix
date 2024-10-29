@@ -20,10 +20,9 @@
   internal.services.vscode-tunnel.enable = true;
   internal.services.office-server.enable = true;
 
-  networking.firewall.enable = false;
-
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";
+  networking.firewall.allowedTCPPorts = [ 8888 ];
 
   boot.initrd.kernelModules = [
     "ata_piix"
