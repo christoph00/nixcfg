@@ -63,7 +63,7 @@ in
       };
     };
 
-    environment.systemPackages = mkIf cfg.enableWifi [ pkgs.iwgtk ];
+    environment.systemPackages = mkIf config.internal.isLaptop [ pkgs.iwgtk ];
 
   };
 }
