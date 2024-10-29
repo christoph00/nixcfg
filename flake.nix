@@ -195,6 +195,9 @@
         # jovian.nixosModules.default
         vscode-server.nixosModules.default
         nvf.nixosModules.default
+
+        microvm.nixosModules.host
+        microvm.nixosModules.guest
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
