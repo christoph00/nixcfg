@@ -34,7 +34,10 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
+
+    microvm.host.enable = cfg.enable;
+    microvm.guest.enable = cfg.isGuest;
 
 
   };
