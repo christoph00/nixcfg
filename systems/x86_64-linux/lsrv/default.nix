@@ -24,7 +24,7 @@
       boot.encryptedRoot = false;
       fs = {
         swapSize = "1G";
-        device = "/dev/mmcblk1";
+        device = "/dev/disk/by-id/mmc-AJTD4R_0x143047b4";
       };
     };
   };
