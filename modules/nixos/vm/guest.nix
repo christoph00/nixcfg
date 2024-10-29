@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.internal;
@@ -14,9 +13,8 @@ let
 in
 {
 
-  config = lib.mkIf cfg.isGuest {
+  config = lib.mkIf config.internal.isMicroVM {
     microvm = {
-
       hypervisor = "cloud-hypervisor";
       mem = lib.mkDefault 2024;
       vcpu = lib.mkDefault 1;
