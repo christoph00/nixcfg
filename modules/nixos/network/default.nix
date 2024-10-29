@@ -17,12 +17,12 @@ in
   options.internal.network = with types; {
     enable = mkBoolOpt' true;
     enableWifi = mkBoolOpt' config.internal.isLaptop;
-
-
+    enableDHCP = mkBoolOpt' true;
+    enableNM = mkBoolOpt' false;
   };
 
   config = (mkIf cfg.enable) {
-    networking.networkmanager.enable = mkDefault false;
+    networking.networkmanager.enable = cfg.enableNM;
 
     services.resolved = {
       enable = true;
@@ -32,8 +32,8 @@ in
     networking = {
       useDHCP = false;
 
-      wireless.iwd = {
-        enable = cfg.enableWifi;
+      wireless.iwd = lib.mkIf cfg.enableWifi {
+        enable = true;
         settings.General.EnableNetworkConfiguration = true;
         settings.General.AddressRandomization = "network";
         settings.General.AddressRandomizationRange = "full";
@@ -55,7 +55,7 @@ in
           networkConfig.DHCP = "yes";
           dhcpConfig.RouteMetric = 20;
         };
-        "50-wired" =  {
+        "50-wired" = lib.mkIf cfg.enableDHCP {
           matchConfig.Name = "en*";
           networkConfig.DHCP = "yes";
           dhcpConfig.RouteMetric = 50;
