@@ -6,21 +6,18 @@
   pkgs,
   # You also have access to your flake's inputs.
   inputs,
+
   # Additional metadata is provided by Snowfall Lib.
-  namespace,
-  # The namespace used for your flake, defaulting to "internal" if not set.
-  system,
-  # The system architecture for this host (eg. `x86_64-linux`).
-  target,
-  # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format,
-  # A normalized name for the system target (eg. `iso`).
-  virtual,
-  # A boolean to determine whether this system is a virtual target using nixos-generators.
+  namespace, # The namespace used for your flake, defaulting to "internal" if not set.
+  system, # The system architecture for this host (eg. `x86_64-linux`).
+  target, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
+  format, # A normalized name for the system target (eg. `iso`).
+  virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
   systems, # An attribute map of your defined hosts.
 
   # All other arguments come from the module system.
   config,
+
   ...
 }:
 
@@ -37,34 +34,48 @@ in
     enable = mkBoolOpt config.internal.isGraphical "Enable the Display Manager.";
     x11 = mkBoolOpt false "Enable the X11 Display Manager.";
     wayland = mkBoolOpt config.internal.graphical.desktop.wayland.enable "Enable the Wayland Display Manager.";
-    sddm = mkBoolOpt' true;
   };
 
   config = mkIf cfg.enable {
-    services = {
-      xserver.enable = true;
-      xserver.displayManager = {
-        startx.enable = true;
-        lightdm = {
+
+    services.displayManager.cosmic-greeter.enable = false;
+
+    environment.systemPackages = with pkgs; [
+      cage
+    ];
+
+    services.greetd.enable = cfg.wayland;
+
+    services.xserver.displayManager = {
+      lightdm = {
+        enable = cfg.x11;
+        greeters.slick = {
           enable = true;
-          background = "#008080";
-          greeters.gtk = {
-            cursorTheme = {
-              package = pkgs.chicago95;
-              name = "Chicago95_Animated_Hourglass_Cursors";
-            };
-            iconTheme = {
-              package = pkgs.chicago95;
-              name = "Chicago95";
-            };
-            theme = {
-              package = pkgs.chicago95;
-              name = "Chicago95";
-            };
-            extraConfig = ''
-              font-name=Helvetica 8
-            '';
-          };
+          theme.name = "Zukitre-dark";
+        };
+      };
+    };
+
+    programs.regreet = {
+      enable = cfg.wayland;
+      package = pkgs.greetd.regreet;
+      cageArgs = [
+        "-s"
+        "-m"
+        "last"
+      ];
+      theme.package = pkgs.canta-theme;
+      settings = {
+
+        commands = {
+          reboot = [
+            "systemctl"
+            "reboot"
+          ];
+          poweroff = [
+            "systemctl"
+            "poweroff"
+          ];
         };
       };
     };
