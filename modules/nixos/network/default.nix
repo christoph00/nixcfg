@@ -54,7 +54,7 @@ in
           dhcpConfig.RouteMetric = 20;
         };
         "50-wired" = lib.mkIf config.internal.isLaptop {
-          matchConfig.Name = "enp*";
+          matchConfig.Name = "en*";
           networkConfig.DHCP = "yes";
           dhcpConfig.RouteMetric = 50;
         };
