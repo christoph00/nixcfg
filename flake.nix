@@ -197,7 +197,7 @@
         nvf.nixosModules.default
 
         microvm.nixosModules.host
-        microvm.nixosModules.guest
+        microvm.nixosModules.microvm
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
