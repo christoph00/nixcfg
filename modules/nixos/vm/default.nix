@@ -17,11 +17,18 @@ let
   }) cfg.vms;
 
   hostNameToIp = builtins.listToAttrs hostNameToIpList;
+
+  microvm-config = {
+    flake = self;
+    updateFlake = "github:christoph00/nixcfg";
+  };
 in
 {
+  imports = [./guest.nix];
   options.internal.vm = with types; {
     enable = mkBoolOpt false "Whether or not to configure VM config.";
-    isGuest = mkBoolOpt' false;
+    isHost = mkBoolOpt cfg.enable;
+    isGuest = mkBoolOpt' config.internak.isMicroVM;
 
     externalInterface = mkOption {
       type = types.string;
@@ -32,13 +39,31 @@ in
       type = with types; listOf string;
       default = [ ];
     };
+
+    enableJournalLinks = mkOption {
+      type = types.bool;
+      default = cfg.enable;
+    };
   };
 
-  config = {
+  config = lib.mkIf cfg.isHost {
+    microvm.host.enable = true;
 
-    microvm.host.enable = cfg.enable;
-    microvm.guest.enable = cfg.isGuest;
+    environment.persist.directories = lib.mkIf config.internal.system.state.enable [
+      "/var/lib/microvms"
+    ];
+
 
 
   };
+
+
+#   config = lib.mkIf config.virtualisation.microVMs.enableJournalLinks {
+#     systemd.tmpfiles.rules = let
+#       makeJournalLink = vmName: 
+#         "L+ /var/log/journal/${config.internal.vm.vms.${vmName}.machine-id} - - - - " + 
+#         "/var/lib/microvms/${vmName}/storage/journal/${config.internal.vm.vms.${vmName}.machine-id}";
+#     in
+#       map makeJournalLink config.internal.vm.vms;
+#   };
 }
