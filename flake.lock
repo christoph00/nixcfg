@@ -1079,6 +1079,21 @@
         "type": "github"
       }
     },
+    "nixos-facter-modules": {
+      "locked": {
+        "lastModified": 1730026316,
+        "narHash": "sha256-AzP+trH/ykBJGTx3twkpuwbkhFSmsY1PJDQtRmK4k4c=",
+        "owner": "numtide",
+        "repo": "nixos-facter-modules",
+        "rev": "15b6531d44aa6f0bbd2fd8309cd2a6d7f183ba32",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nixos-facter-modules",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1723221148,
@@ -3134,6 +3149,7 @@
         "nix95": "nix95",
         "nixinate": "nixinate",
         "nixos-cosmic": "nixos-cosmic",
+        "nixos-facter-modules": "nixos-facter-modules",
         "nixpkgs": [
           "srvos",
           "nixpkgs"
