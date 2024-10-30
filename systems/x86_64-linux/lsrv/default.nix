@@ -24,6 +24,7 @@
         swapSize = "1G";
         device = "/dev/mmcblk0";
       };
+      network.lanInterface = "enp1s0";
     };
   };
 
@@ -62,6 +63,16 @@
     }))
   ];
   boot.blacklistedKernelModules = [ "r8169" ];
+
+  systemd.network.networks."20-modem" = {
+    name = "enp2s0f1";
+    networkConfig = {
+      DHCP = "no";
+    };
+    address = [
+      "10.10.1.2/24"
+    ];
+  };
 
   system.stateVersion = "24.05";
 }
