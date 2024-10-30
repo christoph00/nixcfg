@@ -36,7 +36,7 @@ in
 {
 
   options.internal.services.monitoring = {
-    enable = mkBoolOpt false "Enable Monitoring Service.";
+    enable = mkBoolOpt true "Enable Monitoring Service.";
   };
 
   config = mkIf cfg.enable {
@@ -51,6 +51,7 @@ in
         };
         sources.host = {
           type = "host_metrics";
+          filesystem.mountpoints.excludes = [ "/mnt/state/var/lib/containers/storage/*" "/var/lib/containers/*" ];
         };
         sinks.axiom = {
           type = "axiom";
@@ -58,14 +59,13 @@ in
             "journal"
             "host"
           ];
-          dataset = "journald";
-          token = ''''${AXIOM_TOKEN}'';
+          token = ''''${AXIOM_TOKEN:-fix}'';
+          dataset = ''''${AXIOM_DATASET:-fix}'';
         };
       };
     };
     systemd.services.vector.serviceConfig.EnvironmentFile = config.age.secrets.vector.path;
 
-    age.secrets.vector.file = ../../../../secrets/vector.env;
 
   };
 }
