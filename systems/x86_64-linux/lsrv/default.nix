@@ -12,8 +12,7 @@
 , ...
 }:
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
-
+  facter.reportPath = ./facter.json;
   networking.hostName = "lsrv";
   internal = {
 

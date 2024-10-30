@@ -99,6 +99,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+
     betterfox = {
       url = "github:yokoffing/Betterfox";
       flake = false;
@@ -180,6 +182,7 @@
       ];
 
       systems.modules.nixos = with inputs; [
+        nixos-facter-modules.nixosModules.facter
         srvos.nixosModules.common
         srvos.nixosModules.mixins-nix-experimental
         agenix.nixosModules.default
