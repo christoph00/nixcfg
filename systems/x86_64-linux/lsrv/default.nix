@@ -45,7 +45,22 @@
       "mmc_block"
     ];
   };
-  boot.extraModulePackages = [ config.boot.kernelPackages.r8168 ];
+  boot.extraModulePackages = [
+    (config.boot.kernelPackages.r8168.overrideAttrs (_: super: rec {
+      version = "8.054.00";
+      src = pkgs.fetchFromGitHub {
+        owner = "mtorromeo";
+        repo = "r8168";
+        rev = version;
+        sha256 = "0376bajwr50arpzgxdhfa2vj55zqwzh3rc6qgl24ddzfmdd3ccd5";
+      };
+      meta =
+        super.meta
+        // {
+          broken = false;
+        };
+    }))
+  ];
   boot.blacklistedKernelModules = [ "r8169" ];
 
   system.stateVersion = "24.05";

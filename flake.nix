@@ -169,7 +169,6 @@
         inherit inputs;
         channels-config = {
           allowUnfree = true;
-          allowBroken = true;
           permittedInsecurePackages = [
             "electron-25.9.0"
             "electron-27.3.11"
