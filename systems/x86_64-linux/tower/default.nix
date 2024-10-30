@@ -3,17 +3,17 @@
 # i7-6700k
 # RX580 Sapphire
 ##
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  # imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  facter.reportPath = ./facter.json;
 
   networking.hostName = "tower";
 
