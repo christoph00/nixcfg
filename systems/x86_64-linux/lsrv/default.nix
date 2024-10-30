@@ -3,14 +3,13 @@
 # i7-6700k
 # RX580 Sapphire
 ##
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -24,7 +23,7 @@
       boot.encryptedRoot = false;
       fs = {
         swapSize = "1G";
-        device = "/dev/disk/by-id/mmc-AJTD4R_0x143047b4";
+        device = "/dev/mmcblk0";
       };
     };
   };
