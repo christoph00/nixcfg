@@ -34,5 +34,6 @@ in
 {
 
   "secrets/tailscale-auth-key".publicKeys = all;
+  "secrets/vector.env".publicKeys = all;
 
 }
