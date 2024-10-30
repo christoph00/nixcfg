@@ -41,6 +41,11 @@ in
   config = mkIf cfg.enable {
 
     programs.labwc.enable = true;
+    environment.systemPackages = with pkgs; [
+      labwc-gtktheme
+      labwc-tweaks-gtk
+      labwc-menu-generator
+    ];
 
 
   };
