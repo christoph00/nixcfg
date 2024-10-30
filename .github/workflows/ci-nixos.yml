@@ -25,6 +25,7 @@ jobs:
           - tower
           - x13
           - oca
+          - lsrv
     steps:
     - run: |
         sudo rm -rf $AGENT_TOOLSDIRECTORY
