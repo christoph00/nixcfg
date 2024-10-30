@@ -24,8 +24,9 @@
         swapSize = "1G";
         device = "/dev/mmcblk0";
       };
-      network.lanInterface = "enp1s0";
     };
+    network.lanInterface = "enp1s0";
+
   };
 
   boot.kernelModules = [
