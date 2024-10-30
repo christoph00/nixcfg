@@ -51,11 +51,11 @@ in
         };
         sources.host = {
           type = "host_metrics";
-          filesystem.mountpoints.excludes = [
-            "/mnt/state/var/lib/containers/storage/*"
-            "/var/lib/containers/*"
-            "/run/*"
-          ];
+          filesystem.mountpoints.includes = [ "/nix" "/" ];
+          filesystem.mountpoints.excludes = [ "*" ];
+          filesystem.filesystems.excludes = [ "*" ];
+          filesystem.filesystems.includes = [ "fat" "btrfs" ];
+
         };
         sinks.axiom = {
           type = "axiom";
