@@ -52,7 +52,7 @@
         owner = "mtorromeo";
         repo = "r8168";
         rev = version;
-        sha256 = "0376bajwr50arpzgxdhfa2vj55zqwzh3rc6qgl24ddzfmdd3ccd5";
+        sha256 = "sha256-KyycAe+NBmyDDH/XkAM4PpGvXI5J1CuMW4VuHcOm0UQ=";
       };
       meta =
         super.meta
