@@ -8,7 +8,10 @@
   ...
 }:
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    inputs.microvm.nixosModules.microvm
+  ];
 
   networking.hostName = "vm-smarthome";
 
