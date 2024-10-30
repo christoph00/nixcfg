@@ -50,7 +50,6 @@ with lib.internal;
     ];
 
     environment.systemPackages = with pkgs; [
-
       brightnessctl
       gammastep
       wlsunset
@@ -64,15 +63,17 @@ with lib.internal;
       file-roller
       pavucontrol
 
-      networkmanagerapplet
       pipewire
       wireplumber
 
       unrar
 
       phinger-cursors
+      # chicago95
+      adw-gtk3
 
-      chicago95
+      nwg-look
+      adwaita-icon-theme
 
     ];
 
@@ -109,7 +110,6 @@ with lib.internal;
       commit-mono
       cascadia-code
       martian-mono
-      pixel-code
       mona-sans
       monaspace
       hubot-sans
