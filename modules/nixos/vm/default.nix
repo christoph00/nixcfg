@@ -1,21 +1,20 @@
-{ options
-, config
-, pkgs
-, lib
-, inputs
-, ...
+{
+  options,
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
 }:
 with lib;
 with lib.internal;
 let
   cfg = config.internal.vm;
 
-  hostNameToIpList = lib.imap1
-    (i: v: {
-      name = v;
-      value = "10.0.0.${toString (i + 1)}";
-    })
-    cfg.vms;
+  hostNameToIpList = lib.imap1 (i: v: {
+    name = v;
+    value = "10.0.0.${toString (i + 1)}";
+  }) cfg.vms;
 
   hostNameToIp = builtins.listToAttrs hostNameToIpList;
 

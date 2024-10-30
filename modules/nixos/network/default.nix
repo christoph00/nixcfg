@@ -43,6 +43,11 @@ in
       firewall = {
         enable = true;
         allowPing = true;
+        allowedTCPPorts = [
+          80
+          443
+          22
+        ];
       };
     };
 

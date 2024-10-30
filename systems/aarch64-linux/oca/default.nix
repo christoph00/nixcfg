@@ -1,10 +1,11 @@
-{ config
-, lib
-, pkgs
-, modulesPath
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
 }:
 {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
@@ -18,6 +19,7 @@
 
   internal.services.vscode-tunnel.enable = true;
   internal.services.office-server.enable = true;
+  internal.shell.neovim.enable = true;
 
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";
