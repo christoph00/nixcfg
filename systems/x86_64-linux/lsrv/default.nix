@@ -42,12 +42,12 @@
       "usb_storage"
       "sd_mod"
       "sdhci_pci"
-      "r8169"
       "mmc_block"
     ];
   };
   boot.extraModulePackages = [ config.boot.kernelPackages.r8168 ];
   boot.blacklistedKernelModules = [ "r8169" ];
+  nixpkgs.config.allowBroken = true;
 
   system.stateVersion = "24.05";
 }
