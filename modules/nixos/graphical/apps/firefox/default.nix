@@ -26,7 +26,7 @@ in
 
   config = mkIf cfg.enable {
 
-    mimeApps = {
+    xdg.mime = {
       enable = true;
       defaultApplications = {
         "default-web-browser" = [ "firefox.desktop" ];
