@@ -1,8 +1,3 @@
-##
-# Z170 Extreme4 P7.50
-# i7-6700k
-# RX580 Sapphire
-##
 { config
 , lib
 , pkgs
