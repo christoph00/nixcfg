@@ -17,6 +17,8 @@ in
     enable = mkBoolOpt' true;
     enableWifi = mkBoolOpt' config.internal.isLaptop;
     enableDHCPLAN = mkBoolOpt' true;
+    enableNM = mkBoolOpt' config.internal.isLaptop;
+    enableIWD = mkBoolOpt' false;;
     lanInterface = mkOption {
       type = types.string;
       default = "en*";
@@ -30,11 +32,17 @@ in
       dnssec = "false";
     };
 
+
     networking = {
       useDHCP = false;
-      useNetworkd = true;
+      useNetworkd = !cfg.enableNM;
 
-      wireless.iwd = lib.mkIf cfg.enableWifi {
+      networking.networkmanager = lib.mkIf cfg.enableNM {
+        enable = true;
+        wifi.backend = "iwd";
+      };
+
+      wireless.iwd = lib.mkIf cfg.enableIWD {
         enable = true;
         settings.General.EnableNetworkConfiguration = true;
         settings.General.AddressRandomization = "network";
@@ -53,7 +61,7 @@ in
       };
     };
 
-    systemd.network = {
+    systemd.network =  mkIf !cfg.enableNM {
       enable = true;
       wait-online.enable = false;
       networks = {
@@ -70,9 +78,10 @@ in
       };
     };
 
-    environment.systemPackages = mkIf config.internal.isLaptop [ pkgs.iwgtk ];
+    environment.systemPackages = mkIf cfg.enableIWD [ pkgs.iwgtk ];
 
-    internal.system.state.directories = mkIf cfg.enableWifi [ "/var/lib/iwd" ];
+    internal.system.state.directories = mkIf cfg.enableIWD [ "/var/lib/iwd" ];
+    internal.system.state.directories = mkIf cfg.enableNM [ "/var/lib/NetworkManager" ];
 
   };
 }
