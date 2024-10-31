@@ -1,9 +1,10 @@
-{ options
-, config
-, pkgs
-, lib
-, namespace
-, ...
+{
+  options,
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
 }:
 with lib;
 with lib.internal;
@@ -32,14 +33,13 @@ in
       dnssec = "false";
     };
 
-
     networking = {
       useDHCP = false;
       useNetworkd = !cfg.enableNM;
 
-      networking.networkmanager = lib.mkIf cfg.enableNM {
+      networkmanager = lib.mkIf cfg.enableNM {
         enable = true;
-        wifi.backend = "iwd";
+        wifi.backend = lib.mkIf cfg.enableIWD "iwd";
       };
 
       wireless.iwd = lib.mkIf cfg.enableIWD {
@@ -61,7 +61,7 @@ in
       };
     };
 
-    systemd.network =  mkIf !cfg.enableNM {
+    systemd.network = mkIf (!cfg.enableNM) {
       enable = true;
       wait-online.enable = false;
       networks = {
@@ -80,8 +80,10 @@ in
 
     environment.systemPackages = mkIf cfg.enableIWD [ pkgs.iwgtk ];
 
-    internal.system.state.directories = mkIf cfg.enableIWD [ "/var/lib/iwd" ];
-    internal.system.state.directories = mkIf cfg.enableNM [ "/var/lib/NetworkManager" ];
+    internal.system.state.directories = mkMerge [
+      (mkIf cfg.enableIWD [ "/var/lib/iwd" ])
+      (mkIf cfg.enableNM [ "/var/lib/NetworkManager" ])
+    ];
 
   };
 }

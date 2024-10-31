@@ -37,7 +37,7 @@ in
   environment.systemPackages = with pkgs; [
     zed-fhs
     nixd
-    intelliphense
+    intelephense
     vscode-langservers-extracted
   ];
 
