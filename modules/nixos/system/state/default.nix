@@ -52,9 +52,6 @@ let
     "/var/lib/nixos"
     "/var/lib/systemd"
     "/var/log/journal"
-    "/var/lib/docker"
-    "/var/lib/containers"
-    "/var/lib/taiscale"
   ];
   defaultFiles = [ ];
   defaultUserDirectories = [

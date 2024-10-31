@@ -74,17 +74,13 @@ in
       # pkgs.kdePackages.dolphin
       # pkgs.lxqt.pcmanfm-qt
 
-      pkgs.php83
-      pkgs.php83Packages.composer
-      pkgs.nodejs
-      pkgs.laravel
-
-      pkgs.geary
-
       pkgs.agenix
 
       pkgs.go-passbolt-cli
     ];
+
+    programs.geary.enable = true;
+
 
   };
 

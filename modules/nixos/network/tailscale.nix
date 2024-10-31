@@ -54,8 +54,7 @@ in
       openFirewall = true;
     };
 
-    environment.persistence."${config.internal.system.state.stateDir}".directories =
-      lib.mkIf config.internal.system.state.enable
-        [ "/var/lib/tailscale" ];
+    internal.system.state.directories = [ "/var/lib/tailscale" ];
+
   };
 }
