@@ -41,4 +41,6 @@ in
     vscode-langservers-extracted
   ];
 
+  };
+
 }
