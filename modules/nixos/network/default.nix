@@ -18,7 +18,7 @@ in
     enableWifi = mkBoolOpt' config.internal.isLaptop;
     enableDHCPLAN = mkBoolOpt' true;
     enableNM = mkBoolOpt' config.internal.isLaptop;
-    enableIWD = mkBoolOpt' false;;
+    enableIWD = mkBoolOpt' false;
     lanInterface = mkOption {
       type = types.string;
       default = "en*";
