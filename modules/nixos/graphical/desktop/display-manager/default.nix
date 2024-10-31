@@ -38,47 +38,47 @@ in
 
   config = mkIf cfg.enable {
 
-    services.displayManager.cosmic-greeter.enable = false;
+    services.displayManager.cosmic-greeter.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      cage
-    ];
+    # environment.systemPackages = with pkgs; [
+    #   cage
+    # ];
 
-    services.greetd.enable = cfg.wayland;
+    # services.greetd.enable = cfg.wayland;
 
-    services.xserver.displayManager = {
-      lightdm = {
-        enable = cfg.x11;
-        greeters.slick = {
-          enable = true;
-          theme.name = "Zukitre-dark";
-        };
-      };
-    };
+    # services.xserver.displayManager = {
+    #   lightdm = {
+    #     enable = cfg.x11;
+    #     greeters.slick = {
+    #       enable = true;
+    #       theme.name = "Zukitre-dark";
+    #     };
+    #   };
+    # };
 
-    programs.regreet = {
-      enable = cfg.wayland;
-      package = pkgs.greetd.regreet;
-      cageArgs = [
-        "-s"
-        "-m"
-        "last"
-      ];
-      theme.package = pkgs.canta-theme;
-      settings = {
+    # programs.regreet = {
+    #   enable = cfg.wayland;
+    #   package = pkgs.greetd.regreet;
+    #   cageArgs = [
+    #     "-s"
+    #     "-m"
+    #     "last"
+    #   ];
+    #   theme.package = pkgs.canta-theme;
+    #   settings = {
 
-        commands = {
-          reboot = [
-            "systemctl"
-            "reboot"
-          ];
-          poweroff = [
-            "systemctl"
-            "poweroff"
-          ];
-        };
-      };
-    };
+    #     commands = {
+    #       reboot = [
+    #         "systemctl"
+    #         "reboot"
+    #       ];
+    #       poweroff = [
+    #         "systemctl"
+    #         "poweroff"
+    #       ];
+    #     };
+    #   };
+    # };
 
   };
 
