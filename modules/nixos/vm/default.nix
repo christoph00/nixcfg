@@ -46,7 +46,6 @@ in
 
   config = lib.mkIf cfg.enable {
     microvm.host.enable = true;
-    microvm.guest.enable = false;
 
     internal.system.state.directories = lib.mkIf config.internal.system.state.enable [
       "/var/lib/microvms"
@@ -56,8 +55,8 @@ in
 
   #   config = lib.mkIf config.virtualisation.microVMs.enableJournalLinks {
   #     systemd.tmpfiles.rules = let
-  #       makeJournalLink = vmName: 
-  #         "L+ /var/log/journal/${config.internal.vm.vms.${vmName}.machine-id} - - - - " + 
+  #       makeJournalLink = vmName:
+  #         "L+ /var/log/journal/${config.internal.vm.vms.${vmName}.machine-id} - - - - " +
   #         "/var/lib/microvms/${vmName}/storage/journal/${config.internal.vm.vms.${vmName}.machine-id}";
   #     in
   #       map makeJournalLink config.internal.vm.vms;

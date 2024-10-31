@@ -36,7 +36,7 @@ in
 {
 
   options.internal.services.monitoring = {
-    enable = mkBoolOpt true "Enable Monitoring Service.";
+    enable = mkBoolOpt false "Enable Monitoring Service.";
     hostMetrics = mkBoolOpt false "Enable Host Metrics";
     logFiles = lib.mkOption {
       default = [ ];
@@ -48,7 +48,6 @@ in
 
     services.vector =
       let
-
         systemctlShow = [
           "${config.systemd.package}/bin/systemctl"
           "show"
@@ -103,7 +102,6 @@ in
         timerPropsArg = builtins.concatStringsSep "," (
           commonProps
           ++ [
-            # TODO open a bug in systemd because these are not unix formatted
             "NextElapseUSecRealtime"
             "LastTriggerUSec"
           ]
@@ -200,8 +198,8 @@ in
           sinks.axiom = {
             type = "axiom";
             inputs = [
-              "journal"
-              "host"
+              #"systemd_convert"
+              "journald_sanitize"
             ];
             token = ''''${AXIOM_TOKEN:-fix}'';
             dataset = ''''${AXIOM_DATASET:-fix}'';
