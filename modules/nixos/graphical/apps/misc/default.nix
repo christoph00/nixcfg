@@ -77,6 +77,8 @@ in
       pkgs.agenix
 
       pkgs.go-passbolt-cli
+
+      pkgs.internal.thorium-browser
     ];
 
     programs.geary.enable = true;
