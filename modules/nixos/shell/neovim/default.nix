@@ -28,6 +28,29 @@ in
         mouseSupport = "a";
         scrollOffset = 6;
 
+        withNodeJs = false;
+
+        startPlugins = with pkgs.vimPlugins; [
+          (nvim-treesitter.withPlugins (
+            _:
+            nvim-treesitter.allGrammars
+            ++ [
+              pkgs.tree-sitter-grammars.tree-sitter-nu
+              (pkgs.tree-sitter.buildGrammar {
+                language = "blade";
+                version = "0.10.1";
+                src = pkgs.fetchFromGitHub {
+                  owner = "EmranMR";
+                  repo = "tree-sitter-blade";
+                  rev = "335b2a44b4cdd9446f1c01434226267a61851405";
+                  hash = "sha256-wXzmlg79Xva08wn3NoJDJ2cIHuShXPIlf+UK0TsZdbY=";
+                };
+              })
+            ]
+          ))
+        ];
+
+
         extraPlugins = with pkgs.vimPlugins; {
           supermaven-nvim = {
             package = supermaven-nvim;
@@ -206,13 +229,10 @@ in
             lsp.enable = true;
             treesitter.enable = true;
           };
+          tailwind.enable = true;
           html = {
             enable = true;
             treesitter.enable = true;
-          };
-          clang = {
-            enable = true;
-            cHeader = true;
           };
           markdown.enable = true;
           nix = {
