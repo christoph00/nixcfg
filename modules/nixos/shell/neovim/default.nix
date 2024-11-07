@@ -30,26 +30,6 @@ in
 
         withNodeJs = false;
 
-        startPlugins = with pkgs.vimPlugins; [
-          (nvim-treesitter.withPlugins (
-            _:
-            nvim-treesitter.allGrammars
-            ++ [
-              pkgs.tree-sitter-grammars.tree-sitter-nu
-              (pkgs.tree-sitter.buildGrammar {
-                language = "blade";
-                version = "0.10.1";
-                src = pkgs.fetchFromGitHub {
-                  owner = "EmranMR";
-                  repo = "tree-sitter-blade";
-                  rev = "335b2a44b4cdd9446f1c01434226267a61851405";
-                  hash = "sha256-wXzmlg79Xva08wn3NoJDJ2cIHuShXPIlf+UK0TsZdbY=";
-                };
-              })
-            ]
-          ))
-        ];
-
 
         extraPlugins = with pkgs.vimPlugins; {
           supermaven-nvim = {
@@ -78,8 +58,25 @@ in
           todo-comments.enable = true;
         };
 
+
+        projects = {
+          project-nvim.enable = true;
+        };
+
         utility = {
+          ccc.enable = false;
+          vim-wakatime.enable = false;
+          icon-picker.enable = false;
           surround.enable = true;
+          diffview-nvim.enable = true;
+          motion = {
+            hop.enable = true;
+            leap.enable = true;
+          };
+
+          images = {
+            image-nvim.enable = false;
+          };
         };
 
         comments = {
@@ -109,10 +106,22 @@ in
         treesitter = {
           enable = true;
           fold = true;
-          context.enable = true;
+          context.enable = false;
           highlight.enable = true;
           indent.enable = true;
           addDefaultGrammars = false;
+          grammars = [
+            (pkgs.tree-sitter.buildGrammar {
+              language = "blade";
+              version = "0.10.1";
+              src = pkgs.fetchFromGitHub {
+                owner = "EmranMR";
+                repo = "tree-sitter-blade";
+                rev = "335b2a44b4cdd9446f1c01434226267a61851405";
+                hash = "sha256-wXzmlg79Xva08wn3NoJDJ2cIHuShXPIlf+UK0TsZdbY=";
+              };
+            })
+          ];
         };
 
         autocomplete = {
@@ -234,6 +243,7 @@ in
             enable = true;
             treesitter.enable = true;
           };
+          css.enable = true;
           markdown.enable = true;
           nix = {
             enable = true;
