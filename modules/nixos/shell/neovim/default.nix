@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 with lib.internal;
@@ -39,6 +38,12 @@ in
           };
           nvim-web-devicons = {
             package = nvim-web-devicons;
+          };
+          avante-nvim = {
+            package = avante-nvim;
+            setup = "require('avante_lib').load()
+              require('avante').setup({})";
+
           };
         };
 
@@ -94,7 +99,7 @@ in
           type = "nvim-cmp";
 
           mappings = {
-            #complete = "<Return>";
+            complete = "<Return>";
             close = "<C-e>";
             confirm = null; # set above
 
