@@ -99,7 +99,7 @@ in
           type = "nvim-cmp";
 
           mappings = {
-            complete = "<Return>";
+            complete = "<C-Space>";
             close = "<C-e>";
             confirm = null; # set above
 
@@ -205,6 +205,10 @@ in
           php = {
             enable = true;
             lsp.enable = true;
+            treesitter.enable = true;
+          };
+          html = {
+            enable = true;
             treesitter.enable = true;
           };
           clang = {
