@@ -86,7 +86,7 @@ in
         treesitter = {
           enable = true;
           fold = true;
-          context.enable = false;
+          context.enable = true;
           highlight.enable = true;
           indent.enable = true;
           addDefaultGrammars = false;
@@ -102,7 +102,6 @@ in
             complete = "<C-Space>";
             close = "<C-e>";
             confirm = null; # set above
-
             scrollDocsUp = "<C-d>";
             scrollDocsDown = "<C-f>";
 
