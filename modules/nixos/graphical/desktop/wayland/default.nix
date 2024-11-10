@@ -92,7 +92,7 @@ in
 
       # inputs.ignis.packages.${system}.ignis
 
-      ironbar
+      #ironbar
 
       mako
       swayidle
