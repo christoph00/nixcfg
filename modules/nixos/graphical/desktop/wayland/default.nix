@@ -84,7 +84,6 @@ in
 
       ags
       bun
-      hyprpanel
 
       swww
 
