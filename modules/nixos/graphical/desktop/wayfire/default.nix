@@ -41,7 +41,7 @@ in
 
     #services.displayManager.sessionPackages = [ pkgs.internal.wayfire-session ];A
 
-    services.xserver.desktopManager.mate.enableWaylandSession = true;
+    #services.xserver.desktopManager.mate.enableWaylandSession = true;
 
     programs = {
       wayfire = {
@@ -54,15 +54,6 @@ in
           wayfire-shadows
           windecor
         ];
-      };
-      waybar.enable = true;
-      uwsm = {
-        enable = true;
-        waylandCompositors.wayfire = {
-          prettyName = "Wayfire";
-          comment = "Wayfire compositor managed by UWSM";
-          binPath = getExe config.programs.wayfire.package;
-        };
       };
     };
 
