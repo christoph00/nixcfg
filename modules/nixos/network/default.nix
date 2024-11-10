@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  namespace,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, namespace
+, ...
 }:
 with lib;
 with lib.internal;
@@ -19,7 +18,7 @@ in
     enableWifi = mkBoolOpt' config.internal.isLaptop;
     enableDHCPLAN = mkBoolOpt' true;
     enableNM = mkBoolOpt' config.internal.isLaptop;
-    enableIWD = mkBoolOpt' false;
+    enableIWD = mkBoolOpt' cfg.enableWifi;
     lanInterface = mkOption {
       type = types.string;
       default = "en*";
