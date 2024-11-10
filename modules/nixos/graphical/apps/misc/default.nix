@@ -65,6 +65,8 @@ in
       pkgs.gtkimageview
       pkgs.digikam
 
+      pkgs.networkmanagerapplet
+
       pkgs.qownnotes
 
       pkgs.nextcloud-client
