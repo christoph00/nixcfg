@@ -82,12 +82,18 @@ in
       wayvnc
       wlogout
 
+      ags
+      bun
+      hyprpanel
+
       swww
 
       waybar
       sysmenu
 
       # inputs.ignis.packages.${system}.ignis
+
+      ironbar
 
       mako
       swayidle
