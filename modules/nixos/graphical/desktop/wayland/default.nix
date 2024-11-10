@@ -91,9 +91,9 @@ in
       waybar
       sysmenu
 
-      inputs.ignis.packages.${system}.ignis
+      # inputs.ignis.packages.${system}.ignis
 
-      #ironbar
+      ironbar
 
       mako
       swayidle
