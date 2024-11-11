@@ -67,21 +67,21 @@ in
     ## DP-2 = Monitor  HDMI-A-1 = Dummy
     services.sunshine = {
       enable = true;
-      autoStart = true;
+      autoStart = false;
       capSysAdmin = false;
       openFirewall = true;
 
     };
 
-    systemd.user.services.headless-desktop = {
-      wantedBy = optional cfg.autorun "default.target";
-      description = "Graphical headless server";
-      serviceConfig = {
-        ExecStartPre = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_RUNTIME_DIR WLR_BACKENDS; systemctl --user import-environment";
-        ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec ${config.programs.wayfire.package}/bin/wayfire'";
-      };
-    };
-    users.extraUsers."${cfg.user}".linger = mkDefault true;
+    # systemd.user.services.headless-desktop = {
+    #   wantedBy = optional cfg.autorun "default.target";
+    #   description = "Graphical headless server";
+    #   serviceConfig = {
+    #     ExecStartPre = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_RUNTIME_DIR WLR_BACKENDS; systemctl --user import-environment";
+    #     ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec ${config.programs.wayfire.package}/bin/wayfire'";
+    #   };
+    # };
+    # users.extraUsers."${cfg.user}".linger = mkDefault true;
 
   };
 
