@@ -39,8 +39,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.hypridle.enable = true;
-    programs.hyprlock.enable = true;
+    #services.hypridle.enable = true;
+    #programs.hyprlock.enable = true;
     programs.hyprland = {
 
       enable = true;
