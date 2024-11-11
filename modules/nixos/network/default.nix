@@ -36,10 +36,9 @@ in
       useDHCP = false;
       useNetworkd = !cfg.enableNM;
 
-      networkmanager = lib.mkIf cfg.enableNM {
-        enable = true;
-        wifi.backend = lib.mkIf cfg.enableIWD "iwd";
-      };
+      networkmanager.wifi.backend = lib.mkIf cfg.enableIWD "iwd";
+      networkmanager.enable = cfg.enableNM;
+
 
       wireless.iwd = lib.mkIf cfg.enableIWD {
         enable = true;
