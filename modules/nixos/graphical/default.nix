@@ -49,6 +49,11 @@ with lib.internal;
       "tty"
     ];
 
+    boot.kernelModules = [ "uinput" ];
+      services.udev.extraRules = ''
+      KERNEL=="uinput", GROUP="input", MODE="0660" OPTIONS+="static_node=uinput"
+    '';
+
     environment.systemPackages = with pkgs; [
       brightnessctl
       gammastep
