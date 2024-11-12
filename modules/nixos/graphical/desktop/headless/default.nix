@@ -52,11 +52,11 @@ in
     '';
 
     systemd.user.services."wayland-wm-env@".serviceConfig.Environment = [
-      "WLR_BACKENDS=drm,headless,libinput";
-      "WLR_RENDER_DRM_DEVICE=/dev/dri/card0";
-      "WAYLAND_DISPLAY=wayland-1";];
+      "WLR_BACKENDS=drm,headless,libinput"
+      "WLR_RENDER_DRM_DEVICE=/dev/dri/card0"
+      "WAYLAND_DISPLAY=wayland-1"
+      ];
 
-    };
 
     services.seatd.enable = true;
 
