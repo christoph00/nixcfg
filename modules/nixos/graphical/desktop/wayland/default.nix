@@ -108,6 +108,8 @@ in
       wayvnc
       wlogout
 
+      grim
+
       ags
       bun
 
