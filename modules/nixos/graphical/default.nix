@@ -36,10 +36,8 @@ with lib.internal;
     internal.graphical.desktop.cosmic.enable = true;
     internal.graphical.desktop.labwc.enable = true;
     internal.graphical.desktop.wayfire.enable = true;
-    internal.graphical.desktop.hyprland.enable = true;
+    #internal.graphical.desktop.hyprland.enable = true;
     hardware.graphics.enable = true;
-
-    #programs.labwc.enable = true;
 
     internal.user.extraGroups = [
       "video"

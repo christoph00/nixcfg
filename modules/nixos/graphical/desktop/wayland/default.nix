@@ -83,7 +83,7 @@ in
     systemd.user.services = {
       waybar = {
         description = "Waybar as systemd service";
-        wantedBy = [ "graphical-session.target" ];
+        wantedBy = [ "wayland-session@wayfire.desktop.target" ];
         script = "${pkgs.waybar}/bin/waybar";
         serviceConfig.Slice = "app-graphical.slice";
       };
