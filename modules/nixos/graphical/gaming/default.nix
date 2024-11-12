@@ -59,9 +59,13 @@ in
         wantedBy = [ "graphical-session.target" ];
         script = "${pkgs.sunshine}/bin/sunshine";
         serviceConfig.Slice = "app-graphical.slice";
+        serviceConfig.Install.WantedBy = ["graphical-session.target"];
+
       };
       gamemoded = {
         serviceConfig.Slice = "background-graphical.slice";
+        serviceConfig.Install.WantedBy = ["graphical-session.target"];
+
       };
     };
 
