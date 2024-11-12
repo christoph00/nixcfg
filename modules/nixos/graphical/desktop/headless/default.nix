@@ -54,7 +54,7 @@ in
     systemd.user.services."wayland-wm@".environment = {
       WLR_BACKENDS = "drm,headless,libinput";
       #NIXOS_OZONE_WL = "1";
-      WAYLAND_DISPLAY = "wayland-1";
+      #WAYLAND_DISPLAY = "wayland-1";
       #WLR_LIBINPUT_NO_DEVICES = "1";
       WLR_RENDERER = "pixman";
       WLR_RENDER_DRM_DEVICE = "/dev/dri/card0";
