@@ -1,61 +1,61 @@
-{ lib
-, stdenv
-, fetchurl
-, wrapGAppsHook4
-, makeWrapper
-, alsa-lib
-, at-spi2-atk
-, at-spi2-core
-, atk
-, cairo
-, cups
-, dbus
-, dpkg
-, expat
-, fontconfig
-, freetype
-, gdk-pixbuf
-, glib
-, adwaita-icon-theme
-, gsettings-desktop-schemas
-, gtk3
-, gtk4
-, libdrm
-, libxkbcommon
-, mesa
-, nspr
-, nss
-, pango
-, pipewire
-, snappy
-, udev
-, wayland
-, xdg-utils
-, coreutils
-, libuuid
-, xorg
-, zlib
-, widevine-cdm
-, qt6
-, libkrb5
-, vivaldi-ffmpeg-codecs
-, # command line arguments which are always set e.g "--disable-gpu"
-  commandLineArgs ? ""
-, # Necessary for USB audio devices.
-  pulseSupport ? stdenv.hostPlatform.isLinux
-, libpulseaudio
-, # For GPU acceleration support on Wayland (without the lib it doesn't seem to work)
-  libGL
-, # For video acceleration via VA-API (--enable-features=VaapiVideoDecoder,VaapiVideoEncoder)
-  libvaSupport ? stdenv.isLinux
-, libva
-, enableVideoAcceleration ? libvaSupport
-, # For Vulkan support (--enable-features=Vulkan); disabled by default as it seems to break VA-API
-  vulkanSupport ? true
-, addOpenGLRunpath
-, enableVulkan ? vulkanSupport
-, enableWideVine ? false
-,
+{
+  lib,
+  stdenv,
+  fetchurl,
+  wrapGAppsHook4,
+  makeWrapper,
+  alsa-lib,
+  at-spi2-atk,
+  at-spi2-core,
+  atk,
+  cairo,
+  cups,
+  dbus,
+  dpkg,
+  expat,
+  fontconfig,
+  freetype,
+  gdk-pixbuf,
+  glib,
+  adwaita-icon-theme,
+  gsettings-desktop-schemas,
+  gtk3,
+  gtk4,
+  libdrm,
+  libxkbcommon,
+  mesa,
+  nspr,
+  nss,
+  pango,
+  pipewire,
+  snappy,
+  udev,
+  wayland,
+  xdg-utils,
+  coreutils,
+  libuuid,
+  xorg,
+  zlib,
+  widevine-cdm,
+  qt6,
+  libkrb5,
+  vivaldi-ffmpeg-codecs,
+  # command line arguments which are always set e.g "--disable-gpu"
+  commandLineArgs ? "",
+  # Necessary for USB audio devices.
+  pulseSupport ? stdenv.hostPlatform.isLinux,
+  libpulseaudio,
+  # For GPU acceleration support on Wayland (without the lib it doesn't seem to work)
+  libGL,
+  # For video acceleration via VA-API (--enable-features=VaapiVideoDecoder,VaapiVideoEncoder)
+  libvaSupport ? stdenv.isLinux,
+  libva,
+  enableVideoAcceleration ? libvaSupport,
+  # For Vulkan support (--enable-features=Vulkan); disabled by default as it seems to break VA-API
+  vulkanSupport ? true,
+  addOpenGLRunpath,
+  enableVulkan ? vulkanSupport,
+  enableWideVine ? false,
 }:
 let
   inherit (lib)

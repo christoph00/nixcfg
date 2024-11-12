@@ -50,6 +50,15 @@ in
 
     ];
 
+    systemd.user.services = {
+      sunshine = {
+        description = "Sunshine Host";
+        wantedBy = [ "graphical-session.target" ];
+        script = "${pkgs.sunshine}/bin/sunshine";
+        serviceConfig.Slice = "app-graphical.slice";
+      };
+    };
+
     programs = {
       steam = {
         enable = true;

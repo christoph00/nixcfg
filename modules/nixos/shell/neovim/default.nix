@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 with lib.internal;
@@ -30,7 +31,6 @@ in
 
         withNodeJs = false;
 
-
         extraPlugins = with pkgs.vimPlugins; {
           supermaven-nvim = {
             package = supermaven-nvim;
@@ -57,7 +57,6 @@ in
         notes = {
           todo-comments.enable = true;
         };
-
 
         projects = {
           project-nvim.enable = true;
