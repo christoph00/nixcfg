@@ -49,7 +49,19 @@ in
     programs.uwsm = {
       enable = true;
       waylandCompositors.labwc = {
-        binPath = "/run/current-system/sw/bin/labwc";
+        binPath =
+          let
+            exec-labwc = (
+              pkgs.writeShellScriptBin "exec-labwc" ''
+                env \
+                  WLR_NO_HARDWARE_CURSORS=1 \
+                  WLR_BACKENDS=drm,headless,libinput \
+                  WLR_RENDER_DRM_DEVICE=/dev/dri/renderD128 \
+                  ${config.programs.labwc.package}/bin/labwc
+              ''
+            );
+          in
+          "${exec-labwc}/bin/exec-labwc";
         prettyName = "labwc";
         comment = "Labwc managed by UWSM";
       };
