@@ -47,8 +47,12 @@ in
       pkgs.cartridges
       # pkgs.lutris
       pkgs.bottles
+      pkgs.antimicroX
 
     ];
+
+    services.udev.packages = [ pkgs.antimicroX ];
+
 
     systemd.user.services = {
       sunshine = {
