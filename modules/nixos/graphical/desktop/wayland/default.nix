@@ -83,8 +83,14 @@ in
     systemd.user.services = {
       waybar = {
         description = "Waybar as systemd service";
-        wantedBy = [ "wayland-session@wayfire.desktop.target" ];
+        wantedBy = [ "wayland-session@labwc.desktop.target" ];
         script = "${pkgs.waybar}/bin/waybar";
+        serviceConfig.Slice = "app-graphical.slice";
+      };
+      swww-daemon = {
+        description = "swww-daemon as systemd service";
+        wantedBy = [ "wayland-session@labwc.desktop.target" ];
+        script = "${pkgs.swww}/bin/swww-daemon";
         serviceConfig.Slice = "app-graphical.slice";
       };
       polkit-gnome-authentication-agent-1 = {
