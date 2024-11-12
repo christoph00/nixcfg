@@ -60,6 +60,9 @@ in
         script = "${pkgs.sunshine}/bin/sunshine";
         serviceConfig.Slice = "app-graphical.slice";
       };
+      gamemoded = {
+        serviceConfig.Slice = "background-graphical.slice";
+      };
     };
 
     programs = {
