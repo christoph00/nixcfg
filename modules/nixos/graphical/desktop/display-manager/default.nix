@@ -47,7 +47,7 @@ in
     services.greetd =
       let
         session = {
-          command = "${lib.getExe config.programs.uwsm.package} start wayfire-uwsm.desktop";
+          command = "${lib.getExe config.programs.uwsm.package} start labwc-uwsm.desktop";
           user = "christoph";
         };
       in
