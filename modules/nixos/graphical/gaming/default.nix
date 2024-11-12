@@ -53,7 +53,6 @@ in
 
     services.udev.packages = [ pkgs.antimicrox ];
 
-
     systemd.user.services = {
       sunshine = {
         description = "Sunshine Host";
