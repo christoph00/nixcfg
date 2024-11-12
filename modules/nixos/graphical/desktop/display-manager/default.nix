@@ -54,7 +54,7 @@ in
       {
         enable = true;
         settings = {
-          #terminal.vt = 7;
+          terminal.vt = 1;
           default_session = session;
           initial_session = session;
         };
