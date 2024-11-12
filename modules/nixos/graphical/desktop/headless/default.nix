@@ -51,14 +51,12 @@ in
       KERNEL=="uinput", GROUP="input", MODE="0660" OPTIONS+="static_node=uinput"
     '';
 
-    environment.sessionVariables = {
+    systemd.user.services."wayland-wm-env@".serviceConfig.Environment = {
       WLR_BACKENDS = "drm,headless,libinput";
       NIXOS_OZONE_WL = "1";
       WAYLAND_DISPLAY = "wayland-1";
       #WLR_LIBINPUT_NO_DEVICES = "1";
       WLR_RENDERER = "pixman";
-      #XDG_RUNTIME_DIR="/tmp";
-      XDG_RUNTIME_DIR = "/run/user/1000";
       WLR_RENDER_DRM_DEVICE = "/dev/dri/card0";
       AQ_DRM_DEVICES = "/dev/dri/card0";
 

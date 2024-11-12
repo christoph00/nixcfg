@@ -95,6 +95,10 @@ in
         serviceConfig.Slice = "background-graphical.slice";
 
       };
+      "wayland-wm-env@" = {
+        path = config.services.displayManager.sessionPackages;
+        overrideStrategy = "asDropin";
+      };
     };
 
     environment.systemPackages = with pkgs; [
