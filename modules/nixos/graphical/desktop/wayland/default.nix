@@ -85,24 +85,26 @@ in
         description = "Waybar as systemd service";
         script = "${pkgs.waybar}/bin/waybar";
         serviceConfig.Slice = "app-graphical.slice";
-        serviceConfig.Install.WantedBy = ["graphical-session.target"];
+        serviceConfig.Install.WantedBy = "graphical-session.target";
       };
       swww-daemon = {
         description = "swww-daemon as systemd service";
         script = "${pkgs.swww}/bin/swww-daemon";
         serviceConfig.Slice = "app-graphical.slice";
-        serviceConfig.Install.WantedBy = ["graphical-session.target"];
+        serviceConfig.Install.WantedBy = "graphical-session.target";
 
       };
       polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
         script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         serviceConfig.Slice = "background-graphical.slice";
-        serviceConfig.Install.WantedBy = ["graphical-session.target"];
+        serviceConfig.Install.WantedBy = "graphical-session.target";
 
 
       };
-    };
+      
+        services.xserver.desktopManager.runXdgAutostartIfNone = true;
+
 
     environment.systemPackages = with pkgs; [
       xwayland
