@@ -51,16 +51,11 @@ in
       KERNEL=="uinput", GROUP="input", MODE="0660" OPTIONS+="static_node=uinput"
     '';
 
-    systemd.user.services."wayland-wm-env@".environment = {
-      WLR_BACKENDS = "drm,headless,libinput";
-      #NIXOS_OZONE_WL = "1";
-      #WAYLAND_DISPLAY = "wayland-1";
-      #WLR_LIBINPUT_NO_DEVICES = "1";
-      WLR_RENDERER = "pixman";
-      WLR_RENDER_DRM_DEVICE = "/dev/dri/card0";
-      AQ_DRM_DEVICES = "/dev/dri/card0";
-
-    };
+    systemd.user.services."wayland-wm-env@".serviceConfig.Environment = [
+      "WLR_BACKENDS=drm,headless,libinput"
+      "WLR_RENDER_DRM_DEVICE=/dev/dri/card0"
+      "NIXOS_OZONE_WL=1"
+    ];
 
     services.seatd.enable = true;
 
