@@ -99,9 +99,8 @@ in
         script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         serviceConfig.Slice = "background-graphical.slice";
         serviceConfig.Install.WantedBy = "graphical-session.target";
-
-
       };
+    };
       
         services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
