@@ -46,6 +46,15 @@ in
       labwc-menu-generator
     ];
 
+    programs.uwsm = {
+      enable = true;
+      waylandCompositors.labwc = {
+        binPath = "/run/current-system/sw/bin/labwc";
+        prettyName = "labwc";
+        comment = "Labwc managed by UWSM";
+      };
+    };
+
   };
 
 }
