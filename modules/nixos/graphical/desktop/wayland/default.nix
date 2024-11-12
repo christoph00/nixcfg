@@ -107,6 +107,9 @@ in
       waylock
       wayvnc
       wlogout
+      lswt
+      wlrctl
+      wlopm
 
       grim
 
