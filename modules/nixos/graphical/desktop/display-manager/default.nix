@@ -47,14 +47,14 @@ in
     services.greetd =
       let
         session = {
-          command = "${lib.getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
+          command = "${lib.getExe config.programs.uwsm.package} start wayfire-uwsm.desktop";
           user = "christoph";
         };
       in
       {
         enable = true;
         settings = {
-          terminal.vt = 1;
+          #terminal.vt = 7;
           default_session = session;
           initial_session = session;
         };
