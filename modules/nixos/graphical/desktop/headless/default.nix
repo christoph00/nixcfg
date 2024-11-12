@@ -51,7 +51,7 @@ in
       KERNEL=="uinput", GROUP="input", MODE="0660" OPTIONS+="static_node=uinput"
     '';
 
-    systemd.user.services."wayland-wm-env@".serviceConfig.Environment = {
+    systemd.user.services."wayland-wm-env@".environment = {
       WLR_BACKENDS = "drm,headless,libinput";
       NIXOS_OZONE_WL = "1";
       WAYLAND_DISPLAY = "wayland-1";
