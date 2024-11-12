@@ -110,6 +110,7 @@ in
       lswt
       wlrctl
       wlopm
+      wev
 
       grim
 
