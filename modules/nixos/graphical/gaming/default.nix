@@ -47,11 +47,11 @@ in
       pkgs.cartridges
       # pkgs.lutris
       pkgs.bottles
-      pkgs.antimicroX
+      pkgs.antimicrox
 
     ];
 
-    services.udev.packages = [ pkgs.antimicroX ];
+    services.udev.packages = [ pkgs.antimicrox ];
 
 
     systemd.user.services = {
