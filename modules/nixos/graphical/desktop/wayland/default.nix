@@ -85,7 +85,6 @@ in
         description = "Waybar as systemd service";
         script = "${pkgs.waybar}/bin/waybar";
         wantedBy = [ "graphical-session.target" ];
-        wants = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
       };
@@ -93,7 +92,6 @@ in
         description = "swww-daemon as systemd service";
         script = "${pkgs.swww}/bin/swww-daemon";
         wantedBy = [ "graphical-session.target" ];
-        wants = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
 
@@ -102,7 +100,6 @@ in
         description = "polkit-gnome-authentication-agent-1";
         script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         wantedBy = [ "graphical-session.target" ];
-        wants = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "background-graphical.slice";
       };
