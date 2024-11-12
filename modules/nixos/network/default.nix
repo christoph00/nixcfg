@@ -1,9 +1,10 @@
-{ options
-, config
-, pkgs
-, lib
-, namespace
-, ...
+{
+  options,
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
 }:
 with lib;
 with lib.internal;
@@ -38,7 +39,6 @@ in
 
       networkmanager.wifi.backend = lib.mkIf cfg.enableIWD "iwd";
       networkmanager.enable = cfg.enableNM;
-
 
       wireless.iwd = lib.mkIf cfg.enableIWD {
         enable = true;

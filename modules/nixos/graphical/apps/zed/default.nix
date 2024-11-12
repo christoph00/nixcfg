@@ -1,13 +1,13 @@
 {
   # Snowfall Lib provides a customized `lib` instance with access to your flake's library
   # as well as the libraries available from your flake's inputs.
-  lib
-, # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs
-, # You also have access to your flake's inputs.
-  config
-, inputs
-, ...
+  lib,
+  # An instance of `pkgs` with your overlays and packages applied is also available.
+  pkgs,
+  # You also have access to your flake's inputs.
+  config,
+  inputs,
+  ...
 }:
 
 with builtins;
@@ -18,13 +18,13 @@ let
   cfg = config.internal.graphical.apps.zed;
 
   zed-fhs = pkgs.buildFHSUserEnv {
-      name = "zed";
-      targetPkgs = pkgs:
-        with pkgs; [
-          zed-editor
-        ];
-      runScript = "zed";
-    };
+    name = "zed";
+    targetPkgs =
+      pkgs: with pkgs; [
+        zed-editor
+      ];
+    runScript = "zed";
+  };
 in
 {
 
@@ -34,12 +34,12 @@ in
 
   config = mkIf cfg.enable {
 
-  environment.systemPackages = with pkgs; [
-    zed-fhs
-    nixd
-    intelephense
-    vscode-langservers-extracted
-  ];
+    environment.systemPackages = with pkgs; [
+      zed-fhs
+      nixd
+      intelephense
+      vscode-langservers-extracted
+    ];
 
   };
 

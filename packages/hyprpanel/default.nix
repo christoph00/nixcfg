@@ -1,17 +1,17 @@
-{ lib
-, buildGoModule
-, fetchFromGitHub
-, pkg-config
-, glib
-, gobject-introspection
-, gtk4
-, gtk4-layer-shell
-, gdk-pixbuf
-, graphene
-, cairo
-, pango
-, wrapGAppsHook
-,
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  pkg-config,
+  glib,
+  gobject-introspection,
+  gtk4,
+  gtk4-layer-shell,
+  gdk-pixbuf,
+  graphene,
+  cairo,
+  pango,
+  wrapGAppsHook,
 }:
 
 buildGoModule rec {
@@ -26,7 +26,6 @@ buildGoModule rec {
   };
 
   vendorHash = "sha256-q9HwcbtWk9LJOFmm7yyVWGjnvjWRnwDA+wqYGzysdiE=";
-
 
   nativeBuildInputs = [
     gobject-introspection
@@ -43,7 +42,6 @@ buildGoModule rec {
     cairo
     pango
   ];
-
 
   meta = {
     description = "An opinionated panel/shell for the Hyprland compositor";

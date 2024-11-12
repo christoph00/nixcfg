@@ -1,10 +1,11 @@
-{ config
-, lib
-, pkgs
-, modulesPath
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
 }:
 {
 
@@ -146,7 +147,6 @@
       INTEL_GPU_MIN_FREQ_ON_BAT = 600;
     };
   };
-
 
   hardware.cpu.intel.updateMicrocode = true;
 
