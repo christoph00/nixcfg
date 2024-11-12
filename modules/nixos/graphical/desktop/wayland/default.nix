@@ -132,6 +132,8 @@ in
       waybar
       sysmenu
 
+      uwsm
+
       # inputs.ignis.packages.${system}.ignis
 
       gtk4-layer-shell
