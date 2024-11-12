@@ -63,8 +63,6 @@ in
       AQ_DRM_DEVICES = "/dev/dri/card0";
 
     };
-    services.xserver.autorun = false;
-    services.graphical-desktop.enable = true;
 
     services.seatd.enable = true;
 
