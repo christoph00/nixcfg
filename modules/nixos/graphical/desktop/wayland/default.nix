@@ -137,6 +137,8 @@ in
       wf-recorder
     ];
 
+    security.pam.services.waylock = { };
+
   };
 
 }

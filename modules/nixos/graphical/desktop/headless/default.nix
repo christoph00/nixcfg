@@ -59,7 +59,6 @@ in
       WLR_RENDERER = "pixman";
       WLR_RENDER_DRM_DEVICE = "/dev/dri/card0";
       AQ_DRM_DEVICES = "/dev/dri/card0";
-      
 
     };
 
