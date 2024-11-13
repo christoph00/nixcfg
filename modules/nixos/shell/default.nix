@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.internal;
@@ -100,6 +99,8 @@ in
       pkgs.killall
       pkgs.devenv
       pkgs.tmux
+
+      pkgs.agenix
 
       # pkgs.uv
     ];

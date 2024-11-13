@@ -71,11 +71,6 @@ in
 
     programs.uwsm = {
       enable = true;
-      waylandCompositors.wayfire = {
-        binPath = "/run/current-system/sw/bin/wayfire";
-        prettyName = "Wayfire";
-        comment = "Wayfire managed by UWSM";
-      };
     };
 
     systemd.user.services = {
