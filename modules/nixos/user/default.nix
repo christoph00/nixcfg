@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  namespace,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, namespace
+, ...
 }:
 with lib;
 with lib.internal;
@@ -15,8 +14,11 @@ in
   options.internal.user = with types; {
     name = mkOpt str "christoph" "The name to use for the user account.";
     fullName = mkOpt str "Christoph" "The full name of the user.";
+    passwordFile = mkOption {
+      type = types.nullOr types.path;
+      default = config.age.secrets.user_christoph_pw.path;
+    };
     email = mkOpt str "christoph@asche.co" "The email of the user.";
-    initialPassword = mkOpt str "Start01" "The initial password to use when the user is first created.";
     prompt-init = mkBoolOpt true "Whether or not to show an initial message when opening a new shell.";
     extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
     extraOptions = mkOpt attrs { } (mdDoc "Extra options passed to `users.users.<name>`.");
@@ -28,11 +30,13 @@ in
         enable = false;
       };
     };
-
+    age.secrets.tailscale-auth-key.file = ../../../secrets/user_christoph_pw;
     users.users.${cfg.name} = {
       isNormalUser = true;
 
-      inherit (cfg) name initialPassword;
+      inherit (cfg) name;
+
+      hashedPasswordFile = cfg.passwordFile;
 
       home = "/home/${cfg.name}";
       group = "users";
