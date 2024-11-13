@@ -38,10 +38,10 @@ let
           exit 1
       fi
 
-      MODE="$SUNSHINE_CLIENT_WIDTH''${SUNSHINE_CLIENT_WIDTH}x$SUNSHINE_CLIENT_HEIGHT@$SUNSHINE_CLIENT_FPS''
-      Hz "
+      MODE="''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS}Hz"
       
       ${pkgs.wlr-randr}/bin/wlr-randr --output HEADLESS-1 --on --custom-mode $MODE
+
     '');
 in
 {
@@ -51,14 +51,14 @@ in
       Enable
       Headless
       Desktop.";
-        enableStreaming = mkBoolOpt config.internal.graphical.desktop.headless "
+    enableStreaming = mkBoolOpt config.internal.graphical.desktop.headless "
       Enable
       Streaming ";
-      autorun = mkBoolOpt true "
+    autorun = mkBoolOpt true "
       Autorun ";
-      user = mkOption {
-        type = types.str;
-        default = "
+    user = mkOption {
+      type = types.str;
+      default = "
       christoph ";
 
     };
@@ -66,15 +66,17 @@ in
 
   config = mkIf cfg.enable {
 
-    boot.kernelModules = [ "
-      uinput " ];
+    boot.kernelModules = [
+      "
+      uinput "
+    ];
     services.udev.extraRules = ''
       KERNEL=="
       uinput ", GROUP="
       input ", MODE=" 0660 " OPTIONS+="
       static_node= uinput "
     '';
-
+    environment.systemPackages = [ set_resolution ];
     environment.variables = {
       WLR_BACKENDS = "
       drm,headless,libinput";
@@ -104,7 +106,6 @@ in
     #   description = "Graphical headless server";
     #   serviceConfig = {
     #     ExecStartPre = "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_RUNTIME_DIR WLR_BACKENDS;
-  systemctl --user import-environment";
     #     ExecStart = "${pkgs.runtimeShell} -c 'source /etc/set-environment; exec ${config.programs.wayfire.package}/bin/wayfire'";
     #   };
     # };
@@ -113,6 +114,8 @@ in
   };
 
 }
+
+
 
 
 
