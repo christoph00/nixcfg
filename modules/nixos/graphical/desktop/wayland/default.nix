@@ -131,6 +131,7 @@ in
 
       waybar
       sysmenu
+      sfwbar
 
       uwsm
 
