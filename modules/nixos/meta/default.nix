@@ -3,51 +3,76 @@
   config,
   lib,
   pkgs,
-  namespace,
   ...
 }:
+
 let
   inherit (lib)
     types
-    listOf
     mkIf
     mkMerge
-    mkDefault
     mkOption
     ;
-  inherit (lib.internal) mkBoolOpt;
-  cfg = config.internal.type;
+
+  cfg = config.internal;
+
 in
 {
-  options.internal = with types; {
-    type = mkOption {
-      type = enum [
-        "laptop"
-        "desktop"
-        "server"
-        "vm"
-        "microvm"
-        "bootstrap"
-        "none"
-        "container"
-      ];
+  options.interal = with types; {
+    # Liste der aktiven Rollen
+    roles = mkOption {
+      type = listOf (enum [
+        "smart-home"
+        "router"
+        "gamestream"
+        "gaming"
+        "media"
+        "webserver"
+        "development"
+        "nas"
+        "headless"
+      ]);
+      default = [ ];
+      description = "Liste der aktiven Systemrollen";
     };
-    isV3 = mkBoolOpt config.internal.isV4 "CPU has v4 features";
-    isV4 = mkBoolOpt false "CPU has v3 features";
-    isMicroVM = mkBoolOpt (config.internal.type == "microvm") "Whether or not this is a microvm.";
-    isVM = mkBoolOpt (config.internal.type == "vm") "Whether or not this is a vm.";
-    isLaptop = mkBoolOpt (config.internal.type == "laptop") "Whether or not this is a laptop.";
-    isGraphical = mkBoolOpt (
-      config.internal.type == "desktop" || config.internal.type == "laptop"
-    ) "Whether or not this is a graphical system.";
-    isServer = mkBoolOpt (config.internal.type == "server") "Whether or not this is a server.";
-    isHeadless = mkBoolOpt (
-      config.internal.type == "server"
-      || config.internal.type == "microvm"
-      || config.internal.type == "vm"
-    ) "Whether or not this is a headless server.";
-    isDesktop = mkBoolOpt (config.internal.type == "desktop") "Whether or not this is a desktop.";
-    isContainer = mkBoolOpt (config.internal.type == "container") "Whether or not this is a container.";
+
+    hasRole = role: (builtins.elem role cfg.roles);
+
+    isSmartHome = mkOption {
+      type = types.bool;
+      default = cfg.hasRole "smart-home";
+    };
+
+    isRouter = mkOption {
+      type = types.bool;
+      default = cfg.hasRole "router";
+    };
+
+    isGaming = mkOption {
+      type = types.bool;
+      default = cfg.hasRole "gaming";
+    };
+
+    isMedia = mkOption {
+      type = types.bool;
+      default = cfg.hasRole "media";
+    };
+
+    isHeadless = mkOption {
+      type = types.bool;
+      default = cfg.hasRole "headless";
+    };
+
+    isGameStream = mkOption {
+      type = types.bool;
+      default = cfg.hasRole "gamestream";
+    };
+
+    requiresGUI = mkOption {
+      type = types.bool;
+      default = cfg.isGaming || cfg.hasRole "gamestream" || cfg.isDesktop;
+    };
+
   };
 
 }
