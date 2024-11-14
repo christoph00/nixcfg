@@ -29,7 +29,7 @@ with lib;
 with lib.internal;
 
 let
-  cfg = config.internal.services.office-server;
+  cfg = config.internal.services.homeassistant;
 
 in
 
