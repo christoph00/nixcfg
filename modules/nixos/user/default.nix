@@ -30,7 +30,7 @@ in
         enable = false;
       };
     };
-    age.secrets.tailscale-auth-key.file = ../../../secrets/user_christoph_pw;
+    age.secrets.user_christoph_pw.file = ../../../secrets/user_christoph_pw;
     users.users.${cfg.name} = {
       isNormalUser = true;
 
