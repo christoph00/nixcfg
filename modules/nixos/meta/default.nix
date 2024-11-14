@@ -18,7 +18,7 @@ let
 
 in
 {
-  options.interal = with types; {
+  options.internal = with types; {
     # Liste der aktiven Rollen
     roles = mkOption {
       type = listOf (enum [
