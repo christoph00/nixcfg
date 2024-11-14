@@ -16,6 +16,8 @@ let
 
   cfg = config.internal;
 
+  hasRole = role: (builtins.elem role cfg.roles);
+
 in
 {
   options.internal = with types; {
@@ -36,41 +38,39 @@ in
       description = "Liste der aktiven Systemrollen";
     };
 
-    hasRole = role: (builtins.elem role cfg.roles);
-
     isSmartHome = mkOption {
       type = types.bool;
-      default = cfg.hasRole "smart-home";
+      default = hasRole "smart-home";
     };
 
     isRouter = mkOption {
       type = types.bool;
-      default = cfg.hasRole "router";
+      default = hasRole "router";
     };
 
     isGaming = mkOption {
       type = types.bool;
-      default = cfg.hasRole "gaming";
+      default = hasRole "gaming";
     };
 
     isMedia = mkOption {
       type = types.bool;
-      default = cfg.hasRole "media";
+      default = hasRole "media";
     };
 
     isHeadlessDesktop = mkOption {
       type = types.bool;
-      default = cfg.hasRole "headless-desktop";
+      default = hasRole "headless-desktop";
     };
 
     isGameStream = mkOption {
       type = types.bool;
-      default = cfg.hasRole "gamestream";
+      default = hasRole "gamestream";
     };
 
     requiresGUI = mkOption {
       type = types.bool;
-      default = cfg.isGaming || cfg.hasRole "gamestream" || cfg.isDesktop;
+      default = isGaming || hasRole "gamestream" || isDesktop;
     };
 
   };
