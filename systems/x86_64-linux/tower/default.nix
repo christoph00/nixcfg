@@ -24,7 +24,7 @@
   internal.roles = [
     "gaming"
     "gamestream"
-    "headless"
+    "headless-desktop"
   ];
 
   fileSystems = {
