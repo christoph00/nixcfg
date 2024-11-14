@@ -23,6 +23,13 @@
     };
     network.lanInterface = "enp1s0";
 
+    roles = [
+      "router"
+      "nas"
+      "media"
+      "smart-home"
+    ];
+
   };
 
   boot.kernelModules = [

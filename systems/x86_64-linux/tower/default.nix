@@ -21,8 +21,11 @@
   internal.type = "desktop";
   internal.isV3 = true;
   internal.system.boot.secureBoot = true;
-  #internal.graphical.desktop.display-manager.enable = false;
-  internal.graphical.desktop.headless.enable = true;
+  internal.roles = [
+    "gaming"
+    "gamestream"
+    "headless"
+  ];
 
   fileSystems = {
     "/media/Games" = {
