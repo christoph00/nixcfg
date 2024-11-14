@@ -30,7 +30,7 @@ in
         "webserver"
         "development"
         "nas"
-        "headless"
+        "headless-desktop"
       ]);
       default = [ ];
       description = "Liste der aktiven Systemrollen";
@@ -58,9 +58,9 @@ in
       default = cfg.hasRole "media";
     };
 
-    isHeadless = mkOption {
+    isHeadlessDesktop = mkOption {
       type = types.bool;
-      default = cfg.hasRole "headless";
+      default = cfg.hasRole "headless-desktop";
     };
 
     isGameStream = mkOption {

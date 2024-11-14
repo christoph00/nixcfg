@@ -47,7 +47,7 @@ in
 {
 
   options.internal.graphical.desktop.headless = {
-    enable = mkBoolOpt config.internal.isHeadless "
+    enable = mkBoolOpt config.internal.isHeadlessDesktop "
       Enable
       Headless
       Desktop.";
