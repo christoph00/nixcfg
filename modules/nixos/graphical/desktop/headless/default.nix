@@ -47,11 +47,11 @@ in
 {
 
   options.internal.graphical.desktop.headless = {
-    enable = mkBoolOpt false "
+    enable = mkBoolOpt config.internal.isHeadless "
       Enable
       Headless
       Desktop.";
-    enableStreaming = mkBoolOpt config.internal.graphical.desktop.headless "
+    enableStreaming = mkBoolOpt config.internal.isGameStream "
       Enable
       Streaming ";
     autorun = mkBoolOpt true "
@@ -67,8 +67,7 @@ in
   config = mkIf cfg.enable {
 
     boot.kernelModules = [
-      "
-      uinput "
+      "uinput "
     ];
     services.udev.extraRules = ''
       KERNEL=="
