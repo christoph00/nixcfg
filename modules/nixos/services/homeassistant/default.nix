@@ -45,9 +45,10 @@ in
       enable = true;
       openFirewall = true;
       package = pkgs.home-assistant;
+      config = {
 
+      };
     };
-
   };
 
 }
