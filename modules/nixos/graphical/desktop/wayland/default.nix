@@ -79,6 +79,7 @@ in
     systemd.user.services = {
       waybar = mkIf cfg.waybar {
         description = "Waybar as systemd service";
+        path = [ config.system.path ];
         script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
@@ -107,13 +108,13 @@ in
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "background-graphical.slice";
       };
-      polkit-gnome-authentication-agent-1 = {
-        description = "polkit-gnome-authentication-agent-1";
-        script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
+      # polkit-gnome-authentication-agent-1 = {
+      # description = "polkit-gnome-authentication-agent-1";
+      # script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      # wantedBy = [ "graphical-session.target" ];
+      # after = [ "graphical-session.target" ];
+      # serviceConfig.Slice = "background-graphical.slice";
+      # };
     };
 
     services.xserver.desktopManager.runXdgAutostartIfNone = true;
@@ -152,7 +153,7 @@ in
 
       pwvucontrol
 
-      inputs.ignis.packages.${system}.ignis
+      # inputs.ignis.packages.${system}.ignis
 
       gtk4-layer-shell
       #internal.hyprpanel

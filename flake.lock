@@ -727,26 +727,6 @@
         "type": "github"
       }
     },
-    "ignis": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1731355581,
-        "narHash": "sha256-Zzlm9HZkpTs9QWIUgSUv1bwA/bhSB4TZ1YGeBuqOrFk=",
-        "owner": "linkfrg",
-        "repo": "ignis",
-        "rev": "706a586e57f1d620b139d15dc7cf05bd31fcb3a2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "linkfrg",
-        "repo": "ignis",
-        "type": "github"
-      }
-    },
     "impermanence": {
       "locked": {
         "lastModified": 1725690722,
@@ -3159,7 +3139,6 @@
         "firefox-csshacks": "firefox-csshacks",
         "flake": "flake",
         "flake-utils": "flake-utils_4",
-        "ignis": "ignis",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "microvm": "microvm",
