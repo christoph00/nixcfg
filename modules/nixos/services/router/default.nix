@@ -48,39 +48,40 @@ in
       description = "The external interface to use.";
     };
   };
-  };
 
   config = mkIf cfg.enable {
 
-  services.dnsmasq = {
-    enable = true;
-    servers = [ "8.8.8.8" "8.8.4.4" ];
-    extraConfig = ''
-      interface=${cfg.internalInterface}
-      dhcp-range=192.168.1.10,192.168.1.250,255.255.255.0,24h
-      dhcp-authoritative
-      log-queries
-      log-facility=/var/log/dnsmasq.log
-      no-resolv
-    '';
-  };
+    services.dnsmasq = {
+      enable = true;
+      servers = [
+        "8.8.8.8"
+        "8.8.4.4"
+      ];
+      extraConfig = ''
+        interface=${cfg.internalInterface}
+        dhcp-range=192.168.1.10,192.168.1.250,255.255.255.0,24h
+        dhcp-authoritative
+        log-queries
+        log-facility=/var/log/dnsmasq.log
+        no-resolv
+      '';
+    };
 
+    networking.firewall.allowedTCPPorts = [ 53 ];
 
-  networking.firewall.allowedTCPPorts = [ 53  ];
+    networking.interfaces.eth1.useDHCP = true;
+    networking.interfaces.eth1.ipv4.addresses = [
+      {
+        address = "10.10.1.2";
+        prefixLength = 24;
+      }
+    ];
 
-  networking.interfaces.eth1.useDHCP = true;
-  networking.interfaces.eth1.ipv4.addresses = [
-    {
-      address = "10.10.1.2";
-      prefixLength = 24;
-    }
-  ];
-
-  networking.nat = {
-    enable = true;
-    internalInterfaces = [ cfg.internalInterface ];
-    externalInterface = cfg.externalInterface;
-  };
+    networking.nat = {
+      enable = true;
+      internalInterfaces = [ cfg.internalInterface ];
+      externalInterface = cfg.externalInterface;
+    };
 
   };
 
