@@ -85,7 +85,6 @@ in
       pkgs.internal.thorium-browser
     ];
 
-    programs.geary.enable = true;
 
   };
 
