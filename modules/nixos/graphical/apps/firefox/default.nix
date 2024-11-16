@@ -1,13 +1,13 @@
 {
   # Snowfall Lib provides a customized `lib` instance with access to your flake's library
   # as well as the libraries available from your flake's inputs.
-  lib,
-  # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs,
-  # You also have access to your flake's inputs.
-  config,
-  inputs,
-  ...
+  lib
+, # An instance of `pkgs` with your overlays and packages applied is also available.
+  pkgs
+, # You also have access to your flake's inputs.
+  config
+, inputs
+, ...
 }:
 
 with builtins;
@@ -74,11 +74,11 @@ in
               "@contain-google".install_url = mozillaAddon "google-container";
               "@testpilot-containers".install_url = mozillaAddon "multi-account-containers";
 
-              "ncpasswords@mdns.eu" = {
-                install_url = mozillaAddon "nextcloud-passwords";
-                installation_mode = "force_installed";
-                default_area = "navbar";
-              };
+              # "ncpasswords@mdns.eu" = {
+              # install_url = mozillaAddon "nextcloud-passwords";
+              # installation_mode = "force_installed";
+              # default_area = "navbar";
+              # };
 
               "uBlock0@raymondhill.net".install_url = mozillaAddon "ublock-origin";
 
