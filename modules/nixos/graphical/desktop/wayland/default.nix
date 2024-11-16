@@ -36,8 +36,8 @@ in
 
   options.internal.graphical.desktop.wayland = {
     enable = mkBoolOpt false "Enable the wayland environment.";
-    waybar = mkBoolOpt true "Enable Waybar";
-    sfwbar = mkBoolOpt false "Enable sfwbar";
+    waybar = mkBoolOpt false "Enable Waybar";
+    sfwbar = mkBoolOpt true "Enable sfwbar";
   };
 
   config = mkIf cfg.enable {

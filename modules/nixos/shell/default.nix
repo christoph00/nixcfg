@@ -103,6 +103,7 @@ in
       pkgs.agenix
 
       # pkgs.uv
+      pkgs.uutils-coreutils-noprefix
     ];
 
     programs.nh = {
