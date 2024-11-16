@@ -36,6 +36,8 @@ in
 
   options.internal.graphical.desktop.wayland = {
     enable = mkBoolOpt false "Enable the wayland environment.";
+    waybar = mkBoolOpt true "Enable Waybar";
+    sfwbar = mkBoolOpt false "Enable sfwbar";
   };
 
   config = mkIf cfg.enable {
@@ -75,20 +77,35 @@ in
     };
 
     systemd.user.services = {
-      waybar = {
+      waybar = mkIf cfg.waybar {
         description = "Waybar as systemd service";
         script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
       };
+      sfwbar = mkIf cfg.sfwbar {
+        description = "sfwbar";
+        script = "${pkgs.sfwbar}/bin/sfwbar";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "app-graphical.slice";
+
+      };
       swww-daemon = {
         description = "swww-daemon as systemd service";
         script = "${pkgs.swww}/bin/swww-daemon";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "app-graphical.slice";
+        serviceConfig.Slice = "background-graphical.slice";
 
+      };
+      syshud = {
+        description = "syshud";
+        script = "${pkgs.syshud}/bin/syshud";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "background-graphical.slice";
       };
       polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
@@ -127,6 +144,8 @@ in
 
       waybar
       sysmenu
+      syshud
+
       sfwbar
 
       uwsm
@@ -152,6 +171,7 @@ in
       wluma
       wl-mirror
       wf-recorder
+
     ];
 
     security.pam.services.waylock = { };
