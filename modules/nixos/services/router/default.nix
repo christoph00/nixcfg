@@ -71,7 +71,7 @@ in
   networking.interfaces.eth1.useDHCP = true;
   networking.interfaces.eth1.ipv4.addresses = [
     {
-      address = "10.100.0.2";
+      address = "10.10.1.2";
       prefixLength = 24;
     }
   ];
@@ -80,6 +80,8 @@ in
     enable = true;
     internalInterfaces = [ cfg.internalInterface ];
     externalInterface = cfg.externalInterface;
+  };
+
   };
 
 }
