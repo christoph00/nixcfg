@@ -53,12 +53,18 @@ in
 
     services.udev.packages = [ pkgs.antimicrox ];
 
+    services.sunshine = {
+      enable = true;
+      autoStart = true;
+      capSysAdmin = false;
+      openFirewall = true;
+    };
+
     systemd.user.services = {
       sunshine = {
         description = "Sunshine Host";
-        script = "${pkgs.sunshine}/bin/sunshine";
-        serviceConfig.Slice = "app-graphical.slice";
-        wantedBy = [ "graphical-session.target" ];
+        path = [ config.system.path ];
+        serviceConfig.Slice = "background-graphical.slice";
         after = [ "graphical-session.target" ];
       };
       gamemoded = {
