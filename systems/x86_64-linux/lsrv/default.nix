@@ -30,6 +30,11 @@
       "smart-home"
     ];
 
+    services.router = {
+      internalInterface = "enp1s0";
+      externalInterface = "enp2s0f1";
+    };
+
   };
 
   boot.kernelModules = [
@@ -67,16 +72,6 @@
     ))
   ];
   boot.blacklistedKernelModules = [ "r8169" ];
-
-  systemd.network.networks."20-modem" = {
-    name = "enp2s0f1";
-    networkConfig = {
-      DHCP = "no";
-    };
-    address = [
-      "10.10.1.2/24"
-    ];
-  };
 
   system.stateVersion = "24.05";
 }
