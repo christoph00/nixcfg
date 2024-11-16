@@ -125,8 +125,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ignis.url = "git+https://github.com/linkfrg/ignis?submodules=1";
-    ignis.inputs.nixpkgs.follows = "nixpkgs";
+    # ignis.url = "git+https://github.com/linkfrg/ignis?submodules=1";
+    # ignis.inputs.nixpkgs.follows = "nixpkgs";
 
     quickshell = {
       url = "github:quickshell-mirror/quickshell";
