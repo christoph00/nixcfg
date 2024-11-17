@@ -51,6 +51,7 @@ in
 
   config = mkIf cfg.enable {
 
+    internal.system.state.directories = [ "/var/lib/technitium-dns-server" ];
     services.technitium-dns-server = {
       enable = true;
       openFirewall = true;
