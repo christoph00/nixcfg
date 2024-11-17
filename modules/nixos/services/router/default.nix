@@ -105,24 +105,16 @@ in
 
       nat = {
         enable = true;
-        internalInterfaces = [ cfg.internalInterface ];
-        externalInterface = cfg.externalInterface;
+        internalInterfaces = [ "lan" ];
+        externalInterface = "dtag-ppp";
       };
 
     };
 
     systemd.network = {
-      links."10-internal" = {
-        matchConfig.Name = cfg.internalInterface;
-        linkConfig.Name = "internal";
-      };
-      links."10-external" = {
-        matchConfig.Path = cfg.externalInterface;
-        linkConfig.Name = "external";
-      };
 
       networks."10-external" = {
-        name = "external";
+        name = cfg.externalInterface;
         DHCP = "no";
         addresses = [ { Address = "10.10.1.2/24"; } ];
         vlan = [ "dtag-wan" ];
@@ -130,7 +122,7 @@ in
       };
 
       networks."10-internal" = {
-        name = "internal";
+        name = cfg.internalInterface;
         DHCP = "no";
         bridge = [ "lan" ];
       };
