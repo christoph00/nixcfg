@@ -21,7 +21,6 @@
         device = "/dev/mmcblk0";
       };
     };
-    network.lanInterface = "enp1s0";
 
     roles = [
       "router"
@@ -29,6 +28,11 @@
       "media"
       "smart-home"
     ];
+
+    services.router = {
+      internalInterface = "enp1s0";
+      externalInterface = "enp2s0f1";
+    };
 
   };
 

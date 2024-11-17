@@ -42,8 +42,7 @@ in
 
   config = mkIf cfg.enable {
 
-  internal.system.state.directories = [ "/var/lib/sabnzbd" ];
-
+    internal.system.state.directories = [ "/var/lib/sabnzbd" ];
 
     services.sabnzbd = {
       enable = true;

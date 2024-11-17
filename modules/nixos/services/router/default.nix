@@ -112,25 +112,25 @@ in
     };
 
     systemd.network = {
-      links."10-eth1" = {
-        matchConfig.Path = "pci-0000:01:00.0";
-        linkConfig.Name = "eth1";
+      links."10-internal" = {
+        matchConfig.Name = cfg.internalInterface;
+        linkConfig.Name = "internal";
       };
-      links."10-eth2" = {
-        matchConfig.Path = "pci-0000:02:00.1";
-        linkConfig.Name = "eth2";
+      links."10-external" = {
+        matchConfig.Path = cfg.externalInterface;
+        linkConfig.Name = "external";
       };
 
-      networks."10-eth2" = {
-        name = "eth1";
+      networks."10-external" = {
+        name = "external";
         DHCP = "no";
         addresses = [ { Address = "10.10.1.2/24"; } ];
         vlan = [ "dtag-wan" ];
         linkConfig.MTUBytes = toString 1600;
       };
 
-      networks."10-eth1" = {
-        name = "eth2";
+      networks."10-internal" = {
+        name = "internal";
         DHCP = "no";
         bridge = [ "lan" ];
       };
