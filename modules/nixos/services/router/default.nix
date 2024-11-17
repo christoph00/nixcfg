@@ -57,20 +57,25 @@ in
         "8.8.8.8"
         "8.8.4.4"
       ];
-      extraConfig = ''
-        interface=${cfg.internalInterface}
-        dhcp-range=192.168.1.10,192.168.1.250,255.255.255.0,24h
-        dhcp-authoritative
-        log-queries
-        log-facility=/var/log/dnsmasq.log
-        no-resolv
-      '';
+      settings = {
+        interface = cfg.internalInterface;
+        domain = "internal";
+        bogus-priv = "no";
+        dhcp-range = "192.168.2.100,192.168.2.250,12h";
+      };
     };
+
+    networking.nftables.enable = true;
 
     networking.firewall.allowedTCPPorts = [ 53 ];
 
-    networking.interfaces.eth1.useDHCP = true;
-    networking.interfaces.eth1.ipv4.addresses = [
+    networking.interfaces.${cfg.internalInterface}.ipv4.addresses = [
+      {
+        address = "192.168.2.2";
+        prefixLength = 24;
+      }
+    ];
+    networking.interfaces.${cfg.externalInterface}.ipv4.addresses = [
       {
         address = "10.10.1.2";
         prefixLength = 24;
