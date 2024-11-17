@@ -69,6 +69,7 @@ in
               qingping-ble
               xiaomi-ble
               pyxiaomigateway
+              radios
             ];
         };
       in
