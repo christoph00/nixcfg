@@ -61,17 +61,18 @@ in
     internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
     services.technitium-dns-server = {
       enable = true;
-      openFirewall = true;
-      firewallUDPPorts = [
-        53
-        67
-      ];
+      openFirewall = false;
+
     };
 
     networking = {
       nftables.enable = true;
 
-      firewall.interfaces.lan.allowedTCPPorts = [ 53 ];
+      firewall.allowedTCPPorts = mkForce [];
+      firewall.allowedUDPPorts = mkForce [];
+      firewall.interfaces.lan.allowedTCPPorts = [ 53  22 5360];
+      firewall.interfaces.lan.allowedUDPPorts = [ 546 ];
+
 
       firewall.extraInputRules = ''
         ip protocol icmp icmp type {
@@ -87,6 +88,8 @@ in
       firewall.filterForward = true;
 
       firewall.interfaces.dtag-ppp.allowedUDPPorts = [ 546 ];
+
+
       firewall.extraForwardRules = ''
         iifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
         oifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
