@@ -48,6 +48,7 @@ in
       # pkgs.lutris
       pkgs.bottles
       pkgs.antimicrox
+      pkgs.gamescope
 
     ];
 
