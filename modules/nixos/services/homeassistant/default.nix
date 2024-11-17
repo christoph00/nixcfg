@@ -50,6 +50,18 @@ in
       powerOnBoot = true;
     };
 
+    services.mosquitto = {
+      enable = true;
+      listeners = [
+        {
+          acl = [ "pattern readwrite #" ];
+          omitPasswordAuth = true;
+          settings.allow_anonymous = true;
+        }
+      ];
+    };
+    networking.firewall.allowedTCPPorts = [ 1883 ];
+
     services.home-assistant =
       let
         package = pkgs.home-assistant.override {
@@ -70,6 +82,9 @@ in
               xiaomi-ble
               pyxiaomigateway
               radios
+              bluepy
+              pybluez
+              aioblescan
             ];
         };
       in
@@ -102,8 +117,17 @@ in
           frontend = { };
           history = { };
           config = { };
+          dhcp = { };
           zha = {
+            enable_quirks = true;
             zigpy_config.ota.ikea_provider = true;
+            device_config = {
+              "a4:c1:38:35:dd:d5:77:cc-1".type = "switch";
+              "a4:c1:38:35:dd:d5:77:cc-2".type = "switch";
+              "a4:c1:38:35:dd:d5:77:cc-3".type = "switch";
+              "a4:c1:38:35:dd:d5:77:cc-4".type = "switch";
+              "a4:c1:38:35:dd:d5:77:cc-5".type = "switch";
+            };
           };
           system_health = { };
         };
