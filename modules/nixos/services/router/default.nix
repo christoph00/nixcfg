@@ -79,6 +79,12 @@ in
 
       firewall.filterForward = true;
 
+      firewall.interfaces.dtag-ppp.allowedUDPPorts = [ 546 ];
+      firewall.extraForwardRules = ''
+        iifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
+        oifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
+      '';
+
       nftables.tables.shaping = {
         enable = true;
         family = "inet";
@@ -105,133 +111,127 @@ in
 
     };
 
-  };
+    systemd.network = {
+      links."10-eth1" = {
+        matchConfig.Path = "pci-0000:01:00.0";
+        linkConfig.Name = "eth1";
+      };
+      links."10-eth2" = {
+        matchConfig.Path = "pci-0000:02:00.1";
+        linkConfig.Name = "eth2";
+      };
 
-  systemd.network = {
-    links."10-eth1" = {
-      matchConfig.Path = "pci-0000:01:00.0";
-      linkConfig.Name = "eth1";
-    };
-    links."10-eth2" = {
-      matchConfig.Path = "pci-0000:02:00.1";
-      linkConfig.Name = "eth2";
-    };
+      networks."10-eth1" = {
+        name = "eth1";
+        DHCP = "no";
+        addresses = [ { Address = "10.10.0.2/24"; } ];
+        vlan = [ "dtag-wan" ];
+        linkConfig.MTUBytes = toString 1600;
+      };
 
-    networks."10-eth1" = {
-      name = "eth1";
-      DHCP = "no";
-      addresses = [ { Address = "10.10.0.2/24"; } ];
-      vlan = [ "dtag-wan" ];
-      linkConfig.MTUBytes = toString 1600;
-    };
+      networks."10-eth2" = {
+        name = "eth2";
+        DHCP = "no";
+        bridge = [ "lan" ];
+      };
 
-    networks."10-eth2" = {
-      name = "eth2";
-      DHCP = "no";
-      bridge = [ "lan" ];
-    };
+      netdevs."20-dtag-wan" = {
+        netdevConfig = {
+          Kind = "vlan";
+          Name = "dtag-wan";
+        };
+        vlanConfig.Id = 7;
+      };
+      networks."20-dtag-wan" = {
+        name = "dtag-wan";
+        DHCP = "no";
+        linkConfig = {
+          RequiredForOnline = "degraded";
+          RequiredFamilyForOnline = "ipv6";
+        };
+      };
 
-    netdevs."20-dtag-wan" = {
-      netdevConfig = {
-        Kind = "vlan";
-        Name = "dtag-wan";
+      networks."20-dtag-ppp" = {
+        matchConfig = {
+          Name = "dtag-ppp";
+          Type = "ppp";
+        };
+        networkConfig = {
+          LinkLocalAddressing = "ipv6";
+          DHCP = "ipv6";
+        };
+        dhcpV6Config = {
+          PrefixDelegationHint = "::/56";
+          WithoutRA = "solicit";
+          UseHostname = "no";
+          UseDNS = "no";
+          UseNTP = "no";
+        };
+        dhcpPrefixDelegationConfig = {
+          UplinkInterface = ":self";
+          SubnetId = "0";
+          Announce = "no";
+        };
       };
-      vlanConfig.Id = 7;
-    };
-    networks."20-dtag-wan" = {
-      name = "dtag-wan";
-      DHCP = "no";
-      linkConfig = {
-        RequiredForOnline = "degraded";
-        RequiredFamilyForOnline = "ipv6";
-      };
-    };
 
-    networks."20-dtag-ppp" = {
-      matchConfig = {
-        Name = "dtag-ppp";
-        Type = "ppp";
+      netdevs."20-lan" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "lan";
+        };
       };
-      networkConfig = {
-        LinkLocalAddressing = "ipv6";
-        DHCP = "ipv6";
-      };
-      dhcpV6Config = {
-        PrefixDelegationHint = "::/56";
-        WithoutRA = "solicit";
-        UseHostname = "no";
-        UseDNS = "no";
-        UseNTP = "no";
-      };
-      dhcpPrefixDelegationConfig = {
-        UplinkInterface = ":self";
-        SubnetId = "0";
-        Announce = "no";
-      };
-    };
-
-    netdevs."20-lan" = {
-      netdevConfig = {
-        Kind = "bridge";
-        Name = "lan";
-      };
-    };
-    networks."20-lan" = {
-      matchConfig = {
-        Name = "lan";
-        Type = "bridge";
-      };
-      networkConfig = {
-        LinkLocalAddressing = "ipv6";
-        IPv6AcceptRA = "no";
-        IPv6SendRA = "yes";
-        DHCPPrefixDelegation = "yes";
-        DHCPServer = "no";
-        DNS = [
-          "192.168.2.2"
-          # "fe80::1"
+      networks."20-lan" = {
+        matchConfig = {
+          Name = "lan";
+          Type = "bridge";
+        };
+        networkConfig = {
+          LinkLocalAddressing = "ipv6";
+          IPv6AcceptRA = "no";
+          IPv6SendRA = "yes";
+          DHCPPrefixDelegation = "yes";
+          DHCPServer = "no";
+          DNS = [
+            "192.168.2.2"
+            # "fe80::1"
+          ];
+        };
+        addresses = [
+          { Address = "192.168.2.2/24"; }
+          #{ Address = "fe80::1/64"; }
         ];
-      };
-      addresses = [
-        { Address = "192.168.2.2/24"; }
-        #{ Address = "fe80::1/64"; }
-      ];
-      ipv6SendRAConfig = { };
-      dhcpPrefixDelegationConfig = {
-        UplinkInterface = "dtag-ppp";
-        SubnetId = "0x01";
-        Announce = "yes";
+        ipv6SendRAConfig = { };
+        dhcpPrefixDelegationConfig = {
+          UplinkInterface = "dtag-ppp";
+          SubnetId = "0x01";
+          Announce = "yes";
+        };
       };
     };
-  };
 
-  networking.firewall.interfaces.dtag-ppp.allowedUDPPorts = [ 546 ];
-  networking.firewall.extraForwardRules = ''
-    iifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
-    oifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
-  '';
-
-  services.pppd = {
-    enable = true;
-    peers.dtag = {
-      config = ''
-        plugin pppoe.so dtag-wan
-        user anonymous@t-online.de
-        password anonymous
-        ifname dtag-ppp
-        persist
-        maxfail 0
-        holdoff 5
-        noipdefault
-        lcp-echo-interval 20
-        lcp-echo-failure 3
-        mtu 1492
-        hide-password
-        defaultroute
-        +ipv6
-        debug
-      '';
+    services.pppd = {
+      enable = true;
+      peers.dtag = {
+        config = ''
+          plugin pppoe.so dtag-wan
+          user anonymous@t-online.de
+          password anonymous
+          ifname dtag-ppp
+          persist
+          maxfail 0
+          holdoff 5
+          noipdefault
+          lcp-echo-interval 20
+          lcp-echo-failure 3
+          mtu 1492
+          hide-password
+          defaultroute
+          +ipv6
+          debug
+        '';
+      };
     };
+
   };
 
 }
