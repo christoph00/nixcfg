@@ -110,6 +110,11 @@ in
       firewall.extraForwardRules = ''
         iifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
         oifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
+
+        ct state invalid drop
+        ct state established,related accept
+        iifname lan oifname dtag-ppp ct state new accept
+
       '';
 
       #     nftables.tables.shaping
@@ -121,6 +126,10 @@ in
       };
 
     };
+
+    boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = true;
+    boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = true;
+    #networking.useHostResolvConf = lib.mkForce false;
 
     systemd.network = {
 
