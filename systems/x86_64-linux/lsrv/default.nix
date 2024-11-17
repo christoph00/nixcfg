@@ -37,7 +37,7 @@
   };
 
   boot.kernelModules = [
-    "kvm-intel"
+    #"kvm-intel"
     "acpi_call"
     "i2c_dev"
   ];
