@@ -112,11 +112,11 @@ in
     };
 
     systemd.network = {
-      links."10-eth1" = {
+      links."10-eth2" = {
         matchConfig.Path = "pci-0000:01:00.0";
         linkConfig.Name = "eth1";
       };
-      links."10-eth2" = {
+      links."10-eth1" = {
         matchConfig.Path = "pci-0000:02:00.1";
         linkConfig.Name = "eth2";
       };
@@ -124,7 +124,7 @@ in
       networks."10-eth1" = {
         name = "eth1";
         DHCP = "no";
-        addresses = [ { Address = "10.10.0.2/24"; } ];
+        addresses = [ { Address = "10.10.1.2/24"; } ];
         vlan = [ "dtag-wan" ];
         linkConfig.MTUBytes = toString 1600;
       };
