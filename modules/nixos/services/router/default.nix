@@ -51,6 +51,12 @@ in
 
   config = mkIf cfg.enable {
 
+    environment.systemPackages = with pkgs; [
+      dnsutils
+      ethtool
+      tcpdump
+    ];
+
     internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
     services.technitium-dns-server = {
       enable = true;
@@ -85,9 +91,7 @@ in
         oifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
       '';
 
- #     nftables.tables.shaping
-
-
+      #     nftables.tables.shaping
 
       nat = {
         enable = true;
