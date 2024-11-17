@@ -55,6 +55,7 @@ in
       dnsutils
       ethtool
       tcpdump
+      speedtest-cli
     ];
 
     internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
