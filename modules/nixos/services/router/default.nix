@@ -51,18 +51,13 @@ in
 
   config = mkIf cfg.enable {
 
-    services.dnsmasq = {
+    services.technitium-dns-server = {
       enable = true;
-      servers = [
-        "8.8.8.8"
-        "8.8.4.4"
+      openFirewall = true;
+      firewallUDPPorts = [
+        53
+        67
       ];
-      settings = {
-        #interface = cfg.internalInterface;
-        domain = "internal";
-        bogus-priv = "no";
-        #dhcp-range = "192.168.2.100,192.168.2.250,12h";
-      };
     };
 
     networking.nftables.enable = true;
