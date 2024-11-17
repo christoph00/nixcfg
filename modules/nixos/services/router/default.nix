@@ -58,10 +58,10 @@ in
         "8.8.4.4"
       ];
       settings = {
-        interface = cfg.internalInterface;
+        #interface = cfg.internalInterface;
         domain = "internal";
         bogus-priv = "no";
-        dhcp-range = "192.168.2.100,192.168.2.250,12h";
+        #dhcp-range = "192.168.2.100,192.168.2.250,12h";
       };
     };
 
