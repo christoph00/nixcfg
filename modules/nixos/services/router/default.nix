@@ -76,7 +76,7 @@ in
       ];
       firewall.interfaces.lan.allowedUDPPorts = [
         546
-        52
+        53
         67
         68
       ];
