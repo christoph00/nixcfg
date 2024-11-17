@@ -63,7 +63,6 @@ in
 
     systemd.user.services = {
       sunshine = {
-        description = "Sunshine Host";
         path = [ config.system.path ];
         serviceConfig.Slice = "background-graphical.slice";
         after = [ "graphical-session.target" ];
