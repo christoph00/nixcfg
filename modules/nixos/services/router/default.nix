@@ -61,18 +61,25 @@ in
     internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
     services.technitium-dns-server = {
       enable = true;
-      openFirewall = false;
-
     };
 
     networking = {
       nftables.enable = true;
 
-      firewall.allowedTCPPorts = mkForce [];
-      firewall.allowedUDPPorts = mkForce [];
-      firewall.interfaces.lan.allowedTCPPorts = [ 53  22 5360];
-      firewall.interfaces.lan.allowedUDPPorts = [ 546 ];
-
+      firewall.allowedTCPPorts = mkForce [ ];
+      firewall.allowedUDPPorts = mkForce [ ];
+      firewall.interfaces.lan.allowedTCPPorts = [
+        53
+        22
+        5380 # technitium webui
+        8123 # homeassistant
+      ];
+      firewall.interfaces.lan.allowedUDPPorts = [
+        546
+        52
+        67
+        68
+      ];
 
       firewall.extraInputRules = ''
         ip protocol icmp icmp type {
@@ -88,7 +95,6 @@ in
       firewall.filterForward = true;
 
       firewall.interfaces.dtag-ppp.allowedUDPPorts = [ 546 ];
-
 
       firewall.extraForwardRules = ''
         iifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
