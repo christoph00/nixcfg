@@ -64,6 +64,11 @@ in
 
     networking.firewall.allowedTCPPorts = [ 53 ];
 
+    networking.defaultGateway = {
+      address = "192.168.2.1";
+      interface = cfg.internalInterface;
+    };
+
     networking.interfaces.${cfg.internalInterface}.ipv4.addresses = [
       {
         address = "192.168.2.2";
