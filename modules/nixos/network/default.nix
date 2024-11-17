@@ -17,7 +17,7 @@ in
   options.internal.network = with types; {
     enable = mkBoolOpt' true;
     enableWifi = mkBoolOpt' config.internal.isLaptop;
-    enableDHCPLAN = mkBoolOpt' true;
+    enableDHCPLAN = mkBoolOpt' (!config.internal.isRouter);
     enableNM = mkBoolOpt' config.internal.isGraphical;
     enableIWD = mkBoolOpt' cfg.enableWifi;
     lanInterface = mkOption {
