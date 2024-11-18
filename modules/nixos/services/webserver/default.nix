@@ -41,38 +41,94 @@ in
 
   };
 
-  config = mkIf cfg.enable {
-
-    users.users.caddy.isSystemUser = true;
-    users.users.caddy.group = "caddy";
-    users.groups.caddy = { };
-
-    services.caddy = {
-      enable = true;
-
-      package = pkgs-caddy.caddy.override {
-        externalPlugins = [
-          {
-            name = "cloudflare";
-            repo = "github.com/caddy-dns/cloudflare";
-            version = "89f16b99c18ef49c8bb470a82f895bce01cbaece";
-          }
+  config = mkIf cfg.enable
+    {
+      age.secrets.cf-api-key.file = ../../../secrets/cf-api-key;
+      systemd.services.caddy.serviceConfig = {
+        EnvironmentFile = [
+          "${config.sops.secrets.bunny_dns_api_key_caddy.path}"
         ];
-        vendorHash = "sha256-fTcMtg5GGEgclIwJCav0jjWpqT+nKw2OF1Ow0MEEitk=";
       };
+
+      services.caddy = {
+        enable = true;
+        package = pkgs.caddy.withPlugins {
+          caddyModules = [
+            {
+              name = "cloudflare";
+              repo = "github.com/caddy-dns/cloudflare";
+              version = "89f16b99c18ef49c8bb470a82f895bce01cbaece";
+            }
+            {
+              name = "dynamic-dns";
+              repo = "github.com/mholt/caddy-dynamicdns";
+              version = "d8dab1bbf3fc592032f71dacc14510475b4e3e9a";
+            }
+          ] ++ (
+            # Caddy Layer4 modules
+            lib.lists.map
+              (name: {
+                inherit name;
+                repo = "github.com/mholt/caddy-l4";
+                version = "3d22d6da412883875f573ee4ecca3dbb3fdf0fd0";
+              }) [ "layer4" "modules/l4proxy" "modules/l4tls" "modules/l4proxyprotocol" ]
+          );
+          vendorHash = "sha256-/OR+paTwlc87NcBPMP8ddtO+ZWN1sgcE5UI6igkv+mQ=";
+        };
+
+        email = "admin@r505.de";
+        acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
+        globalConfig = # caddyfile
+          ''
+            dynamic_dns {
+              provider cloudflare {
+                access_key {env.CLOUDFLARE_API_KEY}
+              }
+              domains {
+                r505.de ddns
+              }
+              ip_source simple_http https://icanhazip.com
+              ip_source simple_http https://api64.ipify.org
+              check_interval 5m
+              versions ipv4 ipv6
+              ttl 5m
+            }
+          '';
+        extraConfig = # caddyfile
+          ''
+            (acme_r505_de) {
+              tls {
+                dns bunny {
+                  access_key {env.CLOUDFLARE_API_KEY}
+                  zone r505.de
+                }
+                propagation_timeout -1
+              }
+            }
+            (deny_non_local) {
+              @denied not remote_ip private_ranges
+              handle @denied {
+                abort
+              }
+            }
+          '';
+        virtualHosts = {
+          "ha.r505.de" = {
+            extraConfig = # caddyfile
+              ''
+                import acme_r505_de
+                handle {
+                  reverse_proxy http://127.0.0.1:8123 {
+                    header_up Host {upstream_hostport}
+                  }
+                }
+              '';
+          };
+
+        };
+
+      };
+
     };
-
-
-    systemd.services.caddy.serviceConfig.AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-
-    networking.firewall.allowedTCPPorts = [
-      80
-      443
-    ];
-
-    networking.firewall.allowedUDPPorts = [ 443 ];
-
-
-  };
 
 }
