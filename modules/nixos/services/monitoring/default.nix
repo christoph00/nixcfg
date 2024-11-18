@@ -37,8 +37,8 @@ in
 {
 
   options.internal.services.monitoring = {
-    enable = mkBoolOpt true "Enable Monitoring Service.";
-    hostMetrics = mkBoolOpt true "Enable Host Metrics";
+    enable = mkBoolOpt false "Enable Monitoring Service.";
+    hostMetrics = mkBoolOpt false "Enable Host Metrics";
     logFiles = lib.mkOption {
       default = [ ];
       type = lib.types.listOf lib.types.path;
