@@ -119,6 +119,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    caddy.url = "github:vincentbernat/caddy-nix";
+    caddy.inputs.nixpkgs.follows = "nixpkgs";
+
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
       # WM's nixpkgs is only used for tests, you can safely drop this if needed.
@@ -164,57 +167,61 @@
         src = ./.;
       };
     in
-    lib.mkFlake {
-      inherit inputs;
-      channels-config = {
-        allowUnfree = true;
-        permittedInsecurePackages = [
-          "electron-25.9.0"
-          "electron-27.3.11"
+    lib.mkFlake
+      {
+        inherit inputs;
+        channels-config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [
+            "electron-25.9.0"
+            "electron-27.3.11"
+          ];
+        };
+
+        overlays = with inputs; [
+          flake.overlays.default
+          chaotic.overlays.default
+          nvimcfg.overlays.default
+          nixpkgs-wayland.overlay
+          caddy.overlays.default
         ];
-      };
 
-      overlays = with inputs; [
-        flake.overlays.default
-        chaotic.overlays.default
-        nvimcfg.overlays.default
-        nixpkgs-wayland.overlay
-      ];
+        systems.modules.nixos = with inputs; [
+          nixos-facter-modules.nixosModules.facter
+          srvos.nixosModules.common
+          srvos.nixosModules.mixins-nix-experimental
+          agenix.nixosModules.default
+          chaotic.nixosModules.default
+          {
+            # manually import overlay
+            chaotic.nyx.overlay.enable = false;
+          }
+          disko.nixosModules.disko
+          nixos-cosmic.nixosModules.default
+          impermanence.nixosModules.impermanence
+          lanzaboote.nixosModules.lanzaboote
+          # jovian.nixosModules.default
+          vscode-server.nixosModules.default
+          nvf.nixosModules.default
 
-      systems.modules.nixos = with inputs; [
-        nixos-facter-modules.nixosModules.facter
-        srvos.nixosModules.common
-        srvos.nixosModules.mixins-nix-experimental
-        agenix.nixosModules.default
-        chaotic.nixosModules.default
-        {
-          # manually import overlay
-          chaotic.nyx.overlay.enable = false;
-        }
-        disko.nixosModules.disko
-        nixos-cosmic.nixosModules.default
-        impermanence.nixosModules.impermanence
-        lanzaboote.nixosModules.lanzaboote
-        # jovian.nixosModules.default
-        vscode-server.nixosModules.default
-        nvf.nixosModules.default
+          microvm.nixosModules.host
+          microvm.nixosModules.microvm
+        ];
 
-        microvm.nixosModules.host
-        microvm.nixosModules.microvm
-      ];
+        deploy = lib.mkDeploy { inherit (inputs) self; };
 
-      deploy = lib.mkDeploy { inherit (inputs) self; };
+        checks = builtins.mapAttrs
+          (
+            system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
+          )
+          inputs.deploy-rs.lib;
 
-      checks = builtins.mapAttrs (
-        system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
-      ) inputs.deploy-rs.lib;
+        outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
 
-      outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
-
-      alias = {
-        shells.default = "devel";
-      };
-    }
+        alias = {
+          shells.default = "devel";
+        };
+      }
     // {
       inherit (inputs) self;
     };
