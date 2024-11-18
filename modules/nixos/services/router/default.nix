@@ -185,6 +185,13 @@ in
           SubnetId = "0";
           Announce = "no";
         };
+        cakeConfig = {
+          Bandwidth = "150M"; # Upload Bandwidth
+          CompensationMode = "ptm";
+          PriorityQueueingPreset = "diffserv4";
+          FlowIsolationMode = "dual-src-host";
+          NAT = true;
+        };
       };
 
       netdevs."20-lan" = {
