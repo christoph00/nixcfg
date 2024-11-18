@@ -50,7 +50,7 @@ in
     programs.uwsm = {
       enable = true;
       waylandCompositors.labwc = {
-        bPath = "${config.programs.labwc.package}/bin/labwc";
+        binPath = "${config.programs.labwc.package}/bin/labwc";
         prettyName = "labwc";
         comment = "Labwc managed by UWSM";
       };
