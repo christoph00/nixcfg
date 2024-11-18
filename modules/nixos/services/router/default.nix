@@ -206,12 +206,12 @@ in
           DHCPServer = "no";
           DNS = [
             "192.168.2.2"
-            # "fe80::1"
+            "fe80::1"
           ];
         };
         addresses = [
           { Address = "192.168.2.2/24"; }
-          #{ Address = "fe80::1/64"; }
+          { Address = "fe80::1/64"; }
         ];
         ipv6SendRAConfig = { };
         dhcpPrefixDelegationConfig = {
@@ -247,10 +247,6 @@ in
 
     systemd.services."pppd-dtag" = {
       partOf = [ "systemd-networkd.service" ];
-      serviceConfig = {
-        Restart = "always";
-        RestartSec = 5;
-      };
     };
 
   };
