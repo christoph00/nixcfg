@@ -1,11 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   facter.reportPath = ./facter.json;
@@ -33,6 +32,8 @@
       internalInterface = "enp1s0";
       externalInterface = "enp2s0f1";
     };
+
+    services.webserver.enable = true;
 
   };
 
