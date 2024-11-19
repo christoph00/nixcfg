@@ -179,12 +179,12 @@
         ];
       };
 
-      flake.vaultix = {
-        nodes = self.nixosConfigurations;
-        identity = "./sec/id_secrets.pub";
-        # extraRecipients = [ ];
-        cache = "./sec/cache";
-      };
+      # flake.vaultix = {
+      #   nodes = inputs.self.nixosConfigurations;
+      #   identity = "./sec/id_secrets.pub";
+      #   # extraRecipients = [ ];
+      #   cache = "./sec/cache";
+      # };
 
       overlays = with inputs; [
         flake.overlays.default
@@ -192,7 +192,6 @@
         nvimcfg.overlays.default
         nixpkgs-wayland.overlay
         caddy.overlays.default
-        vaultix.flakeModules.default
       ];
 
       systems.modules.nixos = with inputs; [
@@ -215,6 +214,9 @@
 
         microvm.nixosModules.host
         microvm.nixosModules.microvm
+
+        # vaultix.flakeModules.default
+
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
