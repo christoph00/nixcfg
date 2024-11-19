@@ -52,14 +52,14 @@ in
 
     age.secrets.ha-secrets = {
       file = ../../../../secrets/ha-secrets.age;
-      path = "${config.home-assistant.configDir}/secrets.yaml";
+      path = "${config.services.home-assistant.configDir}/secrets.yaml";
       owner = "hass";
       group = "hass";
     };
 
     age.secrets.ha-serviceaccount = {
       file = ../../../../secrets/ha-serviceaccount.age;
-      path = "${config.home-assistant.configDir}/serviceaccount.json";
+      path = "${config.services.home-assistant.configDir}/serviceaccount.json";
       owner = "hass";
       group = "hass";
     };
