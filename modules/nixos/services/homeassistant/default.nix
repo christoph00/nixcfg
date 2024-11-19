@@ -50,20 +50,6 @@ in
       powerOnBoot = true;
     };
 
-    age.secrets.ha-secrets = {
-      file = ../../../../secrets/ha-secrets.age;
-      path = "${config.services.home-assistant.configDir}/secrets.yaml";
-      owner = "hass";
-      group = "hass";
-    };
-
-    age.secrets.ha-serviceaccount = {
-      file = ../../../../secrets/ha-serviceaccount.age;
-      path = "${config.services.home-assistant.configDir}/serviceaccount.json";
-      owner = "hass";
-      group = "hass";
-    };
-
     services.home-assistant =
       let
         package = pkgs.home-assistant.override {
