@@ -775,22 +775,6 @@
         "type": "github"
       }
     },
-    "impermanence": {
-      "locked": {
-        "lastModified": 1725690722,
-        "narHash": "sha256-4qWg9sNh5g1qPGO6d/GV2ktY+eDikkBTbWSg5/iD2nY=",
-        "owner": "nix-community",
-        "repo": "impermanence",
-        "rev": "63f4d0443e32b0dd7189001ee1894066765d18a5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "impermanence",
-        "rev": "63f4d0443e32b0dd7189001ee1894066765d18a5",
-        "type": "github"
-      }
-    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -3135,6 +3119,21 @@
         "type": "github"
       }
     },
+    "preservation": {
+      "locked": {
+        "lastModified": 1730126375,
+        "narHash": "sha256-RnXYMkXytsdvXQZdRcci5IiuxWFkWDzawPm2L1K+KGA=",
+        "owner": "WilliButz",
+        "repo": "preservation",
+        "rev": "96a98a3eb4e8ecdc70f299723e2a4d78f5ba3bd6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "WilliButz",
+        "repo": "preservation",
+        "type": "github"
+      }
+    },
     "quickshell": {
       "inputs": {
         "nixpkgs": [
@@ -3216,7 +3215,6 @@
         "firefox-csshacks": "firefox-csshacks",
         "flake": "flake",
         "flake-utils": "flake-utils_4",
-        "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "microvm": "microvm",
         "nix95": "nix95",
@@ -3230,6 +3228,7 @@
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nvf": "nvf",
         "nvimcfg": "nvimcfg",
+        "preservation": "preservation",
         "quickshell": "quickshell",
         "raspberry-pi-nix": "raspberry-pi-nix",
         "snowfall-lib": "snowfall-lib_2",
