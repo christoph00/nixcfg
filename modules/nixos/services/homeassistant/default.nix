@@ -50,6 +50,20 @@ in
       powerOnBoot = true;
     };
 
+     age.secrets.ha-secrets = {
+      file = ../../../../secrets/ha-secrets.age;
+      path = "${config.home-assistant.configDir}/secrets.yaml";
+      owner = "hass";
+      group = "hass";
+    };
+
+    age.secrets.ha-serviceaccount = {
+      file = ../../../../secrets/ha-serviceaccount.age;
+      path = "${config.home-assistant.configDir}/serviceaccount.json";
+      owner = "hass";
+      group = "hass";
+    };
+
     services.home-assistant =
       let
         package = pkgs.home-assistant.override {
@@ -91,6 +105,7 @@ in
             unit_system = "metric";
             time_zone = "Europe/Berlin";
             external_url = "https://ha.r505.de";
+            packages = "!include_dir_named pkgs";
           };
           http = {
             server_host = "0.0.0.0";
@@ -118,6 +133,15 @@ in
             };
           };
           system_health = { };
+          google_assistant = {
+          project_id = "!secret google_projectid";
+          service_account = "!include serviceaccount.json";
+          report_state = true;
+          exposed_domains = [
+            "switch"
+            "light"
+          ];
+        };
         };
       };
   };
