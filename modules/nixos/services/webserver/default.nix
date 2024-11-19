@@ -105,11 +105,9 @@ in
                 dns cloudflare {env.CF_API_TOKEN}
                 resolvers 1.1.1.1
               }
-              handle {
-                reverse_proxy http://127.0.0.1:8123 {
-                  header_up Host {upstream_hostport}
-                }
-              }
+             
+              reverse_proxy http://127.0.0.1:8123 
+              
             '';
         };
 
