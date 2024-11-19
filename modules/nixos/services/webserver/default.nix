@@ -83,7 +83,7 @@ in
           ''
             (acme_r505_de) {
               tls {
-                dns bunny {
+                dns cloudflare {
                   access_key {env.CLOUDFLARE_API_KEY}
                   zone r505.de
                 }
