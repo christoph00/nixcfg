@@ -58,7 +58,7 @@ in
             "github.com/caddy-dns/cloudflare"
             "github.com/mholt/caddy-dynamicdns"
           ];
-          hash = "sha256-/OR+paTwlc87NcBPMP8ddtO+ZWN1sgcE5UI6igkv+mQ=";
+          hash = "sha256-Im0STQMRadlYCg1SB0Q2U4h38QbSEbpw7Px4bwYizOI=";
         };
 
         email = "admin@r505.de";
