@@ -167,61 +167,58 @@
         src = ./.;
       };
     in
-    lib.mkFlake
-      {
-        inherit inputs;
-        channels-config = {
-          allowUnfree = true;
-          permittedInsecurePackages = [
-            "electron-25.9.0"
-            "electron-27.3.11"
-          ];
-        };
-
-        overlays = with inputs; [
-          flake.overlays.default
-          chaotic.overlays.default
-          nvimcfg.overlays.default
-          nixpkgs-wayland.overlay
-          caddy.overlays.default
+    lib.mkFlake {
+      inherit inputs;
+      channels-config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "electron-25.9.0"
+          "electron-27.3.11"
         ];
+      };
 
-        systems.modules.nixos = with inputs; [
-          nixos-facter-modules.nixosModules.facter
-          srvos.nixosModules.common
-          srvos.nixosModules.mixins-nix-experimental
-          agenix.nixosModules.default
-          chaotic.nixosModules.default
-          {
-            # manually import overlay
-            chaotic.nyx.overlay.enable = false;
-          }
-          disko.nixosModules.disko
-          nixos-cosmic.nixosModules.default
-          impermanence.nixosModules.impermanence
-          lanzaboote.nixosModules.lanzaboote
-          # jovian.nixosModules.default
-          vscode-server.nixosModules.default
-          nvf.nixosModules.default
+      overlays = with inputs; [
+        flake.overlays.default
+        chaotic.overlays.default
+        nvimcfg.overlays.default
+        nixpkgs-wayland.overlay
+        caddy.overlays.default
+      ];
 
-          microvm.nixosModules.host
-          microvm.nixosModules.microvm
-        ];
+      systems.modules.nixos = with inputs; [
+        nixos-facter-modules.nixosModules.facter
+        srvos.nixosModules.common
+        srvos.nixosModules.mixins-nix-experimental
+        agenix.nixosModules.default
+        chaotic.nixosModules.default
+        {
+          # manually import overlay
+          chaotic.nyx.overlay.enable = false;
+        }
+        disko.nixosModules.disko
+        nixos-cosmic.nixosModules.default
+        impermanence.nixosModules.impermanence
+        lanzaboote.nixosModules.lanzaboote
+        # jovian.nixosModules.default
+        vscode-server.nixosModules.default
+        nvf.nixosModules.default
 
-        deploy = lib.mkDeploy { inherit (inputs) self; };
+        microvm.nixosModules.host
+        microvm.nixosModules.microvm
+      ];
 
-        checks = builtins.mapAttrs
-          (
-            system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
-          )
-          inputs.deploy-rs.lib;
+      deploy = lib.mkDeploy { inherit (inputs) self; };
 
-        outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
+      checks = builtins.mapAttrs (
+        system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
+      ) inputs.deploy-rs.lib;
 
-        alias = {
-          shells.default = "devel";
-        };
-      }
+      outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
+
+      alias = {
+        shells.default = "devel";
+      };
+    }
     // {
       inherit (inputs) self;
     };
