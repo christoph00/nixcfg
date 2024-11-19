@@ -101,6 +101,8 @@ in
                  parameter-problem
                } accept
 
+         tcp dport https accept
+
          counter drop
       '';
 
