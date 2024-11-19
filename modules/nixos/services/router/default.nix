@@ -93,7 +93,7 @@ in
              nd-router-advert,
              nd-neighbor-solicit,
              nd-neighbor-advert,
-             ld-listener-query
+             mld-listener-query
            } accept
 
          ip protocol icmp icmp type {
