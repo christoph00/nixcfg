@@ -64,6 +64,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    vaultix.url = "github:oluceps/vaultix";
+
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake";
     flake.inputs.nixpkgs.follows = "nixpkgs";
@@ -177,12 +179,20 @@
         ];
       };
 
+      flake.vaultix = {
+        nodes = self.nixosConfigurations;
+        identity = "./sec/id_secrets.pub";
+        # extraRecipients = [ ];
+        cache = "./sec/cache";
+      };
+
       overlays = with inputs; [
         flake.overlays.default
         chaotic.overlays.default
         nvimcfg.overlays.default
         nixpkgs-wayland.overlay
         caddy.overlays.default
+        vaultix.flakeModules.default
       ];
 
       systems.modules.nixos = with inputs; [

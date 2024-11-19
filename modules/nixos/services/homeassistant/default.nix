@@ -187,7 +187,7 @@ in
           "snmp"
           "google"
           "spotify"
-          "isal" 
+          "isal"
 
           "zwave_js"
 
