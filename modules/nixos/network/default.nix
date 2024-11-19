@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  namespace,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, namespace
+, ...
 }:
 with lib;
 with lib.internal;
@@ -80,7 +79,7 @@ in
 
     internal.system.state.directories = mkMerge [
       (mkIf cfg.enableIWD [ "/var/lib/iwd" ])
-      (mkIf cfg.enableNM [ "/var/lib/NetworkManager" ])
+      (mkIf cfg.enableNM [ "/var/lib/NetworkManager" "/etc/NetworkManager/system-connections" ])
     ];
 
   };
