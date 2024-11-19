@@ -257,6 +257,30 @@ in
       partOf = [ "systemd-networkd.service" ];
     };
 
+    systemd.services.check-internet = {
+      description = "check ipv4 internet connectivity";
+      path = [ pkgs.iputils pkgs.systemd ];
+      script = ''
+        if ! ping -c 3 -W 5 8.8.8.8 >/dev/null 2>&1; then
+          systemctl restart pppd-dtag.service
+          echo "lost ipv4 connectivity -- restart pppoe"
+        fi
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root";
+      };
+    };
+
+    systemd.timers.check-internet = {
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnBootSec = "3min";
+        OnUnitActiveSec = "3min";
+        Unit = "check-internet.service";
+      };
+    };
+
   };
 
 }
