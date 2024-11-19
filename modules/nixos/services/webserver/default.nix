@@ -43,8 +43,8 @@ in
   config = mkIf cfg.enable {
     age.secrets.cf-api-key = {
       file = ../../../../secrets/cf-api-key;
-        owner = config.services.caddy.user;
-    group = config.services.caddy.group;
+      owner = config.services.caddy.user;
+      group = config.services.caddy.group;
     };
     systemd.services.caddy.serviceConfig = {
       EnvironmentFile = config.age.secrets.cf-api-key.path;
@@ -105,9 +105,9 @@ in
                 dns cloudflare {env.CF_API_TOKEN}
                 resolvers 1.1.1.1
               }
-             
+
               reverse_proxy http://127.0.0.1:8123 
-              
+
             '';
         };
 

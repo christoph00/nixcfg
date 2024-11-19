@@ -50,7 +50,7 @@ in
       powerOnBoot = true;
     };
 
-     age.secrets.ha-secrets = {
+    age.secrets.ha-secrets = {
       file = ../../../../secrets/ha-secrets.age;
       path = "${config.home-assistant.configDir}/secrets.yaml";
       owner = "hass";
@@ -121,6 +121,9 @@ in
           history = { };
           config = { };
           dhcp = { };
+          ffmpeg = {
+            ffmpeg_bin = "${pkgs.ffmpeg}/bin/ffmpeg";
+          };
           zha = {
             enable_quirks = true;
             zigpy_config.ota.ikea_provider = true;
@@ -134,15 +137,65 @@ in
           };
           system_health = { };
           google_assistant = {
-          project_id = "!secret google_projectid";
-          service_account = "!include serviceaccount.json";
-          report_state = true;
-          exposed_domains = [
-            "switch"
-            "light"
-          ];
+            project_id = "!secret google_projectid";
+            service_account = "!include serviceaccount.json";
+            report_state = true;
+            exposed_domains = [
+              "switch"
+              "light"
+            ];
+          };
+
         };
-        };
+        extraComponents = [
+          "caldav"
+          "bluetooth"
+          #"cloud"
+          "calendar"
+          "camera"
+          "open_meteo"
+          #"adguard"
+          "speedtestdotnet"
+          "cups"
+          "device_sun_light_trigger"
+          "esphome"
+          "frontend"
+          "html5"
+          "wyoming"
+          "http"
+          #"hyperion"
+          "assist_pipeline"
+          "jellyfin"
+          "androidtv"
+          "androidtv_remote"
+          #"openai_conversation"
+          "lovelace"
+          "mobile_app"
+          #"nzbget"
+          #"ubus"
+          "radio_browser"
+          "wake_on_lan"
+          "cast"
+          #  "wled"
+          "xiaomi_miio"
+          "xiaomi_ble"
+          "weather"
+          "rest"
+          "ipp"
+          "met"
+          "ping"
+          "snmp"
+          "google"
+          "spotify"
+
+          "zwave_js"
+
+          "python_script"
+          "bluetooth_tracker"
+          "bluetooth_le_tracker"
+          "bthome"
+          "bluetooth_adapters"
+        ];
       };
   };
 
