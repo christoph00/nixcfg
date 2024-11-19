@@ -78,7 +78,7 @@ in
             ip_source simple_http https://icanhazip.com
             ip_source simple_http https://api64.ipify.org
             check_interval 5m
-            versions ipv4 ipv6
+            versions ipv4
             ttl 5m
           }
         '';
