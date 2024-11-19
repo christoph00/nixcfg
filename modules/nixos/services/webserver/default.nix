@@ -66,9 +66,7 @@ in
         globalConfig = # caddyfile
           ''
             dynamic_dns {
-              provider cloudflare {
-                access_key {env.CLOUDFLARE_API_KEY}
-              }
+              provider cloudflare {env.CLOUDFLARE_API_KEY}
               domains {
                 r505.de ddns
               }
