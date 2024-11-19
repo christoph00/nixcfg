@@ -43,7 +43,7 @@ in
 
   config = mkIf cfg.enable
     {
-      age.secrets.cf-api-key.file = ../../../secrets/cf-api-key;
+      age.secrets.cf-api-key.file = ../../../../secrets/cf-api-key;
       systemd.services.caddy.serviceConfig = {
         EnvironmentFile = [
           "${config.age.secrets.cf-api-key.path}"
