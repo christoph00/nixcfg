@@ -32,11 +32,11 @@ with lib.internal;
 
   config = {
 
-    vaultix = {
-      settings = {
-        hostPubkey = config.internal.self.pubkey; # required
-      };
-    };
+    # vaultix = {
+    #   settings = {
+    #     hostPubkey = config.internal.self.pubkey; # required
+    #   };
+    # };
   };
 
 }
