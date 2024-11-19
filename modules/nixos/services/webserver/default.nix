@@ -41,20 +41,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    age.secrets.cf-api-key.file = ../../../../secrets/cf-api-key;
+    age.secrets.cf-api-key = {
+      file = ../../../../secrets/cf-api-key;
+        owner = config.services.caddy.user;
+    group = config.services.caddy.group;
+    };
     systemd.services.caddy.serviceConfig = {
-      LoadCredential = "CLOUDFLARE_API_TOKEN:${config.age.secrets.cf-api-key.path}";
-      EnvironmentFile = "-%t/caddy/secrets.env";
-      RuntimeDirectory = "caddy";
-      ExecStartPre = [
-        (
-          (pkgs.writeShellApplication {
-            name = "caddy-secrets";
-            text = "echo \"CLOUDFLARE_API_TOKEN=\\\"$(<\"$CREDENTIALS_DIRECTORY/CLOUDFLARE_API_TOKEN\")\\\"\" > \"$RUNTIME_DIRECTORY/secrets.env\"";
-          })
-          + "/bin/caddy-secrets"
-        )
-      ];
+      EnvironmentFile = config.age.secrets.cf-api-key.path;
       AmbientCapabilities = "cap_net_bind_service";
       CapabilityBoundingSet = "cap_net_bind_service";
     };
@@ -75,7 +68,7 @@ in
       globalConfig = # caddyfile
         ''
           dynamic_dns {
-            provider cloudflare {env.CLOUDFLARE_API_TOKEN}
+            provider cloudflare {env.CF_API_TOKEN}
             domains {
               r505.de ddns
             }
@@ -90,7 +83,7 @@ in
         ''
           (acme_r505_de) {
             tls {
-              dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+              dns cloudflare {env.CF_API_TOKEN}
               propagation_timeout -1
             }
           }
