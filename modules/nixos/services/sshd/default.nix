@@ -40,6 +40,11 @@ in
           path = "/mnt/state/etc/ssh/ssh_host_ed25519_key";
           type = "ed25519";
         }
+        {
+          bits = 4096;
+          path = "/mnt/state/etc/ssh/ssh_host_rsa_key";
+          type = "rsa";
+        }
       ];
     };
 
