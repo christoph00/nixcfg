@@ -114,6 +114,7 @@ in
           history = { };
           config = { };
           dhcp = { };
+          recorder = { };
           ffmpeg = {
             ffmpeg_bin = "${pkgs.ffmpeg}/bin/ffmpeg";
           };
