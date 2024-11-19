@@ -155,6 +155,7 @@ in
           "frontend"
           "html5"
           "wyoming"
+          "cloudflare"
           "http"
           #"hyperion"
           "assist_pipeline"
