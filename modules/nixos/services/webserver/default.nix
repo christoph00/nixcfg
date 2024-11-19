@@ -85,7 +85,7 @@ in
           (acme_r505_de) {
             tls {
               dns cloudflare {env.CF_API_TOKEN}
-              propagation_timeout -1
+              resolvers 1.1.1.1
             }
           }
           (deny_non_local) {
@@ -99,7 +99,10 @@ in
         "ha.r505.de" = {
           extraConfig = # caddyfile
             ''
-              import acme_r505_de
+              tls {
+                dns cloudflare {env.CF_API_TOKEN}
+                resolvers 1.1.1.1
+              }
               handle {
                 reverse_proxy http://127.0.0.1:8123 {
                   header_up Host {upstream_hostport}
