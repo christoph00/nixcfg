@@ -67,10 +67,9 @@ in
 
       email = "admin@r505.de";
       #acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
-      logFormat = "level INFO";
+      #logFormat = "level INFO";
       globalConfig = # caddyfile
         ''
-          debug
           dynamic_dns {
             provider cloudflare {env.CF_API_TOKEN}
             domains {
