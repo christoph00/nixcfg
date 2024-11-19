@@ -45,26 +45,6 @@ with lib.internal;
 
 let
   cfg = config.internal.system.state;
-
-  defaultDirectories = [
-    "/etc/secureboot"
-    "/var/lib/nixos"
-    "/var/lib/systemd"
-    "/var/log/journal"
-  ];
-  defaultFiles = [ ];
-  defaultUserDirectories = [
-    "Desktop"
-    "Documents"
-    "Downloads"
-    "Music"
-    "Pictures"
-    "Projects"
-    "Public"
-    "Templates"
-    "Videos"
-  ];
-  defaultUserFiles = [ ];
 in
 {
   options.internal.system.state = with types; {
@@ -80,10 +60,36 @@ in
     users.mutableUsers = false;
     programs.fuse.userAllowOther = true;
     fileSystems."${cfg.stateDir}".neededForBoot = true;
-    environment.persistence."${cfg.stateDir}" = {
-      hideMounts = true;
-      directories = cfg.directories ++ defaultDirectories;
-      files = cfg.files ++ defaultFiles;
+
+    preservation = {
+      enable = true;
+      preserveAt."${cfg.stateDir}" = {
+        files = [
+          # auto-generated machine ID
+          {
+            file = "/etc/machine-id";
+            inInitrd = true;
+          }
+          {
+            file = "/var/lib/systemd/random-seed";
+            # create a symlink on the volatile volume
+            how = "symlink";
+            # prepare the preservation early during startup
+            inInitrd = true;
+          }
+        ] ++ cfg.files;
+        directories = [
+        "/var/lib/bluetooth"
+        "/var/lib/fprint"
+        "/var/lib/fwupd"
+        "/var/lib/power-profiles-daemon"
+        "/var/lib/systemd/coredump"
+        "/var/lib/systemd/rfkill"
+        "/var/lib/systemd/timers"
+        { directory = "/var/lib/nixos"; inInitrd = true; }
+        { directory =  "/var/log"; inInitrd = true; }
+        ] ++ cfg.directories;
+      };
     };
   };
 }
