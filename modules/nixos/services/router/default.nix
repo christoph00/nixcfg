@@ -84,11 +84,6 @@ in
         5353 # avahi
       ];
 
-      services.avahi = {
-        reflector = true;
-        allowInterfaces = [ "lan" "ts0" "wg0" ];
-      };
-
       firewall.extraInputRules = ''
 
         ip6 nexthdr icmpv6 icmpv6 type {
@@ -296,6 +291,11 @@ in
         Unit = "check-internet.service";
       };
     };
+    services.avahi = {
+      reflector = true;
+      allowInterfaces = [ "lan" "ts0" "wg0" ];
+    };
+
 
   };
 
