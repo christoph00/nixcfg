@@ -63,7 +63,7 @@ in
       };
 
       email = "admin@r505.de";
-      acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
+      #acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
       logFormat = "level INFO";
       globalConfig = # caddyfile
         ''
@@ -71,7 +71,7 @@ in
           dynamic_dns {
             provider cloudflare {env.CF_API_TOKEN}
             domains {
-              r505.de ddns
+              r505.de ha
             }
             ip_source simple_http https://icanhazip.com
             ip_source simple_http https://api64.ipify.org
