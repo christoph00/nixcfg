@@ -292,6 +292,7 @@ in
       };
     };
     services.avahi = {
+      enable = true;
       reflector = true;
       allowInterfaces = [ "lan" "ts0" "wg0" ];
     };
