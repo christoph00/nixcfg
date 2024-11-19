@@ -81,10 +81,7 @@ in
           ''
             (acme_r505_de) {
               tls {
-                dns cloudflare {
-                  access_key {env.CLOUDFLARE_API_KEY}
-                  zone r505.de
-                }
+                dns cloudflare access_key {env.CLOUDFLARE_API_KEY}
                 propagation_timeout -1
               }
             }
