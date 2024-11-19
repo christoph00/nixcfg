@@ -52,6 +52,9 @@ in
       CapabilityBoundingSet = "cap_net_bind_service";
     };
 
+    networking.firewall.allowedTCPPorts = [ 443 ];
+    networking.firewall.allowedUDPPorts = [ 443 ];
+
     services.caddy = {
       enable = true;
       package = pkgs.caddy.withPlugins {
