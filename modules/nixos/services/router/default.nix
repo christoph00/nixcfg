@@ -85,21 +85,26 @@ in
       firewall.extraInputRules = ''
 
         ip6 nexthdr icmpv6 icmpv6 type {
+        echo-request,
              destination-unreachable,
              packet-too-big,
              time-exceeded,
              parameter-problem,
              nd-router-advert,
              nd-neighbor-solicit,
-             nd-neighbor-advert
+             nd-neighbor-advert,
+             ld-listener-query
            } accept
 
          ip protocol icmp icmp type {
+         echo-request,
                  destination-unreachable,
                  router-advertisement,
                  time-exceeded,
                  parameter-problem
                } accept
+
+
 
          tcp dport https accept
 
