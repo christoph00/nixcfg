@@ -113,12 +113,42 @@ in
           frontend = { };
           history = { };
           config = { };
+          tts = [
+            {
+              platform = "google_translate";
+              service_name = "google_say";
+            }
+          ];
           dhcp = { };
           logbook = { };
-          recorder = { };
+          recorder = {
+            commit_interval = 30;
+            purge_keep_days = 7;
+            exclude = {
+              domains = [
+                "automation"
+                "updater"
+              ];
+              entity_globs = [
+                "sensor.weather_*"
+                "sensor.date_*"
+              ];
+              entities = [
+                "sun.sun"
+                "sensor.last_boot"
+                "sensor.date"
+                "sensor.time"
+              ];
+              event_types = [
+                "call_service"
+              ];
+            };
+          };
           ffmpeg = {
             ffmpeg_bin = "${pkgs.ffmpeg}/bin/ffmpeg";
           };
+          wake_on_lan = { };
+          utility_meter = { };
           zha = {
             enable_quirks = true;
             zigpy_config.ota.ikea_provider = true;
@@ -131,6 +161,9 @@ in
             };
           };
           system_health = { };
+          "automation ui" = "!include automations.yaml";
+          "scene ui" = "!include scenes.yaml";
+          "script ui" = "!include scripts.yaml";
           google_assistant = {
             project_id = "!secret google_projectid";
             service_account = "!include serviceaccount.json";
