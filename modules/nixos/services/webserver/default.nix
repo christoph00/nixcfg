@@ -53,27 +53,12 @@ in
       services.caddy = {
         enable = true;
         package = pkgs.caddy.withPlugins {
-          caddyModules = [
-            {
-              name = "cloudflare";
-              repo = "github.com/caddy-dns/cloudflare";
-              version = "89f16b99c18ef49c8bb470a82f895bce01cbaece";
-            }
-            {
-              name = "dynamic-dns";
-              repo = "github.com/mholt/caddy-dynamicdns";
-              version = "d8dab1bbf3fc592032f71dacc14510475b4e3e9a";
-            }
-          ] ++ (
-            # Caddy Layer4 modules
-            lib.lists.map
-              (name: {
-                inherit name;
-                repo = "github.com/mholt/caddy-l4";
-                version = "3d22d6da412883875f573ee4ecca3dbb3fdf0fd0";
-              }) [ "layer4" "modules/l4proxy" "modules/l4tls" "modules/l4proxyprotocol" ]
-          );
-          vendorHash = "sha256-/OR+paTwlc87NcBPMP8ddtO+ZWN1sgcE5UI6igkv+mQ=";
+          plugins = [
+
+            "github.com/caddy-dns/cloudflare"
+            "github.com/mholt/caddy-dynamicdns"
+          ];
+          hash = "sha256-/OR+paTwlc87NcBPMP8ddtO+ZWN1sgcE5UI6igkv+mQ=";
         };
 
         email = "admin@r505.de";
