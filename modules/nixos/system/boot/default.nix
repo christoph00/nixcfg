@@ -85,6 +85,7 @@ in
         enable = true;
         pkiBundle = "/etc/secureboot";
       };
+      internal.system.state.directories = [ "/etc/secureboot" ];
     })
     (mkIf cfg.encryptedRoot {
       # boot.initrd.clevis = {
