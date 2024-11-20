@@ -57,6 +57,15 @@ in
       powerOnBoot = true;
     };
 
+    services.mosquitto = {
+      enable = true;
+      listeners = [{
+        acl = [ "pattern readwrite #" ];
+        omitPasswordAuth = true;
+        settings.allow_anonymous = true;
+      }];
+    };
+
     services.home-assistant =
       let
         package = pkgs.home-assistant.override {

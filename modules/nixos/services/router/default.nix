@@ -75,6 +75,7 @@ in
         22
         5380 # technitium webui
         8123 # homeassistant
+        1883 # mosquitto
       ];
       firewall.interfaces.lan.allowedUDPPorts = [
         546
