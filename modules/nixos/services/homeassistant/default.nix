@@ -220,6 +220,12 @@ in
 
           "zwave_js"
 
+          "file"
+
+          "cpuspeed"
+          "fail2ban"
+          "hddtemp"
+
           "python_script"
           "bluetooth_tracker"
           "bluetooth_le_tracker"
