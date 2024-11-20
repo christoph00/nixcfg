@@ -44,7 +44,7 @@ in
     environment.systemPackages = [
       pkgs.heroic
       pkgs.sunshine
-      pkgs.protonplus
+      pkgs.protonup-qt
       pkgs.cartridges
       # pkgs.lutris
       pkgs.bottles
