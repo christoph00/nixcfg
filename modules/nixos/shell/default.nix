@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.internal;
@@ -102,6 +101,8 @@ in
       pkgs.tmux
 
       pkgs.agenix
+
+      pkgs.usbutils
 
       # pkgs.uv
       pkgs.uutils-coreutils-noprefix

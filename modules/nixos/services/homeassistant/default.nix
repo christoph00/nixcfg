@@ -221,6 +221,10 @@ in
           "zwave_js"
 
           "file"
+          "media_extractor"
+          "youtube"
+          "google_generative_ai_conversation"
+          "openai_conversation"
 
           "cpuspeed"
           "fail2ban"
