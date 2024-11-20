@@ -63,8 +63,8 @@ in
         settings.allow_anonymous = true;
         acl = [ "topic readwrite #" ];
         users = {
-          ha = { acl = [ "readwrite #" ]; };
-          robot = { acl = [ "readwrite #" ]; };
+          ha = { acl = [ "readwrite #" ]; password = "ha"; };
+          robot = { acl = [ "readwrite #" ]; password = "robot"; };
         };
       }];
     };
