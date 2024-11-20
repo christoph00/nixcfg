@@ -1,10 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  namespace,
-  ...
+{ options
+, config
+, pkgs
+, lib
+, namespace
+, ...
 }:
 with lib;
 with lib.internal;
@@ -74,6 +73,7 @@ in
         "tty"
         "seat"
         "render"
+        "dialout"
       ] ++ cfg.extraGroups;
     } // cfg.extraOptions;
   };
