@@ -89,7 +89,7 @@ in
               bluepy
               pybluez
               aioblescan
-              grpc
+              grpcio-gcp
             ];
         };
       in
