@@ -42,6 +42,17 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    internal.system.state.directories = [
+      {
+        directory = "/var/lib/caddy";
+        user = config.services.caddy.user;
+        group = config.services.caddy.group;
+      }
+    ];
+
+
+
     age.secrets.cf-api-key = {
       file = ../../../../secrets/cf-api-key;
       owner = config.services.caddy.user;
