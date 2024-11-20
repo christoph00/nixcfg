@@ -89,6 +89,7 @@ in
               bluepy
               pybluez
               aioblescan
+              grpc
             ];
         };
       in
@@ -193,6 +194,7 @@ in
           "open_meteo"
           #"adguard"
           "speedtestdotnet"
+          "google_travel_time"
           "cups"
           "device_sun_light_trigger"
           "esphome"
