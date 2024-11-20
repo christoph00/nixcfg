@@ -173,6 +173,7 @@ in
               "a4:c1:38:35:dd:d5:77:cc-5".type = "switch";
             };
           };
+          bluetooth = { };
           system_health = { };
           "automation ui" = "!include automations.yaml";
           "scene ui" = "!include scenes.yaml";
