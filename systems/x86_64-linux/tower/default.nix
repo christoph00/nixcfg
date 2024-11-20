@@ -3,14 +3,13 @@
 # i7-6700k
 # RX580 Sapphire
 ##
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   # imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -26,6 +25,8 @@
     "gamestream"
     "headless-desktop"
   ];
+
+  networking.interfaces.enp0s31f6.wakeOnLan.enable = true;
 
   fileSystems = {
     "/media/Games" = {
@@ -47,6 +48,8 @@
         "compress-force=zstd"
       ];
     };
+
+
 
     # "/media/hdd-data" = {
     #   device = "/dev/disk/by-uuid/25fc5836-72df-4881-8760-af49333fa485";
