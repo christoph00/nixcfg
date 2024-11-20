@@ -94,21 +94,6 @@ in
       #       ttl 5m
       #     }
       #   '';
-      extraConfig = # caddyfile
-        ''
-          (acme_r505_de) {
-            tls {
-              dns cloudflare {env.CF_API_TOKEN}
-              resolvers 1.1.1.1
-            }
-          }
-          (deny_non_local) {
-            @denied not remote_ip private_ranges
-            handle @denied {
-              abort
-            }
-          }
-        '';
       virtualHosts = {
         "ha.r505.de" = {
           extraConfig = # caddyfile
@@ -117,9 +102,21 @@ in
                 dns cloudflare {env.CF_API_TOKEN}
                 resolvers 1.1.1.1
               }
-
               reverse_proxy http://127.0.0.1:8123 
-
+            '';
+        };
+        "dns.r505.de" = {
+          extraConfig = # caddyfile
+            ''
+              @denied not remote_ip private_ranges
+              handle @denied {
+                abort
+              }
+              tls {
+                dns cloudflare {env.CF_API_TOKEN}
+                resolvers 1.1.1.1
+              }
+              reverse_proxy http://127.0.0.1:5380 
             '';
         };
 
