@@ -50,7 +50,8 @@ in
       pkgs.bottles
       pkgs.antimicrox
       pkgs.gamescope
-      pkgs.steamtinkerlaunch
+      pkgs.protontricks
+      pkgs.internal.limo
 
     ];
 
