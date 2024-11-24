@@ -54,6 +54,7 @@ in
       pkgs.internal.limo
       pkgs.vkbasalt-cli
       pkgs.vkbasalt
+      pkgs.goverlay
 
     ];
 
