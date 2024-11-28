@@ -55,6 +55,7 @@ in
       pkgs.vkbasalt-cli
       pkgs.vkbasalt
       pkgs.goverlay
+      pkgs.mangohud
 
     ];
 
