@@ -48,17 +48,17 @@ in
   config = mkIf cfg.enable {
 
     environment.systemPackages = [
-      pkgs.zen-browser
+      # pkgs.zen-browser
       pkgs.zed-editor
       pkgs.vscode
-      pkgs.code-cursor
+      # pkgs.code-cursor
       pkgs.kitty
       pkgs.anyrun
       pkgs.moonlight-qt
       # pkgs.librewolf
       pkgs.libreoffice-fresh
       pkgs.gimp
-      pkgs.wezterm
+      # pkgs.wezterm
 
       pkgs.keepassxc
 
@@ -80,13 +80,13 @@ in
 
       pkgs.agenix
 
-      pkgs.go-passbolt-cli
+      # pkgs.go-passbolt-cli
 
       pkgs.pcmanfm
 
       pkgs.nemo
 
-      pkgs.internal.thorium-browser
+      # pkgs.internal.thorium-browser
     ];
 
   };
