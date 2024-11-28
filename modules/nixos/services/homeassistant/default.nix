@@ -52,6 +52,16 @@ in
 
     users.extraUsers."hass".extraGroups = [ "dialout" ];
 
+    security.doas.extraRules = [
+      {
+        users = [ "hass" ];
+        cmd = "${pkgs.systemd}/bin/systemctl";
+        args = [ "status" "stop" "start" "restart" "reboot" ];
+        runAs = "root";
+        noPass = true;
+      }
+    ];
+
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
