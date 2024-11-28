@@ -120,13 +120,8 @@ with lib.internal;
       hubot-sans
       maple-mono-NF
       material-design-icons
-      (nerdfonts.override {
-        fonts = [
-          "JetBrainsMono"
-          "CascadiaCode"
-          "DaddyTimeMono"
-        ];
-      })
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
     ];
 
   };
