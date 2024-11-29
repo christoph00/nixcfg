@@ -42,7 +42,7 @@ jobs:
          sudo apt-get update -q -y && sudo apt-get install -q -y qemu-system-aarch64 qemu-efi binfmt-support qemu-user-static
       if: contains(matrix.hostname, 'oca')
     - name: Maximize build space
-      uses: easimon/maximize-build-space@v9
+      uses: easimon/maximize-build-space@v10
       with:
         remove-android: 'true'
         remove-dotnet: 'true'
@@ -50,13 +50,13 @@ jobs:
         #build-mount-path: /nix
         swap-size-mb: 1024
         root-reserve-mb: 50192
-    - uses: actions/checkout@v4
-    - uses: DeterminateSystems/nix-installer-action@v14
+    - uses: actions/checkout@v4.2.2
+    - uses: DeterminateSystems/nix-installer-action@v16
       with:
         extra-conf: |
           experimental-features = nix-command flakes
           extra-platforms = aarch64-linux arm-linux i686-linux
-    - uses: DeterminateSystems/flake-checker-action@v4
+    - uses: DeterminateSystems/flake-checker-action@v9
     - uses: DeterminateSystems/magic-nix-cache-action@v8
     - uses: cachix/cachix-action@v15
       with:
