@@ -89,7 +89,6 @@ with lib.internal;
     # `system.disableInstallerTools` option.
     # environment.systemPackages = [ pkgs.nixos-rebuild ];
 
-    environment.systemPackages = [ pkgs.internal.systemctl-mqtt ];
 
   };
 
