@@ -80,6 +80,8 @@ with lib.internal;
       adwaita-qt
       adwsteamgtk
 
+      internal.go-hass-agent
+
     ];
 
     gtk.iconCache.enable = true;
