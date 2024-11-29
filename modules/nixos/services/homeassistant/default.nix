@@ -103,6 +103,7 @@ in
               pybluez
               aioblescan
               grpcio-gcp
+              netmiko
             ];
         };
       in
