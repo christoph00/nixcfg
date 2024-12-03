@@ -55,10 +55,16 @@ in
     security.doas.extraRules = [
       {
         users = [ "hass" ];
-        cmd = "${pkgs.systemd}/bin/systemctl";
+        cmd = "systemctl";
         args = [ "status" "stop" "start" "restart" "reboot" ];
         runAs = "root";
         noPass = true;
+      }
+      {
+        users = [ "hass" ];
+        cmd = "nh";
+        noPass = true;
+        runAs = "root";
       }
     ];
 
@@ -230,7 +236,7 @@ in
             template-entity-row
             universal-remote-card
           ]) ++ (with pkgs; [
-            bubble-card
+            internal.bubble-card
             # home-assistant-lovelace-card-tools
             # home-assistant-lovelace-config-template-card
             # home-assistant-lovelace-custom-brand-icons
