@@ -69,7 +69,7 @@ buildGo123Module rec {
 
   installPhase = ''
       runHook preInstall
-      mv dist/go-hass-agent-amd64 dist/go-hass-agent
+      mv dist/go-hass-agent-* dist/go-hass-agent
     install -Dt $out/bin dist/go-hass-agent
     runHook postInstall
   '';
