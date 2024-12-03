@@ -192,138 +192,138 @@ in
             };
           };
           lovelace.mode = "yaml";
-          dashboards = {
-            lovelace = {
-              title = "Lovelace";
-              icon = "mdi:car-esp";
-              mode = "yaml";
+          dashboards.lovelace = {
+            title = "Lovelace";
+            icon = "mdi:car-esp";
+            mode = "yaml";
 
-              show_in_sidebar = false;
-              require_admin = true;
+            show_in_sidebar = false;
+            require_admin = true;
 
-              filename = writeYAML "lovelace.yaml" {
-
-                views = { };
-              };
-              bluetooth = { };
-              system_health = { };
-              "automation ui" = "!include automations.yaml";
-              "scene ui" = "!include scenes.yaml";
-              "script ui" = "!include scripts.yaml";
-              google_assistant = {
-                project_id = "!secret google_projectid";
-                service_account = "!include serviceaccount.json";
-                report_state = true;
-                exposed_domains = [
-                  "switch"
-                  "light"
-                ];
-              };
-
+            filename = writeYAML "lovelace.yaml" {
+              views = { };
             };
-            customComponents = (with pkgs.home-assistant-custom-components; [
-              better_thermostat
-              prometheus_sensor
-              spook
-              waste_collection_schedule
-              xiaomi_miot
-              bodymiscale
-            ]) ++ (with pkgs; [
-              # home-assistant-bermuda
-              # home-assistant-browser-mod
-              # home-assistant-music-assistant
-              # home-assistant-pirate-weather
-              # home-assistant-spotcast
-              # home-assistant-var
-            ]);
+          };
 
-            customLovelaceModules =
-              (with pkgs.home-assistant-custom-lovelace-modules; [
-                apexcharts-card
-                atomic-calendar-revive
-                button-card
-                card-mod
-                decluttering-card
-                hourly-weather
-                light-entity-card
-                mini-graph-card
-                mini-media-player
-                multiple-entity-row
-                mushroom
-                template-entity-row
-                universal-remote-card
-              ]) ++ (with pkgs; [
-                internal.bubble-card
-                # home-assistant-lovelace-card-tools
-                # home-assistant-lovelace-config-template-card
-                # home-assistant-lovelace-custom-brand-icons
-                # home-assistant-lovelace-grocy-chores-card
-                # home-assistant-lovelace-layout-card
-                # home-assistant-lovelace-waze-travel-time
-              ]);
-            extraComponents = [
-              "caldav"
-              "bluetooth"
-              #"cloud"
-              "calendar"
-              "camera"
-              "open_meteo"
-              #"adguard"
-              "speedtestdotnet"
-              "google_travel_time"
-              "cups"
-              "device_sun_light_trigger"
-              "esphome"
-              "frontend"
-              "html5"
-              "wyoming"
-              "cloudflare"
-              "http"
-              #"hyperion"
-              "assist_pipeline"
-              "jellyfin"
-              "androidtv"
-              "androidtv_remote"
-              #"openai_conversation"
-              "lovelace"
-              "mobile_app"
-              #"nzbget"
-              #"ubus"
-              "radio_browser"
-              "wake_on_lan"
-              "cast"
-              #  "wled"
-              "xiaomi_miio"
-              "xiaomi_ble"
-              "weather"
-              "rest"
-              "ipp"
-              "met"
-              "ping"
-              "snmp"
-              "google"
-              "spotify"
-              "isal"
-
-              "zwave_js"
-
-              "file"
-              "media_extractor"
-              "youtube"
-              "google_generative_ai_conversation"
-              "openai_conversation"
-
-              "cpuspeed"
-              "fail2ban"
-              "hddtemp"
-
-              "python_script"
-              "bluetooth_tracker"
-              "bluetooth_le_tracker"
-              "bthome"
-              "bluetooth_adapters"
+          bluetooth = { };
+          system_health = { };
+          "automation ui" = "!include automations.yaml";
+          "scene ui" = "!include scenes.yaml";
+          "script ui" = "!include scripts.yaml";
+          google_assistant = {
+            project_id = "!secret google_projectid";
+            service_account = "!include serviceaccount.json";
+            report_state = true;
+            exposed_domains = [
+              "switch"
+              "light"
             ];
           };
-        };
 
-      }
+        };
+        customComponents = (with pkgs.home-assistant-custom-components; [
+          better_thermostat
+          prometheus_sensor
+          spook
+          waste_collection_schedule
+          xiaomi_miot
+          bodymiscale
+        ]) ++ (with pkgs; [
+          # home-assistant-bermuda
+          # home-assistant-browser-mod
+          # home-assistant-music-assistant
+          # home-assistant-pirate-weather
+          # home-assistant-spotcast
+          # home-assistant-var
+        ]);
+
+        customLovelaceModules =
+          (with pkgs.home-assistant-custom-lovelace-modules; [
+            apexcharts-card
+            atomic-calendar-revive
+            button-card
+            card-mod
+            decluttering-card
+            hourly-weather
+            light-entity-card
+            mini-graph-card
+            mini-media-player
+            multiple-entity-row
+            mushroom
+            template-entity-row
+            universal-remote-card
+          ]) ++ (with pkgs; [
+            internal.bubble-card
+            # home-assistant-lovelace-card-tools
+            # home-assistant-lovelace-config-template-card
+            # home-assistant-lovelace-custom-brand-icons
+            # home-assistant-lovelace-grocy-chores-card
+            # home-assistant-lovelace-layout-card
+            # home-assistant-lovelace-waze-travel-time
+          ]);
+        extraComponents = [
+          "caldav"
+          "bluetooth"
+          #"cloud"
+          "calendar"
+          "camera"
+          "open_meteo"
+          #"adguard"
+          "speedtestdotnet"
+          "google_travel_time"
+          "cups"
+          "device_sun_light_trigger"
+          "esphome"
+          "frontend"
+          "html5"
+          "wyoming"
+          "cloudflare"
+          "http"
+          #"hyperion"
+          "assist_pipeline"
+          "jellyfin"
+          "androidtv"
+          "androidtv_remote"
+          #"openai_conversation"
+          "lovelace"
+          "mobile_app"
+          #"nzbget"
+          #"ubus"
+          "radio_browser"
+          "wake_on_lan"
+          "cast"
+          #  "wled"
+          "xiaomi_miio"
+          "xiaomi_ble"
+          "weather"
+          "rest"
+          "ipp"
+          "met"
+          "ping"
+          "snmp"
+          "google"
+          "spotify"
+          "isal"
+
+          "zwave_js"
+
+          "file"
+          "media_extractor"
+          "youtube"
+          "google_generative_ai_conversation"
+          "openai_conversation"
+
+          "cpuspeed"
+          "fail2ban"
+          "hddtemp"
+
+          "python_script"
+          "bluetooth_tracker"
+          "bluetooth_le_tracker"
+          "bthome"
+          "bluetooth_adapters"
+        ];
+      };
+  };
+
+}
