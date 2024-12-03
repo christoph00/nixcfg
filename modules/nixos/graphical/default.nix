@@ -126,7 +126,7 @@ with lib.internal;
       nerd-fonts.jetbrains-mono
     ];
 
-    systemd.defaultUnit = lib.mkIf internal.isHeadlessDesktop "multi-user.target";
+    systemd.defaultUnit = lib.mkIf internal.isHeadlessDesktop lib.mkForce "multi-user.target";
 
   };
 
