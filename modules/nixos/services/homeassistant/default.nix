@@ -192,7 +192,7 @@ in
             };
           };
           lovelace.mode = "yaml";
-          dashboards.lovelace = {
+          lovelace.dashboards.lovelace = {
             title = "Lovelace";
             icon = "mdi:car-esp";
             mode = "yaml";
