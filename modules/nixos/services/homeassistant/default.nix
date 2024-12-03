@@ -200,6 +200,44 @@ in
           };
 
         };
+        customComponents = (with pkgs.home-assistant-custom-components; [
+          better_thermostat
+          prometheus_sensor
+          spook
+          waste_collection_schedule
+        ]) ++ (with pkgs; [
+          # home-assistant-bermuda
+          # home-assistant-browser-mod
+          # home-assistant-music-assistant
+          # home-assistant-pirate-weather
+          # home-assistant-spotcast
+          # home-assistant-var
+        ]);
+
+        customLovelaceModules =
+          (with pkgs.home-assistant-custom-lovelace-modules; [
+            apexcharts-card
+            atomic-calendar-revive
+            button-card
+            card-mod
+            decluttering-card
+            hourly-weather
+            light-entity-card
+            mini-graph-card
+            mini-media-player
+            multiple-entity-row
+            mushroom
+            template-entity-row
+            universal-remote-card
+          ]) ++ (with pkgs; [
+            # home-assistant-lovelace-bubble-card
+            # home-assistant-lovelace-card-tools
+            # home-assistant-lovelace-config-template-card
+            # home-assistant-lovelace-custom-brand-icons
+            # home-assistant-lovelace-grocy-chores-card
+            # home-assistant-lovelace-layout-card
+            # home-assistant-lovelace-waze-travel-time
+          ]);
         extraComponents = [
           "caldav"
           "bluetooth"
