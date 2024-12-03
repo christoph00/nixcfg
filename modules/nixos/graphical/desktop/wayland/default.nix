@@ -110,7 +110,7 @@ in
       };
       hass-agent = {
         description = "home assistant agent";
-        script = "${pkgs.internal.go-hass-agent}/bin/go-hass-agent run";
+        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.internal.go-hass-agent}/bin/go-hass-agent run";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig = {
