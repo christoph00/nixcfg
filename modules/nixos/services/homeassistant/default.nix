@@ -212,6 +212,8 @@ in
           prometheus_sensor
           spook
           waste_collection_schedule
+          xiaomi_miot
+          bodymiscale
         ]) ++ (with pkgs; [
           # home-assistant-bermuda
           # home-assistant-browser-mod
