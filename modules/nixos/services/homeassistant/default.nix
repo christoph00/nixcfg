@@ -192,12 +192,6 @@ in
             };
           };
           lovelace.mode = "yaml";
-          lovelace.dashboards.hidden = {
-            mode = "yaml";
-            title = "hidden";
-            show_in_sidebar = false;
-            filename = "ui-lovelace.yaml";
-          };
 
           bluetooth = { };
           system_health = { };
@@ -214,6 +208,11 @@ in
             ];
           };
 
+        };
+        lovelaceConfig = {
+          title = "Hidden";
+          show_in_sidebar = false;
+          require_admin = true;
         };
         customComponents = (with pkgs.home-assistant-custom-components; [
           better_thermostat
