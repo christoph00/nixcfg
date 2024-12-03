@@ -106,6 +106,7 @@ in
 
       # pkgs.uv
       pkgs.uutils-coreutils-noprefix
+      pkgs.chronyc
     ];
 
     programs.nh = {
