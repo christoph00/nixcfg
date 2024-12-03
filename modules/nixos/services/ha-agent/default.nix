@@ -54,7 +54,7 @@ in
       };
 
       serviceConfig = {
-        ExecStart = "${lib.getExe config.nur.repos.sebrut.go-hass-agent} --terminal run";
+        ExecStart = "${lib.getExe pkgs.internal.go-hass-agent} --terminal run";
         User = "christoph";
       };
     };
