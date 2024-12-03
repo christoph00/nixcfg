@@ -192,6 +192,12 @@ in
             };
           };
           lovelace.mode = "yaml";
+          lovelace.dashboards.hidden = {
+            mode = "yaml";
+            title = "hidden";
+            show_in_sidebar = false;
+            filename = "ui-lovelace.yaml";
+          };
 
           bluetooth = { };
           system_health = { };
