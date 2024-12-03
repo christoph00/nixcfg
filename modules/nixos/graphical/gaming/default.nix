@@ -52,9 +52,9 @@ in
       pkgs.gamescope
       pkgs.protontricks
       pkgs.internal.limo
-      pkgs.vkbasalt-cli
-      pkgs.vkbasalt
-      pkgs.goverlay
+      # pkgs.vkbasalt-cli
+      # pkgs.vkbasalt
+      # pkgs.goverlay
       pkgs.mangohud
 
     ];

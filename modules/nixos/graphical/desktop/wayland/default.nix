@@ -108,14 +108,17 @@ in
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "background-graphical.slice";
       };
-      # hass-agent = {
-      #   description = "home assistant agent";
-      #   script = "${pkgs.internal.go-hass-agent}/bin/go-hass-agent run";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "app-graphical.slice";
-      #
-      # };
+      hass-agent = {
+        description = "home assistant agent";
+        script = "${pkgs.internal.go-hass-agent}/bin/go-hass-agent run";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = {
+          ExecStartPre = "doas systemctl stop go-hass-agent";
+          Slice = "app-graphical.slice";
+          ExecStop = "doas systemctl start go-hass-agent";
+        };
+      };
       # polkit-gnome-authentication-agent-1 = {
       # description = "polkit-gnome-authentication-agent-1";
       # script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
