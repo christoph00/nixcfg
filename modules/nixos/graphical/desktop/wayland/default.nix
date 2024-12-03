@@ -114,9 +114,9 @@ in
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig = {
-          ExecStartPre = "doas systemctl stop go-hass-agent";
+          ExecStartPre = "/run/wrappers/bin/doas systemctl stop go-hass-agent";
           Slice = "app-graphical.slice";
-          ExecStop = "doas systemctl start go-hass-agent";
+          ExecStop = "/run/wrappers/bin/doas systemctl start go-hass-agent";
         };
       };
       # polkit-gnome-authentication-agent-1 = {
