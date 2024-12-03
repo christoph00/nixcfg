@@ -230,7 +230,7 @@ in
             template-entity-row
             universal-remote-card
           ]) ++ (with pkgs; [
-            # home-assistant-lovelace-bubble-card
+            bubble-card
             # home-assistant-lovelace-card-tools
             # home-assistant-lovelace-config-template-card
             # home-assistant-lovelace-custom-brand-icons
