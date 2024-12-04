@@ -1,11 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
+{ config
+, lib
+, pkgs
+, modulesPath
+, inputs
+, namespace
+, ...
 }:
 {
   facter.reportPath = ./facter.json;
@@ -24,8 +23,8 @@
 
     roles = [
       "router"
-      "nas"
-      "media"
+      # "nas"
+      # "media"
       "smart-home"
     ];
 
