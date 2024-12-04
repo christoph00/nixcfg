@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
     owner = "Clooos";
     repo = "Bubble-Card";
     rev = "v${version}";
-    hash = "0n1lsgvvhf7qa33ayr2z8zfc9n4yb611xsszg4rzibcwsr6dnf0b";
+    sha256 = "0n1lsgvvhf7qa33ayr2z8zfc9n4yb611xsszg4rzibcwsr6dnf0b";
   };
 
   dontBuild = true;
