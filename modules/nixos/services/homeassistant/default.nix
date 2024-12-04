@@ -37,6 +37,8 @@ in
 
 {
 
+  imports = [ ./assist.nix ];
+
   options.internal.services.homeassistant = {
     enable = mkBoolOpt config.internal.isSmartHome "Enable Homeassistant.";
   };
