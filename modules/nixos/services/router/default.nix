@@ -298,6 +298,11 @@ in
       allowInterfaces = [ "lan" "ts0" "wg0" ];
     };
 
+    services.openntpd = {
+      enable = true;
+      servers = [ "ptbtime1.ptb.de" "ptbtime2.ptb.de" "ptbtime3.ptb.de" ];
+    };
+
 
   };
 
