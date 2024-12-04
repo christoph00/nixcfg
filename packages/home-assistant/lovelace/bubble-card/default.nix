@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "bubble-card";
-  version = "2.2.4";
+  version = "2.3.0";
 
   src = fetchFromGitHub {
     owner = "Clooos";
     repo = "Bubble-Card";
     rev = "v${version}";
-    hash = "sha256-vsgu1hvtlppADvaFLeB4xQHbP3wBc6H4p5HbeS3JY80=";
+    hash = "0n1lsgvvhf7qa33ayr2z8zfc9n4yb611xsszg4rzibcwsr6dnf0b";
   };
 
   dontBuild = true;
