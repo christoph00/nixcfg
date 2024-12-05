@@ -107,6 +107,37 @@ in
     };
   };
 
+    services.kea.dhcp4.settings = {
+    interfaces-config.interfaces = [ "lan" ];
+    subnet4 = [{
+      id = 1;
+      interface = "lan";
+      pools = [{ pool = "192.168.2.51 - 192.168.2.249"; }];
+      subnet = "192.168.2.0/24";
+
+      option-data = [
+        {
+          name = "routers";
+          data = "192.168.2.2";
+        }
+        {
+          name = "domain-name-servers";
+          data = "192.168.2.2";
+        }
+        {
+          name = "domain-name";
+          data = "lan.net.r505.de";
+        }
+      ];
+
+
+
+      ddns-qualifying-suffix = "lan.net.r505.de";
+
+    }];
+  };
+
+
     networking.interfaces.lo.ipv4.addresses = [{
     address = "127.0.0.11";
     prefixLength = 8;
