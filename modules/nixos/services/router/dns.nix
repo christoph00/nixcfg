@@ -83,9 +83,16 @@ in
           "lan.net.r505.de" = lib.mkDefault "127.0.0.11"; 
         };
       };
+      hostsFile = {
+        sources = [ "/etc/hosts" ];
+        hostsTTL = "60m";
+        filterLoopback = true;
+        loading.refreshPeriod = "30m";
+      };
+
       conditional = {
         rewrite = {
-          ts = "cama-boa.ts.net";
+          ts.r505.de = "cama-boa.ts.net";
         };
         mapping = {
           "ts.net" = "100.100.100.100";
