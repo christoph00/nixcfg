@@ -83,7 +83,7 @@ in
       # globalConfig = # caddyfile
       #   ''
       #     dynamic_dns {
-      #       provider cloudflare {env.CF_API_TOKEN}
+      #       provider cloudflare {env.CLOUDFLARE_API_TOKEN}
       #       domains {
       #         r505.de ha
       #       }
@@ -99,7 +99,7 @@ in
           extraConfig = # caddyfile
             ''
               tls {
-                dns cloudflare {env.CF_API_TOKEN}
+                dns cloudflare {env.CLOUDFLARE_API_TOKEN}
                 resolvers 1.1.1.1
               }
               reverse_proxy http://127.0.0.1:8123 
@@ -113,7 +113,7 @@ in
                 abort
               }
               tls {
-                dns cloudflare {env.CF_API_TOKEN}
+                dns cloudflare {env.CLOUDFLARE_API_TOKEN}
                 resolvers 1.1.1.1
               }
               reverse_proxy http://127.0.0.1:5380 
