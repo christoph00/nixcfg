@@ -54,17 +54,14 @@ in
 
     environment.systemPackages = with pkgs; [
       dnsutils
+      dig
       ethtool
       tcpdump
       speedtest-cli
       netop
     ];
 
-    internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
-    services.technitium-dns-server = {
-      enable = true;
-    };
-
+ 
     networking = {
       nftables.enable = true;
 
