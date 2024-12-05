@@ -274,6 +274,8 @@ in
           "wyoming"
           "cloudflare"
           "http"
+          "google_generative_ai_conversation"
+          "tailscale"
           #"hyperion"
           "assist_pipeline"
           "jellyfin"
