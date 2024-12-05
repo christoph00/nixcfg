@@ -53,9 +53,6 @@ in
   imports = [ ./dhcp.nix ];
 
   config = mkIf cfg.enable {
-
-    
-
     environment.systemPackages = with pkgs; [
       dnsutils
       dig
@@ -64,8 +61,6 @@ in
       speedtest-cli
       netop
     ];
-
- 
     networking = {
       nftables.enable = true;
 
