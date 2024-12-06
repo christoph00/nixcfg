@@ -32,80 +32,119 @@ with lib.internal;
 let
   cfg = config.internal.services.agent;
 
-  generateCommands = services:
-    let
-      makeServiceCommands = name: service: ''
-        "mqd/$HOSTNAME/cmd/${name}-start")
-            ${pkgs.systemd}/bin/systemctl --user start ${name}.service
-            ;;
-        "mqd/$HOSTNAME/cmd/${name}-stop")
-            ${pkgs.systemd}/bin/systemctl --user stop ${name}.service
-            ;;
-        "mqd/$HOSTNAME/cmd/${name}-status")
-            status=$(${pkgs.systemd}/bin/systemctl --user status ${name}.service)
-            ${pkgs.mosquitto}/bin/mosquitto_pub -h "$MQTT_HOST" -p "$MQTT_PORT" \
-                -u "$MQTT_USER" -P "$MQTT_PASS" \
-                -t "mqd/$HOSTNAME/status" -m "$status"
-            ;;
-      '';
-      serviceCommands = lib.mapAttrsToString makeServiceCommands services;
-    in serviceCommands;
+  commandType = types.submodule {
+    options = {
+      name = mkOption {
+        type = types.str;
+      };
+      command = mkOption {
+        type = types.str;
+      };
+      user = mkOption {
+        type = types.str;
+        default = "root";
+      };
+    };
+  };
 in
 
 {
 
   options.internal.services.agent = {
     enable = mkBoolOpt true "Enable MQTT Command Daemon.";
+
+    mqtt = {
+      host = mkOption {
+        type = types.str;
+        default = "lsrv";
+        description = "MQTT Broker Host";
+      };
+      port = mkOption {
+        type = types.port;
+        default = 1883;
+        description = "MQTT Broker Port";
+      };
+      username = mkOption {
+        type = types.str;
+        default = "agent";
+      };
+    };
+
+    commands = mkOption {
+      type = types.listOf commandType;
+      default = [];
+      example = literalExpression ''
+        [
+          {
+            name = "reboot";
+            command = "systemctl reboot";
+            user = "root";
+          }
+          {
+            name = "scale-display";
+            command = "wlr-randr --output HEADLESS-1 --scale 2";
+            user = "myuser";
+          }
+        ]
+      '';
   };
 
   config = mkIf cfg.enable {
-  systemd.services.mqtt-daemon = {
-    description = "MQTT Command Daemon";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+ systemd.services.mqtt-commander = {
+      description = "MQTT Command Daemon";
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
+      
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = let
+          generateCommands = commands:
+            concatStringsSep "\n" (map (cmd: ''
+              "mqd/$HOSTNAME/cmd/${cmd.name}")
+                  ${if cmd.user == "root"
+                    then "${cmd.command}"
+                    else "doas -u ${cmd.user} ${cmd.command}"}
+                  ;;
+            '') commands);
+        in
+          pkgs.writeScript "mqtt-commander" ''
+            #!${pkgs.bash}/bin/bash
+            
+            MQTT_HOST="${cfg.mqtt.host}"
+            MQTT_PORT="${toString cfg.mqtt.port}"
+            MQTT_USER="${cfg.mqtt.username}"
 
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.bash}/bin/bash ${pkgs.writeScript "mqtt-daemon" ''
-        #!${pkgs.bash}/bin/bash
-
-        # Konfiguration
-        HOSTNAME=${networking.hostName}
-        MQTT_HOST="lsrv"
-        MQTT_PORT="1883"
-        MQTT_USER="ha"
-        MQTT_PASS="ha"
-
-        send_heartbeat() {
-            while true; do
-                ${pkgs.mosquitto}/bin/mosquitto_pub -h "$MQTT_HOST" -p "$MQTT_PORT" \
-                    -u "$MQTT_USER" -P "$MQTT_PASS" \
-                    -t "mqd/$HOSTNAME/heartbeat" -m "online"
-                sleep 30
-            done
-        }
-
-        listen_commands() {
-            while true; do
-                ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" \
-                    -u "$MQTT_USER" -P "$MQTT_PASS" \
-                    -t "mqd/$HOSTNAME/cmd/+" | while read -r topic payload; do
-                    case "$topic" in
-                        ${generateCommands cfg.services}
-                    esac
+            send_heartbeat() {
+                while true; do
+                    ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
+                        -t "mqd/${config.networking.hostName}/heartbeat" -m "online"
+                    sleep 30
                 done
-                sleep 10
-            done
-        }
+            }
 
-        send_heartbeat &
-        listen_commands &
+            listen_commands() {
+                while true; do
+                    ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
+                        -t "mqd/${config.networking.hostName}/cmd/+" | while read -r topic payload; do
+                        case "$topic" in
+                            ${generateCommands cfg.commands}
+                            *)
+                                echo "Unkown Command: $topic"
+                                ;;
+                        esac
+                    done
+                    sleep 10
+                done
+            }
 
-        wait
-      ''}";
-      Restart = "always";
-      RestartSec = "10";
+            send_heartbeat &
+            listen_commands &
+            wait
+          '';
+        Restart = "always";
+        RestartSec = "10";
+      };
     };
-  };
 };
 }
