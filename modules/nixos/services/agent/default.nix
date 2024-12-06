@@ -52,7 +52,7 @@ let
     icon = "mdi:cog";
     device = {
       identifiers = [ config.networking.hostName ];
-      name = "MQTT Host Agent - ${config.networking.hostName}";
+      name = "${config.networking.hostName}";
       model = "MQTT Host Agent";
       manufacturer = "NixOS";
     };
