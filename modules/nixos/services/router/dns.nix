@@ -79,26 +79,26 @@ in
           minTime = "5m";
           prefetching = true;
         };
-        customDNS = {
-          mapping = {
-            "lan.net.r505.de" = lib.mkDefault "127.0.0.11";
-          };
-        };
-        hostsFile = {
-          sources = [ "/etc/hosts" ];
-          hostsTTL = "60m";
-          filterLoopback = true;
-          loading.refreshPeriod = "30m";
-        };
+        # customDNS = {
+        #   mapping = {
+        #     "lan.net.r505.de" = lib.mkDefault "127.0.0.11";
+        #   };
+        # };
+        # hostsFile = {
+        #   sources = [ "/etc/hosts" ];
+        #   hostsTTL = "60m";
+        #   filterLoopback = true;
+        #   loading.refreshPeriod = "30m";
+        # };
 
-        conditional = {
-          rewrite = {
-            ts.r505.de = "cama-boa.ts.net";
-          };
-          mapping = {
-            "ts.net" = "100.100.100.100";
-          };
-        };
+        # conditional = {
+        #   rewrite = {
+        #     ts.r505.de = "cama-boa.ts.net";
+        #   };
+        #   mapping = {
+        #     "ts.net" = "100.100.100.100";
+        #   };
+        # };
         bootstrapDns = "tcp+udp:1.1.1.1";
         blocking = {
           blackLists = {

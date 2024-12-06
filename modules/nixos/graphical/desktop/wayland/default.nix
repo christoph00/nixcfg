@@ -146,9 +146,6 @@ in
 
       grim
 
-      ags
-      bun
-
       swww
 
       fuzzel
