@@ -2,10 +2,7 @@ module mqtt-host-agent
 
 go 1.23.3
 
-require (
-	github.com/eclipse/paho.mqtt.golang v1.5.0
-	github.com/go-cmd/cmd v1.4.3
-)
+require github.com/eclipse/paho.mqtt.golang v1.5.0
 
 require (
 	github.com/gorilla/websocket v1.5.3 // indirect
