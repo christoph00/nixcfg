@@ -1,15 +1,16 @@
-{ stdenv
-, lib
-, pkgs
-, buildGo123Module
-, # workaround till buildGoModule uses go 1.23 by default
-  pkg-config
-, glfw
-, xorg
-, mage
-, writeShellScriptBin
-, git
-, ...
+{
+  stdenv,
+  lib,
+  pkgs,
+  buildGo123Module,
+  # workaround till buildGoModule uses go 1.23 by default
+  pkg-config,
+  glfw,
+  xorg,
+  mage,
+  writeShellScriptBin,
+  git,
+  ...
 }:
 
 buildGo123Module rec {
