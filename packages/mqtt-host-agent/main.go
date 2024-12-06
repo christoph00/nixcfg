@@ -3,23 +3,14 @@ package main
 import (
     "encoding/json"
     "fmt"
+    "log/syslog"
     "os"
     "os/exec"
     "strings"
     "time"
-    "log/syslog"
-
 
     MQTT "github.com/eclipse/paho.mqtt.golang"
 )
-
-const (
-    haDiscoveryPrefix = "homeassistant"
-)
-
-type Logger struct {
-    syslog *syslog.Writer
-}
 
 type Config struct {
     Broker struct {
@@ -28,35 +19,21 @@ type Config struct {
     } `json:"broker"`
     MqttUser        string            `json:"mqtt_user"`
     AllowedCommands map[string]string `json:"allowedCommands"`
-}
-
-
-type MQTTHostAgent struct {
-    client          MQTT.Client
-    config          Config
-    hostname        string
-    baseTopic       string
-    version         string
-    logger          *Logger
+    WatchServices   []string          `json:"watchServices"`
+    HADiscovery     HADiscoveryConfig `json:"haDiscovery"`
 }
 
 type HADiscoveryConfig struct {
-    Name              string `json:"name"`
-    UniqueId          string `json:"unique_id"`
-    StateTopic        string `json:"state_topic,omitempty"`
-    CommandTopic      string `json:"command_topic,omitempty"`
-    PayloadAvailable  string `json:"payload_available,omitempty"`
-    PayloadNotAvailable string `json:"payload_not_available,omitempty"`
-    Icon              string `json:"icon,omitempty"`
-    Device           HADevice `json:"device"`
+    Services map[string]interface{} `json:"services"`
 }
 
-type HADevice struct {
-    Identifiers  []string `json:"identifiers"`
-    Name         string   `json:"name"`
-    Model        string   `json:"model"`
-    Manufacturer string   `json:"manufacturer"`
-    SwVersion    string   `json:"sw_version"`
+type CommandExecution struct {
+    Command   string   `json:"command"`
+    Arguments []string `json:"arguments,omitempty"`
+}
+
+type Logger struct {
+    syslog *syslog.Writer
 }
 
 func NewLogger() (*Logger, error) {
@@ -82,19 +59,28 @@ func (l *Logger) Warning(format string, v ...interface{}) {
     l.syslog.Warning(msg)
 }
 
+type MQTTHostAgent struct {
+    client    MQTT.Client
+    config    Config
+    hostname  string
+    baseTopic string
+    version   string
+    logger    *Logger
+}
 
 func NewMQTTHostAgent(configPath string) (*MQTTHostAgent, error) {
     logger, err := NewLogger()
     if err != nil {
         return nil, err
     }
+
     config := Config{}
     data, err := os.ReadFile(configPath)
     if err != nil {
         logger.Error("Failed to read config file: %v", err)
         return nil, err
     }
-    
+
     if err := json.Unmarshal(data, &config); err != nil {
         logger.Error("Failed to parse config file: %v", err)
         return nil, err
@@ -111,14 +97,13 @@ func NewMQTTHostAgent(configPath string) (*MQTTHostAgent, error) {
     opts.SetClientID(fmt.Sprintf("host_agent_%s", hostname))
 
     if config.MqttUser != "" {
-    opts.SetUsername(config.MqttUser)
-    if password := os.Getenv("MQTT_PASS"); password != "" {
-        opts.SetPassword(password)
-    } else {
-        logger.Warning("MQTT_PASSWORD environment variable not set")
+        opts.SetUsername(config.MqttUser)
+        if password := os.Getenv("MQTT_PASS"); password != "" {
+            opts.SetPassword(password)
+        } else {
+            logger.Warning("MQTT_PASS environment variable not set")
+        }
     }
-}
-    
 
     // Set last will
     lastWillTopic := fmt.Sprintf("mqd/%s/status", hostname)
@@ -126,6 +111,7 @@ func NewMQTTHostAgent(configPath string) (*MQTTHostAgent, error) {
 
     client := MQTT.NewClient(opts)
     if token := client.Connect(); token.Wait() && token.Error() != nil {
+        logger.Error("Failed to connect to MQTT broker: %v", token.Error())
         return nil, token.Error()
     }
 
@@ -139,108 +125,53 @@ func NewMQTTHostAgent(configPath string) (*MQTTHostAgent, error) {
         version:   "1.0.0",
         logger:    logger,
     }, nil
-
-
 }
 
-func (a *MQTTHostAgent) publishDiscoveryConfigs() {
-    device := HADevice{
-        Identifiers:  []string{a.hostname},
-        Name:         a.hostname,
-        Model:        "MQTT Host Agent",
-        Manufacturer: "NixOS",
-        SwVersion:    a.version,
-    }
-
-    // Heartbeat Sensor
-    a.publishDiscoveryConfig("binary_sensor", "heartbeat", HADiscoveryConfig{
-        Name:              fmt.Sprintf("%s Heartbeat", a.hostname),
-        UniqueId:          fmt.Sprintf("%s_heartbeat", a.hostname),
-        StateTopic:        fmt.Sprintf("%s/heartbeat", a.baseTopic),
-        PayloadAvailable:  "alive",
-        PayloadNotAvailable: "dead",
-        Icon:              "mdi:heart-pulse",
-        Device:            device,
-    })
-
-
-    // Commands
-    for cmdName := range a.config.AllowedCommands {
-        a.publishDiscoveryConfig("button", fmt.Sprintf("cmd_%s", cmdName), HADiscoveryConfig{
-            Name:         fmt.Sprintf("%s Command %s", a.hostname, cmdName),
-            UniqueId:    fmt.Sprintf("%s_cmd_%s", a.hostname, cmdName),
-            CommandTopic: fmt.Sprintf("%s/cmd/%s", a.baseTopic, cmdName),
-            Icon:        "mdi:console",
-            Device:      device,
-        })
-
-        // Command Result Sensor
-        a.publishDiscoveryConfig("sensor", fmt.Sprintf("cmd_%s_result", cmdName), HADiscoveryConfig{
-            Name:       fmt.Sprintf("%s Command %s Result", a.hostname, cmdName),
-            UniqueId:   fmt.Sprintf("%s_cmd_%s_result", a.hostname, cmdName),
-            StateTopic: fmt.Sprintf("%s/cmd/%s/result", a.baseTopic, cmdName),
-            Icon:       "mdi:console-line",
-            Device:     device,
-        })
-    }
-
-}
-
-func (a *MQTTHostAgent) publishDiscoveryConfig(component string, name string, config HADiscoveryConfig) {
-    topic := fmt.Sprintf("%s/%s/%s/%s/config", 
-        haDiscoveryPrefix, 
-        component, 
-        a.hostname, 
-        name,
+func (a *MQTTHostAgent) publishCommandError(cmdName, errMsg string) {
+    a.client.Publish(
+        fmt.Sprintf("%s/command/%s/error", a.baseTopic, cmdName),
+        0, false,
+        errMsg,
     )
-    
-    payload, err := json.Marshal(config)
-    if err != nil {
-        fmt.Printf("Error marshaling discovery config: %v\n", err)
-        return
-    }
-
-    token := a.client.Publish(topic, 0, true, payload)
-    token.Wait()
 }
 
-func (a *MQTTHostAgent) handleCustomCommand(cmdName string) {
-    cmdString, ok := a.config.AllowedCommands[cmdName]
+func (a *MQTTHostAgent) handleCustomCommand(cmdName string, payload []byte) {
+    baseCmd, ok := a.config.AllowedCommands[cmdName]
     if !ok {
         a.logger.Warning("Unauthorized command execution attempt: %s", cmdName)
-        a.client.Publish(
-            fmt.Sprintf("%s/cmd/%s/error", a.baseTopic, cmdName),
-            0, false,
-            "Command not in allowed list",
-        )
+        a.publishCommandError(cmdName, "Command not in allowed list")
         return
     }
 
-    a.logger.Info("Executing custom command: %s (%s)", cmdName, cmdString)
-    
-    args := strings.Fields(cmdString)
-    if len(args) == 0 {
-        errMsg := "Empty command specified"
-        a.logger.Error(errMsg)
-        a.client.Publish(
-            fmt.Sprintf("%s/cmd/%s/error", a.baseTopic, cmdName),
-            0, false,
-            errMsg,
-        )
-        return
+    var execution CommandExecution
+    if len(payload) > 0 {
+        if err := json.Unmarshal(payload, &execution); err != nil {
+            a.logger.Error("Failed to parse command payload: %v", err)
+            a.publishCommandError(cmdName, "Invalid payload format")
+            return
+        }
     }
+
+    args := strings.Fields(baseCmd)
+    args = append(args, execution.Arguments...)
+
+    a.logger.Info("Executing command: %s with args: %v", args[0], args[1:])
 
     go func() {
         cmd := exec.Command(args[0], args[1:]...)
         output, err := cmd.CombinedOutput()
-        topic := fmt.Sprintf("%s/cmd/%s/result", a.baseTopic, cmdName)
-        
+
         result := struct {
-            StatusCode int    `json:"status_code"`
-            Output    string `json:"output"`
+            StatusCode int      `json:"status_code"`
+            Output    string    `json:"output"`
+            Command   string    `json:"command"`
+            Args      []string  `json:"args"`
+            Timestamp time.Time `json:"timestamp"`
         }{
             StatusCode: 0,
-            Output:    "",
+            Command:    args[0],
+            Args:      args[1:],
+            Timestamp: time.Now(),
         }
 
         if err != nil {
@@ -258,17 +189,55 @@ func (a *MQTTHostAgent) handleCustomCommand(cmdName string) {
         }
 
         jsonResult, _ := json.Marshal(result)
-        a.client.Publish(topic, 0, false, string(jsonResult))
+        a.client.Publish(
+            fmt.Sprintf("%s/command/%s/result", a.baseTopic, cmdName),
+            0, false,
+            string(jsonResult),
+        )
+
         a.logger.Info("Command completed: %s (status=%d)", cmdName, result.StatusCode)
     }()
 }
 
-func (a *MQTTHostAgent) Start() {
+func (a *MQTTHostAgent) publishDiscoveryConfigs() {
+    discoveryPrefix := "homeassistant"
 
+    // Publish discovery configs for services
+    for serviceName, config := range a.config.HADiscovery.Services {
+        configJson, err := json.Marshal(config)
+        if err != nil {
+            a.logger.Error("Failed to marshal discovery config for %s: %v", serviceName, err)
+            continue
+        }
+
+        topic := fmt.Sprintf("%s/select/%s/%s/config",
+            discoveryPrefix,
+            a.hostname,
+            serviceName,
+        )
+
+        if token := a.client.Publish(topic, 0, true, configJson); token.Wait() && token.Error() != nil {
+            a.logger.Error("Failed to publish discovery config for %s: %v", serviceName, token.Error())
+        }
+    }
+}
+
+func (a *MQTTHostAgent) Start() {
     a.logger.Info("Starting MQTT Host Agent")
+
     // Publish discovery configs
     a.publishDiscoveryConfigs()
     a.logger.Info("Published Home Assistant discovery configurations")
+
+    // Subscribe to command topics
+    commandTopic := fmt.Sprintf("%s/command/+", a.baseTopic)
+    if token := a.client.Subscribe(commandTopic, 0, func(client MQTT.Client, msg MQTT.Message) {
+        cmdName := strings.Split(msg.Topic(), "/")[3]
+        a.handleCustomCommand(cmdName, msg.Payload())
+    }); token.Wait() && token.Error() != nil {
+        a.logger.Error("Failed to subscribe to command topic: %v", token.Error())
+        return
+    }
 
     // Publish online status
     a.client.Publish(
@@ -278,16 +247,6 @@ func (a *MQTTHostAgent) Start() {
         "online",
     )
     a.logger.Info("Published online status")
-    // Subscribe to commands
-    a.client.Subscribe(
-        fmt.Sprintf("%s/cmd/+", a.baseTopic),
-        0,
-        func(client MQTT.Client, msg MQTT.Message) {
-            parts := strings.Split(msg.Topic(), "/")
-            cmdName := parts[len(parts)-1]
-            a.handleCustomCommand(cmdName)
-        },
-    )
 
     // Start heartbeat
     go func() {
@@ -297,21 +256,12 @@ func (a *MQTTHostAgent) Start() {
                 0, false,
                 "alive",
             )
+            //a.logger.Info("Heartbeat sent")
             time.Sleep(20 * time.Second)
         }
     }()
 
     a.logger.Info("MQTT Host Agent started successfully")
-}
-
-
-func contains(slice []string, item string) bool {
-    for _, s := range slice {
-        if s == item {
-            return true
-        }
-    }
-    return false
 }
 
 func main() {

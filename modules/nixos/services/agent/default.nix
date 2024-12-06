@@ -1,28 +1,27 @@
 {
   # Snowfall Lib provides a customized `lib` instance with access to your flake's library
   # as well as the libraries available from your flake's inputs.
-  lib
-, # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs
-, # You also have access to your flake's inputs.
-  inputs
-, # Additional metadata is provided by Snowfall Lib.
-  namespace
-, # The namespace used for your flake, defaulting to "internal" if not set.
-  system
-, # The system architecture for this host (eg. `x86_64-linux`).
-  target
-, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format
-, # A normalized name for the system target (eg. `iso`).
-  virtual
-, # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems
-, # An attribute map of your defined hosts.
+  lib,
+  # An instance of `pkgs` with your overlays and packages applied is also available.
+  pkgs,
+  # You also have access to your flake's inputs.
+  inputs,
+  # Additional metadata is provided by Snowfall Lib.
+  namespace,
+  # The namespace used for your flake, defaulting to "internal" if not set.
+  system,
+  # The system architecture for this host (eg. `x86_64-linux`).
+  target,
+  # The Snowfall Lib target for this system (eg. `x86_64-iso`).
+  format,
+  # A normalized name for the system target (eg. `iso`).
+  virtual,
+  # A boolean to determine whether this system is a virtual target using nixos-generators.
+  systems, # An attribute map of your defined hosts.
 
   # All other arguments come from the module system.
-  config
-, ...
+  config,
+  ...
 }:
 
 with builtins;
@@ -32,19 +31,41 @@ with lib.internal;
 let
   cfg = config.internal.services.agent;
   format = pkgs.formats.json { };
-  mkServiceCommands = service: {
-    "${service}-start" = "${pkgs.systemd}/bin/systemctl start ${service}";
-    "${service}-stop" = "${pkgs.systemd}/bin/systemctl stop ${service}";
-    "${service}-restart" = "${pkgs.systemd}/bin/systemctl restart ${service}";
-    "${service}-status" = "${pkgs.systemd}/bin/systemctl status ${service}";
+  mkServiceCommand = service: {
+    "${service}" = "${pkgs.systemd}/bin/systemctl";
   };
 
-  serviceCommands = lib.foldl
-    (acc: service:
-      acc // (mkServiceCommands service)
-    )
-    { }
-    cfg.allowedServices;
+  mkServiceDiscoveryConfig = service: {
+    component = "select";
+    name = "Service ${service}";
+    unique_id = "service_${service}_control";
+    command_topic = "mqd/${config.networking.hostName}/command/systemctl";
+    command_template = ''{"command": "systemctl", "arguments": ["{{ value }}", "${service}"]}'';
+    options = [
+      "start"
+      "stop"
+      "restart"
+      "status"
+    ];
+    state_topic = "mqd/${config.networking.hostName}/command/systemctl/result";
+    value_template = "{{ value_json.output }}";
+    icon = "mdi:cog";
+    device = {
+      identifiers = [ config.networking.hostName ];
+      name = "MQTT Host Agent - ${config.networking.hostName}";
+      model = "MQTT Host Agent";
+      manufacturer = "NixOS";
+    };
+  };
+
+  serviceCommands = lib.foldl (
+    acc: service: acc // (mkServiceCommand service)
+  ) { } cfg.allowedServices;
+
+  # Home Assistant Discovery Configs
+  serviceDiscoveryConfigs = lib.foldl (
+    acc: service: acc // { ${service} = mkServiceDiscoveryConfig service; }
+  ) { } cfg.allowedServices;
 
   baseConfig = {
     broker = {
@@ -52,6 +73,9 @@ let
     };
     mqtt_user = cfg.mqtt.user;
     allowedCommands = serviceCommands // cfg.extraCommands;
+    haDiscovery = {
+      services = serviceDiscoveryConfigs;
+    };
   };
 
 in
@@ -95,7 +119,10 @@ in
     allowedServices = mkOption {
       type = types.listOf types.str;
       default = [ ];
-      example = [ "nginx" "postgresql" ];
+      example = [
+        "nginx"
+        "postgresql"
+      ];
       description = "List of services that can be controlled via MQTT";
     };
 
@@ -111,21 +138,24 @@ in
       description = "Additional commands that can be executed via MQTT";
     };
 
-
   };
 
   config = mkIf cfg.enable {
     internal.services.agent = lib.mkDefault {
 
-      allowedServices = [ "nixos-update-switch" "nixos-update-boot" "nixos-clean" ];
+      allowedServices = [
+        "nixos-update-switch"
+        "nixos-update-boot"
+        "nixos-clean"
+      ];
 
       extraCommands = {
+        systemctl = "${pkgs.systemd}/bin/systemctl";
+        poweroff = "${pkgs.systemd}/bin/systemctl poweroff";
         reboot = "${pkgs.systemd}/bin/systemctl reboot";
-        shutdown = "${pkgs.systemd}/bin/systemctl shutdown";
+
       };
     };
-
-
 
     age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-ha.age;
 
@@ -169,7 +199,5 @@ in
       };
     };
 
-
   };
 }
-
