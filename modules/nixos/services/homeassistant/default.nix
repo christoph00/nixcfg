@@ -1,28 +1,27 @@
 {
   # Snowfall Lib provides a customized `lib` instance with access to your flake's library
   # as well as the libraries available from your flake's inputs.
-  lib
-, # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs
-, # You also have access to your flake's inputs.
-  inputs
-, # Additional metadata is provided by Snowfall Lib.
-  namespace
-, # The namespace used for your flake, defaulting to "internal" if not set.
-  system
-, # The system architecture for this host (eg. `x86_64-linux`).
-  target
-, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format
-, # A normalized name for the system target (eg. `iso`).
-  virtual
-, # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems
-, # An attribute map of your defined hosts.
+  lib,
+  # An instance of `pkgs` with your overlays and packages applied is also available.
+  pkgs,
+  # You also have access to your flake's inputs.
+  inputs,
+  # Additional metadata is provided by Snowfall Lib.
+  namespace,
+  # The namespace used for your flake, defaulting to "internal" if not set.
+  system,
+  # The system architecture for this host (eg. `x86_64-linux`).
+  target,
+  # The Snowfall Lib target for this system (eg. `x86_64-iso`).
+  format,
+  # A normalized name for the system target (eg. `iso`).
+  virtual,
+  # A boolean to determine whether this system is a virtual target using nixos-generators.
+  systems, # An attribute map of your defined hosts.
 
   # All other arguments come from the module system.
-  config
-, ...
+  config,
+  ...
 }:
 
 with builtins;
@@ -59,7 +58,13 @@ in
       {
         users = [ "hass" ];
         cmd = "systemctl";
-        args = [ "status" "stop" "start" "restart" "reboot" ];
+        args = [
+          "status"
+          "stop"
+          "start"
+          "restart"
+          "reboot"
+        ];
         runAs = "root";
         noPass = true;
       }
@@ -78,14 +83,22 @@ in
 
     services.mosquitto = {
       enable = true;
-      listeners = [{
-        settings.allow_anonymous = true;
-        acl = [ "topic readwrite #" ];
-        users = {
-          ha = { acl = [ "readwrite #" ]; password = "ha"; };
-          robot = { acl = [ "readwrite #" ]; password = "robot"; };
-        };
-      }];
+      listeners = [
+        {
+          settings.allow_anonymous = true;
+          acl = [ "topic readwrite #" ];
+          users = {
+            ha = {
+              acl = [ "readwrite #" ];
+              password = "ha";
+            };
+            robot = {
+              acl = [ "readwrite #" ];
+              password = "robot";
+            };
+          };
+        }
+      ];
     };
 
     services.home-assistant =
@@ -216,21 +229,23 @@ in
           show_in_sidebar = false;
           require_admin = true;
         };
-        customComponents = (with pkgs.home-assistant-custom-components; [
-          better_thermostat
-          prometheus_sensor
-          spook
-          waste_collection_schedule
-          xiaomi_miot
-          bodymiscale
-        ]) ++ (with pkgs; [
-          # home-assistant-bermuda
-          # home-assistant-browser-mod
-          # home-assistant-music-assistant
-          # home-assistant-pirate-weather
-          # home-assistant-spotcast
-          # home-assistant-var
-        ]);
+        customComponents =
+          (with pkgs.home-assistant-custom-components; [
+            better_thermostat
+            prometheus_sensor
+            spook
+            waste_collection_schedule
+            xiaomi_miot
+            bodymiscale
+          ])
+          ++ (with pkgs; [
+            # home-assistant-bermuda
+            # home-assistant-browser-mod
+            # home-assistant-music-assistant
+            # home-assistant-pirate-weather
+            # home-assistant-spotcast
+            # home-assistant-var
+          ]);
 
         customLovelaceModules =
           (with pkgs.home-assistant-custom-lovelace-modules; [
@@ -247,7 +262,8 @@ in
             mushroom
             template-entity-row
             universal-remote-card
-          ]) ++ (with pkgs; [
+          ])
+          ++ (with pkgs; [
             internal.bubble-card
             # home-assistant-lovelace-card-tools
             # home-assistant-lovelace-config-template-card

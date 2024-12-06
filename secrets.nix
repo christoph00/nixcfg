@@ -39,5 +39,6 @@ in
   "secrets/cf-api-key".publicKeys = [ lsrv ] ++ users;
   "secrets/ha-secrets.age".publicKeys = [ lsrv ] ++ users;
   "secrets/ha-serviceaccount.age".publicKeys = [ lsrv ] ++ users;
+  "secrets/mqtt-agent.age".publicKeys = all;
 
 }

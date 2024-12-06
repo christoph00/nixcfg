@@ -72,7 +72,8 @@ in
 
     commands = mkOption {
       type = types.listOf commandType;
-      default = [];
+      default = [
+      ];
       example = literalExpression ''
         [
           {
@@ -87,64 +88,72 @@ in
           }
         ]
       '';
-  };
+    };
 
-  config = mkIf cfg.enable {
- systemd.services.mqtt-commander = {
-      description = "MQTT Command Daemon";
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
-      
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = let
-          generateCommands = commands:
-            concatStringsSep "\n" (map (cmd: ''
-              "mqd/$HOSTNAME/cmd/${cmd.name}")
-                  ${if cmd.user == "root"
-                    then "${cmd.command}"
-                    else "doas -u ${cmd.user} ${cmd.command}"}
-                  ;;
-            '') commands);
-        in
-          pkgs.writeScript "mqtt-commander" ''
-            #!${pkgs.bash}/bin/bash
-            
-            MQTT_HOST="${cfg.mqtt.host}"
-            MQTT_PORT="${toString cfg.mqtt.port}"
-            MQTT_USER="${cfg.mqtt.username}"
+    config = mkIf cfg.enable {
+      age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-agent.age;
 
-            send_heartbeat() {
-                while true; do
-                    ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
-                        -t "mqd/${config.networking.hostName}/heartbeat" -m "online"
-                    sleep 30
-                done
-            }
+      systemd.services.mqtt-commander = {
+        description = "MQTT Command Daemon";
+        after = [ "network-online.target" ];
+        wants = [ "network-online.target" ];
+        wantedBy = [ "multi-user.target" ];
 
-            listen_commands() {
-                while true; do
-                    ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
-                        -t "mqd/${config.networking.hostName}/cmd/+" | while read -r topic payload; do
-                        case "$topic" in
-                            ${generateCommands cfg.commands}
-                            *)
-                                echo "Unkown Command: $topic"
-                                ;;
-                        esac
-                    done
-                    sleep 10
-                done
-            }
+        serviceConfig = {
+          Type = "simple";
+          EnvironmentFile = config.age.secrets.mqtt-agent.path;
+          ExecStart =
+            let
+              generateCommands =
+                commands:
+                concatStringsSep "\n" (
+                  map
+                    (cmd: ''
+                      "mqd/$HOSTNAME/cmd/${cmd.name}")
+                          ${if cmd.user == "root" then "${cmd.command}" else "doas -u ${cmd.user} ${cmd.command}"}
+                          ;;
+                    '')
+                    commands
+                );
+            in
+            pkgs.writeScript "mqtt-commander" ''
+              #!${pkgs.bash}/bin/bash
 
-            send_heartbeat &
-            listen_commands &
-            wait
-          '';
-        Restart = "always";
-        RestartSec = "10";
+              MQTT_HOST="${cfg.mqtt.host}"
+              MQTT_PORT="${toString cfg.mqtt.port}"
+              MQTT_USER="${cfg.mqtt.username}"
+
+              send_heartbeat() {
+                  while true; do
+                      ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
+                          -t "mqd/${config.networking.hostName}/heartbeat" -m "online"
+                      sleep 30
+                  done
+              }
+
+              listen_commands() {
+                  while true; do
+                      ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
+                          -t "mqd/${config.networking.hostName}/cmd/+" | while read -r topic payload; do
+                          case "$topic" in
+                              ${generateCommands cfg.commands}
+                              *)
+                                  echo "Unkown Command: $topic"
+                                  ;;
+                          esac
+                      done
+                      sleep 10
+                  done
+              }
+
+              send_heartbeat &
+              listen_commands &
+              wait
+            '';
+          Restart = "always";
+          RestartSec = "10";
+        };
       };
     };
-};
+  };
 }

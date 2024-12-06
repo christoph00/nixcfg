@@ -1,17 +1,17 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, cmake
-, pkg-config
-, jsoncpp
-, libarchive
-, libcpr
-, pugixml
-, internal
-, libsForQt5
-, withUnrar ? true
-, unrar
-, # has an unfree license
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  cmake,
+  pkg-config,
+  jsoncpp,
+  libarchive,
+  libcpr,
+  pugixml,
+  internal,
+  libsForQt5,
+  withUnrar ? true,
+  unrar, # has an unfree license
 }:
 
 stdenv.mkDerivation (finalAttrs: {
