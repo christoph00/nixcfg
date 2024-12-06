@@ -81,30 +81,6 @@ in
       powerOnBoot = true;
     };
 
-    services.mosquitto = {
-      enable = true;
-      listeners = [
-        {
-          settings.allow_anonymous = true;
-          acl = [ "topic readwrite #" ];
-          users = {
-            ha = {
-              acl = [ "readwrite #" ];
-              hashedPassword = "$7$101$VwdxsTsOPwHpSHjL$HgyPQ3CZ+wcWFTBLXVkOeSK7YhEGOtkrZt5povOLSrTeT2JuYdAcbIKHc1JizzN0uleN7vgMfqYYQnjsgmlElQ==";
-            };
-            robot = {
-              acl = [ "readwrite #" ];
-              hashedPassword = "$7$101$kcTDlpmOtQEBLOTa$hn8c6AJ9I+j927e/t7CaH9v349bbd8JwuIw5EI4prnIimvX6rQMMlndbhStzE6/NlJ2QPhNVGJAe5AOHyqEmLQ==";
-            };
-            agent = {
-              acl = [ "readwrite #" ];
-              hashedPassword = "$7$101$H99cwUp4aL5ePW3t$YN8Votxip8OpX0dMVJv34hefj8RrHq2l64SwEH1oUr7bFT1eX8R4vthTnTGBfHgfR9r9aMPfMdPgun8RkHMMGw==";
-            };
-          };
-        }
-      ];
-    };
-
     services.home-assistant =
       let
         package = pkgs.home-assistant.override {
