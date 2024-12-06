@@ -86,7 +86,8 @@ in
 
       pkgs.nemo
 
-      # pkgs.internal.thorium-browser
+      pkgs.nil
+      pkgs.gopls
     ];
 
   };
