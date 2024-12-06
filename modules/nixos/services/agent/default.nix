@@ -157,7 +157,7 @@ in
       };
     };
 
-    age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-ha.age;
+    age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-agent.age;
 
     systemd.services.mqtt-host-agent = {
       description = "MQTT Host Agent Service";
