@@ -32,7 +32,27 @@ with lib.internal;
 let
   cfg = config.internal.services.agent;
   format = pkgs.formats.json { };
+  mkServiceCommands = service: {
+    "${service}-start" = "${pkgs.systemd}/bin/systemctl start ${service}";
+    "${service}-stop" = "${pkgs.systemd}/bin/systemctl stop ${service}";
+    "${service}-restart" = "${pkgs.systemd}/bin/systemctl restart ${service}";
+    "${service}-status" = "${pkgs.systemd}/bin/systemctl status ${service}";
+  };
 
+  serviceCommands = lib.foldl
+    (acc: service:
+      acc // (mkServiceCommands service)
+    )
+    { }
+    cfg.allowedServices;
+
+  baseConfig = {
+    broker = {
+      inherit (cfg.broker) host port;
+    };
+    mqtt_user = cfg.mqtt.user;
+    allowedCommands = serviceCommands // cfg.extraCommands;
+  };
 
 in
 
@@ -50,45 +70,62 @@ in
       type = types.nullOr types.path;
       default = config.age.secrets.mqtt-agent.path;
     };
-    settings = mkOption {
-      type = format.type;
+
+    broker = {
+      host = mkOption {
+        type = types.str;
+        description = "MQTT Broker hostname";
+        default = "lsrv";
+      };
+
+      port = mkOption {
+        type = types.port;
+        default = 1883;
+        description = "MQTT Broker port";
+      };
+    };
+
+    mqtt = {
+      user = mkOption {
+        type = types.str;
+        default = "ha";
+      };
+    };
+
+    allowedServices = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      example = [ "nginx" "postgresql" ];
+      description = "List of services that can be controlled via MQTT";
+    };
+
+    extraCommands = mkOption {
+      type = types.attrsOf types.str;
       default = { };
       example = literalExpression ''
         {
-          broker = {
-            host = "mqtt.local";
-            port = 1883;
-          };
-          mqtt_user = "mqtt-host-agent";
-          allowedServices = [ "nginx" "postgresql" ];
-          allowedCommands = {
-            update = "nixos-rebuild switch";
-            uptime = "uptime";
-          };
-          watchServices = [ "nginx" ];
+          update = "''${pkgs.nixos-rebuild}/bin/nixos-rebuild switch";
+          reboot = "''${pkgs.systemd}/bin/systemctl reboot";
         }
       '';
-      description = "Configuration for MQTT Host Agent";
+      description = "Additional commands that can be executed via MQTT";
     };
+
+
   };
 
   config = mkIf cfg.enable {
-    internal.services.agent.settings = lib.mkDefault {
+    internal.services.agent = lib.mkDefault {
 
-      broker = {
-        host = "lsrv";
-        port = 1883;
+      allowedServices = [ "sshd" ];
+
+      extraCommands = {
+        update_switch = "${pkgs.nh}/bin/nh os switch github:christoph00/nixcfg -- --refresh --accept-flake-config";
+        update_boot = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
+        clean_os = "${pkgs.nh}/bin/nh clean all";
+        reboot = "${pkgs.systemd}/bin/systemctl reboot";
+        shutdown = "${pkgs.systemd}/bin/systemctl shutdown";
       };
-      mqtt_user = "ha";
-      allowedServices = [ ];
-      allowedCommands = {
-        update_switch = "nh os switch github:christoph00/nixcfg -- --refresh --accept-flake-config";
-        update_boot = "nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
-        clean_os = "nh clean all";
-        reboot = "systemctl reboot";
-        shutdown = "systemctl shutdown";
-      };
-      watchServices = [ ];
     };
 
 
@@ -102,7 +139,7 @@ in
       wants = [ "network-online.target" ];
 
       serviceConfig = {
-        ExecStart = "${cfg.package}/bin/mqtt-host-agent ${format.generate "mqtt-host-agent-config.json" cfg.settings}";
+        ExecStart = "${cfg.package}/bin/mqtt-host-agent ${format.generate "mqtt-host-agent-config.json" baseConfig}";
         # DynamicUser = true;
         EnvironmentFile = mkIf (cfg.environmentFile != null) [ cfg.environmentFile ];
 
