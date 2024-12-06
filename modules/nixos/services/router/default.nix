@@ -69,18 +69,19 @@ in
       firewall.allowedTCPPorts = mkForce [ ];
       firewall.allowedUDPPorts = mkForce [ ];
       firewall.interfaces.lan.allowedTCPPorts = [
-        53
-        22
+        53 # dns
+        22 # ssh
         5380 # technitium webui
         8123 # homeassistant
         1883 # mosquitto
       ];
       firewall.interfaces.lan.allowedUDPPorts = [
-        546
-        53
-        67
-        68
+        546 # dhcp
+        53 # dns
+        67 # dhcp
+        68 # dhcp
         5353 # avahi
+        123 # ntp
       ];
 
       firewall.extraInputRules = ''
