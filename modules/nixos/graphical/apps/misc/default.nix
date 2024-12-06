@@ -88,6 +88,7 @@ in
 
       pkgs.nil
       pkgs.gopls
+      pkgs.go
     ];
 
   };
