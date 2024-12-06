@@ -66,7 +66,7 @@ in
       };
       username = mkOption {
         type = types.str;
-        default = "agent";
+        default = "ha"; # TEMP
       };
     };
 
@@ -92,7 +92,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-agent.age;
+    age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-ha.age;
 
     systemd.services.mqtt-commander = {
       description = "MQTT Command Daemon";
