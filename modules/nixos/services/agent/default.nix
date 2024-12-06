@@ -117,7 +117,7 @@ in
   config = mkIf cfg.enable {
     internal.services.agent = lib.mkDefault {
 
-      allowedServices = [ "nixos-update" ];
+      allowedServices = [ "nixos-update-switch" "nixos-update-boot" "nixos-clean" ];
 
       extraCommands = {
         reboot = "${pkgs.systemd}/bin/systemctl reboot";
