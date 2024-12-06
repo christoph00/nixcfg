@@ -143,16 +143,13 @@ in
   config = mkIf cfg.enable {
     internal.services.agent = lib.mkDefault {
 
-      allowedServices = [
-        "nixos-update-switch"
-        "nixos-update-boot"
-        "nixos-clean"
-      ];
-
       extraCommands = {
         systemctl = "${pkgs.systemd}/bin/systemctl";
         poweroff = "${pkgs.systemd}/bin/systemctl poweroff";
         reboot = "${pkgs.systemd}/bin/systemctl reboot";
+        nh-os-switch = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
+        nh-os-boot = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
+        nh-clean-all = "${pkgs.nh}/bin/nh clean all";
 
       };
     };
