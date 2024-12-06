@@ -49,10 +49,10 @@ in
     };
   };
 
-  imports = [
-    ./dhcp.nix
-    ./dns.nix
-  ];
+  # imports = [
+  #   ./dhcp.nix
+  #   ./dns.nix
+  # ];
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
@@ -63,6 +63,12 @@ in
       speedtest-cli
       netop
     ];
+
+    internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
+    services.technitium-dns-server = {
+      enable = true;
+    };
+
     networking = {
       nftables.enable = true;
 
