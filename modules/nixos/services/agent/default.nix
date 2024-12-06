@@ -32,20 +32,6 @@ with lib.internal;
 let
   cfg = config.internal.services.agent;
 
-  commandType = types.submodule {
-    options = {
-      name = mkOption {
-        type = types.str;
-      };
-      command = mkOption {
-        type = types.str;
-      };
-      user = mkOption {
-        type = types.str;
-        default = "root";
-      };
-    };
-  };
 in
 
 {
@@ -53,143 +39,101 @@ in
   options.internal.services.agent = {
     enable = mkBoolOpt true "Enable MQTT Command Daemon.";
 
-    mqtt = {
-      host = mkOption {
-        type = types.str;
-        default = "lsrv";
-        description = "MQTT Broker Host";
-      };
-      port = mkOption {
-        type = types.port;
-        default = 1883;
-        description = "MQTT Broker Port";
-      };
-      username = mkOption {
-        type = types.str;
-        default = "ha"; # TEMP
-      };
+    package = mkOption {
+      type = types.package;
+      default = pkgs.internal.mqtt-host-agent;
     };
 
-    commands = mkOption {
-      type = types.listOf commandType;
-      default = [
-      ];
+    environmentFile = mkOption {
+      type = types.nullOr types.path;
+      default = config.age.secrets.mqtt-agent.path;
+    };
+    settings = mkOption {
+      type = format.type;
+      default = { };
       example = literalExpression ''
-        [
-          {
-            name = "reboot";
-            command = "systemctl reboot";
-            user = "root";
-          }
-          {
-            name = "scale-display";
-            command = "wlr-randr --output HEADLESS-1 --scale 2";
-            user = "myuser";
-          }
-        ]
+        {
+          broker = {
+            host = "mqtt.local";
+            port = 1883;
+          };
+          mqtt_user = "mqtt-host-agent";
+          allowedServices = [ "nginx" "postgresql" ];
+          allowedCommands = {
+            update = "nixos-rebuild switch";
+            uptime = "uptime";
+          };
+          watchServices = [ "nginx" ];
+        }
       '';
+      description = "Configuration for MQTT Host Agent";
     };
   };
 
   config = mkIf cfg.enable {
-    ## commands for all hosts
-    internal.services.agent.commands = [
-      {
-        name = "reboot";
-        command = "systemctl reboot";
-      }
-      { name = "shutdown"; command = "systemctl shutdown"; }
-      { name = "update-system-switch"; command = "nh os switch github:christoph00/nixcfg -- --refresh --accept-flake-config"; }
-      { name = "update-system-boot"; command = "nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config"; }
+    internal.services.agent.settings = lib.mkDefault {
 
-    ];
+      broker = {
+        host = "lsrv";
+        port = 1883;
+      };
+      mqtt_user = "ha";
+      allowedServices = [ ];
+      allowedCommands = {
+        update_switch = "nh os switch github:christoph00/nixcfg -- --refresh --accept-flake-config";
+        update_boot = "nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
+        clean_os = "nh clean all";
+        reboot = "systemctl reboot";
+        shutdown = "systemctl shutdown";
+      };
+      watchServices = [ ];
+    };
 
 
 
     age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-ha.age;
-    systemd.services.mqtt-commander = {
-      description = "MQTT Command Daemon";
+
+    systemd.services.mqtt-host-agent = {
+      description = "MQTT Host Agent Service";
+      wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        Type = "simple";
-        EnvironmentFile = config.age.secrets.mqtt-agent.path;
-        ExecStart =
-          let
-            generateCommands =
-              commands:
-              concatStringsSep "\n" (
-                map
-                  (cmd: ''
-                    "mqd/$HOSTNAME/cmd/${cmd.name}")
-                        ${if cmd.user == "root" then "${cmd.command}" else "doas -u ${cmd.user} ${cmd.command}"}
-                        ;;
-                  '')
-                  commands
-              );
-          in
-          pkgs.writeScript "mqtt-commander" ''
-                #!${pkgs.bash}/bin/bash
+        ExecStart = "${cfg.package}/bin/mqtt-host-agent ${format.generate "mqtt-host-agent-config.json" cfg.settings}";
+        # DynamicUser = true;
+        EnvironmentFile = mkIf (cfg.environmentFile != null) [ cfg.environmentFile ];
 
-                MQTT_HOST="${cfg.mqtt.host}"
-                MQTT_PORT="${toString cfg.mqtt.port}"
-                MQTT_USER="${cfg.mqtt.username}"
-
-
-                # Home Assistant Auto Discovery
-                publish_discovery() {
-                    # Heartbeat Sensor
-                    ${pkgs.mosquitto}/bin/mosquitto_pub -h "$MQTT_HOST" -p "$MQTT_PORT" \
-                        -u "$MQTT_USER" -P "$MQTT_PASS" \
-                        -t "homeassistant/sensor/$HOSTNAME"_heartbeat/config \
-                        -m "{\"name\":\"$HOSTNAME Heartbeat\",\"state_topic\":\"mqd/$HOSTNAME/heartbeat\",\"value_template\":\"{{ value }}\",\"unique_id\":\"$HOSTNAME"_heartbeat"\",\"device\":{\"identifiers\":[\"$HOSTNAME\"],\"name\":\"$HOSTNAME\",\"model\":\"MQTT Commander Host\",\"manufacturer\":\"Custom\"}}" \
-            -r
-
-            # Status Sensor
-            ${pkgs.mosquitto}/bin/mosquitto_pub -h "$MQTT_HOST" -p "$MQTT_PORT" \
-            -u "$MQTT_USER" -P "$MQTT_PASS" \
-            -t "homeassistant/sensor/$HOSTNAME"_status/config \
-            -m "{\"name\":\"$HOSTNAME Status\",\"state_topic\":\"mqd/$HOSTNAME/status\",\"value_template\":\"{{ value }}\",\"unique_id\":\"$HOSTNAME"_status"\",\"device\":{\"identifiers\":[\"$HOSTNAME\"],\"name\":\"$HOSTNAME\",\"model\":\"MQTT Commander Host\",\"manufacturer\":\"Custom\"}}" \
-            -r
-            }
-
-
-            publish_discovery
-
-
-            send_heartbeat() {
-            while true; do
-            ${pkgs.mosquitto}/bin/mosquitto_pub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
-            -t "mqd/${config.networking.hostName}/heartbeat" -m "online"
-            sleep 30
-            done
-            }
-
-            listen_commands() {
-            while true; do
-            ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
-            -t "mqd/${config.networking.hostName}/cmd/+" | while read -r topic payload; do
-            case "$topic" in
-            ${generateCommands cfg.commands}
-            *)
-            echo "Unkown Command: $topic"
-            ;;
-            esac
-            done
-            sleep 10
-            done
-            }
-
-            send_heartbeat &
-            listen_commands &
-            wait
-          '';
-        Restart = "always";
-        RestartSec = "10";
+        # Hardening
+        # CapabilityBoundingSet = [ "CAP_DAC_READ_SEARCH" ];
+        # DevicePolicy = "closed";
+        # LockPersonality = true;
+        # MemoryDenyWriteExecute = true;
+        # NoNewPrivileges = true;
+        # PrivateDevices = true;
+        # PrivateTmp = true;
+        # PrivateUsers = true;
+        # ProtectClock = true;
+        # ProtectControlGroups = true;
+        # ProtectHome = true;
+        # ProtectHostname = true;
+        # ProtectKernelLogs = true;
+        # ProtectKernelModules = true;
+        # ProtectKernelTunables = true;
+        # ProtectSystem = "strict";
+        # ReadWritePaths = [ ];
+        # RemoveIPC = true;
+        # RestrictAddressFamilies = [ "AF_INET" "AF_INET6" ];
+        # RestrictNamespaces = true;
+        # RestrictRealtime = true;
+        # RestrictSUIDSGID = true;
+        # SystemCallArchitectures = "native";
+        # SystemCallFilter = [ "@system-service" ];
+        # UMask = "0077";
       };
     };
+
+
   };
 }
 
