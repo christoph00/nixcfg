@@ -58,7 +58,9 @@ in
 
     environment.systemPackages = with pkgs; [ mqttui ];
 
-    environment.etc."mosquitto/mosquitto-acl-1.conf".enable = false;
+    #environment.etc."mosquitto/mosquitto-acl-0.conf".enable = false;
+
+    internal.services.agent.broker.host = "127.0.0.1";
 
     services.mosquitto = {
       enable = true;
