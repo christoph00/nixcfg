@@ -64,6 +64,7 @@ in
 
     services.mosquitto = {
       enable = true;
+      persistence = true;
       listeners = [
         {
           settings.allow_anonymous = true;
