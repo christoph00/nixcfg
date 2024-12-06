@@ -4,13 +4,13 @@ import (
     "encoding/json"
     "fmt"
     "os"
-    "os/exec"
     "strings"
     "time"
     "log/syslog"
 
 
     MQTT "github.com/eclipse/paho.mqtt.golang"
+    "github.com/go-cmd/cmd"
 )
 
 const (
@@ -204,6 +204,7 @@ func (a *MQTTHostAgent) publishDiscoveryConfig(component string, name string, co
     token.Wait()
 }
 
+
 func (a *MQTTHostAgent) handleCustomCommand(cmdName string) {
     cmd, ok := a.config.AllowedCommands[cmdName]
     if !ok {
@@ -217,7 +218,8 @@ func (a *MQTTHostAgent) handleCustomCommand(cmdName string) {
     }
 
     a.logger.Info("Executing command: %s", cmdName)
-    output, err := exec.Command(cmd).CombinedOutput()
+    c := cmd.NewCmd(cmd)
+    output := <-c.Start() 
     topic := fmt.Sprintf("%s/cmd/%s/result", a.baseTopic, cmdName)
 
     if err != nil {
