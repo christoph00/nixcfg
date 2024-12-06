@@ -31,6 +31,8 @@ with lib.internal;
 
 let
   cfg = config.internal.services.agent;
+  format = pkgs.formats.json { };
+
 
 in
 

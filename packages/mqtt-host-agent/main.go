@@ -29,6 +29,26 @@ type MQTTHostAgent struct {
     baseTopic       string
 }
 
+type HADiscoveryConfig struct {
+    Name              string `json:"name"`
+    UniqueId          string `json:"unique_id"`
+    StateTopic        string `json:"state_topic,omitempty"`
+    CommandTopic      string `json:"command_topic,omitempty"`
+    PayloadAvailable  string `json:"payload_available,omitempty"`
+    PayloadNotAvailable string `json:"payload_not_available,omitempty"`
+    Icon              string `json:"icon,omitempty"`
+    Device           HADevice `json:"device"`
+}
+
+type HADevice struct {
+    Identifiers  []string `json:"identifiers"`
+    Name         string   `json:"name"`
+    Model        string   `json:"model"`
+    Manufacturer string   `json:"manufacturer"`
+    SwVersion    string   `json:"sw_version"`
+}
+
+
 func NewMQTTHostAgent(configPath string) (*MQTTHostAgent, error) {
     config := Config{}
     data, err := os.ReadFile(configPath)
@@ -59,12 +79,116 @@ func NewMQTTHostAgent(configPath string) (*MQTTHostAgent, error) {
         return nil, token.Error()
     }
 
-    return &MQTTHostAgent{
+    agent := &MQTTHostAgent{
         client:    client,
         config:    config,
         hostname:  hostname,
         baseTopic: fmt.Sprintf("mqd/%s", hostname),
-    }, nil
+        version:   "1.0.0",
+    }
+
+    opts.SetWill(
+        fmt.Sprintf("%s/status", agent.baseTopic),
+        "offline",
+        1,
+        true,
+    )
+
+    return agent, nil
+
+}
+
+func (a *MQTTHostAgent) publishDiscoveryConfigs() {
+    device := HADevice{
+        Identifiers:  []string{a.hostname},
+        Name:         fmt.Sprintf("MQTT Host Agent - %s", a.hostname),
+        Model:        "MQTT Host Agent",
+        Manufacturer: "NixOS",
+        SwVersion:    a.version,
+    }
+
+    // Heartbeat Sensor
+    a.publishDiscoveryConfig("binary_sensor", "heartbeat", HADiscoveryConfig{
+        Name:              fmt.Sprintf("%s Heartbeat", a.hostname),
+        UniqueId:          fmt.Sprintf("%s_heartbeat", a.hostname),
+        StateTopic:        fmt.Sprintf("%s/heartbeat", a.baseTopic),
+        PayloadAvailable:  "alive",
+        PayloadNotAvailable: "dead",
+        Icon:              "mdi:heart-pulse",
+        Device:            device,
+    })
+
+    // Services
+    for _, service := range a.config.AllowedServices {
+        // Service Status Sensor
+        a.publishDiscoveryConfig("sensor", fmt.Sprintf("service_%s", service), HADiscoveryConfig{
+            Name:       fmt.Sprintf("%s Service %s Status", a.hostname, service),
+            UniqueId:   fmt.Sprintf("%s_service_%s", a.hostname, service),
+            StateTopic: fmt.Sprintf("%s/service/%s/status", a.baseTopic, service),
+            Icon:       "mdi:cog",
+            Device:     device,
+        })
+
+        // Service Control Button
+        for _, action := range []string{"start", "stop", "restart"} {
+            a.publishDiscoveryConfig("button", fmt.Sprintf("service_%s_%s", service, action), HADiscoveryConfig{
+                Name:         fmt.Sprintf("%s Service %s %s", a.hostname, service, action),
+                UniqueId:    fmt.Sprintf("%s_service_%s_%s", a.hostname, service, action),
+                CommandTopic: fmt.Sprintf("%s/service/%s/%s", a.baseTopic, service, action),
+                Icon:        fmt.Sprintf("mdi:power-%s", action),
+                Device:      device,
+            })
+        }
+    }
+
+    // Custom Commands
+    for cmdName := range a.config.AllowedCommands {
+        a.publishDiscoveryConfig("button", fmt.Sprintf("cmd_%s", cmdName), HADiscoveryConfig{
+            Name:         fmt.Sprintf("%s Command %s", a.hostname, cmdName),
+            UniqueId:    fmt.Sprintf("%s_cmd_%s", a.hostname, cmdName),
+            CommandTopic: fmt.Sprintf("%s/cmd/%s", a.baseTopic, cmdName),
+            Icon:        "mdi:console",
+            Device:      device,
+        })
+
+        // Command Result Sensor
+        a.publishDiscoveryConfig("sensor", fmt.Sprintf("cmd_%s_result", cmdName), HADiscoveryConfig{
+            Name:       fmt.Sprintf("%s Command %s Result", a.hostname, cmdName),
+            UniqueId:   fmt.Sprintf("%s_cmd_%s_result", a.hostname, cmdName),
+            StateTopic: fmt.Sprintf("%s/cmd/%s/result", a.baseTopic, cmdName),
+            Icon:       "mdi:console-line",
+            Device:     device,
+        })
+    }
+
+    // Service Watchers
+    for _, service := range a.config.WatchServices {
+        a.publishDiscoveryConfig("binary_sensor", fmt.Sprintf("watch_%s", service), HADiscoveryConfig{
+            Name:       fmt.Sprintf("%s Watch %s", a.hostname, service),
+            UniqueId:   fmt.Sprintf("%s_watch_%s", a.hostname, service),
+            StateTopic: fmt.Sprintf("%s/service/%s/alert", a.baseTopic, service),
+            Icon:       "mdi:alert",
+            Device:     device,
+        })
+    }
+}
+
+func (a *MQTTHostAgent) publishDiscoveryConfig(component string, name string, config HADiscoveryConfig) {
+    topic := fmt.Sprintf("%s/%s/%s/%s/config", 
+        haDiscoveryPrefix, 
+        component, 
+        a.hostname, 
+        name,
+    )
+    
+    payload, err := json.Marshal(config)
+    if err != nil {
+        fmt.Printf("Error marshaling discovery config: %v\n", err)
+        return
+    }
+
+    token := a.client.Publish(topic, 0, true, payload)
+    token.Wait()
 }
 
 func (a *MQTTHostAgent) handleServiceCommand(service, action string) {
@@ -112,6 +236,17 @@ func (a *MQTTHostAgent) handleCustomCommand(cmdName string) {
 }
 
 func (a *MQTTHostAgent) Start() {
+    // Publish discovery configs
+    a.publishDiscoveryConfigs()
+
+    // Publish online status
+    a.client.Publish(
+        fmt.Sprintf("%s/status", a.baseTopic),
+        1,
+        true,
+        "online",
+    )
+
     // Subscribe to service commands
     a.client.Subscribe(
         fmt.Sprintf("%s/service/+/+", a.baseTopic),
