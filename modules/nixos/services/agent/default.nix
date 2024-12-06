@@ -31,15 +31,22 @@ with lib.internal;
 let
   cfg = config.internal.services.agent;
   format = pkgs.formats.json { };
-  mkServiceCommand = service: {
-    "${service}" = "${pkgs.systemd}/bin/systemctl";
+  baseDeviceConfig = {
+    identifiers = [ "agent-${config.networking.hostName}" ];
+    name = "${config.networking.hostName}";
+    model = "MQTT Host Agent";
+    manufacturer = "NixOS";
   };
 
+  # Basis MQTT-Topics
+  mqttBase = "mqd/${config.networking.hostName}";
+
+  # Service Discovery Konfiguration
   mkServiceDiscoveryConfig = service: {
     component = "select";
     name = "Service ${service}";
     unique_id = "service_${service}_control";
-    command_topic = "mqd/${config.networking.hostName}/command/systemctl";
+    command_topic = "${mqttBase}/command/systemctl";
     command_template = ''{"command": "systemctl", "arguments": ["{{ value }}", "${service}"]}'';
     options = [
       "start"
@@ -47,37 +54,93 @@ let
       "restart"
       "status"
     ];
-    state_topic = "mqd/${config.networking.hostName}/command/systemctl/result";
+    state_topic = "${mqttBase}/command/systemctl/result";
     value_template = "{{ value_json.output }}";
+    json_attributes_topic = "${mqttBase}/command/systemctl/result";
+    json_attributes_template = ''
+      {
+        "last_command": "{{ value_json.command }}",
+        "status_code": {{ value_json.status_code }},
+        "timestamp": "{{ value_json.timestamp }}",
+        "service": "${service}"
+      }
+    '';
     icon = "mdi:cog";
-    device = {
-      identifiers = [ "agent-${config.networking.hostName}" ];
-      name = "${config.networking.hostName}";
-      model = "MQTT Host Agent";
-      manufacturer = "NixOS";
-    };
+    entity_category = "config";
+    device = baseDeviceConfig;
   };
 
-  serviceCommands = lib.foldl (
-    acc: service: acc // (mkServiceCommand service)
-  ) { } cfg.allowedServices;
+  # Command Discovery Konfiguration
+  mkCommandDiscoveryConfig = cmd: {
+    component = "button";
+    name = "Command ${cmd}";
+    unique_id = "command_${cmd}";
+    command_topic = "${mqttBase}/command/${cmd}";
+    state_topic = "${mqttBase}/command/${cmd}/result";
+    payload_press = "{}";
+    json_attributes_topic = "${mqttBase}/command/${cmd}/result";
+    json_attributes_template = ''
+      {
+        "status_code": {{ value_json.status_code }},
+        "timestamp": "{{ value_json.timestamp }},
+        "last_output": "{{ value_json.output | truncate(100) }}"
+      }
+    '';
+    availability_topic = "${mqttBase}/status";
+    availability_template = "{{ 'online' if value == 'online' else 'offline' }}";
+    icon = "mdi:console";
+    entity_category = "config";
+    device = baseDeviceConfig;
+  };
 
-  # Home Assistant Discovery Configs
+  mkOnlineStatusSensorConfig = {
+    component = "binary_sensor";
+    name = "${config.networking.hostName} Online Status";
+    unique_id = "${config.networking.hostName}_online_status";
+    state_topic = "${mqttBase}/heartbeat";
+    value_template = ''{{ 'ON' if ((as_timestamp(now()) - as_timestamp(value)) | int < 50) else 'OFF' }}'';
+    payload_on = "ON";
+    payload_off = "OFF";
+    device_class = "connectivity";
+    expire_after = 50;
+    icon = "mdi:server-network";
+    device = baseDeviceConfig;
+  };
+
+  # Status Sensor Konfiguration
+  mkStatusSensorConfig = {
+    component = "sensor";
+    name = "${config.networking.hostName} Status";
+    unique_id = "${config.networking.hostName}_agent_status";
+    state_topic = "${mqttBase}/status";
+    json_attributes_topic = "${mqttBase}/heartbeat";
+    icon = "mdi:server";
+    device = baseDeviceConfig;
+  };
+
+  # Discovery Configs generieren
   serviceDiscoveryConfigs = lib.foldl (
     acc: service: acc // { ${service} = mkServiceDiscoveryConfig service; }
   ) { } cfg.allowedServices;
 
+  commandDiscoveryConfigs = lib.foldl (
+    acc: cmd: acc // { ${cmd} = mkCommandDiscoveryConfig cmd; }
+  ) { } (builtins.attrNames cfg.extraCommands);
+
+  # Basis-Konfiguration
   baseConfig = {
     broker = {
       inherit (cfg.broker) host port;
     };
     mqtt_user = cfg.mqtt.user;
-    allowedCommands = serviceCommands // cfg.extraCommands;
+    allowedCommands = cfg.extraCommands;
     haDiscovery = {
       services = serviceDiscoveryConfigs;
+      commands = commandDiscoveryConfigs;
+      status = mkStatusSensorConfig;
+      online_status = mkOnlineStatusSensorConfig;
     };
   };
-
 in
 
 {
