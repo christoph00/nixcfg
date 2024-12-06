@@ -117,12 +117,9 @@ in
   config = mkIf cfg.enable {
     internal.services.agent = lib.mkDefault {
 
-      allowedServices = [ "sshd" ];
+      allowedServices = [ "nixos-update" ];
 
       extraCommands = {
-        update_switch = "${pkgs.nh}/bin/nh os switch github:christoph00/nixcfg -- --refresh --accept-flake-config";
-        update_boot = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
-        clean_os = "${pkgs.nh}/bin/nh clean all";
         reboot = "${pkgs.systemd}/bin/systemctl reboot";
         shutdown = "${pkgs.systemd}/bin/systemctl shutdown";
       };

@@ -4,13 +4,13 @@ import (
     "encoding/json"
     "fmt"
     "os"
+    "os/exec"
     "strings"
     "time"
     "log/syslog"
 
 
     MQTT "github.com/eclipse/paho.mqtt.golang"
-    "github.com/go-cmd/cmd"
 )
 
 const (
@@ -204,9 +204,8 @@ func (a *MQTTHostAgent) publishDiscoveryConfig(component string, name string, co
     token.Wait()
 }
 
-
 func (a *MQTTHostAgent) handleCustomCommand(cmdName string) {
-    cmd, ok := a.config.AllowedCommands[cmdName]
+    cmdString, ok := a.config.AllowedCommands[cmdName]
     if !ok {
         a.logger.Warning("Unauthorized command execution attempt: %s", cmdName)
         a.client.Publish(
@@ -217,20 +216,51 @@ func (a *MQTTHostAgent) handleCustomCommand(cmdName string) {
         return
     }
 
-    a.logger.Info("Executing command: %s", cmdName)
-    c := cmd.NewCmd(cmd)
-    output := <-c.Start() 
-    topic := fmt.Sprintf("%s/cmd/%s/result", a.baseTopic, cmdName)
-
-    if err != nil {
-        errMsg := fmt.Sprintf("Error executing command: %v", err)
+    a.logger.Info("Executing custom command: %s (%s)", cmdName, cmdString)
+    
+    args := strings.Fields(cmdString)
+    if len(args) == 0 {
+        errMsg := "Empty command specified"
         a.logger.Error(errMsg)
-        a.client.Publish(topic, 0, false, errMsg)
+        a.client.Publish(
+            fmt.Sprintf("%s/cmd/%s/error", a.baseTopic, cmdName),
+            0, false,
+            errMsg,
+        )
         return
     }
-    
-    a.logger.Info("Command executed successfully: %s", cmdName) 
-    a.client.Publish(topic, 0, false, string(output))
+
+    go func() {
+        cmd := exec.Command(args[0], args[1:]...)
+        output, err := cmd.CombinedOutput()
+        topic := fmt.Sprintf("%s/cmd/%s/result", a.baseTopic, cmdName)
+        
+        result := struct {
+            StatusCode int    `json:"status_code"`
+            Output    string `json:"output"`
+        }{
+            StatusCode: 0,
+            Output:    "",
+        }
+
+        if err != nil {
+            if exitErr, ok := err.(*exec.ExitError); ok {
+                result.StatusCode = exitErr.ExitCode()
+            } else {
+                result.StatusCode = -1
+            }
+            result.Output = err.Error()
+        } else {
+            result.Output = string(output)
+            if len(result.Output) > 100 {
+                result.Output = result.Output[:100]
+            }
+        }
+
+        jsonResult, _ := json.Marshal(result)
+        a.client.Publish(topic, 0, false, string(jsonResult))
+        a.logger.Info("Command completed: %s (status=%d)", cmdName, result.StatusCode)
+    }()
 }
 
 func (a *MQTTHostAgent) Start() {
