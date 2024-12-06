@@ -50,7 +50,7 @@ in
     };
   };
 
-  imports = [ ./dhcp.nix ];
+  imports = [ ./dhcp.nix ./dns.nix];
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
