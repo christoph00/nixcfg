@@ -112,7 +112,7 @@ in
     mqtt = {
       user = mkOption {
         type = types.str;
-        default = "ha";
+        default = "agent";
       };
     };
 

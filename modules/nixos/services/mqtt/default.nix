@@ -71,7 +71,7 @@ in
           users = {
             ha = {
               acl = [ "readwrite #" ];
-              hashedPassword = "$7$101$VwdxsTsOPwHpSHjL$HgyPQ3CZ+wcWFTBLXVkOeSK7YhEGOtkrZt5povOLSrTeT2JuYdAcbIKHc1JizzN0uleN7vgMfqYYQnjsgmlElQ==";
+              hashedPassword = "$7$101$GyuMMbkoRFjB8z8R$Xt6dXXBHYQ+Xz8jModT9+bsZluCtWw4aLjtUH1ygzYga9/c6j8WDbyfAV/TAhjpBxdx41SJmUAvlMegvZ0C0zw==";
             };
             robot = {
               acl = [ "readwrite #" ];
