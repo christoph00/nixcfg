@@ -40,7 +40,7 @@ in
 
     programs.firefox = {
       enable = true;
-      package = pkgs.firefox-beta-bin;
+      ativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
 
       policies = {
         AppAutoUpdate = false;
