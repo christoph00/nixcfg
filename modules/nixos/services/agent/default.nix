@@ -92,8 +92,21 @@ in
   };
 
   config = mkIf cfg.enable {
-    age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-ha.age;
+    ## commands for all hosts
+    internal.services.agent.commands = [
+      {
+        name = "reboot";
+        command = "systemctl reboot";
+      }
+      { name = "shutdown"; command = "systemctl shutdown"; }
+      { name = "update-system-switch"; command = "nh os switch github:christoph00/nixcfg -- --refresh --accept-flake-config"; }
+      { name = "update-system-boot"; command = "nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config"; }
 
+    ];
+
+
+
+    age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-ha.age;
     systemd.services.mqtt-commander = {
       description = "MQTT Command Daemon";
       after = [ "network-online.target" ];
@@ -118,33 +131,55 @@ in
               );
           in
           pkgs.writeScript "mqtt-commander" ''
-            #!${pkgs.bash}/bin/bash
+                #!${pkgs.bash}/bin/bash
 
-            MQTT_HOST="${cfg.mqtt.host}"
-            MQTT_PORT="${toString cfg.mqtt.port}"
-            MQTT_USER="${cfg.mqtt.username}"
+                MQTT_HOST="${cfg.mqtt.host}"
+                MQTT_PORT="${toString cfg.mqtt.port}"
+                MQTT_USER="${cfg.mqtt.username}"
+
+
+                # Home Assistant Auto Discovery
+                publish_discovery() {
+                    # Heartbeat Sensor
+                    ${pkgs.mosquitto}/bin/mosquitto_pub -h "$MQTT_HOST" -p "$MQTT_PORT" \
+                        -u "$MQTT_USER" -P "$MQTT_PASS" \
+                        -t "homeassistant/sensor/$HOSTNAME"_heartbeat/config \
+                        -m "{\"name\":\"$HOSTNAME Heartbeat\",\"state_topic\":\"mqd/$HOSTNAME/heartbeat\",\"value_template\":\"{{ value }}\",\"unique_id\":\"$HOSTNAME"_heartbeat"\",\"device\":{\"identifiers\":[\"$HOSTNAME\"],\"name\":\"$HOSTNAME\",\"model\":\"MQTT Commander Host\",\"manufacturer\":\"Custom\"}}" \
+            -r
+
+            # Status Sensor
+            ${pkgs.mosquitto}/bin/mosquitto_pub -h "$MQTT_HOST" -p "$MQTT_PORT" \
+            -u "$MQTT_USER" -P "$MQTT_PASS" \
+            -t "homeassistant/sensor/$HOSTNAME"_status/config \
+            -m "{\"name\":\"$HOSTNAME Status\",\"state_topic\":\"mqd/$HOSTNAME/status\",\"value_template\":\"{{ value }}\",\"unique_id\":\"$HOSTNAME"_status"\",\"device\":{\"identifiers\":[\"$HOSTNAME\"],\"name\":\"$HOSTNAME\",\"model\":\"MQTT Commander Host\",\"manufacturer\":\"Custom\"}}" \
+            -r
+            }
+
+
+            publish_discovery
+
 
             send_heartbeat() {
-                while true; do
-                    ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
-                        -t "mqd/${config.networking.hostName}/heartbeat" -m "online"
-                    sleep 30
-                done
+            while true; do
+            ${pkgs.mosquitto}/bin/mosquitto_pub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
+            -t "mqd/${config.networking.hostName}/heartbeat" -m "online"
+            sleep 30
+            done
             }
 
             listen_commands() {
-                while true; do
-                    ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
-                        -t "mqd/${config.networking.hostName}/cmd/+" | while read -r topic payload; do
-                        case "$topic" in
-                            ${generateCommands cfg.commands}
-                            *)
-                                echo "Unkown Command: $topic"
-                                ;;
-                        esac
-                    done
-                    sleep 10
-                done
+            while true; do
+            ${pkgs.mosquitto}/bin/mosquitto_sub -h "$MQTT_HOST" -p "$MQTT_PORT" -u "$MQTT_USER" -P "$MQTT_PASS" \
+            -t "mqd/${config.networking.hostName}/cmd/+" | while read -r topic payload; do
+            case "$topic" in
+            ${generateCommands cfg.commands}
+            *)
+            echo "Unkown Command: $topic"
+            ;;
+            esac
+            done
+            sleep 10
+            done
             }
 
             send_heartbeat &
@@ -157,3 +192,4 @@ in
     };
   };
 }
+
