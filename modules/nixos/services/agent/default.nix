@@ -51,7 +51,7 @@ let
     value_template = "{{ value_json.output }}";
     icon = "mdi:cog";
     device = {
-      identifiers = [ config.networking.hostName ];
+      identifiers = [ "agent-${config.networking.hostName}" ];
       name = "${config.networking.hostName}";
       model = "MQTT Host Agent";
       manufacturer = "NixOS";
@@ -141,17 +141,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    internal.services.agent = lib.mkDefault {
-
-      extraCommands = {
-        systemctl = "${pkgs.systemd}/bin/systemctl";
-        poweroff = "${pkgs.systemd}/bin/systemctl poweroff";
-        reboot = "${pkgs.systemd}/bin/systemctl reboot";
-        nh-os-switch = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
-        nh-os-boot = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
-        nh-clean-all = "${pkgs.nh}/bin/nh clean all";
-
-      };
+    internal.services.agent.extraCommands = {
+      systemctl = "${pkgs.systemd}/bin/systemctl";
+      poweroff = "${pkgs.systemd}/bin/systemctl poweroff";
+      reboot = "${pkgs.systemd}/bin/systemctl reboot";
+      nh-os-switch = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
+      nh-os-boot = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
+      nh-clean-all = "${pkgs.nh}/bin/nh clean all";
     };
 
     age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-agent.age;
