@@ -58,7 +58,7 @@ in
 
     environment.systemPackages = with pkgs; [ mqttui ];
 
-    environment.etc."mosquitto/mosquitto-acl-0".user = "mosquitto";
+    environment.etc."mosquitto/mosquitto-acl-0.conf".user = "mosquitto";
 
     services.mosquitto = {
       enable = true;
