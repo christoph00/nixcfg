@@ -15,11 +15,8 @@
   internal.type = "vm";
   internal.system.fs.device = "/dev/sda";
   internal.system.boot.encryptedRoot = false;
-  internal.vm.enable = false;
-
-  internal.services.vscode-tunnel.enable = true;
   internal.services.office-server.enable = true;
-  internal.shell.neovim.enable = true;
+  
 
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";
