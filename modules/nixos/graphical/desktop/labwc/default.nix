@@ -44,9 +44,24 @@ in
       labwc-gtktheme
       labwc-tweaks-gtk
       labwc-menu-generator
+      networkmanagerapplet
+      adwaita-icon-theme
+      greybird
+      elementary-xfce-icon-theme
+      glib
     ];
 
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+
+    services.xserver = {
+      enable = true;
+      desktopManager.xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+        enableScreensaver = false;
+      };
+   };
 
     programs.uwsm = {
       enable = true;
