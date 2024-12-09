@@ -1,5 +1,6 @@
-{ lib
-, buildGoModule
+{
+  lib,
+  buildGoModule,
 }:
 
 buildGoModule rec {
@@ -15,9 +16,6 @@ buildGoModule rec {
     "-w"
     "-X main.version=${version}"
   ];
-
-
-
 
   meta = with lib; {
     description = "MQTT Host Agent for managing systemd services and commands via MQTT";

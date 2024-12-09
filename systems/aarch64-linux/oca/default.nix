@@ -16,7 +16,6 @@
   internal.system.fs.device = "/dev/sda";
   internal.system.boot.encryptedRoot = false;
   internal.services.office-server.enable = true;
-  
 
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";

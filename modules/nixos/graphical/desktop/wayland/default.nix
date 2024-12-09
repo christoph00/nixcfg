@@ -86,7 +86,7 @@ in
       };
       sfwbar = mkIf cfg.sfwbar {
         description = "sfwbar";
-        script = "${pkgs.sfwbar}/bin/sfwbar";
+        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.sfwbar}/bin/sfwbar";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
