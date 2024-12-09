@@ -89,9 +89,7 @@ with lib.internal;
 
     programs.dconf.enable = true;
     services = {
-
       xserver = {
-        enable = false;
         xkb.layout = "de";
       };
 
