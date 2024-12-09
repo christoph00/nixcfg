@@ -1,4 +1,4 @@
-module mqtt-host-agent
+module github.com/christoph00/mqtt-host-agent
 
 go 1.23.3
 

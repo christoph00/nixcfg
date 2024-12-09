@@ -46,6 +46,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.sessionVariables.OPEN_AI_API_URL = "https://api.perplexity.ai";
 
     environment.systemPackages = [
       # pkgs.zen-browser
