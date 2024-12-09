@@ -61,7 +61,7 @@ in
         enableXfwm = false;
         enableScreensaver = false;
       };
-   };
+    };
 
     programs.uwsm = {
       enable = true;

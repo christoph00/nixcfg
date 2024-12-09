@@ -85,7 +85,7 @@ with lib.internal;
 
     gtk.iconCache.enable = true;
 
-    services.gnome.gnome-keyring.enable = false;
+    services.gnome.gnome-keyring.enable = true;
 
     programs.dconf.enable = true;
     services = {
