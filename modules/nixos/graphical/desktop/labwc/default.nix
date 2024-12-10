@@ -60,6 +60,7 @@ in
         noDesktop = true;
         enableXfwm = false;
         enableScreensaver = false;
+        enableWaylandSession = true;
       };
     };
 
