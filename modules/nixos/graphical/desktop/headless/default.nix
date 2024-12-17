@@ -91,7 +91,7 @@ in
       input ", MODE=" 0660 " OPTIONS+="
       static_node= uinput "
     '';
-    environment.systemPackages = [ set_resolution ];
+    environment.systemPackages = [ set_resolution pkgs.wayvnc pkgs.novnc];
     environment.variables = {
       WLR_BACKENDS = "
       drm,headless,libinput";
