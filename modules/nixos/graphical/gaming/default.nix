@@ -50,7 +50,7 @@ in
       pkgs.antimicrox
       pkgs.gamescope
       pkgs.protontricks
-      pkgs.internal.limo
+      pkgs.limo
       # pkgs.vkbasalt-cli
       # pkgs.vkbasalt
       # pkgs.goverlay
