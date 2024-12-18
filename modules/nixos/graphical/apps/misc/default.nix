@@ -53,7 +53,7 @@ in
       pkgs.anyrun
       pkgs.moonlight-qt
       # pkgs.librewolf
-      pkgs.firedragon
+      #pkgs.firedragon
       pkgs.libreoffice-fresh
       pkgs.gimp
       # pkgs.wezterm
