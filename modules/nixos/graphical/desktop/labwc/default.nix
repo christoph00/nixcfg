@@ -49,6 +49,8 @@ in
       greybird
       elementary-xfce-icon-theme
       glib
+      xfce4-panel
+      mate.mate-panel
     ];
 
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
@@ -60,7 +62,7 @@ in
         noDesktop = true;
         enableXfwm = false;
         enableScreensaver = false;
-        enableWaylandSession = true;
+        #enableWaylandSession = true;
       };
     };
 
