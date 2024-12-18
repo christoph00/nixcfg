@@ -49,7 +49,7 @@ in
       greybird
       elementary-xfce-icon-theme
       glib
-      xfce4-panel
+      xfce.xfce4-panel
       mate.mate-panel
     ];
 
