@@ -30,7 +30,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     srvos.url = "github:nix-community/srvos";
     # Use the version of nixpkgs that has been tested to work with SrvOS
