@@ -118,7 +118,9 @@
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.mnw.follows = "mnw";
     };
+    mnw.url = "github:Gerg-L/mnw";
 
     nvimcfg = {
       url = "github:christoph00/nvimcfg";
@@ -216,7 +218,7 @@
         # jovian.nixosModules.default
         vscode-server.nixosModules.default
         nvf.nixosModules.default
-
+        # mnw.nixosModules.mnw
         microvm.nixosModules.host
         microvm.nixosModules.microvm
 
