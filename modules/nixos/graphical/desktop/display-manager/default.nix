@@ -47,7 +47,7 @@ in
     services.greetd =
       let
         session = {
-          command = "${lib.getExe config.programs.uwsm.package} start xfce-desktop.desktop";
+          command = "${lib.getExe config.programs.uwsm.package} start xfce-wayland.desktop";
           user = "christoph";
         };
       in
