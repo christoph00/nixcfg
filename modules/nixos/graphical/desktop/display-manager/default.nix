@@ -42,23 +42,23 @@ in
 
   config = mkIf cfg.enable {
 
-    # services.displayManager.cosmic-greeter.enable = true;
+    services.displayManager.cosmic-greeter.enable = true;
 
-    services.greetd =
-      let
-        session = {
-          command = "${lib.getExe config.programs.uwsm.package} start xfce-wayland.desktop";
-          user = "christoph";
-        };
-      in
-      {
-        enable = true;
-        settings = {
-          terminal.vt = 1;
-          default_session = session;
-          initial_session = session;
-        };
-      };
+   # services.greetd =
+   #   let
+   #     session = {
+   #       command = "${lib.getExe config.programs.uwsm.package} start xfce-wayland.desktop";
+   #       user = "christoph";
+   #     };
+   #   in
+   #   {
+   #     enable = true;
+   #     settings = {
+   #       terminal.vt = 1;
+   #       default_session = session;
+   #       initial_session = session;
+   #     };
+   #   };
 
   };
 
