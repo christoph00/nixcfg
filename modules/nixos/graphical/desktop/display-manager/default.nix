@@ -42,23 +42,32 @@ in
 
   config = mkIf cfg.enable {
 
-    services.displayManager.cosmic-greeter.enable = true;
+    # services.displayManager.cosmic-greeter.enable = true;
 
-   # services.greetd =
-   #   let
-   #     session = {
-   #       command = "${lib.getExe config.programs.uwsm.package} start xfce-wayland.desktop";
-   #       user = "christoph";
-   #     };
-   #   in
-   #   {
-   #     enable = true;
-   #     settings = {
-   #       terminal.vt = 1;
-   #       default_session = session;
-   #       initial_session = session;
-   #     };
-   #   };
+    config.services.greetd = {
+      enable = true;
+      vt = 2;
+      restart = !cfg.autoLogin;
+
+      settings = {
+        default_session = {
+          user = "greeter";
+          command = concatStringsSep " " [
+            (getExe pkgs.greetd.tuigreet)
+            "--time"
+            "--remember"
+            "--remember-user-session"
+            "--asterisks"
+            "--sessions ${config.services.displayManager.sessionData.desktops}/share/xsessions:${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"
+          ];
+        };
+
+        initial_session = mkIf cfg.autoLogin {
+          user = "christoph";
+          command = "${pkgs.xfce.xfce4-session}/bin/startxfce4 --wayland";
+        };
+      };
+    };
 
   };
 
