@@ -70,7 +70,6 @@ in
     };
 
     programs.uwsm = {
-      enable = true;
       waylandCompositors.labwc = {
         binPath = "${config.programs.labwc.package}/bin/labwc";
         prettyName = "labwc";
