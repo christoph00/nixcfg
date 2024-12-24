@@ -37,6 +37,7 @@ in
     enable = mkBoolOpt false "Enable the wayland environment.";
     waybar = mkBoolOpt false "Enable Waybar";
     sfwbar = mkBoolOpt false "Enable sfwbar";
+    uwsm = mkBoolOpt false "Enable uwsm";
   };
 
   config = mkIf cfg.enable {
@@ -72,10 +73,12 @@ in
     };
 
     programs.uwsm = {
-      enable = true;
+      enable = cfg.uwsm;
     };
 
-    systemd.user.services = {
+    # security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+
+    systemd.user.services = mkIf cfg.uwsm {
       waybar = mkIf cfg.waybar {
         description = "Waybar as systemd service";
         path = [ config.system.path ];
@@ -129,6 +132,9 @@ in
 
     services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
+    security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+    security.pam.services.waylock = { };
+
     environment.systemPackages = with pkgs; [
       xwayland
       wayland-protocols
@@ -145,6 +151,8 @@ in
       wev
 
       grim
+
+      gtklock
 
       swww
 
@@ -165,7 +173,7 @@ in
       gtk4-layer-shell
       #internal.hyprpanel
 
-      ironbar
+      #ironbar
 
       mako
       swayidle
@@ -181,8 +189,6 @@ in
       wf-recorder
 
     ];
-
-    security.pam.services.waylock = { };
 
   };
 

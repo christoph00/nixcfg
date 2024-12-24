@@ -64,9 +64,7 @@ in
       };
       desktopManager.xfce = {
         enable = true;
-        noDesktop = true;
         enableXfwm = false;
-        enableScreensaver = false;
         enableWaylandSession = true;
       };
     };
