@@ -44,10 +44,10 @@ in
 
     # services.displayManager.cosmic-greeter.enable = true;
 
-    config.services.greetd = {
+    services.greetd = {
       enable = true;
       vt = 2;
-      restart = !cfg.autoLogin;
+      restart = !cfg.autologin;
 
       settings = {
         default_session = {
@@ -62,7 +62,7 @@ in
           ];
         };
 
-        initial_session = mkIf cfg.autoLogin {
+        initial_session = mkIf cfg.autologin {
           user = "christoph";
           command = "${pkgs.xfce.xfce4-session}/bin/startxfce4 --wayland";
         };
