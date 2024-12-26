@@ -37,7 +37,7 @@ in
     enable = mkBoolOpt false "Enable the wayland environment.";
     waybar = mkBoolOpt false "Enable Waybar";
     sfwbar = mkBoolOpt false "Enable sfwbar";
-    uwsm = mkBoolOpt false "Enable uwsm";
+    uwsm = mkBoolOpt true "Enable uwsm";
   };
 
   config = mkIf cfg.enable {
@@ -95,22 +95,22 @@ in
         serviceConfig.Slice = "app-graphical.slice";
 
       };
-      swww-daemon = {
-        description = "swww-daemon as systemd service";
-        script = "${pkgs.swww}/bin/swww-daemon";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
+      # swww-daemon = {
+      #   description = "swww-daemon as systemd service";
+      #   script = "${pkgs.swww}/bin/swww-daemon";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "background-graphical.slice";
 
-      };
-      syshud = {
-        description = "syshud";
-        script = "${pkgs.syshud}/bin/syshud";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
-      # hass-agent = {
+      # };
+      # syshud = {
+      #   description = "syshud";
+      #   script = "${pkgs.syshud}/bin/syshud";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "background-graphical.slice";
+      # };
+      # # hass-agent = {
       #   description = "home assistant agent";
       #   script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.internal.go-hass-agent}/bin/go-hass-agent run";
       #   wantedBy = [ "graphical-session.target" ];
