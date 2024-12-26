@@ -50,18 +50,18 @@ in
       elementary-xfce-icon-theme
       glib
       xfce.xfce4-panel
-      mate.mate-panel
+      #mate.mate-panel
     ];
 
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
 
     services.xserver = {
       enable = true;
-      desktopManager.mate = {
-        enable = true;
-        extraPanelApplets = with pkgs.mate; [ mate-applets ];
-        enableWaylandSession = true;
-      };
+      # desktopManager.mate = {
+      #   enable = true;
+      #   extraPanelApplets = with pkgs.mate; [ mate-applets ];
+      #   enableWaylandSession = true;
+      # };
       desktopManager.xfce = {
         enable = true;
         enableXfwm = false;
