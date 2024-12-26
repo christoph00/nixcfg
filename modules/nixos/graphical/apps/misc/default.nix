@@ -60,7 +60,7 @@ in
 
       pkgs.keepassxc
 
-      pkgs.internal.ghostty
+      pkgs.ghostty
 
       wrapped
       pkgs.gthumb
