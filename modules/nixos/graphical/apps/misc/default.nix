@@ -60,6 +60,8 @@ in
 
       pkgs.keepassxc
 
+      pkgs.internal.ghostty
+
       wrapped
       pkgs.gthumb
       pkgs.gtkimageview

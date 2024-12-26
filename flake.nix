@@ -77,6 +77,12 @@
       url = "github:WilliButz/preservation";
     };
 
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs-unstable.follows = "nixpkgs";
+
+    };
+
     nixpkgs-wayland = {
       url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -128,7 +134,6 @@
     };
 
     caddy.url = "github:vincentbernat/caddy-nix";
-    caddy.inputs.nixpkgs.follows = "nixpkgs";
 
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";

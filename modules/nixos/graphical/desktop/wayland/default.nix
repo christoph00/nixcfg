@@ -37,7 +37,7 @@ in
     enable = mkBoolOpt false "Enable the wayland environment.";
     waybar = mkBoolOpt false "Enable Waybar";
     sfwbar = mkBoolOpt false "Enable sfwbar";
-    uwsm = mkBoolOpt true "Enable uwsm";
+    uwsm = mkBoolOpt false "Enable uwsm";
   };
 
   config = mkIf cfg.enable {
