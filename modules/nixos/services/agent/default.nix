@@ -204,13 +204,18 @@ in
   };
 
   config = mkIf cfg.enable {
-    internal.services.agent.extraCommands = {
-      systemctl = "${pkgs.systemd}/bin/systemctl";
-      poweroff = "${pkgs.systemd}/bin/systemctl poweroff";
-      reboot = "${pkgs.systemd}/bin/systemctl reboot";
-      nh-os-switch = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
-      nh-os-boot = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
-      nh-clean-all = "${pkgs.nh}/bin/nh clean all";
+    internal.services.agent = {
+      extraCommands = {
+        systemctl = "${pkgs.systemd}/bin/systemctl";
+        poweroff = "${pkgs.systemd}/bin/systemctl poweroff";
+        reboot = "${pkgs.systemd}/bin/systemctl reboot";
+        nh-os-switch = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
+        nh-os-boot = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
+        nh-clean-all = "${pkgs.nh}/bin/nh clean all";
+      };
+      extraServices = mkIf config.internal.isHeadlessDesktop [
+        "display-manager"
+      ];
     };
 
     age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-agent.age;
