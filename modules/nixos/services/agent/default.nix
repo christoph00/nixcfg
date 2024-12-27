@@ -213,7 +213,7 @@ in
         nh-os-boot = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
         nh-clean-all = "${pkgs.nh}/bin/nh clean all";
       };
-      extraServices = mkIf config.internal.isHeadlessDesktop [
+      allowedServices = mkIf config.internal.isHeadlessDesktop [
         "display-manager"
       ];
     };
