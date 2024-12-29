@@ -61,7 +61,7 @@ in
       ethtool
       tcpdump
       speedtest-cli
-      netop
+      #netop
     ];
 
     internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
@@ -93,29 +93,28 @@ in
       firewall.extraInputRules = ''
 
         ip6 nexthdr icmpv6 icmpv6 type {
-        echo-request,
-             destination-unreachable,
-             packet-too-big,
-             time-exceeded,
-             parameter-problem,
-             nd-router-advert,
-             nd-neighbor-solicit,
-             nd-neighbor-advert,
-             mld-listener-query
-           } accept
+          echo-request,
+          destination-unreachable,
+          packet-too-big,
+          time-exceeded,
+          parameter-problem,
+          nd-router-advert,
+          nd-neighbor-solicit,
+          nd-neighbor-advert,
+          mld-listener-query
+        } accept
 
-         ip protocol icmp icmp type {
-         echo-request,
-                 destination-unreachable,
-                 router-advertisement,
-                 time-exceeded,
-                 parameter-problem
-               } accept
+        ip protocol icmp icmp type {
+          echo-request,
+          destination-unreachable,
+          router-advertisement,
+          time-exceeded,
+          parameter-problem
+        } accept
 
 
 
          tcp dport https accept
-
          counter drop
       '';
 
