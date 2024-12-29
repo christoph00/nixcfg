@@ -41,7 +41,7 @@ in
   config = mkIf cfg.enable {
 
     environment.systemPackages = [
-      pkgs.heroic
+      #pkgs.heroic
       pkgs.sunshine
       pkgs.protonup-qt
       pkgs.cartridges
@@ -67,18 +67,18 @@ in
       openFirewall = true;
     };
 
-    systemd.user.services = {
-      sunshine = {
-        path = [ config.system.path ];
-        serviceConfig.Slice = "background-graphical.slice";
-        after = [ "graphical-session.target" ];
-      };
-      gamemoded = {
-        serviceConfig.Slice = "background-graphical.slice";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-      };
-    };
+    #systemd.user.services = {
+    #  sunshine = {
+    #    path = [ config.system.path ];
+    #    serviceConfig.Slice = "background-graphical.slice";
+    #    after = [ "graphical-session.target" ];
+    #  };
+    #  gamemoded = {
+    #    serviceConfig.Slice = "background-graphical.slice";
+    #    wantedBy = [ "graphical-session.target" ];
+    #    after = [ "graphical-session.target" ];
+    #  };
+    #};
 
     services.input-remapper.enable = true;
 
@@ -93,14 +93,14 @@ in
             ];
         };
       };
-      # gamescope = {
-      # enable = true;
-      # capSysNice = true;
-      # package = pkgs.gamescope_git;
-      # };
+      gamescope = {
+        enable = true;
+        # capSysNice = true;
+        # package = pkgs.gamescope_git;
+      };
 
       gamemode.enable = true;
-      # protontricks.enable = true;
+      protontricks.enable = true;
     };
 
   };
