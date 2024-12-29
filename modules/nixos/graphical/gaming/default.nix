@@ -100,7 +100,6 @@ in
       };
 
       gamemode.enable = true;
-      protontricks.enable = true;
     };
 
   };
