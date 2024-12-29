@@ -133,7 +133,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    caddy.url = "github:vincentbernat/caddy-nix";
+    #caddy.url = "github:vincentbernat/caddy-nix";
 
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
@@ -202,7 +202,7 @@
         chaotic.overlays.default
         nvimcfg.overlays.default
         nixpkgs-wayland.overlay
-        caddy.overlays.default
+        #caddy.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [
