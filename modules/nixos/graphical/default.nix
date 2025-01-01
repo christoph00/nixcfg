@@ -33,10 +33,7 @@ with lib.internal;
   config = mkIf config.internal.isGraphical {
 
     internal.graphical.desktop.wayland.enable = true;
-    internal.graphical.desktop.cosmic.enable = true;
     internal.graphical.desktop.labwc.enable = true;
-    internal.graphical.desktop.wayfire.enable = true;
-    #internal.graphical.desktop.hyprland.enable = true;
     hardware.graphics.enable = true;
 
     internal.user.extraGroups = [
@@ -74,12 +71,12 @@ with lib.internal;
       # chicago95
       adw-gtk3
 
-      nwg-look
+      #nwg-look
       adwaita-icon-theme
       adwaita-qt
       adwsteamgtk
 
-      internal.go-hass-agent
+      #internal.go-hass-agent
 
     ];
 
