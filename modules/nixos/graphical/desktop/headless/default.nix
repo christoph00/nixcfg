@@ -72,13 +72,13 @@ in
           exec-xfce = (
             pkgs.writeShellScriptBin "exec-xfce" ''
               env \
-                WLR_NO_HARDWARE_CURSORS=1 \
+                WLR_NO_HARDWARE_CURSORS=0 \
                 WLR_BACKENDS=drm,headless,libinput \
                 ${pkgs.xfce.xfce4-session}/bin/startxfce4 --wayland
             ''
           );
         in
-        lib.mkForce "${exec-xfce}/bin/exec-xfce";
+        lib.mkForce "${pkgs.uwsm}/bin/uwsm start ${exec-xfce}/bin/exec-xfce";
     };
 
     boot.kernelModules = [
