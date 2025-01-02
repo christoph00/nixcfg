@@ -80,7 +80,11 @@
     ghostty = {
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs-unstable.follows = "nixpkgs";
+    };
 
+    host-agent = {
+      url = "github:christoph00/host-agent";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixpkgs-wayland = {
@@ -226,6 +230,8 @@
         # mnw.nixosModules.mnw
         microvm.nixosModules.host
         microvm.nixosModules.microvm
+
+        host-agent.nixosModules.default
 
         # vaultix.flakeModules.default
 
