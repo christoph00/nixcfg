@@ -65,7 +65,8 @@ in
         initial_session = mkIf cfg.autologin {
           user = "christoph";
           #command = "${lib.getExe config.programs.uwsm.package} start labwc-uwsm.desktop";
-          command = "${pkgs.xfce.xfce4-session}/bin/startxfce4 --wayland";
+          #command = "${pkgs.xfce.xfce4-session}/bin/startxfce4 --wayland";
+          command = "${pkgs.uwsm}/bin/uwsm start ${pkgs.xfce.xfce4-session}/bin/startxfce4 --wayland";
         };
       };
     };
