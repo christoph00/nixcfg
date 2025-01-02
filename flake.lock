@@ -817,6 +817,26 @@
         "type": "github"
       }
     },
+    "host-agent": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735854024,
+        "narHash": "sha256-/w0zUp9qLlvym63p8ERTYIZZCKc8lWDbUqlpd7P01Ag=",
+        "owner": "christoph00",
+        "repo": "host-agent",
+        "rev": "d5eaacb5272777b01cea97f314df80ede60db8c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "christoph00",
+        "repo": "host-agent",
+        "type": "github"
+      }
+    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -3548,6 +3568,7 @@
         "flake": "flake",
         "flake-utils": "flake-utils_4",
         "ghostty": "ghostty",
+        "host-agent": "host-agent",
         "lanzaboote": "lanzaboote",
         "microvm": "microvm",
         "mnw": "mnw",

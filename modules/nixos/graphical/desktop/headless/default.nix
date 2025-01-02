@@ -66,6 +66,8 @@ in
 
   config = mkIf cfg.enable {
 
+    services.host-agent.monitoring.systemdServices = [ "graphical-session.service" ];
+
     services.greetd.settings.initial_session = {
       command =
         let

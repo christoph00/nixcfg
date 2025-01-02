@@ -270,7 +270,7 @@ in
       partOf = [ "systemd-networkd.service" ];
     };
 
-    internal.services.agent.allowedServices = [ "pppd-dtag" ];
+    services.host-agent.monitoring.systemdServices = [ "pppd-dtag.service" ];
 
     systemd.services.check-internet = {
       description = "check ipv4 internet connectivity";

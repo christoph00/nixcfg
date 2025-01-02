@@ -49,7 +49,6 @@ in
       environmentFile = config.age.secrets.mqtt-agent.path;
       mqtt.broker = "mqtt://lsrv:1883";
       mqtt.username = "agent";
-      monitoring.systemdServices = [ "graphical-session.service" ];
     };
 
   };

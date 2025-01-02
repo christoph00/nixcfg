@@ -206,6 +206,7 @@
         chaotic.overlays.default
         nvimcfg.overlays.default
         nixpkgs-wayland.overlay
+        host-agent.overlays.default
         #caddy.overlays.default
       ];
 
