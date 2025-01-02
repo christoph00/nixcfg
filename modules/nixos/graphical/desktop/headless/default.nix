@@ -78,7 +78,7 @@ in
             ''
           );
         in
-        lib.mkForce "${pkgs.uwsm}/bin/uwsm start ${exec-xfce}/bin/exec-xfce";
+        lib.mkForce "${pkgs.uwsm}/bin/uwsm start -N xfce -- ${exec-xfce}/bin/exec-xfce";
     };
 
     boot.kernelModules = [
