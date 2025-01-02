@@ -66,20 +66,19 @@ in
 
   config = mkIf cfg.enable {
 
-    programs.uwsm.waylandCompositors.labwc = {
-      binPath =
+    services.greetd.settings.initial_session = {
+      command =
         let
-          exec-labwc = (
-            pkgs.writeShellScriptBin "exec-labwc" ''
+          exec-xfce = (
+            pkgs.writeShellScriptBin "exec-xfce" ''
               env \
                 WLR_NO_HARDWARE_CURSORS=1 \
                 WLR_BACKENDS=drm,headless,libinput \
-                WLR_RENDER_DRM_DEVICE=/dev/dri/renderD128 \
-                ${config.programs.labwc.package}/bin/labwc
+                ${pkgs.xfce.xfce4-session}/bin/startxfce4 --wayland
             ''
           );
         in
-        lib.mkForce "${exec-labwc}/bin/exec-labwc";
+        lib.mkForce "${exec-xfce}/bin/exec-xfce";
     };
 
     boot.kernelModules = [
@@ -97,13 +96,12 @@ in
       pkgs.novnc
     ];
     environment.variables = {
-      WLR_BACKENDS = "
-      drm,headless,libinput";
+      #WLR_BACKENDS = "drm,headless,libinput";
       #   #NIXOS_OZONE_WL = "1";
       #   #WAYLAND_DISPLAY = "wayland-1";
       #   #WLR_LIBINPUT_NO_DEVICES = "1";
       #   WLR_RENDERER = "pixman";
-      WLR_RENDER_DRM_DEVICE = "/dev/dri/card0";
+      #WLR_RENDER_DRM_DEVICE = "/dev/dri/card0";
       #   AQ_DRM_DEVICES = "/dev/dri/card0";
 
     };

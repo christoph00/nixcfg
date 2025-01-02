@@ -56,8 +56,6 @@ with lib.internal;
       whitesur-gtk-theme
       whitesur-icon-theme
 
-      (rofi.override { plugins = [ rofi-emoji ]; })
-
       font-manager
       file-roller
       pavucontrol

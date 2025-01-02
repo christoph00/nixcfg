@@ -47,7 +47,6 @@ in
       networkmanagerapplet
       adwaita-icon-theme
       greybird
-      elementary-xfce-icon-theme
       glib
       xfce.xfce4-panel
       #mate.mate-panel
