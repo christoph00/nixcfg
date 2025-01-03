@@ -60,7 +60,7 @@ in
 
     #environment.etc."mosquitto/mosquitto-acl-0.conf".enable = false;
 
-    services.host-agent.mqtt.broker = "mqtt://127.0.0.1:1883";
+    services.host-agent.mqtt.broker = lib.mkForce "mqtt://127.0.0.1:1883";
 
     services.mosquitto = {
       enable = true;
