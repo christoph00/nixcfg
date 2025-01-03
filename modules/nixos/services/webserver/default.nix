@@ -67,11 +67,8 @@ in
     services.caddy = {
       enable = true;
       package = pkgs.caddy.withPlugins {
-        plugins = [
-          "github.com/caddy-dns/cloudflare"
-          "github.com/mholt/caddy-dynamicdns"
-        ];
-        hash = "sha256-Im0STQMRadlYCg1SB0Q2U4h38QbSEbpw7Px4bwYizOI=";
+  plugins = [ "github.com/caddy-dns/cloudflare@v0.0.0-20240703190432-89f16b99c18e" ];
+        hash = "sha256-WGV/Ve7hbVry5ugSmTYWDihoC9i+D3Ct15UKgdpYc9U=";
       };
 
       email = "admin@r505.de";
