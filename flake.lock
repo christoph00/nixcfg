@@ -824,11 +824,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1735854904,
-        "narHash": "sha256-x9k5M6Y8Pu4NLxuixxvoAoXgdP2SN/VHfDn4UKcA9l8=",
+        "lastModified": 1735891075,
+        "narHash": "sha256-833O+chodgi5M+t3QrNWruA6PJHfsAj9vF2nx6wKaoU=",
         "owner": "christoph00",
         "repo": "host-agent",
-        "rev": "ab696bc3cafa11c042d4756537c2b86f770d865a",
+        "rev": "75adfbb344be6589e130d09fce2fa1a0dc248e7b",
         "type": "github"
       },
       "original": {
