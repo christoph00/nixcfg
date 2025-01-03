@@ -103,6 +103,8 @@ in
 
       pkgs.agenix
 
+      pkgs.rsync
+
       pkgs.usbutils
 
       # pkgs.uv
