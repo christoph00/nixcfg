@@ -66,7 +66,7 @@ in
 
   config = mkIf cfg.enable {
 
-    services.host-agent.monitoring.systemdServices = [ "graphical-session.service" ];
+    services.host-agent.monitoring.systemdServices = [ "dispaly-manager.service" ];
 
     services.greetd.settings.initial_session = {
       command =
