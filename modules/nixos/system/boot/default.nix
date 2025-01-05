@@ -114,9 +114,9 @@ in
       boot.consoleLogLevel = 0;
       boot.loader.timeout = 0;
 
-      #boot.plymouth.enable = true;
-      #boot.plymouth.theme = "nixos-bgrt";
-      #boot.plymouth.themePackages = [ pkgs.nixos-bgrt-plymouth ];
+      boot.plymouth.enable = config.internal.isGraphical;
+      boot.plymouth.theme = "nixos-bgrt";
+      boot.plymouth.themePackages = [ pkgs.nixos-bgrt-plymouth ];
     })
   ]);
 }

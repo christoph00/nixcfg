@@ -27,8 +27,6 @@
     "headless-desktop"
   ];
 
-  networking.interfaces.enp0s31f6.wakeOnLan.enable = true;
-
   fileSystems = {
     "/media/Games" = {
       device = "/dev/disk/by-label/ssd-data";
@@ -58,8 +56,6 @@
 
   };
 
-  internal.services.vscode-tunnel.enable = true;
-
   environment.systemPackages = [
     pkgs.amdgpu_top
     pkgs.libva-utils
@@ -83,12 +79,6 @@
       mangohud
     ];
   };
-
-  # chaotic.mesa-git = {
-  # enable = true;
-  # fallbackSpecialisation = false;
-  # inherit (config.hardware.graphics) extraPackages;
-  # };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
