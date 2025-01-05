@@ -57,6 +57,8 @@ in
       pkgs.libreoffice-fresh
       pkgs.gimp
       # pkgs.wezterm
+      #
+      pkgs.floorp
 
       pkgs.keepassxc
 
