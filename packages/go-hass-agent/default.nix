@@ -21,10 +21,10 @@ buildGo123Module rec {
     owner = "joshuar";
     repo = "go-hass-agent";
     rev = "v${version}";
-    hash = "sha256-6uhwqfuIZ4rdp1xKBWUtylmS7Sp2+v7ll3Bh3vl1Pig=";
+    hash = "sha256-YlRoVUixGlDD96/7pCQMy9opP9/pIGrr3w2CLIASRX8=";
   };
 
-  vendorHash = "sha256-kzmnfHIPwS1S85t9bIdMnSMY83uY7ccj6UQF5VIT3Mc=";
+  vendorHash = "sha256-ZPNXU0lBNN6yBuLvYK8rICtWN6jgv6oeArRyIcnPi9w=";
 
   doCheck = false;
 

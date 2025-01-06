@@ -88,45 +88,6 @@ with lib.internal;
     # `system.disableInstallerTools` option.
     # environment.systemPackages = [ pkgs.nixos-rebuild ];
 
-    systemd.services = {
-
-      nixos-update-switch = {
-        description = "Update NixOS System mit nh (switch)";
-        after = [ "network-online.target" ];
-
-        serviceConfig = {
-          Type = "oneshot";
-          User = "christoph";
-          RemainAfterExit = true;
-          ExecStart = "${pkgs.nh}/bin/nh os switch github:christoph00/nixcfg -- --refresh --accept-flake-config";
-        };
-      };
-
-      nixos-update-boot = {
-        description = "Update NixOS System mit nh (boot)";
-        after = [ "network-online.target" ];
-
-        serviceConfig = {
-          User = "christoph";
-          Type = "oneshot";
-          RemainAfterExit = true;
-          ExecStart = "${pkgs.nh}/bin/nh os boot github:christoph00/nixcfg -- --refresh --accept-flake-config";
-        };
-      };
-
-      nixos-cleanup = {
-        description = "Cleanup NixOS System";
-        after = [ "network-online.target" ];
-
-        serviceConfig = {
-          Type = "oneshot";
-          User = "christoph";
-          RemainAfterExit = true;
-          ExecStart = "${pkgs.nh}/bin/nh clean all";
-        };
-      };
-    };
-
   };
 
 }
