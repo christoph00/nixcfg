@@ -102,7 +102,7 @@ in
       pkgs.tmux
 
       pkgs.agenix
-
+      pkgs.helix
       pkgs.rsync
 
       pkgs.usbutils
