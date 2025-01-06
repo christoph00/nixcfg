@@ -112,7 +112,7 @@ in
 
       pkgs.nixd
       pkgs.gopls
-      pkgs.golang
+      pkgs.go
 
       # pkgs.uv
       pkgs.uutils-coreutils-noprefix
