@@ -85,6 +85,9 @@ in
 
     # environment.enableAllTerminfo = true;
     programs.direnv.enable = true;
+    environment.sessionVariables = {
+     COLORTERM = "truecolor";
+    };
     environment.systemPackages = [
       wrapped
       pkgs.htop
