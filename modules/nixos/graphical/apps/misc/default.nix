@@ -89,6 +89,8 @@ in
       pkgs.nil
       pkgs.gopls
       pkgs.go
+
+      inputs.zen-browser.packages.${pkgs.system}.default
     ];
 
   };

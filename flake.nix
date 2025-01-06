@@ -194,12 +194,12 @@
         ];
       };
 
-      # flake.vaultix = {
-      #   nodes = inputs.self.nixosConfigurations;
-      #   identity = "./sec/id_secrets.pub";
-      #   # extraRecipients = [ ];
-      #   cache = "./sec/cache";
-      # };
+      flake.vaultix = {
+        nodes = inputs.self.nixosConfigurations;
+        identity = "./sec/id_secrets.pub";
+        # extraRecipients = [ ];
+        cache = "./sec/cache";
+      };
 
       overlays = with inputs; [
         flake.overlays.default
@@ -252,5 +252,6 @@
     }
     // {
       inherit (inputs) self;
+
     };
 }
