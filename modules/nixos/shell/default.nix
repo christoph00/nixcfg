@@ -110,6 +110,10 @@ in
 
       pkgs.usbutils
 
+      pkgs.nixd
+      pkgs.gopls
+      pkgs.golang
+
       # pkgs.uv
       pkgs.uutils-coreutils-noprefix
 
