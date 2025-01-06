@@ -35,7 +35,7 @@ in
 {
 
   options.internal.services.ha-agent = {
-    enable = mkBoolOpt false "Enable Home Assistant Agent.";
+    enable = mkBoolOpt true "Enable Home Assistant Agent.";
   };
 
   config = mkIf cfg.enable {
