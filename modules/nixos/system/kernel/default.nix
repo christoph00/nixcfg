@@ -158,8 +158,8 @@ in
         #boot.kernelPackages = pkgs.linuxPackages_latest;
         boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
-        chaotic.scx.enable = true; # by default uses scx_rustland scheduler
-        chaotic.scx.scheduler = "scx_bpfland";
+        services.scx.enable = true; # by default uses scx_rustland scheduler
+        services.scx.scheduler = "scx_bpfland";
         systemd.services.scx.serviceConfig.LogNamespace = "sched-ext";
         boot.kernelParams = [ "mitigations=off" ]; # disable mitigations on desktop
 
