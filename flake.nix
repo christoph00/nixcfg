@@ -137,19 +137,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #caddy.url = "github:vincentbernat/caddy-nix";
-
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
       # WM's nixpkgs is only used for tests, you can safely drop this if needed.
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # ignis.url = "git+https://github.com/linkfrg/ignis?submodules=1";
-    # ignis.inputs.nixpkgs.follows = "nixpkgs";
-
-    quickshell = {
-      url = "github:quickshell-mirror/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
