@@ -36,7 +36,7 @@ in
 {
 
   options.internal.services.agent = {
-    enable = mkBoolOpt false "Enable Host Agent.";
+    enable = mkBoolOpt true "Enable Host Agent.";
 
   };
 
