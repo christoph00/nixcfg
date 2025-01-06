@@ -3520,26 +3520,6 @@
         "type": "github"
       }
     },
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1735994283,
-        "narHash": "sha256-6WoauttwnePkkRA84v5f+6J2iR/lrrLA7mmzh6kX7+0=",
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
-        "rev": "fca058e66cfc01d0a45805701234961a16573646",
-        "type": "github"
-      },
-      "original": {
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
-        "type": "github"
-      }
-    },
     "raspberry-pi-nix": {
       "inputs": {
         "libcamera-src": "libcamera-src",
@@ -3614,7 +3594,6 @@
         "nvf": "nvf",
         "nvimcfg": "nvimcfg",
         "preservation": "preservation",
-        "quickshell": "quickshell",
         "raspberry-pi-nix": "raspberry-pi-nix",
         "snowfall-lib": "snowfall-lib_2",
         "srvos": "srvos",

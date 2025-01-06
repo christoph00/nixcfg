@@ -113,7 +113,7 @@ in
       pkgs.nixd
       pkgs.gopls
       pkgs.go
-
+      pkgs.just
       # pkgs.uv
       pkgs.uutils-coreutils-noprefix
 
