@@ -118,7 +118,7 @@ in
             ];
           };
           disk.main.type = "disk";
-          # disk.main.imageSize = "6G";
+          #disk.main.imageSize = "48G";
           disk.main.device = cfg.device; # The device to partition
         };
 
