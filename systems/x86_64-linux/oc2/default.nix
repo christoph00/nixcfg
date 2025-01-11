@@ -1,19 +1,14 @@
 {
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
   ...
 }:
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  facter.reportPath = ./facter.json;
 
   networking.hostName = "oc2";
 
   internal.type = "vm";
   internal.system.fs.device = "/dev/sda";
+  internal.system.boot.encryptedRoot = false;
 
   boot.initrd.kernelModules = [
     "ata_piix"
@@ -23,5 +18,5 @@
     "nvme"
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
