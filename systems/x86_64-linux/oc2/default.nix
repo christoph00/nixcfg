@@ -13,6 +13,7 @@
   internal.system.fs.tmpRoot = false;
   internal.system.fs.swapSize = "1G";
   internal.fs.type = "xfs";
+  internal.system.state.enable = false;
 
   fileSystems."/boot" = {
     device = "/dev/sda1";
