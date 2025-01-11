@@ -7,7 +7,6 @@
   networking.hostName = "oc2";
 
   internal.type = "vm";
-  internal.system.fs.enable = false;
   internal.system.fs.device = "/dev/sda";
   internal.system.boot.encryptedRoot = false;
   internal.system.fs.swapSize = "1G";
