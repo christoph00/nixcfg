@@ -76,59 +76,57 @@ in
       enable = cfg.uwsm;
     };
 
-    # security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+    # systemd.user.services = mkIf cfg.uwsm {
+    #   waybar = mkIf cfg.waybar {
+    #     description = "Waybar as systemd service";
+    #     path = [ config.system.path ];
+    #     script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
+    #     wantedBy = [ "graphical-session.target" ];
+    #     after = [ "graphical-session.target" ];
+    #     serviceConfig.Slice = "app-graphical.slice";
+    #   };
+    #   sfwbar = mkIf cfg.sfwbar {
+    #     description = "sfwbar";
+    #     script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.sfwbar}/bin/sfwbar";
+    #     wantedBy = [ "graphical-session.target" ];
+    #     after = [ "graphical-session.target" ];
+    #     serviceConfig.Slice = "app-graphical.slice";
 
-    systemd.user.services = mkIf cfg.uwsm {
-      waybar = mkIf cfg.waybar {
-        description = "Waybar as systemd service";
-        path = [ config.system.path ];
-        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "app-graphical.slice";
-      };
-      sfwbar = mkIf cfg.sfwbar {
-        description = "sfwbar";
-        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.sfwbar}/bin/sfwbar";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "app-graphical.slice";
+    #   };
+    #   # swww-daemon = {
+    #   #   description = "swww-daemon as systemd service";
+    #   #   script = "${pkgs.swww}/bin/swww-daemon";
+    #   #   wantedBy = [ "graphical-session.target" ];
+    #   #   after = [ "graphical-session.target" ];
+    #   #   serviceConfig.Slice = "background-graphical.slice";
 
-      };
-      # swww-daemon = {
-      #   description = "swww-daemon as systemd service";
-      #   script = "${pkgs.swww}/bin/swww-daemon";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "background-graphical.slice";
-
-      # };
-      # syshud = {
-      #   description = "syshud";
-      #   script = "${pkgs.syshud}/bin/syshud";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "background-graphical.slice";
-      # };
-      # # hass-agent = {
-      #   description = "home assistant agent";
-      #   script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.internal.go-hass-agent}/bin/go-hass-agent run";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig = {
-      #     ExecStartPre = "/run/wrappers/bin/doas systemctl stop go-hass-agent";
-      #     Slice = "app-graphical.slice";
-      #     ExecStop = "/run/wrappers/bin/doas systemctl start go-hass-agent";
-      #   };
-      # };
-      polkit-gnome-authentication-agent-1 = {
-        description = "polkit-gnome-authentication-agent-1";
-        script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
-    };
+    #   # };
+    #   # syshud = {
+    #   #   description = "syshud";
+    #   #   script = "${pkgs.syshud}/bin/syshud";
+    #   #   wantedBy = [ "graphical-session.target" ];
+    #   #   after = [ "graphical-session.target" ];
+    #   #   serviceConfig.Slice = "background-graphical.slice";
+    #   # };
+    #   # # hass-agent = {
+    #   #   description = "home assistant agent";
+    #   #   script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.internal.go-hass-agent}/bin/go-hass-agent run";
+    #   #   wantedBy = [ "graphical-session.target" ];
+    #   #   after = [ "graphical-session.target" ];
+    #   #   serviceConfig = {
+    #   #     ExecStartPre = "/run/wrappers/bin/doas systemctl stop go-hass-agent";
+    #   #     Slice = "app-graphical.slice";
+    #   #     ExecStop = "/run/wrappers/bin/doas systemctl start go-hass-agent";
+    #   #   };
+    #   # };
+    #   polkit-gnome-authentication-agent-1 = {
+    #     description = "polkit-gnome-authentication-agent-1";
+    #     script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    #     wantedBy = [ "graphical-session.target" ];
+    #     after = [ "graphical-session.target" ];
+    #     serviceConfig.Slice = "background-graphical.slice";
+    #   };
+    # };
 
     services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
