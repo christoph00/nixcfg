@@ -86,6 +86,16 @@ in
         pkiBundle = "/etc/secureboot";
       };
       internal.system.state.directories = [ "/etc/secureboot" ];
+
+      # fix error units failed: systemd-hibernate-clear.service https://github.com/systemd/systemd/pull/35497
+      systemd.package = pkgs.systemd.overrideAttrs (old: {
+        patches = old.patches ++ [
+          (pkgs.fetchurl {
+            url = "https://github.com/wrvsrx/systemd/compare/tag_fix-hibernate-resume%5E...tag_fix-hibernate-resume.patch";
+            hash = "sha256-iDC5lenk4LhDdU4ZRHjestYu2jXNvNZCgSCkE2hQHuQ=";
+          })
+        ];
+      });
     })
     (mkIf cfg.encryptedRoot {
       # boot.initrd.clevis = {
