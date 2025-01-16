@@ -69,14 +69,7 @@ with lib.internal;
     system.disableInstallerTools = lib.mkDefault true;
     programs.less.lessopen = lib.mkDefault null;
     programs.command-not-found.enable = lib.mkDefault false;
-    boot = {
 
-      #environment.memoryAllocator.provider = "mimalloc";
-      #nixpkgs.overlays = [ (_: prev: { dhcpcd = prev.dhcpcd.override { enablePrivSep = false; }; }) ];
-      initrd.systemd.enable = lib.mkDefault true;
-      enableContainers = lib.mkDefault false;
-      loader.grub.enable = lib.mkDefault false;
-    };
     environment.defaultPackages = lib.mkDefault [ ];
     documentation.info.enable = lib.mkDefault false;
 

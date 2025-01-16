@@ -55,6 +55,12 @@ in
 
       boot.loader.systemd-boot.configurationLimit = 5;
 
+          boot = {
+      initrd.systemd.enable = lib.mkDefault true;
+      enableContainers = lib.mkDefault false;
+      loader.grub.enable = lib.mkDefault false;
+    };
+
       # secure boot configs are kept here in the common
       # module because secureBoot must be set to false
       # for the first system boot.
