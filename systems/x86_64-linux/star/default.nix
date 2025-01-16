@@ -11,6 +11,7 @@
   internal.system.fs.device = "/dev/ploop62670";
   internal.system.boot.encryptedRoot = false;
   internal.system.fs.swapSize = "1G";
+  internal.system.state.enable = false;
 
 systemd.network.networks.venet0 = {
     name = "venet0";
