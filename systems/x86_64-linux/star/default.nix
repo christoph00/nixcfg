@@ -12,6 +12,7 @@
   internal.system.boot.encryptedRoot = false;
   internal.system.fs.swapSize = "1G";
   internal.system.state.enable = false;
+  internal.system.boot.enable = false;
 
 systemd.network.networks.venet0 = {
     name = "venet0";
