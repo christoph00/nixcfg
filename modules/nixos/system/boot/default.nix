@@ -56,7 +56,6 @@ in
       boot.loader.systemd-boot.configurationLimit = 5;
 
       boot.enableContainers = lib.mkDefault false;
-  
 
       # secure boot configs are kept here in the common
       # module because secureBoot must be set to false

@@ -171,7 +171,7 @@ in
       gtk4-layer-shell
       #internal.hyprpanel
 
-      #ironbar
+      ironbar
 
       mako
       swayidle
@@ -185,6 +185,10 @@ in
       wluma
       wl-mirror
       wf-recorder
+
+      libnotify
+
+      xsettingsd
 
     ];
 
