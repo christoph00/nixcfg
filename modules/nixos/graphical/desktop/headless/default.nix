@@ -110,7 +110,7 @@ in
 
     services.seatd.enable = true;
 
-    systemd.defaultUnit = lib.mkForce "multi-user.target";
+    # systemd.defaultUnit = lib.mkForce "multi-user.target";
 
     ## DP-2 = Monitor  HDMI-A-1 = Dummy
     # services.sunshine = {
