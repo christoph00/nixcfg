@@ -71,16 +71,16 @@ in
     services.greetd.settings.initial_session = {
       command =
         let
-          exec-xfce = (
-            pkgs.writeShellScriptBin "exec-xfce" ''
+          exec-wm = (
+            pkgs.writeShellScriptBin "exec-wm" ''
               env \
                 WLR_NO_HARDWARE_CURSORS=0 \
                 WLR_BACKENDS=drm,headless,libinput \
-                ${pkgs.xfce.xfce4-session}/bin/startxfce4 --wayland
+                ${lib.getExe config.programs.uwsm.package} start labwc-uwsm.desktop
             ''
           );
         in
-        lib.mkForce "${pkgs.uwsm}/bin/uwsm start -N xfce -- ${exec-xfce}/bin/exec-xfce";
+        lib.mkForce "${exec-wm}/bin/exec-wm";
     };
 
     boot.kernelModules = [
