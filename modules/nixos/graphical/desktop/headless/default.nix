@@ -96,6 +96,7 @@ in
       set_resolution
       pkgs.wayvnc
       pkgs.novnc
+      pkgs.wvkbd
     ];
     environment.variables = {
       #WLR_BACKENDS = "drm,headless,libinput";

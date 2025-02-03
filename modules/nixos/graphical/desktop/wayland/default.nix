@@ -35,9 +35,9 @@ in
 
   options.internal.graphical.desktop.wayland = {
     enable = mkBoolOpt false "Enable the wayland environment.";
-    waybar = mkBoolOpt false "Enable Waybar";
+    waybar = mkBoolOpt true "Enable Waybar";
     sfwbar = mkBoolOpt false "Enable sfwbar";
-    ironbar = mkBoolOpt true "Enable ironbar";
+    ironbar = mkBoolOpt false "Enable ironbar";
     xsettingsd = mkBoolOpt true "Enable xsettingsd";
     uwsm = mkBoolOpt true "Enable uwsm";
     wlsunset = mkBoolOpt config.internal.isLaptop "Enable wlsunset";
@@ -186,8 +186,6 @@ in
 
       gtk4-layer-shell
       #internal.hyprpanel
-
-      ironbar
 
       mako
       swayidle
