@@ -40,6 +40,8 @@ in
     ironbar = mkBoolOpt true "Enable ironbar";
     xsettingsd = mkBoolOpt true "Enable xsettingsd";
     uwsm = mkBoolOpt true "Enable uwsm";
+    wlsunset = mkBoolOpt config.internal.isLaptop "Enable wlsunset";
+
   };
 
   config = mkIf cfg.enable {
@@ -113,6 +115,14 @@ in
       syshud = {
         description = "syshud";
         script = "${pkgs.syshud}/bin/syshud";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "background-graphical.slice";
+      };
+
+      wlsunset = mkIf cfg.wlsunset {
+        description = "wlsunset";
+        script = "${pkgs.wlsunset}/bin/wlsunset";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "background-graphical.slice";
