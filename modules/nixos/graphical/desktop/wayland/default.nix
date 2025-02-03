@@ -95,7 +95,7 @@ in
         serviceConfig.Slice = "app-graphical.slice";
 
       };
-      ironbar = mkIf cfg.sfwbar {
+      ironbar = mkIf cfg.ironbar {
         description = "ironbar";
         script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.ironbar}/bin/ironbar";
         wantedBy = [ "graphical-session.target" ];
@@ -165,9 +165,8 @@ in
 
       waybar
       sysmenu
-      syshud55
 
-      sfwbar
+      #sfwbar
 
       uwsm
 
@@ -195,7 +194,7 @@ in
 
       libnotify
 
-      xsettingsd
+      #xsettingsd
 
     ];
 
