@@ -67,18 +67,18 @@ in
       openFirewall = true;
     };
 
-    #systemd.user.services = {
-    #  sunshine = {
-    #    path = [ config.system.path ];
-    #    serviceConfig.Slice = "background-graphical.slice";
-    #    after = [ "graphical-session.target" ];
-    #  };
-    #  gamemoded = {
-    #    serviceConfig.Slice = "background-graphical.slice";
-    #    wantedBy = [ "graphical-session.target" ];
-    #    after = [ "graphical-session.target" ];
-    #  };
-    #};
+    systemd.user.services = {
+      sunshine = {
+        path = [ config.system.path ];
+        serviceConfig.Slice = "background-graphical.slice";
+        after = [ "graphical-session.target" ];
+      };
+      gamemoded = {
+        serviceConfig.Slice = "background-graphical.slice";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+      };
+    };
 
     services.input-remapper.enable = true;
 
