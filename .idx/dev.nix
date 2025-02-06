@@ -7,6 +7,7 @@
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.nixfmt
+    pkgs.nixd
     # pkgs.python311
     # pkgs.python311Packages.pip
     # pkgs.nodejs_20
