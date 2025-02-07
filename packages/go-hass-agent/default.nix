@@ -1,6 +1,17 @@
-{ stdenv, lib, pkgs, buildGo123Module,
-# workaround till buildGoModule uses go 1.23 by default
-pkg-config, glfw, xorg, mage, writeShellScriptBin, git, ... }:
+{
+  stdenv,
+  lib,
+  pkgs,
+  buildGo123Module,
+  # workaround till buildGoModule uses go 1.23 by default
+  pkg-config,
+  glfw,
+  xorg,
+  mage,
+  writeShellScriptBin,
+  git,
+  ...
+}:
 
 buildGo123Module rec {
   pname = "go-hass-agent";
@@ -17,19 +28,25 @@ buildGo123Module rec {
 
   doCheck = false;
 
-  nativeBuildInputs = let
-    fakeGit = writeShellScriptBin "git" ''
-      if [[ $@ = "describe --tags --always --dirty" ]]; then
-          echo "${version}"
-      elif [[ $@ = "rev-parse --short HEAD" ]]; then
-          echo "dummyrev"
-      elif [[ $@ = "log --date=iso8601-strict -1 --pretty=%ct" ]]; then
-          echo "0"
-      else
-          ${git}/bin/git $@
-      fi
-    '';
-  in [ fakeGit pkg-config mage ];
+  nativeBuildInputs =
+    let
+      fakeGit = writeShellScriptBin "git" ''
+        if [[ $@ = "describe --tags --always --dirty" ]]; then
+            echo "${version}"
+        elif [[ $@ = "rev-parse --short HEAD" ]]; then
+            echo "dummyrev"
+        elif [[ $@ = "log --date=iso8601-strict -1 --pretty=%ct" ]]; then
+            echo "0"
+        else
+            ${git}/bin/git $@
+        fi
+      '';
+    in
+    [
+      fakeGit
+      pkg-config
+      mage
+    ];
   buildInputs = with xorg; [
     glfw
     libX11
@@ -60,8 +77,7 @@ buildGo123Module rec {
   meta = {
     description = "A Home Assistant, native app for desktop/laptop devices";
     homepage = "https://github.com/joshuar/go-hass-agent";
-    changelog =
-      "https://github.com/joshuar/go-hass-agent/blob/${src.rev}/CHANGELOG.md";
+    changelog = "https://github.com/joshuar/go-hass-agent/blob/${src.rev}/CHANGELOG.md";
     license = lib.licenses.mit;
     mainProgram = "go-hass-agent";
   };

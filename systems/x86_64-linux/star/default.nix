@@ -1,4 +1,5 @@
-{ modulesPath, ... }: {
+{ modulesPath, ... }:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ./installer.nix
@@ -26,8 +27,12 @@
     };
   };
 
-  boot.initrd.kernelModules =
-    [ "ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi" ];
+  boot.initrd.kernelModules = [
+    "ata_piix"
+    "uhci_hcd"
+    "xen_blkfront"
+    "vmw_pvscsi"
+  ];
 
   system.stateVersion = "24.11";
 }

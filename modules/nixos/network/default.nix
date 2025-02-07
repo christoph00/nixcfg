@@ -1,8 +1,17 @@
-{ options, config, pkgs, lib, namespace, ... }:
+{
+  options,
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
+}:
 with lib;
 with lib.internal;
-let cfg = config.internal.network;
-in {
+let
+  cfg = config.internal.network;
+in
+{
   imports = [ ./tailscale.nix ];
 
   options.internal.network = with types; {
@@ -42,7 +51,11 @@ in {
       firewall = {
         enable = true;
         allowPing = true;
-        allowedTCPPorts = [ 80 443 22 ];
+        allowedTCPPorts = [
+          80
+          443
+          22
+        ];
       };
     };
 

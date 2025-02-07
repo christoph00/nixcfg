@@ -1,4 +1,13 @@
-{ config, lib, pkgs, modulesPath, inputs, namespace, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
+}:
+{
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   networking.hostName = "ok";
@@ -11,8 +20,13 @@
     };
   };
 
-  boot.initrd.kernelModules =
-    [ "ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi" "nvme" ];
+  boot.initrd.kernelModules = [
+    "ata_piix"
+    "uhci_hcd"
+    "xen_blkfront"
+    "vmw_pvscsi"
+    "nvme"
+  ];
 
   system.stateVersion = "24.05";
 }

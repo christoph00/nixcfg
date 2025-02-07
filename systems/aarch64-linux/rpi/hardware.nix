@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 
 let
@@ -31,19 +36,23 @@ let
     cp ${pkgs.ubootRaspberryPi3_64bit}/u-boot.bin /mnt/u-boot-rpi3.bin
     umount /dev/disk/by-label/FIRMWARE
   '';
-in {
+in
+{
 
   nixpkgs.overlays = [
     (_final: super: {
-      makeModulesClosure = x:
-        super.makeModulesClosure (x // { allowMissing = true; });
+      makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
     })
   ];
 
   powerManagement.cpuFreqGovernor = "schedutil";
 
   boot = {
-    kernelParams = [ "cma=32M" "console=ttyS0,115200n8" "console=tty0" ];
+    kernelParams = [
+      "cma=32M"
+      "console=ttyS0,115200n8"
+      "console=tty0"
+    ];
 
     kernelPackages = pkgs.linuxPackages_rpi3;
 
@@ -64,8 +73,7 @@ in {
   ];
   hardware.enableRedistributableFirmware = mkDefault true;
 
-  system.activationScripts.raspberrypi-update =
-    "${raspberrypi-update-3b}/bin/rpi-update-3b";
+  system.activationScripts.raspberrypi-update = "${raspberrypi-update-3b}/bin/rpi-update-3b";
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/NIXOS_SD";
@@ -77,10 +85,12 @@ in {
     fsType = "vfat";
   };
 
-  swapDevices = [{
-    device = "/swapfile";
-    size = 1024;
-  }];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 1024;
+    }
+  ];
 
   networking.interfaces.eth0.useDHCP = mkDefault true;
 

@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   firstTimeInit = pkgs.writeShellScript "first-time-init" ''
     systemConfig=${config.system.build.toplevel}
@@ -55,41 +60,41 @@ let
   '';
 
   fastboot = pkgs.writeText "fastboot" "";
-in {
-  system.build.tarball =
-    pkgs.callPackage (pkgs.path + "/nixos/lib/make-system-tarball.nix") {
-      extraArgs = "--owner=0";
+in
+{
+  system.build.tarball = pkgs.callPackage (pkgs.path + "/nixos/lib/make-system-tarball.nix") {
+    extraArgs = "--owner=0";
 
-      storeContents = [
-        {
-          object = config.system.build.toplevel;
-          symlink = "none";
-        }
-        {
-          object = firstTimeInit;
-          symlink = "/sbin/init";
-        }
-        {
-          object = config.system.build.binBashWrapper;
-          symlink = "/bin/bash";
-        }
-        {
-          object = fastboot;
-          symlink = "/fastboot";
-        }
-        {
-          object = lustrateKeepFiles;
-          symlink = "/etc/NIXOS_LUSTRATE";
-        }
-      ];
+    storeContents = [
+      {
+        object = config.system.build.toplevel;
+        symlink = "none";
+      }
+      {
+        object = firstTimeInit;
+        symlink = "/sbin/init";
+      }
+      {
+        object = config.system.build.binBashWrapper;
+        symlink = "/bin/bash";
+      }
+      {
+        object = fastboot;
+        symlink = "/fastboot";
+      }
+      {
+        object = lustrateKeepFiles;
+        symlink = "/etc/NIXOS_LUSTRATE";
+      }
+    ];
 
-      contents = [
-        #{
-        #  source = "${config.system.build.toplevel}/init";
-        #  target = "/sbin/init";
-        #}
-      ];
+    contents = [
+      #{
+      #  source = "${config.system.build.toplevel}/init";
+      #  target = "/sbin/init";
+      #}
+    ];
 
-      extraCommands = "mkdir -p proc sys dev";
-    };
+    extraCommands = "mkdir -p proc sys dev";
+  };
 }

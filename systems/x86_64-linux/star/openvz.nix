@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   # With most out-of-box templates, OpenVZ automatically runs a set of bash scripts
   # in the guest container every boot to customize the system (setting hostname, IP
@@ -15,7 +20,8 @@ let
 
     exec ${pkgs.bashInteractive}/bin/bash "$@"
   '';
-in {
+in
+{
   boot.isContainer = true;
   boot.loader.initScript.enable = true;
   boot.specialFileSystems."/run/keys".fsType = lib.mkForce "tmpfs";
@@ -53,10 +59,15 @@ in {
   # conflict.
   systemd.services.systemd-udev-trigger-ovz = {
     description = "Coldplug All udev Devices";
-    after = [ "systemd-udevd-kernel.socket" "systemd-udevd-control.socket" ];
+    after = [
+      "systemd-udevd-kernel.socket"
+      "systemd-udevd-control.socket"
+    ];
     wants = [ "systemd-udevd.service" ];
     wantedBy = [ "sysinit.target" ];
-    unitConfig = { DefaultDependencies = "no"; };
+    unitConfig = {
+      DefaultDependencies = "no";
+    };
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = "yes";

@@ -1,9 +1,16 @@
-{ config, lib, pkgs, self, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  self,
+  ...
+}:
 with lib;
 let
   cfg = config.internal.system.network.tailscale;
   kernel = config.boot.kernelPackages;
-in {
+in
+{
   options.internal.system.network.tailscale = {
     enable = mkOption {
       type = types.bool;
@@ -26,16 +33,19 @@ in {
 
     networking.dhcpcd.denyInterfaces = [ cfg.interfaceName ];
 
-    networking.firewall = { trustedInterfaces = [ cfg.interfaceName ]; };
+    networking.firewall = {
+      trustedInterfaces = [ cfg.interfaceName ];
+    };
 
-    systemd.network.networks."50-tailscale" =
-      mkIf config.networking.useNetworkd {
-        matchConfig = { Name = cfg.interfaceName; };
-        linkConfig = {
-          Unmanaged = true;
-          ActivationPolicy = "manual";
-        };
+    systemd.network.networks."50-tailscale" = mkIf config.networking.useNetworkd {
+      matchConfig = {
+        Name = cfg.interfaceName;
       };
+      linkConfig = {
+        Unmanaged = true;
+        ActivationPolicy = "manual";
+      };
+    };
 
     services.tailscale = {
       enable = true;

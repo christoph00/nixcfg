@@ -1,11 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 with lib.internal;
-let cfg = config.internal.shell.neovim;
-in {
+let
+  cfg = config.internal.shell.neovim;
+in
+{
   options.internal.shell.neovim = with types; {
-    enable = mkBoolOpt config.internal.isDesktop
-      "Whether or not to configure neovim config.";
+    enable = mkBoolOpt true "Whether or not to configure neovim config.";
   };
 
   config = mkIf cfg.enable {
@@ -54,6 +60,35 @@ in {
             encoding = "utf-8";
             fileencoding = "utf-8";
             fillchars = "eob: "; # Disable the "~" chars at end of buffer
+          };
+
+          mini = {
+            icons.enable = true;
+            statusline.enable = true;
+            tabline.enable = true;
+            git.enable = true;
+            diff.enable = true;
+            align.enable = true;
+            notify.enable = true;
+            files.enable = true;
+          };
+
+          languages = {
+            # Options applied to all languages
+            enableLSP = true;
+            enableFormat = true;
+            enableTreesitter = true;
+            enableExtraDiagnostics = true;
+            enableDAP = true;
+
+            # Languages
+            nix = {
+              enable = true;
+              format = {
+                type = "nixfmt";
+                package = pkgs.nixfmt-rfc-style;
+              };
+            };
           };
 
         };

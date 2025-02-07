@@ -1,4 +1,8 @@
-{ lib, buildGoModule, fetchFromGitHub, }:
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+}:
 
 buildGoModule rec {
   pname = "mochi";
@@ -13,7 +17,10 @@ buildGoModule rec {
 
   vendorHash = "sha256-+28spfekUVTDCvDgmKXpHNRQNAlQ4k9lEU4H6gZu9ZI=";
 
-  ldflags = [ "-s" "-w" ];
+  ldflags = [
+    "-s"
+    "-w"
+  ];
 
   postInstall = ''
     mv $out/bin/{cmd,mochi}
@@ -21,8 +28,7 @@ buildGoModule rec {
   '';
 
   meta = {
-    description =
-      "The fully compliant, embeddable high-performance Go MQTT v5 server for IoT, smarthome, and pubsub";
+    description = "The fully compliant, embeddable high-performance Go MQTT v5 server for IoT, smarthome, and pubsub";
     homepage = "https://github.com/mochi-mqtt/server";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ ];

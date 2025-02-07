@@ -1,8 +1,17 @@
-{ options, config, pkgs, lib, namespace, ... }:
+{
+  options,
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
+}:
 with lib;
 with lib.internal;
-let cfg = config.internal.user;
-in {
+let
+  cfg = config.internal.user;
+in
+{
   options.internal.user = with types; {
     name = mkOpt str "christoph" "The name to use for the user account.";
     fullName = mkOpt str "Christoph" "The full name of the user.";
@@ -11,15 +20,17 @@ in {
       default = config.age.secrets.user_christoph_pw.path;
     };
     email = mkOpt str "christoph@asche.co" "The email of the user.";
-    prompt-init = mkBoolOpt true
-      "Whether or not to show an initial message when opening a new shell.";
+    prompt-init = mkBoolOpt true "Whether or not to show an initial message when opening a new shell.";
     extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
-    extraOptions =
-      mkOpt attrs { } (mdDoc "Extra options passed to `users.users.<name>`.");
+    extraOptions = mkOpt attrs { } (mdDoc "Extra options passed to `users.users.<name>`.");
   };
 
   config = {
-    snowfallorg.users.${cfg.name} = { home = { enable = false; }; };
+    snowfallorg.users.${cfg.name} = {
+      home = {
+        enable = false;
+      };
+    };
     age.secrets.user_christoph_pw.file = ../../../secrets/user_christoph_pw;
     users.users.${cfg.name} = {
       isNormalUser = true;
@@ -27,8 +38,7 @@ in {
       inherit (cfg) name;
 
       hashedPasswordFile = cfg.passwordFile;
-      initialHashedPassword =
-        "$6$1vqU2umGkgRQ5u1/$FpMIFgzGwYxqcDah6T.YPZG36HbQtXNpEcfEniIoX9SewJ5mJrTZiEgfqaw1ttzyM9N/BMxOx4kq6nn5gtXmx1";
+      initialHashedPassword = "$6$1vqU2umGkgRQ5u1/$FpMIFgzGwYxqcDah6T.YPZG36HbQtXNpEcfEniIoX9SewJ5mJrTZiEgfqaw1ttzyM9N/BMxOx4kq6nn5gtXmx1";
 
       home = "/home/${cfg.name}";
       group = "users";

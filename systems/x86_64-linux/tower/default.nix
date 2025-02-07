@@ -3,7 +3,16 @@
 # i7-6700k
 # RX580 Sapphire
 ##
-{ config, lib, pkgs, modulesPath, inputs, namespace, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
+}:
+{
   # imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   facter.reportPath = ./facter.json;
 
@@ -12,19 +21,31 @@
   internal.type = "desktop";
   internal.isV3 = true;
   internal.system.boot.secureBoot = true;
-  internal.roles = [ "gaming" "gamestream" "headless-desktop" ];
+  internal.roles = [
+    "gaming"
+    "gamestream"
+    "headless-desktop"
+  ];
 
   fileSystems = {
     "/media/Games" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
-      options = [ "subvol=@games" "noatime" "compress-force=zstd" ];
+      options = [
+        "subvol=@games"
+        "noatime"
+        "compress-force=zstd"
+      ];
     };
 
     "/media/ssd-data" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
-      options = [ "subvol=@data" "noatime" "compress-force=zstd" ];
+      options = [
+        "subvol=@data"
+        "noatime"
+        "compress-force=zstd"
+      ];
     };
 
     # "/media/hdd-data" = {
@@ -35,7 +56,10 @@
 
   };
 
-  environment.systemPackages = [ pkgs.amdgpu_top pkgs.libva-utils ];
+  environment.systemPackages = [
+    pkgs.amdgpu_top
+    pkgs.libva-utils
+  ];
 
   hardware.graphics = {
     enable = true;
@@ -50,7 +74,10 @@
       vulkan-validation-layers
       mangohud
     ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk mangohud ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
+      mangohud
+    ];
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -80,12 +107,24 @@
     ROC_ENABLE_PRE_VEGA = "1";
   };
 
-  boot.kernelModules = [ "kvm-intel" "acpi_call" "i2c_dev" ];
-  boot.kernelParams =
-    [ "mem_sleep_default=deep" "amdgpu.gttsize=8192" "amdgpu.ignore_crat=1" ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "acpi_call"
+    "i2c_dev"
+  ];
+  boot.kernelParams = [
+    "mem_sleep_default=deep"
+    "amdgpu.gttsize=8192"
+    "amdgpu.ignore_crat=1"
+  ];
 
   boot.initrd = {
-    availableKernelModules = [ "xhci_pci" "ahci" "nvme" "amdgpu" ];
+    availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "nvme"
+      "amdgpu"
+    ];
   };
 
   services.udev.extraRules = ''

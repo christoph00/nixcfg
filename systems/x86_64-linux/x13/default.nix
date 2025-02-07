@@ -1,4 +1,13 @@
-{ config, lib, pkgs, modulesPath, inputs, namespace, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  namespace,
+  ...
+}:
+{
 
   facter.reportPath = ./facter.json;
 
@@ -21,7 +30,10 @@
     ];
   };
 
-  environment.systemPackages = [ pkgs.libva-utils pkgs.intel-gpu-tools ];
+  environment.systemPackages = [
+    pkgs.libva-utils
+    pkgs.intel-gpu-tools
+  ];
 
   environment.variables = {
     GST_VAAPI_ALL_DRIVERS = "1";
@@ -29,8 +41,13 @@
     VDPAU_DRIVER = "va_gl";
   };
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+    "rtsx_pci_sdmmc"
+  ];
   boot.kernelParams = [
     "quiet"
     "pcie_port_pm=off"

@@ -1,26 +1,28 @@
 {
-# Snowfall Lib provides a customized `lib` instance with access to your flake's library
-# as well as the libraries available from your flake's inputs.
-lib,
-# An instance of `pkgs` with your overlays and packages applied is also available.
-pkgs,
-# You also have access to your flake's inputs.
-inputs,
-# Additional metadata is provided by Snowfall Lib.
-namespace,
-# The namespace used for your flake, defaulting to "internal" if not set.
-system,
-# The system architecture for this host (eg. `x86_64-linux`).
-target,
-# The Snowfall Lib target for this system (eg. `x86_64-iso`).
-format,
-# A normalized name for the system target (eg. `iso`).
-virtual,
-# A boolean to determine whether this system is a virtual target using nixos-generators.
-systems, # An attribute map of your defined hosts.
+  # Snowfall Lib provides a customized `lib` instance with access to your flake's library
+  # as well as the libraries available from your flake's inputs.
+  lib,
+  # An instance of `pkgs` with your overlays and packages applied is also available.
+  pkgs,
+  # You also have access to your flake's inputs.
+  inputs,
+  # Additional metadata is provided by Snowfall Lib.
+  namespace,
+  # The namespace used for your flake, defaulting to "internal" if not set.
+  system,
+  # The system architecture for this host (eg. `x86_64-linux`).
+  target,
+  # The Snowfall Lib target for this system (eg. `x86_64-iso`).
+  format,
+  # A normalized name for the system target (eg. `iso`).
+  virtual,
+  # A boolean to determine whether this system is a virtual target using nixos-generators.
+  systems, # An attribute map of your defined hosts.
 
-# All other arguments come from the module system.
-config, ... }:
+  # All other arguments come from the module system.
+  config,
+  ...
+}:
 
 with builtins;
 with lib;
@@ -28,24 +30,25 @@ with lib.internal;
 
 let
   cfg = config.internal.graphical.desktop.headless;
-  set_resolution = (pkgs.writeShellScriptBin "set_resolution" ''
-    if [ -z "$SUNSHINE_CLIENT_WIDTH" ] || [ -z "$SUNSHINE_CLIENT_HEIGHT" ] || [ -z "$SUNSHINE_CLIENT_FPS" ]; then
-        echo "Missing env Vars from Sunshine"
-        exit 1
-    fi
+  set_resolution = (
+    pkgs.writeShellScriptBin "set_resolution" ''
+      if [ -z "$SUNSHINE_CLIENT_WIDTH" ] || [ -z "$SUNSHINE_CLIENT_HEIGHT" ] || [ -z "$SUNSHINE_CLIENT_FPS" ]; then
+          echo "Missing env Vars from Sunshine"
+          exit 1
+      fi
 
-    MODE="''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS}Hz"
+      MODE="''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS}Hz"
 
-    ${pkgs.wlr-randr}/bin/wlr-randr --output HEADLESS-1 --on --custom-mode $MODE
+      ${pkgs.wlr-randr}/bin/wlr-randr --output HEADLESS-1 --on --custom-mode $MODE
 
-  '');
-in {
+    ''
+  );
+in
+{
 
   options.internal.graphical.desktop.headless = {
-    enable = mkBoolOpt config.internal.isHeadlessDesktop
-      "\n      Enable\n      Headless\n      Desktop.";
-    enableStreaming =
-      mkBoolOpt config.internal.isGameStream "\n      Enable\n      Streaming ";
+    enable = mkBoolOpt config.internal.isHeadlessDesktop "\n      Enable\n      Headless\n      Desktop.";
+    enableStreaming = mkBoolOpt config.internal.isGameStream "\n      Enable\n      Streaming ";
     autorun = mkBoolOpt true "\n      Autorun ";
     user = mkOption {
       type = types.str;
@@ -56,18 +59,21 @@ in {
 
   config = mkIf cfg.enable {
 
-    services.host-agent.monitoring.systemdServices =
-      [ "dispaly-manager.service" ];
+    services.host-agent.monitoring.systemdServices = [ "dispaly-manager.service" ];
 
     services.greetd.settings.initial_session = {
-      command = let
-        exec-wm = (pkgs.writeShellScriptBin "exec-wm" ''
-          env \
-            WLR_NO_HARDWARE_CURSORS=0 \
-            WLR_BACKENDS=drm,headless,libinput \
-            ${lib.getExe config.programs.uwsm.package} start labwc-uwsm.desktop
-        '');
-      in lib.mkForce "${exec-wm}/bin/exec-wm";
+      command =
+        let
+          exec-wm = (
+            pkgs.writeShellScriptBin "exec-wm" ''
+              env \
+                WLR_NO_HARDWARE_CURSORS=0 \
+                WLR_BACKENDS=drm,headless,libinput \
+                ${lib.getExe config.programs.uwsm.package} start labwc-uwsm.desktop
+            ''
+          );
+        in
+        lib.mkForce "${exec-wm}/bin/exec-wm";
     };
 
     boot.kernelModules = [ "uinput " ];
@@ -77,8 +83,12 @@ in {
       input ", MODE=" 0660 " OPTIONS+="
       static_node= uinput "
     '';
-    environment.systemPackages =
-      [ set_resolution pkgs.wayvnc pkgs.novnc pkgs.wvkbd ];
+    environment.systemPackages = [
+      set_resolution
+      pkgs.wayvnc
+      pkgs.novnc
+      pkgs.wvkbd
+    ];
     environment.variables = {
       #WLR_BACKENDS = "drm,headless,libinput";
       #   #NIXOS_OZONE_WL = "1";
