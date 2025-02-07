@@ -124,6 +124,11 @@ in
       default = isGaming || hasRole "gamestream" || isDesktop;
     };
 
+    isBootstrap = mkOption {
+      type = types.bool;
+      default = false;
+    };
+
   };
 
 }
