@@ -56,9 +56,7 @@ in {
     after = [ "systemd-udevd-kernel.socket" "systemd-udevd-control.socket" ];
     wants = [ "systemd-udevd.service" ];
     wantedBy = [ "sysinit.target" ];
-    unitConfig = {
-      DefaultDependencies = "no";
-    };
+    unitConfig = { DefaultDependencies = "no"; };
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = "yes";

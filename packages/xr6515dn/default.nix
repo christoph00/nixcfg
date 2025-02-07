@@ -1,8 +1,4 @@
-{
-  lib,
-  stdenv,
-  fetchFromGitHub,
-}:
+{ lib, stdenv, fetchFromGitHub, }:
 stdenv.mkDerivation rec {
   pname = "xerox-workcentre-6515DN";
   version = "5.519";

@@ -1,11 +1,7 @@
 {
   description = "nixcfg";
   nixConfig = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-      "auto-allocate-uids"
-    ];
+    experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
     extra-substituters = [
       "https://chr.cachix.org"
       "https://cache.nixos.org"
@@ -44,9 +40,7 @@
 
     };
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
+    flake-utils = { url = "github:numtide/flake-utils"; };
 
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
@@ -73,9 +67,7 @@
     # impermanence.url = "github:nix-community/impermanence";
     #impermanence.url = "github:nix-community/impermanence/63f4d0443e32b0dd7189001ee1894066765d18a5";
 
-    preservation = {
-      url = "github:WilliButz/preservation";
-    };
+    preservation = { url = "github:WilliButz/preservation"; };
 
     ghostty = {
       url = "github:ghostty-org/ghostty";
@@ -166,22 +158,17 @@
 
   };
 
-  outputs =
-    inputs:
+  outputs = inputs:
     let
       lib = inputs.snowfall-lib.mkLib {
         inherit inputs;
         src = ./.;
       };
-    in
-    lib.mkFlake {
+    in lib.mkFlake {
       inherit inputs;
       channels-config = {
         allowUnfree = true;
-        permittedInsecurePackages = [
-          "electron-25.9.0"
-          "electron-27.3.11"
-        ];
+        permittedInsecurePackages = [ "electron-25.9.0" "electron-27.3.11" ];
       };
 
       # flake.vaultix = {
@@ -230,17 +217,16 @@
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
 
-      checks = builtins.mapAttrs (
-        system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
-      ) inputs.deploy-rs.lib;
+      checks = builtins.mapAttrs
+        (system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy)
+        inputs.deploy-rs.lib;
 
-      outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
-
-      alias = {
-        shells.default = "devel";
+      outputs-builder = channels: {
+        formatter = channels.nixpkgs.nixfmt-rfc-style;
       };
-    }
-    // {
+
+      alias = { shells.default = "devel"; };
+    } // {
       inherit (inputs) self;
 
     };

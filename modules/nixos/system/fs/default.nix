@@ -1,10 +1,4 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  config,
-  ...
-}:
+{ lib, pkgs, inputs, config, ... }:
 
 with builtins;
 with lib;
@@ -46,56 +40,38 @@ let
     subvolumes = {
       "@root" = mkIf (!cfg.tmpRoot) {
         mountpoint = "/";
-        mountOptions = [
-          "compress-force=zstd:1"
-          "noatime"
-        ];
+        mountOptions = [ "compress-force=zstd:1" "noatime" ];
       };
       "@state" = {
         mountpoint = "/mnt/state";
-        mountOptions = [
-          "compress-force=zstd:1"
-          "noatime"
-        ];
+        mountOptions = [ "compress-force=zstd:1" "noatime" ];
       };
       "@home" = {
         mountpoint = "/home";
-        mountOptions = [
-          "compress-force=zstd:1"
-          "noatime"
-        ];
+        mountOptions = [ "compress-force=zstd:1" "noatime" ];
       };
       "@nix" = {
-        mountOptions = [
-          "compress-force=zstd:1"
-          "noatime"
-        ];
+        mountOptions = [ "compress-force=zstd:1" "noatime" ];
         mountpoint = "/nix";
       };
       "@swap" = {
         mountpoint = "/.swapvol";
-        swap = {
-          swapfile.size = cfg.swapSize;
-        };
+        swap = { swapfile.size = cfg.swapSize; };
       };
     };
   };
-in
-{
+in {
 
   options.internal.system.fs = with types; {
     enable = mkBoolOpt' true;
     type = mkOption {
-      type = enum [
-        "btrfs"
-        "bcachefs"
-        "xfs"
-      ];
+      type = enum [ "btrfs" "bcachefs" "xfs" ];
       default = "btrfs";
     };
 
     device = mkStrOpt "/dev/nvme0n1" "Device to use for the root filesystem.";
-    encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot "Whether or not the root filesystem is encrypted.";
+    encrypted = mkBoolOpt config.internal.system.boot.encryptedRoot
+      "Whether or not the root filesystem is encrypted.";
     tmpRoot = mkBoolOpt true "Whether or not the root filesystem is a tmpfs.";
     swap = mkBoolOpt true "Whether or not to use a swap partition.";
     swapSize = mkStrOpt "16G" "Swap size";
@@ -167,19 +143,13 @@ in
             fsType = "auto";
             preMountHook = "mkdir -p /mnt/state/home";
             device = "/mnt/state/home";
-            mountOptions = [
-              "bind"
-              "noatime"
-            ];
+            mountOptions = [ "bind" "noatime" ];
           };
           "/nix" = {
             fsType = "auto";
             preMountHook = "mkdir -p /mnt/state/nix";
             device = "/mnt/state/nix";
-            mountOptions = [
-              "bind"
-              "noatime"
-            ];
+            mountOptions = [ "bind" "noatime" ];
           };
         };
       })
@@ -202,6 +172,5 @@ in
 
       })
 
-    ]
-  );
+    ]);
 }

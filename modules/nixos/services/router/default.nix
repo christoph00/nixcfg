@@ -1,39 +1,34 @@
 {
-  # Snowfall Lib provides a customized `lib` instance with access to your flake's library
-  # as well as the libraries available from your flake's inputs.
-  lib,
-  # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs,
-  # You also have access to your flake's inputs.
-  inputs,
-  # Additional metadata is provided by Snowfall Lib.
-  namespace,
-  # The namespace used for your flake, defaulting to "internal" if not set.
-  system,
-  # The system architecture for this host (eg. `x86_64-linux`).
-  target,
-  # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format,
-  # A normalized name for the system target (eg. `iso`).
-  virtual,
-  # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems, # An attribute map of your defined hosts.
+# Snowfall Lib provides a customized `lib` instance with access to your flake's library
+# as well as the libraries available from your flake's inputs.
+lib,
+# An instance of `pkgs` with your overlays and packages applied is also available.
+pkgs,
+# You also have access to your flake's inputs.
+inputs,
+# Additional metadata is provided by Snowfall Lib.
+namespace,
+# The namespace used for your flake, defaulting to "internal" if not set.
+system,
+# The system architecture for this host (eg. `x86_64-linux`).
+target,
+# The Snowfall Lib target for this system (eg. `x86_64-iso`).
+format,
+# A normalized name for the system target (eg. `iso`).
+virtual,
+# A boolean to determine whether this system is a virtual target using nixos-generators.
+systems, # An attribute map of your defined hosts.
 
-  # All other arguments come from the module system.
-  config,
-  ...
-}:
+# All other arguments come from the module system.
+config, ... }:
 
 with builtins;
 with lib;
 with lib.internal;
 
-let
-  cfg = config.internal.services.router;
+let cfg = config.internal.services.router;
 
-in
-
-{
+in {
 
   options.internal.services.router = {
     enable = mkBoolOpt config.internal.isRouter "Enable Router.";
@@ -64,10 +59,9 @@ in
       #netop
     ];
 
-    internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
-    services.technitium-dns-server = {
-      enable = true;
-    };
+    internal.system.state.directories =
+      [ "/var/lib/private/technitium-dns-server" ];
+    services.technitium-dns-server = { enable = true; };
 
     networking = {
       nftables.enable = true;
@@ -151,7 +145,7 @@ in
       networks."10-external" = {
         name = cfg.externalInterface;
         DHCP = "no";
-        addresses = [ { Address = "10.10.1.2/24"; } ];
+        addresses = [{ Address = "10.10.1.2/24"; }];
         vlan = [ "dtag-wan" ];
         linkConfig.MTUBytes = toString 1600;
       };
@@ -225,15 +219,10 @@ in
           IPv6SendRA = "yes";
           DHCPPrefixDelegation = "yes";
           DHCPServer = "no";
-          DNS = [
-            "192.168.2.2"
-            "fe80::1"
-          ];
+          DNS = [ "192.168.2.2" "fe80::1" ];
         };
-        addresses = [
-          { Address = "192.168.2.2/24"; }
-          { Address = "fe80::1/64"; }
-        ];
+        addresses =
+          [ { Address = "192.168.2.2/24"; } { Address = "fe80::1/64"; } ];
         ipv6SendRAConfig = { };
         dhcpPrefixDelegationConfig = {
           UplinkInterface = "dtag-ppp";
@@ -266,18 +255,13 @@ in
       };
     };
 
-    systemd.services."pppd-dtag" = {
-      partOf = [ "systemd-networkd.service" ];
-    };
+    systemd.services."pppd-dtag" = { partOf = [ "systemd-networkd.service" ]; };
 
     services.host-agent.monitoring.systemdServices = [ "pppd-dtag.service" ];
 
     systemd.services.check-internet = {
       description = "check ipv4 internet connectivity";
-      path = [
-        pkgs.iputils
-        pkgs.systemd
-      ];
+      path = [ pkgs.iputils pkgs.systemd ];
       script = ''
         if ! ping -c 3 -W 5 8.8.8.8 >/dev/null 2>&1; then
           systemctl restart pppd-dtag.service
@@ -301,20 +285,12 @@ in
     services.avahi = {
       enable = true;
       reflector = true;
-      allowInterfaces = [
-        "lan"
-        "ts0"
-        "wg0"
-      ];
+      allowInterfaces = [ "lan" "ts0" "wg0" ];
     };
 
     services.openntpd = {
       enable = true;
-      servers = [
-        "ptbtime1.ptb.de"
-        "ptbtime2.ptb.de"
-        "ptbtime3.ptb.de"
-      ];
+      servers = [ "ptbtime1.ptb.de" "ptbtime2.ptb.de" "ptbtime3.ptb.de" ];
     };
 
   };

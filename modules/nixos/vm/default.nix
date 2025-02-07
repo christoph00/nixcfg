@@ -1,11 +1,4 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
-}:
+{ options, config, pkgs, lib, inputs, ... }:
 with lib;
 with lib.internal;
 let
@@ -22,8 +15,7 @@ let
     flake = self;
     updateFlake = "github:christoph00/nixcfg";
   };
-in
-{
+in {
   imports = [ ./guest.nix ];
   options.internal.vm = with types; {
     enable = mkBoolOpt false "Whether or not to configure VM config.";
@@ -47,9 +39,8 @@ in
   config = lib.mkIf cfg.enable {
     microvm.host.enable = true;
 
-    internal.system.state.directories = lib.mkIf config.internal.system.state.enable [
-      "/var/lib/microvms"
-    ];
+    internal.system.state.directories =
+      lib.mkIf config.internal.system.state.enable [ "/var/lib/microvms" ];
 
   };
 

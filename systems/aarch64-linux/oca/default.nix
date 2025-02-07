@@ -1,13 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
-}:
-{
+{ config, lib, pkgs, modulesPath, inputs, namespace, ... }: {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   networking.hostName = "oca";

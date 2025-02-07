@@ -1,39 +1,34 @@
 {
-  # Snowfall Lib provides a customized `lib` instance with access to your flake's library
-  # as well as the libraries available from your flake's inputs.
-  lib,
-  # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs,
-  # You also have access to your flake's inputs.
-  inputs,
-  # Additional metadata is provided by Snowfall Lib.
-  namespace,
-  # The namespace used for your flake, defaulting to "internal" if not set.
-  system,
-  # The system architecture for this host (eg. `x86_64-linux`).
-  target,
-  # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format,
-  # A normalized name for the system target (eg. `iso`).
-  virtual,
-  # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems, # An attribute map of your defined hosts.
+# Snowfall Lib provides a customized `lib` instance with access to your flake's library
+# as well as the libraries available from your flake's inputs.
+lib,
+# An instance of `pkgs` with your overlays and packages applied is also available.
+pkgs,
+# You also have access to your flake's inputs.
+inputs,
+# Additional metadata is provided by Snowfall Lib.
+namespace,
+# The namespace used for your flake, defaulting to "internal" if not set.
+system,
+# The system architecture for this host (eg. `x86_64-linux`).
+target,
+# The Snowfall Lib target for this system (eg. `x86_64-iso`).
+format,
+# A normalized name for the system target (eg. `iso`).
+virtual,
+# A boolean to determine whether this system is a virtual target using nixos-generators.
+systems, # An attribute map of your defined hosts.
 
-  # All other arguments come from the module system.
-  config,
-  ...
-}:
+# All other arguments come from the module system.
+config, ... }:
 
 with builtins;
 with lib;
 with lib.internal;
 
-let
-  cfg = config.internal.services.router.dhcp;
+let cfg = config.internal.services.router.dhcp;
 
-in
-
-{
+in {
 
   options.internal.services.router.dhcp = {
     enable = mkBoolOpt config.internal.isRouter "Enable DHCP Server.";
@@ -82,32 +77,24 @@ in
           };
 
           forward-ddns = {
-            ddns-domains = [
-              {
-                name = "home.net.r505.de.";
-                dns-servers = [
-                  {
-                    hostname = "";
-                    ip-address = "127.0.0.11";
-                    port = 53;
-                  }
-                ];
-              }
-            ];
+            ddns-domains = [{
+              name = "home.net.r505.de.";
+              dns-servers = [{
+                hostname = "";
+                ip-address = "127.0.0.11";
+                port = 53;
+              }];
+            }];
           };
           reverse-ddns = {
-            ddns-domains = [
-              {
-                name = "2.168.192.in-addr.arpa.";
-                dns-servers = [
-                  {
-                    hostname = "";
-                    ip-address = "127.0.0.11";
-                    port = 53;
-                  }
-                ];
-              }
-            ];
+            ddns-domains = [{
+              name = "2.168.192.in-addr.arpa.";
+              dns-servers = [{
+                hostname = "";
+                ip-address = "127.0.0.11";
+                port = 53;
+              }];
+            }];
           };
         };
       };
@@ -115,40 +102,36 @@ in
 
     services.kea.dhcp4.settings = {
       interfaces-config.interfaces = [ "lan" ];
-      subnet4 = [
-        {
-          id = 1;
-          interface = "lan";
-          pools = [ { pool = "192.168.2.51 - 192.168.2.249"; } ];
-          subnet = "192.168.2.0/24";
+      subnet4 = [{
+        id = 1;
+        interface = "lan";
+        pools = [{ pool = "192.168.2.51 - 192.168.2.249"; }];
+        subnet = "192.168.2.0/24";
 
-          option-data = [
-            {
-              name = "routers";
-              data = "192.168.2.2";
-            }
-            {
-              name = "domain-name-servers";
-              data = "192.168.2.2";
-            }
-            {
-              name = "domain-name";
-              data = "lan.net.r505.de";
-            }
-          ];
+        option-data = [
+          {
+            name = "routers";
+            data = "192.168.2.2";
+          }
+          {
+            name = "domain-name-servers";
+            data = "192.168.2.2";
+          }
+          {
+            name = "domain-name";
+            data = "lan.net.r505.de";
+          }
+        ];
 
-          ddns-qualifying-suffix = "lan.net.r505.de";
+        ddns-qualifying-suffix = "lan.net.r505.de";
 
-        }
-      ];
+      }];
     };
 
-    networking.interfaces.lo.ipv4.addresses = [
-      {
-        address = "127.0.0.11";
-        prefixLength = 8;
-      }
-    ];
+    networking.interfaces.lo.ipv4.addresses = [{
+      address = "127.0.0.11";
+      prefixLength = 8;
+    }];
 
     services.knot = {
       enable = true;
@@ -157,10 +140,7 @@ in
         acl = {
           internal_ddns_transfer = {
             address = [ "127.0.0.1" ];
-            action = [
-              "update"
-              "transfer"
-            ];
+            action = [ "update" "transfer" ];
           };
         };
         template = {

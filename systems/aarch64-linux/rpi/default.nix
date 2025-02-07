@@ -1,13 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
-}:
-{
+{ config, lib, pkgs, modulesPath, inputs, namespace, ... }: {
   imports = [
     inputs.raspberry-pi-nix.nixosModules.raspberry-pi
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -35,10 +26,7 @@
   fileSystems."/boot/firmware" = {
     device = "/dev/disk/by-label/FIRMWARE";
     fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
+    options = [ "fmask=0022" "dmask=0022" ];
   };
 
   swapDevices = [ ];

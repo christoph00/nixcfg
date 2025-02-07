@@ -1,13 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  namespace,
-  ...
-}:
-{
+{ config, lib, pkgs, modulesPath, inputs, namespace, ... }: {
   facter.reportPath = ./facter.json;
   networking.hostName = "lsrv";
   internal = {
@@ -57,20 +48,16 @@
     ];
   };
   boot.extraModulePackages = [
-    (config.boot.kernelPackages.r8168.overrideAttrs (
-      _: super: rec {
-        version = "8.054.00";
-        src = pkgs.fetchFromGitHub {
-          owner = "mtorromeo";
-          repo = "r8168";
-          rev = version;
-          sha256 = "sha256-KyycAe+NBmyDDH/XkAM4PpGvXI5J1CuMW4VuHcOm0UQ=";
-        };
-        meta = super.meta // {
-          broken = false;
-        };
-      }
-    ))
+    (config.boot.kernelPackages.r8168.overrideAttrs (_: super: rec {
+      version = "8.054.00";
+      src = pkgs.fetchFromGitHub {
+        owner = "mtorromeo";
+        repo = "r8168";
+        rev = version;
+        sha256 = "sha256-KyycAe+NBmyDDH/XkAM4PpGvXI5J1CuMW4VuHcOm0UQ=";
+      };
+      meta = super.meta // { broken = false; };
+    }))
   ];
   boot.blacklistedKernelModules = [ "r8169" ];
 

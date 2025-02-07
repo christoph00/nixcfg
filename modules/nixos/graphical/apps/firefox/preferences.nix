@@ -1,13 +1,10 @@
 { inputs, ... }:
 let
-  betterfox = builtins.replaceStrings [ "user_pref" ] [ "pref" ] (
-    builtins.readFile "${inputs.betterfox}/user.js"
-  );
-  fastfox = builtins.replaceStrings [ "user_pref" ] [ "pref" ] (
-    builtins.readFile "${inputs.betterfox}/Fastfox.js"
-  );
-in
-''
+  betterfox = builtins.replaceStrings [ "user_pref" ] [ "pref" ]
+    (builtins.readFile "${inputs.betterfox}/user.js");
+  fastfox = builtins.replaceStrings [ "user_pref" ] [ "pref" ]
+    (builtins.readFile "${inputs.betterfox}/Fastfox.js");
+in ''
   ${betterfox}
   ${fastfox}
   pref("intl.accept_languages", "en-us,en,de-de,de");

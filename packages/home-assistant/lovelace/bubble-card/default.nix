@@ -1,8 +1,4 @@
-{
-  lib,
-  stdenv,
-  fetchFromGitHub,
-}:
+{ lib, stdenv, fetchFromGitHub, }:
 
 stdenv.mkDerivation rec {
   pname = "bubble-card";
@@ -27,8 +23,10 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    changelog = "https://github.com/Clooos/Bubble-Card/releases/tag/v${version}";
-    description = "Bubble Card is a minimalist card collection for Home Assistant with a nice pop-up touch.";
+    changelog =
+      "https://github.com/Clooos/Bubble-Card/releases/tag/v${version}";
+    description =
+      "Bubble Card is a minimalist card collection for Home Assistant with a nice pop-up touch.";
     homepage = "https://github.com/Clooos/Bubble-Card";
     license = licenses.gpl3Plus;
   };

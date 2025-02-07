@@ -1,18 +1,9 @@
-{
-  options,
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
-}:
+{ options, config, pkgs, lib, inputs, ... }:
 with lib;
 with lib.internal;
-let
-  cfg = config.internal.vm;
+let cfg = config.internal.vm;
 
-in
-{
+in {
 
   config = lib.mkIf config.internal.isMicroVM {
     microvm = {
@@ -21,7 +12,8 @@ in
       vcpu = lib.mkDefault 1;
       shares = [
         {
-          source = "/var/lib/microvms/${config.networking.hostName}/storage/journal";
+          source =
+            "/var/lib/microvms/${config.networking.hostName}/storage/journal";
           mountPoint = "/var/log/journal";
           tag = "journal";
           proto = "virtiofs";
@@ -29,13 +21,15 @@ in
         }
         {
           proto = "virtiofs";
-          source = "/var/lib/microvms/${config.networking.hostName}/storage/etc/ssh";
+          source =
+            "/var/lib/microvms/${config.networking.hostName}/storage/etc/ssh";
           mountPoint = "/etc/ssh";
           tag = "ssh";
         }
         {
           proto = "virtiofs";
-          source = "/var/lib/microvms/${config.networking.hostName}/storage/var/lib";
+          source =
+            "/var/lib/microvms/${config.networking.hostName}/storage/var/lib";
           mountPoint = "/var/lib";
           tag = "var-lib";
         }

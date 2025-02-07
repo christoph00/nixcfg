@@ -1,23 +1,11 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ options, config, lib, pkgs, ... }:
 
 let
-  inherit (lib)
-    types
-    mkIf
-    mkMerge
-    mkOption
-    ;
+  inherit (lib) types mkIf mkMerge mkOption;
 
   cfg = config.internal;
 
-  hostOptions =
-    name:
+  hostOptions = name:
     types.submodule {
       options = {
         ipv4 = mkOption {
@@ -28,15 +16,13 @@ let
 
         pubkey = mkOption {
           type = types.str;
-          default = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDiemTJHxx3emXiY9Ya8mdfLOU3Nl9AFKcZJfdnV9kU7"; # master key
+          default =
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDiemTJHxx3emXiY9Ya8mdfLOU3Nl9AFKcZJfdnV9kU7"; # master key
           description = "Host Public Key";
         };
 
         zone = mkOption {
-          type = types.enum [
-            "home"
-            "cloud"
-          ];
+          type = types.enum [ "home" "cloud" ];
           default = "home";
         };
 
@@ -55,8 +41,7 @@ let
 
   hasRole = role: (builtins.elem role cfg.roles);
 
-in
-{
+in {
   imports = [ ./meta.nix ];
 
   options.internal = with types; {

@@ -1,8 +1,9 @@
-{modulesPath,
-  ...
-}:
-{
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ./installer.nix ./openvz.nix];
+{ modulesPath, ... }: {
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ./installer.nix
+    ./openvz.nix
+  ];
 
   networking.hostName = "star";
 
@@ -14,7 +15,7 @@
   internal.system.state.enable = false;
   internal.system.boot.enable = false;
 
-systemd.network.networks.venet0 = {
+  systemd.network.networks.venet0 = {
     name = "venet0";
     # Change to your assigned IP
     address = [ "77.223.215.81/24" ];
@@ -25,12 +26,8 @@ systemd.network.networks.venet0 = {
     };
   };
 
-  boot.initrd.kernelModules = [
-    "ata_piix"
-    "uhci_hcd"
-    "xen_blkfront"
-    "vmw_pvscsi"
-  ];
+  boot.initrd.kernelModules =
+    [ "ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi" ];
 
   system.stateVersion = "24.11";
 }
