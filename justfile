@@ -1,5 +1,6 @@
 remote-user := `whoami`
 local-hostname := `hostname`
+ip := ""
 
 is-local-host hostname:
     #!/usr/bin/env bash
@@ -22,10 +23,11 @@ build hostname:
 copy hostname:
     #!/usr/bin/env bash
     set -euo pipefail
+    target="${ip:-{{hostname}}}}"
     if ! just is-local-host {{hostname}} 2>/dev/null; then
         CLOSURE_PATH="$(readlink -f result)"
         echo "Kopiere Closure nach {{hostname}}..."
-        nix-copy-closure --to "{{remote-user}}@{{hostname}}" "$CLOSURE_PATH"
+        nix-copy-closure --to "{{remote-user}}@$target" "$CLOSURE_PATH"
     else
         echo "Überspringe Kopieren für lokalen Host"
     fi
@@ -33,6 +35,8 @@ copy hostname:
 activate hostname mode:
     #!/usr/bin/env bash
     set -euo pipefail
+    target="${ip:-{{hostname}}}}"
+
     if [[ ! "{{mode}}" =~ ^(boot|switch)$ ]]; then
         echo "Aktivierungsmodus muss 'boot' oder 'switch' sein"
         exit 1
@@ -43,7 +47,7 @@ activate hostname mode:
         doas nix-env -p /nix/var/nix/profiles/system --set "$CLOSURE_PATH" && \
         doas "$CLOSURE_PATH/bin/switch-to-configuration" {{mode}}
     else
-        ssh "{{remote-user}}@{{hostname}}" "doas nix-env -p /nix/var/nix/profiles/system --set $CLOSURE_PATH && doas $CLOSURE_PATH/bin/switch-to-configuration {{mode}}"
+        ssh "{{remote-user}}@$target" "doas nix-env -p /nix/var/nix/profiles/system --set $CLOSURE_PATH && doas $CLOSURE_PATH/bin/switch-to-configuration {{mode}}"
     fi
     if [ "{{mode}}" = "boot" ]; then
         echo "Konfiguration wird beim nächsten Boot aktiviert"
@@ -62,7 +66,7 @@ deploy hostname *args="": (build hostname) (copy hostname)
     #!/usr/bin/env bash
     set -euo pipefail
     if [ -n "{{args}}" ]; then
-        just activate {{hostname}} {{args}}
+        just activate {{hostname}} {{args}} ip={{ip}}
     else
         echo "Konfiguration wurde gebaut und kopiert, aber nicht aktiviert"
         echo "Zum Aktivieren: just activate {{hostname}} <boot|switch>"

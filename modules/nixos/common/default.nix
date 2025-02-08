@@ -79,7 +79,7 @@ with lib.internal;
 
     # Re-add nixos-rebuild to the systemPackages that was removed by the
     # `system.disableInstallerTools` option.
-    environment.systemPackages = [ pkgs.nixos-rebuild ];
+    environment.systemPackages = [ pkgs.nixos-rebuild-ng ];
 
   };
 

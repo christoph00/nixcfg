@@ -90,9 +90,9 @@ in
               netdisco
               async-upnp-client
               paho-mqtt
-              withings-api
-              withings-sync
-              aiowithings
+              #withings-api
+              #withings-sync
+              #aiowithings
               python-otbr-api
               pyipp
               pysnmp
@@ -104,7 +104,7 @@ in
               pybluez
               aioblescan
               grpcio-gcp
-              netmiko
+              #netmiko
             ];
         };
       in

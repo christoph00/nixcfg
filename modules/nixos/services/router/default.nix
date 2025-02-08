@@ -63,10 +63,10 @@ in
       #netop
     ];
 
-    internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
-    services.technitium-dns-server = {
-      enable = true;
-    };
+    # internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
+    # services.technitium-dns-server = {
+    #   enable = true;
+    # };
 
     networking = {
       nftables.enable = true;
@@ -307,13 +307,41 @@ in
       ];
     };
 
-    services.openntpd = {
+    # services.openntpd = {
+    #   enable = true;
+    #   servers = [
+    #     "ptbtime1.ptb.de"
+    #     "ptbtime2.ptb.de"
+    #     "ptbtime3.ptb.de"
+    #   ];
+    # };
+    #
+    services.ntpd-rs.enable = true;
+
+    services.dnsmasq = {
       enable = true;
-      servers = [
-        "ptbtime1.ptb.de"
-        "ptbtime2.ptb.de"
-        "ptbtime3.ptb.de"
-      ];
+      alwaysKeepRunning = true;
+      settings = {
+        bind-dynamic = true;
+        interface = [ "lan" ];
+        dhcp-range = [ "192.168.2.21,192.168.2.249,255.255.255.0,24h" ];
+        server = [
+          "9.9.9.9"
+          "8.8.8.8"
+          "1.1.1.1"
+        ];
+        domain-needed = true;
+        bogus-priv = true;
+        no-resolv = true;
+        cache-size = 1000;
+
+        local = "/lan/";
+        domain = "lan";
+        expand-hosts = true;
+
+        no-hosts = true;
+        address = "/ha.r505.de/192.168.2.2";
+      };
     };
 
   };

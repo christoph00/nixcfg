@@ -69,7 +69,7 @@ in
         plugins = [
           "github.com/caddy-dns/cloudflare@v0.0.0-20240703190432-89f16b99c18e"
         ];
-        hash = "sha256-WGV/Ve7hbVry5ugSmTYWDihoC9i+D3Ct15UKgdpYc9U=";
+        hash = "sha256-JVkUkDKdat4aALJHQCq1zorJivVCdyBT+7UhqTvaFLw=";
       };
 
       email = "admin@r505.de";
@@ -102,7 +102,7 @@ in
                 resolvers 1.1.1.1
               }
               header -Alt-svc
-              reverse_proxy http://127.0.0.1:8123 
+              reverse_proxy http://127.0.0.1:8123
             '';
         };
         "dns.r505.de" = {
@@ -117,7 +117,7 @@ in
                 resolvers 1.1.1.1
               }
               header -Alt-svc
-              reverse_proxy http://127.0.0.1:5380 
+              reverse_proxy http://127.0.0.1:5380
             '';
         };
 
