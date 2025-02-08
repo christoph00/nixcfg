@@ -223,7 +223,8 @@ in
           IPv6AcceptRA = "no";
           IPv6SendRA = "yes";
           DHCPPrefixDelegation = "yes";
-          DHCPServer = "no";
+          DHCPServer = true;
+          IPForward = true;
           DNS = [
             "192.168.2.2"
             "fe80::1"
@@ -233,11 +234,15 @@ in
           { Address = "192.168.2.2/24"; }
           { Address = "fe80::1/64"; }
         ];
+        linkConfig.RequiredForOnline = "routable";
         ipv6SendRAConfig = { };
         dhcpPrefixDelegationConfig = {
           UplinkInterface = "dtag-ppp";
           SubnetId = "0x01";
           Announce = "yes";
+        };
+        dhcpServerConfig = {
+          PoolOffset = 20;
         };
       };
     };
@@ -324,7 +329,7 @@ in
       settings = {
         bind-dynamic = true;
         interface = [ "lan" ];
-        dhcp-range = [ "192.168.2.21,192.168.2.249,255.255.255.0,24h" ];
+        #dhcp-range = [ "192.168.2.21,192.168.2.249,255.255.255.0,24h" ];
         server = [
           "9.9.9.9"
           "8.8.8.8"
