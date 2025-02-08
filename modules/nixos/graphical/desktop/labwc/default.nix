@@ -46,9 +46,9 @@ in
       labwc-menu-generator
       networkmanagerapplet
       adwaita-icon-theme
-      greybird
-      glib
-      xfce.xfce4-panel
+      #greybird
+      #glib
+      #xfce.xfce4-panel
       #mate.mate-panel
     ];
 
