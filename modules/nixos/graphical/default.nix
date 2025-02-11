@@ -53,9 +53,6 @@ with lib.internal;
       gammastep
       wlsunset
 
-      whitesur-gtk-theme
-      whitesur-icon-theme
-
       font-manager
       file-roller
       pavucontrol
@@ -73,6 +70,8 @@ with lib.internal;
       adwaita-icon-theme
       adwaita-qt
       adwsteamgtk
+
+      bottles
 
       #internal.go-hass-agent
 

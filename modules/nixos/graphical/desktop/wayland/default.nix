@@ -134,6 +134,14 @@ in
         serviceConfig.Slice = "background-graphical.slice";
       };
 
+      xfce-power-manager = mkIf cfg.xsettingsd {
+        description = "xfce-power-manager";
+        script = "${pkgs.xfce.xfce4-power-manager}/bin/xfce4-power-manager";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "background-graphical.slice";
+      };
+
       #   polkit-gnome-authentication-agent-1 = {
       #     description = "polkit-gnome-authentication-agent-1";
       #     script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";

@@ -56,11 +56,6 @@ in
 
     services.xserver = {
       enable = true;
-      # desktopManager.mate = {
-      #   enable = true;
-      #   extraPanelApplets = with pkgs.mate; [ mate-applets ];
-      #   enableWaylandSession = true;
-      # };
       desktopManager.xfce = {
         enable = true;
         enableXfwm = false;
