@@ -38,7 +38,11 @@ in
       inherit (cfg) name;
 
       hashedPasswordFile = cfg.passwordFile;
+<<<<<<< HEAD
       #initialHashedPassword = "$6$1vqU2umGkgRQ5u1/$FpMIFgzGwYxqcDah6T.YPZG36HbQtXNpEcfEniIoX9SewJ5mJrTZiEgfqaw1ttzyM9N/BMxOx4kq6nn5gtXmx1";
+=======
+      # initialHashedPassword = "$6$1vqU2umGkgRQ5u1/$FpMIFgzGwYxqcDah6T.YPZG36HbQtXNpEcfEniIoX9SewJ5mJrTZiEgfqaw1ttzyM9N/BMxOx4kq6nn5gtXmx1";
+>>>>>>> 0f15f28c (ok)
 
       home = "/home/${cfg.name}";
       group = "users";
