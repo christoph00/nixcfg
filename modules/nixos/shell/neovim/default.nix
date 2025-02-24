@@ -17,6 +17,7 @@ in
   config = mkIf cfg.enable {
     programs.nvf = {
       enable = true;
+
       settings = {
         vim = {
           useSystemClipboard = true;
@@ -85,6 +86,15 @@ in
             setupOpts = {
               signature.enabled = true;
               keymap.preset = "enter";
+              sources = {
+                default = [
+                  "lsp"
+                  "path"
+                  "snippets"
+                  "buffer"
+                  # "copilot"
+                ];
+              };
 
             };
           };
@@ -106,7 +116,7 @@ in
               };
               lsp = {
                 enable = true;
-                package = [ "nixd" ];
+                server = "nixd";
               };
               treesitter.enable = true;
             };
