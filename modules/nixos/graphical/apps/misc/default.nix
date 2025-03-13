@@ -58,7 +58,7 @@ in
       pkgs.gimp
       # pkgs.wezterm
       #
-      pkgs.floorp
+      pkgs.windsurf
 
       pkgs.keepassxc
 
