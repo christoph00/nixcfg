@@ -54,10 +54,10 @@ in
           inherit (cfg) port host;
         };
         theme = {
-          background-color = "240 13 14";
-          primary-color = "50 33 68";
-          negative-color = "358 100 68";
-          contrast-multiplier = 1.2;
+          light = true;
+          background-color = "0 0 95";
+          primary-color = "0 0 10";
+          negative-color = "0 90 50";
         };
         pages = [
           {
@@ -71,12 +71,12 @@ in
                     groups = lib.lists.singleton {
                       links = [
                         {
-                          title = "GitHub";
-                          url = "https://github.com";
+                          title = "Cloud";
+                          url = "https://cloud.r505.de";
                         }
                         {
-                          title = "NixOS Status";
-                          url = "https://status.nixos.org";
+                          title = "Home Assistant";
+                          url = "https://ha.r505.de";
                         }
                       ];
                     };
@@ -96,16 +96,38 @@ in
               {
                 size = "full";
                 widgets = [
+                  {
+                    type = "search";
+                    search-engine = "duckduckgo";
+                    autofocus = true;
+                    new-tab = true;
+                    bangs = [
+                      {
+                        title = "Youtube";
+                        shortcut = "!yt";
+                        url = "https://www.youtube.com/results?search_query={QUERY}";
+                      }
+                      {
+                        title = "GitHub";
+                        shortcut = "!gh";
+                        url = "https://github.com/search?q={QUERY}";
+                      }
+                      {
+                        title = "Reddit";
+                        shortcut = "!r";
+                        url = "https://www.reddit.com/search?q={QUERY}";
+                      }
+                      {
+                        title = "Nix Packages";
+                        shortcut = "!nix";
+                        url = "https://search.nixos.org/packages?query={QUERY}";
+                      }
+                    ];
+
+                  }
                   { type = "hacker-news"; }
                   { type = "lobsters"; }
-                  {
-                    type = "reddit";
-                    subreddit = "neovim";
-                  }
-                  {
-                    type = "reddit";
-                    subreddit = "unixporn";
-                  }
+
                 ];
               }
             ];
