@@ -42,10 +42,6 @@ in
 
     internal.services.container.enable = true;
 
-    services.nginx.enable = true;
-    security.acme.acceptTerms = true;
-    security.acme.defaults.email = "chr@asche.co";
-
     virtualisation.oci-containers.containers.collabora-office =
       let
         inherit (config.users.users.collabora-office) uid;
@@ -79,16 +75,16 @@ in
         ];
       };
 
-    services.nginx.virtualHosts."office.r505.de" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:9980";
-        proxyWebsockets = true;
-        extraConfig = ''
-          proxy_read_timeout 36000s;
+    services.caddy.virtualHosts."office.r505.de" = {
+      extraConfig = # caddyfile
+        ''
+          tls {
+            dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+            resolvers 1.1.1.1
+          }
+          header -Alt-svc
+          reverse_proxy http://127.0.0.1:9980
         '';
-      };
     };
 
     users.users.collabora-office = {
