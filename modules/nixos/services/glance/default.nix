@@ -49,6 +49,8 @@ in
 
   config = mkIf cfg.enable {
 
+    internal.services.webserver.enable = true;
+
     services.caddy.virtualHosts."dash.r505.de" = {
       extraConfig = # caddyfile
         ''
