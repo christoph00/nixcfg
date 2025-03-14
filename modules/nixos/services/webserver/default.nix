@@ -74,43 +74,6 @@ in
 
       email = "admin@r505.de";
       acmeCA = "https://acme-v02.api.letsencrypt.org/directory";
-      #logFormat = "level INFO";
-      # globalConfig = # caddyfile
-      # ''
-      #   servers  {
-      #      protocols h1 h2
-      #    }
-      # '';
-
-      #     #     dynamic_dns {
-      #       provider cloudflare {env.CLOUDFLARE_API_TOKEN}
-      #       domains {
-      #         r505.de ha
-      #       }
-      #       ip_source simple_http https://icanhazip.com
-      #       ip_source simple_http https://api64.ipify.org
-      #       check_interval 5m
-      #       versions ipv4
-      #       ttl 5m
-      #     }
-
-        # "dns.r505.de" = {
-        #   extraConfig = # caddyfile
-        #     ''
-        #       @denied not remote_ip private_ranges
-        #       handle @denied {
-        #         abort
-        #       }
-        #       tls {
-        #         dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-        #         resolvers 1.1.1.1
-        #       }
-        #       header -Alt-svc
-        #       reverse_proxy http://127.0.0.1:5380
-        #     '';
-        # };
-
-      };
 
     };
 
