@@ -34,6 +34,7 @@ with lib.internal;
 
     internal.graphical.desktop.wayland.enable = true;
     internal.graphical.desktop.labwc.enable = true;
+    internal.graphical.desktop.niri.enable = true;
     hardware.graphics.enable = true;
 
     internal.user.extraGroups = [
