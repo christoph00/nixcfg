@@ -165,7 +165,12 @@ in
                       {
                         title = "GitHub";
                         shortcut = "gh";
-                        url = "https://github.com/search?q={QUERY}";
+                        url = "https://github.com/search?q={QUERY}&type=code";
+                      }
+                      {
+                        title = "Github Nix";
+                        shortcut = "ghn";
+                        url = "https://github.com/search?q={QUERY}+lang%3Anix&type=code";
                       }
                       {
                         title = "Reddit";

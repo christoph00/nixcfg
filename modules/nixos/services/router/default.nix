@@ -335,6 +335,7 @@ in
           "8.8.8.8"
           "1.1.1.1"
         ];
+        port = 5353;
         domain-needed = true;
         bogus-priv = true;
         no-resolv = true;
