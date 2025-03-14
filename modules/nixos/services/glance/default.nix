@@ -66,21 +66,21 @@ in
               {
                 size = "small";
                 widgets = [
-                  {
-                    type = "bookmarks";
-                    groups = lib.lists.singleton {
-                      links = [
-                        {
-                          title = "Cloud";
-                          url = "https://cloud.r505.de";
-                        }
-                        {
-                          title = "Home Assistant";
-                          url = "https://ha.r505.de";
-                        }
-                      ];
-                    };
-                  }
+                  # {
+                  #   type = "bookmarks";
+                  #   groups = lib.lists.singleton {
+                  #     links = [
+                  #       {
+                  #         title = "Cloud";
+                  #         url = "https://cloud.r505.de";
+                  #       }
+                  #       {
+                  #         title = "Home Assistant";
+                  #         url = "https://ha.r505.de";
+                  #       }
+                  #     ];
+                  #   };
+                  # }
                   {
                     type = "clock";
                     hour-format = "24h";
@@ -90,6 +90,37 @@ in
                   {
                     type = "weather";
                     location = "Hannover, Germany";
+                  }
+                  {
+                    type = "markets";
+                    markets = [
+                      {
+                        name = "DTAG";
+                        symbol = "DTE.DE";
+
+                      }
+                      {
+                        name = "A1JX52";
+                        symbol = "A1JX52";
+                      }
+                    ];
+                  }
+                  {
+                    type = "monitor";
+                    cache = "1m";
+                    title = "Services";
+                    style = "compact";
+                    sites = [
+                      {
+                        title = "Cloud";
+                        url = "https://cloud.r505.de";
+
+                      }
+                      {
+                        title = "Home Assistant";
+                        url = "https://ha.r505.de";
+                      }
+                    ];
                   }
                 ];
               }
@@ -104,27 +135,28 @@ in
                     bangs = [
                       {
                         title = "Youtube";
-                        shortcut = "!yt";
+                        shortcut = "yt";
                         url = "https://www.youtube.com/results?search_query={QUERY}";
                       }
                       {
                         title = "GitHub";
-                        shortcut = "!gh";
+                        shortcut = "gh";
                         url = "https://github.com/search?q={QUERY}";
                       }
                       {
                         title = "Reddit";
-                        shortcut = "!r";
+                        shortcut = "r";
                         url = "https://www.reddit.com/search?q={QUERY}";
                       }
                       {
                         title = "Nix Packages";
-                        shortcut = "!nix";
+                        shortcut = "nix";
                         url = "https://search.nixos.org/packages?query={QUERY}";
                       }
                     ];
 
                   }
+
                   { type = "hacker-news"; }
                   { type = "lobsters"; }
 
