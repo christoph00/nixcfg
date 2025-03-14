@@ -84,7 +84,6 @@ in
                   {
                     type = "clock";
                     hour-format = "24h";
-                    timezones = [ { timezone = "Europe/Berlin"; } ];
                   }
                   { type = "calendar"; }
                   {
@@ -101,7 +100,7 @@ in
                       }
                       {
                         name = "A1JX52";
-                        symbol = "A1JX52";
+                        symbol = "VGWL.DE";
                       }
                     ];
                   }
@@ -119,6 +118,15 @@ in
                       {
                         title = "Home Assistant";
                         url = "https://ha.r505.de";
+                      }
+                    ];
+                  }
+                  {
+                    type = "server-stats";
+                    servers = [
+                      {
+                        type = "local";
+                        name = "oca";
                       }
                     ];
                   }
