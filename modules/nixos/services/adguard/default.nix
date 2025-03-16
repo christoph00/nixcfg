@@ -39,6 +39,19 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    services.caddy.virtualHosts."dns.r505.de" = {
+      extraConfig = # caddyfile
+        ''
+          tls {
+            dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+            resolvers 1.1.1.1
+          }
+          header -Alt-svc
+          reverse_proxy http://127.0.0.1:5000
+        '';
+    };
+
     services.adguardhome = {
       settings = {
         bind_host = "0.0.0.0";
