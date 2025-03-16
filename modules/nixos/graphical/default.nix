@@ -33,8 +33,7 @@ with lib.internal;
   config = mkIf config.internal.isGraphical {
 
     internal.graphical.desktop.wayland.enable = true;
-    internal.graphical.desktop.labwc.enable = true;
-    internal.graphical.desktop.niri.enable = true;
+
     hardware.graphics.enable = true;
 
     internal.user.extraGroups = [

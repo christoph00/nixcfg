@@ -37,7 +37,7 @@ in
     enable = mkBoolOpt config.internal.isGraphical "Enable the Display Manager.";
     x11 = mkBoolOpt false "Enable the X11 Display Manager.";
     wayland = mkBoolOpt config.internal.graphical.desktop.wayland.enable "Enable the Wayland Display Manager.";
-    autologin = mkBoolOpt' !config.internal.isLaptop;
+    autologin = mkBoolOpt' config.internal.isHeadlessDesktop;
   };
 
   config = mkIf cfg.enable {

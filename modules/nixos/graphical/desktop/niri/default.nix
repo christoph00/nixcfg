@@ -34,7 +34,7 @@ in
 {
 
   options.internal.graphical.desktop.niri = {
-    enable = mkBoolOpt false "Enable the niri desktop environment.";
+    enable = mkBoolOpt config.internal.isLaptop "Enable the niri desktop environment.";
   };
 
   config = mkIf cfg.enable {
@@ -51,16 +51,7 @@ in
       #mate.mate-panel
     ];
 
-    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
 
-    services.xserver = {
-      enable = true;
-      desktopManager.xfce = {
-        enable = true;
-        enableXfwm = false;
-        enableWaylandSession = true;
-      };
-    };
 
     programs.uwsm = {
       waylandCompositors.niri = {

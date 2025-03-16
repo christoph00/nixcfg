@@ -72,11 +72,11 @@ in
               "@contain-google".install_url = mozillaAddon "google-container";
               "@testpilot-containers".install_url = mozillaAddon "multi-account-containers";
 
-              # "ncpasswords@mdns.eu" = {
-              # install_url = mozillaAddon "nextcloud-passwords";
-              # installation_mode = "force_installed";
-              # default_area = "navbar";
-              # };
+              "ncpasswords@mdns.eu" = {
+                install_url = mozillaAddon "nextcloud-passwords";
+                installation_mode = "force_installed";
+                default_area = "navbar";
+              };
 
               "uBlock0@raymondhill.net".install_url = mozillaAddon "ublock-origin";
 
