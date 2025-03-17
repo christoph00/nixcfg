@@ -11,7 +11,7 @@ let
 in
 {
   options.internal.shell.neovim = with types; {
-    enable = mkBoolOpt true "Whether or not to configure neovim config.";
+    enable = mkBoolOpt false "Whether or not to configure neovim config.";
   };
 
   config = mkIf cfg.enable {

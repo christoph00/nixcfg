@@ -76,6 +76,18 @@ in
 
     programs.uwsm = {
       enable = cfg.uwsm;
+      waylandCompositors = {
+           # niri = {
+           #   prettyName = "Niri";
+           #   comment = "A scrollable-tiling Wayland compositor.";
+           #   binPath = "${pkgs.niri}/bin/niri";
+           # };
+           # labwc = {
+           #   prettyName = "Labwc";
+           #   comment = "A Wayland window-stacking compositor.";
+           #   binPath = "${pkgs.labwc}/bin/labwc";
+           # };
+         };
     };
 
     systemd.user.services = mkIf cfg.uwsm {
