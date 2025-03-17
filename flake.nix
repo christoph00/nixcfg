@@ -194,7 +194,7 @@
         flake.overlays.default
         chaotic.overlays.default
         nvimcfg.overlays.default
-        nixpkgs-wayland.overlay
+        #nixpkgs-wayland.overlay
         host-agent.overlays.default
         #caddy.overlays.default
       ];

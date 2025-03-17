@@ -169,29 +169,29 @@ in
     security.pam.services.waylock = { };
 
     environment.systemPackages = with pkgs; [
-      xwayland
-      wayland-protocols
-      wayland-utils
+      #xwayland
+      #wayland-protocols
+      #wayland-utils
       wl-clipboard
-      wlroots
+      #wlroots
       wlr-randr
-      waylock
+      #waylock
       wayvnc
-      wlogout
-      lswt
-      wlrctl
-      wlopm
-      wev
+      #wlogout
+      #lswt
+      #wlrctl
+      #wlopm
+      #wev
 
-      grim
+      #grim
 
       gtklock
 
       swww
 
-      fuzzel
+      #fuzzel
 
-      waybar
+      #waybar
       sysmenu
 
       #sfwbar
@@ -202,21 +202,21 @@ in
 
       # inputs.ignis.packages.${system}.ignis
 
-      gtk4-layer-shell
+      #gtk4-layer-shell
       #internal.hyprpanel
 
       mako
       swayidle
 
-      wtype
+      #wtype
 
-      swayimg
+      #swayimg
       wlr-randr
       wl-clipboard
 
-      wluma
-      wl-mirror
-      wf-recorder
+      #wluma
+      #wl-mirror
+      #wf-recorder
 
       libnotify
 
