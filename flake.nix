@@ -77,6 +77,15 @@
       url = "github:WilliButz/preservation";
     };
 
+    stylix.url = "github:danth/stylix";
+    stylix.inputs.nur.follows = "nur";
+
+    nur.url = "github:nix-community/NUR";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     ghostty = {
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs-unstable.follows = "nixpkgs";
@@ -163,6 +172,11 @@
       };
     };
 
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -197,12 +211,17 @@
         #nixpkgs-wayland.overlay
         host-agent.overlays.default
         #caddy.overlays.default
+        niri.overlays.default
+      ];
+
+      homes.modules = with inputs; [
+        niri.homeModules.niri
       ];
 
       systems.modules.nixos = with inputs; [
         nixos-facter-modules.nixosModules.facter
         srvos.nixosModules.common
-        srvos.nixosModules.mixins-nix-experimental
+        #srvos.nixosModules.mixins-nix-experimental
         agenix.nixosModules.default
         chaotic.nixosModules.default
         {
@@ -225,13 +244,11 @@
 
         #vaultix.flakeModules.default
 
+        niri.nixosModules.niri
+
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
-
-      checks = builtins.mapAttrs (
-        system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
-      ) inputs.deploy-rs.lib;
 
       outputs-builder = channels: {
         formatter = channels.nixpkgs.nixfmt-rfc-style;

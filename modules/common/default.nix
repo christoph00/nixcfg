@@ -6,7 +6,8 @@
 }:
 
 {
-  nix.package = lib.mkForce pkgs.lix;
+  nix.package = lib.mkForce pkgs.nixVersions.latest;
+
   nix.settings = {
 
     experimental-features = [
@@ -38,7 +39,6 @@
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
     ];
-  };
   };
 
 }
