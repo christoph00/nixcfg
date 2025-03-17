@@ -200,7 +200,7 @@ in
 
       pwvucontrol
 
-      # inputs.ignis.packages.${system}.ignis
+      inputs.ignis.packages.${system}.ignis
 
       #gtk4-layer-shell
       #internal.hyprpanel
