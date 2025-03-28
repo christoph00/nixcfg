@@ -211,7 +211,7 @@
         #nixpkgs-wayland.overlay
         host-agent.overlays.default
         #caddy.overlays.default
-        niri.overlays.default
+    #i# niri.overlays.default
       ];
 
       homes.modules = with inputs; [
@@ -244,7 +244,7 @@
 
         #vaultix.flakeModules.default
 
-        niri.nixosModules.niri
+       # niri.nixosModules.niri
 
       ];
 
