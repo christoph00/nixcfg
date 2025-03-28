@@ -111,7 +111,7 @@ with lib.internal;
       mona-sans
       monaspace
       hubot-sans
-      maple-mono-NF
+      maple-mono.NF
       material-design-icons
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
