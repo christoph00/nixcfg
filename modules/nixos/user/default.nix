@@ -23,12 +23,13 @@ in
     prompt-init = mkBoolOpt true "Whether or not to show an initial message when opening a new shell.";
     extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
     extraOptions = mkOpt attrs { } (mdDoc "Extra options passed to `users.users.<name>`.");
+    enableHM = mkBoolOpt config.internal.isGraphical "Whether or not to enable Home Manager for the user.";
   };
 
   config = {
     snowfallorg.users.${cfg.name} = {
       home = {
-        enable = false;
+        enable = cfg.enableHM;
       };
     };
     age.secrets.user_christoph_pw.file = ../../../secrets/user_christoph_pw;

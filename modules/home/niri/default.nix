@@ -20,5 +20,5 @@
   ...
 }:
 {
-  # Your configuration.
+  #programs.niri.enable = true;
 }

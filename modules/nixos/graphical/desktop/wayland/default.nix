@@ -138,13 +138,13 @@ in
         serviceConfig.Slice = "background-graphical.slice";
       };
 
-      xsettingsd = mkIf cfg.xsettingsd {
-        description = "xsettingsd";
-        script = "${pkgs.xsettingsd}/bin/xsettingsd";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
+      # xsettingsd = mkIf cfg.xsettingsd {
+      #   description = "xsettingsd";
+      #   script = "${pkgs.xsettingsd}/bin/xsettingsd";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "background-graphical.slice";
+      # };
 
       xfce-power-manager = mkIf cfg.xsettingsd {
         description = "xfce-power-manager";
