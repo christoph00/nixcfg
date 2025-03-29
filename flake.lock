@@ -1102,6 +1102,26 @@
         "type": "github"
       }
     },
+    "ignis": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1742232370,
+        "narHash": "sha256-vx9UdspfvIy7ztzMX+IBIf+OkOGHD9jQDvjiVIc4L+U=",
+        "owner": "linkfrg",
+        "repo": "ignis",
+        "rev": "b6d2715a0ff208fc82e697c82b3d3ae25314a922",
+        "type": "github"
+      },
+      "original": {
+        "owner": "linkfrg",
+        "repo": "ignis",
+        "type": "github"
+      }
+    },
     "jovian": {
       "inputs": {
         "nix-github-actions": "nix-github-actions",
@@ -1785,6 +1805,7 @@
         "ghostty": "ghostty",
         "home-manager": "home-manager_3",
         "host-agent": "host-agent",
+        "ignis": "ignis",
         "lanzaboote": "lanzaboote",
         "microvm": "microvm",
         "mnw": "mnw",

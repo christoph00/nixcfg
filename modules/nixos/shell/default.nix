@@ -117,6 +117,9 @@ in
       # pkgs.uv
       pkgs.uutils-coreutils-noprefix
 
+      pkgs.nixfmt-tree
+      pkgs.nixfmt-rfc-style
+
     ];
 
     programs.nh = {

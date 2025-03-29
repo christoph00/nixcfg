@@ -51,8 +51,6 @@ in
       #mate.mate-panel
     ];
 
-
-
     programs.uwsm = {
       waylandCompositors.niri = {
         binPath = "${config.programs.niri.package}/bin/niri";

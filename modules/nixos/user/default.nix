@@ -33,6 +33,9 @@ in
       };
     };
     age.secrets.user_christoph_pw.file = ../../../secrets/user_christoph_pw;
+
+    users.defaultUserShell = pkgs.nushell;
+
     users.users.${cfg.name} = {
       isNormalUser = true;
 
@@ -42,8 +45,6 @@ in
 
       home = "/home/${cfg.name}";
       group = "users";
-
-      shell = pkgs.bash;
 
       uid = 1000;
 

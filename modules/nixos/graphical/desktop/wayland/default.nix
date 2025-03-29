@@ -38,7 +38,7 @@ in
     waybar = mkBoolOpt true "Enable Waybar";
     sfwbar = mkBoolOpt false "Enable sfwbar";
     ironbar = mkBoolOpt false "Enable ironbar";
-    xsettingsd = mkBoolOpt true "Enable xsettingsd";
+    xsettingsd = mkBoolOpt false "Enable xsettingsd";
     uwsm = mkBoolOpt true "Enable uwsm";
     wlsunset = mkBoolOpt config.internal.isLaptop "Enable wlsunset";
 
@@ -77,17 +77,18 @@ in
     programs.uwsm = {
       enable = cfg.uwsm;
       waylandCompositors = {
-           # niri = {
-           #   prettyName = "Niri";
-           #   comment = "A scrollable-tiling Wayland compositor.";
-           #   binPath = "${pkgs.niri}/bin/niri";
-           # };
-           # labwc = {
-           #   prettyName = "Labwc";
-           #   comment = "A Wayland window-stacking compositor.";
-           #   binPath = "${pkgs.labwc}/bin/labwc";
-           # };
-         };
+
+        # niri = {
+        #   prettyName = "Niri";
+        #   comment = "A scrollable-tiling Wayland compositor.";
+        #   binPath = "${pkgs.niri}/bin/niri";
+        # };
+        # labwc = {
+        #   prettyName = "Labwc";
+        #   comment = "A Wayland window-stacking compositor.";
+        #   binPath = "${pkgs.labwc}/bin/labwc";
+        # };
+      };
     };
 
     systemd.user.services = mkIf cfg.uwsm {
@@ -166,7 +167,7 @@ in
     services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
     security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
-    security.pam.services.waylock = { };
+    #security.pam.services.waylock = { };
 
     environment.systemPackages = with pkgs; [
       #xwayland
@@ -205,7 +206,7 @@ in
       #gtk4-layer-shell
       #internal.hyprpanel
 
-      mako
+      #mako
       swayidle
 
       #wtype
