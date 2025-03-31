@@ -323,7 +323,7 @@ in
     services.ntpd-rs.enable = true;
 
     services.dnsmasq = {
-      enable = true;
+      enable = false;
       alwaysKeepRunning = true;
       settings = {
         bind-dynamic = true;
