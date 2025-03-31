@@ -244,11 +244,6 @@
 
         #vaultix.flakeModules.default
 
-<<<<<<< HEAD
-       # niri.nixosModules.niri
-=======
-        #niri.nixosModules.niri
->>>>>>> 93e2ff54 (ok)
 
       ];
 
