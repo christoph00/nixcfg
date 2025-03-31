@@ -220,11 +220,10 @@ in
         };
         networkConfig = {
           LinkLocalAddressing = "ipv6";
-          IPv6AcceptRA = "no";
-          IPv6SendRA = "yes";
-          DHCPPrefixDelegation = "yes";
+          IPv6AcceptRA = false;
+          IPv6SendRA = true;
+          DHCPPrefixDelegation = true;
           DHCPServer = true;
-          IPForward = true;
           DNS = [
             "192.168.2.2"
             "fe80::1"
