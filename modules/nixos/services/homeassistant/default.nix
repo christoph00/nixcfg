@@ -326,7 +326,7 @@ in
           "isal"
 
           "zwave_js"
-
+          "cookidoo"
           "file"
           "media_extractor"
           "youtube"

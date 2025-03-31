@@ -41,6 +41,7 @@ in
   config = mkIf cfg.enable {
 
   services.resolved.enable = mkForce false;
+  networking.nameservers = ["127.0.0.1"];
 
     services.caddy.virtualHosts."dns.r505.de" = {
       extraConfig = # caddyfile
