@@ -40,6 +40,8 @@ in
 
   config = mkIf cfg.enable {
 
+  services.resolved.enable = mkForce false;
+
     services.caddy.virtualHosts."dns.r505.de" = {
       extraConfig = # caddyfile
         ''
@@ -48,14 +50,15 @@ in
             resolvers 1.1.1.1
           }
           header -Alt-svc
-          reverse_proxy http://127.0.0.1:5000
+          reverse_proxy http://127.0.0.1:3000
         '';
     };
 
     services.adguardhome = {
+      enable = true;
       settings = {
-        bind_host = "0.0.0.0";
-        bind_port = 5000;
+        host = "0.0.0.0";
+        port = 3000;
         http = {
           address = "0.0.0.0:5000";
         };

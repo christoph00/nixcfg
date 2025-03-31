@@ -29,7 +29,7 @@ in
 
   config = (mkIf cfg.enable) {
     services.resolved = {
-      enable = true;
+      enable = mkDefault true;
       dnssec = "false";
     };
 

@@ -69,7 +69,7 @@ in
               env \
                 WLR_NO_HARDWARE_CURSORS=0 \
                 WLR_BACKENDS=drm,headless,libinput \
-                ${lib.getExe config.programs.uwsm.package} start labwc-uwsm.desktop
+                ${lib.getExe config.programs.uwsm.package} start niri.desktop
             ''
           );
         in
