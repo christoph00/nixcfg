@@ -46,6 +46,7 @@ in
     services.caddy.virtualHosts."data.r505.de" = {
       extraConfig = # caddyfile
         ''
+          encode zstd gzip
           tls {
             dns cloudflare {env.CLOUDFLARE_API_TOKEN}
             resolvers 1.1.1.1
@@ -58,7 +59,11 @@ in
           reverse_proxy /static/* http://127.0.0.1:5102
           reverse_proxy * http://127.0.0.1:5101 {
             header_up Host {http.request.host}
-            header_up X-Forwarded-Host {http.request.host}
+            header_up X-Real-IP {http.request.remote.host}
+            header_up X-Forwarded-For {http.request.header.X-Forwarded-For}
+            header_up X-Forwarded-Proto {scheme}
+            header_up Upgrade {http.request.header.Upgrade}
+            header_up Connection {http.request.header.Connection}
           }
         '';
     };
