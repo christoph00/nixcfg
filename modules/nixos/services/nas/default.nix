@@ -43,6 +43,18 @@ in
 
     internal.system.state.directories = [ "/var/lib/sftpgo" ];
 
+    services.caddy.virtualHosts."data.r505.de" = {
+      extraConfig = # caddyfile
+        ''
+          tls {
+            dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+            resolvers 1.1.1.1
+          }
+          header -Alt-svc
+          reverse_proxy http://127.0.0.1:5102
+        '';
+    };
+
     age.secrets.sftpgo = {
       file = ../../../../secrets/sftpgo.env;
       mode = "0400";
