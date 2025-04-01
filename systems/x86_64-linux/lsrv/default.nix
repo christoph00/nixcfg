@@ -74,5 +74,17 @@
   ];
   boot.blacklistedKernelModules = [ "r8169" ];
 
+  fileSystems = {
+    "/mnt/userdata" = {
+      device = "/dev/disk/by-label/ssd-data";
+      fsType = "btrfs";
+      options = [
+        "subvol=@userdata"
+        "noatime"
+        "compress-force=zstd"
+      ];
+    };
+  };
+
   system.stateVersion = "24.05";
 }

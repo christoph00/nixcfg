@@ -43,7 +43,11 @@ in
 
     internal.system.state.directories = [ "/var/lib/sftpgo" ];
 
-    age.secrets.sftpgo.file = ../../../../secrets/sftpgo.env;
+    age.secrets.sftpgo = {
+      file = ../../../../secrets/sftpgo.env;
+      mode = "0400";
+      owner = "sftpgo";
+    };
     systemd.services.sftpgo.serviceConfig.EnvironmentFile = config.age.secrets.sftpgo.path;
 
     services.sftpgo = {
