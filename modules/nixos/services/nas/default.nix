@@ -113,7 +113,6 @@ in
             enable_web_client = true;
             enable_rest_api = true;
             proxy_allowed = [
-              "/run/sftpgo/httpd.sock"
               "127.0.0.1"
             ];
           }
