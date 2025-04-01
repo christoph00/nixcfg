@@ -46,6 +46,26 @@ in
       default = "eth2";
       description = "The external interface to use.";
     };
+    allowedTCPPortsLAN = mkOption {
+      type = types.listOf types.int;
+      default = [ ];
+      description = "The allowed TCP ports for the LAN interface.";
+    };
+    allowedTCPPortsWAN = mkOption {
+      type = types.listOf types.int;
+      default = [ ];
+      description = "The allowed TCP ports for the WAN interface.";
+    };
+    allowedUDPPortsLAN = mkOption {
+      type = types.listOf types.int;
+      default = [ ];
+      description = "The allowed UDP ports for the LAN interface.";
+    };
+    allowedUDPPortsWAN = mkOption {
+      type = types.listOf types.int;
+      default = [ ];
+      description = "The allowed UDP ports for the WAN interface.";
+    };
   };
 
   # imports = [

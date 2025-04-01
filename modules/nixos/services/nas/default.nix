@@ -51,9 +51,15 @@ in
             resolvers 1.1.1.1
           }
           header -Alt-svc
-          reverse_proxy /web/* http://127.0.0.1:5102
+          reverse_proxy /web/* http://127.0.0.1:5102 {
+            header_up Host {http.request.host}
+            header_up X-Forwarded-Host {http.request.host}
+          }
           reverse_proxy /static/* http://127.0.0.1:5102
-          reverse_proxy * http://127.0.0.1:5101
+          reverse_proxy * http://127.0.0.1:5101 {
+            header_up Host {http.request.host}
+            header_up X-Forwarded-Host {http.request.host}
+          }
         '';
     };
 
