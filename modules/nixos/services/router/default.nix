@@ -95,6 +95,9 @@ in
 
       firewall.extraInputRules = ''
 
+        tcp dport 2022 ip saddr { 192.168.2.0/24, 176.9.86.61, 130.162.232.230 } counter accept
+
+
         ip6 nexthdr icmpv6 icmpv6 type {
           echo-request,
           destination-unreachable,
