@@ -52,6 +52,7 @@ in
           }
           header -Alt-svc
           reverse_proxy /web/* http://127.0.0.1:5102
+          reverse_proxy /static/* http://127.0.0.1:5102
           reverse_proxy * http://127.0.0.1:5101
         '';
     };
