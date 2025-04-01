@@ -81,7 +81,7 @@ in
       dataDir = "/var/lib/sftpgo";
       extraReadWriteDirs = [ "/mnt/userdata" ];
       settings = {
-        defender.enable = true;
+        defender.enabled = true;
         data_provider = {
           driver = "sqlite";
           name = "sftpgo.db";
@@ -107,10 +107,15 @@ in
             address = "127.0.0.1";
             enable_https = false;
             port = 5102;
+            #address = "/run/sftpgo/httpd.sock";
             client_ip_proxy_header = "X-Forwarded-For";
             enable_web_admin = true;
             enable_web_client = true;
             enable_rest_api = true;
+            proxy_allowed = [
+              "/run/sftpgo/httpd.sock"
+              "127.0.0.1"
+            ];
           }
         ];
         sftpd.bindings = [
@@ -119,9 +124,14 @@ in
             address = "0.0.0.0";
           }
         ];
-        common.event_manager.enabled_commands = [
-          "${pkgs.ocrmypdf}/bin/ocrmypdf"
-        ];
+        common = {
+          event_manager.enabled_commands = [
+            "${pkgs.ocrmypdf}/bin/ocrmypdf"
+          ];
+          proxy_protocol = 1;
+          proxy_allowed = [ "127.0.0.1" ];
+          proxy_skipped = [ ];
+        };
       };
     };
 
