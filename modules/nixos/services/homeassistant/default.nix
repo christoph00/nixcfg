@@ -251,9 +251,10 @@ in
             mushroom
             template-entity-row
             universal-remote-card
+            bubble-card
           ])
           ++ (with pkgs; [
-            internal.bubble-card
+            #internal.bubble-card
             # home-assistant-lovelace-card-tools
             # home-assistant-lovelace-config-template-card
             # home-assistant-lovelace-custom-brand-icons
@@ -268,7 +269,7 @@ in
           "calendar"
           "camera"
           "open_meteo"
-          #"adguard"
+          "adguard"
           "speedtestdotnet"
           "google_travel_time"
           "cups"
@@ -290,7 +291,7 @@ in
           "lovelace"
           "mobile_app"
           #"nzbget"
-          #"ubus"
+          "ubus"
           "radio_browser"
           "wake_on_lan"
           "cast"
