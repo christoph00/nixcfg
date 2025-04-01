@@ -211,11 +211,6 @@
         #nixpkgs-wayland.overlay
         host-agent.overlays.default
         #caddy.overlays.default
-<<<<<<< HEAD
-        #niri.overlays.default
-=======
-        #i# niri.overlays.default
->>>>>>> 8ee98f61 (ok)
       ];
 
       homes.modules = with inputs; [
@@ -248,14 +243,6 @@
 
         #vaultix.flakeModules.default
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        #niri.nixosModules.niri
->>>>>>> 2fa6a200 (ok)
-
-=======
->>>>>>> 8ee98f61 (ok)
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
