@@ -100,10 +100,6 @@ in
     programs.uwsm = {
       enable = cfg.uwsm;
       waylandCompositors = {
-<<<<<<< HEAD
-
-=======
->>>>>>> 8ee98f61 (ok)
         # niri = {
         #   prettyName = "Niri";
         #   comment = "A scrollable-tiling Wayland compositor.";
