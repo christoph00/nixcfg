@@ -51,7 +51,8 @@ in
             resolvers 1.1.1.1
           }
           header -Alt-svc
-          reverse_proxy http://127.0.0.1:5102
+          reverse_proxy /web/* http://127.0.0.1:5102
+          reverse_proxy * http://127.0.0.1:5101
         '';
     };
 
