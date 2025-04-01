@@ -44,7 +44,7 @@ let
               "gtklock"
               "timeout"
               "600"
-              "wlr-randr --output eDP-1 --off"
+              "systemctl hybrid-sleep"
               "before-sleep"
               "gtklock"
             ];

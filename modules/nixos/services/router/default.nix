@@ -95,9 +95,6 @@ in
 
       firewall.extraInputRules = ''
 
-        tcp dport 2022 ip saddr { 192.168.2.0/24, 176.9.86.61, 130.162.232.230 } counter accept
-
-
         ip6 nexthdr icmpv6 icmpv6 type {
           echo-request,
           destination-unreachable,
@@ -119,14 +116,16 @@ in
         } accept
 
 
-
-         tcp dport https accept
          counter drop
       '';
 
       firewall.filterForward = true;
 
       firewall.interfaces.dtag-ppp.allowedUDPPorts = [ 546 ];
+      firewall.interfaces.dtag-ppp.allowedTCPPorts = [
+        2022
+        443
+      ];
 
       firewall.extraForwardRules = ''
         iifname dtag-ppp tcp flags syn tcp option maxseg size set rt mtu
