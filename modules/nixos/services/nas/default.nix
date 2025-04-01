@@ -68,6 +68,7 @@ in
       enable = true;
       user = "sftpgo";
       dataDir = "/var/lib/sftpgo";
+      extraReadWriteDirs = [ "/mnt/userdata" ];
       settings = {
         defender.enable = true;
         data_provider = {
