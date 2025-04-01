@@ -100,6 +100,17 @@ in
             enable_rest_api = true;
           }
         ];
+        sftpd.bindings = [
+          {
+            port = 2022;
+            address = "0.0.0.0";
+          }
+        ];
+        event_manager.enabled_commands = [
+          pkgs.lib.getExe
+          pkgs.pythonPackages.ocrmypdf
+
+        ];
       };
     };
 

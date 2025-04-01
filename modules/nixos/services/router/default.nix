@@ -79,6 +79,9 @@ in
         5380 # technitium webui
         8123 # homeassistant
         1883 # mosquitto
+        2022 # sftpgo
+        80
+        443
       ];
       firewall.interfaces.lan.allowedUDPPorts = [
         546 # dhcp
@@ -87,6 +90,7 @@ in
         68 # dhcp
         5353 # avahi
         123 # ntp
+        443
       ];
 
       firewall.extraInputRules = ''
