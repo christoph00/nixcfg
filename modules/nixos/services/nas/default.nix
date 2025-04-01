@@ -100,6 +100,10 @@ in
           {
             address = "127.0.0.1";
             port = 5101;
+            client_ip_proxy_header = "X-Forwarded-For";
+            proxy_allowed = [
+              "127.0.0.1"
+            ];
           }
         ];
         httpd.bindings = [
