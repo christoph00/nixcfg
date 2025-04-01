@@ -107,9 +107,7 @@ in
           }
         ];
         event_manager.enabled_commands = [
-          pkgs.lib.getExe
-          pkgs.pythonPackages.ocrmypdf
-
+          "${pkgs.ocrmypdf}/bin/ocrmypdf"
         ];
       };
     };
