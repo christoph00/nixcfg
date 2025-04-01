@@ -106,7 +106,7 @@ in
             address = "0.0.0.0";
           }
         ];
-        event_manager.enabled_commands = [
+        common.event_manager.enabled_commands = [
           "${pkgs.ocrmypdf}/bin/ocrmypdf"
         ];
       };
