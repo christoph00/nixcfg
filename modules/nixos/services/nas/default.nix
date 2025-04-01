@@ -100,7 +100,7 @@ in
           {
             address = "127.0.0.1";
             port = 5101;
-            client_ip_proxy_header = "X-Forwarded-For";
+            client_ip_proxy_header = "X-Real-IP";
             proxy_allowed = [
               "127.0.0.1"
             ];
@@ -112,7 +112,7 @@ in
             enable_https = false;
             port = 5102;
             #address = "/run/sftpgo/httpd.sock";
-            client_ip_proxy_header = "X-Forwarded-For";
+            client_ip_proxy_header = "X-Real-IP";
             enable_web_admin = true;
             enable_web_client = true;
             enable_rest_api = true;
