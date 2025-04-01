@@ -34,6 +34,8 @@
       externalInterface = "enp2s0f1";
     };
 
+    services.nas.enable = true;
+
     services.webserver.enable = true;
 
   };
