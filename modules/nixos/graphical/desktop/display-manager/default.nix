@@ -58,6 +58,7 @@ in
             "--remember"
             "--remember-user-session"
             "--asterisks"
+            "--user-menu"
             "--sessions ${config.services.displayManager.sessionData.desktops}/share/xsessions:${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"
           ];
         };

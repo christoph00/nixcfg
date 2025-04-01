@@ -34,7 +34,7 @@ in
 {
 
   options.internal.graphical.desktop.niri = {
-    enable = mkBoolOpt config.internal.isLaptop "Enable the niri desktop environment.";
+    enable = mkBoolOpt false "Enable the niri desktop environment.";
   };
 
   config = mkIf cfg.enable {

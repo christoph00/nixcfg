@@ -34,7 +34,7 @@ in
 {
 
   options.internal.graphical.desktop.labwc = {
-    enable = mkBoolOpt false "Enable the labwc desktop environment.";
+    enable = mkBoolOpt config.internal.isGraphical "Enable the labwc desktop environment.";
   };
 
   config = mkIf cfg.enable {

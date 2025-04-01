@@ -44,5 +44,9 @@ in
   "secrets/ha-serviceaccount.age".publicKeys = [ lsrv ] ++ users;
   "secrets/mqtt-agent.age".publicKeys = all;
   "secrets/mqtt-ha.age".publicKeys = all; # temp
+  "secrets/sftpgo.env".publicKeys = [
+    oca
+    lsrv
+  ] ++ users;
 
 }

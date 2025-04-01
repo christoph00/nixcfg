@@ -197,6 +197,23 @@ in
           };
           lovelace.mode = "yaml";
 
+          mqtt = {
+            sensor = [
+              {
+                name = "Host Status";
+                state_topic = "host/+/heartbeat";
+                value_template = "{{ value_json.status }}";
+                json_attributes_topic = "host/+/heartbeat";
+              }
+              {
+                name = "Service Status";
+                state_topic = "host/+/service/+";
+                value_template = "{{ value_json.status }}";
+                json_attributes_topic = "host/+/service/+";
+              }
+            ];
+          };
+
           bluetooth = { };
           system_health = { };
           "automation ui" = "!include automations.yaml";

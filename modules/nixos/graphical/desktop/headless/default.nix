@@ -49,10 +49,10 @@ in
   options.internal.graphical.desktop.headless = {
     enable = mkBoolOpt config.internal.isHeadlessDesktop "\n      Enable\n      Headless\n      Desktop.";
     enableStreaming = mkBoolOpt config.internal.isGameStream "\n      Enable\n      Streaming ";
-    autorun = mkBoolOpt true "\n      Autorun ";
+    autorun = mkBoolOpt true "Autorun ";
     user = mkOption {
       type = types.str;
-      default = "\n      christoph ";
+      default = "christoph";
 
     };
   };

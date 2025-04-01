@@ -30,6 +30,29 @@ with lib.internal;
 
 let
   cfg = config.internal.graphical.desktop.wayland;
+  wrapped = inputs.wrapper-manager.lib.build {
+    inherit pkgs;
+    modules = [
+      {
+        wrappers = {
+          swayidle = {
+            basePackage = pkgs.swayidle;
+            flags = [
+              "-w"
+              "timeout"
+              "300"
+              "gtklock"
+              "timeout"
+              "600"
+              "wlr-randr --output eDP-1 --off"
+              "before-sleep"
+              "gtklock"
+            ];
+          };
+        };
+      }
+    ];
+  };
 in
 {
 
@@ -170,6 +193,8 @@ in
     #security.pam.services.waylock = { };
 
     environment.systemPackages = with pkgs; [
+
+      wrapped
       #xwayland
       #wayland-protocols
       #wayland-utils
@@ -178,11 +203,13 @@ in
       wlr-randr
       #waylock
       wayvnc
-      #wlogout
-      #lswt
-      #wlrctl
+      wlogout
+      lswt
+      wlrctl
       #wlopm
-      #wev
+      wev
+
+      rofi-wayland
 
       #grim
 
@@ -201,13 +228,11 @@ in
 
       pwvucontrol
 
-      inputs.ignis.packages.${system}.ignis
-
       #gtk4-layer-shell
       #internal.hyprpanel
 
       #mako
-      swayidle
+      # swayidle
 
       #wtype
 
