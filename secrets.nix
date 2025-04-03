@@ -48,5 +48,6 @@ in
     oca
     lsrv
   ] ++ users;
+  "secrets/rclone.conf".publicKeys = all;
 
 }
