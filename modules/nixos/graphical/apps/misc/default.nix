@@ -76,6 +76,8 @@ in
       pkgs.gopls
       pkgs.go
 
+      pkgs.planify
+
       inputs.zen-browser.packages.${pkgs.system}.default
     ];
 
