@@ -83,14 +83,36 @@ in
       #netop
     ];
 
-    # internal.system.state.directories = [ "/var/lib/private/technitium-dns-server" ];
-    # services.technitium-dns-server = {
-    #   enable = true;
-    # };
+    services.resolved.extraConfig = ''
+      DNSStubListener=false
+    '';
+    services.resolved.fallbackDns = [ "127.0.0.1" ];
+
+    internal.system.state.directories = [ "/var/lib/technitium-dns-server" ];
+    services.technitium-dns-server.enable = true;
+    systemd.services.technitium-dns-server.serviceConfig = {
+      DynamicUser = mkForce false;
+      User = "technitium";
+      Group = "technitium";
+      UMask = "0007";
+      PIDFile = "/run/technitium.pid";
+
+    };
+
+    users.users.technitium = {
+      isSystemUser = true;
+      group = "technitium";
+      home = "/var/lib/technitium-dns-server";
+    };
+    users.groups.technitium = { };
 
     networking = {
       nftables.enable = true;
 
+      nameservers = [
+        "::1"
+        "127.0.0.1"
+      ];
       firewall.allowedTCPPorts = mkForce [ ];
       firewall.allowedUDPPorts = mkForce [ ];
       firewall.interfaces.lan.allowedTCPPorts = [
@@ -348,8 +370,13 @@ in
     #
     services.ntpd-rs.enable = true;
 
+    systemd.services.dnsmasq = {
+      after = [ "technitium-dns-server.service" ];
+      conflicts = [ "technitium-dns-server.service" ];
+    };
+
     services.dnsmasq = {
-      enable = false;
+      enable = true;
       alwaysKeepRunning = true;
       settings = {
         bind-dynamic = true;

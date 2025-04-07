@@ -35,7 +35,7 @@ in
 {
 
   options.internal.services.adguard = {
-    enable = mkBoolOpt config.internal.services.router.enable "Enable AdGuard.";
+    enable = mkBoolOpt false "Enable AdGuard.";
   };
 
   config = mkIf cfg.enable {
