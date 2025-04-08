@@ -115,6 +115,21 @@ in
       reverse_proxy http://127.0.0.1:5380
     '';
 
+    services.smartdns = {
+      enable = true;
+      bindPort = 5301;
+      settings = {
+        cache-size = 4096;
+        server-tls = [
+          "8.8.8.8:853"
+          "1.1.1.1:853"
+        ];
+        server-https = "https://cloudflare-dns.com/dns-query -exclude-default-group";
+        prefetch-domain = true;
+        speed-check-mode = "ping,tcp:80";
+      };
+    };
+
     networking = {
       nftables.enable = true;
 
@@ -404,7 +419,7 @@ in
 
     services.dnsmasq = {
       enable = true;
-      alwaysKeepRunning = true;
+      alwaysKeepRunning = false;
       settings = {
         bind-dynamic = true;
         interface = [ "lan" ];
