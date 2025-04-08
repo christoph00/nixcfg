@@ -50,6 +50,6 @@ in
   ] ++ users;
   "secrets/rclone.conf".publicKeys = all;
 
-  "secrets/agent-key".publicKeys = all;
+  "secrets/agent-key".publicKeys = [ lsrv ] ++ users;
 
 }
