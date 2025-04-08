@@ -50,4 +50,6 @@ in
   ] ++ users;
   "secrets/rclone.conf".publicKeys = all;
 
+  "secrets/agent-key".publicKeys = all;
+
 }
