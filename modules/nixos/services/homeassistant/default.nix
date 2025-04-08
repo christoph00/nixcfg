@@ -30,12 +30,15 @@ with lib.internal;
 
 let
   cfg = config.internal.services.homeassistant;
-  inherit (pkgs.writers) writeYAML;
+  #inherit (pkgs.writers) writeYAML;
 
 in
 {
 
-  imports = [ ./assist.nix ];
+  imports = [
+    ./assist.nix
+    ./commands.nix
+  ];
 
   options.internal.services.homeassistant = {
     enable = mkBoolOpt config.internal.isSmartHome "Enable Homeassistant.";

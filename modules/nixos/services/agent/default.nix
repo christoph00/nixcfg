@@ -35,20 +35,44 @@ in
 {
 
   options.internal.services.agent = {
-    enable = mkBoolOpt false "Enable Host Agent.";
+    enable = mkBoolOpt true "Enable Agent.";
 
   };
 
   config = mkIf cfg.enable {
 
-    age.secrets.mqtt-agent.file = ../../../../secrets/mqtt-agent.age;
-
-    services.host-agent = {
-      enable = true;
-      environmentFile = config.age.secrets.mqtt-agent.path;
-      mqtt.broker = "mqtt://lsrv:1883";
-      mqtt.username = "agent";
+    users.users.agent = {
+      isSystemUser = true;
+      group = "agent";
+      home = "/var/lib/agent";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHaBH8zJjpPUMN4By4fZLXHSSiZ05nLcA3PrUsvczhd9"
+      ];
     };
+    users.groups.agent = { };
+
+    security.doas.extraRules = [
+      {
+        users = [ "agent" ];
+        cmd = "systemctl";
+        args = [
+          "status"
+          "stop"
+          "start"
+          "restart"
+          "reboot"
+        ];
+        runAs = "root";
+        noPass = true;
+      }
+
+      {
+        users = [ "agent" ];
+        cmd = "nh";
+        noPass = true;
+        runAs = "root";
+      }
+    ];
 
   };
 }
