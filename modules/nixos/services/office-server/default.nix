@@ -40,40 +40,63 @@ in
 
   config = mkIf cfg.enable {
 
-    internal.services.container.enable = true;
+    # internal.services.container.enable = true;
 
-    virtualisation.oci-containers.containers.collabora-office =
-      let
-        inherit (config.users.users.collabora-office) uid;
-        inherit (config.users.groups.collabora-office) gid;
-      in
-      {
-        image = "mirror.gcr.io/collabora/code";
-        ports = [ "9980:9980" ];
-        environment =
-          let
-            mkAlias = domain: "https://" + (builtins.replaceStrings [ "." ] [ "\\." ] domain) + ":443";
-          in
-          {
-            server_name = "office.r505.de";
-            aliasgroup1 = mkAlias "office.r505.de";
-            aliasgroup2 = mkAlias "cloud.r505.de";
-            aliasgroup3 = mkAlias "cloud.kinderkiste-hannover.de";
-            extra_params = "--o:ssl.enable=false --o:ssl.termination=true";
-          };
-        extraOptions = [
-          "--uidmap=0:65534:1"
-          "--gidmap=0:65534:1"
-          "--uidmap=100:${toString uid}:1"
-          "--gidmap=101:${toString gid}:1"
-          "--network=host"
-          "--cap-add=MKNOD"
-          "--cap-add=CHOWN"
-          "--cap-add=FOWNER"
-          "--cap-add=SYS_CHROOT"
-          "--label=io.containers.autoupdate=registry"
-        ];
+    # virtualisation.oci-containers.containers.collabora-office =
+    #   let
+    #     inherit (config.users.users.collabora-office) uid;
+    #     inherit (config.users.groups.collabora-office) gid;
+    #   in
+    #   {
+    #     image = "mirror.gcr.io/collabora/code";
+    #     ports = [ "9980:9980" ];
+    #     environment =
+    #       let
+    #         mkAlias = domain: "https://" + (builtins.replaceStrings [ "." ] [ "\\." ] domain) + ":443";
+    #       in
+    #       {
+    #         server_name = "office.r505.de";
+    #         aliasgroup1 = mkAlias "office.r505.de";
+    #         aliasgroup2 = mkAlias "cloud.r505.de";
+    #         aliasgroup3 = mkAlias "cloud.kinderkiste-hannover.de";
+    #         extra_params = "--o:ssl.enable=false --o:ssl.termination=true";
+    #       };
+    #     extraOptions = [
+    #       "--uidmap=0:65534:1"
+    #       "--gidmap=0:65534:1"
+    #       "--uidmap=100:${toString uid}:1"
+    #       "--gidmap=101:${toString gid}:1"
+    #       "--network=host"
+    #       "--cap-add=MKNOD"
+    #       "--cap-add=CHOWN"
+    #       "--cap-add=FOWNER"
+    #       "--cap-add=SYS_CHROOT"
+    #       "--label=io.containers.autoupdate=registry"
+    #     ];
+    #   };
+
+    services.collabora-online = {
+      enable = true;
+
+      settings = {
+        ssl.enable = false;
+        ssl.termination = true;
+
+        net = {
+          listen = "loopback";
+          post_allow.host = [ "::1" ];
+        };
+        aliasGroups.r505 = {
+          host = "cloud.r505.de";
+          aliases = [ "cloud\\.r505.de" ];
+        };
+
+        storage.wopi = {
+          "@allow" = true;
+          host = [ "cloud.r505.de" ];
+        };
       };
+    };
 
     services.caddy.virtualHosts."office.r505.de" = {
       extraConfig = # caddyfile
@@ -85,16 +108,6 @@ in
           header -Alt-svc
           reverse_proxy http://127.0.0.1:9980
         '';
-    };
-
-    users.users.collabora-office = {
-      isSystemUser = true;
-      group = "collabora-office";
-      uid = 982;
-    };
-
-    users.groups.collabora-office = {
-      gid = 982;
     };
 
   };
