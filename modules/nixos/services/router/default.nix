@@ -117,14 +117,14 @@ in
 
     services.smartdns = {
       enable = true;
-      bindPort = 5301;
       settings = {
+        bind = "127.0.0.153:53";
         cache-size = 4096;
         server-tls = [
           "8.8.8.8:853"
           "1.1.1.1:853"
         ];
-        server-https = "https://cloudflare-dns.com/dns-query -exclude-default-group";
+        server-https = "https://cloudflare-dns.com/dns-query";
         prefetch-domain = true;
         speed-check-mode = "ping,tcp:80";
       };
