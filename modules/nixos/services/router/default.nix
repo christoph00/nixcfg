@@ -115,21 +115,6 @@ in
       reverse_proxy http://127.0.0.1:5380
     '';
 
-    services.smartdns = {
-      enable = true;
-      settings = {
-        bind = "127.0.0.153:53";
-        cache-size = 4096;
-        server-tls = [
-          "8.8.8.8:853"
-          "1.1.1.1:853"
-        ];
-        server-https = "https://cloudflare-dns.com/dns-query";
-        prefetch-domain = true;
-        speed-check-mode = "ping,tcp:80";
-      };
-    };
-
     networking = {
       nftables.enable = true;
 
@@ -313,7 +298,7 @@ in
           IPv6AcceptRA = false;
           IPv6SendRA = true;
           DHCPPrefixDelegation = true;
-          DHCPServer = true;
+          DHCPServer = false;
           DNS = [
             "192.168.2.2"
             "fe80::1"
@@ -412,13 +397,13 @@ in
     #
     services.ntpd-rs.enable = true;
 
-    systemd.services.dnsmasq = {
-      after = [ "technitium-dns-server.service" ];
-      conflicts = [ "technitium-dns-server.service" ];
-    };
+    # systemd.services.dnsmasq = {
+    #   after = [ "technitium-dns-server.service" ];
+    #   conflicts = [ "technitium-dns-server.service" ];
+    # };
 
     services.dnsmasq = {
-      enable = true;
+      enable = false;
       alwaysKeepRunning = false;
       settings = {
         bind-dynamic = true;
