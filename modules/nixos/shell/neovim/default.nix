@@ -11,7 +11,7 @@ let
 in
 {
   options.internal.shell.neovim = with types; {
-    enable = mkBoolOpt false "Whether or not to configure neovim config.";
+    enable = mkBoolOpt true "Whether or not to configure neovim config.";
   };
 
   config = mkIf cfg.enable {
@@ -21,6 +21,8 @@ in
       settings = {
         vim = {
           useSystemClipboard = true;
+          globals.mapleader = " ";
+          enableLuaLoader = true;
 
           options = {
             # 2-space indents
@@ -63,29 +65,103 @@ in
             fillchars = "eob: "; # Disable the "~" chars at end of buffer
           };
 
-          mini = {
-            icons.enable = true;
-            statusline.enable = true;
-            tabline.enable = true;
-            git.enable = true;
-            diff.enable = true;
-            align.enable = true;
-            notify.enable = true;
-            files.enable = true;
+          ui = {
+            noice = {
+              enable = true;
+              setupOpts = {
+                lsp.progress.enabled = false;
+                notify.enabled = false;
+              };
+            };
+
+            borders.enable = true;
+            illuminate.enable = true;
           };
 
+          statusline.lualine.enable = true;
+
+          mini = {
+            icons.enable = true;
+            # statusline.enable = true;
+            # tabline.enable = true;
+            # git.enable = true;
+            # diff.enable = true;
+            # align.enable = true;
+            notify.enable = true;
+            # files.enable = true;
+          };
+
+          utility.snacks-nvim = {
+            enable = true;
+            setupOpts = {
+              bigfile.enabled = true;
+              picker = {
+                enabled = true;
+                sources = {
+                  explorer = {
+                    layout = {
+                      preset = "vertical";
+                      preview = true;
+                    };
+                    auto_close = true;
+                  };
+                };
+              };
+              #dashboard.enabled = true;
+              input.enabled = true;
+              indent = {
+                enabled = true;
+              };
+              rename = {
+                enabled = true;
+              };
+              scope = {
+                enabled = true;
+              };
+              git = {
+                enabled = true;
+              };
+              gitbrowse = {
+                enabled = true;
+              };
+
+              explorer = {
+                enabled = true;
+                replace_netrw = true;
+              };
+            };
+          };
           theme = {
             enable = true;
             name = "tokyonight";
-            transparent = false;
+            transparent = true;
             style = "day";
           };
 
+          binds = {
+            whichKey = {
+              enable = true;
+              setupOpts = {
+                preset = "helix";
+                win.border = "none";
+              };
+            };
+            cheatsheet.enable = true;
+          };
+          autocomplete.enableSharedCmpSources = true;
           autocomplete.blink-cmp = {
             enable = true;
+            mappings = {
+              next = "<Down>";
+              previous = "<Up>";
+            };
             setupOpts = {
               signature.enabled = true;
-              keymap.preset = "enter";
+
+              keymap = {
+                preset = "enter";
+                "<C-y>" = [ "select_and_accept" ];
+              };
               sources = {
                 default = [
                   "lsp"
@@ -95,8 +171,33 @@ in
                   # "copilot"
                 ];
               };
+              completion = {
+                accept.auto_brackets.enabled = true;
+                menu.draw.treesitter = [ "lsp" ];
+                documentation = {
+                  auto_show = true;
+                  auto_show_delay_ms = 100;
+                };
+              };
 
             };
+          };
+
+          lazy.plugins = {
+            "supermaven-nvim" = {
+              package = pkgs.vimPlugins.supermaven-nvim;
+              setupModule = "supermaven-nvim";
+              setupOpts = {
+                enabled = true;
+                keymaps = {
+                  accept_suggestion = "<C-y>";
+                  clear_suggestion = "<C-n>";
+                  accept_word = "<C-w>";
+                };
+              };
+              event = [ "InsertEnter" ];
+            };
+
           };
 
           languages = {
@@ -124,6 +225,8 @@ in
             php.enable = true;
           };
           lsp = {
+            enable = true;
+            lspconfig.enable = true;
             formatOnSave = true;
             # lspkind.enable = true;
             trouble.enable = true;
@@ -143,6 +246,15 @@ in
               php
             ];
           };
+
+          keymaps = [
+            {
+              action = "<cmd>lua Snacks.picker.projects()<CR>";
+              desc = "Change current project.";
+              key = "<leader>p";
+              mode = "n";
+            }
+          ];
         };
       };
     };
