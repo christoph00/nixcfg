@@ -17,7 +17,6 @@ in
   config = mkIf cfg.enable {
     programs.nvf = {
       enable = true;
-
       settings = {
         vim = {
           useSystemClipboard = true;
@@ -148,13 +147,15 @@ in
             };
             cheatsheet.enable = true;
           };
-          assistant = {
-            copilot.enable = true;
+          assistant.copilot = {
+            enable = true;
+            cmp.enable = true;
           };
           autocomplete.enableSharedCmpSources = true;
           autocomplete.blink-cmp = {
             enable = true;
             mappings = {
+              confirm = "<Tab>";
               next = "<Down>";
               previous = "<Up>";
             };
@@ -186,19 +187,30 @@ in
             };
           };
 
-          lazy.plugins = {
-            "supermaven-nvim" = {
-              package = pkgs.vimPlugins.supermaven-nvim;
-              setupModule = "supermaven-nvim";
-              setupOpts = {
-                enabled = true;
-                keymaps = {
-                  accept_suggestion = "<C-y>";
-                  clear_suggestion = "<C-n>";
-                  accept_word = "<C-w>";
-                };
-              };
-              event = [ "InsertEnter" ];
+          extraPlugins = with pkgs.vimPlugins; {
+
+            avante = {
+              package = avante-nvim;
+              setup = "require('avante').setup {
+              auto_suggestions_provider = 'openai',
+              provider = 'perplexity',
+              copilot = {
+                endpoint = 'https://api.githubcopilot.com/',
+                model = 'claude-3.7-sonnet',
+              },
+              windows = {
+	      	      position = 'right',
+                width = 50,
+              },
+              vendors = {
+						    perplexity = {
+					        __inherited_from = 'openai',
+					        api_key_name = 'PERPLEXITY_API_KEY',
+					        endpoint = 'https://api.perplexity.ai',
+					        model = 'sonar-pro',
+				        },
+              },
+            }";
             };
 
           };
