@@ -11,7 +11,7 @@ let
 in
 {
   options.internal.shell.neovim = with types; {
-    enable = mkBoolOpt true "Whether or not to configure neovim config.";
+    enable = mkBoolOpt config.internal.isGraphical "Whether or not to configure neovim config.";
   };
 
   config = mkIf cfg.enable {
@@ -67,7 +67,7 @@ in
 
           ui = {
             noice = {
-              enable = true;
+              enable = false;
               setupOpts = {
                 lsp.progress.enabled = false;
                 notify.enabled = false;
@@ -148,6 +148,9 @@ in
             };
             cheatsheet.enable = true;
           };
+          assistant = {
+            copilot.enable = true;
+          };
           autocomplete.enableSharedCmpSources = true;
           autocomplete.blink-cmp = {
             enable = true;
@@ -168,7 +171,7 @@ in
                   "path"
                   "snippets"
                   "buffer"
-                  # "copilot"
+                  "copilot"
                 ];
               };
               completion = {
