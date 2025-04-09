@@ -17,6 +17,7 @@
   internal.system.boot.encryptedRoot = false;
   internal.services.office-server.enable = true;
   internal.services.glance.enable = true;
+  internal.services.vscode-tunnel.enable = true;
 
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";

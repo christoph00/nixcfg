@@ -34,7 +34,11 @@
       externalInterface = "enp2s0f1";
     };
 
-    services.nas.enable = true;
+    services.nas = {
+      enable = true;
+      domain = "data.r505.de";
+      extraDirectorys = [ "/mnt/userdata" ];
+    };
 
     services.webserver.enable = true;
 

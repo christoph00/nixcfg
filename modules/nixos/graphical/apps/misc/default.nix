@@ -45,20 +45,13 @@ in
     environment.sessionVariables.OPEN_AI_API_URL = "https://api.perplexity.ai";
 
     environment.systemPackages = [
-      # pkgs.zen-browser
-      pkgs.zed-editor
       pkgs.vscode
-      # pkgs.code-cursor
       pkgs.kitty
       pkgs.anyrun
       pkgs.moonlight-qt
-      # pkgs.librewolf
-      #pkgs.firedragon
+
       pkgs.libreoffice-fresh
       pkgs.gimp
-      # pkgs.wezterm
-      #
-      pkgs.windsurf
 
       pkgs.keepassxc
 
@@ -71,24 +64,15 @@ in
 
       pkgs.networkmanagerapplet
 
-      pkgs.qownnotes
-
       pkgs.nextcloud-client
 
-      # pkgs.quickshell
       pkgs.kdePackages.okular
-      # pkgs.kdePackages.dolphin
-      # pkgs.lxqt.pcmanfm-qt
 
       pkgs.agenix
 
-      # pkgs.go-passbolt-cli
-
-      pkgs.pcmanfm
-
       pkgs.nemo
 
-      pkgs.nil
+      pkgs.nixd
       pkgs.gopls
       pkgs.go
 

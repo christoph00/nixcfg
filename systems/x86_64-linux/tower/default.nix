@@ -27,6 +27,16 @@
     "headless-desktop"
   ];
 
+  services.nas = {
+    enable = true;
+    domain = "data.r505.de";
+    extraDirectorys = [
+      "/media/Games"
+      "/media/ssd-data"
+      "/media/hdd-data"
+    ];
+  };
+
   fileSystems = {
     "/media/Games" = {
       device = "/dev/disk/by-label/ssd-data";
@@ -48,11 +58,15 @@
       ];
     };
 
-    # "/media/hdd-data" = {
-    #   device = "/dev/disk/by-uuid/25fc5836-72df-4881-8760-af49333fa485";
-    #   fsType = "btrfs";
-    #   options = ["subvol=@data" "noatime" "compress-force=zstd"];
-    # };
+    "/media/hdd-data" = {
+      device = "/dev/disk/by-uuid/25fc5836-72df-4881-8760-af49333fa485";
+      fsType = "btrfs";
+      options = [
+        "subvol=@data"
+        "noatime"
+        "compress-force=zstd"
+      ];
+    };
 
   };
 

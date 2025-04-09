@@ -36,6 +36,16 @@ in
 
   options.internal.services.nas = {
     enable = mkBoolOpt false "Enable NAS Services.";
+    domain = mkOption {
+      type = types.str;
+      default = "localhost";
+      description = "The domain to use for the NAS services.";
+    };
+    extraDirectorys = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Extra directories to add to the NAS services.";
+    };
 
   };
 
@@ -43,7 +53,7 @@ in
 
     internal.system.state.directories = [ "/var/lib/sftpgo" ];
 
-    services.caddy.virtualHosts."data.r505.de" = {
+    services.caddy.virtualHosts."${cfg.domain}" = {
       extraConfig = # caddyfile
         ''
           encode zstd gzip
@@ -79,7 +89,7 @@ in
       enable = true;
       user = "sftpgo";
       dataDir = "/var/lib/sftpgo";
-      extraReadWriteDirs = [ "/mnt/userdata" ];
+      extraReadWriteDirs = cfg.extraDirectorys;
       settings = {
         defender.enabled = true;
         data_provider = {

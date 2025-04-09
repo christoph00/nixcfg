@@ -17,11 +17,11 @@ with lib.internal;
 let
   cfg = config.internal.graphical.apps.zed;
 
-  zed-fhs = pkgs.buildFHSUserEnv {
-    name = "zed";
-    targetPkgs = pkgs: with pkgs; [ zed-editor ];
-    runScript = "zed";
-  };
+  # zed-fhs = pkgs.buildFHSUserEnv {
+  #   name = "zed";
+  #   targetPkgs = pkgs: with pkgs; [ zed-editor ];
+  #   runScript = "zed";
+  # };
 in
 {
 
@@ -32,7 +32,7 @@ in
   config = mkIf cfg.enable {
 
     environment.systemPackages = with pkgs; [
-      zed-fhs
+      zed-editor
       nixd
       intelephense
       vscode-langservers-extracted
