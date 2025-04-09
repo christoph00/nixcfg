@@ -48,7 +48,7 @@ in
         inherit (config.users.groups.collabora-office) gid;
       in
       {
-        image = "docker.io/collabora/code";
+        image = "mirror.gcr.io/collabora/code";
         ports = [ "9980:9980" ];
         environment =
           let

@@ -4,12 +4,7 @@
 # RX580 Sapphire
 ##
 {
-  config,
-  lib,
   pkgs,
-  modulesPath,
-  inputs,
-  namespace,
   ...
 }:
 {

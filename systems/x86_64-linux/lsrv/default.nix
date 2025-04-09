@@ -1,10 +1,6 @@
 {
   config,
-  lib,
   pkgs,
-  modulesPath,
-  inputs,
-  namespace,
   ...
 }:
 {
@@ -24,8 +20,8 @@
 
     roles = [
       "router"
-      # "nas"
-      # "media"
+      "nas"
+      "media"
       "smart-home"
     ];
 

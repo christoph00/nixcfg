@@ -1,14 +1,10 @@
 {
-  config,
   lib,
   pkgs,
-  modulesPath,
-  inputs,
-  namespace,
   ...
 }:
 {
-  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+  facter.reportPath = ./facter.json;
 
   networking.hostName = "oca";
 
