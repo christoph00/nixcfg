@@ -77,23 +77,23 @@ in
 
     services.collabora-online = {
       enable = true;
-
+      aliasGroups = [
+        {
+          host = "https://office.r505.de";
+          aliases = [
+            "https://cloud.r505.de"
+            "https://cloud.kinderkiste-hannover.de"
+          ];
+        }
+      ];
       settings = {
         ssl.enable = false;
         ssl.termination = true;
+        remote_font_config.url = "https://cloud.r505.de/apps/richdocuments/settings/fonts.json";
 
         net = {
+          proto = "IPv4";
           listen = "loopback";
-          post_allow.host = [ "::1" ];
-        };
-        aliasGroups.r505 = {
-          host = "cloud.r505.de";
-          aliases = [ "cloud\\.r505.de" ];
-        };
-
-        storage.wopi = {
-          "@allow" = true;
-          host = [ "cloud.r505.de" ];
         };
       };
     };
