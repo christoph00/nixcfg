@@ -77,14 +77,14 @@ in
             illuminate.enable = true;
           };
 
-          statusline.lualine.enable = true;
+          # statusline.lualine.enable = true;
 
           mini = {
             icons.enable = true;
             # statusline.enable = true;
-            # tabline.enable = true;
+            tabline.enable = true;
             # git.enable = true;
-            # diff.enable = true;
+            diff.enable = true;
             # align.enable = true;
             notify.enable = true;
             # files.enable = true;
@@ -151,9 +151,42 @@ in
             enable = true;
             cmp.enable = true;
           };
+          assistant.codecompanion-nvim = {
+            enable = false;
+            setupOpts = {
+              opts.language = "German";
+              adapters =
+                lib.generators.mkLuaInline
+                  # lua
+                  ''
+                    {
+                      perplexity = function ()
+                        return require("codecompanion.adapters").extend("openai_compatible", {
+                          env = {
+                            url = "https://api.perplexity.ai",
+                            chat_url = "/v1/chat/completions",
+                            api_key = "PERPLEXITY_API_KEY",
+                          },  
+                          schema = {
+                            model = {
+                              default = "sonar",
+                            }
+                          }
+                        })
+                      end
+                    }
+                  '';
+              strategies = {
+                chat.adapter = "perplexity";
+                inline.adapter = "copilot";
+              };
+              display.diff.provider = "mini_diff";
+            };
+          };
           autocomplete.enableSharedCmpSources = true;
           autocomplete.blink-cmp = {
             enable = true;
+            friendly-snippets.enable = true;
             mappings = {
               confirm = "<Tab>";
               next = "<Down>";
@@ -172,15 +205,70 @@ in
                   "path"
                   "snippets"
                   "buffer"
+                  # "codecompanion"
                   "copilot"
+                  "avante_commands"
+                  "avante_mentions"
+                  "avante_files"
                 ];
+                providers = {
+                  avante_commands = {
+                    name = "avante_commands";
+                    module = "blink.compat.source";
+                  };
+                  avante_mentions = {
+                    name = "avante_mentions";
+                    module = "blink.compat.source";
+                  };
+                  avante_files = {
+                    name = "avante_files";
+                    module = "blink.compat.source";
+                  };
+                };
               };
               completion = {
-                accept.auto_brackets.enabled = true;
+                ghost_text.enabled = true;
+                accept = {
+                  auto_brackets = {
+                    enabled = false;
+                    semantic_token_resolution = {
+                      enabled = true;
+                    };
+                  };
+                };
                 menu.draw.treesitter = [ "lsp" ];
+                menu = {
+                  border = [
+                    [
+                      "󱐋"
+                      "WarningMsg"
+                    ]
+                    "─"
+                    "╮"
+                    "│"
+                    "╯"
+                    "─"
+                    "╰"
+                    "│"
+                  ];
+                  winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:None";
+                };
                 documentation = {
                   auto_show = true;
                   auto_show_delay_ms = 100;
+                  window.border = [
+                    [
+                      "󰙎"
+                      "DiagnosticOk"
+                    ]
+                    "─"
+                    "╮"
+                    "│"
+                    "╯"
+                    "─"
+                    "╰"
+                    "│"
+                  ];
                 };
               };
 
@@ -188,31 +276,25 @@ in
           };
 
           extraPlugins = with pkgs.vimPlugins; {
-
             avante = {
               package = avante-nvim;
               setup = "require('avante').setup {
-              auto_suggestions_provider = 'openai',
               provider = 'perplexity',
-              copilot = {
-                endpoint = 'https://api.githubcopilot.com/',
-                model = 'claude-3.7-sonnet',
+              auto_suggest_provider = 'copilot',
+              vendors = {
+                perplexity = {
+                  __inherited_from = 'openai',
+                  api_key_name = 'PERPLEXITY_API_KEY',
+                 endpoint = 'https://api.perplexity.ai',
+                 model = 'sonar',
+                },
               },
               windows = {
 	      	      position = 'right',
                 width = 50,
               },
-              vendors = {
-						    perplexity = {
-					        __inherited_from = 'openai',
-					        api_key_name = 'PERPLEXITY_API_KEY',
-					        endpoint = 'https://api.perplexity.ai',
-					        model = 'sonar-pro',
-				        },
-              },
             }";
             };
-
           };
 
           languages = {
