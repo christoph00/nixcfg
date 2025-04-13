@@ -56,6 +56,8 @@ in
         Type = "simple";
         Restart = "always";
         RestartSec = 10;
+        CPUQuota = "340%";  # 4 Kerne × 85% = 340%
+        CPUWeight = 85;
       };
       path = [
         "/run/wrappers/"
