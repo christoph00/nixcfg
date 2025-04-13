@@ -81,6 +81,9 @@ with lib.internal;
     # `system.disableInstallerTools` option.
     environment.systemPackages = [ pkgs.nixos-rebuild-ng ];
 
+    # prevent nix-daemon locking the system
+    systemd.services.nix-daemon.serviceConfig.Nice = "19";
+
   };
 
 }
