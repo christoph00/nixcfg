@@ -83,6 +83,8 @@ with lib.internal;
 
     # prevent nix-daemon locking the system
     systemd.services.nix-daemon.serviceConfig.Nice = "19";
+    nix.daemonCPUSchedPolicy = "idle";
+    nix.daemonIOSchedClass = "idle";
 
   };
 
