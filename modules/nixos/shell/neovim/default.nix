@@ -81,18 +81,19 @@ in
 
           mini = {
             icons.enable = true;
-            # statusline.enable = true;
-            tabline.enable = true;
+
+            # tabline.enable = true;
             # git.enable = true;
             diff.enable = true;
             # align.enable = true;
-            notify.enable = true;
+            # notify.enable = true;
             # files.enable = true;
           };
 
           utility.snacks-nvim = {
             enable = true;
             setupOpts = {
+              enimate.enabled = true;
               bigfile.enabled = true;
               picker = {
                 enabled = true;
@@ -106,11 +107,12 @@ in
                   };
                 };
               };
-              #dashboard.enabled = true;
+              # dashboard.enabled = true;
               input.enabled = true;
               indent = {
                 enabled = true;
               };
+              image.enabled = true;
               rename = {
                 enabled = true;
               };
@@ -123,10 +125,19 @@ in
               gitbrowse = {
                 enabled = true;
               };
-
+              notify = {
+                enabled = true;
+              };
+              notifier = {
+                enabled = true;
+              };
+              statuscolumn.enabled = true;
               explorer = {
                 enabled = true;
                 replace_netrw = true;
+              };
+              words = {
+                enabled = true;
               };
             };
           };
@@ -152,7 +163,7 @@ in
             cmp.enable = true;
           };
           assistant.codecompanion-nvim = {
-            enable = false;
+            enable = true;
             setupOpts = {
               opts.language = "German";
               adapters =
@@ -177,7 +188,7 @@ in
                     }
                   '';
               strategies = {
-                chat.adapter = "perplexity";
+                chat.adapter = "copilot";
                 inline.adapter = "copilot";
               };
               display.diff.provider = "mini_diff";
@@ -205,26 +216,26 @@ in
                   "path"
                   "snippets"
                   "buffer"
-                  # "codecompanion"
+                  "codecompanion"
                   "copilot"
-                  "avante_commands"
-                  "avante_mentions"
-                  "avante_files"
+                  # "avante_commands"
+                  # "avante_mentions"
+                  # "avante_files"
                 ];
-                providers = {
-                  avante_commands = {
-                    name = "avante_commands";
-                    module = "blink.compat.source";
-                  };
-                  avante_mentions = {
-                    name = "avante_mentions";
-                    module = "blink.compat.source";
-                  };
-                  avante_files = {
-                    name = "avante_files";
-                    module = "blink.compat.source";
-                  };
-                };
+                # providers = {
+                #   avante_commands = {
+                #     name = "avante_commands";
+                #     module = "blink.compat.source";
+                #   };
+                #   avante_mentions = {
+                #     name = "avante_mentions";
+                #     module = "blink.compat.source";
+                #   };
+                #   avante_files = {
+                #     name = "avante_files";
+                #     module = "blink.compat.source";
+                #   };
+                # };
               };
               completion = {
                 ghost_text.enabled = true;
@@ -275,28 +286,28 @@ in
             };
           };
 
-          extraPlugins = with pkgs.vimPlugins; {
-            avante = {
-              package = avante-nvim;
-              setup = "require('avante').setup {
-              provider = 'perplexity',
-              auto_suggest_provider = 'copilot',
-              vendors = {
-                perplexity = {
-                  __inherited_from = 'openai',
-                  api_key_name = 'PERPLEXITY_API_KEY',
-                 endpoint = 'https://api.perplexity.ai',
-                 model = 'sonar',
-                },
-              },
-              windows = {
-	      	      position = 'right',
-                width = 50,
-              },
-            }";
-            };
-          };
-
+          # extraPlugins = with pkgs.vimPlugins; {
+          #   avante = {
+          #     package = avante-nvim;
+          #     setup = "require('avante').setup {
+          #     provider = 'perplexity',
+          #     auto_suggest_provider = 'copilot',
+          #     vendors = {
+          #       perplexity = {
+          #         __inherited_from = 'openai',
+          #         api_key_name = 'PERPLEXITY_API_KEY',
+          #        endpoint = 'https://api.perplexity.ai',
+          #        model = 'sonar',
+          #       },
+          #     },
+          #     windows = {
+          #     position = 'right',
+          #       width = 50,
+          #     },
+          #   }";
+          #   };
+          # };
+          #
           languages = {
             # Options applied to all languages
             enableLSP = true;
@@ -329,6 +340,7 @@ in
             trouble.enable = true;
             lspSignature.enable = false;
             otter-nvim.enable = true;
+            lspsaga.enable = true;
           };
 
           treesitter = {
@@ -341,6 +353,7 @@ in
               latex
               nix
               php
+              blade
             ];
           };
 
@@ -348,8 +361,56 @@ in
             {
               action = "<cmd>lua Snacks.picker.projects()<CR>";
               desc = "Change current project.";
-              key = "<leader>p";
+              key = "<leader>fp";
               mode = "n";
+            }
+            {
+              action = "<cmd>lua Snacks.picker.smart()<CR>";
+              desc = "Open Smart Picker.";
+              key = "<leader><space>";
+              mode = "n";
+            }
+            {
+              action = "<cmd>lua Snacks.picker.files()<CR>";
+              desc = "Find Files.";
+              key = "<leader>ff";
+              mode = "n";
+            }
+            {
+              action = "<cmd>lua Snacks.picker.lsp_symbols()<CR>";
+              desc = "LSP Symbols";
+              key = "<leader>ss";
+              mode = "n";
+            }
+            {
+              action = "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>";
+              desc = "LSP Workspace Symbols";
+              key = "<leader>sw";
+              mode = "n";
+            }
+            {
+              mode = "n";
+              key = "<leader>aa";
+              action = "<cmd>CodeCompanionActions<CR>";
+              desc = "CodeCompanion Actions";
+            }
+            {
+              mode = "v";
+              key = "<leader>aa";
+              action = "<cmd>CodeCompanionActions<CR>";
+              desc = "CodeCompanion Actions";
+            }
+            {
+              mode = "n";
+              key = "<leader>ac";
+              action = "<cmd>CodeCompanionChat<CR>";
+              desc = "Open Code Companion Chat";
+            }
+            {
+              mode = "n";
+              key = "<leader>ap";
+              action = "<cmd>CodeCompanion<CR>";
+              desc = "Open Code Companion Prompt";
             }
           ];
         };
