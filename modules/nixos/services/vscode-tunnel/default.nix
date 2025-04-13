@@ -47,8 +47,8 @@ in
 
     programs.nix-ld.enable = true;
 
-    systemd.user.services.code-tunnel = {
-      enable = true;
+    systemd.services.code-tunnel = {
+      wantedBy = [ "default.target" ];
       description = "Visual Studio Code Tunnel";
       after = [ "network.target" ];
       startLimitIntervalSec = 0;
@@ -58,18 +58,14 @@ in
         RestartSec = 10;
         CPUQuota = "340%";  # 4 Kerne × 85% = 340%
         CPUWeight = 85;
+        ExecStart = "/bin/sh -lc '${pkgs.vscode.fhs}/bin/code tunnel --accept-server-license-terms'";
+        User = "christoph";
       };
       path = [
         "/run/wrappers/"
         "/nix/var/nix/profiles/default/"
         "/run/current-system/sw/"
       ];
-      preStart = ''
-        echo $PATH
-        /usr/bin/env
-      '';
-      script = "/bin/sh -lc '${pkgs.vscode.fhs}/bin/code tunnel --accept-server-license-terms'";
-      wantedBy = [ "default.target" ];
     };
 
   };
