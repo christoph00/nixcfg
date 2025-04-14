@@ -15,12 +15,19 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    environment.systemPackages = with pkgs; [
+      iwe
+      internal.lumen
+    ];
+
     programs.nvf = {
       enable = true;
 
       settings = {
         vim = {
           additionalRuntimePaths = [ ./runtime ];
+          extraLuaFiles = [ ./autocmds.lua ];
           useSystemClipboard = true;
           globals.mapleader = " ";
           enableLuaLoader = true;
