@@ -38,6 +38,7 @@ in
   imports = [
     ./assist.nix
     ./commands.nix
+    ./wyoming.nix
   ];
 
   options.internal.services.homeassistant = {
@@ -119,7 +120,7 @@ in
               pybluez
               aioblescan
               grpcio-gcp
-              
+
             ];
         };
       in

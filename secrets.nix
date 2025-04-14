@@ -51,5 +51,8 @@ in
   "secrets/rclone.conf".publicKeys = all;
 
   "secrets/agent-key".publicKeys = [ lsrv ] ++ users;
-
+  "secrets/wyoming-openai.env".publicKeys = [
+    lsrv
+    oca
+  ] ++ users;
 }
