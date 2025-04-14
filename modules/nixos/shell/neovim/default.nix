@@ -17,8 +17,10 @@ in
   config = mkIf cfg.enable {
     programs.nvf = {
       enable = true;
+
       settings = {
         vim = {
+          additionalRuntimePaths = [ ./runtime ];
           useSystemClipboard = true;
           globals.mapleader = " ";
           enableLuaLoader = true;
@@ -81,13 +83,42 @@ in
 
           mini = {
             icons.enable = true;
+            surround = {
+              enable = true;
+              setupOpts = {
+                mappings = {
+                  add = "ys";
+                  delete = "ds";
+                  replace = "cs";
+                  find = "yf";
+                  find_left = "yF";
+                  highlight = "yh";
+                  update_n_lines = "yn";
+                };
+                n_lines = 1000;
+              };
+            };
+            pairs.enable = true;
 
             # tabline.enable = true;
-            # git.enable = true;
+            git.enable = true;
             diff.enable = true;
             # align.enable = true;
             # notify.enable = true;
             # files.enable = true;
+            move = {
+              enable = false;
+              setupOpts.mappings = {
+                left = "<left>";
+                right = "<right>";
+                down = "<down>";
+                up = "<up>";
+                line_left = "<left>";
+                line_right = "<right>";
+                line_down = "<down>";
+                line_up = "<up>";
+              };
+            };
           };
 
           utility.snacks-nvim = {
@@ -171,25 +202,41 @@ in
                   # lua
                   ''
                     {
-                      perplexity = function ()
-                        return require("codecompanion.adapters").extend("openai_compatible", {
-                          env = {
-                            url = "https://api.perplexity.ai",
-                            chat_url = "/v1/chat/completions",
-                            api_key = "PERPLEXITY_API_KEY",
-                          },  
-                          schema = {
-                            model = {
-                              default = "sonar",
-                            }
-                          }
-                        })
-                      end
+                      openrouter = function()
+                       return require("codecompanion.adapters").extend("openai_compatible", {
+                         env = {
+                           url = "https://openrouter.ai/api",
+                           api_key = "OPENROUTER_API_KEY",
+                           chat_url = "/v1/chat/completions",
+                        },
+                        parameters = {
+                          provider = {
+                            allow_fallbacks = false,
+                          },
+                          stream = true,
+                        },
+                        schema = {
+                          model = {
+                            default = "openrouter/optimus-alpha",
+                            choices = {
+                              -- "anthropic/claude-3.7-sonnet",
+                              -- "anthropic/claude-3.5-sonnet",
+                              -- "deepseek/deepseek-chat-v3-0324",
+                              -- "deepseek/deepseek-r1",
+                              "openrouter/optimus-alpha",
+                              "google/gemini-2.5-pro-exp-03-25",
+                              "perplexity/sonar"
+                            },
+                          },
+                        },
+                      })
+                    end,
                     }
                   '';
               strategies = {
-                chat.adapter = "copilot";
-                inline.adapter = "copilot";
+                chat.adapter = "openrouter";
+                inline.adapter = "openrouter";
+                agent.adapter = "openrouter";
               };
               display.diff.provider = "mini_diff";
             };
@@ -330,7 +377,23 @@ in
               treesitter.enable = true;
             };
             go.enable = true;
-            php.enable = true;
+            php = {
+              enable = true;
+              lsp.server = "intelephense";
+              lsp.enable = true;
+              treesitter.enable = true;
+            };
+            html = {
+              enable = true;
+              treesitter = {
+                enable = true;
+                autotagHtml = true;
+              };
+
+            };
+            bash.enable = true;
+            yaml.enable = true;
+            markdown.enable = true;
           };
           lsp = {
             enable = true;
@@ -338,9 +401,12 @@ in
             formatOnSave = true;
             # lspkind.enable = true;
             trouble.enable = true;
-            lspSignature.enable = false;
             otter-nvim.enable = true;
-            lspsaga.enable = true;
+            lspsaga.enable = false;
+            null-ls = {
+              enable = true;
+
+            };
           };
 
           treesitter = {
@@ -354,6 +420,7 @@ in
               nix
               php
               blade
+              html
             ];
           };
 
@@ -370,6 +437,7 @@ in
               key = "<leader><space>";
               mode = "n";
             }
+
             {
               action = "<cmd>lua Snacks.picker.files()<CR>";
               desc = "Find Files.";
@@ -380,6 +448,13 @@ in
               action = "<cmd>lua Snacks.picker.lsp_symbols()<CR>";
               desc = "LSP Symbols";
               key = "<leader>ss";
+              mode = "n";
+            }
+
+            {
+              action = "<cmd>lua Snacks.explorer()<CR>";
+              desc = "Open explorer.";
+              key = "<leader>e";
               mode = "n";
             }
             {
@@ -413,6 +488,14 @@ in
               desc = "Open Code Companion Prompt";
             }
           ];
+
+          luaConfigPost = ''
+            vim.filetype.add({
+            pattern = {
+              ['.*%.blade%.php'] = 'php',
+            }
+             });
+          '';
         };
       };
     };
