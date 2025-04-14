@@ -177,6 +177,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    lumen = {
+      url = "github:jnsahaj/lumen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =

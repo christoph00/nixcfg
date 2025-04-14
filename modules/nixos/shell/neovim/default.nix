@@ -18,7 +18,8 @@ in
 
     environment.systemPackages = with pkgs; [
       iwe
-      internal.lumen
+      inputs.lumen.packages.${pkgs.system}.default
+      fzf
     ];
 
     programs.nvf = {
