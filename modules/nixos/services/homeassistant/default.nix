@@ -119,7 +119,7 @@ in
               pybluez
               aioblescan
               grpcio-gcp
-              #netmiko
+              netmiko
             ];
         };
       in
@@ -247,7 +247,7 @@ in
             xiaomi_miot
             bodymiscale
           ])
-          ++ (with pkgs; [
+          ++ (with pkgs.internal; [
             # home-assistant-bermuda
             # home-assistant-browser-mod
             # home-assistant-music-assistant
@@ -307,7 +307,7 @@ in
           "jellyfin"
           "androidtv"
           "androidtv_remote"
-          #"openai_conversation"
+          "openai_conversation"
           "lovelace"
           "mobile_app"
           #"nzbget"
@@ -347,6 +347,10 @@ in
           "bluetooth_adapters"
         ];
       };
+
+    systemd.services.home-assistant.environment = {
+      OPENAI_BASE_URL = "https://openrouter.ai/api/v1";
+    };
   };
 
 }
