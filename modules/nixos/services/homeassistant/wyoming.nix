@@ -13,7 +13,7 @@ let
   cfg = config.internal.services.homeassistant.wyoming-openai;
 in
 {
-  options.services.wyoming-openai = {
+  options.internal.services.homeassistant.wyoming-openai = {
 
     enable = mkBoolOpt config.internal.isSmartHome "Enable wyoming-openai Server.";
     port = lib.mkOption {
