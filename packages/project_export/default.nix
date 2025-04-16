@@ -5,7 +5,7 @@
 
 buildGoModule rec {
   pname = "project-export";
-  version = "1.1";
+  version = "1.2";
   src = ./.;
 
   vendorHash = null;

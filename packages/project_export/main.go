@@ -107,7 +107,7 @@ func processFile(path string, writer *bufio.Writer) {
 // Unveränderte Hilfsfunktionen
 func getDirs(input string) []string {
 	if input == "laravel-app" {
-		return []string{"./app", "./config", "./routes", "./bootstrap"}
+		return []string{"./app", "./config", "./routes", "./bootstrap", "./resources", "./database"}
 	}
 	return []string{input}
 }

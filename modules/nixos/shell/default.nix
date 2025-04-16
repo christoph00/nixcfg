@@ -19,6 +19,13 @@ let
           git = {
             basePackage = pkgs.git;
           };
+          rclone = {
+            basePackage = pkgs.rclone;
+            flags = [
+              "--config"
+              "${config.age.secrets."rclone.conf".path}"
+            ];
+          };
           starship = {
             basePackage = pkgs.starship;
             env.STARSHIP_CONFIG.value = (pkgs.formats.toml { }).generate "starship-config" {
@@ -82,6 +89,14 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    age.secrets."rclone.conf" = {
+      file = ../../../secrets/rclone.conf;
+      mode = "0400";
+      owner = "christoph";
+      symlink = false;
+      path = "/run/credentials/rclone.conf";
+    };
 
     # environment.enableAllTerminfo = true;
     programs.direnv.enable = true;
