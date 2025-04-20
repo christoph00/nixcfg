@@ -22,7 +22,8 @@ in
       inputs.lumen.packages.${pkgs.system}.default
       fzf
       internal.project_export
-      codex
+      internal.open-codex
+      aider-chat
       yazi
     ];
 
