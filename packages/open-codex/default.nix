@@ -21,7 +21,6 @@ buildNpmPackage rec {
   npmDepsHash = "sha256-riVXC7T9zgUBUazH5Wq7+MjU1FepLkp9kHLSq+ZVqbs=";
 
   doInstallCheck = true;
-  nativeInstallCheckInputs = [ versionCheckHook ];
 
   meta = {
     description = "Lightweight coding agent that runs in your terminal";

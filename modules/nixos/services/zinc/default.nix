@@ -19,58 +19,58 @@ in
     enable = mkBoolOpt false "Enable Zinc Search Service.";
 
     user = mkOption {
-      type = str;
+      type = lib.types.str;
       default = "zinc";
       description = "user account under which zinc runs";
     };
     group = mkOption {
-      type = str;
+      type = lib.types.str;
       default = "zinc";
       description = "group under which zinc runs";
     };
     dataDir = mkOption {
-      type = path;
+      type = lib.types.path;
       default = "/var/lib/zinc";
       description = ''the data directory for zinc'';
     };
     secretFile = mkOption {
-      type = nullOr path;
+      type = lib.types.nullOr lib.types.path;
       default = null;
       description = ''secret env variables for zinc'';
     };
     package = mkOption {
       default = pkgs.zinc;
       defaultText = literalExpression "pkgs.zinc";
-      type = package;
+      type = lib.types.package;
       description = ''zinc package to use'';
     };
     address = mkOption {
-      type = str;
+      type = lib.types.str;
       default = "0.0.0.0";
       description = ''zinc server IP address to bind to'';
     };
     port = mkOption {
-      type = port;
+      type = lib.types.port;
       default = 4080;
       description = ''zinc server listen http port'';
     };
     prometheus = mkOption {
-      type = bool;
+      type = lib.types.bool;
       default = false;
       description = ''Enables prometheus metrics on /metrics endpoint'';
     };
     telemetry = mkOption {
-      type = bool;
+      type = lib.types.bool;
       default = false;
       description = ''send anonymous telemetry info for improving zinc'';
     };
     sentry = mkOption {
-      type = bool;
+      type = lib.types.bool;
       default = false;
       description = ''send anonymous sentry info for improving zinc'';
     };
     sentryDSN = mkOption {
-      type = str;
+      type = lib.types.str;
       default = "ingest.sentry.io";
       description = ''sentry DSN variable'';
     };

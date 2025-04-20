@@ -49,16 +49,10 @@ in
 
     internal.system.state.directories = [ "/var/lib/open-webui" ];
 
-    services.caddy.virtualHosts."${cfg.domain}" = {
-      extraConfig = # caddyfile
-        ''
-          encode zstd gzip
-          tls {
-            dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-            resolvers 1.1.1.1
-          }
-          reverse_proxy http://127.0.0.1:3000
-        '';
+    services.nginx.virtualHosts."${cfg.domain}".locations."/" = {
+      proxyPass = "http://127.0.0.1:3000";
+      recommendedProxySettings = true;
+      proxyWebsockets = true;
     };
 
     services.open-webui = {
