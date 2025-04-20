@@ -42,8 +42,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.sessionVariables.OPEN_AI_API_URL = "https://api.perplexity.ai";
-
     environment.systemPackages = [
       pkgs.vscode
       pkgs.kitty
@@ -60,7 +58,6 @@ in
       wrapped
       pkgs.gthumb
       pkgs.gtkimageview
-      # pkgs.digikam
 
       pkgs.networkmanagerapplet
 
@@ -72,13 +69,6 @@ in
 
       pkgs.nemo
 
-      pkgs.nixd
-      pkgs.gopls
-      pkgs.go
-
-      pkgs.planify
-
-      inputs.zen-browser.packages.${pkgs.system}.default
     ];
 
   };
