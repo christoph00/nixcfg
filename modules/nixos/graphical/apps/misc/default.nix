@@ -60,7 +60,7 @@ in
       wrapped
       pkgs.gthumb
       pkgs.gtkimageview
-      pkgs.digikam
+      # pkgs.digikam
 
       pkgs.networkmanagerapplet
 
