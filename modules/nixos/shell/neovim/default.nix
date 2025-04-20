@@ -23,6 +23,7 @@ in
       fzf
       internal.project_export
       codex
+      yazi
     ];
 
     programs.nvf = {
