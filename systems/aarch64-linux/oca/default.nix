@@ -17,6 +17,7 @@
   internal.services.ai.enable = true;
   internal.shell.neovim.enable = true;
   internal.services.n8n.enable = true;
+  internal.services.zinc.enable = true;
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";
   networking.firewall.allowedTCPPorts = [ 8888 ];
