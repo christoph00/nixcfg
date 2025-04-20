@@ -140,7 +140,7 @@ in
         {
 
           "Mod+Escape".action.spawn = [ "${lib.getExe powerMenu}" ];
-          "Mod+Return".action.spawn = [ "${inputs.ghostty.packages.${pkgs.system}.default}/bin/ghostty" ];
+          "Mod+Return".action.spawn = [ "${pkgs.ghostty}/bin/ghostty" ];
 
           "Mod+Tab".action = focus-column-right-or-first;
 

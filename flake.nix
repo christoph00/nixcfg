@@ -86,11 +86,6 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs-unstable.follows = "nixpkgs";
-    };
-
     host-agent = {
       url = "github:christoph00/host-agent";
       inputs.nixpkgs.follows = "nixpkgs";
