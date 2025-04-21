@@ -17,17 +17,6 @@ in
 
   config = mkIf cfg.enable {
 
-    environment.systemPackages = with pkgs; [
-      iwe
-      inputs.lumen.packages.${pkgs.system}.default
-      fzf
-      internal.project_export
-      internal.open-codex
-      aider-chat
-      goose-cli
-      yazi
-    ];
-
     programs.nvf = {
       enable = true;
 

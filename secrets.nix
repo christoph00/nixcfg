@@ -55,4 +55,8 @@ in
     lsrv
     oca
   ] ++ users;
+  "secrets/aider.env".publicKeys = [
+    oca
+    x13
+  ] ++ users;
 }
