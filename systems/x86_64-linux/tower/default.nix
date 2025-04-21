@@ -22,9 +22,9 @@
     "headless-desktop"
   ];
 
-  services.nas = {
+  internal.services.nas = {
     enable = true;
-    domain = "data.r505.de";
+    domain = "tdata.r505.de";
     extraDirectorys = [
       "/media/Games"
       "/media/ssd-data"
