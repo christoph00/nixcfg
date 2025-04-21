@@ -125,6 +125,9 @@ in
 
       pkgs.usbutils
 
+      pkgs.gnupg
+      # pkgs.pinentry
+
       pkgs.nixd
       pkgs.gopls
       pkgs.go
@@ -135,7 +138,25 @@ in
       pkgs.nixfmt-tree
       pkgs.nixfmt-rfc-style
 
+      pkgs.pass
+
     ];
+
+    services.dbus.packages = [ pkgs.pass-secret-service ];
+
+    systemd.user.services.pass-secret-service = {
+      description = "Pass Secret Service";
+      serviceConfig = {
+        ExecStart = "${pkgs.pass-secret-service}/bin/pass-secret-service";
+        Restart = "on-failure";
+      };
+      wantedBy = [ "default.target" ];
+    };
+
+    programs.gnupg.agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-curses;
+    };
 
     programs.nh = {
       enable = true;

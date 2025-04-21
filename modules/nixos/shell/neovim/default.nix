@@ -24,6 +24,7 @@ in
       internal.project_export
       internal.open-codex
       aider-chat
+      goose-cli
       yazi
     ];
 

@@ -49,12 +49,21 @@ in
 
     internal.system.state.directories = [ "/var/lib/open-webui" ];
 
-    services.nginx.virtualHosts."${cfg.domain}".locations."/" = {
-      proxyPass = "http://127.0.0.1:3000";
-      recommendedProxySettings = true;
-      proxyWebsockets = true;
+    services.nginx.virtualHosts."${cfg.domain}" = {
+      useACMEHost = "r505.de";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${toString config.services.open-webui.port}";
+        recommendedProxySettings = true;
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header        X-Real-IP $remote_addr;
+          proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header        X-Forwarded-Proto $scheme;
+          proxy_set_header        X-Forwarded-Host $host;
+          proxy_set_header        X-Forwarded-Server $host;
+        '';
+      };
     };
-
     services.open-webui = {
       enable = true;
       package = pkgs.open-webui;
@@ -72,7 +81,6 @@ in
         ENABLE_RAG_WEB_SEARCH = "True";
         SEARXNG_QUERY_URL = "https://priv.au/search?q=<query>";
         RAG_WEB_SEARCH_ENGINE = "searxng";
-        PORT = "3000";
 
       };
     };

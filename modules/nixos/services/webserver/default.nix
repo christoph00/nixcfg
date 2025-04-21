@@ -47,19 +47,15 @@ in
   config = mkIf cfg.enable {
 
     internal.system.state.directories = [
-      {
-        directory = "/var/lib/acme";
-        user = config.services.acme.user;
-        group = config.services.acme.group;
-      }
+      "/var/lib/acme"
     ];
 
     age.secrets.cf-api-key = {
       file = ../../../../secrets/cf-api-key;
-      owner = config.services.acme.user;
-      group = config.services.acme.group;
+      owner = "acme";
+      group = "acme";
+      mode = "440";
     };
-    user.extraGroups = [ "nginx" ];
 
     services.nginx = {
       enable = true;
@@ -90,8 +86,15 @@ in
       acceptTerms = true;
       defaults = {
         email = "chr+acme@asche.co";
-        credentialsFile = config.age.secrets.acme.path;
+      };
+      certs."r505.de" = {
+        domain = "*.r505.de";
+        extraDomainNames = [ "*.net.r505.de" ];
         dnsProvider = "cloudflare";
+        dnsPropagationCheck = true;
+        dnsResolver = "1.1.1.1:53";
+        group = "nginx";
+        credentialsFile = config.age.secrets.cf-api-key.path;
       };
     };
 

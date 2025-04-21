@@ -105,7 +105,7 @@ in
       serviceConfig = {
         ${if cfg.secretFile != null then "EnvironmentFile" else null} = cfg.secretFile;
         ExecStart = ''
-          ${cfg.package}/bin/zinc
+          ${cfg.package}/bin/zincsearch
         '';
         Restart = "on-failure";
         StateDirectory = "zinc";
