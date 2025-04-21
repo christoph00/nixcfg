@@ -91,6 +91,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    aider-nix.url = "github:matko/aider-nix";
+
     nixpkgs-wayland = {
       url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";

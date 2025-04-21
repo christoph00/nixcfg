@@ -16,6 +16,7 @@
   internal.services.vscode-tunnel.enable = true;
   internal.services.ai.enable = true;
   internal.shell.neovim.enable = true;
+  internal.shell.devtools.enable = true;
   internal.services.n8n.enable = true;
   internal.services.zinc.enable = true;
   services.tinyproxy.enable = true;
