@@ -48,8 +48,8 @@ in
       remotes = [
         {
           name = "origin";
-          url = "https://github.com/christoph00/nixcfg";
-          branches.main.name = "main";
+          url = "https://github.com/christoph00/nixcfg.git";
+          poller.period = 300;
         }
       ];
     };
