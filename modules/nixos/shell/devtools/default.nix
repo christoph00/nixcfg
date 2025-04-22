@@ -47,6 +47,11 @@ in
 
   config = mkIf cfg.enable {
 
+    environment.variables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+
     age.secrets.aider-env = {
       file = ../../../../secrets/aider.env;
       mode = "0400";
@@ -85,6 +90,7 @@ in
         set-option -g automatic-rename on
 
         set -g status-position top
+        set -g mouse on
 
         set-option -ga terminal-overrides ",xterm*:Tc"
 
@@ -96,9 +102,9 @@ in
         set -g @tokyo-night-tmux_theme day
         set -g @tokyo-night-tmux_transparent 1
 
-        set -g @tokyo-night-tmux_window_id_style super
-        set -g @tokyo-night-tmux_pane_id_style hide
-        set -g @tokyo-night-tmux_zoom_id_style dsquare
+        set -g @tokyo-night-tmux_window_id_style none
+        set -g @tokyo-night-tmux_pane_id_style none
+        set -g @tokyo-night-tmux_zoom_id_style none
 
         # Widgets
         set -g @tokyo-night-tmux_show_path 1
@@ -110,8 +116,6 @@ in
 
         set -g @tokyo-night-tmux_terminal_icon 
         set -g @tokyo-night-tmux_active_terminal_icon 
-
-
 
       '';
     };
