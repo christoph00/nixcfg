@@ -175,8 +175,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lumen = {
-      url = "github:jnsahaj/lumen";
+    comin = {
+      url = "github:nlewo/comin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

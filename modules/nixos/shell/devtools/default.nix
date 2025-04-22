@@ -60,7 +60,6 @@ in
     environment.systemPackages = with pkgs; [
       wrapped
       iwe
-      inputs.lumen.packages.${pkgs.system}.default
       fzf
       internal.project_export
       internal.open-codex
