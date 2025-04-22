@@ -24,6 +24,15 @@ let
             flags = [
               "--env-file"
               "${config.age.secrets.aider-env.path}"
+              "--chat-language"
+              "German"
+              "--vim"
+              "--editor"
+              "vim"
+              "--cache-prompts"
+              "--no-attribute-author"
+              "--attribute-committer"
+              "--no-check-update"
             ];
           };
         };
