@@ -41,6 +41,8 @@ in
 
   config = mkIf cfg.enable {
 
+    internal.system.state.directories = [ "/var/lib/comin" ];
+
     services.comin = {
       enable = true;
       remotes = [
