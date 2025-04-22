@@ -216,10 +216,10 @@
         #caddy.overlays.default
       ];
 
-      homes.modules = with inputs; [
-        #niri.homeModules.niri
-      ];
-
+      # homes.modules = with inputs; [
+      #   #niri.homeModules.niri
+      # ];
+      #
       systems.modules.nixos = with inputs; [
         nixos-facter-modules.nixosModules.facter
         srvos.nixosModules.common
@@ -241,6 +241,8 @@
         # mnw.nixosModules.mnw
         microvm.nixosModules.host
         microvm.nixosModules.microvm
+
+        comin.nixosModules.comin
 
         host-agent.nixosModules.default
 
