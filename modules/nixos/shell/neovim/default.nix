@@ -175,6 +175,12 @@ in
               };
             };
           };
+          utility.yazi-nvim = {
+            enable = true;
+            mappings = {
+              openYazi = "<leader>-";
+            };
+          };
           theme = {
             enable = true;
             name = "tokyonight";
