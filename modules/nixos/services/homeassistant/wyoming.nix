@@ -15,7 +15,7 @@ in
 {
   options.internal.services.homeassistant.wyoming-openai = {
 
-    enable = mkBoolOpt config.internal.isSmartHome "Enable wyoming-openai Server.";
+    enable = mkBoolOpt false "Enable wyoming-openai Server.";
     port = lib.mkOption {
       type = lib.types.port;
       default = 10300;
@@ -45,7 +45,7 @@ in
       after = [ "network.target" ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.internal.wyoming-openai}/bin/wyoming-openai --port ${toString cfg.port}";
+        # ExecStart = "${pkgs.internal.wyoming-openai}/bin/wyoming-openai --port ${toString cfg.port}";
         Restart = "on-failure";
         DynamicUser = true;
         ProtectSystem = "strict";
