@@ -61,7 +61,60 @@ in
       internal.open-codex
       goose-cli
       yazi
+      bc
+
+      nixfmt
+      devenv
+      nixd
     ];
+
+    programs.tmux = {
+      enable = true;
+      terminal = "screen-256color";
+      plugins = with pkgs.tmuxPlugins; [
+        tokyo-night-tmux
+        fzf-tmux-url
+        yank
+        open
+      ];
+      newSession = true;
+      keyMode = "vi";
+      extraConfig = ''
+        set -g default-command "''${SHELL}" # this will avoid loading profile again
+        set -g set-clipboard on
+        set-option -g automatic-rename on
+
+        set -g status-position top
+
+        set-option -ga terminal-overrides ",xterm*:Tc"
+
+        bind x kill-pane
+        bind q kill-window
+        bind Q kill-session
+
+
+        set -g @tokyo-night-tmux_theme day
+        set -g @tokyo-night-tmux_transparent 1
+
+        set -g @tokyo-night-tmux_window_id_style super
+        set -g @tokyo-night-tmux_pane_id_style hide
+        set -g @tokyo-night-tmux_zoom_id_style dsquare
+
+        # Widgets
+        set -g @tokyo-night-tmux_show_path 1
+        set -g @tokyo-night-tmux_path_format relative
+
+        set -g @tokyo-night-tmux_show_git 1
+
+        set -g @tokyo-night-tmux_show_datetime 0
+
+        set -g @tokyo-night-tmux_terminal_icon 
+        set -g @tokyo-night-tmux_active_terminal_icon 
+
+
+
+      '';
+    };
 
   };
 }

@@ -116,11 +116,8 @@ in
       pkgs.pciutils
       pkgs.jq
       pkgs.killall
-      pkgs.devenv
-      pkgs.tmux
 
       pkgs.agenix
-      pkgs.helix
       pkgs.rsync
 
       pkgs.usbutils
@@ -128,15 +125,7 @@ in
       pkgs.gnupg
       # pkgs.pinentry
 
-      pkgs.nixd
-      pkgs.gopls
-      pkgs.go
-      pkgs.just
-      # pkgs.uv
       pkgs.uutils-coreutils-noprefix
-
-      pkgs.nixfmt-tree
-      pkgs.nixfmt-rfc-style
 
       pkgs.pass
 
