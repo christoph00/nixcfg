@@ -15,12 +15,7 @@ let
       {
         wrappers = {
           aider = {
-            basePackage = inputs.aider-nix.packages.${pkgs.system}.aider-chat.override {
-              withAllFeatures = true;
-              withPlaywright = true;
-              withBrowser = true;
-              withHelp = true;
-            };
+            basePackage = pkgs.aider-chat-full;
             flags = [
               "--env-file"
               "${config.age.secrets.aider-env.path}"
@@ -70,6 +65,9 @@ in
       nixfmt
       devenv
       nixd
+
+      httpie
+      curlie
     ];
 
     programs.tmux = {

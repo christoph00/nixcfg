@@ -59,4 +59,8 @@ in
     oca
     x13
   ] ++ users;
+  "secrets/searx.env".publicKeys = [
+    oca
+    oc1
+  ] ++ users;
 }
