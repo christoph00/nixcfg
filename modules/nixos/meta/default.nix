@@ -50,6 +50,25 @@ let
           type = types.str;
           default = name;
         };
+
+        description = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+          description = "Eine Beschreibung des Hosts.";
+        };
+
+        macAddress = mkOption {
+          type = types.nullOr types.str;
+          default = null;
+          description = "Die primäre MAC-Adresse des Hosts.";
+          example = "00:11:22:33:44:55";
+        };
+
+        architecture = mkOption {
+          type = types.nullOr (types.enum [ "x86_64" "aarch64" ]);
+          default = null;
+          description = "Die CPU-Architektur des Hosts.";
+        };
       };
     };
 
