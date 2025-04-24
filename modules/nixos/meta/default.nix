@@ -65,7 +65,12 @@ let
         };
 
         architecture = mkOption {
-          type = types.nullOr (types.enum [ "x86_64" "aarch64" ]);
+          type = types.nullOr (
+            types.enum [
+              "x86_64"
+              "aarch64"
+            ]
+          );
           default = null;
           description = "Die CPU-Architektur des Hosts.";
         };
@@ -74,7 +79,6 @@ let
           type = types.int;
           description = "Eindeutige numerische ID des Hosts.";
           example = 1;
-          # Es gibt keine Standard-ID, sie muss pro Host gesetzt werden.
         };
       };
     };
@@ -83,7 +87,8 @@ let
 
   # --- WireGuard P2P IP Generation ---
   # Helper function to convert an integer offset within 10.87.0.0/16 to an IP string
-  intOffsetToIpString = offset:
+  intOffsetToIpString =
+    offset:
     let
       baseIpInt = (10 * 256 + 87) * 65536; # 10.87.0.0
       ipInt = baseIpInt + offset;
@@ -91,10 +96,18 @@ let
       o2 = builtins.div (ipInt - o1 * 16777216) 65536; # 256^2
       o3 = builtins.div (ipInt - o1 * 16777216 - o2 * 65536) 256;
       o4 = ipInt - o1 * 16777216 - o2 * 65536 - o3 * 256;
-    in "${toString o1}.${toString o2}.${toString o3}.${toString o4}";
+    in
+    "${toString o1}.${toString o2}.${toString o3}.${toString o4}";
 
   # Hosts, für die P2P-Verbindungen generiert werden sollen
-  p2pHostNames = [ "lsrv" "oca" "oc1" "oc2" "star" "tower" ];
+  p2pHostNames = [
+    "lsrv"
+    "oca"
+    "oc1"
+    "oc2"
+    "star"
+    "tower"
+  ];
 
   # Filtered meta data for relevant hosts
   p2pMeta = lib.filterAttrs (name: _: builtins.elem name p2pHostNames) cfg.meta;
@@ -103,19 +116,22 @@ let
   sortedP2pHostNames = lib.sort lib.lessThan (lib.attrNames p2pMeta);
 
   # Generate all unique pairs (hostA, hostB) where hostA < hostB alphabetically
-  hostPairs = lib.flatten (lib.imap0 (idxA: hostA:
-    lib.imap0 (idxB: hostB:
-      if idxA < idxB then { inherit hostA hostB; } else null
+  hostPairs = lib.flatten (
+    lib.imap0 (
+      idxA: hostA:
+      lib.imap0 (idxB: hostB: if idxA < idxB then { inherit hostA hostB; } else null) sortedP2pHostNames
     ) sortedP2pHostNames
-  ) sortedP2pHostNames);
+  );
 
   # Assign an index and calculate IPs for each pair
-  pairConfigs = lib.imap0 (k: pair:
+  pairConfigs = lib.imap0 (
+    k: pair:
     let
       subnetOffset = k * 4; # Each pair gets a /30 (4 addresses)
       ipA = intOffsetToIpString (subnetOffset + 1); # First usable IP
       ipB = intOffsetToIpString (subnetOffset + 2); # Second usable IP
-    in {
+    in
+    {
       hostA = pair.hostA;
       hostB = pair.hostB;
       ipA = ipA;
@@ -125,17 +141,32 @@ let
   ) (lib.filter (x: x != null) hostPairs);
 
   # Build the final structure accessible via internal.wireguardP2P.<hostA>.<hostB>
-  wireguardP2PStructure = lib.foldl (acc: pairConfig:
+  wireguardP2PStructure = lib.foldl (
+    acc: pairConfig:
     let
       hostA = pairConfig.hostA;
       hostB = pairConfig.hostB;
-      peerInfoA = { localIP = pairConfig.ipA; remoteIP = pairConfig.ipB; subnetIndex = pairConfig.subnetIndex; };
-      peerInfoB = { localIP = pairConfig.ipB; remoteIP = pairConfig.ipA; subnetIndex = pairConfig.subnetIndex; };
-    in acc // {
-      ${hostA} = (acc.${hostA} or {}) // { ${hostB} = peerInfoA; };
-      ${hostB} = (acc.${hostB} or {}) // { ${hostA} = peerInfoB; };
+      peerInfoA = {
+        localIP = pairConfig.ipA;
+        remoteIP = pairConfig.ipB;
+        subnetIndex = pairConfig.subnetIndex;
+      };
+      peerInfoB = {
+        localIP = pairConfig.ipB;
+        remoteIP = pairConfig.ipA;
+        subnetIndex = pairConfig.subnetIndex;
+      };
+    in
+    acc
+    // {
+      ${hostA} = (acc.${hostA} or { }) // {
+        ${hostB} = peerInfoA;
+      };
+      ${hostB} = (acc.${hostB} or { }) // {
+        ${hostA} = peerInfoB;
+      };
     }
-  ) {} pairConfigs;
+  ) { } pairConfigs;
   # --- End WireGuard P2P IP Generation ---
 
 in
@@ -215,13 +246,17 @@ in
     # Structure containing calculated WireGuard P2P IPs for specific hosts
     # Access via config.internal.wireguardP2P.<hostA>.<hostB>.localIP etc.
     wireguardP2P = mkOption {
-      type = types.attrsOf (types.attrsOf (types.submodule {
-        options = {
-          localIP = mkOption { type = types.str; };
-          remoteIP = mkOption { type = types.str; };
-          subnetIndex = mkOption { type = types.int; };
-        };
-      }));
+      type = types.attrsOf (
+        types.attrsOf (
+          types.submodule {
+            options = {
+              localIP = mkOption { type = types.str; };
+              remoteIP = mkOption { type = types.str; };
+              subnetIndex = mkOption { type = types.int; };
+            };
+          }
+        )
+      );
       internal = true;
       readOnly = true; # Calculated value
       default = wireguardP2PStructure;
