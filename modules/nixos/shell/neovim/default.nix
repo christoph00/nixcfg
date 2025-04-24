@@ -59,6 +59,7 @@ in
             foldlevelstart = 99;
 
             # Misc
+            inccommand = "split";
             termguicolors = true;
             timeoutlen = 1000;
             scrolloff = 4;
@@ -82,7 +83,7 @@ in
             illuminate.enable = true;
           };
 
-          # statusline.lualine.enable = true;
+          statusline.lualine.enable = true;
 
           mini = {
             icons.enable = true;
@@ -129,18 +130,18 @@ in
             setupOpts = {
               enimate.enabled = true;
               bigfile.enabled = true;
-              picker = {
-                enabled = true;
-                sources = {
-                  explorer = {
-                    layout = {
-                      preset = "vertical";
-                      preview = true;
-                    };
-                    auto_close = true;
-                  };
-                };
-              };
+              # picker = {
+              #   enabled = false;
+              #   sources = {
+              #     explorer = {
+              #       layout = {
+              #         preset = "vertical";
+              #         preview = true;
+              #       };
+              #       auto_close = true;
+              #     };
+              #   };
+              # };
               # dashboard.enabled = true;
               input.enabled = true;
               indent = {
@@ -166,10 +167,10 @@ in
                 enabled = true;
               };
               statuscolumn.enabled = true;
-              explorer = {
-                enabled = true;
-                replace_netrw = true;
-              };
+              # explorer = {
+              #   enabled = false;
+              #   replace_netrw = true;
+              # };
               words = {
                 enabled = true;
               };
@@ -178,7 +179,7 @@ in
           utility.yazi-nvim = {
             enable = true;
             mappings = {
-              openYazi = "<leader>-";
+              openYazi = "<leader><space>";
             };
           };
           theme = {
@@ -418,6 +419,13 @@ in
             };
           };
 
+          telescope = {
+            enable = true;
+            mappings = {
+              buffers = "<leader>fb";
+              findFiles = "<leader>ff";
+            };
+          };
           treesitter = {
             enable = true;
             addDefaultGrammars = true;
@@ -434,44 +442,44 @@ in
           };
 
           keymaps = [
-            {
-              action = "<cmd>lua Snacks.picker.projects()<CR>";
-              desc = "Change current project.";
-              key = "<leader>fp";
-              mode = "n";
-            }
-            {
-              action = "<cmd>lua Snacks.picker.smart()<CR>";
-              desc = "Open Smart Picker.";
-              key = "<leader><space>";
-              mode = "n";
-            }
-
-            {
-              action = "<cmd>lua Snacks.picker.files()<CR>";
-              desc = "Find Files.";
-              key = "<leader>ff";
-              mode = "n";
-            }
-            {
-              action = "<cmd>lua Snacks.picker.lsp_symbols()<CR>";
-              desc = "LSP Symbols";
-              key = "<leader>ss";
-              mode = "n";
-            }
-
-            {
-              action = "<cmd>lua Snacks.explorer()<CR>";
-              desc = "Open explorer.";
-              key = "<leader>e";
-              mode = "n";
-            }
-            {
-              action = "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>";
-              desc = "LSP Workspace Symbols";
-              key = "<leader>sw";
-              mode = "n";
-            }
+            # {
+            #   action = "<cmd>lua Snacks.picker.projects()<CR>";
+            #   desc = "Change current project.";
+            #   key = "<leader>fp";
+            #   mode = "n";
+            # }
+            # {
+            #   action = "<cmd>lua Snacks.picker.smart()<CR>";
+            #   desc = "Open Smart Picker.";
+            #   key = "<leader><space>";
+            #   mode = "n";
+            # }
+            #
+            # {
+            #   action = "<cmd>lua Snacks.picker.files()<CR>";
+            #   desc = "Find Files.";
+            #   key = "<leader>ff";
+            #   mode = "n";
+            # }
+            # {
+            #   action = "<cmd>lua Snacks.picker.lsp_symbols()<CR>";
+            #   desc = "LSP Symbols";
+            #   key = "<leader>ss";
+            #   mode = "n";
+            # }
+            #
+            # {
+            #   action = "<cmd>lua Snacks.explorer()<CR>";
+            #   desc = "Open explorer.";
+            #   key = "<leader>e";
+            #   mode = "n";
+            # }
+            # {
+            #   action = "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>";
+            #   desc = "LSP Workspace Symbols";
+            #   key = "<leader>sw";
+            #   mode = "n";
+            # }
             {
               mode = "n";
               key = "<leader>aa";

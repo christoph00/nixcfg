@@ -15,7 +15,7 @@ let
       {
         wrappers = {
           aider = {
-            basePackage = pkgs.aider-chat-full;
+            basePackage = pkgs.aider-chat;
             flags = [
               "--env-file"
               "${config.age.secrets.aider-env.path}"
