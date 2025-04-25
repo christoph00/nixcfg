@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 {
@@ -22,6 +23,17 @@
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";
   networking.firewall.allowedTCPPorts = [ 8888 ];
+
+  services.nginx.virtualHosts."ha.r505.de" = {
+    useACMEHost = "r505.de";
+    forceSSL = true;
+
+    locations."/" = {
+      proxyPass = "http://${config.internal.hosts.lsrv.net.vpn}:8123";
+      recommendedProxySettings = true;
+      proxyWebsockets = true;
+    };
+  };
 
   boot.initrd.kernelModules = [
     "ata_piix"
