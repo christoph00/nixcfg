@@ -71,6 +71,7 @@
           "webserver"
           "router"
           "nas"
+          "smarthome"
         ];
         net = {
           wan = "dynamic";
@@ -86,7 +87,7 @@
         inherit id;
         zone = "home";
         architecture = "x86_64";
-        wgPubkey = "+3J7uu4QlrYhNPrttXvH6JXySDuZw71KV763oP6A/0A="
+        wgPubkey = "+3J7uu4QlrYhNPrttXvH6JXySDuZw71KV763oP6A/0A=";
         roles = [
           "vpn"
           "desktop"
