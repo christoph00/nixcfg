@@ -63,14 +63,14 @@ with lib.internal;
       useXkbConfig = true;
     };
     #system.etc.overlay.enable = lib.mkDefault true;
-    services.userborn.enable = lib.mkDefault true;
-
-    # Random perl remnants
-    system.disableInstallerTools = lib.mkDefault true;
-    programs.less.lessopen = lib.mkDefault null;
-    programs.command-not-found.enable = lib.mkDefault false;
-
-    environment.defaultPackages = lib.mkDefault [ ];
+    # services.userborn.enable = lib.mkDefault true;
+    #
+    # # Random perl remnants
+    # system.disableInstallerTools = lib.mkDefault true;
+    # programs.less.lessopen = lib.mkDefault null;
+    # programs.command-not-found.enable = lib.mkDefault false;
+    #
+    # environment.defaultPackages = lib.mkDefault [ ];
     documentation.info.enable = lib.mkDefault false;
 
     # Check that the system does not contain a Nix store path that contains the
@@ -79,7 +79,7 @@ with lib.internal;
 
     # Re-add nixos-rebuild to the systemPackages that was removed by the
     # `system.disableInstallerTools` option.
-    environment.systemPackages = [ pkgs.nixos-rebuild-ng ];
+    # environment.systemPackages = [ pkgs.nixos-rebuild-ng ];
 
     # prevent nix-daemon locking the system
     systemd.services.nix-daemon.serviceConfig.Nice = "19";
