@@ -20,7 +20,7 @@ in
     enable = mkBoolOpt' true;
     enableWifi = mkBoolOpt' (config.internal.hasRole "laptop");
     enableDHCPLAN = mkBoolOpt' (!config.internal.hasRole "router");
-    enableNM = mkBoolOpt' (config.intermal.hasRole "desktop");
+    enableNM = mkBoolOpt' (config.internal.hasRole "desktop");
     enableIWD = mkBoolOpt' cfg.enableWifi;
     lanInterface = mkOption {
       type = types.string;
