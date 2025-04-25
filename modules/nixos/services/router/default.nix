@@ -142,6 +142,7 @@ in
         5353 # avahi
         123 # ntp
         443
+        51820 # wireguard
       ];
 
       firewall.extraInputRules = ''
