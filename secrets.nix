@@ -47,6 +47,7 @@ in
   "secrets/sftpgo.env".publicKeys = [
     oca
     lsrv
+    tower
   ] ++ users;
   "secrets/rclone.conf".publicKeys = all;
 

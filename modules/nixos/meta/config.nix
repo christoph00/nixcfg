@@ -96,6 +96,7 @@
           "development"
           "headless-desktop"
           "game-stream"
+          "media"
         ];
         net = {
           lan = "dhcp";
