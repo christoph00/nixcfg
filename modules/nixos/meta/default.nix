@@ -13,6 +13,7 @@ let
     "gaming"
     "smarthome"
     "vpn"
+    "router"
   ];
 
   hostOptions =
