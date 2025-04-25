@@ -37,13 +37,17 @@ in
 {
 
   imports = [
-    ./assist.nix
-    ./commands.nix
-    ./wyoming.nix
+    # ./assist.nix
+    # ./commands.nix
+    # ./wyoming.nix
   ];
 
   options.internal.services.homeassistant = {
     enable = mkBoolOpt enabled "Enable Homeassistant.";
+    domain = mkOption {
+      type = types.str;
+      default = "ha.r505.de";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -85,16 +89,20 @@ in
       powerOnBoot = true;
     };
 
-    services.caddy.virtualHosts."ha.r505.de" = {
-      extraConfig = # caddyfile
-        ''
-          tls {
-            dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-            resolvers 1.1.1.1
-          }
-          header -Alt-svc
-          reverse_proxy http://127.0.0.1:8123
+    services.nginx.virtualHosts.${cfg.domain}" = {
+      useACMEHost = "r505.de";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8123";
+        recommendedProxySettings = true;
+        proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header        X-Real-IP $remote_addr;
+          proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header        X-Forwarded-Proto $scheme;
+          proxy_set_header        X-Forwarded-Host $host;
+          proxy_set_header        X-Forwarded-Server $host;
         '';
+      };
     };
 
     services.home-assistant =
