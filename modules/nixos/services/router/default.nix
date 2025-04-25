@@ -88,33 +88,33 @@ in
     '';
     services.resolved.fallbackDns = [ "127.0.0.1" ];
 
-    internal.system.state.directories = [ "/var/lib/technitium-dns-server" ];
-    services.technitium-dns-server.enable = true;
-    systemd.services.technitium-dns-server.serviceConfig = {
-      DynamicUser = mkForce false;
-      User = "technitium";
-      Group = "technitium";
-      UMask = "0007";
-      PIDFile = "/run/technitium.pid";
-
-    };
-
-    users.users.technitium = {
-      isSystemUser = true;
-      group = "technitium";
-      home = "/var/lib/technitium-dns-server";
-    };
-    users.groups.technitium = { };
-
-    services.caddy.virtualHosts."dns.r505.de".extraConfig = ''
-      tls {
-        dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-        resolvers 1.1.1.1
-      }
-      header -Alt-svc
-      reverse_proxy http://127.0.0.1:5380
-    '';
-
+    # internal.system.state.directories = [ "/var/lib/technitium-dns-server" ];
+    # services.technitium-dns-server.enable = true;
+    # systemd.services.technitium-dns-server.serviceConfig = {
+    #   DynamicUser = mkForce false;
+    #   User = "technitium";
+    #   Group = "technitium";
+    #   UMask = "0007";
+    #   PIDFile = "/run/technitium.pid";
+    #
+    # };
+    #
+    # users.users.technitium = {
+    #   isSystemUser = true;
+    #   group = "technitium";
+    #   home = "/var/lib/technitium-dns-server";
+    # };
+    # users.groups.technitium = { };
+    #
+    # services.caddy.virtualHosts."dns.r505.de".extraConfig = ''
+    #   tls {
+    #     dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    #     resolvers 1.1.1.1
+    #   }
+    #   header -Alt-svc
+    #   reverse_proxy http://127.0.0.1:5380
+    # '';
+    #
     networking = {
       nftables.enable = true;
 
@@ -218,10 +218,8 @@ in
 
     boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = true;
     boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = true;
-    #networking.useHostResolvConf = lib.mkForce false;
 
     systemd.network = {
-
       networks."10-external" = {
         name = cfg.externalInterface;
         DHCP = "no";
@@ -403,8 +401,8 @@ in
     # };
 
     services.dnsmasq = {
-      enable = false;
-      alwaysKeepRunning = false;
+      enable = true;
+      alwaysKeepRunning = true;
       settings = {
         bind-dynamic = true;
         interface = [ "lan" ];
@@ -414,7 +412,7 @@ in
           "8.8.8.8"
           "1.1.1.1"
         ];
-        port = 5353;
+        port = 53;
         domain-needed = true;
         bogus-priv = true;
         no-resolv = true;
@@ -424,7 +422,7 @@ in
         domain = "lan";
         expand-hosts = true;
 
-        no-hosts = true;
+        # no-hosts = true;
         address = "/ha.r505.de/192.168.2.2";
       };
     };
