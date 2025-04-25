@@ -31,19 +31,19 @@ in
           else
             {
               publicKey = host.wgPubkey;
-              allowedIPs =
-                if host.zone == "oracle" then
-                  [
-                    meta.subnets.oracle
-                    host.net.vpn
-                  ]
-                else if host.zone == "home" then
-                  [
-                    meta.subnets.home
-                    host.net.vpn
-                  ]
-                else
-                  [ host.net.vpn ];
+              allowedIPs = [ host.net.vpn ];
+              # if host.zone == "oracle" then
+              #   [
+              #     meta.subnets.oracle
+              #     host.net.vpn
+              #   ]
+              # else if host.zone == "home" then
+              #   [
+              #     meta.subnets.home
+              #     host.net.vpn
+              #   ]
+              # else
+              #   [ host.net.vpn ];
               endpoint = mkIf (host.net.wan != "dynamic" && host.net.wan != null) "${host.net.wan}:51820";
               persistentKeepalive = mkDefault 25;
             }
