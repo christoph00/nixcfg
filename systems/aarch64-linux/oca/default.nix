@@ -12,7 +12,7 @@
   internal.system.fs.device = "/dev/sda";
   internal.system.boot.encryptedRoot = false;
   internal.services.office-server.enable = true;
-  internal.services.glance.enable = true;
+  # internal.services.glance.enable = true;
   internal.services.vscode-tunnel.enable = true;
   internal.services.ai.enable = true;
   internal.shell.neovim.enable = true;

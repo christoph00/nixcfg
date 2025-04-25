@@ -1,22 +1,14 @@
 {
-  options,
   config,
   lib,
-  pkgs,
-  namespace,
   ...
 }:
 let
   inherit (lib)
     types
-    listOf
-    mkIf
-    mkMerge
-    mkDefault
     mkOption
     ;
   inherit (lib.internal) mkBoolOpt;
-  cfg = config.internal.type;
 in
 {
   options.internal = with types; {
