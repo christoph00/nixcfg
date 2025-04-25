@@ -12,6 +12,7 @@ let
     "game-stream"
     "gaming"
     "smarthome"
+    "vpn"
   ];
 
   hostOptions =
@@ -132,19 +133,11 @@ in
   };
 
   config = {
-    internal.currentHost = lib.mkMerge [
-      (lib.mkIf (
+    internal.currentHost = (
+      lib.mkIf (
         config.internal.hosts ? ${config.internal.thisHost}
-      ) config.internal.hosts.${config.internal.thisHost})
-      {
-        roles = [ ];
-        net = {
-          lan = null;
-          wan = null;
-          vpn = null;
-        };
-      }
-    ];
+      ) config.internal.hosts.${config.internal.thisHost}
+    );
 
     assertions = [
       {

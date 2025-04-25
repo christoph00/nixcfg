@@ -16,12 +16,12 @@ in
 
   config = mkIf cfg.enable {
 
-    age.secrets.wg-key.file = ../../../secrets/wg-key-${meta.thisHost}.key;
+    age.secrets.wg-key.file = ../../../secrets/wg-${meta.thisHost}-key;
 
-    networking.wireguard.interfaces.wg0 = {
+    networking.wireguard.interfaces.wg0 = mkIf (meta.currentHost.net.vpn != null) {
       ips = [ "${meta.currentHost.net.vpn}/24" ];
       listenPort = 51820;
-      privateKeyFile = "${age.secrets.wg-key.path}";
+      privateKeyFile = "${config.age.secrets.wg-key.path}";
 
       peers = filter (p: p != null) (
         mapAttrsToList (
@@ -30,7 +30,7 @@ in
             null
           else
             {
-              publicKey = host.pubkey;
+              publicKey = host.wgPubkey;
               allowedIPs =
                 if host.zone == "oracle" then
                   [

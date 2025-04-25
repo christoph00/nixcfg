@@ -11,7 +11,10 @@ let
   cfg = config.internal.network;
 in
 {
-  imports = [ ./tailscale.nix ];
+  imports = [
+    ./tailscale.nix
+    ./wireguard.nix
+  ];
 
   options.internal.network = with types; {
     enable = mkBoolOpt' true;
@@ -59,7 +62,9 @@ in
 
       extraHosts =
         let
-          hostEntries = mapAttrsToList (name: host: "${host.vpn}\t${name}.wg.r505.de") config.internal.hosts;
+          hostEntries = mapAttrsToList (
+            name: host: "${host.net.vpn}\t${name}.wg.r505.de"
+          ) config.internal.hosts;
         in
         concatStringsSep "\n" (filter (s: s != "") hostEntries);
     };
