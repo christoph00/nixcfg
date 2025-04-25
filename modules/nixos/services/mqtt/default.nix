@@ -32,7 +32,7 @@ in
 {
 
   options.internal.services.mqtt = {
-    enable = mkBoolOpt config.internal.isSmartHome "Enable MQTT Broker.";
+    enable = mkBoolOpt (config.internal.hasRole "smarthome") "Enable MQTT Broker.";
     settings = mkOption {
       type = types.attrs;
       default = {

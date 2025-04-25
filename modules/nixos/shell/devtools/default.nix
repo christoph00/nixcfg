@@ -61,6 +61,7 @@ in
       goose-cli
       yazi
       bc
+      gitu
 
       nixfmt
       devenv

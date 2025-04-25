@@ -35,13 +35,7 @@ in
 {
 
   options.internal.services.webserver = {
-    enable = mkBoolOpt false "Enable Webserver.";
-    caddyHash = mkOption {
-      type = types.str;
-      default = "sha256-exKjrj1XyrmJwHt62HR5GCfFrOZP7P9a1ej+k1LLiVM=";
-      description = "Hash of the caddy sources.";
-    };
-
+    enable = mkBoolOpt (config.internal.hasRole "webserver") "Enable Webserver.";
   };
 
   config = mkIf cfg.enable {
@@ -84,6 +78,9 @@ in
     };
 
     users.groups.acme.members = [ "nginx" ];
+    users.users.nginx.isSystemUser = mkForce true;
+    users.users.nginx.group = "nginx";
+    users.groups.nginx = { };
 
   };
 

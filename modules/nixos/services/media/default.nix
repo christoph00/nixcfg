@@ -35,7 +35,7 @@ in
 {
 
   options.internal.services.media = {
-    enable = mkBoolOpt config.internal.isMedia "Enable Media Services.";
+    enable = mkBoolOpt (config.internal.hasRole "media") "Enable Media Services.";
 
   };
 

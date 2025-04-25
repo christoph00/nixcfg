@@ -47,8 +47,8 @@ in
 {
 
   options.internal.graphical.desktop.headless = {
-    enable = mkBoolOpt config.internal.isHeadlessDesktop "\n      Enable\n      Headless\n      Desktop.";
-    enableStreaming = mkBoolOpt config.internal.isGameStream "\n      Enable\n      Streaming ";
+    enable = mkBoolOpt (config.internal.hasRole "headless-desktop") "Enable HeadlessDesktop.";
+    enableStreaming = mkBoolOpt (config.internal.hasRole "game-stream") "EnableStreaming";
     autorun = mkBoolOpt true "Autorun ";
     user = mkOption {
       type = types.str;

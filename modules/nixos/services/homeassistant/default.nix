@@ -31,6 +31,7 @@ with lib.internal;
 let
   cfg = config.internal.services.homeassistant;
   #inherit (pkgs.writers) writeYAML;
+  enabled = config.internal.hasRole "smarthome";
 
 in
 {
@@ -42,7 +43,7 @@ in
   ];
 
   options.internal.services.homeassistant = {
-    enable = mkBoolOpt config.internal.isSmartHome "Enable Homeassistant.";
+    enable = mkBoolOpt enabled "Enable Homeassistant.";
   };
 
   config = mkIf cfg.enable {

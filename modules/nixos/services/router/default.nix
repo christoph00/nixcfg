@@ -35,7 +35,7 @@ in
 {
 
   options.internal.services.router = {
-    enable = mkBoolOpt config.internal.isRouter "Enable Router.";
+    enable = mkBoolOpt (config.internal.hasRole "router") "Enable Router.";
     internalInterface = mkOption {
       type = types.str;
       default = "eth1";
