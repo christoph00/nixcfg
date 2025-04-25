@@ -145,6 +145,14 @@ in
         51820 # wireguard
       ];
 
+      firewall.interfaces.wg0.allowedTCPPorts = [
+        22
+        80
+        443
+        8123
+        2022
+      ];
+
       firewall.extraInputRules = ''
 
         ip6 nexthdr icmpv6 icmpv6 type {
