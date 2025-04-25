@@ -58,6 +58,9 @@ in
           443
           22
         ];
+        allowedUDPPorts = [
+          51820
+        ];
       };
 
       extraHosts =

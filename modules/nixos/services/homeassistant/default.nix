@@ -30,8 +30,6 @@ with lib.internal;
 
 let
   cfg = config.internal.services.homeassistant;
-  #inherit (pkgs.writers) writeYAML;
-  enabled = config.internal.hasRole "smarthome";
 
 in
 {
@@ -43,7 +41,7 @@ in
   ];
 
   options.internal.services.homeassistant = {
-    enable = mkBoolOpt enabled "Enable Homeassistant.";
+    enable = mkBoolOpt (config.internal.hasRole "smarthome") "Enable Homeassistant.";
     domain = mkOption {
       type = types.str;
       default = "ha.r505.de";
