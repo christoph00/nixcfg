@@ -89,7 +89,7 @@ in
       powerOnBoot = true;
     };
 
-    services.nginx.virtualHosts.${cfg.domain}" = {
+    services.nginx.virtualHosts."${cfg.domain}" = {
       useACMEHost = "r505.de";
       locations."/" = {
         proxyPass = "http://127.0.0.1:8123";
