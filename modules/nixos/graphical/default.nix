@@ -110,11 +110,13 @@ with lib.internal;
       martian-mono
       mona-sans
       monaspace
-      hubot-sans
       maple-mono.NF
       material-design-icons
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
+      nerd-fonts.geist-mono
+      nerd-fonts._0xproto
+      nerd-fonts.bigblue-terminal
     ];
 
   };
