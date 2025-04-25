@@ -16,12 +16,6 @@
   internal.type = "desktop";
   internal.isV3 = true;
   internal.system.boot.secureBoot = true;
-  internal.roles = [
-    "gaming"
-    "gamestream"
-    "headless-desktop"
-  ];
-
   internal.services.nas = {
     enable = true;
     domain = "tdata.r505.de";
