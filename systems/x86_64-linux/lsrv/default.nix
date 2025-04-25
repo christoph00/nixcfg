@@ -18,13 +18,6 @@
       };
     };
 
-    roles = [
-      "router"
-      "nas"
-      "media"
-      "smart-home"
-    ];
-
     services.router = {
       internalInterface = "enp1s0";
       externalInterface = "enp2s0f1";
