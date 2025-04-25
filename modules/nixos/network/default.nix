@@ -1,9 +1,8 @@
 {
-  options,
   config,
   pkgs,
   lib,
-  namespace,
+  options,
   ...
 }:
 with lib;
@@ -57,6 +56,12 @@ in
           22
         ];
       };
+
+      extraHosts =
+        let
+          hostEntries = mapAttrsToList (name: host: "${host.vpn}\t${name}.wg.r505.de") config.internal.hosts;
+        in
+        concatStringsSep "\n" (filter (s: s != "") hostEntries);
     };
 
     systemd.network = mkIf (!cfg.enableNM) {

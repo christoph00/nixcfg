@@ -105,6 +105,12 @@ in
       description = "Managed hosts registry";
     };
 
+    subnets = {
+      home = lib.mkOption { type = lib.types.str; };
+      oracle = lib.mkOption { type = lib.types.str; };
+      vpn = lib.mkOption { type = lib.types.str; };
+    };
+
     thisHost = lib.mkOption {
       type = types.str;
       default = config.networking.hostName;

@@ -63,4 +63,26 @@ in
     oca
     oc1
   ] ++ users;
+
+  "secrets/wg-oc1-key".publicKeys = [
+    oc1
+  ] ++ users;
+  "secrets/wg-oc2-key".publicKeys = [
+    oc2
+  ] ++ users;
+  "secrets/wg-oca-key".publicKeys = [
+    oca
+  ] ++ users;
+  "secrets/wg-lsrv-key".publicKeys = [
+    lsrv
+  ] ++ users;
+  "secrets/wg-csrv-key".publicKeys = [
+    csrv
+  ] ++ users;
+  "secrets/wg-tower-key".publicKeys = [
+    tower
+  ] ++ users;
+  "secrets/wg-x13-key".publicKeys = [
+    x13
+  ] ++ users;
 }
