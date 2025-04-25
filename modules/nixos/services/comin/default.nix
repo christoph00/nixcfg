@@ -35,7 +35,7 @@ in
 {
 
   options.internal.services.comin = {
-    enable = mkBoolOpt true "Enable Comin Deployment.";
+    enable = mkBoolOpt false "Enable Comin Deployment.";
 
   };
 
