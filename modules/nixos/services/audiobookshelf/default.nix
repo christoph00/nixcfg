@@ -57,8 +57,10 @@ in
 
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString config.services.audiobookshelf.port}";
-        recommendedProxySettings = true;
         proxyWebsockets = true;
+        extraConfig = ''
+          proxy_redirect http:// $scheme://;
+        '';
       };
     };
 

@@ -74,8 +74,8 @@ in
               "@contain-google".install_url = mozillaAddon "google-container";
               "@testpilot-containers".install_url = mozillaAddon "multi-account-containers";
 
-              "ncpasswords@mdns.eu" = {
-                install_url = mozillaAddon "nextcloud-passwords";
+              "passbolt@passbolt.com" = {
+                install_url = mozillaAddon "passbolt";
                 installation_mode = "force_installed";
                 default_area = "navbar";
               };
