@@ -20,6 +20,7 @@
   internal.shell.devtools.enable = true;
   internal.services.n8n.enable = true;
   internal.services.searx.enable = true;
+  internal.services.audiobookshelf.enable = true;
   services.tinyproxy.enable = true;
   services.tinyproxy.settings.Listen = "0.0.0.0";
   networking.firewall.allowedTCPPorts = [ 8888 ];
