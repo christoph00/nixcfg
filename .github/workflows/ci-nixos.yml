@@ -51,7 +51,7 @@ jobs:
         swap-size-mb: 1024
         root-reserve-mb: 50192
     - uses: actions/checkout@v4.2.2
-    - uses: DeterminateSystems/nix-installer-action@v16
+    - uses: DeterminateSystems/nix-installer-action@v17
       with:
         extra-conf: |
           experimental-features = nix-command flakes
