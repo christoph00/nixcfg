@@ -12,6 +12,7 @@ let
   oc1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBxEMuue30m1zhq/03TMgJrj1t+8hRudPPpWMM3/5o9A";
   oc2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIND8HbngVMLrM3sfnr8tz3moOlahHFgA0BliQREX6toe";
   x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM+dCB8RPOgkaXoRT6FnUIft5axZ0BF41wAzYPXJjRkR";
+  star = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBF0fUs5cYSbwBcY+pqSSgiqrW+jGFJBPO+kjPz2SY1z";
 
   servers = [
     csrv
@@ -19,6 +20,7 @@ let
     oca
     oc1
     oc2
+    star
   ];
   desktops = [
     tower
@@ -47,6 +49,7 @@ in
   "secrets/sftpgo.env".publicKeys = [
     oca
     lsrv
+    tower
   ] ++ users;
   "secrets/rclone.conf".publicKeys = all;
 
@@ -85,4 +88,8 @@ in
   "secrets/wg-x13-key".publicKeys = [
     x13
   ] ++ users;
+  "secrets/wg-star-key".publicKeys = [
+    star
+  ] ++ users;
+
 }

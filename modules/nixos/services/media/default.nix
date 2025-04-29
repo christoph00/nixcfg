@@ -41,9 +41,18 @@ in
 
   config = mkIf cfg.enable {
 
-    internal.system.state.directories = [ "/var/lib/sabnzbd" ];
+    internal.system.state.directories = [
+      "/var/lib/sabnzbd"
+      "/var/lib/jellyfin"
+      "/var/cache/jellyfin"
+    ];
 
     services.sabnzbd = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    services.jellyfin = {
       enable = true;
       openFirewall = true;
     };

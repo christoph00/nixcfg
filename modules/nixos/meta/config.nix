@@ -89,13 +89,13 @@
         architecture = "x86_64";
         wgPubkey = "+3J7uu4QlrYhNPrttXvH6JXySDuZw71KV763oP6A/0A=";
         roles = [
-          "vpn"
           "desktop"
           "gaming"
           "nas"
           "development"
           "headless-desktop"
           "game-stream"
+          "media"
         ];
         net = {
           lan = "dhcp";
@@ -113,7 +113,6 @@
         architecture = "x86_64";
         wgPubkey = "Ik2N2lpZ7mlWnYGktygruKsLyytd210/B4WcS3gDCiI=";
         roles = [
-          "vpn"
           "desktop"
           "development"
         ];
@@ -123,6 +122,24 @@
           vpn = "10.87.87.${toString id}";
         };
       };
+
+    star =
+      let
+        id = 33;
+      in
+      {
+        inherit id;
+        zone = "external";
+        architecture = "x86_64";
+        pgPubkey = "qk/Ciz8JNJfRMDf0pq2mWVlkd9MrFkRQ6TP8JaStj1E=";
+        roles = [ "vpn" ];
+        net = {
+          lan = null;
+          wan = "77.223.215.81";
+          vpn = "10.87.87.${toString id}";
+        };
+      };
+
   };
 
   internal.subnets = {

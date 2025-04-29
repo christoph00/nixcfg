@@ -14,6 +14,8 @@ let
     "smarthome"
     "vpn"
     "router"
+    "media"
+    "web-proxy"
   ];
 
   hostOptions =

@@ -2,7 +2,6 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ./installer.nix
     ./openvz.nix
   ];
 
@@ -18,7 +17,6 @@
 
   systemd.network.networks.venet0 = {
     name = "venet0";
-    # Change to your assigned IP
     address = [ "77.223.215.81/24" ];
     networkConfig = {
       DHCP = "no";
