@@ -89,7 +89,6 @@
         architecture = "x86_64";
         wgPubkey = "+3J7uu4QlrYhNPrttXvH6JXySDuZw71KV763oP6A/0A=";
         roles = [
-          "vpn"
           "desktop"
           "gaming"
           "nas"
@@ -114,7 +113,6 @@
         architecture = "x86_64";
         wgPubkey = "Ik2N2lpZ7mlWnYGktygruKsLyytd210/B4WcS3gDCiI=";
         roles = [
-          "vpn"
           "desktop"
           "development"
         ];
@@ -133,7 +131,8 @@
         inherit id;
         zone = "external";
         architecture = "x86_64";
-        roles = [ ];
+        pgPubkey = "qk/Ciz8JNJfRMDf0pq2mWVlkd9MrFkRQ6TP8JaStj1E=";
+        roles = [ "vpn" ];
         net = {
           lan = null;
           wan = "77.223.215.81";

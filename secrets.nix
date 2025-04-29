@@ -88,4 +88,8 @@ in
   "secrets/wg-x13-key".publicKeys = [
     x13
   ] ++ users;
+  "secrets/wg-star-key".publicKeys = [
+    star
+  ] ++ users;
+
 }
