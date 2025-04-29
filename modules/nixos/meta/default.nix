@@ -76,7 +76,9 @@ let
           type = types.submodule {
             options = {
               lan = lib.mkOption {
-                type = types.either (types.strMatching "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$") (types.enum [ "dhcp" ]);
+                type = types.nullOr types.either (types.strMatching "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$") (
+                  types.enum [ "dhcp" ]
+                );
                 description = "LAN IP configuration";
               };
 

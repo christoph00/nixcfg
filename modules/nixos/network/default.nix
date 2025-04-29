@@ -50,7 +50,7 @@ in
         settings.General.AddressRandomizationRange = "full";
       };
 
-      nftables.enable = true;
+      nftables.enable = mkDefault true;
       firewall = {
         enable = true;
         allowPing = true;

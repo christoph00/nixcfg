@@ -17,18 +17,43 @@
 
   systemd.network.networks.venet0 = {
     name = "venet0";
-    address = [ "77.223.215.81/24" ];
+    addresses = [
+      {
+        addressConfig = {
+          Address = "127.0.0.1/32";
+          Scope = "host";
+        };
+      }
+      {
+        addressConfig = {
+          Address = "77.223.215.81/32";
+          Broadcast = "77.223.215.81";
+          Scope = "global";
+        };
+      }
+    ];
     networkConfig = {
       DHCP = "no";
+      DNSSEC = "no";
       DefaultRouteOnDevice = "yes";
       ConfigureWithoutCarrier = "yes";
     };
   };
 
-  services.resolved.enable = false;
-  networking.resolvconf.extraConfig = ''
-    prepend_nameservers="1.1.1.1"
-  '';
+  networking.nameservers = [
+    "8.8.8.8"
+    "8.8.4.4"
+  ];
+
+  services.resolved = {
+    enable = false;
+    dnssec = "false";
+  };
+
+  # Manually set resolv.conf for now
+  environment.etc = {
+    "resolv.conf".text = "nameserver 8.8.8.8\n";
+  };
 
   fileSystems."/" = {
     device = "/dev/ploop48914p1";

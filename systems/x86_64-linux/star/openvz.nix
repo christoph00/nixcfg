@@ -22,6 +22,7 @@ let
   '';
 in
 {
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   boot.isContainer = true;
   boot.loader.initScript.enable = true;
   boot.specialFileSystems."/run/keys".fsType = lib.mkForce "tmpfs";
@@ -79,7 +80,8 @@ in
   };
 
   networking.useHostResolvConf = false;
-  # networking.firewall.package = lib.mkDefault pkgs.iptables-legacy;
+  networking.firewall.package = lib.mkDefault pkgs.iptables-legacy;
+  networking.nftables.enable = false;
 
   system.build.binBashWrapper = binBashWrapper;
   system.activationScripts.injectOpenVzScripts = ''
