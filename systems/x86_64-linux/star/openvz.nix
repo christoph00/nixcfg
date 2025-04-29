@@ -79,7 +79,7 @@ in
   };
 
   networking.useHostResolvConf = false;
-  networking.firewall.package = lib.mkDefault pkgs.iptables-legacy;
+  # networking.firewall.package = lib.mkDefault pkgs.iptables-legacy;
 
   system.build.binBashWrapper = binBashWrapper;
   system.activationScripts.injectOpenVzScripts = ''

@@ -25,11 +25,22 @@
     };
   };
 
+  services.resolved.enable = false;
+  networking.resolvconf.extraConfig = ''
+    prepend_nameservers="1.1.1.1"
+  '';
+
+  fileSystems."/" = {
+    device = "/dev/ploop48914p1";
+    fsType = "ext4";
+  };
+
   boot.initrd.kernelModules = [
     "ata_piix"
     "uhci_hcd"
     "xen_blkfront"
     "vmw_pvscsi"
+    "kvm_intel"
   ];
 
   system.stateVersion = "24.11";
