@@ -124,6 +124,23 @@
           vpn = "10.87.87.${toString id}";
         };
       };
+
+    star =
+      let
+        id = 33;
+      in
+      {
+        inherit id;
+        zone = "external";
+        architecture = "x86_64";
+        roles = [ ];
+        net = {
+          lan = null;
+          wan = "77.223.215.81";
+          vpn = "10.87.87.${toString id}";
+        };
+      };
+
   };
 
   internal.subnets = {
