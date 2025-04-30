@@ -12,7 +12,7 @@ let
 in
 {
   imports = [
-    ./tailscale.nix
+    # ./tailscale.nix
     ./wireguard.nix
     ./netbird.nix
   ];
