@@ -22,7 +22,8 @@ in
         io = {
           port = 51820;
           environment.NB_SETUP_KEY_FILE = config.age.secrets."netbird-io-setup-key".path;
-          dns-resolver.address = "127.0.0.222";
+          dns-resolver.address = "127.0.0.1";
+          dns-resolver.port = 5333;
         };
       };
     };
