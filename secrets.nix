@@ -35,6 +35,7 @@ let
 in
 {
 
+  "secrets/netbird-io-setup.key".publicKeys = all;
   "secrets/tailscale-auth-key".publicKeys = all;
   "secrets/vector.env".publicKeys = all;
   "secrets/user_christoph_pw".publicKeys = all;
