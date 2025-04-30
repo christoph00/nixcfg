@@ -30,7 +30,7 @@
     forceSSL = true;
 
     locations."/" = {
-      proxyPass = "http://${config.internal.hosts.lsrv.net.vpn}:8123";
+      proxyPass = "http://lsrv.nb.r505.de:8123";
       recommendedProxySettings = true;
       proxyWebsockets = true;
     };
