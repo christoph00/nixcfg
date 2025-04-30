@@ -21,11 +21,17 @@ in
       clients = {
         io = {
           port = 51820;
+          environment.NB_SETUP_KEY_FILE = config.age.secrets."netbird-io-setup-key".path;
+          dns-resolver.address = "127.0.0.222";
         };
       };
     };
     internal.system.state.directories = [ "/var/lib/netbird-io" ];
-    systemd.services.netbird-netbird-io.postStart = ''
+    age.secrets."netbird-io-setup-key" = {
+      owner = "netbird-io";
+      file = ../../../secrets/netbird-io-setup.key;
+    };
+    systemd.services.netbird-io.postStart = ''
       /run/current-system/sw/bin/netbird-io up
     '';
   };
