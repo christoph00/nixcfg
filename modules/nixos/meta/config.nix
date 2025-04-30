@@ -131,7 +131,7 @@
         inherit id;
         zone = "external";
         architecture = "x86_64";
-        pgPubkey = "qk/Ciz8JNJfRMDf0pq2mWVlkd9MrFkRQ6TP8JaStj1E=";
+        wgPubkey = "qk/Ciz8JNJfRMDf0pq2mWVlkd9MrFkRQ6TP8JaStj1E=";
         roles = [ "vpn" ];
         net = {
           lan = null;
