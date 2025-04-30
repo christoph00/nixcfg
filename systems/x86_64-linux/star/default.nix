@@ -15,6 +15,8 @@
   internal.system.state.enable = false;
   internal.system.boot.enable = false;
 
+  services.netbird.clients.io.environment.NB_WG_KERNEL_DISABLED = "true";
+
   systemd.network.networks.venet0 = {
     name = "venet0";
     addresses = [

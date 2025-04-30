@@ -35,6 +35,8 @@ in
     systemd.services.netbird-io.postStart = ''
       /run/current-system/sw/bin/netbird-io up
     '';
+
+    networking.firewall.trustedInterfaces = [ "nb-io" ];
   };
 
 }
