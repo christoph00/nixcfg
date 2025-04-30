@@ -129,6 +129,8 @@ in
 
       pkgs.pass
 
+      pkgs.dnsutils
+
     ];
 
     services.dbus.packages = [ pkgs.pass-secret-service ];

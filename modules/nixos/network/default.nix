@@ -12,9 +12,9 @@ let
 in
 {
   imports = [
-    ./tailscale.nix
+    # ./tailscale.nix
     ./wireguard.nix
-    # ./netbird.nix
+    ./netbird.nix
   ];
 
   options.internal.network = with types; {
