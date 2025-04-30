@@ -332,6 +332,8 @@ in
           "spotify"
           "isal"
 
+          "webdav"
+
           "zwave_js"
           "cookidoo"
           "file"
