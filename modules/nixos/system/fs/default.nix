@@ -124,30 +124,28 @@ in
           disk.main.device = cfg.device; # The device to partition
         };
 
-        boot.initrd.systemd.services.rollback =
-          mkIf (cfg.rollbackRoot && !cfg.tmpRoot && cfg.type == "btrfs")
-            {
-              description = "Rollback BTRFS root subvolume to a pristine state";
-              wantedBy = [ "initrd.target" ];
-              before = [ "sysroot.mount" ];
-              unitConfig.DefaultDependencies = "no";
-              serviceConfig.Type = "oneshot";
-              script = ''
-                mkdir /btrfs_tmp
-                mount ${cfg.device} /btrfs_tmp
+        boot.initrd.systemd.services.rollback = mkIf (cfg.rollback && !cfg.tmpRoot && cfg.type == "btrfs") {
+          description = "Rollback BTRFS root subvolume to a pristine state";
+          wantedBy = [ "initrd.target" ];
+          before = [ "sysroot.mount" ];
+          unitConfig.DefaultDependencies = "no";
+          serviceConfig.Type = "oneshot";
+          script = ''
+            mkdir /btrfs_tmp
+            mount ${cfg.device} /btrfs_tmp
 
-                btrfs subvolume list -o /btrfs_tmp/@root |
-                cut -f9 -d' ' |
-                while read subvolume; do
-                  btrfs subvolume delete "/btrfs_tmp/$subvolume"
-                done
+            btrfs subvolume list -o /btrfs_tmp/@root |
+            cut -f9 -d' ' |
+            while read subvolume; do
+              btrfs subvolume delete "/btrfs_tmp/$subvolume"
+            done
 
-                btrfs subvolume delete /btrfs_tmp/@root
-                btrfs subvolume snapshot /btrfs_tmp/@root-blank /btrfs_tmp/@root
+            btrfs subvolume delete /btrfs_tmp/@root
+            btrfs subvolume snapshot /btrfs_tmp/@root-blank /btrfs_tmp/@root
 
-                umount /btrfs_tmp
-              '';
-            };
+            umount /btrfs_tmp
+          '';
+        };
 
       }
 
