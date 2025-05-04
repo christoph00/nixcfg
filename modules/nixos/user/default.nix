@@ -41,7 +41,10 @@ in
 
       inherit (cfg) name;
 
-      hashedPasswordFile = cfg.passwordFile;
+      hashedPasswordFile = mkIf (config.internal.type != "bootstrap") cfg.passwordFile;
+      hashedPassword = mkIf (
+        config.internal.type == "bootstrap"
+      ) "$y$j9T$QgTeWgADVMseXf1yfCPNN1$FANADtOZcSiLPuNg9SJbdVKWPvLokK7MfVa4iNvJZP4";
 
       home = "/home/${cfg.name}";
       group = "users";
@@ -58,8 +61,6 @@ in
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFXvfa+PwkdnF9PIOT0T3qb42Kduklar59uog8ugm2fx christoph@oca"
 
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmHJIHJYMl/0awPcEeftLSxDKGVWmN0jhYPQ5hCINxD christoph@wrk"
-
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB//5XxnAj4gdYeasWBSZxuGKzmkqI7iMHUN60tZC4Jx christoph@csrv"
 
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAHqEQOgEdi3e8uPWqE2nqzyiKC9Y792C5tNKco6lz4o christoph@tower"
       ];
