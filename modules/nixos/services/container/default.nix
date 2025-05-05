@@ -38,6 +38,7 @@ in
   config = mkIf cfg.enable {
 
     environment.systemPackages = with pkgs; [ podman-compose ];
+    internal.system.state.directories = [ "/var/lib/containers" ];
 
     virtualisation.podman.enable = true;
     virtualisation.podman.dockerCompat = true;
