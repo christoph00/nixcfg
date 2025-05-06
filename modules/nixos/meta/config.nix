@@ -34,7 +34,7 @@
         wgPubkey = "Lw5CwsmceU63CHIC3kDU0//vQf9kwL4Pt+HlWHrDPi4=";
         zone = "oracle";
         architecture = "x86_64";
-        roles = [ "vpn" ];
+        roles = [ ];
         net = {
           wan = "158.101.169.88";
           lan = "10.0.0.142";
@@ -50,7 +50,7 @@
         wgPubkey = "6oGf+oPvLIinnun4OuJgurBRzlJLQKhVmCbhaQFQIXc=";
         zone = "oracle";
         architecture = "x86_64";
-        roles = [ "vpn" ];
+        roles = [ ];
         net = {
           wan = "130.162.234.237";
           lan = "10.0.0.151";
