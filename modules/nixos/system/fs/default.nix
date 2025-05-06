@@ -124,6 +124,11 @@ in
           disk.main.device = cfg.device; # The device to partition
         };
 
+        zramSwap = {
+          enable = true;
+          memoryPercent = 150;
+        };
+
         boot.initrd.systemd.services.rollback = mkIf (cfg.rollback && !cfg.tmpRoot && cfg.type == "btrfs") {
           description = "Rollback BTRFS root subvolume to a pristine state";
           wantedBy = [ "initrd.target" ];
