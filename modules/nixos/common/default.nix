@@ -86,8 +86,6 @@ with lib.internal;
     nix.daemonCPUSchedPolicy = "idle";
     nix.daemonIOSchedClass = "idle";
 
-    environment.noXlibs = (mkIf config.internal.isVM || config.internal.isBootstrap);
-
   };
 
 }
