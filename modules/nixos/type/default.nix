@@ -28,7 +28,7 @@ in
     isV4 = mkBoolOpt false "CPU has v3 features";
     isMicroVM = mkBoolOpt (config.internal.type == "microvm") "Whether or not this is a microvm.";
     isVM = mkBoolOpt (config.internal.type == "vm") "Whether or not this is a vm.";
-    isBootstrap mkBoolOpt (config.internal.type == "bootstrap") "Bootsteap";
+    isBootstrap = mkBoolOpt (config.internal.type == "bootstrap") "Bootsteap";
     isLaptop = mkBoolOpt (config.internal.type == "laptop") "Whether or not this is a laptop.";
     isGraphical = mkBoolOpt (
       config.internal.type == "desktop" || config.internal.type == "laptop"
