@@ -17,6 +17,7 @@ in
     flake.modules.nixos.users
     flake.modules.nixos.network
     flake.modules.nixos.shell
+    flake.modules.nixos.sevices
   ];
 
   options.host = {

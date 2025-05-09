@@ -1,13 +1,13 @@
 { ... }:
 {
   imports = [
-    ./homeassistant
-    ./media.nix
-    ./mqtt.nix
-    ./nas.nix
-    ./office-server.nix
-    ./searx.nix
+    # ./homeassistant
+    # ./media.nix
+    # ./mqtt.nix
+    # ./nas.nix
+    # ./office-server.nix
+    # ./searx.nix
     ./sshd.nix
-    ./webserver.nix
+    # ./webserver.nix
   ];
 }

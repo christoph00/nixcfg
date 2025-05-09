@@ -101,8 +101,9 @@ in
     encrypted = mkBoolOpt false;
     tmpRoot = mkBoolOpt cfg.state.enable;
     swap = mkBoolOpt true;
-    swapSize = mkStrOpt "16G";
+    swapSize = mkStrOpt "1G";
     rollback = mkBoolOpt true;
+    forceDevice = mkBoolOpt false;
 
   };
 
@@ -123,7 +124,7 @@ in
             ];
           };
           disk.main.type = "disk";
-          #disk.main.imageSize = "12G";
+          disk.main.imageSize = "12G";
           disk.main.device = cfg.disk.device; # The device to partition
         };
 
@@ -219,6 +220,11 @@ in
               };
             };
           };
+        };
+
+        fileSystems = mkIf cfg.disk.forceDevice {
+          "/".device = lib.mkForce "${cfg.disk.device}2";
+          "/boot".device = lib.mkForce "${cfg.disk.device}1";
         };
 
       })
