@@ -5,7 +5,6 @@
 
   networking.hostName = "oc1";
 
-  host.bootstrap = true;
   sys.state.enable = false;
   sys.disk.device = "/dev/sda";
   sys.disk.forceDevice = true;

@@ -20,7 +20,7 @@ in
     enable = mkBoolOpt true;
     enableWifi = mkBoolOpt false;
     enableDHCPLAN = mkBoolOpt true;
-    enableNM = mkBoolOpt true;
+    enableNM = mkBoolOpt false;
     lanInterface = mkStrOpt "ens*";
 
   };
