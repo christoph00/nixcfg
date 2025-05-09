@@ -76,4 +76,15 @@
       ];
       nixpkgs.config.allowUnfree = true;
     };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://chr.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "chr.cachix.org-1:8Z0vNVd8hK8lVU53Y26GHDNc6gv3eFzBNwSYOcUvsgA="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
 }
