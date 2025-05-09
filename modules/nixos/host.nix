@@ -1,9 +1,13 @@
-{ inputs, flake, options, flake, ... }:
+{
+  inputs,
+  flake,
+  options,
+  ...
+}:
 let
   inherit (flake.lib) mkOpt mkBoolOpt;
-in 
 
-in 
+in
 {
   imports = [
     inputs.nixos-facter-modules.nixosModules.facter
@@ -16,7 +20,7 @@ in
   ];
 
   options.host = {
-    bootstrap = mkBoolOpt;
+    bootstrap = mkBoolOpt false;
   };
 
 }

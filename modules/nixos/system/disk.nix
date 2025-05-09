@@ -125,7 +125,7 @@ in
           };
           disk.main.type = "disk";
           #disk.main.imageSize = "12G";
-          disk.main.device = cfg.device; # The device to partition
+          disk.main.device = cfg.disk.device; # The device to partition
         };
 
         zramSwap = {

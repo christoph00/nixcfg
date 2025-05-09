@@ -55,6 +55,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-anywhere = {
+      url = "github:numtide/nixos-anywhere";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        disko.follows = "disko";
+        nixos-stable.follows = "nixpkgs";
+      };
+    };
+
   };
 
   outputs =

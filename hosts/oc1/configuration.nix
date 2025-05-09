@@ -6,4 +6,6 @@
   networking.hostName = "oc1";
 
   host.bootstrap = true;
+  sys.state.enable = false;
+  sys.disk.type = "xfs";
 }
