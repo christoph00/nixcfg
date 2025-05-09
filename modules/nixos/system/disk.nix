@@ -99,11 +99,10 @@ in
 
     device = mkStrOpt "/dev/sda";
     encrypted = mkBoolOpt false;
-    tmpRoot = mkBoolOpt true;
+    tmpRoot = mkBoolOpt cfg.state.enable;
     swap = mkBoolOpt true;
     swapSize = mkStrOpt "16G";
     rollback = mkBoolOpt true;
-    state = mkBoolOpt true;
 
   };
 
