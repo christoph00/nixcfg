@@ -28,7 +28,7 @@ in
   system.stateVersion = "24.05";
 
   nix = {
-    # package = pkgs.lix;
+    package = pkgs.lix;
     gc = {
       automatic = true;
       dates = "Mon *-*-* 04:00";
