@@ -1,0 +1,46 @@
+{
+  flake,
+  lib,
+  ...
+}:
+let
+  inherit (flake.lib) nodefault;
+  inherit (lib) mkDefault;
+
+in
+{
+
+  documentation = {
+    enable = mkDefault false;
+    doc = nodefault;
+    info = nodefault;
+    man = nodefault;
+    nixos = nodefault;
+  };
+
+  environment = {
+    defaultPackages = mkDefault [ ];
+    stub-ld = nodefault;
+  };
+
+  programs = {
+    less.lessopen = mkDefault null;
+    command-not-found = nodefault;
+  };
+
+  boot.enableContainers = mkDefault false;
+
+  services = {
+    logrotate = nodefault;
+    udisks2 = nodefault;
+  };
+
+  xdg = {
+    autostart = nodefault;
+    icons = nodefault;
+    mime = nodefault;
+    sounds = nodefault;
+    menus = nodefault;
+  };
+
+}

@@ -3,16 +3,20 @@
   lib,
   pkgs,
   inputs,
+  flake,
   ...
 }:
 with lib;
-with lib.internal;
+with flake.lib;
 let
-  cfg = config.internal.shell.neovim;
+  cfg = config.shell.neovim;
 in
 {
-  options.internal.shell.neovim = with types; {
-    enable = mkBoolOpt config.internal.isGraphical "Whether or not to configure neovim config.";
+  imports = [
+    inputs.nvf.nixosModules.default
+  ];
+  options.shell.neovim = with types; {
+    enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
@@ -79,14 +83,14 @@ in
               };
             };
 
-            borders.enable = true;
-            illuminate.enable = true;
+            borders = enabled;
+            illuminate = enabled;
           };
 
-          statusline.lualine.enable = true;
+          statusline.lualine = enabled;
 
           mini = {
-            icons.enable = true;
+            icons = enabled;
             surround = {
               enable = true;
               setupOpts = {
@@ -102,14 +106,10 @@ in
                 n_lines = 1000;
               };
             };
-            pairs.enable = true;
+            pairs = enabled;
 
-            # tabline.enable = true;
-            git.enable = true;
-            diff.enable = true;
-            # align.enable = true;
-            # notify.enable = true;
-            # files.enable = true;
+            git = enabled;
+            diff = enabled;
             move = {
               enable = false;
               setupOpts.mappings = {
@@ -197,11 +197,11 @@ in
                 win.border = "none";
               };
             };
-            cheatsheet.enable = true;
+            cheatsheet = enabled;
           };
           assistant.copilot = {
             enable = true;
-            cmp.enable = true;
+            cmp = enabled;
           };
           assistant.codecompanion-nvim = {
             enable = true;
@@ -413,10 +413,8 @@ in
             trouble.enable = true;
             otter-nvim.enable = true;
             lspsaga.enable = false;
-            null-ls = {
-              enable = true;
+            null-ls = enabled;
 
-            };
           };
 
           telescope = {

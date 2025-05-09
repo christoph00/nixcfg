@@ -1,35 +1,17 @@
 {
-  # Snowfall Lib provides a customized `lib` instance with access to your flake's library
-  # as well as the libraries available from your flake's inputs.
   lib,
-  # An instance of `pkgs` with your overlays and packages applied is also available.
   pkgs,
-  # You also have access to your flake's inputs.
-  inputs,
-  # Additional metadata is provided by Snowfall Lib.
-  namespace,
-  # The namespace used for your flake, defaulting to "internal" if not set.
-  system,
-  # The system architecture for this host (eg. `x86_64-linux`).
-  target,
-  # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format,
-  # A normalized name for the system target (eg. `iso`).
-  virtual,
-  # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems, # An attribute map of your defined hosts.
-
-  # All other arguments come from the module system.
   config,
+  flake,
   ...
 }:
 
 with builtins;
 with lib;
-with lib.internal;
+with flake.lib;
 
 let
-  cfg = config.internal.services.homeassistant;
+  cfg = config.services.home-assistant;
 
 in
 {
@@ -40,17 +22,9 @@ in
     # ./wyoming.nix
   ];
 
-  options.internal.services.homeassistant = {
-    enable = mkBoolOpt (config.internal.hasRole "smarthome") "Enable Homeassistant.";
-    domain = mkOption {
-      type = types.str;
-      default = "ha.r505.de";
-    };
-  };
-
   config = mkIf cfg.enable {
 
-    internal.system.state.directories = [
+    sys.state.directories = [
       {
         directory = "/var/lib/hass";
         user = "hass";
@@ -87,9 +61,10 @@ in
       powerOnBoot = true;
     };
 
-    services.nginx.virtualHosts."${cfg.domain}" = {
+    services.nginx.virtualHosts."ha.r505.de" = {
       useACMEHost = "r505.de";
       forceSSL = true;
+      kTLS = true;
 
       locations."/" = {
         proxyPass = "http://127.0.0.1:8123";
@@ -150,7 +125,7 @@ in
             trusted_proxies = [
               "127.0.0.1"
               "::1"
-              "${config.internal.subnets.vpn}"
+              "${config.network.subnets.vpn}"
             ];
           };
           mobile_app = { };
@@ -242,26 +217,21 @@ in
           show_in_sidebar = false;
           require_admin = true;
         };
-        customComponents =
-          (with pkgs.home-assistant-custom-components; [
+        customComponents = (
+          with pkgs.home-assistant-custom-components;
+          [
             better_thermostat
             prometheus_sensor
             spook
             waste_collection_schedule
             xiaomi_miot
             bodymiscale
-          ])
-          ++ (with pkgs.internal; [
-            # home-assistant-bermuda
-            # home-assistant-browser-mod
-            # home-assistant-music-assistant
-            # home-assistant-pirate-weather
-            # home-assistant-spotcast
-            # home-assistant-var
-          ]);
+          ]
+        );
 
-        customLovelaceModules =
-          (with pkgs.home-assistant-custom-lovelace-modules; [
+        customLovelaceModules = (
+          with pkgs.home-assistant-custom-lovelace-modules;
+          [
             apexcharts-card
             atomic-calendar-revive
             button-card
@@ -276,16 +246,8 @@ in
             template-entity-row
             universal-remote-card
             bubble-card
-          ])
-          ++ (with pkgs; [
-            #internal.bubble-card
-            # home-assistant-lovelace-card-tools
-            # home-assistant-lovelace-config-template-card
-            # home-assistant-lovelace-custom-brand-icons
-            # home-assistant-lovelace-grocy-chores-card
-            # home-assistant-lovelace-layout-card
-            # home-assistant-lovelace-waze-travel-time
-          ]);
+          ]
+        );
         extraComponents = [
           "caldav"
           "bluetooth"
@@ -314,7 +276,7 @@ in
           "openai_conversation"
           "lovelace"
           "mobile_app"
-          #"nzbget"
+          "nzbget"
           "ubus"
           "radio_browser"
           "wake_on_lan"

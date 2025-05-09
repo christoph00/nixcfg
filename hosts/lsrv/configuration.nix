@@ -1,0 +1,81 @@
+{
+  flake,
+  config,
+  pkgs,
+  ...
+}:
+{
+
+  imports = [ flake.modules.nixos.host ];
+  facter.reportPath = ./facter.json;
+  networking.hostName = "lsrv";
+
+  sys = {
+    boot.encryptedRoot = false;
+    disk = {
+      swapSize = "1G";
+      device = "/dev/mmcblk0";
+    };
+  };
+
+  network.router = {
+    internalInterface = "enp1s0";
+    externalInterface = "enp2s0f1";
+  };
+
+  # svc.nas = {
+  #   enable = true;
+  #   domain = "data.r505.de";
+  #   extraDirectorys = [ "/mnt/userdata" ];
+  # };
+  #
+  boot = {
+    kernelModules = [
+      "kvm-intel"
+      "acpi_call"
+      "i2c_dev"
+    ];
+
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+        "sdhci_pci"
+        "mmc_block"
+      ];
+    };
+    extraModulePackages = [
+      (config.boot.kernelPackages.r8168.overrideAttrs (
+        _: super: rec {
+          version = "8.054.00";
+          src = pkgs.fetchFromGitHub {
+            owner = "mtorromeo";
+            repo = "r8168";
+            rev = version;
+            sha256 = "sha256-KyycAe+NBmyDDH/XkAM4PpGvXI5J1CuMW4VuHcOm0UQ=";
+          };
+          meta = super.meta // {
+            broken = false;
+          };
+        }
+      ))
+    ];
+    blacklistedKernelModules = [ "r8169" ];
+  };
+  fileSystems = {
+    "/mnt/userdata" = {
+      device = "/dev/disk/by-label/ssd-data";
+      fsType = "btrfs";
+      options = [
+        "subvol=@userdata"
+        "noatime"
+        "compress-force=zstd"
+      ];
+    };
+  };
+
+}
