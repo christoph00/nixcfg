@@ -23,6 +23,8 @@ jobs:
       matrix:
         hostname: 
           - tower
+          - oc1
+          - oc2
           - x13
           - oca
           - lsrv
