@@ -6,5 +6,6 @@
     ./state.nix
     ./nix.nix
     ./kernel.nix
+    ./time.nix
   ];
 }
