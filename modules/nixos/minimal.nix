@@ -1,6 +1,7 @@
 {
   flake,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -26,6 +27,7 @@ in
   programs = {
     less.lessopen = mkDefault null;
     command-not-found = nodefault;
+    git.package = lib.mkDefault pkgs.gitMinimal;
   };
 
   boot.enableContainers = mkDefault false;

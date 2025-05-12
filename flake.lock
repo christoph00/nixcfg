@@ -800,6 +800,7 @@
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
         "preservation": "preservation",
+        "srvos": "srvos",
         "wrapper-manager": "wrapper-manager"
       }
     },
@@ -898,6 +899,26 @@
       "original": {
         "type": "git",
         "url": "https://spectrum-os.org/git/spectrum"
+      }
+    },
+    "srvos": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1746712786,
+        "narHash": "sha256-xNaoH62qyEWFNLgyq4QsENwFyG/l9a/dVPN8z5i7+RI=",
+        "owner": "nix-community",
+        "repo": "srvos",
+        "rev": "a6784a02b6d101edc90a3202f4ba03860115f149",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "srvos",
+        "type": "github"
       }
     },
     "systems": {

@@ -14,6 +14,7 @@ in
   imports = [
     ./router.nix
     ./optimize.nix
+    ./netbird.nix
   ];
 
   options.network = with types; {

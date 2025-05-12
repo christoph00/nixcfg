@@ -11,6 +11,7 @@ in
 {
   imports = [
     inputs.nixos-facter-modules.nixosModules.facter
+    inputs.srvos.nixosModules.common
     flake.modules.nixos.system
     flake.modules.nixos.secrets
     flake.modules.nixos.minimal

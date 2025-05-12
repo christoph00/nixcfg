@@ -22,6 +22,7 @@ in
 
   config = mkIf cfg.enable {
     programs.direnv = enabled;
+    programs.git = enabled;
     environment.systemPackages = with pkgs; [
       htop
       wget
@@ -34,7 +35,6 @@ in
       usbutils
       uutils-coreutils-noprefix
       dnsutils
-      git
     ];
 
   };
