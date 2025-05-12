@@ -23,6 +23,11 @@ in
 
   options.host = {
     bootstrap = mkBoolOpt false;
+    graphical = mkBoolOpt false;
+    gaming = mkBoolOpt false;
+    vm = mkBoolOpt false;
+    server = mkBoolOpt false;
+    container = mkBoolOpt false;
   };
 
 }

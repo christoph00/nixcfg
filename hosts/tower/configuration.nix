@@ -13,7 +13,10 @@
   facter.reportPath = ./facter.json;
   networking.hostName = "tower";
 
+  host.graphical = true;
+
   sys.boot.secureBoot = true;
+  sys.disk.device = "/dev/nvme0n1";
 
   # internal.services.nas = {
   #   enable = true;
@@ -134,5 +137,4 @@
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource0_resize}="8"
   '';
 
-  system.stateVersion = "24.05";
 }

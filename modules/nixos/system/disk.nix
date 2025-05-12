@@ -206,6 +206,7 @@ in
       })
 
       (mkIf ((cfg.disk.type == "xfs" || cfg.disk.type == "ext4") && !cfg.state.enable) {
+
         disko.devices.disk.main.content = {
           type = "gpt";
           partitions = {
@@ -225,6 +226,10 @@ in
         fileSystems = mkIf cfg.disk.forceDevice {
           "/".device = lib.mkForce "${cfg.disk.device}2";
           "/boot".device = lib.mkForce "${cfg.disk.device}1";
+        };
+
+        boot.tmp = {
+          cleanOnBoot = true;
         };
 
       })
