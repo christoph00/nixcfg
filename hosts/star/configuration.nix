@@ -15,6 +15,7 @@ in
   # sys.disk.device = "/dev/ploop62670";
   sys.disk = disabled;
   sys.state = disabled;
+  sys.boot = disabled;
 
   systemd.network.networks.venet0 = {
     name = "venet0";
