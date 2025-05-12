@@ -21,9 +21,11 @@ in
       clients = {
         io = {
           port = 51820;
-          environment.NB_SETUP_KEY_FILE = config.age.secrets."netbird-io-setup-key".path;
-          emvironment.NB_WG_KERNEL_DISABLED = cfg.userspace;
-          dns-resolver.address = "127.0.0.77";
+          environment = {
+            NB_SETUP_KEY_FILE = config.age.secrets."netbird-io-setup-key".path;
+            NB_WG_KERNEL_DISABLED = cfg.userspace;
+            dns-resolver.address = "127.0.0.77";
+          };
           # dns-resolver.port = 5053;
         };
       };
