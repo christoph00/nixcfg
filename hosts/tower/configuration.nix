@@ -12,7 +12,9 @@
   imports = [ flake.modules.nixos.host ];
   facter.reportPath = ./facter.json;
   networking.hostName = "tower";
-
+  hw.cpu = "intel";
+  hw.gpu = "amd";
+  hw.ram = 32;
   host.graphical = true;
   host.gaming = true;
 

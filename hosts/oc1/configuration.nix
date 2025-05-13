@@ -10,6 +10,8 @@
   sys.disk.forceDevice = true;
   sys.disk.type = "xfs";
   host.vm = true;
+  hw.gpu = "vm";
+  hw.cpu = "amd";
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"

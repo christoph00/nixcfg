@@ -156,6 +156,8 @@ in
           interval = "weekly";
         };
 
+        services.smartd.enable = !config.host.vm;
+
         services.btrfs.autoScrub = mkIf (cfg.disk.type == "btrfs") {
           enable = true;
           interval = "weekly";

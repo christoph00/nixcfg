@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (flake.lib) mkOpt mkBoolOpt;
+  inherit (flake.lib) mkBoolOpt;
 
 in
 {
@@ -19,6 +19,7 @@ in
     flake.modules.nixos.network
     flake.modules.nixos.shell
     flake.modules.nixos.services
+    flake.modules.nixos.hw
   ];
 
   options.host = {
