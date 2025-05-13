@@ -11,6 +11,7 @@ let
   cfg = config.svc.rclone;
   rcloneOptions = [
     "nodev"
+    "_netdev"
     "nofail"
     "read-only"
     "allow_other"
@@ -19,7 +20,7 @@ let
     "gid=1000"
     "umask=002"
     "vfs-cache-mode=full"
-    "vfs-cache-max-size=30G"
+    "vfs-cache-max-size=10G"
     "vfs-fast-fingerprint"
     "vfs-write-back=1h"
     "vfs-cache-max-age=2h"
