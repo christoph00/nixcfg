@@ -151,6 +151,21 @@ in
               script = rollback;
             };
 
+        services.fstrim = mkIf (!config.host.vm) {
+          enable = true;
+          interval = "weekly";
+        };
+
+        services.btrfs.autoScrub = mkIf (cfg.disk.type == "btrfs") {
+          enable = true;
+          interval = "weekly";
+          fileSystems = [
+            "/nix"
+            "/home"
+            "/mnt/store"
+          ];
+        };
+
       }
 
       (mkIf (cfg.disk.encrypted && cfg.disk.type == "btrfs") {

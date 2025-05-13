@@ -7,8 +7,8 @@
   ...
 }:
 let
-  inherit (lib) types mkIf;
-  inherit (flake.lib) mkBoolOpt mkSecret;
+  inherit (lib) mkIf;
+  inherit (flake.lib) mkBoolOpt mkSecret enabled;
   cfg = config.shell.devtools;
   wrapped = inputs.wrapper-manager.lib.build {
     inherit pkgs;
@@ -38,11 +38,13 @@ let
 in
 {
   options.shell.devtools = {
-    enable = mkBoolOpt false;
+    enable = mkBoolOpt config.host.graphical;
     tmux = mkBoolOpt true;
   };
 
   config = mkIf cfg.enable {
+
+    programs.nvf = enabled;
 
     environment.variables = {
       EDITOR = "nvim";

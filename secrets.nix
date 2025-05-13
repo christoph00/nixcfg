@@ -92,5 +92,6 @@ in
   "secrets/wg-star-key".publicKeys = [
     star
   ] ++ users;
+  "secrets/box-key.age".publicKeys = all;
 
 }

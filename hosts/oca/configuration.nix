@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
   imports = [ inputs.self.nixosModules.host ];
 
@@ -7,6 +7,7 @@
   sys.disk.forceDevice = true;
 
   host.vm = true;
+  shell.devtools.enable = true;
 
   networking.timeServers = [ "169.254.169.254" ];
 

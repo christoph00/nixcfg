@@ -6,23 +6,18 @@
   flake,
   ...
 }:
-with lib;
-with flake.lib;
 let
-  cfg = config.shell.neovim;
+  inherit (lib) mkIf;
+  inherit (flake.lib) enabled;
 in
 {
   imports = [
     inputs.nvf.nixosModules.default
   ];
-  options.shell.neovim = with types; {
-    enable = mkBoolOpt false;
-  };
 
-  config = mkIf cfg.enable {
+  config = mkIf config.programs.nvf.enable {
 
     programs.nvf = {
-      enable = true;
 
       settings = {
         vim = {
