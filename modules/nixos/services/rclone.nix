@@ -27,6 +27,7 @@ let
     "tpslimit-burst=16"
     "drive-chunk-size=128M"
     "args2env"
+    "config=${cfg.config}"
   ];
 in
 {
