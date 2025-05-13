@@ -9,6 +9,7 @@
   sys.disk.device = "/dev/sda";
   sys.disk.forceDevice = true;
   sys.disk.type = "xfs";
+  host.vm = true;
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"

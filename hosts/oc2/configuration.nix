@@ -11,6 +11,8 @@
   sys.disk.device = "/dev/sda";
   sys.disk.forceDevice = true;
 
+  host.vm = true;
+
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"
     "nvme_core.shutdown_timeout=10"

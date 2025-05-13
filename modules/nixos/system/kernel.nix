@@ -9,7 +9,7 @@
   ...
 }:
 let
-  inherit (lib) mkIf mkForce;
+  inherit (lib) mkIf mkForce mkDefault;
   inherit (flake.lib) mkBoolOpt;
   cfg = config.sys.kernel;
 in
@@ -27,11 +27,11 @@ in
     boot = {
       kernelPackages =
         if config.host.graphical then
-          perSystem.chaotic.linuxPackages_cachyos-lto
+          mkDefault perSystem.chaotic.linuxPackages_cachyos-lto
         else if config.host.server then
-          perSystem.chaotic.linuxPackages_cachyos-server
+          mkDefault perSystem.chaotic.linuxPackages_cachyos-server
         else
-          pkgs.linuxPackages_latest;
+          mkDefault 80 pkgs.linuxPackages_latest;
       supportedFilesystems = mkForce [
         "btrfs"
         "vfat"
