@@ -9,5 +9,6 @@
     # ./searx.nix
     ./sshd.nix
     # ./webserver.nix
+    ./rclone.nix
   ];
 }

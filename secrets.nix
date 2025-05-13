@@ -52,7 +52,7 @@ in
     lsrv
     tower
   ] ++ users;
-  "secrets/rclone.conf".publicKeys = all;
+  "secrets/rclone.age".publicKeys = all;
 
   "secrets/agent-key".publicKeys = [ lsrv ] ++ users;
   "secrets/wyoming-openai.env".publicKeys = [
