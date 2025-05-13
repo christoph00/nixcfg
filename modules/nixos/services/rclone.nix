@@ -42,7 +42,7 @@ in
     fileSystems."/media/box" = {
       device = "box:";
       fsType = "rclone";
-      options = [ ] // rcloneOptions;
+      options = rcloneOptions;
     };
 
   };
