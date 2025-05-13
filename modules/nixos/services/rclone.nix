@@ -13,7 +13,6 @@ let
     "nodev"
     "_netdev"
     "nofail"
-    "read-only"
     "allow_other"
     "dir-cache-time=2h"
     "uid=1000"
@@ -29,6 +28,9 @@ let
     "drive-chunk-size=128M"
     "args2env"
     "config=${cfg.config}"
+    "x-systemd.automount"
+    "x-systemd.mount-timeout=5"
+    "x-systemd.idle-timeout=30"
   ];
 in
 {
