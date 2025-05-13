@@ -14,6 +14,7 @@
   networking.hostName = "tower";
 
   host.graphical = true;
+  host.gaming = true;
 
   sys.boot.secureBoot = true;
   sys.disk.device = "/dev/nvme0n1";

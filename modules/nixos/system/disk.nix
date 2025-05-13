@@ -133,6 +133,13 @@ in
           memoryPercent = 150;
         };
 
+        boot.kernel.sysctl = mkIf config.zramSwap.enable {
+          "vm.swappiness" = 180;
+          "vm.watermark_boost_factor" = 0;
+          "vm.watermark_scale_factor" = 125;
+          "vm.page-cluster" = 0;
+        };
+
         boot.initrd.systemd.services.rollback =
           mkIf (cfg.disk.rollback && !cfg.disk.tmpRoot && cfg.disk.type == "btrfs")
             {

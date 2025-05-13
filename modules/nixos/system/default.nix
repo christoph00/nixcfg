@@ -7,5 +7,6 @@
     ./nix.nix
     ./kernel.nix
     ./time.nix
+    ./console.nix
   ];
 }
