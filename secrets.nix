@@ -59,7 +59,7 @@ in
     lsrv
     oca
   ] ++ users;
-  "secrets/aider.env".publicKeys = [
+  "secrets/aider.age".publicKeys = [
     oca
     x13
   ] ++ users;

@@ -6,9 +6,9 @@
   flake,
   ...
 }:
-with lib;
-with flake.lib;
 let
+  inherit (lib) types mkIf;
+  inherit (flake.lib) mkBoolOpt mkSecret;
   cfg = config.shell.devtools;
   wrapped = inputs.wrapper-manager.lib.build {
     inherit pkgs;
@@ -19,7 +19,7 @@ let
             basePackage = pkgs.aider-chat;
             flags = [
               "--env-file"
-              "${config.age.secrets.aider-env.path}"
+              "${config.age.secrets.aider.path}"
               "--chat-language"
               "German"
               "--vim"
@@ -37,7 +37,7 @@ let
   };
 in
 {
-  options.shell.devtools = with types; {
+  options.shell.devtools = {
     enable = mkBoolOpt false;
     tmux = mkBoolOpt true;
   };
@@ -49,11 +49,12 @@ in
       VISUAL = "nvim";
     };
 
-    age.secrets.aider-env = {
-      file = ../../../../secrets/aider.env;
+    age.secrets.aider = mkSecret {
+      file = "aider";
       mode = "0400";
       owner = "christoph";
     };
+
     environment.systemPackages = with pkgs; [
       wrapped
       iwe

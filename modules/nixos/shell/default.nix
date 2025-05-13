@@ -13,8 +13,8 @@ let
 in
 {
   imports = [
-    # ./neovim
-    # ./devtools.nix
+    ./neovim
+    ./devtools.nix
   ];
   options.shell = with types; {
     enable = mkBoolOpt true;
