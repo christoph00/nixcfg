@@ -3,6 +3,7 @@
   lib,
   flake,
   options,
+  pkgs,
   ...
 }:
 let
@@ -42,6 +43,8 @@ in
   config = mkIf cfg.enable {
 
     age.secrets.rclone = mkSecret { file = "rclone"; };
+
+    environment.systemPackages = [ pkgs.rclone ];
 
     fileSystems."/media/box" = {
       device = "box:";
