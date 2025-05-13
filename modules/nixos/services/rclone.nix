@@ -51,6 +51,17 @@ in
       fsType = "rclone";
       options = rcloneOptions;
     };
+    fileSystems."/media/cloud" = {
+      device = "cloud:";
+      fsType = "rclone";
+      options = rcloneOptions;
+    };
+
+    fileSystems."/media/nas" = {
+      device = "nas:";
+      fsType = "rclone";
+      options = rcloneOptions;
+    };
 
   };
 }
