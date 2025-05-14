@@ -10,5 +10,6 @@
     ./sshd.nix
     # ./webserver.nix
     ./rclone.nix
+    ./actions-runner.nix
   ];
 }

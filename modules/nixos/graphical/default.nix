@@ -6,5 +6,7 @@
     ./desktop.nix
     ./cosmic.nix
     ./gaming.nix
+    ./remote.nix
+    ./firefox.nix
   ];
 }

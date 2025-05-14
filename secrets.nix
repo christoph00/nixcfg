@@ -93,5 +93,6 @@ in
     star
   ] ++ users;
   "secrets/box-key.age".publicKeys = all;
+  "secrets/actions-runner.age".publicKeys = all;
 
 }
