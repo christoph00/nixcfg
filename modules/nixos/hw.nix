@@ -12,9 +12,19 @@ let
 in
 {
   options.hw = {
-    gpu = mkOpt enum [ "amd" "nvidia" "intel" "vm" "other" ] "other";
+    gpu = mkOpt (enum [
+      "amd"
+      "nvidia"
+      "intel"
+      "vm"
+      "other"
+    ]) "other";
     ram = mkOpt int 1;
-    cpu = mkOpt enum [ "intel" "amd" "other" ] "intel";
+    cpu = mkOpt (enum [
+      "intel"
+      "amd"
+      "other"
+    ]) "intel";
   };
   config = {
     hardware.cpu.intel.updateMicrocode = cfg.cpu == "intel";
