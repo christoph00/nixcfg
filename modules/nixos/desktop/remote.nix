@@ -11,14 +11,24 @@ let
   inherit (flake.lib) mkBoolOpt;
   inherit (lib) mkIf;
   cfg = config.desktop;
+  switch-resolution = pkgs.writeShellScriptBin "switch-resolution" ''
+    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-1920}
+    HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-1080}
+    FPS=''${SUNSHINE_CLIENT_FPS:-60}.000
+
+    if [ "$1" == "reset" ]; then
+      swaymsg output HEADLESS-1 resolution 1920x1080@60
+    else
+      swaymsg output HEADLESS-1 resolution ''${WIDTH}x''${HEIGHT}@''${FPS}Hz
+    fi
+  '';
 in
 {
   options.desktop = {
     remote = mkBoolOpt false;
-
   };
-
   config = mkIf cfg.remote {
+    environment.systemPackages = [ switch-resolution ];
     services.sunshine = {
       enable = true;
       autoStart = true;
