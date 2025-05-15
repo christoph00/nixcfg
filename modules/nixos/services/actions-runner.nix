@@ -8,13 +8,14 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (flake.lib) mkBoolOpt mkSecret;
+  inherit (flake.lib) mkBoolOpt mkSecret mkStrOpt;
   cfg = config.svc.actions-runner;
 in
 {
 
   options.svc.actions-runner = {
     enable = mkBoolOpt false;
+    sys = mkStrOpt "x86_64";
   };
 
   config = mkIf cfg.enable {
@@ -24,7 +25,7 @@ in
     services.gitea-actions-runner.instances.${config.networking.hostName} = {
       enable = true;
       labels = [
-        "nix-${config.nixpkgs.hostPlatform}:host"
+        "nix-${cfg.sys}:host"
       ];
       hostPackages = with pkgs; [
         bash
