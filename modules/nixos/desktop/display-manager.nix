@@ -36,12 +36,15 @@ let
     exec swaymsg create_output HEADLESS-1
     exec uwsm finalize SWAYSOCK WAYLAND_DISPLAY WLR_BACKENDS
 
+
     default_border normal
     default_floating_border normal
 
-    bindsym Mod5+x kill
-    bindsym Mod5+Tab exec ${pkgs.swayr}/bin/swayr switch-workspace
-    bindsym Mod5+d exec ${pkgs.fuzzel}/bin/fuzzel
+    set $mod Mod1
+
+    set $ws1 "1: Game"
+    set $ws2 "2: Steam"
+    set $ws2 "3: Bottles"
 
     # seat seat0 fallback false
     # seat seat0 attach "48879:57005:Keyboard_passthrough"
@@ -52,7 +55,27 @@ let
     # seat seat0 attach "1133:16440:Logitech_Wireless_Mouse_PID:4038"
     # seat seat0 attach "48879:57005:Touchscreen_passthrough"
     #
+
     input "48879:57005:Mouse_passthrough" pointer_accel -1
+
+    assign [app_id="steam"] $ws2
+    assign [class="^Steam$"] $ws2
+
+    assign [app_id="bottles"] $ws3
+    assign [class="^Bottles$"] $ws3
+
+    assign [class=".*"] $ws1
+
+
+    bindsym $mod+Shift+q kill
+    bindsym $mod+d exec uwsm-app ${pkgs.anyrun}/bin/anyrun
+
+    bindsym $mod+1 workspace $ws1
+    bindsym $mod+2 workspace $ws2
+    bindsym $mod+1 workspace $ws3
+
+
+
 
   '';
 in

@@ -46,7 +46,7 @@ in
         serviceConfig.Slice = "app-graphical.slice";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
-        script = "${config.programs.steam.package}/bin/steam -tenfoot -pipewire-dmabuf -steamos3";
+        script = "${config.programs.steam.package}/bin/steam -pipewire-dmabuf -silent";
       };
     };
 
