@@ -23,7 +23,9 @@ in
 
   svc.actions-runner = enabled;
 
+  desktop.enable = true;
   desktop.remote = true;
+  desktop.gaming = enabled;
 
   sys.boot.secureBoot = true;
   sys.disk.device = "/dev/nvme0n1";

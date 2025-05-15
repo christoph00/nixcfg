@@ -43,6 +43,10 @@ in
             "--sessions '${sessionPath}'"
           ];
         };
+        initial_session = mkIf cfg.autologin {
+          command = "uwsm start -S -F /run/current-system/sw/bin/steam-gamescope";
+          user = "christoph";
+        };
       };
     };
     services.displayManager.cosmic-greeter.enable = cfg.displayManager == "cosmic-greeter";

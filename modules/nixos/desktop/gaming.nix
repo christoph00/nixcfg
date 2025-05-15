@@ -50,8 +50,8 @@ in
               stdenv.cc.cc.lib
               libkrb5
               keyutils
-              gamescope
-              mangohud
+              # gamescope
+              # mangohud
             ];
         };
         extraCompatPackages = with pkgs; [
@@ -194,11 +194,10 @@ in
         protonup-qt
         protontricks
         gamemode
-        gamemoderun
         openmw
         bottles
         limo
-        veloren
+        # veloren
         endless-sky
         luanti
         openttd

@@ -16,6 +16,7 @@ in
     enable = mkBoolOpt false;
     headless = mkBoolOpt false;
     waybar = mkBoolOpt true;
+    wlsunset = mkBoolOpt false;
   };
   config = mkIf cfg.enable {
     hardware.graphics.enable = true;
@@ -37,8 +38,17 @@ in
     xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;
-      #wlr.enable = true;
-      #extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+      wlr.enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-gnome
+      ];
+      config.common = {
+        default = [
+          "gtk"
+          "wlr"
+        ];
+      };
     };
 
     services = {
