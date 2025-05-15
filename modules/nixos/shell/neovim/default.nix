@@ -397,7 +397,7 @@ in
 
             };
             bash.enable = true;
-            yaml.enable = true;
+            # yaml.enable = true;
             markdown.enable = true;
           };
           lsp = {

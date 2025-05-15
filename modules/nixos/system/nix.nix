@@ -27,6 +27,12 @@ in
   system.disableInstallerTools = config.programs.nh.enable;
   system.stateVersion = "24.05";
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = _: true;
+    allowAliases = false;
+  };
+
   nix = {
     package = pkgs.lix;
     gc = {

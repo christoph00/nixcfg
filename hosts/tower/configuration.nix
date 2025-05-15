@@ -78,8 +78,8 @@
     extraPackages = with pkgs; [
       amdvlk
       libvdpau-va-gl
-      vaapiVdpau
-      #rocmPackages.clr.icd
+      rocmPackages.clr.icd
+      rocmPackages.clr
       vulkan-loader
       vulkan-extension-layer
       vulkan-validation-layers

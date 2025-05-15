@@ -7,16 +7,15 @@
   ...
 }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkDefault;
   inherit (flake.lib) mkBoolOpt;
-  cfg = options.desktop;
+  cfg = config.desktop;
 in
 {
   options.desktop = {
-    enable = mkBoolOpt config.host.graphical;
+    enable = mkBoolOpt false;
     headless = mkBoolOpt false;
     waybar = mkBoolOpt true;
-
   };
   config = mkIf cfg.enable {
     hardware.graphics.enable = true;
@@ -40,6 +39,22 @@ in
       xdgOpenUsePortal = true;
       #wlr.enable = true;
       #extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    };
+
+    services = {
+      gvfs.enable = true;
+
+      udisks2.enable = true;
+
+      dbus = {
+        enable = true;
+        implementation = "broker";
+
+        packages = builtins.attrValues { inherit (pkgs) dconf gcr udisks2; };
+      };
+
+      timesyncd.enable = true;
+      chrony.enable = false;
     };
 
     programs.uwsm = {
