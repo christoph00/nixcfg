@@ -19,7 +19,7 @@ let
 in
 {
   options.desktop = {
-    displayManager = mkOpt nullOr (enum [
+    displayManager = mkOpt (nullOr enum [
       "greetd"
       "cosmic-greeter"
     ]) "greetd";
