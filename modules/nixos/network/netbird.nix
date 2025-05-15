@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib) mkIf boolToString;
+  inherit (lib) mkIf boolToString mkForce;
   inherit (flake.lib) mkBoolOpt;
   cfg = config.network.netbird;
 in
@@ -38,6 +38,8 @@ in
     systemd.services.netbird-io.postStart = ''
       /run/current-system/sw/bin/netbird-io up --dns-resolver-address 127.0.0.77
     '';
+
+    systemd.services.netbird.wantedBy = mkForce [ ];
 
     networking.firewall.trustedInterfaces = [ "nb-io" ];
   };

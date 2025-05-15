@@ -8,6 +8,9 @@
   flake,
   ...
 }:
+let
+  inherit (flake.lib) enabled;
+in
 {
   imports = [ flake.modules.nixos.host ];
   facter.reportPath = ./facter.json;
@@ -17,6 +20,8 @@
   hw.ram = 32;
   host.graphical = true;
   host.gaming = true;
+
+  svc.actions-runner = enabled;
 
   desktop.remote = true;
 

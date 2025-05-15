@@ -35,7 +35,7 @@ in
   services = {
     logrotate = nodefault;
     udisks2 = nodefault;
-    lvm.enable = nodefault;
+    lvm = nodefault;
   };
 
   xdg = {
