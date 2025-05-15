@@ -21,7 +21,14 @@ let
     env \
     WLR_NO_HARDWARE_CURSORS=0 \
     WLR_BACKENDS=drm,headless,libinput \
-    ${getExe config.programs.uwsm.package} start steam.desktop
+    WAYLAND_DISPLAY=gamescope-0 \
+    UWSM_WAIT_VARNAMES_SETTLETIME=2
+    ${getExe config.programs.uwsm.package} start -F -S -N steam \
+    gamescope -- --steam --backend headless --rt --force-grab-cursor --expose-wayland -F fsr  -- \
+    steam -tenfoot -pipewire-dmabuf -steamos3 -steamdeck &
+    GAMESCOPE_PID=$!
+    uwsm finalize 
+    wait $GAMESCOPE_PID
   '';
 in
 {
@@ -33,6 +40,9 @@ in
     autologin = mkBoolOpt false;
   };
   config = mkIf cfg.enable {
+
+    environment.systemPackages = [ exec-wm ];
+
     services.greetd = mkIf (cfg.displayManager == "greetd") {
       enable = true;
       vt = 2;

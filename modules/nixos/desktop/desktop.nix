@@ -65,6 +65,8 @@ in
 
       timesyncd.enable = true;
       chrony.enable = false;
+
+      seatd.enable = true;
     };
 
     programs.uwsm = {

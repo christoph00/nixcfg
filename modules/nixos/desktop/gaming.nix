@@ -68,6 +68,9 @@ in
         args = [
           "--rt"
           "--expose-wayland"
+          "--backend"
+          "headless"
+          "-e"
         ];
       };
 
