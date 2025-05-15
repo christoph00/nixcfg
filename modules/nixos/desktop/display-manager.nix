@@ -8,7 +8,7 @@
 }:
 let
   inherit (lib) mkIf concatStringsSep getExe;
-  inherit (lib.types) nullOr enum;
+  inherit (lib.types) enum;
   inherit (flake.lib) mkOpt mkBoolOpt;
   cfg = config.desktop;
   sessionData = config.services.displayManager.sessionData.desktops;
@@ -16,6 +16,13 @@ let
     "${sessionData}/share/xsessions"
     "${sessionData}/share/wayland-sessions"
   ];
+
+  exec-wm = pkgs.writeShellScriptBin "exec-wm" ''
+    env \
+    WLR_NO_HARDWARE_CURSORS=0 \
+    WLR_BACKENDS=drm,headless,libinput \
+    ${getExe config.programs.uwsm.package} start steam.desktop
+  '';
 in
 {
   options.desktop = {
@@ -44,7 +51,7 @@ in
           ];
         };
         initial_session = mkIf cfg.autologin {
-          command = "uwsm start -S -F /run/current-system/sw/bin/steam-gamescope";
+          command = "${exec-wm}/bin/exec-wm";
           user = "christoph";
         };
       };
