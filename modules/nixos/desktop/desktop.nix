@@ -15,7 +15,7 @@ in
   options.desktop = {
     enable = mkBoolOpt false;
     headless = mkBoolOpt false;
-    waybar = mkBoolOpt true;
+    waybar = mkBoolOpt false;
     wlsunset = mkBoolOpt false;
   };
   config = mkIf cfg.enable {

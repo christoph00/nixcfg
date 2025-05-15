@@ -31,7 +31,12 @@ let
     # wait $GAMESCOPE_PID
   '';
 
+  steam-ui = pkgs.writeShellScriptBin "steamui" ''
+    steam -tenfoot -pipewire-dmabuf -steamos3
+  '';
+
   gamewm-conf = pkgs.writeText "gamewm.conf" ''
+    exec swaymsg create_output HEADLESS-1
     exec uwsm finalize SWAYSOCK WAYLAND_DISPLAY WLR_BACKENDS
 
     default_border normal
@@ -49,10 +54,8 @@ let
     #
     input "48879:57005:Mouse_passthrough" pointer_accel -1
 
-    assign [app_id="^sunshine-terminal$"] 9
-    exec ${pkgs.foot}/bin/foot --app-id=sunshine-terminal
+    exec uwsm-app ${steam-ui}
 
-    exec steam
   '';
 in
 {
