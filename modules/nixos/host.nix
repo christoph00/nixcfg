@@ -20,6 +20,7 @@ in
     flake.modules.nixos.shell
     flake.modules.nixos.services
     flake.modules.nixos.hw
+    flake.modules.nixos.desktop
   ];
 
   options.host = {
