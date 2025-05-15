@@ -18,7 +18,7 @@
   host.graphical = true;
   host.gaming = true;
 
-  graphical.remote = true;
+  desktop.remote = true;
 
   sys.boot.secureBoot = true;
   sys.disk.device = "/dev/nvme0n1";
