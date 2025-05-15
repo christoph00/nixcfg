@@ -8,7 +8,9 @@
 let
   inherit (lib) mkIf;
   inherit (flake.lib) enabled;
-  cfg = config.desktop
+  cfg = config.desktop;
+
+in
 {
   config = mkIf cfg.enable {
 
@@ -437,7 +439,7 @@ let
         "widget.use-xdg-desktop-portal.file-picker" = 1;
 
       };
+
     };
   };
-
 }
