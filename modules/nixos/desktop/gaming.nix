@@ -33,6 +33,7 @@ in
       PROTON_USE_NTSYNC = "1";
       PROTON_ENABLE_AMD_AGS = "1";
       STEAM_MULTIPLE_XWAYLANDS = "1";
+      XKB_DEFAULT_LAYOUT = "de";
     };
 
     systemd.user.services = {

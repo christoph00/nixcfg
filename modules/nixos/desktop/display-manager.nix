@@ -22,7 +22,8 @@ let
     env \
     WLR_NO_HARDWARE_CURSORS=0 \
     WLR_BACKENDS=drm,headless,libinput \
-    WLR_LIBINPUT_NO_DEVICES=1
+    WLR_LIBINPUT_NO_DEVICES=1 \
+    XKB_DEFAULT_LAYOUT=de
     /run/current-system/sw/bin/sway -c ${gamewm-conf}
     # gamescope --steam --backend headless --rt --force-grab-cursor --expose-wayland -F fsr  -- \
     # steam -tenfoot -pipewire-dmabuf -steamos3 -steamdeck &
@@ -37,7 +38,10 @@ let
 
     default_border normal
     default_floating_border normal
-    bindsym BTN_RIGHT kill
+
+    bindsym Mod5+x kill
+    bindsym Mod5+Tab exec ${pkgs.swayr}/bin/swayr switch-workspace
+    bindsym Mod5+d exec ${pkgs.fuzzel}/bin/fuzzel
 
     # seat seat0 fallback false
     # seat seat0 attach "48879:57005:Keyboard_passthrough"
