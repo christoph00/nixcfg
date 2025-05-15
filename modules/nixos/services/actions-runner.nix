@@ -22,6 +22,10 @@ in
 
     age.secrets.actions-runner = mkSecret { file = "actions-runner"; };
 
+    sys.state.directories = [
+      config.services.gitea-actions-runner.instances.${config.networking.hostName}.settings.cache.dir
+    ];
+
     services.gitea-actions-runner.instances.${config.networking.hostName} = {
       enable = true;
       labels = [
