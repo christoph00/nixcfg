@@ -18,16 +18,15 @@ let
   ];
 
   exec-wm = pkgs.writeShellScriptBin "exec-wm" ''
+    set -xeuo pipefail
     env \
     WLR_NO_HARDWARE_CURSORS=0 \
     WLR_BACKENDS=drm,headless,libinput \
-    WAYLAND_DISPLAY=gamescope-0 \
-    UWSM_WAIT_VARNAMES_SETTLETIME=2
-    ${getExe config.programs.uwsm.package} start -F -S -N steam \
-    gamescope -- --steam --backend headless --rt --force-grab-cursor --expose-wayland -F fsr  -- \
+    WAYLAND_DISPLAY=gamescope-0
+    gamescope --steam --backend headless --rt --force-grab-cursor --expose-wayland -F fsr  -- \
     steam -tenfoot -pipewire-dmabuf -steamos3 -steamdeck &
     GAMESCOPE_PID=$!
-    uwsm finalize 
+    FINALIZED="I'm here" WAYLAND_DISPLAY=gamescope-0 uwsm finalize
     wait $GAMESCOPE_PID
   '';
 in
@@ -61,7 +60,7 @@ in
           ];
         };
         initial_session = mkIf cfg.autologin {
-          command = "${exec-wm}/bin/exec-wm";
+          command = "${getExe config.programs.uwsm.package} start -F -S -N steam ${exec-wm}/bin/exec-wm";
           user = "christoph";
         };
       };
