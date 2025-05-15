@@ -9,12 +9,13 @@
 let
   inherit (lib) mkIf;
   inherit (flake.lib) mkBoolOpt;
-  cfg = options.graphical.desktop;
+  cfg = options.desktop;
 in
 {
   options.desktop = {
     enable = mkBoolOpt config.host.graphical;
     headless = mkBoolOpt false;
+    waybar = mkBoolOpt true;
 
   };
   config = mkIf cfg.enable {
@@ -42,22 +43,22 @@ in
     };
 
     programs.uwsm = {
-      enable = cfg.uwsm;
-      waylandCompositors = {
-        # niri = {
-        #   prettyName = "Niri";
-        #   comment = "A scrollable-tiling Wayland compositor.";
-        #   binPath = "${pkgs.niri}/bin/niri";
-        # };
-        # labwc = {
-        #   prettyName = "Labwc";
-        #   comment = "A Wayland window-stacking compositor.";
-        #   binPath = "${pkgs.labwc}/bin/labwc";
-        # };
-      };
+      enable = true;
+      # waylandCompositors = {
+      # niri = {
+      #   prettyName = "Niri";
+      #   comment = "A scrollable-tiling Wayland compositor.";
+      #   binPath = "${pkgs.niri}/bin/niri";
+      # };
+      # labwc = {
+      #   prettyName = "Labwc";
+      #   comment = "A Wayland window-stacking compositor.";
+      #   binPath = "${pkgs.labwc}/bin/labwc";
+      # };
+      # };
     };
 
-    systemd.user.services = mkIf cfg.uwsm {
+    systemd.user.services = {
       waybar = mkIf cfg.waybar {
         description = "Waybar as systemd service";
         path = [ config.system.path ];

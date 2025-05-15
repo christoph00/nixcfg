@@ -10,7 +10,7 @@ let
   inherit (lib) mkIf concatStringsSep getExe;
   inherit (lib.types) nullOr enum;
   inherit (flake.lib) mkOpt mkBoolOpt;
-  cfg = config.graphical;
+  cfg = config.desktop;
   sessionData = config.services.displayManager.sessionData.desktops;
   sessionPath = concatStringsSep ":" [
     "${sessionData}/share/xsessions"
@@ -19,7 +19,7 @@ let
 in
 {
   options.desktop = {
-    displayManager = mkOpt (nullOr enum [
+    displayManager = mkOpt (enum [
       "greetd"
       "cosmic-greeter"
     ]) "greetd";

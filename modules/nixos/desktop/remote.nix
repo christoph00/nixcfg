@@ -10,7 +10,7 @@
 let
   inherit (flake.lib) mkBoolOpt;
   inherit (lib) mkIf;
-  cfg = config.graphical;
+  cfg = config.desktop;
 in
 {
   options.desktop = {
