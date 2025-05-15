@@ -31,10 +31,6 @@ let
     # wait $GAMESCOPE_PID
   '';
 
-  steam-ui = pkgs.writeShellScriptBin "steamui" ''
-    steam -tenfoot -pipewire-dmabuf -steamos3
-  '';
-
   gamewm-conf = pkgs.writeText "gamewm.conf" ''
     exec swaymsg create_output HEADLESS-1
     exec uwsm finalize SWAYSOCK WAYLAND_DISPLAY WLR_BACKENDS
@@ -53,8 +49,6 @@ let
     # seat seat0 attach "48879:57005:Touchscreen_passthrough"
     #
     input "48879:57005:Mouse_passthrough" pointer_accel -1
-
-    exec uwsm-app ${steam-ui}
 
   '';
 in

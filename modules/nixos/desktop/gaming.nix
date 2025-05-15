@@ -19,14 +19,33 @@ in
 
     boot.kernelModules = [ "ntsync" ];
 
+    boot.kernel.sysctl = {
+      "kernel.split_lock_mitigate" = 0;
+      "kernel.nmi_watchdog" = 0;
+      "kernel.sched_bore" = "1";
+    };
+
     services.udev.extraRules = ''
       KERNEL=="ntsync", MODE="0644"
     '';
+
+    environment.sessionVariables = {
+      PROTON_USE_NTSYNC = "1";
+      PROTON_ENABLE_AMD_AGS = "1";
+      STEAM_MULTIPLE_XWAYLANDS = "1";
+    };
+
     systemd.user.services = {
       gamemoded = {
         serviceConfig.Slice = "background-graphical.slice";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
+      };
+      steam = {
+        serviceConfig.Slice = "app-graphical.slice";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        script = "${config.programs.steam.package}/bin/steam -tenfoot -pipewire-dmabuf -steamos3";
       };
     };
 
@@ -50,8 +69,6 @@ in
               stdenv.cc.cc.lib
               libkrb5
               keyutils
-              # gamescope
-              # mangohud
             ];
         };
         extraCompatPackages = with pkgs; [
@@ -207,6 +224,7 @@ in
         luanti
         openttd
         protonhax
+        umu-launcher
       ];
   };
 }
