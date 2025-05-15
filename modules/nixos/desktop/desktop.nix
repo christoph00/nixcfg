@@ -69,20 +69,32 @@ in
       seatd.enable = true;
     };
 
+    programs.sway = {
+      enable = true;
+      wrapperFeatures = {
+        gtk = true;
+      };
+    };
+
     programs.uwsm = {
       enable = true;
-      # waylandCompositors = {
-      # niri = {
-      #   prettyName = "Niri";
-      #   comment = "A scrollable-tiling Wayland compositor.";
-      #   binPath = "${pkgs.niri}/bin/niri";
-      # };
-      # labwc = {
-      #   prettyName = "Labwc";
-      #   comment = "A Wayland window-stacking compositor.";
-      #   binPath = "${pkgs.labwc}/bin/labwc";
-      # };
-      # };
+      waylandCompositors = {
+        sway = {
+          prettyName = "Sway";
+          comment = "Sway compositor managed by UWSM";
+          binPath = "/run/current-system/sw/bin/sway";
+        };
+        # niri = {
+        #   prettyName = "Niri";
+        #   comment = "A scrollable-tiling Wayland compositor.";
+        #   binPath = "${pkgs.niri}/bin/niri";
+        # };
+        # labwc = {
+        #   prettyName = "Labwc";
+        #   comment = "A Wayland window-stacking compositor.";
+        #   binPath = "${pkgs.labwc}/bin/labwc";
+        # };
+      };
     };
 
     systemd.user.services = {

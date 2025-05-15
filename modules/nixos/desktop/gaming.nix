@@ -71,6 +71,8 @@ in
           "--backend"
           "headless"
           "-e"
+          "--force-grab-cursor"
+          "-f"
         ];
       };
 

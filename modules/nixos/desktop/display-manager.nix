@@ -17,17 +17,43 @@ let
     "${sessionData}/share/wayland-sessions"
   ];
 
-  exec-wm = pkgs.writeShellScriptBin "exec-wm" ''
+  gamewm = pkgs.writeShellScriptBin "gamewm" ''
     set -xeuo pipefail
     env \
     WLR_NO_HARDWARE_CURSORS=0 \
     WLR_BACKENDS=drm,headless,libinput \
-    WAYLAND_DISPLAY=gamescope-0
-    gamescope --steam --backend headless --rt --force-grab-cursor --expose-wayland -F fsr  -- \
-    steam -tenfoot -pipewire-dmabuf -steamos3 -steamdeck &
-    GAMESCOPE_PID=$!
-    FINALIZED="I'm here" WAYLAND_DISPLAY=gamescope-0 uwsm finalize
-    wait $GAMESCOPE_PID
+    /run/current-system/sw/bin/sway -c ${gamewm-conf}
+    # gamescope --steam --backend headless --rt --force-grab-cursor --expose-wayland -F fsr  -- \
+    # steam -tenfoot -pipewire-dmabuf -steamos3 -steamdeck &
+    # GAMESCOPE_PID=$!
+    # FINALIZED="I'm here" WAYLAND_DISPLAY=gamescope-0 uwsm finalize
+    # wait $GAMESCOPE_PID
+  '';
+
+  gamewm-conf = pkgs.writeText "gamewm.conf" ''
+    exec swaymsg create_output HEADLESS-1
+    output HEADLESS-1 resolution 1280x720
+    exec uwsm finalize
+
+    default_border normal
+    default_floating_border normal
+    bindsym BTN_RIGHT kill
+
+    seat seat0 fallback false
+    seat seat0 attach "48879:57005:Keyboard_passthrough"
+    seat seat0 attach "48879:57005:Mouse_passthrough"
+    seat seat0 attach "48879:57005:Pen_passthrough"
+    seat seat0 attach "48879:57005:Touch_passthrough"
+    # Sunshine without inputtino, remove when next release arrives
+    seat seat0 attach "1133:16440:Logitech_Wireless_Mouse_PID:4038"
+    seat seat0 attach "48879:57005:Touchscreen_passthrough"
+
+    input "48879:57005:Mouse_passthrough" pointer_accel -1
+
+    assign [app_id="^sunshine-terminal$"] 9
+    exec ${pkgs.foot}/bin/foot --app-id=sunshine-terminal
+
+    exec steam
   '';
 in
 {
@@ -39,8 +65,6 @@ in
     autologin = mkBoolOpt false;
   };
   config = mkIf cfg.enable {
-
-    environment.systemPackages = [ exec-wm ];
 
     services.greetd = mkIf (cfg.displayManager == "greetd") {
       enable = true;
@@ -60,7 +84,8 @@ in
           ];
         };
         initial_session = mkIf cfg.autologin {
-          command = "${getExe config.programs.uwsm.package} start -F -S -N steam ${exec-wm}/bin/exec-wm";
+          command = "${getExe config.programs.uwsm.package} start -F -S -N gamewm ${gamewm}/bin/gamewm";
+          # command = "${getExe config.programs.uwsm.package} start -F -S sway.desktop";
           user = "christoph";
         };
       };
