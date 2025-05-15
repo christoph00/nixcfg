@@ -26,6 +26,7 @@ in
   desktop.enable = true;
   desktop.remote = true;
   desktop.gaming = enabled;
+  desktop.display-manager.autologin = true;
 
   sys.boot.secureBoot = true;
   sys.disk.device = "/dev/nvme0n1";
