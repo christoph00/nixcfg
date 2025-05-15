@@ -31,8 +31,6 @@ let
   '';
 
   gamewm-conf = pkgs.writeText "gamewm.conf" ''
-    exec swaymsg create_output HEADLESS-1
-    output HEADLESS-1 resolution 1280x720
     exec uwsm finalize
 
     default_border normal
