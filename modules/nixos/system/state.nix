@@ -45,6 +45,8 @@ in
     programs.fuse.userAllowOther = true;
     fileSystems."${cfg.stateDir}".neededForBoot = true;
 
+    age.identityPaths = [ "${cfg.stateDir}/etc/ssh/ssh_host_ed25519_key" ];
+
     boot.initrd.systemd.suppressedUnits = [ "systemd-machine-id-commit.service" ];
     systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
 
@@ -63,6 +65,22 @@ in
             how = "symlink";
             # prepare the preservation early during startup
             inInitrd = true;
+          }
+          {
+            file = "/etc/ssh/ssh_host_ed25519_key.pub";
+            mode = "0644";
+          }
+          {
+            file = "/etc/ssh/ssh_host_ed25519_key";
+            mode = "0600";
+          }
+          {
+            file = "/etc/ssh/ssh_host_rsa_key.pub";
+            mode = "0644";
+          }
+          {
+            file = "/etc/ssh/ssh_host_rsa_key";
+            mode = "0600";
           }
         ] ++ cfg.files;
         directories = [

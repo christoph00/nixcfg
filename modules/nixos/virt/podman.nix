@@ -11,7 +11,7 @@ let
 in
 {
   config = mkIf cfg.podman {
-    sys.state.stateDirs = [
+    sys.state.directories = [
       "/var/lib/containers"
     ];
     virtualisation.podman = {
