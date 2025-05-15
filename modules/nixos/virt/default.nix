@@ -7,11 +7,13 @@ let
 in
 {
 
-  imports = [ ./podman.nix ];
+  imports = [
+    ./podman.nix
+    ./microvm
+  ];
 
   options.virt = {
     podman = mkBoolOpt false;
-    microvm = mkBoolOpt false;
     microGuest = mkBoolOpt false;
     container = mkBoolOpt false;
   };

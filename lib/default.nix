@@ -6,7 +6,7 @@ let
     types
     mkDefault
     attrNames
-    mkIf
+    getAttr
     ;
 in
 rec {
@@ -64,6 +64,14 @@ rec {
       inherit owner group mode;
     };
 
+  toList = attrs: (builtins.map (key: getAttr key attrs) (attrNames attrs));
+
   allHostsList = attrNames flake.nixosConfigurations;
+
+  allSystems = toList flake.nixosConfigurations;
+
+  allMicroVMS = builtins.filter (
+    x: ((builtins.hasAttr "microvm" x.config.virt.microvm) && (x.config.virt.microvm.isGuest == true))
+  ) allSystems;
 
 }

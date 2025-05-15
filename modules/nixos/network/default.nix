@@ -21,7 +21,7 @@ in
     enable = mkBoolOpt true;
     enableWifi = mkBoolOpt false;
     enableDHCPLAN = mkBoolOpt true;
-    enableNM = mkBoolOpt false;
+    enableNM = mkBoolOpt config.host.graphical;
     lanInterface = mkStrOpt "ens*";
 
   };

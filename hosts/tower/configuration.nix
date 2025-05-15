@@ -22,6 +22,7 @@
 
   sys.boot.secureBoot = true;
   sys.disk.device = "/dev/nvme0n1";
+  sys.disk.encrypted = true;
 
   # internal.services.nas = {
   #   enable = true;

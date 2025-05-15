@@ -8,7 +8,7 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (flake.lib) mkBoolOpt;
+  inherit (flake.lib) mkBoolOpt enabled;
   cfg = config.graphical.gaming;
 in
 {
@@ -30,7 +30,7 @@ in
       };
     };
 
-    services.input-remapper.enable = true;
+    services.input-remapper = enabled;
 
     programs = {
       steam = {
@@ -40,15 +40,63 @@ in
             pkgs: with pkgs; [
               xz
               openssl
+              xorg.libXcursor
+              xorg.libXi
+              xorg.libXinerama
+              xorg.libXScrnSaver
+              libpng
+              libpulseaudio
+              libvorbis
+              stdenv.cc.cc.lib
+              libkrb5
+              keyutils
+              gamescope
+              mangohud
             ];
         };
+        extraCompatPackages = with pkgs; [
+          proton-ge-bin
+          steamtinkerlaunch
+        ];
+        gamescopeSession = enabled;
+        protontricks = enabled;
+        extest = enabled; # controller input
       };
       gamescope = {
         enable = true;
-        # capSysNice = true;
+        capSysNice = false;
+        args = [
+          "--rt"
+          "--expose-wayland"
+        ];
       };
 
-      gamemode.enable = true;
+      gamemode = {
+        enable = true;
+        enableRenice = true;
+
+        settings = {
+          general = {
+            renice = 10;
+          };
+          custom = {
+            start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+            end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+          };
+        };
+      };
+
+    };
+
+    programs.uwsm = {
+      enable = true;
+      waylandCompositors = {
+        steam-gamescope = {
+          prettyName = "Steam";
+          comment = "Steam Gamescope Session managed by UWSM";
+          binPath = "/run/current-system/sw/bin/steam-gamescope";
+        };
+      };
     };
 
     environment.systemPackages =
