@@ -8,5 +8,6 @@
     ./kernel.nix
     ./time.nix
     ./console.nix
+    ./security.nix
   ];
 }
