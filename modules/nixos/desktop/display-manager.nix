@@ -22,6 +22,7 @@ let
     env \
     WLR_NO_HARDWARE_CURSORS=0 \
     WLR_BACKENDS=drm,headless,libinput \
+    WLR_LIBINPUT_NO_DEVICES=1
     /run/current-system/sw/bin/sway -c ${gamewm-conf}
     # gamescope --steam --backend headless --rt --force-grab-cursor --expose-wayland -F fsr  -- \
     # steam -tenfoot -pipewire-dmabuf -steamos3 -steamdeck &

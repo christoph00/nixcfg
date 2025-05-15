@@ -28,6 +28,9 @@ in
     remote = mkBoolOpt false;
   };
   config = mkIf cfg.remote {
+    services.udev.extraRules = ''
+      KERNEL=="uinput", GROUP="input", MODE="0666", OPTIONS+="static_node=uinput"
+    '';
     environment.systemPackages = [ switch-resolution ];
     services.sunshine = {
       enable = true;
