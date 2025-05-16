@@ -8,5 +8,6 @@
     ./gaming.nix
     ./remote.nix
     ./firefox.nix
+    ./fonts.nix
   ];
 }

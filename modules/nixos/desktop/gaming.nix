@@ -226,6 +226,7 @@ in
         openttd
         protonhax
         umu-launcher
+        cartridges
       ];
   };
 }

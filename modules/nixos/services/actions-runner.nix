@@ -23,7 +23,7 @@ in
     age.secrets.actions-runner = mkSecret { file = "actions-runner"; };
 
     sys.state.directories = [
-      config.services.gitea-actions-runner.instances.${config.networking.hostName}.settings.cache.dir
+      "/var/lib/private/gitea-runner"
     ];
 
     services.gitea-actions-runner.instances.${config.networking.hostName} = {
@@ -51,7 +51,7 @@ in
         log.level = "info";
         cache = {
           enabled = true;
-          dir = "/var/cache/forgejo-runner/actions";
+          dir = "/var/lib/gitea-runner/${config.networking.hostName}/cache";
         };
         runner = {
           capacity = 2;

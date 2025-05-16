@@ -44,7 +44,9 @@ let
 
     set $ws1 "1: Game"
     set $ws2 "2: Steam"
-    set $ws2 "3: Bottles"
+    set $ws3 "3: Bottles"
+    set $ws4 "4: Misc"
+    set $ws5 "5: Browser"
 
     # seat seat0 fallback false
     # seat seat0 attach "48879:57005:Keyboard_passthrough"
@@ -59,10 +61,12 @@ let
     input "48879:57005:Mouse_passthrough" pointer_accel -1
 
     assign [app_id="steam"] $ws2
-    assign [class="^Steam$"] $ws2
+    assign [class="steam"] $ws2
 
     assign [app_id="bottles"] $ws3
     assign [class="^Bottles$"] $ws3
+
+    assign [app_id="limo"] $ws4
 
     assign [class=".*"] $ws1
 
@@ -72,7 +76,9 @@ let
 
     bindsym $mod+1 workspace $ws1
     bindsym $mod+2 workspace $ws2
-    bindsym $mod+1 workspace $ws3
+    bindsym $mod+3 workspace $ws3
+    bindsym $mod+4 workspace $ws4
+    bindsym $mod+5 workspace $ws5
 
 
 

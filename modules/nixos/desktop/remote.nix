@@ -8,8 +8,8 @@
   ...
 }:
 let
-  inherit (flake.lib) mkBoolOpt;
-  inherit (lib) mkIf;
+  inherit (flake.lib) mkBoolOpt mkSecret;
+  inherit (lib) mkIf getExe;
   cfg = config.desktop;
   switch-resolution = pkgs.writeShellScriptBin "switch-resolution" ''
     WIDTH=''${SUNSHINE_CLIENT_WIDTH:-1920}
@@ -28,6 +28,13 @@ in
     remote = mkBoolOpt false;
   };
   config = mkIf cfg.remote {
+
+    age.secrets.self-pem = mkSecret {
+      file = "self";
+      owner = "christoph";
+      group = "users";
+    };
+
     services.udev.extraRules = ''
       KERNEL=="uinput", GROUP="input", MODE="0666", OPTIONS+="static_node=uinput"
     '';
@@ -40,6 +47,26 @@ in
     };
 
     systemd.user.services = {
+      wayvnc = {
+        description = "wayvnc";
+        script = "${getExe pkgs.wayvnc} --gpu --log-level info --output HEADLESS-1";
+        # wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "background-graphical.slice";
+      };
+      novnc = {
+        description = "novnc";
+        script = "${getExe pkgs.novnc} --listen 0.0.0.0:6080 --vnc 127.0.0.1:5900 --cert ${config.age.secrets.self-pem.path}";
+        # wantedBy = [ "graphical-session.target" ];
+        after = [ "wayvnc.service" ];
+        partOf = [ "wayvnc.service" ];
+        path = [ config.system.path ];
+        serviceConfig = {
+          Slice = "background-graphical.slice";
+          SuccessExitStatus = 143;
+        };
+
+      };
       sunshine = {
         path = [ config.system.path ];
         serviceConfig.Slice = "background-graphical.slice";

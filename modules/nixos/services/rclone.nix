@@ -43,6 +43,11 @@ in
   config = mkIf cfg.enable {
 
     age.secrets.rclone = mkSecret { file = "rclone"; };
+    age.secrets.rclone-user = mkSecret {
+      file = "rclone";
+      owner = "christoph";
+      group = "users";
+    };
 
     environment.systemPackages = [ pkgs.rclone ];
 
