@@ -228,6 +228,17 @@ in
         protonhax
         umu-launcher
         cartridges
+
+        cacert
+        dos2unix
+        samba
+        wine
+        winetricks
+        unzip
+        xlsfonts
+        zip
+
+        vulkan-tools
       ];
   };
 }
