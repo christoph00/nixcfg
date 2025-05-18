@@ -84,52 +84,39 @@ in
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      amdvlk
-      libvdpau-va-gl
       rocmPackages.clr.icd
-      rocmPackages.clr
       vulkan-loader
       vulkan-extension-layer
       vulkan-validation-layers
-      mangohud
-    ];
-    extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
-      mangohud
     ];
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   hardware.amdgpu = {
-    amdvlk = {
-      enable = true;
-      supportExperimental.enable = true;
-      support32Bit.enable = true;
-      settings = {
-        AllowVkPipelineCachingToDisk = 1;
-        EnableVmAlwaysValid = 1;
-        IFH = 0;
-        IdleAfterSubmitGpuMask = 1;
-        ShaderCacheMode = 1;
-      };
-    };
     opencl.enable = true;
     initrd.enable = true;
   };
 
   environment.variables = {
     RADV_PERFTEST = "sam,video_decode,transfer_queue";
-    AMD_VULKAN_ICD = "RADV";
     LIBVA_DRIVER_NAME = "radeonsi";
     VDPAU_DRIVER = "radeonsi";
     ROC_ENABLE_PRE_VEGA = "1";
+
+    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+    AMD_VULKAN_ICD = "RADV";
   };
+
+  systemd.tmpfiles.rules = [
+    "L+ /opt/rocm/hip - - - - ${pkgs.rocmPackages.clr}"
+  ];
 
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
     "i2c_dev"
+    "amdgpu"
   ];
   boot.kernelParams = [
     "mem_sleep_default=deep"
