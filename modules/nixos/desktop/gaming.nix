@@ -215,6 +215,7 @@ in
         steam
         proton-ge-custom
         protonup-qt
+        protonplus
         protontricks
         gamemode
         openmw

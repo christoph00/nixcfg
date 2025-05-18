@@ -18,9 +18,19 @@ in
       gammastep
       wlsunset
 
+      _7zz
+      # _7zz-rar
+
+      desktop-file-utils
+
+      wev
+      walker
+
       font-manager
       file-roller
       unrar
+
+      nautilus
 
       phinger-cursors
       # chicago95

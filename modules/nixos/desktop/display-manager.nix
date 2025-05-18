@@ -67,6 +67,9 @@ let
     assign [class="^Bottles$"] $ws3
 
     assign [app_id="limo"] $ws4
+    assign [app_id="nautilus"] $ws4
+
+    assign [app_id="firefox-beta"] $ws5
 
     assign [class=".*"] $ws1
 

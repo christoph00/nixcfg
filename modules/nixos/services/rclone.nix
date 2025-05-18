@@ -4,6 +4,7 @@
   flake,
   options,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -15,24 +16,41 @@ let
     "_netdev"
     "nofail"
     "allow_other"
-    "dir-cache-time=2h"
+    # "dir-cache-time=2h"
     "uid=1000"
     "gid=1000"
     "umask=002"
     "vfs-cache-mode=full"
-    "vfs-cache-max-size=10G"
+    # "vfs-cache-max-size=10G"
     "vfs-fast-fingerprint"
-    "vfs-write-back=1h"
-    "vfs-cache-max-age=2h"
-    "tpslimit=8"
-    "tpslimit-burst=16"
-    "drive-chunk-size=128M"
+    # "vfs-write-back=1h"
+    # "vfs-cache-max-age=2h"
+    # "tpslimit=8"
+    # "tpslimit-burst=16"
+    # "drive-chunk-size=128M"
     "args2env"
     "config=${cfg.config}"
     "x-systemd.automount"
     "x-systemd.mount-timeout=5"
     "x-systemd.idle-timeout=30"
   ];
+
+  wrapped = inputs.wrapper-manager.lib.build {
+    inherit pkgs;
+    modules = [
+      {
+        wrappers = {
+          rclone = {
+            basePackage = pkgs.rclone;
+            flags = [
+              "--config"
+              "${config.age.secrets.rclone-user.path}"
+            ];
+          };
+        };
+      }
+    ];
+  };
 in
 {
   options.svc.rclone = {
@@ -49,7 +67,7 @@ in
       group = "users";
     };
 
-    environment.systemPackages = [ pkgs.rclone ];
+    environment.systemPackages = [ wrapped ];
 
     fileSystems."/media/box" = {
       device = "box:";
