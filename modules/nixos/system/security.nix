@@ -26,6 +26,15 @@ in
       allowSimultaneousMultithreading = true;
       allowUserNamespaces = true;
 
+      pam.loginLimits = [
+        {
+          domain = "*";
+          item = "nofile";
+          type = "-";
+          value = "65536";
+        }
+      ];
+
     };
 
   };
