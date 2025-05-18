@@ -23,7 +23,6 @@ in
         vim = {
           additionalRuntimePaths = [ ./runtime ];
           extraLuaFiles = [ ./autocmds.lua ];
-          useSystemClipboard = true;
           globals.mapleader = " ";
           enableLuaLoader = true;
 

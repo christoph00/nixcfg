@@ -99,7 +99,7 @@ in
   };
 
   environment.variables = {
-    RADV_PERFTEST = "sam,video_decode,transfer_queue";
+    # RADV_PERFTEST = "sam,video_decode,transfer_queue";
     LIBVA_DRIVER_NAME = "radeonsi";
     VDPAU_DRIVER = "radeonsi";
     ROC_ENABLE_PRE_VEGA = "1";
@@ -107,6 +107,9 @@ in
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
     AMD_VULKAN_ICD = "RADV";
   };
+
+  services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   systemd.tmpfiles.rules = [
     "L+ /opt/rocm/hip - - - - ${pkgs.rocmPackages.clr}"
@@ -119,7 +122,7 @@ in
     "amdgpu"
   ];
   boot.kernelParams = [
-    "mem_sleep_default=deep"
+    # "mem_sleep_default=deep"
     "amdgpu.gttsize=8192"
     "amdgpu.ignore_crat=1"
   ];
@@ -134,8 +137,8 @@ in
   };
 
   services.udev.extraRules = ''
-    #GPU bar size
-    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource0_resize}="8"
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource0_resize}="13"
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource2_resize}="3"
   '';
 
 }
