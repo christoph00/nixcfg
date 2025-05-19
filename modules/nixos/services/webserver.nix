@@ -33,7 +33,7 @@ in
 
     services.nginx = {
       enable = true;
-      package = pkgs.angie;
+      # package = pkgs.angie;
 
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
