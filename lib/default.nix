@@ -45,7 +45,7 @@ rec {
     // {
       inherit kTLS;
       useACMEHost = acmeHost;
-      serverAlias = aliases;
+      serverAliases = aliases;
       locations = (extra-config.locations or { }) // {
         "/" = (extra-config.locations."/" or { }) // {
           proxyPass = "http://${host}${if port != null then ":${builtins.toString port}" else ""}";
