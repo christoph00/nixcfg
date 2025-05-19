@@ -21,6 +21,7 @@ in
   services.nginx.virtualHosts."ha.r505.de" = create-proxy {
     host = "100.77.199.49";
     port = 8123;
+    proxy-web-sockets = true;
   };
 
   boot.kernelParams = [
