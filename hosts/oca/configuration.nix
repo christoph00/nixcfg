@@ -14,6 +14,8 @@ in
   sys.disk.device = "/dev/sda";
   sys.disk.forceDevice = true;
 
+  hw.cpu = "other";
+
   host.vm = true;
   shell.devtools.enable = true;
 
