@@ -33,7 +33,6 @@ in
 
     services.nginx = {
       enable = true;
-      openFirewall = true;
       package = pkgs.angie;
 
       recommendedGzipSettings = true;
