@@ -19,11 +19,6 @@ in
 
   networking.timeServers = [ "169.254.169.254" ];
 
-  services.nginx.virtualHosts."ha.r505.de" = create-proxy {
-    host = "lsrv.nb.r505.de";
-    port = 8123;
-  };
-
   boot.initrd.kernelModules = [
     "ata_piix"
     "uhci_hcd"

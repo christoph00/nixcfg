@@ -8,7 +8,7 @@
     # ./office-server.nix
     # ./searx.nix
     ./sshd.nix
-    # ./webserver.nix
+    ./webserver.nix
     ./rclone.nix
     ./actions-runner.nix
   ];

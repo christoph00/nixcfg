@@ -1,4 +1,7 @@
-{ inputs, ... }:
+{ inputs, flake, ... }:
+let
+  inherit (flake.lib) create-proxy;
+in
 {
   imports = [ inputs.self.nixosModules.host ];
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -12,6 +15,13 @@
   host.vm = true;
   hw.gpu = "vm";
   hw.cpu = "amd";
+
+  svc.webserver.enable = true;
+
+  services.nginx.virtualHosts."ha.r505.de" = create-proxy {
+    host = "lsrv.nb.r505.de";
+    port = 8123;
+  };
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"
