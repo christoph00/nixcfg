@@ -16,7 +16,7 @@ in
 
   options.svc.webserver = {
     enable = mkBoolOpt false;
-    domain = mkStrOpt "${config.networking.domain}";
+    domain = mkStrOpt "r505.de";
   };
 
   config = mkIf cfg.enable {
