@@ -15,6 +15,8 @@
 
   services.openssh.openFirewall = false;
 
+  boot.growPartition = true;
+
   services.n8n.enable = true;
   services.n8n.webhookUrl = "https://n8n.r505.de";
 
