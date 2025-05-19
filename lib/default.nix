@@ -41,8 +41,6 @@ rec {
       aliases ? [ ],
       extra-config ? { },
     }:
-    assert assertMsg (port != "" && port != null) "port cannot be empty";
-    assert assertMsg (host != "") "host cannot be empty";
     extra-config
     // {
       inherit kTLS acmeHost;
