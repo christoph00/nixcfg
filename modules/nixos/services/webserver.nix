@@ -31,6 +31,8 @@ in
       group = "acme";
     };
 
+    networking.firewall.allowedTCPPorts = [ 443 ];
+
     services.nginx = {
       enable = true;
       # package = pkgs.angie;
