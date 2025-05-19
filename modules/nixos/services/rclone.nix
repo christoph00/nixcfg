@@ -41,6 +41,7 @@ let
         wrappers = {
           rclone = {
             renames.rclone = "rcloneu";
+            renames."mount.rclone" = "mount.rcloneu";
             basePackage = pkgs.rclone;
             flags = [
               "--config"
