@@ -18,8 +18,10 @@
   # -- n8n
   services.n8n.enable = true;
   services.n8n.webhookUrl = "https://n8n.r505.de";
-  environment.systemPackages = [ pkgs.uv ];
-  programs.npm.enable = true;
+  environment.systemPackages = [
+    pkgs.uv
+    pkgs.nodejs
+  ];
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"
