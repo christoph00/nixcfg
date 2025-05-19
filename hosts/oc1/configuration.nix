@@ -18,11 +18,18 @@ in
 
   svc.webserver.enable = true;
 
+  services.openssh.openFirewall = false;
+
   services.nginx.virtualHosts."ha.r505.de" = create-proxy {
     host = "100.77.199.49";
     port = 8123;
     proxy-web-sockets = true;
   };
+  services.nginx.virtualHosts."n8n.r505.de" = create-proxy {
+    host = "100.77.109.190";
+    port 5678;
+  };
+
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"

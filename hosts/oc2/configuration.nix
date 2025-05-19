@@ -13,6 +13,11 @@
 
   host.vm = true;
 
+  services.openssh.openFirewall = false;
+
+  services.n8n.enable = true;
+  services.n8n.webhookUrl = "https://n8n.r505.de";
+
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"
     "nvme_core.shutdown_timeout=10"
