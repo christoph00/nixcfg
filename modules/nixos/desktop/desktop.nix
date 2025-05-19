@@ -32,7 +32,7 @@ in
       GDK_BACKEND = "wayland,x11";
       MOZ_ENABLE_WAYLAND = "1";
       XDG_SESSION_TYPE = "wayland";
-      SDL_VIDEODRIVER = "wayland,x11";
+      SDL_VIDEODRIVER = "wayland,x11,windows";
       CLUTTER_BACKEND = "wayland";
     };
     xdg.portal = {
