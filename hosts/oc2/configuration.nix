@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [ inputs.self.nixosModules.host ];
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -14,8 +14,6 @@
   host.vm = true;
 
   services.openssh.openFirewall = false;
-
-  boot.growPartition = true;
 
   # -- n8n
   services.n8n.enable = true;

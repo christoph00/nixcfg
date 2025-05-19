@@ -16,8 +16,6 @@ in
   hw.gpu = "vm";
   hw.cpu = "amd";
 
-  boot.growPartition = true;
-
   svc.webserver.enable = true;
 
   services.openssh.openFirewall = false;
