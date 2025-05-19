@@ -43,7 +43,8 @@ rec {
     }:
     extra-config
     // {
-      inherit kTLS acmeHost;
+      inherit kTLS;
+      useACMEHost = acmeHost;
       serverAlias = aliases;
       locations = (extra-config.locations or { }) // {
         "/" = (extra-config.locations."/" or { }) // {
