@@ -13,7 +13,6 @@ let
   cfg = config.svc.rclone;
   rcloneOptions = [
     "nodev"
-    "_netdev"
     "nofail"
     "allow_other"
     # "dir-cache-time=2h"
@@ -41,6 +40,7 @@ let
       {
         wrappers = {
           rclone = {
+            renames.rclone = "rcloneu";
             basePackage = pkgs.rclone;
             flags = [
               "--config"
@@ -67,7 +67,10 @@ in
       group = "users";
     };
 
-    environment.systemPackages = [ wrapped ];
+    environment.systemPackages = [
+      wrapped
+      pkgs.rclone
+    ];
 
     fileSystems."/media/box" = {
       device = "box:";
