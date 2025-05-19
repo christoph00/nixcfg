@@ -44,6 +44,8 @@ rec {
     extra-config
     // {
       inherit kTLS;
+      onlySSL = true;
+      enableACME = true;
       useACMEHost = acmeHost;
       serverAliases = aliases;
       locations = (extra-config.locations or { }) // {
