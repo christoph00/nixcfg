@@ -16,7 +16,7 @@ in
 
   options.svc.webserver = {
     enable = mkBoolOpt false;
-    domain = mkStrOpt config.networking.domain;
+    domain = mkStrOpt "${config.networking.domain}";
   };
 
   config = mkIf cfg.enable {
