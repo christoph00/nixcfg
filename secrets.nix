@@ -39,9 +39,11 @@ in
   "secrets/tailscale-auth-key".publicKeys = all;
   "secrets/vector.env".publicKeys = all;
   "secrets/user_christoph_pw".publicKeys = all;
-  "secrets/cf-api-key".publicKeys = [
+  "secrets/cf-api-key.age".publicKeys = [
     lsrv
     oca
+    oc1
+    oc2
   ] ++ users;
   "secrets/ha-secrets.age".publicKeys = [ lsrv ] ++ users;
   "secrets/ha-serviceaccount.age".publicKeys = [ lsrv ] ++ users;

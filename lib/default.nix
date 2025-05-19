@@ -36,12 +36,17 @@ rec {
       port ? null,
       host ? "127.0.0.1",
       proxy-web-sockets ? false,
+      kTLS ? true,
+      acmeHost ? "r505.de",
+      aliases ? [ ],
       extra-config ? { },
     }:
     assert assertMsg (port != "" && port != null) "port cannot be empty";
     assert assertMsg (host != "") "host cannot be empty";
     extra-config
     // {
+      inherit kTLS acmeHost;
+      serverAlias = aliases;
       locations = (extra-config.locations or { }) // {
         "/" = (extra-config.locations."/" or { }) // {
           proxyPass = "http://${host}${if port != null then ":${builtins.toString port}" else ""}";

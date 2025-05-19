@@ -68,6 +68,9 @@ in
       devenv
 
       curlie
+
+      goose-cli
+      codex
     ];
 
     programs.tmux = {
