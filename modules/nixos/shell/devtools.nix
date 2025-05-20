@@ -76,7 +76,7 @@ in
 
       go
 
-      spider
+      katana
     ];
 
     programs.tmux = {
