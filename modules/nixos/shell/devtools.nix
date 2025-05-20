@@ -73,6 +73,10 @@ in
       codex
 
       dotenvy
+
+      go
+
+      spider
     ];
 
     programs.tmux = {
