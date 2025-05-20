@@ -6,6 +6,7 @@
 {
   pkgs,
   flake,
+  lib,
   ...
 }:
 let
@@ -88,7 +89,9 @@ in
       vulkan-loader
       vulkan-extension-layer
       vulkan-validation-layers
+      amdvlk
     ];
+    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -96,6 +99,9 @@ in
   hardware.amdgpu = {
     opencl.enable = true;
     initrd.enable = true;
+    legacySupport.enable = true;
+    amdvlk.enable = true;
+    amdvlk.support32Bit.enable = true;
   };
 
   environment.variables = {
@@ -104,8 +110,23 @@ in
     VDPAU_DRIVER = "radeonsi";
     ROC_ENABLE_PRE_VEGA = "1";
 
-    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+    # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+
+    VK_DRIVER_FILES = lib.concatStringsSep ":" [
+      "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json"
+      "/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json"
+      "/run/opengl-driver/share/vulkan/icd.d/amd_icd64.json"
+      "/run/opengl-driver-32/share/vulkan/icd.d/amd_icd32.json"
+    ];
+
+    VK_ICD_FILENAMES = lib.concatStringsSep ":" [
+      "${pkgs.mesa}/share/vulkan/icd.d/radeon_icd.x86_64.json" # Mesa RADV 64-bit
+      "${pkgs.driversi686Linux.mesa}/share/vulkan/icd.d/radeon_icd.i686.json" # Mesa RADV 32-bit
+    ];
+
     AMD_VULKAN_ICD = "RADV";
+
+    MESA_LOADER_DRIVER_OVERRIDE = "radeonsi";
   };
 
   services.xserver.enable = true;
@@ -125,8 +146,12 @@ in
     # "mem_sleep_default=deep"
     "amdgpu.gttsize=8192"
     "amdgpu.ignore_crat=1"
+    "radeon.si_support=0"
+    "radeon.cik_support=0"
+    "amdgpu.si_support=1"
+    "amdgpu.cik_support=1"
   ];
-
+  boot.blacklistedKernelModules = [ "fglrx" ];
   boot.initrd = {
     availableKernelModules = [
       "xhci_pci"
