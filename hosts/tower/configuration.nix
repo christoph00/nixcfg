@@ -33,6 +33,31 @@ in
   sys.disk.device = "/dev/nvme0n1";
   sys.disk.encrypted = true;
 
+  services.pyload.enable = true;
+  services.pyload.listenAddress = "0.0.0.0";
+  services.pyload.downloadDirectory = "/media/ssd-data/Downloads";
+  services.pyload.user = "christoph";
+  services.pyload.group = "users";
+
+  services.nzbget = {
+    enable = true;
+    user = "christoph";
+    group = "users";
+    settings = {
+      MainDir = "/media/ssd-data/Downloads";
+    };
+
+  };
+
+  sys.state.directories = [
+    "/var/lib/pyload"
+    "/var/lib/nzbget"
+  ];
+  networking.firewall.allowedTCPPorts = [
+    8000
+    6789
+  ];
+
   # internal.services.nas = {
   #   enable = true;
   #   domain = "tdata.r505.de";
