@@ -71,6 +71,8 @@ in
 
       goose-cli
       codex
+
+      dotenvy
     ];
 
     programs.tmux = {

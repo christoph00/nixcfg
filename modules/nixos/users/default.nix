@@ -44,6 +44,8 @@ in
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmHJIHJYMl/0awPcEeftLSxDKGVWmN0jhYPQ5hCINxD christoph@wrk"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAHqEQOgEdi3e8uPWqE2nqzyiKC9Y792C5tNKco6lz4o christoph@tower"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHoppzmns1lt6TT2otVKHn1ErtUn5pNzJXbViaYymrLn christoph@x13"
+
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDrBVHoPvd10kDl4WjgUqWh3PdMzrDRXauG3zkfYocjt n8n" # TODO: add to agent user
       ];
 
       linger = mkDefault false;
