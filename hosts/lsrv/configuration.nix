@@ -13,15 +13,18 @@
   sys = {
     boot.encryptedRoot = false;
     disk = {
-      swapSize = "1G";
       device = "/dev/mmcblk0";
+      forceDevice = true;
     };
   };
 
   network.router = {
+    enable = true;
     internalInterface = "enp1s0";
     externalInterface = "enp2s0f1";
   };
+
+  services.home-assistant.enable = true;
 
   # svc.nas = {
   #   enable = true;
