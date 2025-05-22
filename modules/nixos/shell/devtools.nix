@@ -77,6 +77,7 @@ in
       go
 
       katana
+      httrack
     ];
 
     programs.tmux = {
