@@ -25,7 +25,7 @@ in
   };
 
   system.disableInstallerTools = config.programs.nh.enable;
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.11";
 
   nixpkgs.config = {
     allowUnfree = true;

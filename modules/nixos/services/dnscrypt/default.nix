@@ -7,7 +7,7 @@ let
   inherit (lib) mkDefault mkIf;
 in
 {
-  config = mkIf (!config.networking.router.enable) {
+  config = mkIf (!config.network.router.enable) {
 
     services.dnscrypt-proxy2 = {
       enable = mkDefault true;

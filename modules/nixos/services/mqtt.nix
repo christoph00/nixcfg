@@ -21,12 +21,9 @@
   ...
 }:
 
-with builtins;
-with lib;
-with lib.internal;
-
 let
-  cfg = config.internal.services.mqtt;
+  inherit (lib) mkIf types;
+  cfg = config.svc.mqtt;
 
 in
 {

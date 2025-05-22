@@ -2,6 +2,7 @@
   config,
   lib,
   flake,
+  inputs,
   ...
 }:
 let
@@ -17,8 +18,9 @@ in
     email = mkOpt str "christoph@asche.co";
     extraGroups = mkOpt (listOf str) [ ];
     extraOptions = mkOpt attrs { };
-    enableHM = mkBoolOpt false;
   };
+
+  imports = [ inputs.hjem.nixosModules.default ];
 
   config = {
 
@@ -63,5 +65,18 @@ in
         "dialout"
       ] ++ cfg.extraGroups;
     } // cfg.extraOptions;
+
+    hjem = mkIf (!config.host.minimal) {
+      clobberByDefault = true;
+      extraModules = [
+        inputs.hjem-rum.hjemModules.default
+      ];
+      users.${cfg.name} = {
+        enable = true;
+        directory = "/home/${cfg.name}";
+        user = "${cfg.name}";
+      };
+    };
+
   };
 }

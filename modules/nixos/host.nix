@@ -30,6 +30,7 @@ in
     vm = mkBoolOpt false;
     server = mkBoolOpt false;
     container = mkBoolOpt false;
+    minimal = mkBoolOpt false;
   };
 
 }
