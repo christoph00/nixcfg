@@ -1,9 +1,10 @@
 { ... }:
 {
   imports = [
-    # ./homeassistant
+    ./homeassistant
+    ./dnscrypt
     # ./media.nix
-    # ./mqtt.nix
+    ./mqtt.nix
     # ./nas.nix
     # ./office-server.nix
     # ./searx.nix
