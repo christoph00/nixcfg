@@ -18,7 +18,7 @@ in
   config = mkIf cfg.enable {
 
     services.dnscrypt-proxy2 = {
-      enable = mkDefault true;
+      enable = mkDefault false;
       settings = {
         ipv6_servers = true;
         require_dnssec = true;

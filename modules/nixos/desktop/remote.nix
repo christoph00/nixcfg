@@ -44,6 +44,26 @@ in
       autoStart = true;
       capSysAdmin = false;
       openFirewall = true;
+      settings = {
+        vaapi_strict_rc_buffer = "enabled";
+        qp = 3;
+        adapter_name = "/dev/dri/renderD128";
+        locale = "de";
+        capture = "wlr";
+        min_threads = 3;
+        encoder = "vaapi";
+        # global_prep_cmd = [{"do":"/run/current-system/sw/bin/switch-resolution","undo":"/run/current-system/sw/bin/switch-resolution reset"}]
+        global_prep_cmd = builtins.toJSON [
+          {
+            do = "${switch-resolution}/bin/switch-resolution";
+            undo = "${switch-resolution}/bin/switch-resolution reset";
+          }
+        ];
+        key_rightalt_to_key_win = "enabled";
+        fec_percentage = 3;
+        high_resolution_scrolling = "disabled";
+
+      };
     };
 
     systemd.user.services = {

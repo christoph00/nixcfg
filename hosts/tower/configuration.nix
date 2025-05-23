@@ -7,6 +7,7 @@
   pkgs,
   flake,
   lib,
+  perSystem,
   ...
 }:
 let
@@ -26,8 +27,50 @@ in
 
   desktop.enable = true;
   desktop.remote = true;
-  desktop.gaming = enabled;
+  desktop.gaming.enable = true;
+  desktop.gaming.proton = perSystem.self.proton-cachyos-bin.steamcompattool;
   desktop.autologin = true;
+
+  desktop.games = {
+    oblivion = {
+      exe = "/home/christoph/Games/Oblivion/OblivionRemastered.exe";
+      gameid = "2623190";
+      icon = {
+        url = "https://cdn2.steamgriddb.com/icon/beddc9f9e1c9b438dc4246e494644ce4.ico";
+        sha256 = "sha256-tJkkjbDw6Ok7rghwO3G13gqOxBSseKZWYXVX6lbpkXg=";
+      };
+      cover = {
+        url = "https://cdn2.steamgriddb.com/grid/97d2ff5928c5e71eb02cece4fcd57337.png";
+        sha256 = "sha256-WInirFJ7WOnPZQy9O28JFR2a3eKXBxbDsHwRvOr9oMI=";
+      };
+    };
+    cyberpunk2077 = {
+      exe = "/home/christoph/Games/Cyberpunk2077/bin/x64/Cyberpunk2077.exe";
+      gameid = "1091500";
+      icon = {
+        url = "https://cdn2.steamgriddb.com/icon/e0481545062e383969b6c020ad73e2f8.ico";
+        sha256 = "sha256-PZZLXT/4MMuOknKxv/4hRTzB18+8LlTksYGwci/wx1o=";
+      };
+      cover = {
+        url = "https://cdn2.steamgriddb.com/grid/4030e2eebb977639f8836aa25a293e40.png";
+        sha256 = "sha256-jvMb98Oeb/zw78yCUg2GnHXjLx5piLT41NgsxHcDNF8=";
+      };
+    };
+    kdc = {
+      name = "Kingdom Come Delivernce II";
+      exe = "/media/Games/Kingdom Come Deliverance/bin/Win64/KingdomCome.exe";
+      gameid = "379430";
+      icon = {
+        url = "https://cdn2.steamgriddb.com/icon/b0fae80dbb4cabab2a00827fd7389f21.ico";
+        sha256 = "sha256-4AlJBnrz8HWFf3BAbc5QGo+L/zeFEqdgCZjDgGqKU2g=";
+
+      };
+      cover = {
+        url = "https://cdn2.steamgriddb.com/grid/107e5674373e2e3e4b1a0fc42b7bb190.png";
+        sha256 = "sha256-4PTClV/1aqrEmfK2SFJPxEIySaOtGnkce/X/V30fd/0=";
+      };
+    };
+  };
 
   sys.boot.secureBoot = true;
   sys.disk.device = "/dev/nvme0n1";

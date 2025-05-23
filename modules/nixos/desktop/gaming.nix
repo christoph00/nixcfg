@@ -7,13 +7,14 @@
   ...
 }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkPackageOption;
   inherit (flake.lib) mkBoolOpt enabled;
   cfg = config.desktop.gaming;
 in
 {
   options.desktop.gaming = {
     enable = mkBoolOpt false;
+    proton = mkPackageOption pkgs "proton-ge-bin" { };
   };
   config = mkIf cfg.enable {
 
@@ -75,6 +76,7 @@ in
         extraCompatPackages = with pkgs; [
           proton-ge-bin
           steamtinkerlaunch
+          cfg.proton
         ];
         gamescopeSession = enabled;
         protontricks = enabled;
@@ -113,13 +115,13 @@ in
 
     programs.uwsm = {
       enable = true;
-      waylandCompositors = {
-        steam-gamescope = {
-          prettyName = "Steam";
-          comment = "Steam Gamescope Session managed by UWSM";
-          binPath = "/run/current-system/sw/bin/steam-gamescope";
-        };
-      };
+      # waylandCompositors = {
+      # steam-gamescope = {
+      #   prettyName = "Steam";
+      #   comment = "Steam Gamescope Session managed by UWSM";
+      #   binPath = "/run/current-system/sw/bin/steam-gamescope";
+      # };
+      # };
     };
 
     environment.systemPackages =
@@ -213,8 +215,6 @@ in
       in
       [
         steam
-        proton-ge-custom
-        protonup-qt
         protonplus
         protontricks
         gamemode
@@ -222,12 +222,8 @@ in
         bottles
         limo
         # veloren
-        endless-sky
-        luanti
-        openttd
         protonhax
         umu-launcher
-        cartridges
 
         cacert
         dos2unix

@@ -45,5 +45,4 @@ in
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 
-  nixpkgs.hostPlatform = "aarch64-linux";
 }

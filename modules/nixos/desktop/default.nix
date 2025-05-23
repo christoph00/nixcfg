@@ -6,6 +6,7 @@
     ./desktop.nix
     ./cosmic.nix
     ./gaming.nix
+    ./games.nix
     ./remote.nix
     ./firefox.nix
     ./fonts.nix

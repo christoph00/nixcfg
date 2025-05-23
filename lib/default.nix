@@ -16,6 +16,7 @@ rec {
   mkBoolOpt = default: mkOpt types.bool default;
   mkIntOpt = default: mkOpt types.int default;
   mkStrOpt = default: mkOpt types.str default;
+  mkStrOptNull = mkOpt (types.nullOr types.str) null;
 
   enabled = {
     enable = true;
