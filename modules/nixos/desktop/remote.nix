@@ -78,9 +78,8 @@ in
         description = "novnc";
         script = "${getExe pkgs.novnc} --listen 0.0.0.0:6080 --vnc 127.0.0.1:5900 --cert ${config.age.secrets.self-pem.path}";
         # wantedBy = [ "graphical-session.target" ];
-        after = [ "wayvnc.service" ];
-        partOf = [ "wayvnc.service" ];
         path = [ config.system.path ];
+        requires = [ "wayvnc.service" ];
         serviceConfig = {
           Slice = "background-graphical.slice";
           SuccessExitStatus = 143;

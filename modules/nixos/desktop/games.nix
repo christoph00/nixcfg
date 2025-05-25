@@ -32,7 +32,7 @@ let
       in
       {
         name = gameName;
-        cmd = "${pkgs.uwsm}/bin/uwsm-app game-${name}.desktop";
+        cmd = "${pkgs.uwsm}/bin/uwsm-app -s games.slice -a game-${name} game-${name}.desktop";
         image-path = iconPath;
       }
     ) games;
@@ -93,7 +93,7 @@ in
               [Desktop Entry]
               Name=${gameName}
               Comment=Launch ${gameName}
-              Exec=env ${envStr} ${pkgs.umu-launcher}/bin/umu-run "${game.exe}" %U
+              Exec=env ${envStr} ${pkgs.umu-launcher}/bin/umu-run "${game.exe}"
               Type=Application
               Categories=Game;
               Icon=${icon}
@@ -106,7 +106,7 @@ in
 
               [Desktop Action CustomExe]
               Name=Custom Executable
-              Exec=${pkgs.zenity}/bin/zenity --file-selection --title="Select Executable" | xargs env ${envStr} ${pkgs.umu-launcher}/bin/umu-run
+              Exec=env ${envStr} ${pkgs.umu-launcher}/bin/umu-run %f
             '';
           };
         }
