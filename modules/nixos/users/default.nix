@@ -3,6 +3,7 @@
   lib,
   flake,
   inputs,
+  pkgs,
   ...
 }:
 let
@@ -39,6 +40,8 @@ in
 
       home = "/home/${cfg.name}";
       group = "users";
+
+      shell = pkgs.zsh;
 
       uid = 1000;
 
