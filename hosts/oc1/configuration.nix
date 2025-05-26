@@ -1,6 +1,11 @@
-{ inputs, flake, ... }:
+{
+  inputs,
+  flake,
+  config,
+  ...
+}:
 let
-  inherit (flake.lib) create-proxy;
+  inherit (flake.lib) create-proxy mkSecret;
 in
 {
   imports = [ inputs.self.nixosModules.host ];
@@ -20,6 +25,13 @@ in
 
   services.openssh.openFirewall = false;
 
+  age.secrets.proxy-auth = mkSecret {
+    file = "proxy-auth";
+    owner = "nginx";
+    group = "nginx";
+    mode = "0640";
+  };
+
   services.nginx.virtualHosts."ha.r505.de" = create-proxy {
     host = "100.77.199.49";
     port = 8123;
@@ -34,10 +46,7 @@ in
     host = "100.77.155.15";
     port = 1033;
     proxy-web-sockets = true;
-    extra-config.locations."/".extraConfig = ''
-      allow 130.162.232.230/32;
-      deny all;
-    '';
+    extra-config.authBasicUserFile = config.age.secrets.proxy-auth.path;
   };
   services.nginx.virtualHosts."audio.r505.de" = create-proxy {
     host = "100.77.155.15";
@@ -47,6 +56,7 @@ in
   services.nginx.virtualHosts."rssb.r505.de" = create-proxy {
     host = "100.77.155.15";
     port = 1035;
+    extra-config.authBasicUserFile = config.age.secrets.proxy-auth.path;
   };
 
   boot.kernelParams = [

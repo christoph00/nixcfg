@@ -97,5 +97,6 @@ in
   "secrets/box-key.age".publicKeys = all;
   "secrets/actions-runner.age".publicKeys = all;
   "secrets/self.age".publicKeys = all;
+  "secrets/proxy-auth.age".publicKeys = [ oc1 ] ++ users;
 
 }
