@@ -19,7 +19,7 @@ in
   host.vm = true;
   shell.devtools = enabled;
 
-  services.searx = enabled;
+  svc.searx = enabled;
 
   networking.timeServers = [ "169.254.169.254" ];
 

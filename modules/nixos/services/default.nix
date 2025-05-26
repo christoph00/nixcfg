@@ -7,7 +7,7 @@
     # ./mqtt.nix
     # ./nas.nix
     # ./office-server.nix
-    # ./searx.nix
+    ./searx.nix
     ./sshd.nix
     ./webserver.nix
     ./rclone.nix

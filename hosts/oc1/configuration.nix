@@ -30,6 +30,11 @@ in
     port = 5678;
     proxy-web-sockets = true;
   };
+  services.nginx.virtualHosts."search.r505.de" = create-proxy {
+    host = "100.77.155.15";
+    port = 1033;
+    proxy-web-sockets = true;
+  };
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"

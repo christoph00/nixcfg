@@ -7,22 +7,33 @@
 
 let
   inherit (lib) mkIf;
-  inherit (flake.lib) mkSecret mkStrOpt;
-  cfg = config.serivces.searx;
+  inherit (flake.lib) mkSecret mkBoolOpt mkStrOpt;
+  cfg = config.svc.searx;
 in
 {
 
-  options.services.searx.domain = mkStrOpt "search.${config.networking.domain}";
+  options.svc.searx = {
+    enable = mkBoolOpt false;
 
-  config = mkIf config.services.searx.enable {
+    domain = mkStrOpt "search.${config.networking.domain}";
+
+  };
+
+  config = mkIf cfg.enable {
     users.users.nginx.extraGroups = [ "searx" ];
 
     age.secrets."searx" = mkSecret { file = "searx"; };
 
     services = {
+      nginx.enable = true;
       nginx.virtualHosts.${cfg.domain} = {
-        useACMEHost = "r505.de";
-        forceSSL = true;
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 1033;
+            ssl = false;
+          }
+        ];
         locations = {
           "/" = {
             extraConfig = ''
@@ -50,7 +61,7 @@ in
           use_default_settings = true;
           general = {
             debug = false;
-            instance_name = domain;
+            instance_name = cfg.domain;
           };
           ui = {
             static_use_hash = true;
@@ -60,7 +71,7 @@ in
           };
           server = {
             secret_key = "@SECRET_KEY@";
-            base_url = "https://${domain}";
+            base_url = "https://${cfg.domain}";
             default_locale = "de";
             default_theme = "oscar";
             public_instance = false;
