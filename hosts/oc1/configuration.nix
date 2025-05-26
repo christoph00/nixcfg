@@ -40,7 +40,7 @@ in
     '';
   };
   services.nginx.virtualHosts."audio.r505.de" = create-proxy {
-    host = "10.77.155.15";
+    host = "100.77.155.15";
     port = 5051;
     proxy-web-sockets = true;
   };

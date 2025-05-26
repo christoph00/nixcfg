@@ -14,6 +14,8 @@ in
   sys.disk.device = "/dev/sda";
   sys.disk.forceDevice = true;
 
+  network.netbird.ip = "100.77.155.15";
+
   hw.cpu = "other";
 
   host.vm = true;

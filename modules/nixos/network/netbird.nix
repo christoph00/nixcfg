@@ -6,13 +6,14 @@
 }:
 let
   inherit (lib) mkIf boolToString mkForce;
-  inherit (flake.lib) mkBoolOpt;
+  inherit (flake.lib) mkBoolOpt mkStrOpt;
   cfg = config.network.netbird;
 in
 {
   options.network.netbird = {
     enable = mkBoolOpt true;
     userspace = mkBoolOpt false;
+    ip = mkStrOpt "100.77.0.0";
   };
 
   config = mkIf cfg.enable {
@@ -39,7 +40,7 @@ in
       /run/current-system/sw/bin/netbird-io up --dns-resolver-address 127.0.0.77
     '';
 
-    systemd.services.netbird.wantedBy = mkForce [ ];
+    systemd.services.netbird.enable = false;
 
     networking.firewall.trustedInterfaces = [ "nb-io" ];
   };

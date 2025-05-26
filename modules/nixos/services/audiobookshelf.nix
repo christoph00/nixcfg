@@ -13,6 +13,7 @@ in
 
     services.audiobookshelf = {
       port = 5051;
+      host = "${config.network.netbird.ip}";
     };
 
   };
