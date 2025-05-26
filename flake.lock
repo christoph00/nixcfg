@@ -104,25 +104,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-<<<<<<< Updated upstream
-        "lastModified": 1748084900,
-        "narHash": "sha256-XxVAY/U3qloh2gCy8T8aBj6lXu6DOAX5wH7cTg1QSkE=",
-||||||| Stash base
-        "lastModified": 1747491978,
-        "narHash": "sha256-Jn7um1fnf2bI9N8gvG5jIHvIJxxLaXd+2+wHXyW0Frs=",
-=======
         "lastModified": 1748171373,
         "narHash": "sha256-w13clACePanx7hsF62vtRpZwbM6VUVBY5xK2+jGCTzg=",
->>>>>>> Stashed changes
         "owner": "lilyinstarlight",
         "repo": "nixos-cosmic",
-<<<<<<< Updated upstream
-        "rev": "d01c1a4044129f6eddb944f4d71a84e07c139eba",
-||||||| Stash base
-        "rev": "2a7be063557ffc19ab1d8ab18bfd1721df8355c5",
-=======
         "rev": "bf3593b6a84e201251560a20dde9b3b1ac6d49aa",
->>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -191,25 +177,11 @@
         ]
       },
       "locked": {
-<<<<<<< Updated upstream
-        "lastModified": 1747742835,
-        "narHash": "sha256-kYL4GCwwznsypvsnA20oyvW8zB/Dvn6K5G/tgMjVMT4=",
-||||||| Stash base
-        "lastModified": 1747274630,
-        "narHash": "sha256-87RJwXbfOHyzTB9LYagAQ6vOZhszCvd8Gvudu+gf3qo=",
-=======
         "lastModified": 1748225455,
         "narHash": "sha256-AzlJCKaM4wbEyEpV3I/PUq5mHnib2ryEy32c+qfj6xk=",
->>>>>>> Stashed changes
         "owner": "nix-community",
         "repo": "disko",
-<<<<<<< Updated upstream
-        "rev": "df522e787fdffc4f32ed3e1fca9ed0968a384d62",
-||||||| Stash base
-        "rev": "ec7c109a4f794fce09aad87239eab7f66540b888",
-=======
         "rev": "a894f2811e1ee8d10c50560551e50d6ab3c392ba",
->>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -536,25 +508,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-<<<<<<< Updated upstream
-        "lastModified": 1748116794,
-        "narHash": "sha256-o088a395dlmC6TjacrrvdcJny7l6qTJHNSUyI/rDhBg=",
-||||||| Stash base
-        "lastModified": 1747217237,
-        "narHash": "sha256-rYWxmjGpdGYlJd8gwripamC3t9mCihBDZJiz84CrUHI=",
-=======
         "lastModified": 1748236200,
         "narHash": "sha256-AYqZbr5sqUPXjbXfuLVsRbasS41R4OIohCmsPX2PqAs=",
->>>>>>> Stashed changes
         "owner": "snugnug",
         "repo": "hjem-rum",
-<<<<<<< Updated upstream
-        "rev": "16d2a9bbd18738d2669aff0788057d92ed440fbb",
-||||||| Stash base
-        "rev": "1d3bf26bb71dced495a99e05a0141db24c49ca6f",
-=======
         "rev": "956481f458e412320d1d6edb6f4952e92756b4d1",
->>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -664,27 +622,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-<<<<<<< Updated upstream
-        "lastModified": 1748090336,
-        "narHash": "sha256-axM+bgr1KVFu5KE+lDgg6ZdTM/RNs7GoDRBd304Eu/c=",
-        "rev": "438cb4cb313ab939b4e94f2f40fc64fd03705a12",
-||||||| Stash base
-        "lastModified": 1747408691,
-        "narHash": "sha256-+yX+xF1cZUd1Pub7MJ7uGcC6JQ0FN+CsEmBg6rGLfjU=",
-        "rev": "a7634f87aac545fa01fa19878cc5ad2c994e2116",
-=======
         "lastModified": 1748182888,
         "narHash": "sha256-tm3yi3KL+KjMnLZFXKR1ioI/Rk8DIa2n1NNE6I99BpU=",
         "rev": "dbff52bfbc48ead789888bf24422d0ef6f7ba9a8",
->>>>>>> Stashed changes
         "type": "tarball",
-<<<<<<< Updated upstream
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/438cb4cb313ab939b4e94f2f40fc64fd03705a12.tar.gz"
-||||||| Stash base
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/a7634f87aac545fa01fa19878cc5ad2c994e2116.tar.gz"
-=======
         "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/dbff52bfbc48ead789888bf24422d0ef6f7ba9a8.tar.gz?rev=dbff52bfbc48ead789888bf24422d0ef6f7ba9a8"
->>>>>>> Stashed changes
       },
       "original": {
         "type": "tarball",
@@ -735,25 +677,11 @@
         "spectrum": "spectrum"
       },
       "locked": {
-<<<<<<< Updated upstream
-        "lastModified": 1747859546,
-        "narHash": "sha256-tDu6JFzM86y5L2eLAkkw5Aklzz0DwfohtcxRXw+fCHA=",
-||||||| Stash base
-        "lastModified": 1747417232,
-        "narHash": "sha256-7Ii0POxd3S/q9iOoZdYJORINP6yQYu/GO0d7emNvr+I=",
-=======
         "lastModified": 1748210404,
         "narHash": "sha256-5qLXDOUXk1u8EUesWey2Uml2VYnFII2orPdozqQD53Q=",
->>>>>>> Stashed changes
         "owner": "astro",
         "repo": "microvm.nix",
-<<<<<<< Updated upstream
-        "rev": "91ba136db1a3dd73168639c185fa802eb1157ec1",
-||||||| Stash base
-        "rev": "5beafebf8bcee75aebf23ca6ec46d13d471b0146",
-=======
         "rev": "e5705d2853f2899b4ac04eb5d7b31558583386cc",
->>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -764,25 +692,11 @@
     },
     "mnw": {
       "locked": {
-<<<<<<< Updated upstream
-        "lastModified": 1747615842,
-        "narHash": "sha256-pAh9ndf+GdoCfsWaNATFDjgiax9fOYdWzguYV1H/W0E=",
-||||||| Stash base
-        "lastModified": 1747507276,
-        "narHash": "sha256-mGxeIGNqgY2r2Ji2hZ8cpy5lLFwnkUq4XVHQeDMiMsE=",
-=======
         "lastModified": 1748203683,
         "narHash": "sha256-zd5GFPg/lVbIILs0ze0bLUsFS72TD/N0Vq5IEGmSG7Y=",
->>>>>>> Stashed changes
         "owner": "Gerg-L",
         "repo": "mnw",
-<<<<<<< Updated upstream
-        "rev": "b62120999410eb4a4e27359a3e1c0a22fcc0baff",
-||||||| Stash base
-        "rev": "74bb7dcc52df51337fde52c695216b64b2270a06",
-=======
         "rev": "0cb0df3a6f26cbb42f3e096ec65bc7263aab9757",
->>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -1013,25 +927,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-<<<<<<< Updated upstream
-        "lastModified": 1747862697,
-        "narHash": "sha256-U4HaNZ1W26cbOVm0Eb5OdGSnfQVWQKbLSPrSSa78KC0=",
-||||||| Stash base
-        "lastModified": 1747335874,
-        "narHash": "sha256-IKKIXTSYJMmUtE+Kav5Rob8SgLPnfnq4Qu8LyT4gdqQ=",
-=======
         "lastModified": 1748037224,
         "narHash": "sha256-92vihpZr6dwEMV6g98M5kHZIttrWahb9iRPBm1atcPk=",
->>>>>>> Stashed changes
         "owner": "NixOS",
         "repo": "nixpkgs",
-<<<<<<< Updated upstream
-        "rev": "2baa12ff69913392faf0ace833bc54bba297ea95",
-||||||| Stash base
-        "rev": "ba8b70ee098bc5654c459d6a95dfc498b91ff858",
-=======
         "rev": "f09dede81861f3a83f7f06641ead34f02f37597f",
->>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -1194,25 +1094,11 @@
         ]
       },
       "locked": {
-<<<<<<< Updated upstream
-        "lastModified": 1748054080,
-        "narHash": "sha256-rwFiLLNCwkj9bqePtH1sMqzs1xmohE0Ojq249piMzF4=",
-||||||| Stash base
-        "lastModified": 1747449297,
-        "narHash": "sha256-veyXchTz6eWwvuW5X49UluHkheHkFcqHJSwGuKBhrmQ=",
-=======
         "lastModified": 1748140821,
         "narHash": "sha256-GZcjWLQtDifSYMd1ueLDmuVTcQQdD5mONIBTqABooOk=",
->>>>>>> Stashed changes
         "owner": "oxalica",
         "repo": "rust-overlay",
-<<<<<<< Updated upstream
-        "rev": "2221d8d53c128beb69346fa3ab36da3f19bb1691",
-||||||| Stash base
-        "rev": "f44db7d7cea4528288780c6347756173a8248225",
-=======
         "rev": "476b2ba7dc99ddbf70b1f45357dbbdbdbdfb4422",
->>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -1287,25 +1173,11 @@
         ]
       },
       "locked": {
-<<<<<<< Updated upstream
-        "lastModified": 1747876980,
-        "narHash": "sha256-ZRoCqZmuHqPaPDIzSIrijalnRUlyb47mpI81gw+pDAU=",
-||||||| Stash base
-        "lastModified": 1747271380,
-        "narHash": "sha256-ITF3Q2RxCn8qzR+anAK2Um22jCmUnDkHDM4dOX0M4+0=",
-=======
         "lastModified": 1748221540,
         "narHash": "sha256-hlf/ILKLU98P38mXQxm6kxbxjt3eI0vUcDZhXjf2HJg=",
->>>>>>> Stashed changes
         "owner": "nix-community",
         "repo": "srvos",
-<<<<<<< Updated upstream
-        "rev": "20a4a794afc9a25fdaf0d4301de4c47c47a25747",
-||||||| Stash base
-        "rev": "7cf5c3b2ad6bfa4b9915f505bddd17df96844308",
-=======
         "rev": "37ce28d34cf7b416bf8eb0974a99e85ad65fbe84",
->>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
