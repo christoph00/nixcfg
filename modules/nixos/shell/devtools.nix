@@ -80,7 +80,7 @@ in
       httrack
     ];
 
-    rum.programs.tealdeer = {
+    user.hjem.rum.programs.tealdeer = {
       enable = true;
       settings = {
         auto_update = true;

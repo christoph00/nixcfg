@@ -18,6 +18,7 @@ in
     email = mkOpt str "christoph@asche.co";
     extraGroups = mkOpt (listOf str) [ ];
     extraOptions = mkOpt attrs { };
+    hjem = mkOpt attrs { };
   };
 
   imports = [ inputs.hjem.nixosModules.default ];
@@ -75,7 +76,7 @@ in
         enable = true;
         directory = "/home/${cfg.name}";
         user = "${cfg.name}";
-      };
+      } // cfg.hjem;
     };
 
   };
