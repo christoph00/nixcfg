@@ -80,6 +80,14 @@ in
       httrack
     ];
 
+    rum.programs.tealdeer = {
+      enable = true;
+      settings = {
+        auto_update = true;
+
+      };
+    };
+
     programs.tmux = {
       enable = cfg.tmux;
       terminal = "screen-256color";
