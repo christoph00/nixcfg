@@ -2,6 +2,7 @@
   config,
   lib,
   flake,
+  ...
 }:
 let
   inherit (lib) mkIf;

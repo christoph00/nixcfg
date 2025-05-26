@@ -79,4 +79,12 @@ rec {
     x: ((builtins.hasAttr "microvm" x.config.virt.microvm) && (x.config.virt.microvm.isGuest == true))
   ) allSystems;
 
+  toEnvValue = env: if isList env then concatStringsSep ":" (map toString env) else toString env;
+
+  toEnvExport =
+    vars:
+    (concatStringsSep "\n" (
+      mapAttrsToList (name: value: "export ${name}=\"${toEnvValue value}\"") vars
+    ));
+
 }

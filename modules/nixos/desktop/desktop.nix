@@ -8,7 +8,7 @@
 }:
 let
   inherit (lib) mkIf mkDefault;
-  inherit (flake.lib) mkBoolOpt;
+  inherit (flake.lib) mkBoolOpt toEnvExport;
   cfg = config.desktop;
 in
 {
@@ -50,6 +50,8 @@ in
         ];
       };
     };
+
+    home.files.".config/uwsm/env".text = toEnvExport config.user.hjem.environment.sessionVariables;
 
     services = {
       gvfs.enable = true;
