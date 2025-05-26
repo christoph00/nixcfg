@@ -13,7 +13,7 @@ let
 in
 {
   imports = [
-    ./router.nix
+    ./router
     ./optimize.nix
     ./netbird.nix
   ];
