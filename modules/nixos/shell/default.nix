@@ -39,6 +39,7 @@ in
       fzf
       lsd
       atuin
+      starship
     ];
 
     programs.zsh.enable = true;
@@ -59,6 +60,7 @@ in
         alias ls=lsd
 
 
+        eval "$(${pkgs.starship}/bin/starship init zsh)"
         eval "$(${pkgs.atuin}/bin/atuin init zsh)"
       '';
 

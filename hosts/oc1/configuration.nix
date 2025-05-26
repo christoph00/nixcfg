@@ -34,6 +34,10 @@ in
     host = "100.77.155.15";
     port = 1033;
     proxy-web-sockets = true;
+    extraConfig.locations."/".extraConfig = ''
+      allow 130.162.232.230
+      deny all;
+    '';
   };
 
   boot.kernelParams = [

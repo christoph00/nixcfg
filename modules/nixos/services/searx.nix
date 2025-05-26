@@ -174,7 +174,6 @@ in
               "(.*\.)?reddit.com$"
               "(.*\.)?github.com$"
 
-              # For wiki articles
               "(.*\.)?nixos.org$"
               "(.*\.)archlinux.org$"
             ];
