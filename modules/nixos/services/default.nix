@@ -10,6 +10,7 @@
     ./audio.nix
     ./audiobookshelf.nix
     ./searx.nix
+    ./rssbridge.nix
     ./sshd.nix
     ./webserver.nix
     ./rclone.nix

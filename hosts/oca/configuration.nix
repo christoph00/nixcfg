@@ -24,6 +24,7 @@ in
   svc.searx = enabled;
 
   services.audiobookshelf = enabled;
+  services.rss-bridge = enabled;
 
   networking.timeServers = [ "169.254.169.254" ];
 

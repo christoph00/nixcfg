@@ -44,6 +44,10 @@ in
     port = 5051;
     proxy-web-sockets = true;
   };
+  services.nginx.virtualHosts."rssb.r505.de" = create-proxy {
+    host = "100.77.155.15";
+    port = 1035;
+  };
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"
