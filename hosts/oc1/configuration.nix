@@ -46,7 +46,7 @@ in
     host = "100.77.155.15";
     port = 1033;
     proxy-web-sockets = true;
-    extra-config.authBasicUserFile = config.age.secrets.proxy-auth.path;
+    extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
   };
   services.nginx.virtualHosts."audio.r505.de" = create-proxy {
     host = "100.77.155.15";
@@ -56,7 +56,7 @@ in
   services.nginx.virtualHosts."rssb.r505.de" = create-proxy {
     host = "100.77.155.15";
     port = 1035;
-    extra-config.authBasicUserFile = config.age.secrets.proxy-auth.path;
+    extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
   };
 
   boot.kernelParams = [
