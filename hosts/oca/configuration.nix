@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (flake.lib) create-proxy;
+  inherit (flake.lib) create-proxy enabled;
 in
 {
   imports = [ inputs.self.nixosModules.host ];
@@ -17,7 +17,9 @@ in
   hw.cpu = "other";
 
   host.vm = true;
-  shell.devtools.enable = true;
+  shell.devtools = enabled;
+
+  services.searx = enabled;
 
   networking.timeServers = [ "169.254.169.254" ];
 
