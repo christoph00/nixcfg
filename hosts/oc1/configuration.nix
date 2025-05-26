@@ -35,7 +35,7 @@ in
     port = 1033;
     proxy-web-sockets = true;
     extra-config.locations."/".extraConfig = ''
-      allow 130.162.232.230/32
+      allow 130.162.232.230/32;
       deny all;
     '';
   };
