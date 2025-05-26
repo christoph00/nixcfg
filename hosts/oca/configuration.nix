@@ -21,6 +21,8 @@ in
 
   svc.searx = enabled;
 
+  services.audiobookshelf = enabled;
+
   networking.timeServers = [ "169.254.169.254" ];
 
   boot.initrd.kernelModules = [

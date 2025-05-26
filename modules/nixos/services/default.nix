@@ -7,6 +7,8 @@
     # ./mqtt.nix
     # ./nas.nix
     # ./office-server.nix
+    ./audio.nix
+    ./audiobookshelf.nix
     ./searx.nix
     ./sshd.nix
     ./webserver.nix

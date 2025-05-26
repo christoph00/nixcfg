@@ -8,11 +8,11 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (flake.lib) mkBooLOpt;
+  inherit (flake.lib) mkBoolOpt;
   cfg = config.svc.audio;
 in
 {
-  options.svc.audio.enable = mkBooLOpt config.host.graphical;
+  options.svc.audio.enable = mkBoolOpt config.host.graphical;
   config = mkIf cfg.enable {
 
     services.pipewire = {
