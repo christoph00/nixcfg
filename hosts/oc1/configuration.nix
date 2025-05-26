@@ -58,6 +58,11 @@ in
     port = 1035;
     extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
   };
+  services.nginx.virtualHosts."yt.r505.de" = create-proxy {
+    host = "100.77.155.15";
+    port = 8945;
+    extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
+  };
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"

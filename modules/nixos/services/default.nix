@@ -12,6 +12,7 @@
     ./searx.nix
     ./rssbridge.nix
     ./sshd.nix
+    ./pinchflat.nix
     ./webserver.nix
     ./rclone.nix
     ./actions-runner.nix
