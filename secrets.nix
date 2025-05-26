@@ -65,7 +65,7 @@ in
     oca
     x13
   ] ++ users;
-  "secrets/searx.env".publicKeys = [
+  "secrets/searx.age".publicKeys = [
     oca
     oc1
   ] ++ users;

@@ -7,12 +7,13 @@
 }:
 let
   inherit (lib) mkDefault mkIf;
-  inherit (flake.lib) mkBoolOpt;
+  inherit (flake.lib) mkBoolOpt mkStrOpt;
   cfg = config.svc.dnscrypt;
 in
 {
   options.svc.dnscrypt = {
     enable = mkBoolOpt true;
+    localDNS = mkStrOpt "$DHCP";
   };
   config = mkIf cfg.enable {
 
@@ -22,7 +23,10 @@ in
         ipv6_servers = true;
         require_dnssec = true;
 
-        listen_addresses = [ "127.0.0.1:53" ];
+        listen_addresses = [
+          "127.0.0.1:53"
+          "[::1]:53"
+        ];
 
         sources.public-resolvers = {
           urls = [
@@ -34,9 +38,8 @@ in
         };
 
         forwarding_rules = pkgs.writeText "forwarding-rules.txt" ''
-          local            $DHCP
-          lan            $DHCP
-          192.168.in-addr.arpa $DHCP
+          lan            ${cfg.localDNS}
+          192.168.in-addr.arpa ${cfg.localDNS}
         '';
       };
     };

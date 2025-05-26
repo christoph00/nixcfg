@@ -51,7 +51,7 @@ in
       };
     };
 
-    home.files.".config/uwsm/env".text = toEnvExport config.user.hjem.environment.sessionVariables;
+    # home.files.".config/uwsm/env".text = toEnvExport config.user.hjem.environment.sessionVariables;
 
     services = {
       gvfs.enable = true;

@@ -7,6 +7,8 @@ let
     mkDefault
     attrNames
     getAttr
+    concatStringsSep
+    mapAttrsToList
     ;
 in
 rec {
