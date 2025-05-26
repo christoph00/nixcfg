@@ -2,7 +2,7 @@
 {
   imports = [
     # ./homeassistant
-    ./dnscrypt
+    ./dnscrypt.nix
     # ./media.nix
     # ./mqtt.nix
     # ./nas.nix

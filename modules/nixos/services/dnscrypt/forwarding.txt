@@ -1,3 +1,0 @@
-local            $DHCP
-lan            $DHCP
-192.in-addr.arpa $DHCP
