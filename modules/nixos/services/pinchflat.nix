@@ -10,7 +10,7 @@ let
 in
 {
   config = mkIf config.services.pinchflat.enable {
-    sys.state.directories = [ config.services.pinchflat.mediaDir ];
+    sys.state.directories = [ "/var/lib/private/pinchflat" ];
     age.secrets.pinchflat = mkSecret { file = "pinchflat"; };
     services.pinchflat.secretsFile = config.age.secrets.pinchflat.path;
 

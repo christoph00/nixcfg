@@ -24,6 +24,8 @@ in
 
     age.secrets."searx" = mkSecret { file = "searx"; };
 
+    sys.state.directories = [ "/var/lib/searx" ];
+
     services = {
       nginx.enable = true;
       nginx.virtualHosts.${cfg.domain} = {
@@ -62,12 +64,16 @@ in
           general = {
             debug = false;
             instance_name = cfg.domain;
+            privacypolicy_url = false;
           };
           ui = {
             static_use_hash = true;
             query_in_title = true;
             infinite_scroll = false;
             center_alignment = true;
+            hotkeys = "vim";
+            engine_shortcuts = true;
+            expand_results = true;
           };
           server = {
             secret_key = "@SECRET_KEY@";
@@ -84,6 +90,11 @@ in
             request_timeout = 5.0;
             pool_connections = 200;
             pool_maxsize = 30;
+            dns_resolver = {
+              enable = true;
+              use_system_resolver = true;
+              resolver_address = "127.0.0.1";
+            };
           };
           engines =
             let
@@ -106,6 +117,15 @@ in
               "github".disabled = false;
               "lobste.rs".disabled = false;
               "hackernews".disabled = false;
+              "annas archive".disabled = false;
+              "lib.rs".disabled = false;
+              "library genesis".disabled = false;
+              "packagist".disabled = false;
+              "wikinews".disabled = false;
+              "tagesschau".disabled = false;
+              "reddit".disabled = false;
+              "duckduckgo images".disabled = false;
+
             })
             ++ [
               {
@@ -182,12 +202,14 @@ in
             ];
           };
           search = {
+            safe_search = 0;
             formats = [
               "html"
               "json"
+              "rss"
             ];
             max_page = 10;
-            default_lang = "en";
+            default_lang = "all";
             autocomplete = "duckduckgo";
             favicon_resolver = "duckduckgo";
 
@@ -200,18 +222,22 @@ in
               ipv6_prefix = 56;
             };
             botdetection.ip_lists.block_ip = [
-              # "93.184.216.34" # example.org
             ];
             botdetection.ip_lists.pass_ip = [
-              "130.162.232.230" # dade1
             ];
+          };
+
+          cache = {
+            cache_max_age = 1440; # Cache for 24 hours
+            cache_disabled_plugins = [ ];
+            cache_dir = "/var/lib/searx";
           };
 
           faviconsSettings = {
             favicons = {
               cfg_schema = 1;
               cache = {
-                db_url = "/run/searx/faviconcache.db";
+                db_url = "/var/lib/searx/faviconcache.db";
                 HOLD_TIME = 5184000;
                 LIMIT_TOTAL_BYTES = 2147483648;
                 BLOB_MAX_BYTES = 40960;

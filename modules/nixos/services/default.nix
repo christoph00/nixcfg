@@ -16,5 +16,6 @@
     ./webserver.nix
     ./rclone.nix
     ./actions-runner.nix
+    ./litellm.nix
   ];
 }
