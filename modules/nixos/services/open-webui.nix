@@ -11,8 +11,12 @@ let
 in
 {
   config = mkIf config.services.open-webui.enable {
+
+    sys.state.directories = [ "/var/lib/open-webui" ];
+
     services.open-webui = {
       port = 3033;
+      host = config.network.netbird.ip;
 
       environment = {
         ANONYMIZED_TELEMETRY = "False";
