@@ -13,13 +13,11 @@ in
 {
 
   options.svc.searx = {
-    enable = mkBoolOpt false;
-
     domain = mkStrOpt "search.${config.networking.domain}";
 
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf config.services.searx.enable {
     users.users.nginx.extraGroups = [ "searx" ];
 
     age.secrets."searx" = mkSecret { file = "searx"; };
@@ -49,7 +47,6 @@ in
       };
 
       searx = {
-        enable = true;
         runInUwsgi = true;
         redisCreateLocally = true;
         environmentFile = config.age.secrets.searx.path;

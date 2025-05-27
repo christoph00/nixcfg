@@ -64,6 +64,12 @@ in
     extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
   };
 
+  services.nginx.virtualHosts."llm.r505.de" = create-proxy {
+    host = "100.77.155.15";
+    port = 5059;
+
+  };
+
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"
     "nvme_core.shutdown_timeout=10"

@@ -98,6 +98,10 @@ in
   "secrets/actions-runner.age".publicKeys = all;
   "secrets/self.age".publicKeys = all;
   "secrets/proxy-auth.age".publicKeys = [ oc1 ] ++ users;
-  "secrets/pinchflat.age".publicKeys = [ oca ] ++ users;
+  "secrets/pinchflat.age".publicKeys = [
+    oca
+    tower
+  ] ++ users;
+  "secrets/litellm.age".publicKeys = [ oca ] ++ users;
 
 }

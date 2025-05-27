@@ -21,11 +21,11 @@ in
   host.vm = true;
   shell.devtools = enabled;
 
-  svc.searx = enabled;
-
+  services.searx = enabled;
   services.audiobookshelf = enabled;
   services.rss-bridge = enabled;
   services.pinchflat = enabled;
+  services.litellm = enabled;
 
   networking.timeServers = [ "169.254.169.254" ];
 

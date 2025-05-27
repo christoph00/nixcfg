@@ -13,7 +13,7 @@ in
 
     age.secrets.litellm = mkSecret { file = "litellm"; };
 
-    sys.state.directories = [ config.services.litellm.stateDir ];
+    sys.state.directories = [ "/var/lib/private/litellm" ];
 
     services.litellm = {
       environmentFile = config.age.secrets.litellm.path;
