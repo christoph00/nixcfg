@@ -81,6 +81,7 @@ in
 
       nodejs
       uv
+      python3
 
       pass
     ];
