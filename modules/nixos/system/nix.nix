@@ -33,6 +33,29 @@ in
     allowAliases = false;
   };
 
+  nixpkgs.overlays = [
+    (_: prev: {
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (_: python-prev: {
+          rapidocr-onnxruntime = python-prev.rapidocr-onnxruntime.overridePythonAttrs (self: {
+            pythonImportsCheck = if python-prev.stdenv.isAarch64 then [ ] else [ "rapidocr_onnxruntime" ];
+            doCheck = !(python-prev.stdenv.isAarch64);
+            meta = self.meta // {
+              badPlatforms = [ ];
+            };
+          });
+          chromadb = python-prev.chromadb.overridePythonAttrs (self: {
+            pythonImportsCheck = if python-prev.stdenv.isAarch64 then [ ] else [ "chromadb" ];
+            doCheck = !(python-prev.stdenv.isAarch64);
+            meta = self.meta // {
+              broken = false;
+            };
+          });
+        })
+      ];
+    })
+  ];
+
   nix = {
     package = pkgs.lix;
     gc = {

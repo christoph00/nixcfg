@@ -7,6 +7,7 @@
     # ./mqtt.nix
     # ./nas.nix
     # ./office-server.nix
+    ./open-webui.nix
     ./audio.nix
     ./audiobookshelf.nix
     ./searx.nix
@@ -16,6 +17,6 @@
     ./webserver.nix
     ./rclone.nix
     ./actions-runner.nix
-    ./litellm.nix
+    # ./litellm.nix
   ];
 }

@@ -69,6 +69,11 @@ in
     port = 4000;
 
   };
+  services.nginx.virtualHosts."ai.r505.de" = create-proxy {
+    host = "100.77.155.15";
+    port = 3033;
+
+  };
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"

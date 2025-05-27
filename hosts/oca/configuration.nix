@@ -25,7 +25,7 @@ in
   services.audiobookshelf = enabled;
   services.rss-bridge = enabled;
   services.pinchflat = enabled;
-  svc.litellm = enabled;
+  services.open-webui = enabled;
 
   networking.timeServers = [ "169.254.169.254" ];
 

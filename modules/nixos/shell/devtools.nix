@@ -78,6 +78,11 @@ in
 
       katana
       httrack
+
+      nodejs
+      uv
+
+      pass
     ];
 
     user.hjem.rum.programs.tealdeer = {
