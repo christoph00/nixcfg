@@ -91,6 +91,8 @@ in
           "/var/lib/systemd/coredump"
           "/var/lib/systemd/rfkill"
           "/var/lib/systemd/timers"
+
+          "/var/lib/containers"
           {
             directory = "/var/lib/nixos";
             inInitrd = true;

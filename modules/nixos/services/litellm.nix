@@ -2,24 +2,43 @@
   lib,
   config,
   flake,
+  pkgs,
   ...
 }:
 let
-  inherit (lib) mkIf;
-  inherit (flake.lib) mkSecret;
+  inherit (lib) mkIf mkForce;
+  inherit (flake.lib) mkSecret mkBoolOpt;
+  user = "litellm";
 in
 {
-  config = mkIf config.services.litellm.enable {
+  options.svc.litellm.enable = mkBoolOpt false;
+  config = mkIf config.svc.litellm.enable {
 
-    age.secrets.litellm = mkSecret { file = "litellm"; };
-
-    sys.state.directories = [ "/var/lib/private/litellm" ];
-
-    services.litellm = {
-      environmentFile = config.age.secrets.litellm.path;
-      port = 5059;
-      host = config.network.netbird.ip;
+    age.secrets."litellm.yaml" = mkSecret {
+      file = "litellm-conf";
     };
 
+    # sys.state.directories = [ "/var/lib/litellm" ];
+
+    virtualisation.quadlet.autoEscape = true;
+    virtualisation.quadlet.containers.litellm = {
+      autoStart = true;
+      serviceConfig = {
+        RestartSec = "10";
+        Restart = "always";
+      };
+      containerConfig = {
+        # renovate: docker-image
+        image = "ghcr.io/berriai/litellm-database:main-latest";
+        autoUpdate = "registry";
+        userns = "keep-id";
+        publishPorts = [ "4000:4000" ];
+
+        # environmentHost = true;
+
+        # podmanArgs = [ ];
+        volumes = [ "${config.age.secrets."litellm.yaml".path}:/app/config.yaml:ro" ];
+      };
+    };
   };
 }

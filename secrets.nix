@@ -103,5 +103,6 @@ in
     tower
   ] ++ users;
   "secrets/litellm.age".publicKeys = [ oca ] ++ users;
+  "secrets/litellm-conf.age".publicKeys = [ oca ] ++ users;
 
 }

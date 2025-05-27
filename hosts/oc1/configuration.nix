@@ -66,7 +66,7 @@ in
 
   services.nginx.virtualHosts."llm.r505.de" = create-proxy {
     host = "100.77.155.15";
-    port = 5059;
+    port = 4000;
 
   };
 
