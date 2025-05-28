@@ -7,7 +7,7 @@
 let
   inherit (flake.lib) create-proxy mkSecret;
 
-  ip_oca = flake.nixosConfiguration.oca.config.network.netbird.ip;
+  ip_oca = flake.nixosConfigurations.oca.config.network.netbird.ip;
 in
 {
   imports = [ inputs.self.nixosModules.host ];
