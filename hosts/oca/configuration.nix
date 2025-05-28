@@ -25,6 +25,7 @@ in
   svc.mcpo = enabled;
 
   services.searx = enabled;
+  services.n8n = enabled;
   services.audiobookshelf = enabled;
   services.rss-bridge = enabled;
   services.pinchflat = enabled;

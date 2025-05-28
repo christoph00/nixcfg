@@ -67,8 +67,11 @@ in
         "seat"
         "render"
         "dialout"
+        "media"
       ] ++ cfg.extraGroups;
     } // cfg.extraOptions;
+
+    users.groups.media = { };
 
     hjem = mkIf (!config.host.minimal) {
       clobberByDefault = true;

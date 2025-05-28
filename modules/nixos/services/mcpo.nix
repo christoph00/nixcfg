@@ -33,21 +33,21 @@ let
           "@wonderwhy-er/desktop-commander@latest"
         ];
       };
-      nixos = {
-        command = "nix";
-        args = [
-          "run"
-          "github:utensils/mcp-nixos"
-          "--"
-        ];
-      };
-      code-reasoning = {
-        command = npx;
-        args = [
-          "-y"
-          "@mettamatt/code-reasoning"
-        ];
-      };
+      # nixos = {
+      #   command = "nix";
+      #   args = [
+      #     "run"
+      #     "github:utensils/mcp-nixos"
+      #     "--"
+      #   ];
+      # };
+      # # code-reasoning = {
+      #   command = npx;
+      #   args = [
+      #     "-y"
+      #     "@mettamatt/code-reasoning"
+      #   ];
+      # };
       searxng = {
         command = npx;
         args = [
@@ -90,7 +90,7 @@ in
       isSystemUser = true;
       createHome = true;
       group = "mcpo";
-      home = /var/lib/mcpo;
+      home = "/var/lib/mcpo";
     };
 
     systemd.services.mcpo = {
@@ -99,6 +99,16 @@ in
       after = [
         "network.target"
         "open-webui.service"
+      ];
+      environment = {
+        UV_NO_MANAGED_PYTHON = "1";
+      };
+      path = [
+        pkgs.nodejs
+        pkgs.python3
+        pkgs.uv
+        pkgs.busybox
+        config.nix.package
       ];
       serviceConfig = {
         User = "mcpo";

@@ -20,6 +20,7 @@
     ./rclone.nix
     ./actions-runner.nix
     ./proxy.nix
+    ./sabnzbd.nix
     # ./litellm.nix
   ];
 }
