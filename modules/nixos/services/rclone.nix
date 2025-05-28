@@ -20,7 +20,7 @@ let
     "gid=1101"
     "umask=002"
     "vfs-cache-mode=full"
-    # "vfs-cache-max-size=10G"
+    "vfs-cache-max-size=8G"
     "vfs-fast-fingerprint"
     # "vfs-write-back=1h"
     # "vfs-cache-max-age=2h"
@@ -29,9 +29,11 @@ let
     # "drive-chunk-size=128M"
     "args2env"
     "config=${cfg.config}"
+    "cache-dir=/var/cache/rclone"
     "x-systemd.automount"
     "x-systemd.mount-timeout=5"
     "x-systemd.idle-timeout=30"
+    "x-gvfs-hide"
   ];
 
   wrapped = inputs.wrapper-manager.lib.build {

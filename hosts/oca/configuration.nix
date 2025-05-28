@@ -28,8 +28,8 @@ in
   services.searx = enabled;
   services.n8n = enabled;
   services.audiobookshelf = enabled;
-  services.rss-bridge = enabled;
-  services.pinchflat = enabled;
+  # services.rss-bridge = enabled;
+  # services.pinchflat = enabled;
   services.open-webui = enabled;
   services.sabnzbd = enabled;
 
