@@ -59,6 +59,8 @@ in
         # aliases
         alias ls=lsd
 
+        export PATH="$HOME/.local/bin:$PATH"
+
 
         eval "$(${pkgs.starship}/bin/starship init zsh)"
         eval "$(${pkgs.atuin}/bin/atuin init zsh)"
