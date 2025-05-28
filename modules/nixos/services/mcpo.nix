@@ -7,7 +7,10 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (flake.lib) mkBoolOpt;
+  inherit (flake.lib) mkBoolOpt mkIntOpt;
+
+  cfg = config.svc.mcpo;
+
   uvx = "${pkgs.uvx}/bin/uvx";
   npx = "${pkgs.nodejs}/bin/npx";
   mcpoConfig = {
@@ -21,6 +24,28 @@ let
         args = [
           "mcp-server-time"
           "--local-timezone=${config.time.timeZone}"
+        ];
+      };
+      desktop-commander = {
+        command = npx;
+        args = [
+          "-y"
+          "@wonderwhy-er/desktop-commander@latest"
+        ];
+      };
+      nixos = {
+        command = "nix";
+        args = [
+          "run"
+          "github:utensils/mcp-nixos"
+          "--"
+        ];
+      };
+      code-reasoning = {
+        command = npx;
+        args = [
+          "-y"
+          "@mettamatt/code-reasoning"
         ];
       };
       searxng = {
@@ -44,13 +69,34 @@ let
   };
 in
 {
-  options.mcpo.enable = mkBoolOpt false;
-  config = mkIf config.svc.mcpo.enable {
+  options.mcpo = {
+    enable = mkBoolOpt false;
+    port = mkIntOpt 8787;
+  };
+  config = mkIf cfg.enable {
 
     sys.state.directories = [ "/var/lib/private/mcpo" ];
 
-    systemd.services.mcpo = {
+    # systemd.user.services.mcpo = {
+    #   description = "mcpo OpenAPI Server";
+    #   wantedBy = [ "default.target" ];
+    #   serviceConfig.ExecStart = ''
+    #     ${pkgs.uvx}/bin/uvx mcpo --config ${userConfigFile}
+    #   '';
+    # };
 
+    users.users.mcpo = {
+      isSystemUser = false;
+      createHome = true;
+    };
+
+    systemd.services.mcpo = {
+      description = "mcpo OpenAPI Server";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig.DynamicUser = true;
+      serviceConfig.ExecStart = ''
+        ${pkgs.uvx}/bin/uvx mcpo --config ${mcpoConfig} --port ${toString cfg.port}
+      '';
     };
 
   };

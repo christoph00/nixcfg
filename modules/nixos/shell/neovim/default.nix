@@ -221,8 +221,9 @@ in
                         },
                         schema = {
                           model = {
-                            default = "openrouter/optimus-alpha",
+                            default = "openrouter/meta-llama/llama-4-maverick:free",
                             choices = {
+                              "meta-llama/llama-4-maverick:free",
                               -- "anthropic/claude-3.7-sonnet",
                               -- "anthropic/claude-3.5-sonnet",
                               -- "deepseek/deepseek-chat-v3-0324",

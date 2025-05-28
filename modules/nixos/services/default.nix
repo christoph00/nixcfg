@@ -9,6 +9,7 @@
     # ./office-server.nix
     ./n8n.nix
     ./open-webui.nix
+    ./mcpo.nix
     ./audio.nix
     ./audiobookshelf.nix
     ./searx.nix

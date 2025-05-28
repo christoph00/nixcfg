@@ -22,6 +22,7 @@ in
   shell.devtools = enabled;
 
   svc.proxy = enabled;
+  svc.mcpo = enabled;
 
   services.searx = enabled;
   services.audiobookshelf = enabled;

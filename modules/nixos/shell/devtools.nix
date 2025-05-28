@@ -84,6 +84,11 @@ in
       python3
 
       pass
+
+      repomix
+
+      php
+      php84Packages.composer
     ];
 
     user.hjem.rum.programs.tealdeer = {
