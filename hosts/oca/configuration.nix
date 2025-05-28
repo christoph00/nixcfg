@@ -21,6 +21,8 @@ in
   host.vm = true;
   shell.devtools = enabled;
 
+  svc.proxy = enabled;
+
   services.searx = enabled;
   services.audiobookshelf = enabled;
   services.rss-bridge = enabled;
