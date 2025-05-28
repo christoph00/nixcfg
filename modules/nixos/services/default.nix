@@ -7,6 +7,7 @@
     # ./mqtt.nix
     # ./nas.nix
     # ./office-server.nix
+    ./n8n.nix
     ./open-webui.nix
     ./audio.nix
     ./audiobookshelf.nix
