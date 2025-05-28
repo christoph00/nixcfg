@@ -1,60 +1,32 @@
 {
-  # Snowfall Lib provides a customized `lib` instance with access to your flake's library
-  # as well as the libraries available from your flake's inputs.
-  lib,
-  # An instance of `pkgs` with your overlays and packages applied is also available.
-  pkgs,
-  # You also have access to your flake's inputs.
-  inputs,
-  # Additional metadata is provided by Snowfall Lib.
-  namespace,
-  # The namespace used for your flake, defaulting to "internal" if not set.
-  system,
-  # The system architecture for this host (eg. `x86_64-linux`).
-  target,
-  # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format,
-  # A normalized name for the system target (eg. `iso`).
-  virtual,
-  # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems, # An attribute map of your defined hosts.
-
-  # All other arguments come from the module system.
   config,
+  lib,
+  flake,
   ...
 }:
 
-with builtins;
-with lib;
-with lib.internal;
-
 let
-  cfg = config.internal.services.media;
+  inherit (lib) mkIf;
+  inherit (flake.lib) mkBoolOpt;
+  cfg = config.svc.media;
 
 in
 {
 
-  options.internal.services.media = {
-    enable = mkBoolOpt (config.internal.hasRole "media") "Enable Media Services.";
+  options.svc.media = {
+    enable = mkBoolOpt false;
 
   };
 
   config = mkIf cfg.enable {
 
-    internal.system.state.directories = [
-      "/var/lib/sabnzbd"
+    sys.state.directories = [
       "/var/lib/jellyfin"
       "/var/cache/jellyfin"
     ];
 
-    services.sabnzbd = {
-      enable = true;
-      openFirewall = true;
-    };
-
     services.jellyfin = {
       enable = true;
-      openFirewall = true;
     };
 
   };

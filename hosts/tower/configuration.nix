@@ -23,6 +23,8 @@ in
   host.graphical = true;
   host.gaming = true;
 
+  network.netbird.ip = "100.77.157.165";
+
   svc.actions-runner = enabled;
 
   desktop.enable = true;

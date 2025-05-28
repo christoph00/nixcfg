@@ -23,6 +23,7 @@ in
 
   svc.proxy = enabled;
   svc.mcpo = enabled;
+  svc.media = enabled;
 
   services.searx = enabled;
   services.n8n = enabled;
@@ -30,6 +31,7 @@ in
   services.rss-bridge = enabled;
   services.pinchflat = enabled;
   services.open-webui = enabled;
+  services.sabnzbd = enabled;
 
   networking.timeServers = [ "169.254.169.254" ];
 
@@ -44,5 +46,7 @@ in
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
+
+  nixpkgs.hostPlatform = "aarch64-linux";
 
 }

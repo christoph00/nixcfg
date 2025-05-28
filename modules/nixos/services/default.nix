@@ -3,7 +3,7 @@
   imports = [
     # ./homeassistant
     ./dnscrypt.nix
-    # ./media.nix
+    ./media.nix
     # ./mqtt.nix
     # ./nas.nix
     # ./office-server.nix

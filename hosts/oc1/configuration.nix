@@ -6,6 +6,8 @@
 }:
 let
   inherit (flake.lib) create-proxy mkSecret;
+
+  ip_oca = flake.nixosConfiguration.oca.config.network.netbird.ip;
 in
 {
   imports = [ inputs.self.nixosModules.host ];
@@ -39,7 +41,7 @@ in
     proxy-web-sockets = true;
   };
   services.nginx.virtualHosts."n8n.r505.de" = create-proxy {
-    host = "100.77.155.15";
+    host = ip_oca;
     port = 5678;
     proxy-web-sockets = true;
   };
@@ -49,23 +51,23 @@ in
     proxy-web-sockets = true;
   };
   services.nginx.virtualHosts."search.r505.de" = create-proxy {
-    host = "100.77.155.15";
+    host = ip_oca;
     port = 1033;
     proxy-web-sockets = true;
     extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
   };
   services.nginx.virtualHosts."audio.r505.de" = create-proxy {
-    host = "100.77.155.15";
+    host = ip_oca;
     port = 5051;
     proxy-web-sockets = true;
   };
   services.nginx.virtualHosts."rssb.r505.de" = create-proxy {
-    host = "100.77.155.15";
+    host = ip_oca;
     port = 1035;
     extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
   };
   services.nginx.virtualHosts."yt.r505.de" = create-proxy {
-    host = "100.77.155.15";
+    host = ip_oca;
     port = 8945;
     extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
   };
@@ -79,7 +81,16 @@ in
     host = "100.77.155.15";
     port = 3033;
     proxy-web-sockets = true;
-
+  };
+  # services.nginx.virtualHosts."dl.r505.de" = create-proxy {
+  #   host = ip_oca;
+  #   port = 8080;
+  #   extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
+  # };
+  services.nginx.virtualHosts."media.r505.de" = create-proxy {
+    host = ip_oca;
+    port = 8096;
+    proxy-web-sockets = true;
   };
 
   boot.kernelParams = [
