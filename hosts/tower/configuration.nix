@@ -88,6 +88,22 @@ in
       };
 
     };
+    rdr2 = {
+      name = "Red Dead Redemption II";
+      exe = "/media/Games/RDR2/Bin/RDR.exe";
+      gameid = "1174180";
+      store = "epic";
+      icon = {
+        url = "https://cdn2.steamgriddb.com/icon/9fc664916bce863561527f06a96f5ff3.ico";
+        sha256 = "sha256-lzpG3meHStM0z/Ltocn5nFjH/Aa842bdhGWPuvr7fV0=";
+
+      };
+      cover = {
+        url = "https://cdn2.steamgriddb.com/grid/5c1d8b6ff107dafb76906e0334e62a87.png";
+        sha256 = "sha256-H++/rHaMtY4X2JGnBaZKJ60hYo3y80xnhxhhSjU+qMU=";
+      };
+
+    };
   };
 
   sys.boot.secureBoot = true;
