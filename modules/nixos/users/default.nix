@@ -12,16 +12,6 @@ let
   cfg = config.user;
 in
 {
-<<<<<<< HEAD
-  options.user = with types; {
-    name = mkStrOpt "christoph";
-    fullName = mkStrOpt "Christoph";
-    passwordFile = mkOpt (nullOr path) null;
-    email = mkOpt str "christoph@asche.co";
-    extraGroups = mkOpt (listOf str) [ ];
-    extraOptions = mkOpt attrs { };
-    hjem = mkOpt attrs { };
-=======
   options = {
     user = with types; {
       name = mkStrOpt "christoph";
@@ -31,10 +21,10 @@ in
       extraGroups = mkOpt (listOf str) [ ];
       extraOptions = mkOpt attrs { };
 
+      hjem = mkOpt attrs { };
     };
     home = mkOpt types.attrs { };
 
->>>>>>> 2223af1b (ok)
   };
 
   imports = [ inputs.hjem.nixosModules.default ];
@@ -93,15 +83,14 @@ in
       extraModules = [
         inputs.hjem-rum.hjemModules.default
       ];
-      users.${cfg.name} = {
-        enable = true;
-        directory = "/home/${cfg.name}";
-        user = "${cfg.name}";
-<<<<<<< HEAD
-      } // cfg.hjem;
-=======
-      } // config.home;
->>>>>>> 2223af1b (ok)
+      users.${cfg.name} =
+        {
+          enable = true;
+          directory = "/home/${cfg.name}";
+          user = "${cfg.name}";
+        }
+        // cfg.hjem
+        // config.home;
     };
 
   };
