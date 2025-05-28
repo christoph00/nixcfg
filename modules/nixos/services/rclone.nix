@@ -17,7 +17,7 @@ let
     "allow_other"
     # "dir-cache-time=2h"
     "uid=1000"
-    "gid=1000"
+    "gid=1101"
     "umask=002"
     "vfs-cache-mode=full"
     # "vfs-cache-max-size=10G"

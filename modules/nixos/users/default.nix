@@ -76,7 +76,9 @@ in
       ] ++ cfg.extraGroups;
     } // cfg.extraOptions;
 
-    users.groups.media = { };
+    users.groups.media = {
+      gid = 1101;
+    };
 
     hjem = mkIf (!config.host.minimal) {
       clobberByDefault = true;

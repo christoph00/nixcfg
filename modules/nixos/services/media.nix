@@ -25,6 +25,8 @@ in
       "/var/cache/jellyfin"
     ];
 
+    users.users.jellyfin.extraGroups = [ "media" ];
+
     services.jellyfin = {
       enable = true;
     };
