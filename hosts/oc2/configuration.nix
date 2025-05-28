@@ -12,6 +12,7 @@
   sys.disk.forceDevice = true;
 
   host.vm = true;
+  host.minimal = true;
 
   services.openssh.openFirewall = false;
 

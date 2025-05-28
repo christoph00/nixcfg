@@ -18,6 +18,7 @@ in
   sys.disk.forceDevice = true;
   sys.disk.type = "xfs";
   host.vm = true;
+  host.minimal = true;
   hw.gpu = "vm";
   hw.cpu = "amd";
 

@@ -9,5 +9,8 @@
     ./remote.nix
     ./firefox.nix
     ./fonts.nix
+    ./gtk.nix
+    ./gtk.nix
+    ./ghostty.nix
   ];
 }
