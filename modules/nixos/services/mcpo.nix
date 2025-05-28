@@ -11,7 +11,7 @@ let
 
   cfg = config.svc.mcpo;
 
-  uvx = "${pkgs.uvx}/bin/uvx";
+  uvx = "${pkgs.uv}/bin/uvx";
   npx = "${pkgs.nodejs}/bin/npx";
   mcpoConfig = {
     mcpServers = {
@@ -69,13 +69,13 @@ let
   };
 in
 {
-  options.mcpo = {
+  options.svc.mcpo = {
     enable = mkBoolOpt false;
     port = mkIntOpt 8787;
   };
   config = mkIf cfg.enable {
 
-    sys.state.directories = [ "/var/lib/private/mcpo" ];
+    sys.state.directories = [ "/var/lib/mcpo" ];
 
     # systemd.user.services.mcpo = {
     #   description = "mcpo OpenAPI Server";
@@ -85,18 +85,34 @@ in
     #   '';
     # };
 
+    users.groups.mcpo = { };
     users.users.mcpo = {
-      isSystemUser = false;
+      isSystemUser = true;
       createHome = true;
+      group = "mcpo";
+      home = /var/lib/mcpo;
     };
 
     systemd.services.mcpo = {
       description = "mcpo OpenAPI Server";
       wantedBy = [ "multi-user.target" ];
-      serviceConfig.DynamicUser = true;
-      serviceConfig.ExecStart = ''
-        ${pkgs.uvx}/bin/uvx mcpo --config ${mcpoConfig} --port ${toString cfg.port}
-      '';
+      after = [
+        "network.target"
+        "open-webui.service"
+      ];
+      serviceConfig = {
+        User = "mcpo";
+        Group = "mcpo";
+        RestartSec = 30;
+        WorkingDirectory = "/var/lib/mcpo";
+        ExecStart =
+          let
+            configJSON = pkgs.writeText "config.json" (builtins.toJSON mcpoConfig);
+          in
+          ''
+            ${uvx} mcpo --config ${configJSON} --port ${toString cfg.port}
+          '';
+      };
     };
 
   };
