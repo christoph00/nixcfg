@@ -30,6 +30,7 @@ in
       unzip
       pciutils
       jq
+      jc
       killall
       rsync
       usbutils
