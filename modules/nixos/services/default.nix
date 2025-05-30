@@ -21,6 +21,7 @@
     ./actions-runner.nix
     ./proxy.nix
     ./sabnzbd.nix
+    ./agentgateway.nix
     # ./litellm.nix
   ];
 }

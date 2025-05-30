@@ -22,7 +22,7 @@ in
   shell.devtools = enabled;
 
   svc.proxy = enabled;
-  svc.mcpo = enabled;
+  svc.agentgateway = enabled;
   svc.media = enabled;
 
   services.searx = enabled;
