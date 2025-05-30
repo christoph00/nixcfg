@@ -48,6 +48,7 @@ in
   services.nginx.virtualHosts."agent.r505.de" = create-proxy {
     host = ip_oca;
     port = 19000;
+    extra-config.basicAuthFile = config.age.secrets.proxy-auth.path;
   };
   services.nginx.virtualHosts."alt.n8n.r505.de" = create-proxy {
     host = "100.77.109.190";

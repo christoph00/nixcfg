@@ -33,6 +33,7 @@ let
     targets.mcp = [
       {
         name = "fetch";
+        listeners = [ "sse" ];
         stdio = {
           cmd = uvx;
           args = [ "mcp-server-fetch" ];
