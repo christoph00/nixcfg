@@ -16,6 +16,10 @@ let
   npx = "${pkgs.nodejs}/bin/npx";
   agentgatewayConf = {
     type = "static";
+    admin = {
+      host = "0.0.0.0";
+      port = cfg.port;
+    };
     listeners = [
       {
         name = "sse";
