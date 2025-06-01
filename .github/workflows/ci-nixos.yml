@@ -58,7 +58,7 @@ jobs:
         extra-conf: |
           experimental-features = nix-command flakes
           extra-platforms = aarch64-linux arm-linux i686-linux
-    - uses: DeterminateSystems/flake-checker-action@v9
+    - uses: DeterminateSystems/flake-checker-action@v10
     - uses: DeterminateSystems/magic-nix-cache-action@v9
     - uses: cachix/cachix-action@v16
       with:
