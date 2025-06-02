@@ -26,14 +26,14 @@ let
           "--local-timezone=${config.time.timeZone}"
         ];
       };
-      desktop-commander = {
-        command = npx;
-        args = [
-          "-y"
-          "@wonderwhy-er/desktop-commander@latest"
-        ];
-      };
-      # nixos = {
+      # desktop-commander = {
+      #   command = npx;
+      #   args = [
+      #     "-y"
+      #     "@wonderwhy-er/desktop-commander@latest"
+      #   ];
+      # };
+      # # nixos = {
       #   command = "nix";
       #   args = [
       #     "run"

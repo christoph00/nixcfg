@@ -12,7 +12,12 @@ in
   config = mkIf config.services.n8n.enable {
     sys.state.directories = [ "/var/lib/n8n" ];
     services.n8n.webhookUrl = mkDefault "https://n8n.r505.de";
-    systemd.services.n8n.path = [ pkgs.nodejs ];
+    systemd.services.n8n.path = [
+      pkgs.nodejs
+      pkgs.uv
+      pkgs.bash
+      config.nix.package
+    ];
     systemd.services.n8n.environment.N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE = "True";
     systemd.services.n8n.serviceConfig = {
       DynamicUser = mkForce false;

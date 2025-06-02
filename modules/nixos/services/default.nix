@@ -22,6 +22,7 @@
     ./proxy.nix
     ./sabnzbd.nix
     ./agentgateway.nix
+    ./mcp-proxy.nix
     # ./litellm.nix
   ];
 }
