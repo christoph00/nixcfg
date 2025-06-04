@@ -32,6 +32,7 @@ in
   # services.pinchflat = enabled;
   services.open-webui = enabled;
   services.sabnzbd = enabled;
+  services.actual = enabled;
 
   networking.timeServers = [ "169.254.169.254" ];
 

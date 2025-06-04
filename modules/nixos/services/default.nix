@@ -12,6 +12,7 @@
     ./mcpo.nix
     ./audio.nix
     ./audiobookshelf.nix
+    ./actual.nix
     ./searx.nix
     ./rssbridge.nix
     ./sshd.nix

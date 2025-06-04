@@ -45,6 +45,11 @@ in
     port = 5678;
     proxy-web-sockets = true;
   };
+  services.nginx.virtualHosts."fin.r505.de" = create-proxy {
+    host = ip_oca;
+    port = 5088;
+    proxy-web-sockets = true;
+  };
   services.nginx.virtualHosts."agent.r505.de" = create-proxy {
     host = ip_oca;
     port = 19000;
