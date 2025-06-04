@@ -317,7 +317,7 @@
     "flake-parts_3": {
       "inputs": {
         "nixpkgs-lib": [
-          "nixos-anywhere",
+          "mcphub",
           "nixpkgs"
         ]
       },
@@ -336,6 +336,48 @@
       }
     },
     "flake-parts_4": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "mcphub-nvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1743550720,
+        "narHash": "sha256-hIshGgKZCgWh6AYJpJmRgFdR3WUbkY04o82X05xqQiY=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "c621e8422220273271f52058f618c94e405bb0f5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_5": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixos-anywhere",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1743550720,
+        "narHash": "sha256-hIshGgKZCgWh6AYJpJmRgFdR3WUbkY04o82X05xqQiY=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "c621e8422220273271f52058f618c94e405bb0f5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_6": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib_2"
       },
@@ -668,6 +710,48 @@
         "url": "https://git.lix.systems/lix-project/lix/archive/2.93.0.tar.gz"
       }
     },
+    "mcphub": {
+      "inputs": {
+        "flake-parts": "flake-parts_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1749029003,
+        "narHash": "sha256-/drkhOo1Eq4Ab3byy7lQZ3OgqgXL1Q62B0UGzWsQim0=",
+        "owner": "ravitemer",
+        "repo": "mcp-hub",
+        "rev": "2b25fe1fc9bd5c3d29060ce81ca68545c0a739e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ravitemer",
+        "repo": "mcp-hub",
+        "type": "github"
+      }
+    },
+    "mcphub-nvim": {
+      "inputs": {
+        "flake-parts": "flake-parts_4",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1749032409,
+        "narHash": "sha256-8s7WMqcW9ASotXiSaEloIJ0xOR+W/LU7i7rjh/GsD1g=",
+        "owner": "ravitemer",
+        "repo": "mcphub.nvim",
+        "rev": "e9d000be198df8b4b40e09fb975b675e904b42f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ravitemer",
+        "repo": "mcphub.nvim",
+        "type": "github"
+      }
+    },
     "microvm": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -799,7 +883,7 @@
         "disko": [
           "disko"
         ],
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_5",
         "nixos-images": "nixos-images",
         "nixos-stable": [
           "nixpkgs"
@@ -943,7 +1027,7 @@
     },
     "nvf": {
       "inputs": {
-        "flake-parts": "flake-parts_4",
+        "flake-parts": "flake-parts_6",
         "flake-utils": "flake-utils_4",
         "mnw": [
           "mnw"
@@ -1119,6 +1203,8 @@
         "lanzaboote": "lanzaboote",
         "lix": "lix",
         "lix-module": "lix-module",
+        "mcphub": "mcphub",
+        "mcphub-nvim": "mcphub-nvim",
         "microvm": "microvm",
         "mnw": "mnw",
         "nixos-anywhere": "nixos-anywhere",

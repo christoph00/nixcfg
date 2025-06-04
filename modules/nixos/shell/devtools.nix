@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   flake,
+  perSystem,
   ...
 }:
 let
@@ -91,6 +92,8 @@ in
       php84Packages.composer
       python312Packages.pylance
       intelephense
+
+      perSystem.mcphub.default
     ];
 
     user.hjem.rum.programs.tealdeer = {

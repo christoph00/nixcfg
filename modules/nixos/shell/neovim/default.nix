@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   flake,
+  perSystem,
   ...
 }:
 let
@@ -195,7 +196,51 @@ in
           };
           assistant.copilot = {
             enable = true;
-            cmp = enabled;
+            cmp.enable = false;
+            setupOpts = {
+              suggestion = {
+                enabled = true;
+                auto_trigger = true;
+                debounce = 75;
+                keymap = {
+                  accept = false; # Let nvf handle keymaps
+                  accept_word = false;
+                  accept_line = false;
+                  next = false;
+                  prev = false;
+                  dismiss = false;
+                };
+              };
+              panel = {
+                enabled = true;
+                auto_refresh = false;
+                keymap = {
+                  jump_prev = false;
+                  jump_next = false;
+                  accept = false;
+                  refresh = false;
+                  open = false;
+                };
+              };
+            };
+            mappings = {
+              suggestion = {
+                accept = "<A-y>";
+                next = "<A-n>";
+                prev = "<A-p>";
+
+                dismiss = "<A-d>";
+                acceptWord = "<A-w>";
+                acceptLine = "<A-l>";
+              };
+              panel = {
+                open = "<A-CR>";
+                accept = "<CR>";
+                jumpNext = "]]";
+                jumpPrev = "[[";
+                refresh = "gr";
+              };
+            };
           };
           assistant.codecompanion-nvim = {
             enable = true;
@@ -221,16 +266,14 @@ in
                         },
                         schema = {
                           model = {
-                            default = "openrouter/meta-llama/llama-4-maverick:free",
+                            default = "openrouter/mistralai/devstral-small:free",
                             choices = {
-                              "meta-llama/llama-4-maverick:free",
+                              "openrouter/mistralai/devstral-small:free",
+                              "openrouter/meta-llama/llama-4-maverick:free",
                               -- "anthropic/claude-3.7-sonnet",
                               -- "anthropic/claude-3.5-sonnet",
                               -- "deepseek/deepseek-chat-v3-0324",
                               -- "deepseek/deepseek-r1",
-                              "openrouter/optimus-alpha",
-                              "google/gemini-2.5-pro-exp-03-25",
-                              "perplexity/sonar"
                             },
                           },
                         },
@@ -238,12 +281,91 @@ in
                     end,
                     }
                   '';
-              strategies = {
-                chat.adapter = "openrouter";
-                inline.adapter = "openrouter";
-                agent.adapter = "openrouter";
-              };
               display.diff.provider = "mini_diff";
+              display = {
+                chat = {
+                  # Basic UI improvements
+                  intro_message = "Welcome to CodeCompanion ✨! Press ? for options";
+                  show_header_separator = true; # Show separators between messages
+                  auto_scroll = true; # Auto-scroll as responses come in
+
+                  # Show LLM model and settings at the top
+                  show_settings = true; # This displays the model being used
+                  show_token_count = true; # Show token usage
+                  show_references = true; # Show references from slash commands
+
+                  # Custom token count display function
+                  token_count = {
+                    _type = "lua-inline";
+                    expr = ''
+                      function(tokens, adapter)
+                        return string.format(" 🤖 %s (%d tokens)", adapter.formatted_name, tokens)
+                      end
+                    '';
+                  };
+
+                  # Window styling
+                  separator = "─"; # Visual separator between messages
+                  window = {
+                    layout = "vertical";
+                    border = "rounded"; # Better looking border
+                    height = 0.8;
+                    width = 0.45;
+                  };
+                };
+              };
+
+              strategies = {
+                agent.adapter = "openrouter";
+                chat = {
+                  adapter = "openrouter";
+                  roles = {
+                    _type = "lua-inline";
+                    expr = ''
+                      {
+                        llm = function(adapter)
+                          return string.format("🤖 %s (%s)", adapter.formatted_name, adapter.schema.model.default)
+                        end,
+                        user = "👤 Me"
+                      }
+                    '';
+                  };
+                  keymaps = {
+                    close = {
+                      modes = {
+                        n = "q";
+                      };
+                      index = 3;
+                      callback = "keymaps.close";
+                      description = "Close Chat";
+                    };
+                    stop = {
+                      modes = {
+                        n = "<C-c>";
+                      };
+                      index = 4;
+                      callback = "keymaps.stop";
+                      description = "Stop Request";
+                    };
+                  };
+                };
+                inline = {
+                  adapter = "copilot";
+                };
+              };
+
+              extensions = {
+                mcphub = {
+                  callback = "mcphub.extensions.codecompanion";
+                  opts = {
+                    show_result_in_chat = true;
+                    make_vars = true;
+                    make_slash_commands = true;
+                    auto_register_servers = true;
+                  };
+                };
+              };
+
             };
           };
           autocomplete.enableSharedCmpSources = true;
@@ -360,6 +482,21 @@ in
           #   };
           # };
           #
+          extraPlugins = {
+            mcphub = {
+              package = perSystem.mcphub-nvim.default;
+              # The `build` step for npm install is ignored here; user handles CLI install.
+              # The `config` function from Lua spec is translated to `setup` string:
+              setup = ''
+                local status_ok, mcphub = pcall(require, "mcphub")
+                if not status_ok then
+                  vim.notify("mcphub.nvim plugin could not be required. Ensure mcp-hub CLI is installed globally and in PATH.", vim.log.levels.ERROR)
+                  return
+                end
+                mcphub.setup({}) -- Pass options if needed, e.g. { config = { auto_approve = true } }
+              '';
+            };
+          };
           languages = {
             # Options applied to all languages
             enableLSP = true;

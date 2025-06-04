@@ -72,6 +72,15 @@
 
     mnw.url = "github:Gerg-L/mnw";
 
+    mcphub-nvim = {
+      url = "github:ravitemer/mcphub.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    mcphub = {
+      url = "github:ravitemer/mcp-hub";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
       inputs.nixpkgs.follows = "nixpkgs";
