@@ -89,6 +89,8 @@ in
 
       php
       php84Packages.composer
+      python312Packages.pylance
+      intelephense
     ];
 
     user.hjem.rum.programs.tealdeer = {
