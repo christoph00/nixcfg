@@ -14,6 +14,7 @@ in
 {
   imports = [
     inputs.nvf.nixosModules.default
+    ./mcphub.nix
   ];
 
   config = mkIf config.programs.nvf.enable {
@@ -196,14 +197,14 @@ in
           };
           assistant.copilot = {
             enable = true;
-            cmp.enable = false;
+            cmp.enable = false; # Use blink-cmp
             setupOpts = {
               suggestion = {
                 enabled = true;
                 auto_trigger = true;
                 debounce = 75;
                 keymap = {
-                  accept = false; # Let nvf handle keymaps
+                  accept = false;
                   accept_word = false;
                   accept_line = false;
                   next = false;
@@ -211,6 +212,7 @@ in
                   dismiss = false;
                 };
               };
+
               panel = {
                 enabled = true;
                 auto_refresh = false;
@@ -246,12 +248,27 @@ in
             enable = true;
             setupOpts = {
               opts.language = "German";
-              adapters =
-                lib.generators.mkLuaInline
-                  # lua
-                  ''
-                    {
-                      openrouter = function()
+              adapters = {
+                _type = "lua-inline";
+
+                # Model list https://codecompanion.olimorris.dev/usage/chat-buffer/agents#compatibility
+                expr = ''
+                  {
+                    copilot = function()
+                      return require('codecompanion.adapters').extend('copilot', {
+                        schema = {
+                          model = {
+                            default = 'claude-sonnet-4',
+                            choices = {
+                              'claude-sonnet-4',
+                              'gpt-4.1,'
+                            },
+                          },
+                        },
+                      })
+                    end,
+
+                    openrouter = function()
                        return require("codecompanion.adapters").extend("openai_compatible", {
                          env = {
                            url = "https://openrouter.ai/api",
@@ -266,10 +283,10 @@ in
                         },
                         schema = {
                           model = {
-                            default = "openrouter/mistralai/devstral-small:free",
+                            default = "mistralai/devstral-small:free",
                             choices = {
-                              "openrouter/mistralai/devstral-small:free",
-                              "openrouter/meta-llama/llama-4-maverick:free",
+                              "mistralai/devstral-small:free",
+                              "meta-llama/llama-4-maverick:free",
                               -- "anthropic/claude-3.7-sonnet",
                               -- "anthropic/claude-3.5-sonnet",
                               -- "deepseek/deepseek-chat-v3-0324",
@@ -279,8 +296,10 @@ in
                         },
                       })
                     end,
-                    }
-                  '';
+
+                  }
+                '';
+              };
               display.diff.provider = "mini_diff";
               display = {
                 chat = {
@@ -290,8 +309,8 @@ in
                   auto_scroll = true; # Auto-scroll as responses come in
 
                   # Show LLM model and settings at the top
-                  show_settings = true; # This displays the model being used
-                  show_token_count = true; # Show token usage
+                  show_settings = false; # This displays the model being used
+                  show_token_count = false; # Show token usage
                   show_references = true; # Show references from slash commands
 
                   # Custom token count display function
@@ -316,9 +335,9 @@ in
               };
 
               strategies = {
-                agent.adapter = "openrouter";
+                agent.adapter = "copilot";
                 chat = {
-                  adapter = "openrouter";
+                  adapter = "copilot";
                   roles = {
                     _type = "lua-inline";
                     expr = ''
@@ -352,9 +371,15 @@ in
                 inline = {
                   adapter = "copilot";
                 };
+
               };
 
               extensions = {
+                vectorcode = {
+                  opts = {
+                    add_tool = true;
+                  };
+                };
                 mcphub = {
                   callback = "mcphub.extensions.codecompanion";
                   opts = {
@@ -377,6 +402,9 @@ in
               next = "<Down>";
               previous = "<Up>";
             };
+            sourcePlugins = {
+              ripgrep = enabled;
+            };
             setupOpts = {
               signature.enabled = true;
 
@@ -385,31 +413,13 @@ in
                 "<C-y>" = [ "select_and_accept" ];
               };
               sources = {
-                default = [
-                  "lsp"
-                  "path"
-                  "snippets"
-                  "buffer"
-                  "codecompanion"
-                  "copilot"
-                  # "avante_commands"
-                  # "avante_mentions"
-                  # "avante_files"
-                ];
-                # providers = {
-                #   avante_commands = {
-                #     name = "avante_commands";
-                #     module = "blink.compat.source";
-                #   };
-                #   avante_mentions = {
-                #     name = "avante_mentions";
-                #     module = "blink.compat.source";
-                #   };
-                #   avante_files = {
-                #     name = "avante_files";
-                #     module = "blink.compat.source";
-                #   };
-                # };
+                per_filetype = {
+                  codecompanion = [
+                    "codecompanion"
+                    "buffer"
+                  ];
+                };
+
               };
               completion = {
                 ghost_text.enabled = true;
@@ -423,83 +433,19 @@ in
                 };
                 menu.draw.treesitter = [ "lsp" ];
                 menu = {
-                  border = [
-                    [
-                      "󱐋"
-                      "WarningMsg"
-                    ]
-                    "─"
-                    "╮"
-                    "│"
-                    "╯"
-                    "─"
-                    "╰"
-                    "│"
-                  ];
                   winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:None";
                 };
                 documentation = {
                   auto_show = true;
                   auto_show_delay_ms = 100;
-                  window.border = [
-                    [
-                      "󰙎"
-                      "DiagnosticOk"
-                    ]
-                    "─"
-                    "╮"
-                    "│"
-                    "╯"
-                    "─"
-                    "╰"
-                    "│"
-                  ];
                 };
               };
 
             };
           };
 
-          # extraPlugins = with pkgs.vimPlugins; {
-          #   avante = {
-          #     package = avante-nvim;
-          #     setup = "require('avante').setup {
-          #     provider = 'perplexity',
-          #     auto_suggest_provider = 'copilot',
-          #     vendors = {
-          #       perplexity = {
-          #         __inherited_from = 'openai',
-          #         api_key_name = 'PERPLEXITY_API_KEY',
-          #        endpoint = 'https://api.perplexity.ai',
-          #        model = 'sonar',
-          #       },
-          #     },
-          #     windows = {
-          #     position = 'right',
-          #       width = 50,
-          #     },
-          #   }";
-          #   };
-          # };
-          #
-          extraPlugins = {
-            mcphub = {
-              package = perSystem.mcphub-nvim.default;
-              # The `build` step for npm install is ignored here; user handles CLI install.
-              # The `config` function from Lua spec is translated to `setup` string:
-              setup = ''
-                local status_ok, mcphub = pcall(require, "mcphub")
-                if not status_ok then
-                  vim.notify("mcphub.nvim plugin could not be required. Ensure mcp-hub CLI is installed globally and in PATH.", vim.log.levels.ERROR)
-                  return
-                end
-                mcphub.setup({}) -- Pass options if needed, e.g. { config = { auto_approve = true } }
-              '';
-            };
-          };
           languages = {
             # Options applied to all languages
-            enableLSP = true;
             enableFormat = true;
             enableTreesitter = true;
             enableExtraDiagnostics = true;

@@ -87,13 +87,13 @@ in
       pass
 
       repomix
+      vectorcode
 
       php
       php84Packages.composer
       python312Packages.pylance
       intelephense
 
-      perSystem.mcphub.default
     ];
 
     user.hjem.rum.programs.tealdeer = {

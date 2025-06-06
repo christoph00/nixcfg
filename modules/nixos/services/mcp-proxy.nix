@@ -8,39 +8,35 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (flake.lib) mkBoolOpt mkIntOpt;
+  inherit (flake.lib) mkBoolOpt mkIntOpt mkSecret;
   cfg = config.svc.mcp-proxy;
   uvx = "${pkgs.uv}/bin/uvx";
   npx = "${pkgs.nodejs}/bin/npx";
   mcpoConfig = {
     mcpServers = {
-      fetch = {
+      github = {
         enabled = true;
+        command = "${pkgs.github-mcp-server}/bin/github-mcp-server";
         transportType = "stdio";
         timeout = 120;
-        command = uvx;
-        args = [ "mcp-server-fetch" ];
-      };
-      time = {
-        enabled = true;
-        transportType = "stdio";
-        timeout = 120;
-        command = uvx;
         args = [
-          "mcp-server-time"
-          "--local-timezone=${config.time.timeZone}"
+          "stdio"
         ];
+        env = {
+          GITHUB_PERSONAL_ACCESS_TOKEN = "";
+        };
       };
-      desktop-commander = {
-        enabled = true;
-        transportType = "stdio";
-        timeout = 120;
-        command = npx;
-        args = [
-          "-y"
-          "@wonderwhy-er/desktop-commander@latest"
-        ];
-      };
+
+      # desktop-commander = {
+      #   enabled = true;
+      #   transportType = "stdio";
+      #   timeout = 120;
+      #   command = npx;
+      #   args = [
+      #     "-y"
+      #     "@wonderwhy-er/desktop-commander@latest"
+      #   ];
+      # };
     };
   };
 in
@@ -51,6 +47,10 @@ in
   };
 
   config = mkIf config.svc.mcp-proxy.enable {
+    age.secrets.api-keys-agent = mkSecret {
+      file = "api-keys";
+      owner = "mcp-proxy";
+    };
 
     sys.state.directories = [ "/var/lib/mcp-proxy" ];
     users.groups.mcp-proxy = { };
@@ -65,17 +65,8 @@ in
       script = "${perSystem.self.mcp-proxy}/bin/mcp-proxy --named-server-config ${pkgs.writeText "mcp-proxy-config.json" (builtins.toJSON mcpoConfig)} --port ${toString cfg.port} --stateless ";
       description = "MCP Proxy Service";
       wantedBy = [ "multi-user.target" ];
-      environment = {
-        UV_NO_MANAGED_PYTHON = "1";
-      };
-      path = [
-        pkgs.nodejs
-        pkgs.python3
-        pkgs.uv
-        pkgs.busybox
-        config.nix.package
-      ];
       serviceConfig = {
+        EnvironmentFile = config.age.secrets.api-keys-agent.file;
         User = "mcp-proxy";
         Group = "mcp-proxy";
         RestartSec = 30;

@@ -9,7 +9,7 @@ in
 
   imports = [
     ./podman.nix
-    ./microvm
+    # ./microvm
   ];
 
   options.virt = {

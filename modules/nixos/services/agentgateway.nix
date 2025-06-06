@@ -8,7 +8,7 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (flake.lib) mkBoolOpt mkIntOpt;
+  inherit (flake.lib) mkBoolOpt mkIntOpt mkSecret;
 
   cfg = config.svc.agentgateway;
 
@@ -31,15 +31,43 @@ let
       }
     ];
     targets.mcp = [
-      {
-        name = "fetch";
-        listeners = [ "sse" ];
-        stdio = {
-          cmd = uvx;
-          args = [ "mcp-server-fetch" ];
-        };
-      }
-
+      # {
+      #   name = "github";
+      #   listeners = [ "sse" ];
+      #   stdio = {
+      #     cmd = "${pkgs.github-mcp-server}/bin/github-mcp-server";
+      #     args = [
+      #       "stdio"
+      #     ];
+      #     env = {
+      #       GITHUB_PERSONAL_ACCESS_TOKEN = "$(awk -F'=' '/^GITHUB_PERSONAL_ACCESS_TOKEN=/ {print $2}' ${config.age.secrets.api-keys-agent.path})";
+      #     };
+      #   };
+      # }
+      # # {
+      #   name = "fetch";
+      #   listeners = [ "sse" ];
+      #   stdio = {
+      #     cmd = uvx;
+      #     args = [
+      #       "-p"
+      #       "3.12"
+      #       "mcp-server-fetch"
+      #     ];
+      #   };
+      # }
+      # {
+      #   name = "time";
+      #   listeners = [ "sse" ];
+      #   stdio = {
+      #     cmd = uvx;
+      #     args = [
+      #       "mcp-server-time"
+      #       "--local-timezone=${config.time.timeZone}"
+      #     ];
+      #   };
+      # }
+      #
       # time = {
       #   command = uvx;
       #   args = [
@@ -97,6 +125,16 @@ in
   config = mkIf cfg.enable {
 
     sys.state.directories = [ "/var/lib/agentgateway" ];
+    age.secrets.api-keys-agent = mkSecret {
+      file = "api-keys";
+      owner = "agentgateway";
+    };
+
+    environment.systemPackages = [
+      pkgs.github-mcp-server
+      pkgs.uv
+      pkgs.nodejs
+    ];
 
     users.groups.agentgateway = { };
     users.users.agentgateway = {
@@ -115,13 +153,6 @@ in
       environment = {
         UV_NO_MANAGED_PYTHON = "1";
       };
-      path = [
-        pkgs.nodejs
-        pkgs.python3
-        pkgs.uv
-        pkgs.busybox
-        config.nix.package
-      ];
       serviceConfig = {
         User = "agentgateway";
         Group = "agentgateway";

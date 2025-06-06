@@ -18,6 +18,8 @@ in
 
   hw.cpu = "other";
 
+  virt.podman = true;
+
   host.vm = true;
   shell.devtools = enabled;
 

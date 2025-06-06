@@ -21,6 +21,7 @@ in
     flake.modules.nixos.services
     flake.modules.nixos.hw
     flake.modules.nixos.desktop
+    flake.modules.nixos.virt
   ];
 
   options.host = {

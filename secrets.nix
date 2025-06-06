@@ -105,4 +105,10 @@ in
   "secrets/litellm.age".publicKeys = [ oca ] ++ users;
   "secrets/litellm-conf.age".publicKeys = [ oca ] ++ users;
 
+  "secrets/api-keys.age".publicKeys = [
+    oca
+    x13
+    tower
+  ] ++ users;
+
 }
