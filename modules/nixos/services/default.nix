@@ -4,6 +4,7 @@
     # ./homeassistant
     ./dnscrypt.nix
     ./media.nix
+    ./neovim-server.nix
     # ./mqtt.nix
     # ./nas.nix
     # ./office-server.nix

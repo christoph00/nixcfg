@@ -11,8 +11,12 @@
   hw.gpu = "intel";
   hw.ram = 16;
   host.graphical = true;
+  sys.boot.secureBoot = true;
+  sys.disk.device = "/dev/nvme0n1";
+  sys.disk.encrypted = true;
 
   desktop.enable = true;
+  desktop.displayManager = "cosmic-greeter";
 
   network.enableWifi = true;
 
@@ -105,5 +109,4 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  system.stateVersion = "24.05";
 }

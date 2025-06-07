@@ -9,6 +9,7 @@
     ./games.nix
     ./remote.nix
     ./firefox.nix
+    ./niri.nix
     ./fonts.nix
     ./gtk.nix
     ./gtk.nix

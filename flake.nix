@@ -91,6 +91,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    basix = {
+      url = "github:notashelf/basix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
       inputs.nixpkgs.follows = "nixpkgs";

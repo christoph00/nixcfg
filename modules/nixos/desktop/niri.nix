@@ -28,6 +28,17 @@ in
 
     programs.niri.enable = true;
 
+    home.packages = with pkgs; [
+      xwayland-satellite
+      brightnessctl
+      fuzzel
+    ];
+
+    home.files.".config/niri/config.kdl".source = pkgs.replaceVars ./niri.kdl {
+      DEFAULT_AUDIO_SINK = null;
+      DEFAULT_AUDIO_SOURCE = null;
+    };
+
     programs.uwsm.waylandCompositors = {
 
       niri = {

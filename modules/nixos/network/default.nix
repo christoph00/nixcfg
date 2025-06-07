@@ -3,6 +3,7 @@
   config,
   lib,
   flake,
+  pkgs,
   ...
 }:
 with lib;
