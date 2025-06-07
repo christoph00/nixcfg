@@ -26,6 +26,7 @@ in
   svc.proxy = enabled;
   # svc.mcp-proxy = enabled;
   svc.media = enabled;
+  svc.neovim-server = enabled;
 
   services.searx = enabled;
   services.n8n = enabled;

@@ -24,7 +24,10 @@ in
       settings = {
         vim = {
           additionalRuntimePaths = [ ./runtime ];
-          extraLuaFiles = [ ./autocmds.lua ./codecompanion-fidget.lua  ];
+          extraLuaFiles = [
+            ./autocmds.lua
+            ./codecompanion-fidget.lua
+          ];
           globals.mapleader = " ";
           enableLuaLoader = true;
 
@@ -137,6 +140,11 @@ in
                 line_up = "<up>";
               };
             };
+          };
+
+          terminal.toggleterm = {
+            enable = true;
+            lazygit.enable = true;
           };
 
           utility.snacks-nvim = {
