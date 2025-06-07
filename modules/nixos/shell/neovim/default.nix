@@ -24,7 +24,7 @@ in
       settings = {
         vim = {
           additionalRuntimePaths = [ ./runtime ];
-          extraLuaFiles = [ ./autocmds.lua ];
+          extraLuaFiles = [ ./autocmds.lua ./codecompanion-fidget.lua  ];
           globals.mapleader = " ";
           enableLuaLoader = true;
 
@@ -83,7 +83,20 @@ in
             illuminate = enabled;
           };
 
-          statusline.lualine = enabled;
+          statusline.lualine = {
+            enable = true;
+            theme = "Tomorrow";
+          };
+
+          visuals.fidget-nvim = {
+            enable = true;
+            setupOpts = {
+              notification.window = {
+                winblend = 0;
+                border = "none";
+              };
+            };
+          };
 
           mini = {
             icons = enabled;
@@ -103,6 +116,11 @@ in
               };
             };
             pairs = enabled;
+
+            sessions = {
+              enable = true;
+
+            };
 
             git = enabled;
             diff = enabled;
@@ -375,11 +393,6 @@ in
               };
 
               extensions = {
-                vectorcode = {
-                  opts = {
-                    add_tool = true;
-                  };
-                };
                 mcphub = {
                   callback = "mcphub.extensions.codecompanion";
                   opts = {

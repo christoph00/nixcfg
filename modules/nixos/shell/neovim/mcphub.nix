@@ -10,37 +10,6 @@ let
   inherit (lib) mkIf;
   inherit (flake.lib) mkBoolOpt mkIntOpt mkSecret;
   cfg = config.programs.nvf;
-  # uvx = "${pkgs.uv}/bin/uvx";
-  # npx = "${pkgs.nodejs}/bin/npx";
-  # mcphub-servers = {
-  #   nativeMCPServers.neovim.disabledTools = [ ];
-  #
-  #   mcpServers = {
-  #     github = {
-  #       command = "${pkgs.github-mcp-server}/bin/github-mcp-server";
-  #       args = [
-  #         "stdio"
-  #       ];
-  #       env = {
-  #         GITHUB_PERSONAL_ACCESS_TOKEN = "$(awk -F'=' '/^GITHUB_PERSONAL_ACCESS_TOKEN=/ {print $2}' ${config.age.secrets.api-keys.path})";
-  #       };
-  #     };
-  #     fetch = {
-  #       command = uvx;
-  #       args = [ "-p 3.12 mcp-server-fetch" ];
-  #     };
-  #     perplexity = {
-  #       command = npx;
-  #       args = [
-  #         "-y"
-  #         "server-perplexity-ask"
-  #       ];
-  #       env = {
-  #         PERPLEXITY_API_KEY = "$(awk -F'=' '/^PERPLEXITY_API_KEY=/ {print $2}' ${config.age.secrets.api-keys.path})";
-  #       };
-  #     };
-  #   };
-  # };
 in
 {
 
@@ -51,9 +20,22 @@ in
       owner = "christoph";
     };
 
-    environment.systemPackages = with pkgs; [
-      github-mcp-server
-    ];
+    environment.systemPackages =
+      with perSystem.mcp-servers;
+      [
+        mcp-server-fetch
+        # mcp-server-brave-search
+        mcp-server-filesystem
+        # mcp-server-memory
+        playwright-mcp
+        # mcp-server-gdrive
+
+      ]
+      ++ [
+        pkgs.github-mcp-server
+        perSystem.mcp-nixos.default
+        perSystem.self.basic-memory
+      ];
     programs.nvf.settings.vim.extraPlugins = {
       mcphub = {
         package = perSystem.mcphub-nvim.default;
@@ -73,8 +55,6 @@ in
         '';
       };
     };
-
-    # config = vim.fn.expand("${pkgs.writeText "servers.json" (builtins.toJSON mcphub-servers)}"),
   };
 
 }

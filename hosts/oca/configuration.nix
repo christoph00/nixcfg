@@ -24,7 +24,7 @@ in
   shell.devtools = enabled;
 
   svc.proxy = enabled;
-  svc.mcp-proxy = enabled;
+  # svc.mcp-proxy = enabled;
   svc.media = enabled;
 
   services.searx = enabled;
@@ -32,9 +32,9 @@ in
   services.audiobookshelf = enabled;
   # services.rss-bridge = enabled;
   # services.pinchflat = enabled;
-  services.open-webui = enabled;
+  # services.open-webui = enabled;
   services.sabnzbd = enabled;
-  services.actual = enabled;
+  # services.actual = enabled;
 
   networking.timeServers = [ "169.254.169.254" ];
 

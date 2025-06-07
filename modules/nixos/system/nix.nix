@@ -31,6 +31,7 @@ in
     allowUnfree = true;
     allowUnfreePredicate = _: true;
     allowAliases = false;
+    allowBroken = true;
   };
 
   nixpkgs.overlays = [

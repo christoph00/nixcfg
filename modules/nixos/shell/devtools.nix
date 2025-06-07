@@ -87,7 +87,6 @@ in
       pass
 
       repomix
-      vectorcode
 
       php
       php84Packages.composer

@@ -9,69 +9,13 @@ let
   inherit (lib) mkIf;
   inherit (flake.lib) mkBoolOpt mkIntOpt;
 
-  cfg = config.svc.mcpo;
+  cfg = config.svc.mcp-servers;
 
-  uvx = "${pkgs.uv}/bin/uvx";
-  npx = "${pkgs.nodejs}/bin/npx";
-  mcpoConfig = {
-    mcpServers = {
-      fetch = {
-        command = uvx;
-        args = [ "mcp-server-fetch" ];
-      };
-      time = {
-        command = uvx;
-        args = [
-          "mcp-server-time"
-          "--local-timezone=${config.time.timeZone}"
-        ];
-      };
-      # desktop-commander = {
-      #   command = npx;
-      #   args = [
-      #     "-y"
-      #     "@wonderwhy-er/desktop-commander@latest"
-      #   ];
-      # };
-      # # nixos = {
-      #   command = "nix";
-      #   args = [
-      #     "run"
-      #     "github:utensils/mcp-nixos"
-      #     "--"
-      #   ];
-      # };
-      # # code-reasoning = {
-      #   command = npx;
-      #   args = [
-      #     "-y"
-      #     "@mettamatt/code-reasoning"
-      #   ];
-      # };
-      searxng = {
-        command = npx;
-        args = [
-          "-y"
-          "mcp-searxng"
-        ];
-        env = {
-          SEARXNG_URL = "http://127.0.0.1:1033";
-        };
-      };
-      context7 = {
-        command = npx;
-        args = [
-          "-y"
-          "@upstash/context7-mcp@latest"
-        ];
-      };
-    };
-  };
 in
 {
-  options.svc.mcpo = {
+  options.svc.mcp-servers = {
     enable = mkBoolOpt false;
-    port = mkIntOpt 8787;
+
   };
   config = mkIf cfg.enable {
 

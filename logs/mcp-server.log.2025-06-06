@@ -1,0 +1,3 @@
+[2m2025-06-06T22:03:34.214473Z[0m [32m INFO[0m ThreadId(01) [2mcrates/mcp-server/src/main.rs[0m[2m:[0m[2m228:[0m Starting MCP server
+[2m2025-06-06T22:03:34.215986Z[0m [32m INFO[0m ThreadId(01) [2mcrates/mcp-server/src/main.rs[0m[2m:[0m[2m237:[0m Server initialized and ready to handle requests
+[2m2025-06-06T22:03:34.216003Z[0m [32m INFO[0m ThreadId(01) [2mcrates/mcp-server/src/lib.rs[0m[2m:[0m[2m143:[0m Server started

@@ -7,6 +7,14 @@
   imports = [ flake.modules.nixos.host ];
   facter.reportPath = ./facter.json;
   networking.hostName = "x13";
+  hw.cpu = "intel";
+  hw.gpu = "intel";
+  hw.ram = 16;
+  host.graphical = true;
+
+  desktop.enable = true;
+
+  network.enableWifi = true;
 
   hardware.graphics = {
     enable = true;

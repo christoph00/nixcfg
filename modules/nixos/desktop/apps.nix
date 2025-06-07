@@ -32,6 +32,8 @@ in
 
       nautilus
 
+      neovide
+
       phinger-cursors
       # chicago95
       adw-gtk3
