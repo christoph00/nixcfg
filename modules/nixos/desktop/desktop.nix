@@ -3,12 +3,14 @@
   flake,
   lib,
   options,
+  inputs,
   pkgs,
   ...
 }:
 let
   inherit (lib) mkIf mkDefault;
-  inherit (flake.lib) mkBoolOpt toEnvExport;
+  inherit (flake.lib) mkBoolOpt;
+  inherit (inputs.hjem-rum.lib.generators.environment) toEnvExport;
   cfg = config.desktop;
 in
 {
@@ -26,15 +28,6 @@ in
       KERNEL=="uinput", GROUP="input", MODE="0660" OPTIONS+="static_node=uinput"
     '';
 
-    environment.variables = {
-      NIXOS_OZONE_WL = "1";
-      _JAVA_AWT_WM_NONEREPARENTING = "1";
-      GDK_BACKEND = "wayland,x11";
-      MOZ_ENABLE_WAYLAND = "1";
-      XDG_SESSION_TYPE = "wayland";
-      SDL_VIDEODRIVER = "wayland,x11,windows";
-      CLUTTER_BACKEND = "wayland";
-    };
     xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;
@@ -51,7 +44,18 @@ in
       };
     };
 
-    # home.files.".config/uwsm/env".text = toEnvExport config.user.hjem.environment.sessionVariables;
+    home.environment.sessionVariables = {
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_CLASS = "user";
+      NIXOS_OZONE_WL = "1";
+      _JAVA_AWT_WM_NONEREPARENTING = "1";
+      GDK_BACKEND = "wayland,x11";
+      MOZ_ENABLE_WAYLAND = "1";
+      SDL_VIDEODRIVER = "wayland,x11,windows";
+      CLUTTER_BACKEND = "wayland";
+    };
+
+    home.files.".config/uwsm/env".text = toEnvExport config.home.environment.sessionVariables;
 
     services = {
       gvfs.enable = true;
@@ -81,12 +85,12 @@ in
     programs.uwsm = {
       enable = true;
       waylandCompositors = {
-        sway = {
-          prettyName = "Sway";
-          comment = "Sway compositor managed by UWSM";
-          binPath = "/run/current-system/sw/bin/sway";
-        };
-        # niri = {
+        # sway = {
+        #   prettyName = "Sway";
+        #   comment = "Sway compositor managed by UWSM";
+        #   binPath = "/run/current-system/sw/bin/sway";
+        # };
+        # # niri = {
         #   prettyName = "Niri";
         #   comment = "A scrollable-tiling Wayland compositor.";
         #   binPath = "${pkgs.niri}/bin/niri";

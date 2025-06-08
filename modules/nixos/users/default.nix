@@ -20,8 +20,6 @@ in
       email = mkOpt str "christoph@asche.co";
       extraGroups = mkOpt (listOf str) [ ];
       extraOptions = mkOpt attrs { };
-
-      hjem = mkOpt attrs { };
     };
     home = mkOpt types.attrs { };
 
@@ -85,14 +83,11 @@ in
       extraModules = [
         inputs.hjem-rum.hjemModules.default
       ];
-      users.${cfg.name} =
-        {
-          enable = true;
-          directory = "/home/${cfg.name}";
-          user = "${cfg.name}";
-        }
-        // cfg.hjem
-        // config.home;
+      users.${cfg.name} = {
+        enable = true;
+        directory = "/home/${cfg.name}";
+        user = "${cfg.name}";
+      } // config.home;
     };
 
   };

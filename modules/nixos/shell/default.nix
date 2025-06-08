@@ -49,8 +49,8 @@ in
       enable = true;
       initConfig = ''
         # enable vi mode
-        bindkey -v
-        export KEYTIMEOUT=1
+        # bindkey -v
+        # export KEYTIMEOUT=1
 
         # history
         SAVEHIST=2000

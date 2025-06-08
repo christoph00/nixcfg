@@ -95,7 +95,7 @@ in
 
     ];
 
-    user.hjem.rum.programs.tealdeer = {
+    home.rum.programs.tealdeer = {
       enable = true;
       settings = {
         auto_update = true;

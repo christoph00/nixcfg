@@ -1,8 +1,5 @@
 {
   config,
-  options,
-  flake,
-  pkgs,
   lib,
   ...
 }:
@@ -10,8 +7,8 @@ let
   inherit (lib) mkIf;
 in
 {
-  config.home = mkIf config.desktop.enable {
-    rum.programs.ghostty = {
+  config = mkIf config.desktop.enable {
+    home.rum.programs.ghostty = {
       enable = true;
     };
   };
