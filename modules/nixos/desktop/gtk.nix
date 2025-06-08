@@ -10,8 +10,8 @@ let
   inherit (lib) mkIf;
 in
 {
-  config.home = mkIf config.desktop.enable {
-    rum.misc.gtk = {
+  config = mkIf config.desktop.enable {
+    home.rum.misc.gtk = {
       enable = true;
       packages = [
         (pkgs.catppuccin-papirus-folders.override {

@@ -28,25 +28,25 @@ in
 
     programs.niri.enable = true;
 
+    xdg.portal.config.niri = {
+      default = "gtk;gnome";
+    };
+
     home.packages = with pkgs; [
       xwayland-satellite
       brightnessctl
       fuzzel
+      ghostty
     ];
 
-    home.files.".config/niri/config.kdl".source = pkgs.replaceVars ./niri.kdl {
-      DEFAULT_AUDIO_SINK = null;
-      DEFAULT_AUDIO_SOURCE = null;
-    };
+    home.files.".config/niri/config.kdl".source = builtins.readFile ./niri.kdl;
 
     programs.uwsm.waylandCompositors = {
-
       niri = {
         prettyName = "Niri";
         comment = "A scrollable-tiling Wayland compositor.";
         binPath = "${pkgs.niri}/bin/niri";
       };
-
     };
 
   };

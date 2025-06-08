@@ -12,7 +12,6 @@
     ./niri.nix
     ./fonts.nix
     ./gtk.nix
-    ./gtk.nix
     ./ghostty.nix
   ];
 }
