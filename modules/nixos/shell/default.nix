@@ -45,7 +45,7 @@ in
 
     programs.zsh.enable = true;
 
-    user.hjem.rum.programs.zsh = {
+    home.rum.programs.zsh = {
       enable = true;
       initConfig = ''
         # enable vi mode
