@@ -16,7 +16,6 @@
   sys.disk.encrypted = true;
 
   desktop.enable = true;
-  desktop.displayManager = "cosmic-greeter";
 
   network.enableWifi = true;
 

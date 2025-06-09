@@ -98,7 +98,7 @@ in
   };
   config = mkIf cfg.enable {
 
-    sys.state.directories = [ "/var/lib/cosmic-greeter" ];
+    # sys.state.directories = [ "/var/lib/cosmic-greeter" ];
 
     services.greetd = mkIf (cfg.displayManager == "greetd") {
       enable = true;
