@@ -27,7 +27,6 @@ in
           extraLuaFiles = [
             ./autocmds.lua
             ./codecompanion-fidget.lua
-            ./keyloader.lua
           ];
           globals.mapleader = " ";
           enableLuaLoader = true;
@@ -445,6 +444,7 @@ in
                   '')
                 ];
               };
+
               sources = {
                 default = [
                   "minuet"
@@ -493,11 +493,6 @@ in
           };
 
           extraPlugins = {
-            keyloader = {
-              setup = ''
-                require('keyloader').setup({})
-              '';
-            };
             minuet = {
               package = pkgs.vimPlugins.minuet-ai-nvim;
               setup = "
@@ -667,19 +662,27 @@ in
           ];
 
           luaConfigPost = ''
-            if vim.g.neovide then
-              vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
-              vim.keymap.set('v', '<D-c>', '"+y') -- Copy
-              vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
-              vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
-              vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
-              vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+
+            local keyloader = require('keyloader')
+            local success = keyloader.load_keys("${config.age.secrets.api-keys.path}")
+            if success then
+              keyloader.set_globals()
             end
-            vim.filetype.add({
-             pattern = {
-              ['.*%.blade%.php'] = 'php',
-             }
-            });
+
+
+             if vim.g.neovide then
+               vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+               vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+               vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+               vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+               vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+               vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+             end
+             vim.filetype.add({
+              pattern = {
+               ['.*%.blade%.php'] = 'php',
+              }
+             });
           '';
         };
       };

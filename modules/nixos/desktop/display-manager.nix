@@ -91,22 +91,28 @@ in
 {
   options.desktop = {
     displayManager = mkOpt (enum [
-      "greetd"
+      "tuigreet"
       "cosmic-greeter"
-    ]) "greetd";
+      "regreet"
+    ]) "regreet";
     autologin = mkBoolOpt false;
   };
   config = mkIf cfg.enable {
 
-    # sys.state.directories = [ "/var/lib/cosmic-greeter" ];
+    sys.state.directories = [
+      "/var/lib/cosmic-greeter"
+      "/var/lib/regreet"
+    ];
 
-    services.greetd = mkIf (cfg.displayManager == "greetd") {
+    programs.regreet.enable = cfg.displayManager == "regreet";
+
+    services.greetd = {
       enable = true;
       vt = 2;
-      restart = true;
+      restart = false;
 
       settings = {
-        default_session = {
+        default_session = mkIf (cfg.displayManager == "tuigreet") {
           user = "greeter";
           command = concatStringsSep " " [
             (getExe pkgs.greetd.tuigreet)
