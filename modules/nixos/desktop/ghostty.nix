@@ -8,7 +8,7 @@ let
 in
 {
   config = mkIf config.desktop.enable {
-    home.rum.programs.ghostty = {
+    hjem.users.christoph.rum.programs.ghostty = {
       enable = true;
     };
   };

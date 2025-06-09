@@ -12,6 +12,7 @@ let
   cfg = config.user;
 in
 {
+  imports = [ (lib.modules.mkAliasOptionModule [ "home" ] [ "hjem" "users" "${cfg.name}" ]) ];
   options = {
     user = with types; {
       name = mkStrOpt "christoph";
@@ -20,12 +21,9 @@ in
       email = mkOpt str "christoph@asche.co";
       extraGroups = mkOpt (listOf str) [ ];
       extraOptions = mkOpt attrs { };
+      hjem = mkBoolOpt true;
     };
-    home = mkOpt types.attrs { };
-
   };
-
-  imports = [ inputs.hjem.nixosModules.default ];
 
   config = {
 
@@ -78,7 +76,7 @@ in
       gid = 1101;
     };
 
-    hjem = mkIf (!config.host.minimal) {
+    hjem = mkIf cfg.hjem {
       clobberByDefault = true;
       extraModules = [
         inputs.hjem-rum.hjemModules.default
@@ -87,7 +85,7 @@ in
         enable = true;
         directory = "/home/${cfg.name}";
         user = "${cfg.name}";
-      } // config.home;
+      };
     };
 
   };

@@ -6,7 +6,6 @@ pkgs.mkShell {
     pkgs.ragenix
     inputs.nixos-anywhere.packages.${pkgs.system}.nixos-anywhere
   ];
-
   # env = { };
 
   # shellHook = ''   '';

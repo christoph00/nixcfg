@@ -33,6 +33,8 @@
     ];
   };
 
+  home.files."host.txt".text = "This is the X13 host configuration file.";
+
   environment.systemPackages = [
     pkgs.libva-utils
     pkgs.intel-gpu-tools

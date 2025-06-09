@@ -196,7 +196,7 @@ layout {
     // You can enable drop shadows for windows.
     shadow {
         // Uncomment the next line to enable shadows.
-        // on
+        on
 
         // By default, the shadow draws only around its window, and not behind it.
         // Uncomment this setting to make the shadow draw behind its window.
@@ -255,6 +255,9 @@ environment {
   DISPLAY ":12"
 }
 spawn-at-startup "sh" "-c" "exec xwayland-satellite :12 2>/dev/null"
+
+
+spawn-at-startup "uwsm" "finalize"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -582,5 +585,4 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 
 
-    spawn-at-startup "uwsm finalize"
 }

@@ -88,7 +88,10 @@ in
 
           statusline.lualine = {
             enable = true;
-            theme = "Tomorrow";
+          };
+
+          ashboard.alpha = {
+            enable = true;
           };
 
           visuals.fidget-nvim = {
@@ -222,7 +225,7 @@ in
             cheatsheet = enabled;
           };
           assistant.copilot = {
-            enable = true;
+            enable = false;
             cmp.enable = false; # Use blink-cmp
             setupOpts = {
               suggestion = {
@@ -361,9 +364,9 @@ in
               };
 
               strategies = {
-                agent.adapter = "copilot";
+                agent.adapter = "openrouter";
                 chat = {
-                  adapter = "copilot";
+                  adapter = "openrouter";
                   roles = {
                     _type = "lua-inline";
                     expr = ''
@@ -395,7 +398,7 @@ in
                   };
                 };
                 inline = {
-                  adapter = "copilot";
+                  adapter = "openrouter";
                 };
 
               };
@@ -432,15 +435,37 @@ in
               keymap = {
                 preset = "enter";
                 "<C-y>" = [ "select_and_accept" ];
+                "<A-y>" = [
+                  (lib.generators.mkLuaInline ''
+                    function(cmp)
+                      cmp.show { providers = { 'minuet' } }
+                    end
+                  '')
+                ];
               };
               sources = {
+                default = [
+                  "minuet"
+                  "lsp"
+                  "path"
+                  "snippets"
+                  "buffer"
+                ];
                 per_filetype = {
                   codecompanion = [
                     "codecompanion"
                     "buffer"
                   ];
                 };
-
+                providers = {
+                  minuet = {
+                    name = "minuet";
+                    module = "minuet.blink";
+                    async = true;
+                    timeout_ms = 3000;
+                    score_offset = 50;
+                  };
+                };
               };
               completion = {
                 ghost_text.enabled = true;
@@ -463,6 +488,37 @@ in
               };
 
             };
+          };
+
+          extraPlugins = {
+            minuet = {
+              package = pkgs.vimPlugins.minuet-ai-nvim;
+              setup = "
+            require('minuet').setup {
+              provider = 'codestral',
+              n_completions = 1, -- recommend for local model for resource saving
+              -- I recommend beginning with a small context window size and incrementally
+              -- expanding it, depending on your local computing power. A context window
+              -- of 512, serves as an good starting point to estimate your computing
+              -- power. Once you have a reliable estimate of your local computing power,
+              -- you should adjust the context window to a larger value.
+              context_window = 1024,
+              provider_options = {
+                codestral = {
+                    model = 'codestral-latest',
+                    end_point = 'https://codestral.mistral.ai/v1/fim/completions',
+                    api_key = 'CODESTRAL_API_KEY',
+                    stream = true,
+                    optional = {
+                        stop = nil, -- the identifier to stop the completion generation
+                        max_tokens = nil,
+                    },
+                },
+            },
+          }
+          ";
+            };
+
           };
 
           languages = {
@@ -604,11 +660,19 @@ in
           ];
 
           luaConfigPost = ''
+            if vim.g.neovide then
+              vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+              vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+              vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+              vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+              vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+              vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+            end
             vim.filetype.add({
-            pattern = {
+             pattern = {
               ['.*%.blade%.php'] = 'php',
-            }
-             });
+             }
+            });
           '';
         };
       };

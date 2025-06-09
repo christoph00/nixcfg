@@ -12,10 +12,11 @@ in
   imports = [
     inputs.nixos-facter-modules.nixosModules.facter
     inputs.srvos.nixosModules.common
-    flake.modules.nixos.system
+    inputs.hjem.nixosModules.default
     flake.modules.nixos.secrets
-    flake.modules.nixos.minimal
+    flake.modules.nixos.system
     flake.modules.nixos.users
+    flake.modules.nixos.minimal
     flake.modules.nixos.network
     flake.modules.nixos.shell
     flake.modules.nixos.services

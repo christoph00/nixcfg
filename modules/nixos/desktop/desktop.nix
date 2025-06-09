@@ -17,7 +17,7 @@ in
   options.desktop = {
     enable = mkBoolOpt false;
     headless = mkBoolOpt false;
-    waybar = mkBoolOpt false;
+    waybar = mkBoolOpt true;
     wlsunset = mkBoolOpt false;
   };
   config = mkIf cfg.enable {
@@ -55,7 +55,8 @@ in
       CLUTTER_BACKEND = "wayland";
     };
 
-    home.files.".config/uwsm/env".text = toEnvExport config.home.environment.sessionVariables;
+    hjem.users.christoph.files.".config/uwsm/env".text =
+      toEnvExport config.hjem.users.christoph.environment.sessionVariables;
 
     services = {
       gvfs.enable = true;
