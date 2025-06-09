@@ -27,6 +27,7 @@ in
           extraLuaFiles = [
             ./autocmds.lua
             ./codecompanion-fidget.lua
+            ./keyloader.lua
           ];
           globals.mapleader = " ";
           enableLuaLoader = true;
@@ -492,6 +493,11 @@ in
           };
 
           extraPlugins = {
+            keyloader = {
+              setup = ''
+                require('keyloader').setup({})
+              '';
+            };
             minuet = {
               package = pkgs.vimPlugins.minuet-ai-nvim;
               setup = "
