@@ -302,8 +302,10 @@ in
                        return require("codecompanion.adapters").extend("openai_compatible", {
                          env = {
                            url = "https://openrouter.ai/api",
-                           api_key = "OPENROUTER_API_KEY",
-                           chat_url = "/v1/chat/completions",
+                           api_key = function()
+                            return _G.keyloader.get('OPENROUTER_API_KEY')
+                           end,
+                            chat_url = "/v1/chat/completions",
                         },
                         parameters = {
                           provider = {
@@ -313,8 +315,9 @@ in
                         },
                         schema = {
                           model = {
-                            default = "mistralai/devstral-small:free",
+                            default = "deepseek/deepseek-chat-v3-0324:free",
                             choices = {
+                              "deepseek/deepseek-chat-v3-0324:free",
                               "mistralai/devstral-small:free",
                               "meta-llama/llama-4-maverick:free",
                               -- "anthropic/claude-3.7-sonnet",
@@ -509,7 +512,9 @@ in
                 codestral = {
                     model = 'codestral-latest',
                     end_point = 'https://codestral.mistral.ai/v1/fim/completions',
-                    api_key = 'CODESTRAL_API_KEY',
+                    api_key = function()
+                      return _G.keyloader.get('CODESTRAL_API_KEY')
+                    end,
                     stream = true,
                     optional = {
                         stop = nil, -- the identifier to stop the completion generation
@@ -664,10 +669,9 @@ in
           luaConfigPost = ''
 
             local keyloader = require('keyloader')
-            local success = keyloader.load_keys("${config.age.secrets.api-keys.path}")
-            if success then
-              keyloader.set_globals()
-            end
+            keyloader.load_keys("${config.age.secrets.api-keys.path}")
+
+            _G.keyloader = keyloader
 
 
              if vim.g.neovide then
