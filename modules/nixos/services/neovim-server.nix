@@ -22,10 +22,10 @@ in
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
       serviceConfig = {
-        Environment = "PATH=/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin"; # TODO: fixed bins ?
+        Environment = "PATH=/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:/home/christoph/.nix-profile/bin"; # TODO: fixed bins ?
         Type = "simple";
         User = config.svc.neovim-server.user;
-        ExecStart = "${pkgs.zsh}/bin/zsh -c ${config.programs.nvf.finalPackage}/bin/nvim --listen 0.0.0.0:10066 --headless";
+        ExecStart = "${config.programs.nvf.finalPackage}/bin/nvim --listen 0.0.0.0:10066 --headless";
         Restart = "always";
         RestartSec = 5;
         WorkingDirectory = "/home/${config.svc.neovim-server.user}/Code";
