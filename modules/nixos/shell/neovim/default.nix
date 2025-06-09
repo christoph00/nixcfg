@@ -90,8 +90,9 @@ in
             enable = true;
           };
 
-          ashboard.alpha = {
+          dashboard.alpha = {
             enable = true;
+            theme = "theta";
           };
 
           visuals.fidget-nvim = {
