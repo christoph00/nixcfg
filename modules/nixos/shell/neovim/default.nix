@@ -153,7 +153,7 @@ in
           terminal.toggleterm = {
             enable = true;
             lazygit.enable = true;
-            etupOpts = {
+            setupOpts = {
               direction = "float";
             };
           };
