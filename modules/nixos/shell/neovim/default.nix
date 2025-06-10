@@ -15,6 +15,7 @@ in
   imports = [
     inputs.nvf.nixosModules.default
     ./mcphub.nix
+    ./repl.nix
   ];
 
   config = mkIf config.programs.nvf.enable {
@@ -670,6 +671,11 @@ in
               key = "<leader>ap";
               action = "<cmd>CodeCompanion<CR>";
               desc = "Open Code Companion Prompt";
+            }
+            {
+              mode = "n";
+              key = "<leader>tt";
+              action = "<cmd>ToggleTerm direction=float<CR>";
             }
           ];
 
