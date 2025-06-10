@@ -41,7 +41,8 @@ in
       #nwg-look
       adwaita-icon-theme
       adwaita-qt
-      adwsteamgtk
+
+      moonlight-qt
 
     ];
 

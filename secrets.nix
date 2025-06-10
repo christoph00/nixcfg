@@ -36,7 +36,7 @@ in
 {
 
   "secrets/netbird-io-setup.key".publicKeys = all;
-  "secrets/tailscale-auth-key".publicKeys = all;
+  "secrets/tailscale-key.age".publicKeys = all;
   "secrets/vector.env".publicKeys = all;
   "secrets/user_christoph_pw".publicKeys = all;
   "secrets/cf-api-key.age".publicKeys = [
