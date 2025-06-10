@@ -23,7 +23,10 @@ in
         prefixes.v4 = "100.64.64.0/24";
         dns.search_domains = [ "ts.r505.de" ];
         dns.base_domain = "ts.r505.de";
-
+        dns.nameservers.global = [
+          "1.1.1.1"
+          "9.9.9.9"
+        ];
       };
 
     };
