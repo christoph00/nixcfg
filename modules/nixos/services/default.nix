@@ -8,6 +8,7 @@
     # ./mqtt.nix
     # ./nas.nix
     # ./office-server.nix
+    ./headscale.nix
     ./n8n.nix
     ./open-webui.nix
     ./audio.nix

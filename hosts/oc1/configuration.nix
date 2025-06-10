@@ -28,6 +28,8 @@ in
 
   services.openssh.openFirewall = false;
 
+  services.headscale.enable = true;
+
   age.secrets.proxy-auth = mkSecret {
     file = "proxy-auth";
     owner = "nginx";
@@ -101,6 +103,11 @@ in
     host = ip_oca;
     port = 8096;
     proxy-web-sockets = true;
+  };
+  services.nginx.virtualHosts."hs.r505.de" = create-proxy {
+    host = "127.0.0.1";
+    port = config.services.headscale.port;
+
   };
 
   boot.kernelParams = [

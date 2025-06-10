@@ -16,6 +16,7 @@ in
     inputs.nvf.nixosModules.default
     ./mcphub.nix
     ./repl.nix
+    ./mail.nix
   ];
 
   config = mkIf config.programs.nvf.enable {
