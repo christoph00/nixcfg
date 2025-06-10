@@ -107,6 +107,7 @@ in
   services.nginx.virtualHosts."hs.r505.de" = create-proxy {
     host = "127.0.0.1";
     port = config.services.headscale.port;
+    proxy-web-sockets = true;
 
   };
 
