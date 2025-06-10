@@ -17,6 +17,7 @@ in
     ./router
     ./optimize.nix
     ./netbird.nix
+    ./tailnet.nix
   ];
 
   options.network = with types; {
