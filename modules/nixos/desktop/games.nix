@@ -15,6 +15,7 @@ let
   inherit (flake.lib) mkOpt mkStrOpt mkStrOptNull;
   cfg = config.desktop;
 
+
   gamesToApps =
     games:
     lib.mapAttrsToList (
@@ -60,6 +61,7 @@ in
   };
 
   config = mkIf cfg.gaming.enable {
+
     home.files =
       let
         defaultEnv = {

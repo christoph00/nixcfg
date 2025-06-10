@@ -71,6 +71,8 @@ in
             encoding = "utf-8";
             fileencoding = "utf-8";
             fillchars = "eob: "; # Disable the "~" chars at end of buffer
+
+            guifont = "imWritingMono_Nerd_Font:h11";
           };
 
           ui = {
@@ -126,7 +128,9 @@ in
 
             sessions = {
               enable = true;
-
+              setupOpts = {
+                autoread = true;
+              };
             };
 
             git = enabled;
@@ -149,6 +153,9 @@ in
           terminal.toggleterm = {
             enable = true;
             lazygit.enable = true;
+            etupOpts = {
+              direction = "float";
+            };
           };
 
           utility.snacks-nvim = {
