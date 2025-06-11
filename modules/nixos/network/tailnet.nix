@@ -12,7 +12,7 @@ in
 {
   options.network.tailnet = {
     enable = mkBoolOpt false;
-    ip = mkStrOpt "10.64.64.0";
+    ip = mkStrOpt "100.64.64.0";
   };
 
   config = mkIf cfg.enable {
@@ -27,7 +27,7 @@ in
       interfaceName = "ts0";
       authKeyParameters.baseURL = "https://hs.r505.de";
     };
-    age.secrets."tailscale-key" = {
+    age.secrets."tailscale-key" = mkSecret {
       owner = "tailscale";
       file = "tailscale-key";
     };
