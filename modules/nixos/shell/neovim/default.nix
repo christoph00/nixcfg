@@ -684,6 +684,32 @@ in
               key = "<leader>tt";
               action = "<cmd>ToggleTerm direction=float<CR>";
             }
+            {
+              mode = "n";
+              key = "<leader>q";
+              action = "<C-w>q";
+              desc = "Close Window";
+            }
+            {
+              mode = "n";
+              key = "<leader>w";
+              action = "<C-w>";
+            }
+            {
+              mode = "n";
+              key = "gx";
+              action = ''
+                function()
+                  local url = vim.fn.expand('<cfile')
+                  if url and #url > 0 then
+                    vim.fn.streg('+', url)
+                    vim.notify("URL: " .. url, vim.log.levels.INFO, {title = "Clipboard"})
+                  else
+                    vim.notify("No URL Found", vim.log.levels.WARN, {title = "Clipboard"})
+                  end
+                end
+              '';
+            }
           ];
 
           luaConfigPost = ''
