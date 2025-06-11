@@ -4,7 +4,7 @@
 }:
 
 pkgs.python3.pkgs.buildPythonApplication rec {
-  pname = "vector-code";
+  pname = "vectorcode";
   version = "0.6.11";
   pyproject = true;
 
@@ -18,6 +18,8 @@ pkgs.python3.pkgs.buildPythonApplication rec {
   build-system = [
     pkgs.python3.pkgs.pdm-backend
   ];
+
+  pythonRelaxDeps = true;
 
   dependencies = with pkgs.python3.pkgs; [
     charset-normalizer
@@ -59,7 +61,7 @@ pkgs.python3.pkgs.buildPythonApplication rec {
   };
 
   pythonImportsCheck = [
-    "vector_code"
+    "vectorcode"
   ];
 
   meta = {

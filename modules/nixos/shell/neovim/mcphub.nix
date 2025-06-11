@@ -20,7 +20,7 @@ in
       owner = "christoph";
     };
 
-    environment.systemPackages =
+    home.packages =
       with perSystem.mcp-servers;
       [
         mcp-server-fetch
@@ -35,6 +35,7 @@ in
         pkgs.github-mcp-server
         perSystem.mcp-nixos.default
         perSystem.self.basic-memory
+        perSystem.self.vector-code
       ];
     programs.nvf.settings.vim.extraPlugins = {
       mcphub = {

@@ -11,8 +11,8 @@ let
 in
 {
   options.network.tailnet = {
-    enable = mkBoolOpt true;
-    ip = mkStrOpt "100.64.64.0";
+    enable = mkBoolOpt false;
+    ip = mkStrOpt "10.64.64.0";
   };
 
   config = mkIf cfg.enable {

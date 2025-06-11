@@ -74,7 +74,6 @@ in
             fileencoding = "utf-8";
             fillchars = "eob: "; # Disable the "~" chars at end of buffer
 
-            guifont = "imWritingMono_Nerd_Font:h11";
           };
 
           ui = {
@@ -556,12 +555,19 @@ in
                 server = "nixd";
               };
               treesitter.enable = true;
+              extraDiagnostics.enable = true;
             };
             go.enable = true;
             php = {
               enable = true;
               lsp.server = "intelephense";
               lsp.enable = true;
+              treesitter.enable = true;
+            };
+            python = {
+              enable = true;
+              lsp.enable = true;
+              format.enable = true;
               treesitter.enable = true;
             };
             html = {
