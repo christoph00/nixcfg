@@ -62,6 +62,7 @@ in
       wrapped
       iwe
       fzf
+      fd
       yazi
       bc
       gitu
