@@ -25,11 +25,7 @@ in
   config = mkIf cfg.enable {
 
     sys.state.directories = [
-      {
-        directory = "/var/lib/hass";
-        user = "hass";
-        group = "hass";
-      }
+      "/var/lib/hass"
     ];
 
     users.extraUsers."hass".extraGroups = [ "dialout" ];
@@ -102,7 +98,6 @@ in
         };
       in
       {
-        enable = true;
         openFirewall = true;
         package = package.overrideAttrs (o: {
           doInstallCheck = false;
