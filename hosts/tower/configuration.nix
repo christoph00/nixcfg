@@ -74,7 +74,8 @@ in
     };
     sims4 = {
       name = "Sims 4";
-      exe = "/media/Games/Sims4/Game/Bin/TS4_x64.exe -offline";
+      exe = "/media/Games/Sims4/Game/Bin/TS4_x64.exe";
+      args = "-alwaysoffline";
       gameid = "1222670";
       store = "ea";
       icon = {
@@ -90,7 +91,11 @@ in
     };
     x4 = {
       name = "X4: Foundations";
-      exe = "/home/christoph/Games/X4/X4.exe -language 49 -voicelanguage 49";
+      exe = "/home/christoph/Games/X4/X4.exe";
+      env = {
+        PROTON_ENABLE_WAYLAND = "0";
+      };
+      args = " -language 49 -voicelanguage 49";
       store = "gog";
       gameid = "392160";
       icon = {
@@ -99,7 +104,7 @@ in
       };
       cover = {
         url = "https://cdn2.steamgriddb.com/grid/b15628b1d6e0282e0e81d2c7020c23f6.png";
-        sha265 = "sha256-WtweMsq+bvcQumUsfCrlGlcJhcFgiFfLntfgsCqo7pQ=";
+        sha256 = "sha256-WtweMsq+bvcQumUsfCrlGlcJhcFgiFfLntfgsCqo7pQ=";
       };
     };
     rdr2 = {

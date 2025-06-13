@@ -60,18 +60,18 @@ let
 
     input "48879:57005:Mouse_passthrough" pointer_accel -1
 
-    assign [app_id="steam"] $ws2
-    assign [class="steam"] $ws2
-
-    assign [app_id="bottles"] $ws3
-    assign [class="^Bottles$"] $ws3
-
-    assign [app_id="limo"] $ws4
-    assign [app_id="nautilus"] $ws4
-
-    assign [app_id="firefox-beta"] $ws5
-
-    assign [class=".*"] $ws1
+    # assign [app_id="steam"] $ws2
+    # assign [class="steam"] $ws2
+    #
+    # assign [app_id="bottles"] $ws3
+    # assign [class="^Bottles$"] $ws3
+    #
+    # assign [app_id="limo"] $ws4
+    # assign [app_id="nautilus"] $ws4
+    #
+    # assign [app_id="firefox-beta"] $ws5
+    #
+    # assign [class=".*"] $ws1
 
 
     bindsym $mod+Shift+q kill

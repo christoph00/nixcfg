@@ -8,11 +8,11 @@ let
 in
 pkgs.stdenvNoCC.mkDerivation rec {
   inherit pname;
-  version = "10.0-20250520";
+  version = "10.0-20250601";
 
   src = pkgs.fetchzip {
-    url = "https://github.com/CachyOS/proton-cachyos/releases/download/cachyos-10.0-20250520-slr/proton-cachyos-${version}-slr-x86_64_v3.tar.xz";
-    hash = "sha256-UskbGsVXhtQIjTmq8sCXd998cThI0wfvRXeePdgFdLs=";
+    url = "https://github.com/CachyOS/proton-cachyos/releases/download/cachyos-${version}-slr/proton-cachyos-${version}-slr-x86_64_v3.tar.xz";
+    hash = "sha256-HAiREPiADl7oHcvzoxHL9er9Dsl6NF18BQuuI9aCcR4=";
     nativeBuildInputs = [ pkgs.xz ];
     stripRoot = false;
   };

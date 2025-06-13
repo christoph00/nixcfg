@@ -44,6 +44,7 @@ in
       options = {
         name = mkStrOptNull;
         exe = mkStrOpt "winecfg";
+        args = mkStrOpt "";
         gameid = mkStrOpt "umu-default";
         store = mkStrOpt "NONE";
         env = mkOpt attrs { };
@@ -94,7 +95,7 @@ in
               [Desktop Entry]
               Name=${gameName}
               Comment=Launch ${gameName}
-              Exec=env ${envStr} ${pkgs.umu-launcher}/bin/umu-run "${game.exe}"
+              Exec=env ${envStr} gamemoderun ${pkgs.umu-launcher}/bin/umu-run "${game.exe}" ${game.args}
               Type=Application
               Categories=Game;
               Icon=${icon}
