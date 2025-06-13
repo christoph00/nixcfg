@@ -129,9 +129,13 @@ in
 
   };
 
+  services.lact.enable = true;
+  sys.state.directories = [ "/etc/lact" ];
+
   environment.systemPackages = [
     pkgs.amdgpu_top
     pkgs.libva-utils
+    pkgs.lact
   ];
 
   hardware.graphics = {
@@ -155,6 +159,10 @@ in
     legacySupport.enable = true;
     amdvlk.enable = true;
     amdvlk.support32Bit.enable = true;
+    overdrive = {
+      enable = true;
+      ppfeaturemask = "0xffffffff";
+    };
   };
 
   environment.variables = {
