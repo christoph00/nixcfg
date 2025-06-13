@@ -5,8 +5,8 @@
   ...
 }:
 let
-  inherit (lib) mkIf;
-  inherit (flake.lib) mkOpt mkForce;
+  inherit (lib) mkIf mkForce;
+  inherit (flake.lib) mkOpt;
   cfg = config.network.router;
 in
 {
@@ -66,7 +66,10 @@ in
 
       firewall.filterForward = true;
 
-      firewall.interfaces.dtag-ppp.allowedUDPPorts = [ 546 ];
+      firewall.interfaces.dtag-ppp.allowedUDPPorts = [
+        546
+        51820
+      ];
       firewall.interfaces.dtag-ppp.allowedTCPPorts = [
         # 2022
         # 443

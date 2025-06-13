@@ -11,7 +11,7 @@ let
 in
 {
 
-  config = mkIf config.services.mosquitto {
+  config = mkIf config.services.mosquitto.enable {
 
     environment.systemPackages = with pkgs; [ mqttui ];
 

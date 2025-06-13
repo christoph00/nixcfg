@@ -12,12 +12,17 @@ in
   config = mkIf cfg.enable {
 
     svc.dnscrypt = {
-      enable = true;
+      enable = false;
       localDNS = "127.0.0.1:5353";
     };
 
+    services.resolved.enable = false;
+
+    networking.nameservers = [ "127.0.0.1" ];
+
     services.dnsmasq = {
       enable = true;
+      alwaysKeepRunning = true;
       settings = {
         server = [
           "9.9.9.9"
@@ -25,17 +30,17 @@ in
           "1.1.1.1"
           # "/ts.r505.de/100.100.100.100"
         ];
-        port = 5353;
+        port = 53;
         domain-needed = true;
         bogus-priv = true;
-        no-resolv = true;
+        # no-resolv = true;
         cache-size = 1000;
 
         local = "/lan/";
         domain = "lan";
         expand-hosts = true;
 
-        address = "/ha.r505.de/192.168.2.2";
+        # address = "/ha.r505.de/192.168.2.2";
       };
     };
   };

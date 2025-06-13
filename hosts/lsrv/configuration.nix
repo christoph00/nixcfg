@@ -25,7 +25,7 @@
   };
 
   services.home-assistant.enable = true;
-  services.mosquitto.enale = true;
+  services.mosquitto.enable = true;
 
   # svc.nas = {
   #   enable = true;

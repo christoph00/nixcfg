@@ -120,7 +120,8 @@ in
             trusted_proxies = [
               "127.0.0.1"
               "::1"
-              "${config.network.subnets.vpn}"
+              "100.77.87.57" # oc1
+              # "${config.network.subnets.vpn}"
             ];
           };
           mobile_app = { };
