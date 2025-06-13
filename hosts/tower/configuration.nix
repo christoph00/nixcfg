@@ -74,7 +74,7 @@ in
     };
     sims4 = {
       name = "Sims 4";
-      exe = "/media/Games/Sims4/Game/Bin/TS4_x64.exe --offline";
+      exe = "/media/Games/Sims4/Game/Bin/TS4_x64.exe -offline";
       gameid = "1222670";
       store = "ea";
       icon = {
@@ -88,19 +88,33 @@ in
       };
 
     };
+    x4 = {
+      name = "X4: Foundations";
+      exe = "/home/christoph/Games/X4/X4.exe -language 49 -voicelanguage 49";
+      store = "gog";
+      gameid = "392160";
+      icon = {
+        url = "https://www.egosoft.com/img/x4-logo_200px.png";
+        sha256 = "sha256-ECaknWJ8ukZGeg6zLkF+E8xkj8X6VZVd6FhT1VtCg1M=";
+      };
+      cover = {
+        url = "https://cdn2.steamgriddb.com/grid/b15628b1d6e0282e0e81d2c7020c23f6.png";
+        sha265 = "sha256-WtweMsq+bvcQumUsfCrlGlcJhcFgiFfLntfgsCqo7pQ=";
+      };
+    };
     rdr2 = {
       name = "Red Dead Redemption II";
       exe = "/media/Games/RDR2/Bin/RDR.exe";
       gameid = "1174180";
       store = "epic";
       icon = {
-        url = "https://cdn2.steamgriddb.com/icon/9fc664916bce863561527f06a96f5ff3.ico";
-        sha256 = "sha256-lzpG3meHStM0z/Ltocn5nFjH/Aa842bdhGWPuvr7fV0=";
+        url = "https://cdn2.steamgriddb.com/icon/2e65f2f2fdaf6c699b223c61b1b5ab89.png";
+        sha256 = "sha256-vdgmwtNQwjXADdz/puUX+jCNAP1FHozX0IVfqpD92F8=";
 
       };
       cover = {
-        url = "https://cdn2.steamgriddb.com/grid/5c1d8b6ff107dafb76906e0334e62a87.png";
-        sha256 = "sha256-H++/rHaMtY4X2JGnBaZKJ60hYo3y80xnhxhhSjU+qMU=";
+        url = "https://cdn2.steamgriddb.com/grid/3940304b536796dcc176aa83203a3955.png";
+        sha256 = "sha256-kWi8zpSm5hHqTviNwv4ZHcUBrpNk/8ZVYxWGXGPDybs=";
       };
 
     };
