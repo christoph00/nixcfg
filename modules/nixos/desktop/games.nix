@@ -15,7 +15,6 @@ let
   inherit (flake.lib) mkOpt mkStrOpt mkStrOptNull;
   cfg = config.desktop;
 
-
   gamesToApps =
     games:
     lib.mapAttrsToList (
