@@ -15,9 +15,9 @@ in
       package = pkgs.vimPlugins.himalaya-vim;
       setupModule = "himalaya";
       cmd = [ "Himalaya" ];
-      after = ''
-        vim.g.himalaya_executable = "${pkgs.himalaya}/bin/himalaya}"
-      '';
+      # after = ''
+      #   vim.g.himalaya_executable = "${pkgs.himalaya}/bin/himalaya}"
+      # '';
     };
 
   };

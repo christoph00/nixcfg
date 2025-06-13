@@ -11,12 +11,12 @@ let
     prevAttrs:
     let
       pname = "n8n";
-      version = "1.97.0";
+      version = "1.98.1";
       src = pkgs.fetchFromGitHub {
         owner = "n8n-io";
         repo = "n8n";
         tag = "n8n@${version}";
-        hash = "sha256-Y4KHxqgjCoExhsNJBYw77Yck/KC9j7OAvJOReULPlbE=";
+        hash = "sha256-jWRd5Mu7iiisQh/NT7bLCRE9VG6cJ6QTiNWlMk9vnsQ=";
       };
 
     in
@@ -24,7 +24,7 @@ let
       inherit src version;
       pnpmDeps = pkgs.pnpm_10.fetchDeps {
         inherit pname version src;
-        hash = "sha256-yO5wOGCZmpiBRuw7wwi1YqllzYPIwLv2SEvWwNufNYM=";
+        hash = "sha256-gX9rj7MerFH1jdfH0s5/puZaBVF6zR3BpOUac16/B2Y=";
       };
     }
   );

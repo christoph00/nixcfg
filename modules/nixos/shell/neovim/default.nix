@@ -17,6 +17,7 @@ in
     ./mcphub.nix
     ./repl.nix
     ./mail.nix
+    ./notes.nix
   ];
 
   config = mkIf config.programs.nvf.enable {
