@@ -74,7 +74,7 @@ in
     };
     sims4 = {
       name = "Sims 4";
-      exe = "/media/Games/Sims4/Game/Bin/TS4_x64.exe";
+      exe = "/media/Games/Sims4/Game/Bin/TS4_x64.exe --offline";
       gameid = "1222670";
       store = "ea";
       icon = {

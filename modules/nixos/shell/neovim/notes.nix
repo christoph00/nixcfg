@@ -11,9 +11,12 @@ in
   config = mkIf config.programs.nvf.enable {
 
     programs.nvf.settings = {
+      vim.lazy.plugins = {
+
+      };
       vim.notes = {
         obsidian = {
-          enable = true;
+          enable = false;
           setupOpts = {
             mappings = [ ];
             log_level = lib.generators.mkLuaInline "vim.log.levels.ERROR";
