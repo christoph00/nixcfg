@@ -1,37 +1,31 @@
 {
   pkgs,
   pname,
+  ...
 }:
 
-pkgs.python3.pkgs.buildPythonApplication rec {
+pkgs.buildGoModule rec {
   inherit pname;
-  version = "0.8.0";
-  pyproject = true;
+  version = "0.28.0";
 
   src = pkgs.fetchFromGitHub {
-    owner = "sparfenyuk";
+    owner = "TBXark";
     repo = "mcp-proxy";
     rev = "v${version}";
-    hash = "sha256-3KGBQyiI6hbDfl37lhhnGYHixHYGsKAgTJH/PSe3UFs=";
+    hash = "sha256-3W4ril9J1zRvXznU+4rCxFBRHGbjUZ1K6US4fRmyIH4=";
   };
-  build-system = [
-    pkgs.python3.pkgs.setuptools
-  ];
 
-  dependencies = with pkgs.python3.pkgs; [
-    mcp
-    uvicorn
-  ];
+  vendorHash = "sha256-0fE5X0yAnXeOlt6aM4O2LWASY8+81wwk86ssWwQjxGA=";
 
-  pythonImportsCheck = [
-    "mcp_proxy"
+  ldflags = [
+    "-s"
+    "-w"
   ];
 
   meta = {
-    description = "A bridge between Streamable HTTP and stdio MCP transports";
-    homepage = "https://github.com/sparfenyuk/mcp-proxy";
+    description = "An MCP proxy server that aggregates and serves multiple MCP resource servers through a single HTTP server";
+    homepage = "https://github.com/TBXark/mcp-proxy";
     license = pkgs.lib.licenses.mit;
-    maintainers = [ ];
     mainProgram = "mcp-proxy";
   };
 }

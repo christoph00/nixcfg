@@ -13,6 +13,14 @@ let
   uvx = "${pkgs.uv}/bin/uvx";
   npx = "${pkgs.nodejs}/bin/npx";
   mcpoConfig = {
+    mcpProxy = {
+      baseURL = "https://mcp.r505.de";
+      addr = ":7061";
+      name = "MCP Proxy";
+      version = "1.0";
+      type = "streamable-http";
+
+    };
     mcpServers = {
       github = {
         enabled = true;
@@ -62,7 +70,7 @@ in
     };
 
     systemd.services.mcp-proxy = {
-      script = "${perSystem.self.mcp-proxy}/bin/mcp-proxy --named-server-config ${pkgs.writeText "mcp-proxy-config.json" (builtins.toJSON mcpoConfig)} --port ${toString cfg.port} --stateless ";
+      script = "${perSystem.self.mcp-proxy}/bin/mcp-proxy --config ${pkgs.writeText "mcp-proxy-config.json" (builtins.toJSON mcpoConfig)}";
       description = "MCP Proxy Service";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
