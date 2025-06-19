@@ -6,16 +6,16 @@
 
 pkgs.buildGoModule rec {
   inherit pname;
-  version = "0.28.0";
+  version = "0.32.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "TBXark";
     repo = "mcp-proxy";
     rev = "v${version}";
-    hash = "sha256-3W4ril9J1zRvXznU+4rCxFBRHGbjUZ1K6US4fRmyIH4=";
+    hash = "sha256-2nsQ3nbLauWgX7jsg2kNyaF3w3VaOn2Ax2PSU3DRThk=";
   };
 
-  vendorHash = "sha256-0fE5X0yAnXeOlt6aM4O2LWASY8+81wwk86ssWwQjxGA=";
+  vendorHash = "sha256-w2LCSRpadSEaOQc2HPFXR3Kw0o8OoNYyhJHSa9QElJs=";
 
   ldflags = [
     "-s"

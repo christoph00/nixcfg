@@ -18,23 +18,35 @@ let
       addr = ":7061";
       name = "MCP Proxy";
       version = "1.0";
-      type = "streamable-http";
+      # type = "streamable-http";
 
     };
     mcpServers = {
-      github = {
-        enabled = true;
-        command = "${pkgs.github-mcp-server}/bin/github-mcp-server";
-        transportType = "stdio";
-        timeout = 120;
+      playwright = {
+        command = "${perSystem.mcp-servers.playwright-mcp}/bin/mcp-server-playwright";
         args = [
-          "stdio"
+          "--browser"
+          "chrome"
+          "--executable-path"
+          "${pkgs.chromium}/bin/chromium"
         ];
-        env = {
-          GITHUB_PERSONAL_ACCESS_TOKEN = "";
-        };
       };
-
+      context7 = {
+        command = "${perSystem.mcp-servers.context7-mcp}/bin/context7-mcp";
+      };
+      # github = {
+      #   enabled = true;
+      #   command = "${pkgs.github-mcp-server}/bin/github-mcp-server";
+      #   transportType = "stdio";
+      #   timeout = 120;
+      #   args = [
+      #     "stdio"
+      #   ];
+      #   env = {
+      #     GITHUB_PERSONAL_ACCESS_TOKEN = "";
+      #   };
+      # };
+      #
       # desktop-commander = {
       #   enabled = true;
       #   transportType = "stdio";
