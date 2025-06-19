@@ -14,7 +14,7 @@ let
   npx = "${pkgs.nodejs}/bin/npx";
   mcpoConfig = {
     mcpProxy = {
-      baseURL = "https://mcp.r505.de";
+      baseURL = "http://${config.network.netbird.ip}:7061";
       addr = ":7061";
       name = "MCP Proxy";
       version = "1.0";

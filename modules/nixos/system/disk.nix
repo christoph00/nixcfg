@@ -164,7 +164,7 @@ in
           fileSystems = [
             "/nix"
             "/home"
-            "/mnt/store"
+            "/mnt/state"
           ];
         };
 
