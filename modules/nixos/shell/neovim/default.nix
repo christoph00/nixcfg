@@ -235,7 +235,7 @@ in
             cheatsheet = enabled;
           };
           assistant.copilot = {
-            enable = true;
+            enable = false;
             cmp.enable = false; # Use blink-cmp
             setupOpts = {
               suggestion = {
@@ -285,10 +285,10 @@ in
           };
           snippets.luasnip = {
             enable = true;
+            setupOpts.enable_autosnippets = true;
             providers = [
               "friendly-snippets"
               "blink-compat"
-              "copilot-lua"
               "nvim-treesitter"
             ];
 
@@ -469,7 +469,7 @@ in
 
               sources = {
                 default = [
-                  "copilot"
+                  "minuet"
                   "lsp"
                   "path"
                   "snippets"
@@ -532,35 +532,35 @@ in
               };
               setup = "require('venv-selector').setup {}";
             };
-            #   minuet = {
-            #     package = pkgs.vimPlugins.minuet-ai-nvim;
-            #     setup = "
-            #   require('minuet').setup {
-            #     provider = 'codestral',
-            #     n_completions = 1, -- recommend for local model for resource saving
-            #     -- I recommend beginning with a small context window size and incrementally
-            #     -- expanding it, depending on your local computing power. A context window
-            #     -- of 512, serves as an good starting point to estimate your computing
-            #     -- power. Once you have a reliable estimate of your local computing power,
-            #     -- you should adjust the context window to a larger value.
-            #     context_window = 1024,
-            #     provider_options = {
-            #       codestral = {
-            #           model = 'codestral-latest',
-            #           end_point = 'https://codestral.mistral.ai/v1/fim/completions',
-            #           api_key = function()
-            #             return _G.keyloader.get('CODESTRAL_API_KEY')
-            #           end,
-            #           stream = true,
-            #           optional = {
-            #               stop = nil, -- the identifier to stop the completion generation
-            #               max_tokens = nil,
-            #           },
-            #       },
-            #   },
-            # }
-            # ";
-            #   };
+            minuet = {
+              package = pkgs.vimPlugins.minuet-ai-nvim;
+              setup = "
+              require('minuet').setup {
+                provider = 'codestral',
+                n_completions = 1, -- recommend for local model for resource saving
+                -- I recommend beginning with a small context window size and incrementally
+                -- expanding it, depending on your local computing power. A context window
+                -- of 512, serves as an good starting point to estimate your computing
+                -- power. Once you have a reliable estimate of your local computing power,
+                -- you should adjust the context window to a larger value.
+                context_window = 1024,
+                provider_options = {
+                  codestral = {
+                      model = 'codestral-latest',
+                      end_point = 'https://codestral.mistral.ai/v1/fim/completions',
+                      api_key = function()
+                        return _G.keyloader.get('CODESTRAL_API_KEY')
+                      end,
+                      stream = true,
+                      optional = {
+                          stop = nil, -- the identifier to stop the completion generation
+                          max_tokens = nil,
+                      },
+                  },
+              },
+            }
+            ";
+            };
 
           };
 
