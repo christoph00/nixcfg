@@ -61,6 +61,8 @@ in
         alias ls=lsd
 
         export PATH="$HOME/.local/bin:$PATH"
+        export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+        export PATH="$PATH:$HOME/.npm-packages/bin"
 
 
         eval "$(${pkgs.starship}/bin/starship init zsh)"

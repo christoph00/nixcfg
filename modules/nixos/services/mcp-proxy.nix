@@ -18,7 +18,7 @@ let
       addr = ":7061";
       name = "MCP Proxy";
       version = "1.0";
-      # type = "streamable-http";
+      type = "streamable-http";
 
     };
     mcpServers = {
