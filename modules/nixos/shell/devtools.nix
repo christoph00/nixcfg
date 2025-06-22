@@ -11,31 +11,6 @@ let
   inherit (lib) mkIf;
   inherit (flake.lib) mkBoolOpt mkSecret enabled;
   cfg = config.shell.devtools;
-  wrapped = inputs.wrapper-manager.lib.build {
-    inherit pkgs;
-    modules = [
-      {
-        wrappers = {
-          aider = {
-            basePackage = pkgs.aider-chat;
-            flags = [
-              "--env-file"
-              "${config.age.secrets.aider.path}"
-              "--chat-language"
-              "German"
-              "--vim"
-              "--editor"
-              "vim"
-              "--cache-prompts"
-              "--no-attribute-author"
-              "--attribute-committer"
-              "--no-check-update"
-            ];
-          };
-        };
-      }
-    ];
-  };
 in
 {
   options.shell.devtools = {
@@ -59,7 +34,6 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      wrapped
       iwe
       fzf
       fd

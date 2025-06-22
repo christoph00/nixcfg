@@ -3,6 +3,7 @@
   flake,
   pkgs,
   config,
+  perSystem,
   ...
 }:
 let
@@ -29,7 +30,8 @@ in
     programs.firefox = {
       enable = true;
       nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
-      package = pkgs.firefox-beta-bin;
+      # package = pkgs.firefox-beta-bin;
+      package = perSystem.chaotic.firefox_nightly;
       preferencesStatus = "default";
 
       policies = {

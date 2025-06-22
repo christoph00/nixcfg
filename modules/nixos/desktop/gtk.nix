@@ -14,10 +14,10 @@ in
     home.rum.misc.gtk = {
       enable = true;
       packages = [
-        (pkgs.catppuccin-papirus-folders.override {
-          accent = "rosewater";
-          flavor = "mocha";
-        })
+        # (pkgs.catppuccin-papirus-folders.override {
+        #   accent = "rosewater";
+        #   flavor = "mocha";
+        # })
         pkgs.bibata-cursors
       ];
 

@@ -36,24 +36,24 @@ let
     "x-gvfs-hide"
   ];
 
-  wrapped = inputs.wrapper-manager.lib.build {
-    inherit pkgs;
-    modules = [
-      {
-        wrappers = {
-          rclone = {
-            renames.rclone = "rcloneu";
-            renames."mount.rclone" = "mount.rcloneu";
-            basePackage = pkgs.rclone;
-            flags = [
-              "--config"
-              "${config.age.secrets.rclone-user.path}"
-            ];
-          };
-        };
-      }
-    ];
-  };
+  # wrapped = inputs.wrapper-manager.lib {
+  #   inherit pkgs;
+  #   modules = [
+  #     {
+  #       wrappers = {
+  #         rclone = {
+  #           renames.rclone = "rcloneu";
+  #           renames."mount.rclone" = "mount.rcloneu";
+  #           basePackage = pkgs.rclone;
+  #           prependFlags = [
+  #             "--config"
+  #             "${config.age.secrets.rclone-user.path}"
+  #           ];
+  #         };
+  #       };
+  #     }
+  #   ];
+  # };
 in
 {
   options.svc.rclone = {
@@ -71,9 +71,9 @@ in
     };
 
     environment.systemPackages = [
-      wrapped
       pkgs.rclone
     ];
+    # ] ++ (builtins.attrValues wrapped.config.build.packages);
 
     fileSystems."/media/box" = {
       device = "box:";

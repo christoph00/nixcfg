@@ -20,23 +20,21 @@ in
       owner = "christoph";
     };
 
-    home.packages =
-      with perSystem.mcp-servers;
-      [
-        mcp-server-fetch
-        # mcp-server-brave-search
-        mcp-server-filesystem
-        # mcp-server-memory
-        playwright-mcp
-        # mcp-server-gdrive
+    home.packages = with perSystem.mcp-servers; [
+      # mcp-server-fetch
+      # mcp-server-brave-search
+      mcp-server-filesystem
+      # mcp-server-memory
+      # playwright-mcp
+      # mcp-server-gdrive
 
-      ]
-      ++ [
-        pkgs.github-mcp-server
-        perSystem.mcp-nixos.default
-        perSystem.self.basic-memory
-        perSystem.self.vector-code
-      ];
+    ];
+    # ++ [
+    # pkgs.github-mcp-server
+    #   perSystem.mcp-nixos.default
+    #   perSystem.self.basic-memory
+    #   perSystem.self.vector-code
+    # ];
     programs.nvf.settings.vim.extraPlugins = {
       mcphub = {
         package = perSystem.mcphub-nvim.default;
