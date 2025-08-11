@@ -52,7 +52,7 @@ jobs:
         #build-mount-path: /nix
         swap-size-mb: 1024
         root-reserve-mb: 50192
-    - uses: actions/checkout@v4.3.0
+    - uses: actions/checkout@v5.0.0
     - uses: DeterminateSystems/nix-installer-action@v19
       with:
         extra-conf: |
