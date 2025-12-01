@@ -52,8 +52,8 @@ jobs:
         #build-mount-path: /nix
         swap-size-mb: 1024
         root-reserve-mb: 50192
-    - uses: actions/checkout@v5.0.0
-    - uses: DeterminateSystems/nix-installer-action@v20
+    - uses: actions/checkout@v6.0.0
+    - uses: DeterminateSystems/nix-installer-action@v21
       with:
         extra-conf: |
           experimental-features = nix-command flakes
