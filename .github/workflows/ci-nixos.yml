@@ -44,7 +44,7 @@ jobs:
          sudo apt-get update -q -y && sudo apt-get install -q -y qemu-system-aarch64 binfmt-support qemu-user-static
       if: contains(matrix.hostname, 'oca')
     - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
+      uses: jlumbroso/free-disk-space@v1.3.1
       with:
         # this might remove tools that are actually needed,
         # if set to "true" but frees about 6 GB
@@ -58,8 +58,8 @@ jobs:
         large-packages: true
         docker-images: true
         swap-storage: true
-    - uses: actions/checkout@v5.0.0
-    - uses: DeterminateSystems/nix-installer-action@v20
+    - uses: actions/checkout@v6.0.0
+    - uses: DeterminateSystems/nix-installer-action@v21
       with:
         extra-conf: |
           experimental-features = nix-command flakes
