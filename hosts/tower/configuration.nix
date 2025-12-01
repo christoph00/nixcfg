@@ -23,8 +23,6 @@ in
   host.graphical = true;
   host.gaming = true;
 
-  network.netbird.ip = "100.77.157.165";
-
   svc.actions-runner = enabled;
 
   desktop.enable = true;
@@ -32,98 +30,6 @@ in
   desktop.gaming.enable = true;
   desktop.gaming.proton = perSystem.self.proton-cachyos-bin.steamcompattool;
   desktop.autologin = true;
-
-  desktop.games = {
-    oblivion = {
-      exe = "/home/christoph/Games/Oblivion/OblivionRemastered.exe";
-      gameid = "2623190";
-      icon = {
-        url = "https://cdn2.steamgriddb.com/icon/beddc9f9e1c9b438dc4246e494644ce4.ico";
-        sha256 = "sha256-tJkkjbDw6Ok7rghwO3G13gqOxBSseKZWYXVX6lbpkXg=";
-      };
-      cover = {
-        url = "https://cdn2.steamgriddb.com/grid/97d2ff5928c5e71eb02cece4fcd57337.png";
-        sha256 = "sha256-WInirFJ7WOnPZQy9O28JFR2a3eKXBxbDsHwRvOr9oMI=";
-      };
-    };
-    cyberpunk2077 = {
-      exe = "/home/christoph/Games/Cyberpunk2077/bin/x64/Cyberpunk2077.exe";
-      gameid = "1091500";
-      icon = {
-        url = "https://cdn2.steamgriddb.com/icon/e0481545062e383969b6c020ad73e2f8.ico";
-        sha256 = "sha256-PZZLXT/4MMuOknKxv/4hRTzB18+8LlTksYGwci/wx1o=";
-      };
-      cover = {
-        url = "https://cdn2.steamgriddb.com/grid/4030e2eebb977639f8836aa25a293e40.png";
-        sha256 = "sha256-jvMb98Oeb/zw78yCUg2GnHXjLx5piLT41NgsxHcDNF8=";
-      };
-    };
-    kdc = {
-      name = "Kingdom Come Delivernce II";
-      exe = "/media/Games/Kingdom Come Deliverance/bin/Win64/KingdomCome.exe";
-      gameid = "379430";
-      icon = {
-        url = "https://cdn2.steamgriddb.com/icon/b0fae80dbb4cabab2a00827fd7389f21.ico";
-        sha256 = "sha256-4AlJBnrz8HWFf3BAbc5QGo+L/zeFEqdgCZjDgGqKU2g=";
-
-      };
-      cover = {
-        url = "https://cdn2.steamgriddb.com/grid/107e5674373e2e3e4b1a0fc42b7bb190.png";
-        sha256 = "sha256-4PTClV/1aqrEmfK2SFJPxEIySaOtGnkce/X/V30fd/0=";
-      };
-    };
-    sims4 = {
-      name = "Sims 4";
-      exe = "/media/Games/Sims4/Game/Bin/TS4_x64.exe";
-      args = "-alwaysoffline";
-      gameid = "1222670";
-      store = "ea";
-      icon = {
-        url = "https://cdn2.steamgriddb.com/icon/9fc664916bce863561527f06a96f5ff3.ico";
-        sha256 = "sha256-lzpG3meHStM0z/Ltocn5nFjH/Aa842bdhGWPuvr7fV0=";
-
-      };
-      cover = {
-        url = "https://cdn2.steamgriddb.com/grid/5c1d8b6ff107dafb76906e0334e62a87.png";
-        sha256 = "sha256-H++/rHaMtY4X2JGnBaZKJ60hYo3y80xnhxhhSjU+qMU=";
-      };
-
-    };
-    x4 = {
-      name = "X4: Foundations";
-      exe = "/home/christoph/Games/X4/X4.exe";
-      env = {
-        PROTON_ENABLE_WAYLAND = "0";
-      };
-      args = " -language 49 -voicelanguage 49";
-      store = "gog";
-      gameid = "392160";
-      icon = {
-        url = "https://www.egosoft.com/img/x4-logo_200px.png";
-        sha256 = "sha256-ECaknWJ8ukZGeg6zLkF+E8xkj8X6VZVd6FhT1VtCg1M=";
-      };
-      cover = {
-        url = "https://cdn2.steamgriddb.com/grid/b15628b1d6e0282e0e81d2c7020c23f6.png";
-        sha256 = "sha256-WtweMsq+bvcQumUsfCrlGlcJhcFgiFfLntfgsCqo7pQ=";
-      };
-    };
-    rdr2 = {
-      name = "Red Dead Redemption II";
-      exe = "/media/Games/RDR2/Bin/RDR.exe";
-      gameid = "1174180";
-      store = "epic";
-      icon = {
-        url = "https://cdn2.steamgriddb.com/icon/2e65f2f2fdaf6c699b223c61b1b5ab89.png";
-        sha256 = "sha256-vdgmwtNQwjXADdz/puUX+jCNAP1FHozX0IVfqpD92F8=";
-
-      };
-      cover = {
-        url = "https://cdn2.steamgriddb.com/grid/3940304b536796dcc176aa83203a3955.png";
-        sha256 = "sha256-kWi8zpSm5hHqTviNwv4ZHcUBrpNk/8ZVYxWGXGPDybs=";
-      };
-
-    };
-  };
 
   sys.boot.secureBoot = true;
   sys.disk.device = "/dev/nvme0n1";
@@ -220,7 +126,7 @@ in
       "${pkgs.driversi686Linux.mesa}/share/vulkan/icd.d/radeon_icd.i686.json" # Mesa RADV 32-bit
     ];
 
-    AMD_VULKAN_ICD = "RADV";
+  #  AMD_VULKAN_ICD = "RADV";
 
     MESA_LOADER_DRIVER_OVERRIDE = "radeonsi";
   };

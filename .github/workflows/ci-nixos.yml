@@ -43,15 +43,21 @@ jobs:
          DEBIAN_FRONTEND=noninteractive
          sudo apt-get update -q -y && sudo apt-get install -q -y qemu-system-aarch64 binfmt-support qemu-user-static
       if: contains(matrix.hostname, 'oca')
-    - name: Maximize build space
-      uses: easimon/maximize-build-space@v10
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
       with:
-        remove-android: 'true'
-        remove-dotnet: 'true'
-        remove-haskell: 'true'
-        #build-mount-path: /nix
-        swap-size-mb: 1024
-        root-reserve-mb: 50192
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: true
+        
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
     - uses: actions/checkout@v5.0.0
     - uses: DeterminateSystems/nix-installer-action@v20
       with:

@@ -19,7 +19,7 @@
   };
 
   network.router = {
-    enable = true;
+    enable = false;
     internalInterface = "enp1s0";
     externalInterface = "enp2s0f1";
   };
