@@ -45,9 +45,11 @@ in {
         uid = 1000;
 
         openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK17U08FmWSeTBdZaKc905+DbCPsAO22ycB6BQEW7fwA christoph@oca"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII1MrbLLO4xfy0qns7diUDklWd8LthvvdKIMdydKNb9f christoph@oca"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwrR18ub6bgzehbzGzwFu4gBXPuBfkXCYLlqS9Qbal2 christoph@x13"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJznPNQqLgyHNL2Cxbtx3RO6BncMpC1Bpyae/edKW7oH christoph@tower"
+
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBMM61ElzdrJV9KqIcktRE52m/TGZ4fWbbiddNcEj8s/" #w        
         ];
 
         linger = mkDefault false;

@@ -17,7 +17,6 @@ in {
   # virt.podman = true;
 
   host.vm = true;
-host.bootstrap = true;
   shell.devtools = enabled;
 
   # svc.proxy = enabled;
