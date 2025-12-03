@@ -5,13 +5,11 @@
   config,
   options,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
   inherit (flake.lib) enabled;
   cfg = config.desktop;
-in
-{
+in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       brightnessctl
@@ -44,6 +42,9 @@ in
 
       moonlight-qt
 
+      vscode
+
+      ghostty
     ];
 
     home.files.".local/share/applications/neovide-oca.desktop".text = ''
@@ -54,7 +55,5 @@ in
       Type=Application
       Categories=Development;IDE;
     '';
-
   };
-
 }

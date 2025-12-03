@@ -60,6 +60,7 @@ in {
         gemini-cli
         qwen-code
         crush
+        code
       ]);
 
     home.rum.programs.tealdeer = {

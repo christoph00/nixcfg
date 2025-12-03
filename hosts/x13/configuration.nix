@@ -2,16 +2,15 @@
   flake,
   pkgs,
   ...
-}:
-{
-  imports = [ flake.modules.nixos.host ];
+}: {
+  imports = [flake.modules.nixos.host];
   facter.reportPath = ./facter.json;
   networking.hostName = "x13";
   hw.cpu = "intel";
   hw.gpu = "intel";
   hw.ram = 16;
   host.graphical = true;
-  sys.boot.secureBoot = true;
+  sys.boot.secureBoot = false;
   sys.disk.device = "/dev/nvme0n1";
   sys.disk.encrypted = true;
 
@@ -29,7 +28,6 @@
       # pkgs.mesa.opencl
       intel-media-driver
       # pkgs.intel-compute-runtime
-
     ];
   };
 
@@ -74,7 +72,7 @@
       "ahci.mobile_lpm_policy=3"
       "mitigations=off"
     ];
-    initrd.kernelModules = [ "i915" ];
+    initrd.kernelModules = ["i915"];
 
     kernelModules = [
       "kvm-intel"
@@ -90,7 +88,6 @@
       options snd-intel-dspcfg dsp_driver=1
       options thinkpad_acpi fan_control=1 experimental=1
     '';
-
   };
 
   services.fstrim.enable = true;
@@ -110,5 +107,4 @@
   services.power-profiles-daemon.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
-
 }
