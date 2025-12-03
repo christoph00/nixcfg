@@ -39,6 +39,8 @@ in {
       starship
     ];
 
+    programs.rust-motd = enabled;
+
     programs.zsh.enable = true;
 
     home.rum.programs.zsh = {
