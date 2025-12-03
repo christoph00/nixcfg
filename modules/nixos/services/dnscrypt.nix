@@ -12,7 +12,7 @@ let
 in
 {
   options.svc.dnscrypt = {
-    enable = mkBoolOpt true;
+    enable = mkBoolOpt false;
     localDNS = mkStrOpt "$DHCP";
   };
   config = mkIf cfg.enable {

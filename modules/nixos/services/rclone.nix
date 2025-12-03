@@ -57,7 +57,7 @@ let
 in
 {
   options.svc.rclone = {
-    enable = mkBoolOpt (!config.host.bootstrap);
+    enable = mkBoolOpt false;
     config = mkStrOpt config.age.secrets.rclone.path;
 
   };

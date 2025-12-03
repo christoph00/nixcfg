@@ -34,7 +34,6 @@ in
       wlr.enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
-        xdg-desktop-portal-gnome
       ];
       config.common = {
         default = [
@@ -59,15 +58,10 @@ in
       toEnvExport config.hjem.users.christoph.environment.sessionVariables;
 
     services = {
-      gvfs.enable = true;
-
-      udisks2.enable = true;
-
       dbus = {
         enable = true;
         implementation = "broker";
 
-        packages = builtins.attrValues { inherit (pkgs) dconf gcr udisks2; };
       };
 
       timesyncd.enable = true;
@@ -105,14 +99,14 @@ in
     };
 
     systemd.user.services = {
-      waybar = mkIf cfg.waybar {
-        description = "Waybar as systemd service";
-        path = [ config.system.path ];
-        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "app-graphical.slice";
-      };
+#      waybar = mkIf cfg.waybar {
+#        description = "Waybar as systemd service";
+#        path = [ config.system.path ];
+#        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
+#        wantedBy = [ "graphical-session.target" ];
+#        after = [ "graphical-session.target" ];
+#        serviceConfig.Slice = "app-graphical.slice";
+#      };
       # sfwbar = mkIf cfg.sfwbar {
       #   description = "sfwbar";
       #   script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.sfwbar}/bin/sfwbar";

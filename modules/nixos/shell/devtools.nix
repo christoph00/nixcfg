@@ -27,11 +27,11 @@ in
       VISUAL = "nvim";
     };
 
-    age.secrets.aider = mkSecret {
-      file = "aider";
-      mode = "0400";
-      owner = "christoph";
-    };
+#    age.secrets.aider = mkSecret {
+#      file = "aider";
+#      mode = "0400";
+#      owner = "christoph";
+#    };
 
     environment.systemPackages = with pkgs; [
       iwe

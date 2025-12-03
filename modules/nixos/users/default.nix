@@ -47,12 +47,7 @@ in
       uid = 1000;
 
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFXvfa+PwkdnF9PIOT0T3qb42Kduklar59uog8ugm2fx christoph@oca"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmHJIHJYMl/0awPcEeftLSxDKGVWmN0jhYPQ5hCINxD christoph@wrk"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAHqEQOgEdi3e8uPWqE2nqzyiKC9Y792C5tNKco6lz4o christoph@tower"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHoppzmns1lt6TT2otVKHn1ErtUn5pNzJXbViaYymrLn christoph@x13"
-
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDrBVHoPvd10kDl4WjgUqWh3PdMzrDRXauG3zkfYocjt n8n" # TODO: add to agent user
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK17U08FmWSeTBdZaKc905+DbCPsAO22ycB6BQEW7fwA christoph@oca"
       ];
 
       linger = mkDefault false;

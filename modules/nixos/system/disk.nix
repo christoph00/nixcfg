@@ -74,7 +74,7 @@ let
       "@swap" = {
         mountpoint = "/.swapvol";
         swap = {
-          swapfile.size = cfg.swapSize;
+          swapfile.size = cfg.disk.swapSize;
         };
       };
     };

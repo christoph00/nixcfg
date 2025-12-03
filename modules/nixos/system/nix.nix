@@ -58,7 +58,6 @@ in
   ];
 
   nix = {
-    package = pkgs.lix;
     gc = {
       automatic = true;
       dates = "Mon *-*-* 04:00";
@@ -103,10 +102,6 @@ in
         "auto-allocate-uids"
 
         "cgroups"
-
-        "repl-flake"
-
-        "pipe-operator"
 
         "fetch-closure"
 

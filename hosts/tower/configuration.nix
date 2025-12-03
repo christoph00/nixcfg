@@ -23,16 +23,12 @@ in
   host.graphical = true;
   host.gaming = true;
 
-  svc.actions-runner = enabled;
-
   desktop.enable = true;
-  desktop.remote = true;
-  desktop.gaming.enable = true;
-  desktop.gaming.proton = perSystem.self.proton-cachyos-bin.steamcompattool;
+  desktop.remote = false;
   desktop.autologin = true;
 
-  sys.boot.secureBoot = true;
-  sys.disk.device = "/dev/nvme0n1";
+  sys.boot.secureBoot = false;
+  sys.disk.device = "/dev/disk/by-id/ata-Samsung_SSD_840_PRO_Series_S12PNEAD417298N";
   sys.disk.encrypted = true;
 
   services.sabnzbd = enabled;
@@ -87,9 +83,7 @@ in
       vulkan-loader
       vulkan-extension-layer
       vulkan-validation-layers
-      amdvlk
     ];
-    extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -97,52 +91,19 @@ in
   hardware.amdgpu = {
     opencl.enable = true;
     initrd.enable = true;
-    legacySupport.enable = true;
-    amdvlk.enable = true;
-    amdvlk.support32Bit.enable = true;
     overdrive = {
       enable = true;
       ppfeaturemask = "0xffffffff";
     };
   };
 
-  environment.variables = {
-    # RADV_PERFTEST = "sam,video_decode,transfer_queue";
-    LIBVA_DRIVER_NAME = "radeonsi";
-    VDPAU_DRIVER = "radeonsi";
-    ROC_ENABLE_PRE_VEGA = "1";
-
-    # VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
-
-    VK_DRIVER_FILES = lib.concatStringsSep ":" [
-      "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json"
-      "/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json"
-      "/run/opengl-driver/share/vulkan/icd.d/amd_icd64.json"
-      "/run/opengl-driver-32/share/vulkan/icd.d/amd_icd32.json"
-    ];
-
-    VK_ICD_FILENAMES = lib.concatStringsSep ":" [
-      "${pkgs.mesa}/share/vulkan/icd.d/radeon_icd.x86_64.json" # Mesa RADV 64-bit
-      "${pkgs.driversi686Linux.mesa}/share/vulkan/icd.d/radeon_icd.i686.json" # Mesa RADV 32-bit
-    ];
-
-  #  AMD_VULKAN_ICD = "RADV";
-
-    MESA_LOADER_DRIVER_OVERRIDE = "radeonsi";
-  };
-
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
-  systemd.tmpfiles.rules = [
-    "L+ /opt/rocm/hip - - - - ${pkgs.rocmPackages.clr}"
-  ];
+  services.xserver.videoDrivers = [ "amdgpu" "i915" ];
 
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
     "i2c_dev"
-    "amdgpu"
   ];
   boot.kernelParams = [
     # "mem_sleep_default=deep"
@@ -159,7 +120,6 @@ in
       "xhci_pci"
       "ahci"
       "nvme"
-      "amdgpu"
     ];
   };
 

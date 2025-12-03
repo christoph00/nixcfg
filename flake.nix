@@ -63,7 +63,7 @@
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     nvf = {
-      url = "github:notashelf/nvf";
+      url = "github:notashelf/nvf/v0.8";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.mnw.follows = "mnw";
     };
@@ -98,7 +98,6 @@
 
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     microvm = {

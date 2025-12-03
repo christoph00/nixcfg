@@ -108,7 +108,6 @@ in
 
     services.greetd = {
       enable = true;
-      vt = 2;
       restart = false;
 
       settings = {

@@ -6,30 +6,25 @@
   flake,
   perSystem,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
   inherit (flake.lib) enabled;
-in
-{
+in {
   imports = [
     inputs.nvf.nixosModules.default
-    ./mcphub.nix
-    ./repl.nix
-    ./mail.nix
-    ./notes.nix
+    #    ./mcphub.nix
+    #    ./repl.nix
+    #    ./mail.nix
+    #    ./notes.nix
   ];
 
   config = mkIf config.programs.nvf.enable {
-
     programs.nvf = {
-
       settings = {
         vim = {
-          additionalRuntimePaths = [ ./runtime ];
+          # additionalRuntimePaths = [ ./runtime ];
           extraLuaFiles = [
-            ./autocmds.lua
-            ./codecompanion-fidget.lua
+            # ./autocmds.lua
           ];
           globals.mapleader = " ";
           enableLuaLoader = true;
@@ -74,7 +69,6 @@ in
             encoding = "utf-8";
             fileencoding = "utf-8";
             fillchars = "eob: "; # Disable the "~" chars at end of buffer
-
           };
 
           ui = {
@@ -228,7 +222,7 @@ in
             whichKey = {
               enable = true;
               setupOpts = {
-                preset = "helix";
+                # preset = "helix";
                 win.border = "none";
               };
             };
@@ -291,154 +285,6 @@ in
               "blink-compat"
               "nvim-treesitter"
             ];
-
-          };
-          assistant.codecompanion-nvim = {
-            enable = true;
-            setupOpts = {
-              opts.language = "German";
-              adapters = {
-                _type = "lua-inline";
-
-                # Model list https://codecompanion.olimorris.dev/usage/chat-buffer/agents#compatibility
-                expr = ''
-                  {
-                    copilot = function()
-                      return require('codecompanion.adapters').extend('copilot', {
-                        schema = {
-                          model = {
-                            default = 'claude-sonnet-4',
-                            choices = {
-                              'claude-sonnet-4',
-                              'gpt-4.1,'
-                            },
-                          },
-                        },
-                      })
-                    end,
-
-                    openrouter = function()
-                       return require("codecompanion.adapters").extend("openai_compatible", {
-                         env = {
-                           url = "https://openrouter.ai/api",
-                           api_key = function()
-                            return _G.keyloader.get('OPENROUTER_API_KEY')
-                           end,
-                            chat_url = "/v1/chat/completions",
-                        },
-                        parameters = {
-                          provider = {
-                            allow_fallbacks = false,
-                          },
-                          stream = true,
-                        },
-                        schema = {
-                          model = {
-                            default = "deepseek/deepseek-chat-v3-0324:free",
-                            choices = {
-                              "deepseek/deepseek-chat-v3-0324:free",
-                              "mistralai/devstral-small:free",
-                              "meta-llama/llama-4-maverick:free",
-                              -- "anthropic/claude-3.7-sonnet",
-                              -- "anthropic/claude-3.5-sonnet",
-                              -- "deepseek/deepseek-chat-v3-0324",
-                              -- "deepseek/deepseek-r1",
-                            },
-                          },
-                        },
-                      })
-                    end,
-
-                  }
-                '';
-              };
-              display.diff.provider = "mini_diff";
-              display = {
-                chat = {
-                  # Basic UI improvements
-                  intro_message = "Welcome to CodeCompanion ✨! Press ? for options";
-                  show_header_separator = true; # Show separators between messages
-                  auto_scroll = true; # Auto-scroll as responses come in
-
-                  # Show LLM model and settings at the top
-                  show_settings = false; # This displays the model being used
-                  show_token_count = false; # Show token usage
-                  show_references = true; # Show references from slash commands
-
-                  # Custom token count display function
-                  token_count = {
-                    _type = "lua-inline";
-                    expr = ''
-                      function(tokens, adapter)
-                        return string.format(" 🤖 %s (%d tokens)", adapter.formatted_name, tokens)
-                      end
-                    '';
-                  };
-
-                  # Window styling
-                  separator = "─"; # Visual separator between messages
-                  window = {
-                    layout = "vertical";
-                    border = "rounded"; # Better looking border
-                    height = 0.8;
-                    width = 0.45;
-                  };
-                };
-              };
-
-              strategies = {
-                agent.adapter = "openrouter";
-                chat = {
-                  adapter = "openrouter";
-                  roles = {
-                    _type = "lua-inline";
-                    expr = ''
-                      {
-                        llm = function(adapter)
-                          return string.format("🤖 %s (%s)", adapter.formatted_name, adapter.schema.model.default)
-                        end,
-                        user = "👤 Me"
-                      }
-                    '';
-                  };
-                  keymaps = {
-                    close = {
-                      modes = {
-                        n = "q";
-                      };
-                      index = 3;
-                      callback = "keymaps.close";
-                      description = "Close Chat";
-                    };
-                    stop = {
-                      modes = {
-                        n = "<C-c>";
-                      };
-                      index = 4;
-                      callback = "keymaps.stop";
-                      description = "Stop Request";
-                    };
-                  };
-                };
-                inline = {
-                  adapter = "openrouter";
-                };
-
-              };
-
-              extensions = {
-                mcphub = {
-                  callback = "mcphub.extensions.codecompanion";
-                  opts = {
-                    show_result_in_chat = true;
-                    make_vars = true;
-                    make_slash_commands = true;
-                    auto_register_servers = true;
-                  };
-                };
-              };
-
-            };
           };
           autocomplete.enableSharedCmpSources = true;
           autocomplete.blink-cmp = {
@@ -457,7 +303,7 @@ in
 
               keymap = {
                 preset = "enter";
-                "<C-y>" = [ "select_and_accept" ];
+                "<C-y>" = ["select_and_accept"];
                 "<A-y>" = [
                   (lib.generators.mkLuaInline ''
                     function(cmp)
@@ -501,7 +347,7 @@ in
                     };
                   };
                 };
-                menu.draw.treesitter = [ "lsp" ];
+                menu.draw.treesitter = ["lsp"];
                 menu = {
                   winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:None";
                 };
@@ -510,58 +356,7 @@ in
                   auto_show_delay_ms = 100;
                 };
               };
-
             };
-          };
-
-          extraPlugins = {
-            "venv-selector.nvim" = {
-              package = pkgs.vimUtils.buildVimPlugin {
-                pname = "venv-selector.nvim";
-                version = "2025-03-22";
-                src = pkgs.fetchFromGitHub {
-                  owner = "linux-cultist";
-                  repo = "venv-selector.nvim";
-                  rev = "c677caa1030808a9f90092e522de7cc20c1390dd";
-                  sha256 = "1wz9fci60ii4c2k04vxzd74vrdhfyg60s6smm0xbyvc8x57ph1x2";
-                };
-                meta.homepage = "https://github.com/linux-cultist/venv-selector.nvim/";
-                nvimSkipModule = [
-                  "venv-selector.cached_venv"
-                ];
-              };
-              setup = "require('venv-selector').setup {}";
-            };
-            minuet = {
-              package = pkgs.vimPlugins.minuet-ai-nvim;
-              setup = "
-              require('minuet').setup {
-                provider = 'codestral',
-                n_completions = 1, -- recommend for local model for resource saving
-                -- I recommend beginning with a small context window size and incrementally
-                -- expanding it, depending on your local computing power. A context window
-                -- of 512, serves as an good starting point to estimate your computing
-                -- power. Once you have a reliable estimate of your local computing power,
-                -- you should adjust the context window to a larger value.
-                context_window = 1024,
-                provider_options = {
-                  codestral = {
-                      model = 'codestral-latest',
-                      end_point = 'https://codestral.mistral.ai/v1/fim/completions',
-                      api_key = function()
-                        return _G.keyloader.get('CODESTRAL_API_KEY')
-                      end,
-                      stream = true,
-                      optional = {
-                          stop = nil, -- the identifier to stop the completion generation
-                          max_tokens = nil,
-                      },
-                  },
-              },
-            }
-            ";
-            };
-
           };
 
           languages = {
@@ -574,10 +369,6 @@ in
             # Languages
             nix = {
               enable = true;
-              format = {
-                type = "nixfmt";
-                package = pkgs.nixfmt-rfc-style;
-              };
               lsp = {
                 enable = true;
                 server = "nixd";
@@ -604,7 +395,6 @@ in
                 enable = true;
                 autotagHtml = true;
               };
-
             };
             bash.enable = true;
             # yaml.enable = true;
@@ -612,14 +402,12 @@ in
           };
           lsp = {
             enable = true;
-            lspconfig.enable = true;
             formatOnSave = true;
             # lspkind.enable = true;
             trouble.enable = true;
             otter-nvim.enable = true;
             lspsaga.enable = false;
             null-ls = enabled;
-
           };
 
           telescope = {
@@ -683,84 +471,24 @@ in
             #   key = "<leader>sw";
             #   mode = "n";
             # }
-            {
-              mode = "n";
-              key = "<leader>aa";
-              action = "<cmd>CodeCompanionActions<CR>";
-              desc = "CodeCompanion Actions";
-            }
-            {
-              mode = "v";
-              key = "<leader>aa";
-              action = "<cmd>CodeCompanionActions<CR>";
-              desc = "CodeCompanion Actions";
-            }
-            {
-              mode = "n";
-              key = "<leader>ac";
-              action = "<cmd>CodeCompanionChat<CR>";
-              desc = "Open Code Companion Chat";
-            }
-            {
-              mode = "n";
-              key = "<leader>ap";
-              action = "<cmd>CodeCompanion<CR>";
-              desc = "Open Code Companion Prompt";
-            }
-            {
-              mode = "n";
-              key = "<leader>tt";
-              action = "<cmd>ToggleTerm direction=float<CR>";
-            }
-            {
-              mode = "n";
-              key = "<leader>q";
-              action = "<C-w>q";
-              desc = "Close Window";
-            }
-            {
-              mode = "n";
-              key = "<leader>w";
-              action = "<C-w>";
-            }
-            {
-              mode = "n";
-              key = "gx";
-              action = ''
-                function()
-                  local url = vim.fn.expand('<cfile')
-                  if url and #url > 0 then
-                    vim.fn.streg('+', url)
-                    vim.notify("URL: " .. url, vim.log.levels.INFO, {title = "Clipboard"})
-                  else
-                    vim.notify("No URL Found", vim.log.levels.WARN, {title = "Clipboard"})
-                  end
-                end
-              '';
-            }
           ];
 
           luaConfigPost = ''
 
-            local keyloader = require('keyloader')
-            keyloader.load_keys("${config.age.secrets.api-keys.path}")
 
-            _G.keyloader = keyloader
-
-
-             if vim.g.neovide then
-               vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
-               vim.keymap.set('v', '<D-c>', '"+y') -- Copy
-               vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
-               vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
-               vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
-               vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
-             end
-             vim.filetype.add({
-              pattern = {
-               ['.*%.blade%.php'] = 'php',
-              }
-             });
+            if vim.g.neovide then
+              vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+              vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+              vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+              vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+              vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+              vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+            end
+            vim.filetype.add({
+             pattern = {
+              ['.*%.blade%.php'] = 'php',
+             }
+            });
           '';
         };
       };
