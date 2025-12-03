@@ -22,7 +22,7 @@ in
     enable = mkBoolOpt true;
     enableWifi = mkBoolOpt false;
     enableDHCPLAN = mkBoolOpt true;
-    enableNM = mkBoolOpt config.host.graphical;
+    enableNM = mkBoolOpt config.host.graphical "Enable NetworkManager";
     lanInterface = mkStrOpt "en*";
 
   };
@@ -63,9 +63,8 @@ in
 
       wireless = mkIf cfg.enableWifi {
         enable = false;
-        userControlled = enabled;
         iwd = {
-          enable = true;
+          enable = mkIf (!cfg.enableNM) true;
           settings.General.EnableNetworkConfiguration = true;
           settings.Settings.AutoConnect = true;
         };
@@ -92,7 +91,7 @@ in
       wait-online.anyInterface = true;
       networks = {
         "20-wireless" = mkIf cfg.enableWifi {
-          matchConfig.Name = "wlp*";
+          matchConfig.Name = [ "wlp*" "wlan*" ];
           networkConfig.DHCP = "yes";
           dhcpConfig.RouteMetric = 20;
         };

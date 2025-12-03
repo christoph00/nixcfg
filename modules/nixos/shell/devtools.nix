@@ -6,20 +6,17 @@
   flake,
   perSystem,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
   inherit (flake.lib) mkBoolOpt mkSecret enabled;
   cfg = config.shell.devtools;
-in
-{
+in {
   options.shell.devtools = {
     enable = mkBoolOpt config.host.graphical;
     tmux = mkBoolOpt true;
   };
 
   config = mkIf cfg.enable {
-
     programs.nvf = enabled;
 
     environment.variables = {
@@ -27,54 +24,48 @@ in
       VISUAL = "nvim";
     };
 
-#    age.secrets.aider = mkSecret {
-#      file = "aider";
-#      mode = "0400";
-#      owner = "christoph";
-#    };
+    #    age.secrets.aider = mkSecret {
+    #      file = "aider";
+    #      mode = "0400";
+    #      owner = "christoph";
+    #    };
 
-    environment.systemPackages = with pkgs; [
-      iwe
-      fzf
-      fd
-      yazi
-      bc
-      gitu
-
-      devenv
-
-      curlie
-
-      goose-cli
-      codex
-
-      dotenvy
-
-      go
-
-      katana
-      httrack
-
-      nodejs
-      uv
-      python3
-
-      pass
-
-      repomix
-
-      php
-      php84Packages.composer
-      python312Packages.pylance
-      intelephense
-
-    ];
+    environment.systemPackages =
+      (with pkgs; [
+        iwe
+        fzf
+        fd
+        yazi
+        bc
+        gitu
+        devenv
+        curlie
+        dotenvy
+        go
+        katana
+        httrack
+        nodejs
+        uv
+        python3
+        pass
+        repomix
+        php
+        php84Packages.composer
+        python312Packages.pylance
+        intelephense
+      ])
+      ++ (with perSystem.nix-ai-tools; [
+        claude-code
+        opencode
+        gemini-cli
+        qwen-code
+        crush
+      ]);
 
     home.rum.programs.tealdeer = {
       enable = true;
       settings = {
         auto_update = true;
-
       };
     };
 
@@ -124,6 +115,5 @@ in
 
       '';
     };
-
   };
 }

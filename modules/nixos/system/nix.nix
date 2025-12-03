@@ -3,16 +3,12 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   inherit (lib) mkDefault mkForce;
-in
-{
-
+in {
   environment = {
-    systemPackages = [ pkgs.git ];
+    systemPackages = [pkgs.git];
     variables.NIXPKGS_CONFIG = mkForce "";
-
   };
 
   programs.nh = {
@@ -36,24 +32,36 @@ in
 
   nixpkgs.overlays = [
     (_: prev: {
-      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-        (_: python-prev: {
-          rapidocr-onnxruntime = python-prev.rapidocr-onnxruntime.overridePythonAttrs (self: {
-            pythonImportsCheck = if python-prev.stdenv.isAarch64 then [ ] else [ "rapidocr_onnxruntime" ];
-            doCheck = !(python-prev.stdenv.isAarch64);
-            meta = self.meta // {
-              badPlatforms = [ ];
-            };
-          });
-          chromadb = python-prev.chromadb.overridePythonAttrs (self: {
-            pythonImportsCheck = if python-prev.stdenv.isAarch64 then [ ] else [ "chromadb" ];
-            doCheck = !(python-prev.stdenv.isAarch64);
-            meta = self.meta // {
-              broken = false;
-            };
-          });
-        })
-      ];
+      pythonPackagesExtensions =
+        prev.pythonPackagesExtensions
+        ++ [
+          (_: python-prev: {
+            rapidocr-onnxruntime = python-prev.rapidocr-onnxruntime.overridePythonAttrs (self: {
+              pythonImportsCheck =
+                if python-prev.stdenv.isAarch64
+                then []
+                else ["rapidocr_onnxruntime"];
+              doCheck = !(python-prev.stdenv.isAarch64);
+              meta =
+                self.meta
+                // {
+                  badPlatforms = [];
+                };
+            });
+            chromadb = python-prev.chromadb.overridePythonAttrs (self: {
+              pythonImportsCheck =
+                if python-prev.stdenv.isAarch64
+                then []
+                else ["chromadb"];
+              doCheck = !(python-prev.stdenv.isAarch64);
+              meta =
+                self.meta
+                // {
+                  broken = false;
+                };
+            });
+          })
+        ];
     })
   ];
 
@@ -66,7 +74,7 @@ in
 
     optimise = {
       automatic = true;
-      dates = [ "04:41" ];
+      dates = ["04:41"];
     };
 
     daemonCPUSchedPolicy = "idle";
@@ -79,8 +87,8 @@ in
       use-cgroups = true;
       extra-platforms = config.boot.binfmt.emulatedSystems;
       auto-optimise-store = true;
-      allowed-users = [ "@wheel" ];
-      trusted-users = [ "@wheel" ];
+      allowed-users = ["@wheel"];
+      trusted-users = ["@wheel"];
       max-jobs = "auto";
       sandbox = true;
       system-features = [
@@ -117,8 +125,8 @@ in
         "https://chr.cachix.org"
         "https://nyx.chaotic.cx/"
         "https://nix-community.cachix.org"
-        "https://cosmic.cachix.org"
         "https://cache.garnix.io"
+        "https://numtide.cachix.org"
       ];
 
       trusted-public-keys = [
@@ -126,9 +134,8 @@ in
         "chr.cachix.org-1:8Z0vNVd8hK8lVU53Y26GHDNc6gv3eFzBNwSYOcUvsgA="
         "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+        "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
       ];
     };
   };
-
 }

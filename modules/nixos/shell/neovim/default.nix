@@ -211,11 +211,29 @@ in {
               openYazi = "<leader><space>";
             };
           };
+
           theme = {
             enable = true;
-            name = "tokyonight";
+            name = "base16";
             transparent = true;
-            style = "day";
+            base16-colors = {
+              base00 = "#ffffff"; # Hintergrund
+              base01 = "#f8f8f8"; # heller Hintergrund
+              base02 = "#e0e0e0"; # Auswahl
+              base03 = "#7a7a7a"; # Kommentar (neu, dunkler)
+              base04 = "#505050"; # hellere Kommentare / Sekundärtext
+              base05 = "#000000"; # Standard-Text
+              base06 = "#202020"; # dunkler Text
+              base07 = "#101010"; # sehr dunkler Text
+              base08 = "#a60000"; # Rot (Fehler)
+              base09 = "#b65c00"; # Orange
+              base0A = "#a45bad"; # Magenta
+              base0B = "#006800"; # Grün
+              base0C = "#205ea6"; # Cyan/Blau
+              base0D = "#1f1f1f"; # Dunkelblau
+              base0E = "#721045"; # Violett
+              base0F = "#8f0075"; # Pink
+            };
           };
 
           binds = {
@@ -241,7 +259,7 @@ in {
               enable = true;
               lsp = {
                 enable = true;
-                server = "nixd";
+                server = ["nixd"];
               };
               treesitter.enable = true;
               extraDiagnostics.enable = true;
@@ -249,7 +267,7 @@ in {
             go.enable = true;
             php = {
               enable = true;
-              lsp.server = "intelephense";
+              lsp.server = ["intelephense"];
               lsp.enable = true;
               treesitter.enable = true;
             };

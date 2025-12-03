@@ -18,6 +18,7 @@
   desktop.enable = true;
 
   network.enableWifi = true;
+  network.enableNM = false;
 
   hardware.graphics = {
     enable = true;

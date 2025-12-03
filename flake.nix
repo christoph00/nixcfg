@@ -70,6 +70,8 @@
 
     mnw.url = "github:Gerg-L/mnw";
 
+    nix-ai-tools.url = "github:numtide/nix-ai-tools";
+
     mcphub-nvim = {
       url = "github:ravitemer/mcphub.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -113,11 +115,9 @@
         nixos-stable.follows = "nixpkgs";
       };
     };
-
   };
 
-  outputs =
-    inputs:
+  outputs = inputs:
     inputs.blueprint {
       inherit inputs;
       systems = [
