@@ -48,6 +48,7 @@ in
 
       openssh.authorizedKeys.keys = [
 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK17U08FmWSeTBdZaKc905+DbCPsAO22ycB6BQEW7fwA christoph@oca"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwrR18ub6bgzehbzGzwFu4gBXPuBfkXCYLlqS9Qbal2 christoph@x13"
       ];
 
       linger = mkDefault false;

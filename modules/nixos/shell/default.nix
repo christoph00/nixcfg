@@ -66,7 +66,6 @@ in
 
 
         eval "$(${pkgs.starship}/bin/starship init zsh)"
-        eval "$(${pkgs.atuin}/bin/atuin init zsh)"
       '';
 
       plugins = {
