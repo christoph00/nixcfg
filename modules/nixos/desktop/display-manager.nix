@@ -5,8 +5,7 @@
   options,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf concatStringsSep getExe;
   inherit (lib.types) enum;
   inherit (flake.lib) mkOpt mkBoolOpt;
@@ -87,21 +86,20 @@ let
 
 
   '';
-in
-{
+in {
   options.desktop = {
     displayManager = mkOpt (enum [
       "tuigreet"
       "cosmic-greeter"
       "regreet"
-    ]) "regreet";
+    ]) "tuigreet";
     autologin = mkBoolOpt false;
   };
   config = mkIf cfg.enable {
-
     sys.state.directories = [
       "/var/lib/cosmic-greeter"
       "/var/lib/regreet"
+      "/var/lib/greetd"
     ];
 
     programs.regreet.enable = cfg.displayManager == "regreet";
@@ -114,7 +112,7 @@ in
         default_session = mkIf (cfg.displayManager == "tuigreet") {
           user = "greeter";
           command = concatStringsSep " " [
-            (getExe pkgs.greetd.tuigreet)
+            (getExe pkgs.tuigreet)
             "--time"
             "--remember"
             "--remember-user-session"
@@ -123,8 +121,8 @@ in
           ];
         };
         initial_session = mkIf cfg.autologin {
-          command = "${getExe config.programs.uwsm.package} start -F -S -N gamewm ${gamewm}/bin/gamewm";
-          # command = "${getExe config.programs.uwsm.package} start -F -S sway.desktop";
+          # command = "${getExe config.programs.uwsm.package} start -F -S -N gamewm ${gamewm}/bin/gamewm";
+          command = "${getExe config.programs.uwsm.package} start -F -S labwc.desktop";
           user = "christoph";
         };
       };
