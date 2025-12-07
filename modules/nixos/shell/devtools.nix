@@ -53,6 +53,8 @@ in {
         php84Packages.composer
         python312Packages.pylance
         intelephense
+        gh
+        watchgha
       ])
       ++ (with perSystem.nix-ai-tools; [
         claude-code
