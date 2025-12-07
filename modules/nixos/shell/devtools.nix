@@ -58,7 +58,7 @@ in {
         claude-code
         opencode
         gemini-cli
-        qwen-code
+        # qwen-code
         crush
         code
       ]);

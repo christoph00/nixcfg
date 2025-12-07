@@ -30,41 +30,6 @@ in {
     allowBroken = true;
   };
 
-  nixpkgs.overlays = [
-    (_: prev: {
-      pythonPackagesExtensions =
-        prev.pythonPackagesExtensions
-        ++ [
-          (_: python-prev: {
-            rapidocr-onnxruntime = python-prev.rapidocr-onnxruntime.overridePythonAttrs (self: {
-              pythonImportsCheck =
-                if python-prev.stdenv.isAarch64
-                then []
-                else ["rapidocr_onnxruntime"];
-              doCheck = !(python-prev.stdenv.isAarch64);
-              meta =
-                self.meta
-                // {
-                  badPlatforms = [];
-                };
-            });
-            chromadb = python-prev.chromadb.overridePythonAttrs (self: {
-              pythonImportsCheck =
-                if python-prev.stdenv.isAarch64
-                then []
-                else ["chromadb"];
-              doCheck = !(python-prev.stdenv.isAarch64);
-              meta =
-                self.meta
-                // {
-                  broken = false;
-                };
-            });
-          })
-        ];
-    })
-  ];
-
   nix = {
     gc = {
       automatic = true;
@@ -112,14 +77,12 @@ in {
         "cgroups"
 
         "fetch-closure"
-
-        "dynamic-derivations"
       ];
       use-xdg-base-directories = true;
       keep-derivations = true;
       keep-outputs = true;
       http-connections = 50;
-      accept-flake-config = false;
+      accept-flake-config = true;
 
       substituters = [
         "https://chr.cachix.org"

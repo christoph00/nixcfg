@@ -46,11 +46,8 @@ in {
 
       ghostty
     ];
-i
 
     # for foot themes
-    environment.pathsToLink = [ "share/foot" ]
-
-  
+    environment.pathsToLink = ["share/foot"];
   };
 }
