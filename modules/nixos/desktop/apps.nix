@@ -46,14 +46,11 @@ in {
 
       ghostty
     ];
+i
 
-    home.files.".local/share/applications/neovide-oca.desktop".text = ''
-      [Desktop Entry]
-      Name=Neovide OCA
-      Exec=${pkgs.neovide}/bin/neovide --server 100.77.155.15:10066
-      Icon=${pkgs.neovide}/share/icons/hicolor/256x256/apps/neovide.png
-      Type=Application
-      Categories=Development;IDE;
-    '';
+    # for foot themes
+    environment.pathsToLink = [ "share/foot" ]
+
+  
   };
 }
