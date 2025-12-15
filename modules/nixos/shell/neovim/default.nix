@@ -72,25 +72,12 @@ in {
           };
 
           ui = {
-            noice = {
-              enable = false;
-              setupOpts = {
-                lsp.progress.enabled = false;
-                notify.enabled = false;
-              };
-            };
-
             borders = enabled;
             illuminate = enabled;
           };
 
           statusline.lualine = {
             enable = true;
-          };
-
-          dashboard.alpha = {
-            enable = true;
-            theme = "theta";
           };
 
           visuals.fidget-nvim = {
@@ -159,19 +146,18 @@ in {
             setupOpts = {
               enimate.enabled = true;
               bigfile.enabled = true;
-              # picker = {
-              #   enabled = false;
-              #   sources = {
-              #     explorer = {
-              #       layout = {
-              #         preset = "vertical";
-              #         preview = true;
-              #       };
-              #       auto_close = true;
-              #     };
-              #   };
-              # };
-              # dashboard.enabled = true;
+              picker = {
+                enabled = false;
+                sources = {
+                  explorer = {
+                    layout = {
+                      preset = "vertical";
+                      preview = true;
+                    };
+                    auto_close = true;
+                  };
+                };
+              };
               input.enabled = true;
               indent = {
                 enabled = true;
@@ -247,6 +233,18 @@ in {
             cheatsheet = enabled;
           };
 
+          autocomplete.blink-cmp = {
+            enable = true;
+            friendly-snippets.enable = true;
+            setupOpts = {
+              signature.enabled = true;
+              cmdline = {
+                keymap.preset = "cmdline";
+                completion.menu.auto_show = true;
+              };
+            };
+          };
+
           languages = {
             # Options applied to all languages
             enableFormat = true;
@@ -259,7 +257,7 @@ in {
               enable = true;
               lsp = {
                 enable = true;
-                server = ["nixd"];
+                servers = ["nixd"];
               };
               treesitter.enable = true;
               extraDiagnostics.enable = true;
@@ -267,7 +265,7 @@ in {
             go.enable = true;
             php = {
               enable = true;
-              lsp.server = ["intelephense"];
+              lsp.servers = ["intelephense"];
               lsp.enable = true;
               treesitter.enable = true;
             };
@@ -298,15 +296,9 @@ in {
             null-ls = enabled;
           };
 
-          telescope = {
-            enable = true;
-            mappings = {
-              buffers = "<leader>fb";
-              findFiles = "<leader>ff";
-            };
-          };
           treesitter = {
             enable = true;
+            context.enable = true;
             addDefaultGrammars = true;
             autotagHtml = true;
             # Maybe just install every single one?
@@ -318,6 +310,33 @@ in {
               blade
               html
             ];
+          };
+
+          assistant = {
+            avante-nvim = {
+              enable = false;
+            };
+            chatgpt.enable = false;
+            codecompanion-nvim = {
+              enable = true;
+              setupOpts = {
+                strategies = {
+                  chat = {
+                    adapter = "ollama";
+                  };
+                  inline = {
+                    adapter = "ollama";
+                  };
+                  cmd = {
+                    adapter = "ollama";
+                  };
+                };
+              };
+            };
+            copilot = {
+              enable = true;
+              cmp.enable = true;
+            };
           };
 
           keymaps = [

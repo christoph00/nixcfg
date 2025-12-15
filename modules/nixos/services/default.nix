@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./homeassistant
     ./dnscrypt.nix
@@ -23,6 +22,7 @@
     ./actions-runner.nix
     ./proxy.nix
     ./sabnzbd.nix
+    # ./vector.nix
     ./agentgateway.nix
     ./mcp-proxy.nix
     # ./litellm.nix

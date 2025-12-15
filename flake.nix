@@ -65,8 +65,8 @@
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     nvf = {
-      url = "github:notashelf/nvf/v0.8";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.mnw.follows = "mnw";
     };
 
