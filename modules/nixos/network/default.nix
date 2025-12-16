@@ -24,6 +24,7 @@ in {
     enableNM = mkBoolOpt config.host.graphical;
     lanInterface = mkStrOpt "en*";
     publicIP = mkStrOpt "dynamic";
+    wgIP = mkStrOpt "10.100.100.99";
   };
 
   config = (mkIf cfg.enable) {
