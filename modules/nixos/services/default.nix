@@ -5,6 +5,7 @@
     ./media.nix
     ./neovim-server.nix
     ./mqtt.nix
+    ./code-tunnel.nix
     # ./nas.nix
     # ./office-server.nix
     ./headscale.nix
