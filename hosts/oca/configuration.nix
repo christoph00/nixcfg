@@ -24,6 +24,8 @@ in {
   # svc.media = enabled;
   # svc.neovim-server = enabled;
 
+  svc.code-tunnel = enabled;
+
   # services.searx = enabled;
   # services.n8n = enabled;
   # services.audiobookshelf = enabled;

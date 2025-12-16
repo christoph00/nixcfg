@@ -15,6 +15,7 @@ in {
     user = mkStrOpt "christoph";
   };
   config = mkIf cfg.enable {
+    programs.nix-ld.enable = true;
     systemd.services.code-tunnel = {
       description = "VSCode Tunnel Server";
       wantedBy = ["default.target"];
