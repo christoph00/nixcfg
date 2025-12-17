@@ -14,7 +14,10 @@ in
 
   networking.hostName = "one";
 
-  sys.disk.device = "/dev/sda";
+
+  host.bootstrap = true;
+
+  sys.disk.device = "/dev/vda";
   sys.disk.forceDevice = true;
   host.vm = true;
   host.minimal = true;
@@ -23,9 +26,7 @@ in
 
   svc.webserver.enable = true;
 
-  services.openssh.openFirewall = false;
-
-  services.headscale.enable = true;
+  # services.openssh.openFirewall = false;
 
  
 
@@ -45,14 +46,36 @@ in
     # "console=ttyAMA0,115200"
   ];
 
-  networking.timeServers = [ "169.254.169.254" ];
+  # Network configuration
+
+  network.enableDHCPLAN = false;
+
+  networking.interfaces.eth0.ipv4.addresses = [
+    {
+      address = "185.228.136.218";
+      prefixLength = 22;
+    }
+  ];
+  networking.interfaces.eth0.ipv6.addresses = [
+    {
+      address = "2a03:4000:23:cac::2025";
+      prefixLength = 64;
+    }
+  ];
+  networking.defaultGateway = "185.228.136.1";
+  networking.defaultGateway6 = { address = "fe80::1"; interface = "eth0"; };
+
+  # Public IP configuration
+  network.publicIP = "185.228.136.218";
 
   # WireGuard configuration
   network.wireguard = {
-    enable = true;
+    enable = false;
     ip = "10.100.100.50";
-    publicKey = "=";
+    publicKey = "uMOJYI5t42gnSUhlYaF1SfsLxD5PZnMnRTfAhn1cinA=";
   };
 
 
+
+  powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 }

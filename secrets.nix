@@ -11,7 +11,7 @@ let
   oc1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQzfYiD7ugHkflIXEvCFj3o6skLLyFDlRkkoTjlyK5I";
   oc2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZwupfoft4N/wvB4DqXLcZtuFWNRbomxgf/WzhgCx2F";
   x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICmYYt27qyW73/QHk2Q7oben7p4iLgRts//SwBzohaMx";
-  star = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBF0fUs5cYSbwBcY+pqSSgiqrW+jGFJBPO+kjPz2SY1z";
+  one = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBF0fUs5cYSbwBcY+pqSSgiqrW+jGFJBPO+kjPz2SY1z";
 
   servers = [
     csrv
@@ -19,7 +19,7 @@ let
     oca
     oc1
     oc2
-    star
+    one
   ];
   desktops = [
     tower
@@ -97,6 +97,11 @@ in {
   "secrets/wg-x13.age".publicKeys =
     [
       x13
+    ]
+    ++ users;
+  "secrets/wg-one.age".publicKeys =
+    [
+      one
     ]
     ++ users;
   #  "secrets/box-key.age".publicKeys = all;
