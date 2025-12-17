@@ -30,6 +30,11 @@ in {
           subdomain = "mail";
           port = 8088;
         };
+        jmap = {
+          enable = true;
+          subdomain = "jmap";
+          port = 8087;
+        };
       };
     };
 

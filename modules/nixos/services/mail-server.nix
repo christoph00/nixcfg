@@ -35,8 +35,8 @@ in {
               tls.implicit = true;
             };
             jmap = {
-              bind = "127.0.0.1:8088";
-              url = "https://mail.r505.de";
+              bind = "127.0.0.1:8087";
+              url = "https://jmap.r505.de";
               protocol = "http";
             };
             management = {
@@ -48,6 +48,13 @@ in {
         session.auth = {
           mechanisms = "[plain]";
           directory = "'in-memory'";
+        };
+        jmap = {
+          http.headers = [
+            "Access-Control-Allow-Origin: *"
+            "Access-Control-Allow-Methods: POST, GET, HEAD, OPTIONS"
+            "Access-Control-Allow-Headers: *"
+          ];
         };
       };
     };
