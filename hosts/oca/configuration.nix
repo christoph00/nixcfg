@@ -35,17 +35,21 @@ in {
   # services.sabnzbd = enabled;
   # services.actual = enabled;
 
-  svc.webserver = enabled // {
-    services = {
-      n8n = {
-        enable = true;
-        subdomain = "n8n";
-        port = 5678;
+  svc.webserver =
+    enabled
+    // {
+      services = {
+        n8n = {
+          enable = true;
+          subdomain = "n8n";
+          port = 5678;
+        };
       };
     };
-  };
 
   networking.timeServers = ["169.254.169.254"];
+
+  network.publicIP = "152.70.42.43";
 
   # WireGuard configuration
   network.wireguard = {
