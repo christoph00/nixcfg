@@ -3,20 +3,19 @@
   flake,
   config,
   ...
-}:
-let
+}: let
   inherit (lib) mkForce;
-
-in
-{
+in {
   config = {
+    systemd.services."serial-getty@ttyS0" = {
+      enable = false;
+    };
 
     security = {
       sudo-rs = {
         enable = true;
         execWheelOnly = true;
         wheelNeedsPassword = false;
-
       };
       sudo.enable = mkForce false;
 
@@ -34,8 +33,6 @@ in
           value = "65536";
         }
       ];
-
     };
-
   };
 }
