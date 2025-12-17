@@ -50,20 +50,20 @@ in
 
   network.enableDHCPLAN = false;
 
-  networking.interfaces.eth0.ipv4.addresses = [
+  networking.interfaces.ens3.ipv4.addresses = [
     {
       address = "185.228.136.218";
       prefixLength = 22;
     }
   ];
-  networking.interfaces.eth0.ipv6.addresses = [
+  networking.interfaces.ens3.ipv6.addresses = [
     {
       address = "2a03:4000:23:cac::2025";
       prefixLength = 64;
     }
   ];
   networking.defaultGateway = "185.228.136.1";
-  networking.defaultGateway6 = { address = "fe80::1"; interface = "eth0"; };
+  networking.defaultGateway6 = { address = "fe80::1"; interface = "ens3"; };
 
   # Public IP configuration
   network.publicIP = "185.228.136.218";
