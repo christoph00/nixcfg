@@ -4,19 +4,13 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (flake.lib) create-proxy mkSecret;
-
-in
-{
-  imports = [ inputs.self.nixosModules.host ];
+in {
+  imports = [inputs.self.nixosModules.host];
   nixpkgs.hostPlatform = "x86_64-linux";
 
   networking.hostName = "one";
-
-
-  host.bootstrap = true;
 
   sys.disk.device = "/dev/vda";
   sys.disk.forceDevice = true;
@@ -28,8 +22,6 @@ in
   svc.webserver.enable = true;
 
   # services.openssh.openFirewall = false;
-
- 
 
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"
@@ -71,13 +63,12 @@ in
 
   # WireGuard configuration
   network.wireguard = {
-    enable = false;
+    enable = true;
     ip = "10.100.100.50";
     publicKey = "uMOJYI5t42gnSUhlYaF1SfsLxD5PZnMnRTfAhn1cinA=";
   };
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
-
+  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk"];
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 }

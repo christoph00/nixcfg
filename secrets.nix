@@ -11,7 +11,7 @@ let
   oc1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQzfYiD7ugHkflIXEvCFj3o6skLLyFDlRkkoTjlyK5I";
   oc2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZwupfoft4N/wvB4DqXLcZtuFWNRbomxgf/WzhgCx2F";
   x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICmYYt27qyW73/QHk2Q7oben7p4iLgRts//SwBzohaMx";
-  one = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBF0fUs5cYSbwBcY+pqSSgiqrW+jGFJBPO+kjPz2SY1z";
+  one = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7STsorCqxsu+ZQZjgsD1Zqw8ihoLKKUQgdvNS+s3F8";
 
   servers = [
     csrv
