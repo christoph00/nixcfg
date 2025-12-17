@@ -1,7 +1,7 @@
 let
   christoph_tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJznPNQqLgyHNL2Cxbtx3RO6BncMpC1Bpyae/edKW7oH";
   christoph_x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwrR18ub6bgzehbzGzwFu4gBXPuBfkXCYLlqS9Qbal2";
-  christoph_oca = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFXvfa+PwkdnF9PIOT0T3qb42Kduklar59uog8ugm2fx";
+  christoph_oca = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII1MrbLLO4xfy0qns7diUDklWd8LthvvdKIMdydKNb9f";
 
   # Hosts
   csrv = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkYJjXoEofN3Nb/b9Dxsc0+J2S5fUU7fZOs6hqZCvGT";
@@ -69,30 +69,36 @@ in {
   #    oc1
   #  ] ++ users;
   #
-  #  "secrets/wg-oc1-key".publicKeys = [
-  #    oc1
-  #  ] ++ users;
-  #  "secrets/wg-oc2-key".publicKeys = [
-  #    oc2
-  #  ] ++ users;
-  #  "secrets/wg-oca-key".publicKeys = [
-  #    oca
-  #  ] ++ users;
-  #  "secrets/wg-lsrv-key".publicKeys = [
-  #    lsrv
-  #  ] ++ users;
-  #  "secrets/wg-csrv-key".publicKeys = [
-  #    csrv
-  #  ] ++ users;
-  #  "secrets/wg-tower-key".publicKeys = [
-  #    tower
-  #  ] ++ users;
-  #  "secrets/wg-x13-key".publicKeys = [
-  #    x13
-  #  ] ++ users;
-  #  "secrets/wg-star-key".publicKeys = [
-  #    star
-  #  ] ++ users;
+  "secrets/wg-oca.age".publicKeys =
+    [
+      oca
+    ]
+    ++ users;
+  "secrets/wg-oc1.age".publicKeys =
+    [
+      oc1
+    ]
+    ++ users;
+  "secrets/wg-oc2.age".publicKeys =
+    [
+      oc2
+    ]
+    ++ users;
+  "secrets/wg-lsrv.age".publicKeys =
+    [
+      lsrv
+    ]
+    ++ users;
+  "secrets/wg-tower.age".publicKeys =
+    [
+      tower
+    ]
+    ++ users;
+  "secrets/wg-x13.age".publicKeys =
+    [
+      x13
+    ]
+    ++ users;
   #  "secrets/box-key.age".publicKeys = all;
   #  "secrets/actions-runner.age".publicKeys = all;
   #  "secrets/self.age".publicKeys = all;

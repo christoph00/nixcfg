@@ -42,6 +42,13 @@
 
   networking.timeServers = [ "169.254.169.254" ];
 
+  # WireGuard configuration
+  network.wireguard = {
+    enable = true;
+    ip = "10.100.100.23";
+    publicKey = "hPbhzBf3BaWh8nlGtie3vyF/hBBrkXHJQzBXxn3bGnk=";
+  };
+
   boot.initrd = {
     availableKernelModules = [
       "ata_piix"

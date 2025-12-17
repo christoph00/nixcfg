@@ -4,7 +4,7 @@
   flake,
   ...
 }: let
-  inherit (flake.lib) create-proxy enabled;
+  inherit (flake.lib) create-caddy-proxy enabled;
 in {
   imports = [inputs.self.nixosModules.host];
 
@@ -27,7 +27,7 @@ in {
   svc.code-tunnel = enabled;
 
   # services.searx = enabled;
-  # services.n8n = enabled;
+  services.n8n = enabled;
   # services.audiobookshelf = enabled;
   # services.rss-bridge = enabled;
   # services.pinchflat = enabled;
@@ -35,7 +35,24 @@ in {
   # services.sabnzbd = enabled;
   # services.actual = enabled;
 
+  svc.webserver = enabled // {
+    services = {
+      n8n = {
+        enable = true;
+        subdomain = "n8n";
+        port = 5678;
+      };
+    };
+  };
+
   networking.timeServers = ["169.254.169.254"];
+
+  # WireGuard configuration
+  network.wireguard = {
+    enable = true;
+    ip = "10.100.100.21";
+    publicKey = "bPdw9huRmyUJCEpi67mfuWplQ/ScCFizkS7X3Pztyi8=";
+  };
 
   boot.initrd.kernelModules = [
     "ata_piix"

@@ -27,6 +27,13 @@
   services.home-assistant.enable = true;
   services.mosquitto.enable = true;
 
+  # WireGuard configuration
+  network.wireguard = {
+    enable = false;
+    ip = "10.100.100.110";
+    publicKey = "/i1dR37XIw95bwSK3UJb/67AAOwh2nCDOdAGGgiUjmM=";
+  };
+
   # svc.nas = {
   #   enable = true;
   #   domain = "data.r505.de";

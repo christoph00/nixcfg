@@ -7,22 +7,19 @@
 let
   inherit (flake.lib) create-proxy mkSecret;
 
-  ip_oca = flake.nixosConfigurations.oca.config.network.netbird.ip;
 in
 {
   imports = [ inputs.self.nixosModules.host ];
   nixpkgs.hostPlatform = "x86_64-linux";
 
-  networking.hostName = "oc1";
+  networking.hostName = "one";
 
-  sys.state.enable = false;
   sys.disk.device = "/dev/sda";
   sys.disk.forceDevice = true;
-  sys.disk.type = "xfs";
   host.vm = true;
   host.minimal = true;
   hw.gpu = "vm";
-  hw.cpu = "amd";
+  hw.cpu = "intel";
 
   svc.webserver.enable = true;
 
@@ -53,29 +50,9 @@ in
   # WireGuard configuration
   network.wireguard = {
     enable = true;
-    ip = "10.100.100.22";
-    publicKey = "imcTI5Zu3QiHS4MgvaDFYEvmNJYrMRstP9GWS9sBVyg=";
+    ip = "10.100.100.50";
+    publicKey = "=";
   };
 
-  boot.initrd = {
-    availableKernelModules = [
-      "ata_piix"
-      "uhci_hcd"
-      "xen_blkfront"
-      "vmw_pvscsi"
-      "virtio_net"
-      "virtio_pci"
-      "virtio_blk"
-      "virtio_scsi"
-      "9p"
-      "9pnet_virtio"
 
-    ];
-    kernelModules = [
-      "nvme"
-      "virtio_balloon"
-      "virtio_console"
-      "virtio_rng"
-    ];
-  };
 }

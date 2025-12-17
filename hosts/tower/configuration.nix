@@ -100,6 +100,13 @@ in {
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
+  # WireGuard configuration
+  network.wireguard = {
+    enable = false;
+    ip = "10.100.100.105";
+    publicKey = "6CTpNoM92SEBu6LFMYs2dZNoOA/6Ad00a22NITmsH1w=";
+  };
+
   hardware.amdgpu = {
     opencl.enable = true;
     initrd.enable = true;

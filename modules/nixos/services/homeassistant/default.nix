@@ -71,7 +71,7 @@ in
 
     services.home-assistant =
       let
-        package = pkgs.home-assistant.override {
+        package = perSystem.nixpkgs-unstable.home-assistant.override {
           extraPackages =
             ps: with ps; [
               defusedxml

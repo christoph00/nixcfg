@@ -107,4 +107,11 @@
   services.power-profiles-daemon.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
+
+  # WireGuard configuration
+  network.wireguard = {
+    enable = false;
+    ip = "10.100.100.106";
+    publicKey = "5M1yv9GRgVSE/8/CO2BngITxugRLcHkUBaVz7g8/1QU=";
+  };
 }

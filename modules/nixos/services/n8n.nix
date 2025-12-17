@@ -1,38 +1,22 @@
 {
   lib,
-  flake,
   config,
   pkgs,
+  perSystem,
   ...
 }:
 let
   inherit (lib) mkIf mkDefault mkForce;
-  package = pkgs.n8n.overrideAttrs (
-    prevAttrs:
-    let
-      pname = "n8n";
-      version = "1.98.1";
-      src = pkgs.fetchFromGitHub {
-        owner = "n8n-io";
-        repo = "n8n";
-        tag = "n8n@${version}";
-        hash = "sha256-jWRd5Mu7iiisQh/NT7bLCRE9VG6cJ6QTiNWlMk9vnsQ=";
-      };
-
-    in
-    {
-      inherit src version;
-      pnpmDeps = pkgs.pnpm_10.fetchDeps {
-        inherit pname version src;
-        hash = "sha256-gX9rj7MerFH1jdfH0s5/puZaBVF6zR3BpOUac16/B2Y=";
-      };
-    }
-  );
+  package = perSystem.nixpkgs-unstable.n8n.overrideAttrs (old: {
+    meta = old.meta // {
+      license = lib.licenses.free;
+    };
+  });
 in
 {
   config = mkIf config.services.n8n.enable {
     sys.state.directories = [ "/var/lib/n8n" ];
-    services.n8n.webhookUrl = mkDefault "https://n8n.r505.de";
+    services.n8n.environment.WEBHOOK_URL = mkDefault "https://n8n.r505.de";
 
     systemd.services.n8n.path = [
       pkgs.nodejs
