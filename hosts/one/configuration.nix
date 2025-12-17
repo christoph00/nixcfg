@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  inherit (flake.lib) create-proxy mkSecret;
+  inherit (flake.lib) enabled;
 in {
   imports = [inputs.self.nixosModules.host];
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -19,10 +19,19 @@ in {
   hw.gpu = "vm";
   hw.cpu = "intel";
 
-  svc.webserver.enable = true;
-
-
   services.stalwart-mail.enable = true;
+
+  svc.webserver =
+    enabled
+    // {
+      services = {
+        mail = {
+          enable = true;
+          subdomain = "mail";
+          port = 8088;
+        };
+      };
+    };
 
   # services.openssh.openFirewall = false;
 

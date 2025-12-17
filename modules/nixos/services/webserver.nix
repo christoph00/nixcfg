@@ -4,9 +4,9 @@
   flake,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkForce
     mapAttrs'
@@ -15,16 +15,15 @@ let
     filterAttrs
     types
     ;
-  inherit (flake.lib)
+  inherit
+    (flake.lib)
     mkBoolOpt
     mkStrOpt
     mkSecret
     mkOpt
     ;
   cfg = config.svc.webserver;
-
-in
-{
+in {
   options.svc.webserver = {
     enable = mkBoolOpt false;
     domain = mkStrOpt "r505.de";
@@ -35,10 +34,16 @@ in
         options = {
           enable = mkBoolOpt false;
           subdomain = mkStrOpt "";
-          port = lib.mkOption { type = types.int; default = 80; };
+          port = lib.mkOption {
+            type = types.int;
+            default = 80;
+          };
           host = mkStrOpt "127.0.0.1";
           extraConfig = mkStrOpt "";
-          extraHeaders = lib.mkOption { type = types.attrsOf types.str; default = {}; };
+          extraHeaders = lib.mkOption {
+            type = types.attrsOf types.str;
+            default = {};
+          };
         };
       });
       default = {};
@@ -53,8 +58,8 @@ in
 
     age.secrets.cf-api-key = mkSecret {
       file = "cf-api-key";
-      owner = "acme";
-      group = "acme";
+      # owner = "acme";
+      # group = "acme";
     };
 
     networking.firewall.allowedTCPPorts = [
@@ -73,38 +78,37 @@ in
     };
 
     systemd.services.caddy.serviceConfig = {
-      AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
-      ReadWritePaths = [ "/var/lib/caddy" "/var/lib/acme" ];
+      AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];
+      ReadWritePaths = ["/var/lib/caddy" "/var/lib/acme"];
     };
 
     services.caddy = {
       enable = true;
       # Configure FrankenPHP
       # package = pkgs.frankenphp;
-     
+
       # Generate virtual hosts for enabled services
-      virtualHosts =
-        let
-          enabledServices = filterAttrs (_: service: service.enable) cfg.services;
-        in
+      virtualHosts = let
+        enabledServices = filterAttrs (_: service: service.enable) cfg.services;
+      in
         mapAttrs'
-          (_name: service: {
-            name = "${service.subdomain}.${cfg.domain}";
-            value = {
-              extraConfig = ''
-                reverse_proxy http://${service.host}:${toString service.port}
-                ${service.extraConfig}
-              '';
-            };
-          })
-          enabledServices;
+        (_name: service: {
+          name = "${service.subdomain}.${cfg.domain}";
+          value = {
+            extraConfig = ''
+              reverse_proxy http://${service.host}:${toString service.port}
+              ${service.extraConfig}
+            '';
+          };
+        })
+        enabledServices;
     };
 
-    users.users.caddy.extraGroups = [ "acme" ];
-    systemd.tmpfiles.rules = [
-      "Z /var/lib/acme 0755 acme acme - -"
-    ];
-
+    users.users.caddy.extraGroups = ["acme"];
+    # systemd.tmpfiles.rules = [
+    #   "Z /var/lib/acme 0755 acme acme - -"
+    # ];
+    #
     # Dynamic ACME certificate generation for all enabled services
     security.acme = {
       acceptTerms = true;
@@ -114,24 +118,23 @@ in
         #dnsPropagationCheck = true;
         #dnsResolver = "1.1.1.1:53";
         credentialsFile = config.age.secrets.cf-api-key.path;
-        reloadServices = [ "caddy.service" ];
+        reloadServices = ["caddy.service"];
         # Use lego client instead of minica for cloudflare DNS
         server = "https://acme-v02.api.letsencrypt.org/directory";
       };
       # Generate certs for each enabled service
-      certs =
-        let
-          enabledServices = filterAttrs (_: service: service.enable) cfg.services;
-        in
+      certs = let
+        enabledServices = filterAttrs (_: service: service.enable) cfg.services;
+      in
         mapAttrs'
-          (_name: service: {
-            name = "${service.subdomain}.${cfg.domain}";
-            value = {
-              domain = "${service.subdomain}.${cfg.domain}";
-              reloadServices = [ "caddy.service" ];
-            };
-          })
-          enabledServices;
+        (_name: service: {
+          name = "${service.subdomain}.${cfg.domain}";
+          value = {
+            domain = "${service.subdomain}.${cfg.domain}";
+            reloadServices = ["caddy.service"];
+          };
+        })
+        enabledServices;
     };
   };
 }
