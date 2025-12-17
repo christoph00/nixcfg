@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./fail2ban.nix
     ./homeassistant
     ./dnscrypt.nix
     ./media.nix
