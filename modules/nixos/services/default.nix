@@ -27,5 +27,6 @@
     ./agentgateway.nix
     ./mcp-proxy.nix
     # ./litellm.nix
+    ./mail-server.nix
   ];
 }

@@ -21,6 +21,9 @@ in {
 
   svc.webserver.enable = true;
 
+
+  services.stalwart-mail.enable = true;
+
   # services.openssh.openFirewall = false;
 
   boot.kernelParams = [
