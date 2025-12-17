@@ -55,7 +55,8 @@ in {
   network.wireguard = {
     enable = true;
     ip = "10.100.100.21";
-    publicKey = "bPdw9huRmyUJCEpi67mfuWplQ/ScCFizkS7X3Pztyi8=";
+    publicKey = "X7eH5ByMRdlSztO6qlAkJSXx00fZ+TPYXXHxpLYwbHo=";
+    homeRoute = true;
   };
 
   boot.initrd.kernelModules = [
