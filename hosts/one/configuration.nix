@@ -77,7 +77,8 @@ in {
   network.wireguard = {
     enable = true;
     ip = "10.100.100.50";
-    publicKey = "uMOJYI5t42gnSUhlYaF1SfsLxD5PZnMnRTfAhn1cinA=";
+    publicKey = "583eAPBGntxyvah8K1VfCPInv3F1iZ6vfO/KEQlYEkE=";
+    homeRoute = true;
   };
 
   boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk"];

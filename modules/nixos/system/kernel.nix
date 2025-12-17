@@ -22,12 +22,11 @@ in {
 
     boot = {
       kernelPackages =
-        # if config.host.graphical then
-        #   perSystem.chaotic.linuxPackages_cachyos-lto
-        # else if config.host.server then
-        #   perSystem.chaotic.linuxPackages_cachyos-server
-        # else
-        mkDefault pkgs.linuxPackages_latest;
+        if config.host.graphical
+        then perSystem.nix-cachyos-kernel.linuxPackages-cachyos-latest
+        else if config.host.server
+        then pkgs.linuxPackages
+        else mkDefault pkgs.linuxPackages_latest;
       supportedFilesystems = mkForce [
         "btrfs"
         "vfat"

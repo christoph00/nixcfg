@@ -59,6 +59,7 @@
       ip = "10.100.100.1";
       pubkey = "jEuJnsFIoWJ1WLyHG6Jih0TFCOupoPmhaMzCv0wBCQY=";
       # publicIP = "ROUTER_PUBLIC_IP";  # Optional
+      extraAllowedIPs = ["192.168.2.0/24"];
     };
   };
 
@@ -103,6 +104,11 @@ in {
       type = types.str;
       description = "The public key for the WireGuard interface.";
     };
+    homeRoute = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable Route to Home LAN";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -120,7 +126,17 @@ in {
       peers = generatePeers hostname wgnet;
     };
 
+    boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = true;
+
     networking.firewall.allowedUDPPorts = [51820];
+
+    networking.interfaces.wg0.ipv4.routes = mkIf cfg.homeRoute [
+      {
+        address = "192.168.2.0";
+        prefixLength = 24;
+        via = "10.100.100.1";
+      }
+    ];
 
     networking.extraHosts = lib.concatStringsSep "\n" (
       lib.mapAttrsToList (name: hostCfg: "${hostCfg.ip} ${name}") wgnet
