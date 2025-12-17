@@ -76,6 +76,7 @@ in
     publicKey = "uMOJYI5t42gnSUhlYaF1SfsLxD5PZnMnRTfAhn1cinA=";
   };
 
+  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
 
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
