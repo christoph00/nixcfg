@@ -7,31 +7,27 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkForce mkDefault;
   inherit (flake.lib) mkBoolOpt;
   cfg = config.sys.kernel;
-in
-{
-  imports = [ inputs.chaotic.nixosModules.default ];
+in {
   options.sys.kernel = {
     enable = mkBoolOpt true;
   };
   config = mkIf cfg.enable {
-
     services.scx.enable = config.host.graphical;
     services.scx.scheduler = "scx_bpfland";
     systemd.services.scx.serviceConfig.LogNamespace = "sched-ext";
 
     boot = {
       kernelPackages =
-        if config.host.graphical then
-          perSystem.chaotic.linuxPackages_cachyos-lto
-        else if config.host.server then
-          perSystem.chaotic.linuxPackages_cachyos-server
-        else
-          mkDefault pkgs.linuxPackages_latest;
+        # if config.host.graphical then
+        #   perSystem.chaotic.linuxPackages_cachyos-lto
+        # else if config.host.server then
+        #   perSystem.chaotic.linuxPackages_cachyos-server
+        # else
+        mkDefault pkgs.linuxPackages_latest;
       supportedFilesystems = mkForce [
         "btrfs"
         "vfat"
@@ -84,9 +80,6 @@ in
         "qnx6"
         "sysv"
       ];
-      kernelParams = mkIf config.host.graphical [ "mitigations=off" ]; # disable mitigations on desktop
-
     };
-
   };
 }
