@@ -4,19 +4,15 @@
   config,
   flake,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
   user = "openwebui";
-in
-{
+in {
   config = mkIf config.services.open-webui.enable {
-
-    sys.state.directories = [ "/var/lib/open-webui" ];
+    sys.state.directories = ["/var/lib/open-webui"];
 
     services.open-webui = {
       port = 3033;
-      host = config.network.netbird.ip;
 
       environment = {
         ANONYMIZED_TELEMETRY = "False";
@@ -28,9 +24,8 @@ in
 
         # Web Search
         ENABLE_RAG_WEB_SEARCH = "True";
-        SEARXNG_QUERY_URL = "http://127.0.0.1:1033/search?q=<query>";
+        # SEARXNG_QUERY_URL = "http://127.0.0.1:1033/search?q=<query>";
         RAG_WEB_SEARCH_ENGINE = "searxng";
-
       };
     };
 
@@ -51,8 +46,7 @@ in
         };
       };
 
-      groups.openwebui = { };
+      groups.openwebui = {};
     };
-
   };
 }

@@ -19,7 +19,8 @@ in {
   hw.gpu = "vm";
   hw.cpu = "intel";
 
-  services.stalwart-mail.enable = true;
+  services.stalwart-mail = enabled;
+  services.karakeep = enabled;
 
   svc.webserver =
     enabled
@@ -38,7 +39,7 @@ in {
         keep = {
           enable = true;
           subdomain = "keep";
-          inherit (config.services.karakeep) port
+          inherit (config.services.karakeep) port;
         };
       };
     };

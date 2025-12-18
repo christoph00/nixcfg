@@ -2,6 +2,7 @@
   inputs,
   lib,
   flake,
+  config,
   ...
 }: let
   inherit (flake.lib) create-caddy-proxy enabled;
@@ -31,7 +32,7 @@ in {
   # services.audiobookshelf = enabled;
   # services.rss-bridge = enabled;
   # services.pinchflat = enabled;
-  # services.open-webui = enabled;
+  services.open-webui = enabled;
   # services.sabnzbd = enabled;
   # services.actual = enabled;
 
@@ -45,6 +46,11 @@ in {
           enable = true;
           subdomain = "n8n";
           port = 5678;
+        };
+        open-webui = {
+          enable = true;
+          subdomain = "ai";
+          port = config.services.open-webui.port;
         };
       };
     };
