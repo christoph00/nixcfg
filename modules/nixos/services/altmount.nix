@@ -1,0 +1,98 @@
+{
+  flake,
+  lib,
+  config,
+  pkgs,
+  perSystem,
+  ...
+}:
+let
+  inherit (lib) mkIf;
+  inherit (flake.lib) mkBoolOpt mkIntOpt mkSecret;
+  cfg = config.svc.mcp-proxy;
+  uvx = "${pkgs.uv}/bin/uvx";
+  npx = "${pkgs.nodejs}/bin/npx";
+  mcpoConfig = {
+    mcpProxy = {
+      baseURL = "http://${config.network.netbird.ip}:7061";
+      addr = ":7061";
+      name = "MCP Proxy";
+      version = "1.0";
+      type = "streamable-http";
+
+    };
+    mcpServers = {
+      playwright = {
+        command = "${perSystem.mcp-servers.playwright-mcp}/bin/mcp-server-playwright";
+        args = [
+          "--browser"
+          "chrome"
+          "--executable-path"
+          "${pkgs.chromium}/bin/chromium"
+        ];
+      };
+      context7 = {
+        command = "${perSystem.mcp-servers.context7-mcp}/bin/context7-mcp";
+      };
+      # github = {
+      #   enabled = true;
+      #   command = "${pkgs.github-mcp-server}/bin/github-mcp-server";
+      #   transportType = "stdio";
+      #   timeout = 120;
+      #   args = [
+      #     "stdio"
+      #   ];
+      #   env = {
+      #     GITHUB_PERSONAL_ACCESS_TOKEN = "";
+      #   };
+      # };
+      #
+      # desktop-commander = {
+      #   enabled = true;
+      #   transportType = "stdio";
+      #   timeout = 120;
+      #   command = npx;
+      #   args = [
+      #     "-y"
+      #     "@wonderwhy-er/desktop-commander@latest"
+      #   ];
+      # };
+    };
+  };
+in
+{
+  options.svc.mcp-proxy = {
+    enable = mkBoolOpt false;
+    port = mkIntOpt 3003;
+  };
+
+  config = mkIf config.svc.mcp-proxy.enable {
+    age.secrets.api-keys-agent = mkSecret {
+      file = "api-keys";
+      owner = "mcp-proxy";
+    };
+
+    sys.state.directories = [ "/var/lib/mcp-proxy" ];
+    users.groups.mcp-proxy = { };
+    users.users.mcp-proxy = {
+      isSystemUser = true;
+      createHome = true;
+      group = "mcp-proxy";
+      home = "/var/lib/mcp-proxy";
+    };
+
+    systemd.services.mcp-proxy = {
+      script = "${perSystem.self.mcp-proxy}/bin/mcp-proxy --config ${pkgs.writeText "mcp-proxy-config.json" (builtins.toJSON mcpoConfig)}";
+      description = "MCP Proxy Service";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        EnvironmentFile = config.age.secrets.api-keys-agent.file;
+        User = "mcp-proxy";
+        Group = "mcp-proxy";
+        RestartSec = 30;
+        WorkingDirectory = "/var/lib/mcp-proxy";
+      };
+    };
+  };
+
+}

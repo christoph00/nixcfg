@@ -4,3 +4,4 @@ out
 _backup
 .direnv
 keys.txt
+.claude
