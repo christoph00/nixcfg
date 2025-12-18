@@ -11,6 +11,7 @@
     ./fail2ban.nix
     ./headscale.nix
     ./homeassistant
+    ./karakeep.nix
     ./mail-server.nix
     ./media.nix
     ./mcp-proxy.nix

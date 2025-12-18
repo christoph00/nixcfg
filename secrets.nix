@@ -108,6 +108,9 @@ in {
     "secrets/altmount-cfg.age".publicKeys = [
       oca
     ] ++ users;
+    "secrets/karakeep-cfg.age".publicKeys = [
+      one
+    ] ++ users;
   #  "secrets/box-key.age".publicKeys = all;
   #  "secrets/actions-runner.age".publicKeys = all;
   #  "secrets/self.age".publicKeys = all;

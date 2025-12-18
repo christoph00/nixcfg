@@ -62,7 +62,7 @@
     extraModulePackages = [
       (config.boot.kernelPackages.r8168.overrideAttrs (
         _: super: rec {
-          version = "8.054.00";
+          version = "8.055.00";
           src = pkgs.fetchFromGitHub {
             owner = "mtorromeo";
             repo = "r8168";

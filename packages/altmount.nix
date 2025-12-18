@@ -1,13 +1,13 @@
-{pkgs}: 
+{pkgs}:
   pkgs.buildGoModule rec {
     pname = "altmount";
-    version = "0.0.1-alpha5";
+    version = "unstable-2025-12-17";
 
     src = pkgs.fetchFromGitHub {
       owner = "javi11";
       repo = "altmount";
-      rev = "v${version}";
-      hash = "sha256-vkBouXluVVIoTs/jEMbcrv/TOfs0Pi49WA/QM7LXC+w=";
+      rev = "34a9a500a27d1b3e70122c858e39c02976765276";
+      hash = "sha256-L6JOWbKUQu8mjT3cHp2ZtXd3svhmNqV+Cdi7eEqnirM=";
     };
 
     vendorHash = "sha256-CCxEW3YmGb+SfslxC7qDKfZr2ZREHUJ53cgDCzOzjpU=";

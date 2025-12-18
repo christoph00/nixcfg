@@ -35,6 +35,11 @@ in {
           subdomain = "jmap";
           port = 8087;
         };
+        keep = {
+          enable = true;
+          subdomain = "keep";
+          inherit (config.services.karakeep) port
+        };
       };
     };
 
