@@ -35,6 +35,8 @@ in {
   # services.sabnzbd = enabled;
   # services.actual = enabled;
 
+  services.altmount = enabled;
+
   svc.webserver =
     enabled
     // {
