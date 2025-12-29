@@ -3,17 +3,25 @@
   pkgs,
   config,
   flake,
+  perSystem,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
+  package = perSystem.nixpkgs-unstable.open-webui.overrideAttrs (old: {
+    meta = old.meta // {
+      license = lib.licenses.free;
+    };
+  });
   user = "openwebui";
-in {
+in
+{
   config = mkIf config.services.open-webui.enable {
-    sys.state.directories = ["/var/lib/open-webui"];
+    sys.state.directories = [ "/var/lib/open-webui" ];
 
     services.open-webui = {
       port = 3033;
-
+      inherit package;
       environment = {
         ANONYMIZED_TELEMETRY = "False";
         DO_NOT_TRACK = "True";
@@ -46,7 +54,7 @@ in {
         };
       };
 
-      groups.openwebui = {};
+      groups.openwebui = { };
     };
   };
 }

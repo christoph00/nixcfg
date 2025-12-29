@@ -35,6 +35,8 @@
       inputs.hjem.follows = "hjem";
     };
 
+    quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
+
     nix-cachyos-kernel = {
       url = "github:xddxdd/nix-cachyos-kernel";
       # inputs.nixpkgs.follows = "nixpkgs";
@@ -119,7 +121,8 @@
     };
   };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     inputs.blueprint {
       inherit inputs;
       systems = [

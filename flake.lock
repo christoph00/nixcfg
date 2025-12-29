@@ -1352,6 +1352,21 @@
         "type": "github"
       }
     },
+    "quadlet-nix": {
+      "locked": {
+        "lastModified": 1763141753,
+        "narHash": "sha256-XAHkOkLEWbRQZ6t/SowwOukrUfIneNQOC/UEQlTaPBU=",
+        "owner": "SEIAROTg",
+        "repo": "quadlet-nix",
+        "rev": "211b5c626cf9ea91403b510e2ac5ca03a7194566",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SEIAROTg",
+        "repo": "quadlet-nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -1378,6 +1393,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nvf": "nvf",
         "preservation": "preservation",
+        "quadlet-nix": "quadlet-nix",
         "srvos": "srvos",
         "wrapper-manager": "wrapper-manager"
       }

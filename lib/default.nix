@@ -49,10 +49,18 @@ rec {
     {
       useACMEHost = acmeHost;
       extraConfig = ''
-        reverse_proxy ${host}${if port != null then ":${builtins.toString port}" else ""}${lib.optionalString proxy-web-sockets " {
+        reverse_proxy ${host}${
+          if port != null then ":${builtins.toString port}" else ""
+        }${lib.optionalString proxy-web-sockets " {
           header_up Connection {>Connection}
           header_up Upgrade {>Upgrade}
-        }"}${lib.optionalString (extraHeaders != {}) (lib.concatStringsSep "\n" (lib.mapAttrsToList (key: value: "          header_up ${key} \"${value}\"") extraHeaders))}${lib.optionalString (extraConfig != "") "\n${extraConfig}"}
+        }"}${
+          lib.optionalString (extraHeaders != { }) (
+            lib.concatStringsSep "\n" (
+              lib.mapAttrsToList (key: value: "          header_up ${key} \"${value}\"") extraHeaders
+            )
+          )
+        }${lib.optionalString (extraConfig != "") "\n${extraConfig}"}
       '';
     };
 

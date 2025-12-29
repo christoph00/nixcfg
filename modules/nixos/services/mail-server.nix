@@ -4,11 +4,13 @@
   pkgs,
   perSystem,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkDefault mkForce;
-in {
+in
+{
   config = mkIf config.services.stalwart-mail.enable {
-    sys.state.directories = ["/var/lib/stalwart-mail"];
+    sys.state.directories = [ "/var/lib/stalwart-mail" ];
 
     services.stalwart-mail = {
       openFirewall = true;
@@ -40,7 +42,7 @@ in {
               protocol = "http";
             };
             management = {
-              bind = ["127.0.0.1:8088"];
+              bind = [ "127.0.0.1:8088" ];
               protocol = "http";
             };
           };

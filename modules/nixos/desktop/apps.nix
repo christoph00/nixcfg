@@ -5,11 +5,13 @@
   config,
   options,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
   inherit (flake.lib) enabled;
   cfg = config.desktop;
-in {
+in
+{
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       brightnessctl
@@ -48,7 +50,7 @@ in {
     ];
 
     # foot
-    environment.etc."xdg/foot/foot.ini".text = pkgs.lib.generators.toINI {} {
+    environment.etc."xdg/foot/foot.ini".text = pkgs.lib.generators.toINI { } {
       main = {
         font = "BlexMono Nerd Font:size=11";
         pad = "8x8";

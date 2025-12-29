@@ -82,7 +82,8 @@ in
             file = "/etc/ssh/ssh_host_rsa_key";
             mode = "0600";
           }
-        ] ++ cfg.files;
+        ]
+        ++ cfg.files;
         directories = [
           "/var/lib/bluetooth"
           "/var/lib/fprint"
@@ -101,7 +102,8 @@ in
             directory = "/var/log";
             inInitrd = true;
           }
-        ] ++ cfg.directories;
+        ]
+        ++ cfg.directories;
       };
     };
   };

@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.services.vector;
   inherit (lib) mkIf;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.vector = {
       journaldAccess = true;

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./actions-runner.nix
     ./agentgateway.nix
@@ -30,6 +31,6 @@
     # ./nas.nix
     # ./office-server.nix
     # ./vector.nix
-    # ./litellm.nix
+    ./litellm.nix
   ];
 }

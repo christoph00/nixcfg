@@ -6,10 +6,12 @@
   flake,
   perSystem,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
   inherit (flake.lib) enabled;
-in {
+in
+{
   imports = [
     inputs.nvf.nixosModules.default
     #    ./mcphub.nix
@@ -257,7 +259,7 @@ in {
               enable = true;
               lsp = {
                 enable = true;
-                servers = ["nixd"];
+                servers = [ "nixd" ];
               };
               treesitter.enable = true;
               extraDiagnostics.enable = true;
@@ -265,7 +267,7 @@ in {
             go.enable = true;
             php = {
               enable = true;
-              lsp.servers = ["intelephense"];
+              lsp.servers = [ "intelephense" ];
               lsp.enable = true;
               treesitter.enable = true;
             };

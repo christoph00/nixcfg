@@ -5,7 +5,8 @@
   options,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf concatStringsSep getExe;
   inherit (lib.types) enum;
   inherit (flake.lib) mkOpt mkBoolOpt;
@@ -86,7 +87,8 @@
 
 
   '';
-in {
+in
+{
   options.desktop = {
     displayManager = mkOpt (enum [
       "tuigreet"

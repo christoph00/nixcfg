@@ -43,7 +43,7 @@ in {
     device = "/dev/disk/by-partlabel/disk-main-luks";
     keyFile = "/keysec/root.key";
     keyFileTimeout = 5;
-    fallbackToPassword = true;
+    # fallbackToPassword = true;
   };
 
   fileSystems = {
@@ -117,7 +117,10 @@ in {
   };
 
   services.xserver.enable = true;
-  services.xserver.videoDrivers = ["amdgpu" "i915"];
+  services.xserver.videoDrivers = [
+    "amdgpu"
+    "i915"
+  ];
 
   boot.kernelModules = [
     "kvm-intel"

@@ -3,10 +3,8 @@
   config,
   pkgs,
   ...
-}:
-{
-
-  imports = [ flake.modules.nixos.host ];
+}: {
+  imports = [flake.modules.nixos.host];
   facter.reportPath = ./facter.json;
   networking.hostName = "lsrv";
 
@@ -59,23 +57,23 @@
         "mmc_block"
       ];
     };
-    extraModulePackages = [
-      (config.boot.kernelPackages.r8168.overrideAttrs (
-        _: super: rec {
-          version = "8.055.00";
-          src = pkgs.fetchFromGitHub {
-            owner = "mtorromeo";
-            repo = "r8168";
-            rev = version;
-            sha256 = "sha256-KyycAe+NBmyDDH/XkAM4PpGvXI5J1CuMW4VuHcOm0UQ=";
-          };
-          meta = super.meta // {
-            broken = false;
-          };
-        }
-      ))
-    ];
-    blacklistedKernelModules = [ "r8169" ];
+    # extraModulePackages = [
+    #   (config.boot.kernelPackages.r8168.overrideAttrs (
+    #     _: super: rec {
+    #       version = "8.055.00";
+    #       src = pkgs.fetchFromGitHub {
+    #         owner = "mtorromeo";
+    #         repo = "r8168";
+    #         rev = version;
+    #         sha256 = "sha256-KyycAe+NBmyDDH/XkAM4PpGvXI5J1CuMW4VuHcOm0UQ=";
+    #       };
+    #       meta = super.meta // {
+    #         broken = false;
+    #       };
+    #     }
+    #   ))
+    # ];
+    blacklistedKernelModules = ["r8169"];
   };
   fileSystems = {
     "/mnt/userdata" = {
@@ -88,5 +86,4 @@
       ];
     };
   };
-
 }

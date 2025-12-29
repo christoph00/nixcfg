@@ -4,10 +4,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (flake.lib) enabled;
-in {
-  imports = [inputs.self.nixosModules.host];
+in
+{
+  imports = [ inputs.self.nixosModules.host ];
   nixpkgs.hostPlatform = "x86_64-linux";
 
   networking.hostName = "one";
@@ -22,27 +24,25 @@ in {
   services.stalwart-mail = enabled;
   services.karakeep = enabled;
 
-  svc.webserver =
-    enabled
-    // {
-      services = {
-        mail = {
-          enable = true;
-          subdomain = "mail";
-          port = 8088;
-        };
-        jmap = {
-          enable = true;
-          subdomain = "jmap";
-          port = 8087;
-        };
-        keep = {
-          enable = true;
-          subdomain = "keep";
-          inherit (config.services.karakeep) port;
-        };
+  svc.webserver = enabled // {
+    services = {
+      mail = {
+        enable = true;
+        subdomain = "mail";
+        port = 8088;
+      };
+      jmap = {
+        enable = true;
+        subdomain = "jmap";
+        port = 8087;
+      };
+      keep = {
+        enable = true;
+        subdomain = "keep";
+        inherit (config.services.karakeep) port;
       };
     };
+  };
 
   # services.openssh.openFirewall = false;
 
@@ -92,7 +92,13 @@ in {
     homeRoute = true;
   };
 
-  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk"];
+  boot.initrd.availableKernelModules = [
+    "ata_piix"
+    "uhci_hcd"
+    "virtio_pci"
+    "sr_mod"
+    "virtio_blk"
+  ];
 
   powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 }

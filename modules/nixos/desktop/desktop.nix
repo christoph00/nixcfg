@@ -99,14 +99,14 @@ in
     };
 
     systemd.user.services = {
-#      waybar = mkIf cfg.waybar {
-#        description = "Waybar as systemd service";
-#        path = [ config.system.path ];
-#        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
-#        wantedBy = [ "graphical-session.target" ];
-#        after = [ "graphical-session.target" ];
-#        serviceConfig.Slice = "app-graphical.slice";
-#      };
+      #      waybar = mkIf cfg.waybar {
+      #        description = "Waybar as systemd service";
+      #        path = [ config.system.path ];
+      #        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
+      #        wantedBy = [ "graphical-session.target" ];
+      #        after = [ "graphical-session.target" ];
+      #        serviceConfig.Slice = "app-graphical.slice";
+      #      };
       # sfwbar = mkIf cfg.sfwbar {
       #   description = "sfwbar";
       #   script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.sfwbar}/bin/sfwbar";

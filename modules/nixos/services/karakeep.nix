@@ -4,11 +4,13 @@
   lib,
   perSystem,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
   inherit (flake.lib) mkBoolOpt mkIntOpt mkSecret;
   cfg = config.services.karakeep;
-in {
+in
+{
   options.services.karakeep = {
     port = mkIntOpt 3050;
   };
@@ -16,7 +18,7 @@ in {
     age.secrets.karakeep-cfg = mkSecret {
       file = "karakeep-cfg";
     };
-    sys.state.directories = ["/var/lib/karakeep"];
+    sys.state.directories = [ "/var/lib/karakeep" ];
     services.karakeep = {
       package = perSystem.nixpkgs-unstable.karakeep;
       environmentFile = config.age.secrets.karakeep-cfg.path;
