@@ -5,12 +5,9 @@
   inputs,
   ...
 }:
-
 with builtins;
 with lib;
-with flake.lib;
-
-let
+with flake.lib; let
   cfg = config.sys;
   ESP = {
     size = "800M";
@@ -19,7 +16,7 @@ let
       type = "filesystem";
       format = "vfat";
       mountpoint = "/boot";
-      mountOptions = [ "defaults" ];
+      mountOptions = ["defaults"];
     };
   };
 
@@ -41,7 +38,7 @@ let
 
   btrfsLayout = {
     type = "btrfs";
-    extraArgs = [ "-f" ];
+    extraArgs = ["-f"];
     subvolumes = {
       "@root" = mkIf (!cfg.disk.tmpRoot) {
         mountpoint = "/";
@@ -79,9 +76,7 @@ let
       };
     };
   };
-in
-{
-
+in {
   imports = [
     inputs.disko.nixosModules.disko
   ];
@@ -98,20 +93,18 @@ in
     };
 
     device = mkStrOpt "/dev/sda";
+    stateDevice = mkStrOpt config.sys.disk.device;
     encrypted = mkBoolOpt false;
     tmpRoot = mkBoolOpt cfg.state.enable;
     swap = mkBoolOpt true;
     swapSize = mkStrOpt "1G";
     rollback = mkBoolOpt true;
     forceDevice = mkBoolOpt false;
-
   };
 
   config = mkIf cfg.disk.enable (
-
     mkMerge [
       {
-
         boot.supportedFilesystems.zfs = lib.mkForce false;
 
         disko.devices = {
@@ -142,14 +135,14 @@ in
 
         boot.initrd.systemd.services.rollback =
           mkIf (cfg.disk.rollback && !cfg.disk.tmpRoot && cfg.disk.type == "btrfs")
-            {
-              description = "Rollback BTRFS root subvolume to a pristine state";
-              wantedBy = [ "initrd.target" ];
-              before = [ "sysroot.mount" ];
-              unitConfig.DefaultDependencies = "no";
-              serviceConfig.Type = "oneshot";
-              script = rollback;
-            };
+          {
+            description = "Rollback BTRFS root subvolume to a pristine state";
+            wantedBy = ["initrd.target"];
+            before = ["sysroot.mount"];
+            unitConfig.DefaultDependencies = "no";
+            serviceConfig.Type = "oneshot";
+            script = rollback;
+          };
 
         services.fstrim = mkIf (!config.host.vm) {
           enable = true;
@@ -167,7 +160,6 @@ in
             "/mnt/state"
           ];
         };
-
       }
 
       (mkIf (cfg.disk.encrypted && cfg.disk.type == "btrfs") {
@@ -206,7 +198,6 @@ in
 
       ## TODO: xfs/ext4 with state
       (mkIf ((cfg.disk.type == "xfs" || cfg.disk.type == "ext4") && cfg.state.enable) {
-
         disko.devices.nodev = {
           "/home" = {
             fsType = "auto";
@@ -230,7 +221,6 @@ in
       })
 
       (mkIf ((cfg.disk.type == "xfs" || cfg.disk.type == "ext4") && !cfg.state.enable) {
-
         disko.devices.disk.main.content = {
           type = "gpt";
           partitions = {
@@ -255,7 +245,6 @@ in
         boot.tmp = {
           cleanOnBoot = true;
         };
-
       })
 
       (mkIf cfg.disk.encrypted {
@@ -273,7 +262,6 @@ in
           ];
         };
       })
-
     ]
   );
 }

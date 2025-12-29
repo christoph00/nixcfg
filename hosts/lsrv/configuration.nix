@@ -1,6 +1,7 @@
 {
   flake,
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -76,6 +77,7 @@
     blacklistedKernelModules = ["r8169"];
   };
   fileSystems = {
+    "/mnt/state".device = lib.mkFoce "/dev/disk/by-label/ssd-data";
     "/mnt/userdata" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
