@@ -3,11 +3,13 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkDefault mkForce;
-in {
+in
+{
   environment = {
-    systemPackages = [pkgs.git];
+    systemPackages = [ pkgs.git ];
     variables.NIXPKGS_CONFIG = mkForce "";
   };
 
@@ -39,7 +41,7 @@ in {
 
     optimise = {
       automatic = true;
-      dates = ["04:41"];
+      dates = [ "04:41" ];
     };
 
     daemonCPUSchedPolicy = "idle";
@@ -52,8 +54,8 @@ in {
       use-cgroups = true;
       extra-platforms = config.boot.binfmt.emulatedSystems;
       auto-optimise-store = true;
-      allowed-users = ["@wheel"];
-      trusted-users = ["@wheel"];
+      allowed-users = [ "@wheel" ];
+      trusted-users = [ "@wheel" ];
       max-jobs = "auto";
       sandbox = true;
       system-features = [

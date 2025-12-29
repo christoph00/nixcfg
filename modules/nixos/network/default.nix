@@ -7,10 +7,12 @@
   ...
 }:
 with lib;
-with flake.lib; let
+with flake.lib;
+let
   inherit (lib) mkDefault;
   cfg = config.network;
-in {
+in
+{
   imports = [
     ./router
     ./optimize.nix
@@ -42,8 +44,8 @@ in {
     };
 
     system.nssDatabases.hosts = mkMerge [
-      (mkBefore ["mdns_minimal [NOTFOUND=return]"])
-      (mkAfter ["mdns"])
+      (mkBefore [ "mdns_minimal [NOTFOUND=return]" ])
+      (mkAfter [ "mdns" ])
     ];
 
     hardware.wirelessRegulatoryDatabase = mkDefault cfg.enableWifi;
@@ -88,7 +90,10 @@ in {
       wait-online.anyInterface = true;
       networks = {
         "20-wireless" = mkIf cfg.enableWifi {
-          matchConfig.Name = ["wlp*" "wlan*"];
+          matchConfig.Name = [
+            "wlp*"
+            "wlan*"
+          ];
           networkConfig.DHCP = "yes";
           dhcpConfig.RouteMetric = 20;
         };
@@ -100,10 +105,10 @@ in {
       };
     };
 
-    environment.systemPackages = mkIf cfg.enableWifi [pkgs.iwgtk];
+    environment.systemPackages = mkIf cfg.enableWifi [ pkgs.iwgtk ];
 
     sys.state.directories = mkMerge [
-      (mkIf cfg.enableWifi ["/var/lib/iwd"])
+      (mkIf cfg.enableWifi [ "/var/lib/iwd" ])
       (mkIf cfg.enableNM [
         "/var/lib/NetworkManager"
         "/etc/NetworkManager/system-connections"

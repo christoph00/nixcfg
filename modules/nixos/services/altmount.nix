@@ -40,7 +40,6 @@ in
       readOnly = true;
     };
 
-
     settings = lib.mkOption {
       description = ''
         Configuration of Altmount. See <https://github.com/javi11/altmount/blob/main/config.sample.yaml> for more information.
@@ -73,7 +72,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "WebDAV server configuration.";
           };
 
@@ -87,7 +86,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "REST API configuration.";
           };
 
@@ -101,7 +100,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "Authentication configuration.";
           };
 
@@ -115,7 +114,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "Database configuration.";
           };
 
@@ -135,7 +134,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "Metadata filesystem configuration.";
           };
 
@@ -155,7 +154,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "Streaming and download configuration.";
           };
 
@@ -177,11 +176,38 @@ in
                 allowed_file_extensions = lib.mkOption {
                   type = lib.types.listOf lib.types.str;
                   default = [
-                    ".mp4" ".mkv" ".avi" ".mov" ".wmv" ".flv" ".webm" ".m4v"
-                    ".mpg" ".mpeg" ".m2ts" ".ts" ".vob" ".3gp" ".3g2"
-                    ".h264" ".h265" ".hevc" ".ogv" ".ogm" ".strm" ".iso"
-                    ".img" ".divx" ".xvid" ".rm" ".rmvb" ".asf" ".asx"
-                    ".wtv" ".mk3d" ".dvr-ms"
+                    ".mp4"
+                    ".mkv"
+                    ".avi"
+                    ".mov"
+                    ".wmv"
+                    ".flv"
+                    ".webm"
+                    ".m4v"
+                    ".mpg"
+                    ".mpeg"
+                    ".m2ts"
+                    ".ts"
+                    ".vob"
+                    ".3gp"
+                    ".3g2"
+                    ".h264"
+                    ".h265"
+                    ".hevc"
+                    ".ogv"
+                    ".ogm"
+                    ".strm"
+                    ".iso"
+                    ".img"
+                    ".divx"
+                    ".xvid"
+                    ".rm"
+                    ".rmvb"
+                    ".asf"
+                    ".asx"
+                    ".wtv"
+                    ".mk3d"
+                    ".dvr-ms"
                   ];
                   description = "Allowed file extensions for import.";
                 };
@@ -217,7 +243,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "Import processing configuration.";
           };
 
@@ -273,7 +299,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "Health monitoring configuration.";
           };
 
@@ -299,27 +325,29 @@ in
                 };
 
                 categories = lib.mkOption {
-                  type = lib.types.listOf (lib.types.submodule {
-                    options = {
-                      name = lib.mkOption {
-                        type = lib.types.str;
-                        description = "Category name.";
+                  type = lib.types.listOf (
+                    lib.types.submodule {
+                      options = {
+                        name = lib.mkOption {
+                          type = lib.types.str;
+                          description = "Category name.";
+                        };
+                        order = lib.mkOption {
+                          type = lib.types.int;
+                          description = "Category order.";
+                        };
+                        priority = lib.mkOption {
+                          type = lib.types.int;
+                          description = "Category priority.";
+                        };
+                        dir = lib.mkOption {
+                          type = lib.types.str;
+                          description = "Category directory.";
+                        };
                       };
-                      order = lib.mkOption {
-                        type = lib.types.int;
-                        description = "Category order.";
-                      };
-                      priority = lib.mkOption {
-                        type = lib.types.int;
-                        description = "Category priority.";
-                      };
-                      dir = lib.mkOption {
-                        type = lib.types.str;
-                        description = "Category directory.";
-                      };
-                    };
-                  });
-                  default = [];
+                    }
+                  );
+                  default = [ ];
                   description = "Download categories.";
                 };
 
@@ -336,7 +364,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "SABnzbd-compatible API configuration.";
           };
 
@@ -357,18 +385,18 @@ in
 
                 radarr_instances = lib.mkOption {
                   type = lib.types.listOf lib.types.attrs;
-                  default = [];
+                  default = [ ];
                   description = "Radarr instances (configured via UI).";
                 };
 
                 sonarr_instances = lib.mkOption {
                   type = lib.types.listOf lib.types.attrs;
-                  default = [];
+                  default = [ ];
                   description = "Sonarr instances (configured via UI).";
                 };
               };
             };
-            default = {};
+            default = { };
             description = "Radarr/Sonarr arrs configuration.";
           };
 
@@ -412,7 +440,7 @@ in
                 };
               };
             };
-            default = {};
+            default = { };
             description = "Logging configuration with rotation support.";
           };
 
@@ -429,60 +457,62 @@ in
           };
 
           providers = lib.mkOption {
-            type = lib.types.listOf (lib.types.submodule {
-              options = {
+            type = lib.types.listOf (
+              lib.types.submodule {
+                options = {
 
-                host = lib.mkOption {
-                  type = lib.types.str;
-                  description = "Provider hostname.";
-                };
+                  host = lib.mkOption {
+                    type = lib.types.str;
+                    description = "Provider hostname.";
+                  };
 
-                port = lib.mkOption {
-                  type = lib.types.port;
-                  description = "Provider port.";
-                };
+                  port = lib.mkOption {
+                    type = lib.types.port;
+                    description = "Provider port.";
+                  };
 
-                username = lib.mkOption {
-                  type = lib.types.str;
-                  description = "Provider username.";
-                };
+                  username = lib.mkOption {
+                    type = lib.types.str;
+                    description = "Provider username.";
+                  };
 
-                password = lib.mkOption {
-                  type = lib.types.str;
-                  description = "Provider password.";
-                };
+                  password = lib.mkOption {
+                    type = lib.types.str;
+                    description = "Provider password.";
+                  };
 
-                max_connections = lib.mkOption {
-                  type = lib.types.int;
-                  description = "Maximum number of connections.";
-                };
+                  max_connections = lib.mkOption {
+                    type = lib.types.int;
+                    description = "Maximum number of connections.";
+                  };
 
-                tls = lib.mkOption {
-                  type = lib.types.bool;
-                  default = false;
-                  description = "Use TLS/SSL.";
-                };
+                  tls = lib.mkOption {
+                    type = lib.types.bool;
+                    default = false;
+                    description = "Use TLS/SSL.";
+                  };
 
-                insecure_tls = lib.mkOption {
-                  type = lib.types.bool;
-                  default = false;
-                  description = "Allow insecure TLS connections.";
-                };
+                  insecure_tls = lib.mkOption {
+                    type = lib.types.bool;
+                    default = false;
+                    description = "Allow insecure TLS connections.";
+                  };
 
-                enabled = lib.mkOption {
-                  type = lib.types.bool;
-                  default = true;
-                  description = "Enable/disable this provider.";
-                };
+                  enabled = lib.mkOption {
+                    type = lib.types.bool;
+                    default = true;
+                    description = "Enable/disable this provider.";
+                  };
 
-                is_backup_provider = lib.mkOption {
-                  type = lib.types.bool;
-                  default = false;
-                  description = "Mark as backup provider.";
+                  is_backup_provider = lib.mkOption {
+                    type = lib.types.bool;
+                    default = false;
+                    description = "Mark as backup provider.";
+                  };
                 };
-              };
-            });
-            default = [];
+              }
+            );
+            default = [ ];
             description = "NNTP providers configuration.";
             example = [
               {
@@ -513,11 +543,10 @@ in
 
   config = lib.mkIf cfg.enable {
 
-   age.secrets.altmount-cfg = mkSecret {
+    age.secrets.altmount-cfg = mkSecret {
       file = "altmount-cfg";
       owner = "altmount";
     };
-
 
     services.altmount = {
       package = perSystem.self.altmount;

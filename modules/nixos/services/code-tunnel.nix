@@ -4,12 +4,14 @@
   flake,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
   inherit (flake.lib) mkBoolOpt mkStrOpt;
 
   cfg = config.svc.code-tunnel;
-in {
+in
+{
   options.svc.code-tunnel = {
     enable = mkBoolOpt false;
     user = mkStrOpt "christoph";
@@ -18,7 +20,7 @@ in {
     programs.nix-ld.enable = true;
     systemd.services.code-tunnel = {
       description = "VSCode Tunnel Server";
-      wantedBy = ["default.target"];
+      wantedBy = [ "default.target" ];
       after = [
         "network.target"
       ];

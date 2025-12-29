@@ -6,11 +6,13 @@
   flake,
   perSystem,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
   inherit (flake.lib) mkBoolOpt mkSecret enabled;
   cfg = config.shell.devtools;
-in {
+in
+{
   options.shell.devtools = {
     enable = mkBoolOpt config.host.graphical;
     tmux = mkBoolOpt true;

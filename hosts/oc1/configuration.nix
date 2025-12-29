@@ -30,8 +30,6 @@ in
 
   services.headscale.enable = true;
 
- 
-
   boot.kernelParams = [
     "nvme.shutdown_timeout=10"
     "nvme_core.shutdown_timeout=10"

@@ -4,14 +4,19 @@
   ...
 }:
 with builtins;
-with lib; let
+with lib;
+let
   cfg = config.sys;
-in {
+in
+{
   config = {
     services.openssh = {
       enable = true;
       settings = {
-        AllowUsers = ["christoph" "agent"];
+        AllowUsers = [
+          "christoph"
+          "agent"
+        ];
       };
       hostKeys = mkIf config.sys.state.enable [
         {

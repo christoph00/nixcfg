@@ -3,9 +3,11 @@
   flake,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkForce;
-in {
+in
+{
   config = {
     systemd.services."serial-getty@ttyS0" = {
       enable = false;

@@ -2,8 +2,9 @@
   flake,
   pkgs,
   ...
-}: {
-  imports = [flake.modules.nixos.host];
+}:
+{
+  imports = [ flake.modules.nixos.host ];
   facter.reportPath = ./facter.json;
   networking.hostName = "x13";
   hw.cpu = "intel";
@@ -72,7 +73,7 @@
       "ahci.mobile_lpm_policy=3"
       "mitigations=off"
     ];
-    initrd.kernelModules = ["i915"];
+    initrd.kernelModules = [ "i915" ];
 
     kernelModules = [
       "kvm-intel"

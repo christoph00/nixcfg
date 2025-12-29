@@ -5,21 +5,23 @@
   config,
   perSystem,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
   inherit (flake.lib) enabled;
   cfg = config.desktop;
-in {
+in
+{
   config = mkIf cfg.enable {
     xdg.mime = {
       enable = true;
       defaultApplications = {
-        "default-web-browser" = ["firefox.desktop"];
-        "text/html" = ["firefox.desktop"];
-        "x-scheme-handler/http" = ["firefox.desktop"];
-        "x-scheme-handler/https" = ["firefox.desktop"];
-        "x-scheme-handler/about" = ["firefox.desktop"];
-        "x-scheme-handler/unknown" = ["firefox.desktop"];
+        "default-web-browser" = [ "firefox.desktop" ];
+        "text/html" = [ "firefox.desktop" ];
+        "x-scheme-handler/http" = [ "firefox.desktop" ];
+        "x-scheme-handler/https" = [ "firefox.desktop" ];
+        "x-scheme-handler/about" = [ "firefox.desktop" ];
+        "x-scheme-handler/unknown" = [ "firefox.desktop" ];
       };
     };
 
@@ -33,14 +35,16 @@ in {
       policies = {
         AppAutoUpdate = false;
 
-        Containers.Default = let
-          mkContainer = name: color: icon: {inherit name color icon;};
-        in [
-          (mkContainer "Personal" "blue" "fingerprint")
-          (mkContainer "Self-hosted" "pink" "fingerprint")
-          (mkContainer "Shopping" "pink" "cart")
-          (mkContainer "Gaming" "turquoise" "chill")
-        ];
+        Containers.Default =
+          let
+            mkContainer = name: color: icon: { inherit name color icon; };
+          in
+          [
+            (mkContainer "Personal" "blue" "fingerprint")
+            (mkContainer "Self-hosted" "pink" "fingerprint")
+            (mkContainer "Shopping" "pink" "cart")
+            (mkContainer "Gaming" "turquoise" "chill")
+          ];
 
         DisableAppUpdate = true;
         DisableMasterPasswordCreation = true;
@@ -48,39 +52,41 @@ in {
         DisableSetDesktopBackground = true;
         DontCheckDefaultBrowser = true;
 
-        ExtensionSettings = let
-          mozillaAddon = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
+        ExtensionSettings =
+          let
+            mozillaAddon = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
 
-          # Unlike the user-specific browser configuration, we're just
-          # considering the bare minimum set of preferred extensions.
-          extensions = {
-            "@contain-google".install_url = mozillaAddon "google-container";
-            "@testpilot-containers".install_url = mozillaAddon "multi-account-containers";
+            # Unlike the user-specific browser configuration, we're just
+            # considering the bare minimum set of preferred extensions.
+            extensions = {
+              "@contain-google".install_url = mozillaAddon "google-container";
+              "@testpilot-containers".install_url = mozillaAddon "multi-account-containers";
 
-            "passbolt@passbolt.com" = {
-              install_url = mozillaAddon "passbolt";
-              installation_mode = "force_installed";
-              default_area = "navbar";
+              "passbolt@passbolt.com" = {
+                install_url = mozillaAddon "passbolt";
+                installation_mode = "force_installed";
+                default_area = "navbar";
+              };
+
+              "uBlock0@raymondhill.net".install_url = mozillaAddon "ublock-origin";
+
+              "de-DE@dictionaries.addons.mozilla.org".install_url = mozillaAddon "dictionary-german";
+
+              "{3c078156-979c-498b-8990-85f7987dd929}".install_url = mozillaAddon "sidebery";
+
+              "{b86e4813-687a-43e6-ab65-0bde4ab75758}".install_url =
+                mozillaAddon "localcdn-fork-of-decentraleyes";
             };
 
-            "uBlock0@raymondhill.net".install_url = mozillaAddon "ublock-origin";
-
-            "de-DE@dictionaries.addons.mozilla.org".install_url = mozillaAddon "dictionary-german";
-
-            "{3c078156-979c-498b-8990-85f7987dd929}".install_url = mozillaAddon "sidebery";
-
-            "{b86e4813-687a-43e6-ab65-0bde4ab75758}".install_url =
-              mozillaAddon "localcdn-fork-of-decentraleyes";
-          };
-
-          applyInstallationMode = name: value:
-            lib.nameValuePair name (
-              value
-              // (lib.optionalAttrs (!(lib.hasAttrByPath ["installation_mode"] value)) {
-                installation_mode = "normal_installed";
-              })
-            );
-        in
+            applyInstallationMode =
+              name: value:
+              lib.nameValuePair name (
+                value
+                // (lib.optionalAttrs (!(lib.hasAttrByPath [ "installation_mode" ] value)) {
+                  installation_mode = "normal_installed";
+                })
+              );
+          in
           lib.mapAttrs' applyInstallationMode extensions;
 
         FirefoxHome = {
@@ -320,7 +326,8 @@ in {
         # MOZILLA
         "permissions.default.desktop-notification" = 0;
         "permissions.default.geo" = 0;
-        "geo.provider.network.url" = "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
+        "geo.provider.network.url" =
+          "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
         "permissions.manager.defaultsUrl" = "";
         "webchannel.allowObject.urlWhitelist" = "";
 

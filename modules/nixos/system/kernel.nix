@@ -7,11 +7,13 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkForce mkDefault;
   inherit (flake.lib) mkBoolOpt;
   cfg = config.sys.kernel;
-in {
+in
+{
   options.sys.kernel = {
     enable = mkBoolOpt true;
   };
@@ -22,11 +24,12 @@ in {
 
     boot = {
       kernelPackages =
-        if config.host.graphical
-        then perSystem.nix-cachyos-kernel.linuxPackages-cachyos-latest
-        else if config.host.server
-        then pkgs.linuxPackages
-        else mkDefault pkgs.linuxPackages_latest;
+        if config.host.graphical then
+          perSystem.nix-cachyos-kernel.linuxPackages-cachyos-latest
+        else if config.host.server then
+          pkgs.linuxPackages
+        else
+          mkDefault pkgs.linuxPackages_latest;
       supportedFilesystems = mkForce [
         "btrfs"
         "vfat"

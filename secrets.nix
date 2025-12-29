@@ -31,20 +31,20 @@ let
     christoph_x13
     christoph_oca
   ];
-in {
+in
+{
   #  "secrets/netbird-io-setup.key".publicKeys = all;
   #  "secrets/tailscale-key.age".publicKeys = all;
   #  "secrets/vector.env".publicKeys = all;
   "secrets/user_christoph_pw".publicKeys = all;
-  "secrets/cf-api-key.age".publicKeys =
-    [
-      lsrv
-      oca
-      one
-      oc1
-      oc2
-    ]
-    ++ users;
+  "secrets/cf-api-key.age".publicKeys = [
+    lsrv
+    oca
+    one
+    oc1
+    oc2
+  ]
+  ++ users;
   #  "secrets/ha-secrets.age".publicKeys = [ lsrv ] ++ users;
   #  "secrets/ha-serviceaccount.age".publicKeys = [ lsrv ] ++ users;
   #  "secrets/mqtt-agent.age".publicKeys = all;
@@ -70,47 +70,46 @@ in {
   #    oc1
   #  ] ++ users;
   #
-  "secrets/wg-oca.age".publicKeys =
-    [
-      oca
-    ]
-    ++ users;
-  "secrets/wg-oc1.age".publicKeys =
-    [
-      oc1
-    ]
-    ++ users;
-  "secrets/wg-oc2.age".publicKeys =
-    [
-      oc2
-    ]
-    ++ users;
-  "secrets/wg-lsrv.age".publicKeys =
-    [
-      lsrv
-    ]
-    ++ users;
-  "secrets/wg-tower.age".publicKeys =
-    [
-      tower
-    ]
-    ++ users;
-  "secrets/wg-x13.age".publicKeys =
-    [
-      x13
-    ]
-    ++ users;
-  "secrets/wg-one.age".publicKeys =
-    [
-      one
-    ]
-    ++ users;
-    "secrets/altmount-cfg.age".publicKeys = [
-      oca
-    ] ++ users;
-    "secrets/karakeep-cfg.age".publicKeys = [
-      one
-    ] ++ users;
+  "secrets/wg-oca.age".publicKeys = [
+    oca
+  ]
+  ++ users;
+  "secrets/wg-oc1.age".publicKeys = [
+    oc1
+  ]
+  ++ users;
+  "secrets/wg-oc2.age".publicKeys = [
+    oc2
+  ]
+  ++ users;
+  "secrets/wg-lsrv.age".publicKeys = [
+    lsrv
+  ]
+  ++ users;
+  "secrets/wg-tower.age".publicKeys = [
+    tower
+  ]
+  ++ users;
+  "secrets/wg-x13.age".publicKeys = [
+    x13
+  ]
+  ++ users;
+  "secrets/wg-one.age".publicKeys = [
+    one
+  ]
+  ++ users;
+  "secrets/altmount-cfg.age".publicKeys = [
+    oca
+  ]
+  ++ users;
+  "secrets/karakeep-cfg.age".publicKeys = [
+    one
+  ]
+  ++ users;
+  "secrets/litellm-env.age".publicKeys = [
+    oca
+  ]
+  ++ users;
   #  "secrets/box-key.age".publicKeys = all;
   #  "secrets/actions-runner.age".publicKeys = all;
   #  "secrets/self.age".publicKeys = all;

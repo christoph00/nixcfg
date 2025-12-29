@@ -9,10 +9,12 @@
   lib,
   perSystem,
   ...
-}: let
+}:
+let
   inherit (flake.lib) enabled;
-in {
-  imports = [flake.modules.nixos.host];
+in
+{
+  imports = [ flake.modules.nixos.host ];
   facter.reportPath = ./facter.json;
   networking.hostName = "tower";
   hw.cpu = "intel";
@@ -79,7 +81,7 @@ in {
   };
 
   services.lact.enable = true;
-  sys.state.directories = ["/etc/lact"];
+  sys.state.directories = [ "/etc/lact" ];
 
   environment.systemPackages = [
     pkgs.amdgpu_top
@@ -98,7 +100,7 @@ in {
     ];
   };
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # WireGuard configuration
   network.wireguard = {
@@ -117,7 +119,10 @@ in {
   };
 
   services.xserver.enable = true;
-  services.xserver.videoDrivers = ["amdgpu" "i915"];
+  services.xserver.videoDrivers = [
+    "amdgpu"
+    "i915"
+  ];
 
   boot.kernelModules = [
     "kvm-intel"
@@ -133,7 +138,7 @@ in {
     "amdgpu.si_support=1"
     "amdgpu.cik_support=1"
   ];
-  boot.blacklistedKernelModules = ["fglrx"];
+  boot.blacklistedKernelModules = [ "fglrx" ];
   boot.initrd = {
     availableKernelModules = [
       "xhci_pci"

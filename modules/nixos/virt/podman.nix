@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  inputs,
   pkgs,
   ...
 }:
@@ -11,6 +12,7 @@ let
 
 in
 {
+  imports = [ inputs.quadlet-nix.nixosModules.quadlet ];
   config = mkIf cfg.podman {
     sys.state.directories = [
       "/var/lib/containers"
@@ -23,6 +25,8 @@ in
     environment.systemPackages = [
       pkgs.podman
     ];
+
+    virtualisation.quadlet.enable = true;
 
     virtualisation.podman = {
       enable = true;

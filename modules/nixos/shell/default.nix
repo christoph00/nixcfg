@@ -6,9 +6,11 @@
   ...
 }:
 with lib;
-with flake.lib; let
+with flake.lib;
+let
   cfg = config.shell;
-in {
+in
+{
   imports = [
     ./neovim
     ./devtools.nix
@@ -69,9 +71,9 @@ in {
       plugins = {
         nix-zsh-completions = {
           source = "${pkgs.nix-zsh-completions}/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh";
-          completions = ["${pkgs.nix-zsh-completions}/share/zsh/site-functions"];
+          completions = [ "${pkgs.nix-zsh-completions}/share/zsh/site-functions" ];
         };
-        zsh-completions.completions = ["${pkgs.zsh-completions}/share/zsh/site-functions"];
+        zsh-completions.completions = [ "${pkgs.zsh-completions}/share/zsh/site-functions" ];
         zsh-fzf-tab = {
           source = "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
           config = ''

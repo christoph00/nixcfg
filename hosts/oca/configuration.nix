@@ -4,10 +4,12 @@
   flake,
   config,
   ...
-}: let
+}:
+let
   inherit (flake.lib) create-caddy-proxy enabled;
-in {
-  imports = [inputs.self.nixosModules.host];
+in
+{
+  imports = [ inputs.self.nixosModules.host ];
 
   networking.hostName = "oca";
   sys.disk.device = "/dev/sda";
@@ -33,29 +35,33 @@ in {
   # services.rss-bridge = enabled;
   # services.pinchflat = enabled;
   services.open-webui = enabled;
+  svc.litellm = enabled;
   # services.sabnzbd = enabled;
   # services.actual = enabled;
 
   services.altmount = enabled;
 
-  svc.webserver =
-    enabled
-    // {
-      services = {
-        n8n = {
-          enable = true;
-          subdomain = "n8n";
-          port = 5678;
-        };
-        open-webui = {
-          enable = true;
-          subdomain = "ai";
-          port = config.services.open-webui.port;
-        };
+  svc.webserver = enabled // {
+    services = {
+      n8n = {
+        enable = true;
+        subdomain = "n8n";
+        port = 5678;
       };
+      open-webui = {
+        enable = true;
+        subdomain = "ai";
+        port = config.services.open-webui.port;
+      };
+      #   litellm = {
+      #     enable = true;
+      #     subdomain = "llm";
+      #     port = config.services.litellm.port;
+      # };
     };
+  };
 
-  networking.timeServers = ["169.254.169.254"];
+  networking.timeServers = [ "169.254.169.254" ];
 
   network.publicIP = "152.70.42.43";
 
