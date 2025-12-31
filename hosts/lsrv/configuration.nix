@@ -16,6 +16,7 @@
       forceDevice = true;
     };
   };
+  host.bootstrap = true;
 
   network.router = {
     enable = false;
@@ -23,8 +24,8 @@
     externalInterface = "enp2s0f1";
   };
 
-  services.home-assistant.enable = true;
-  services.mosquitto.enable = true;
+  # services.home-assistant.enable = true;
+  # services.mosquitto.enable = true;
 
   # WireGuard configuration
   network.wireguard = {
@@ -77,7 +78,7 @@
     blacklistedKernelModules = ["r8169"];
   };
   fileSystems = {
-    "/mnt/state".device = lib.mkFoce "/dev/disk/by-label/ssd-data";
+    "/mnt/state".device = lib.mkForce "/dev/disk/by-label/ssd-data";
     "/mnt/userdata" = {
       device = "/dev/disk/by-label/ssd-data";
       fsType = "btrfs";
