@@ -1,7 +1,11 @@
-{ inputs, flake, ... }:
-with inputs.nixpkgs;
-let
-  inherit (lib)
+{
+  inputs,
+  flake,
+  ...
+}:
+with inputs.nixpkgs; let
+  inherit
+    (lib)
     mkOption
     types
     mkDefault
@@ -13,9 +17,8 @@ let
     mapAttrs
     filterAttrs
     ;
-in
-rec {
-  mkOpt = type: default: mkOption { inherit type default; };
+in rec {
+  mkOpt = type: default: mkOption {inherit type default;};
   mkBoolOpt = default: mkOpt types.bool default;
   mkIntOpt = default: mkOpt types.int default;
   mkStrOpt = default: mkOpt types.str default;
@@ -37,45 +40,43 @@ rec {
     enable = mkDefault false;
   };
 
-  create-caddy-proxy =
-    {
-      port ? null,
-      host ? "127.0.0.1",
-      proxy-web-sockets ? false,
-      acmeHost ? "r505.de",
-      extraHeaders ? { },
-      extraConfig ? "",
-    }:
-    {
-      useACMEHost = acmeHost;
-      extraConfig = ''
-        reverse_proxy ${host}${
-          if port != null then ":${builtins.toString port}" else ""
-        }${lib.optionalString proxy-web-sockets " {
+  create-caddy-proxy = {
+    port ? null,
+    host ? "127.0.0.1",
+    proxy-web-sockets ? false,
+    acmeHost ? "r505.de",
+    extraHeaders ? {},
+    extraConfig ? "",
+  }: {
+    useACMEHost = acmeHost;
+    extraConfig = ''
+      reverse_proxy ${host}${
+        if port != null
+        then ":${builtins.toString port}"
+        else ""
+      }${lib.optionalString proxy-web-sockets " {
           header_up Connection {>Connection}
           header_up Upgrade {>Upgrade}
         }"}${
-          lib.optionalString (extraHeaders != { }) (
-            lib.concatStringsSep "\n" (
-              lib.mapAttrsToList (key: value: "          header_up ${key} \"${value}\"") extraHeaders
-            )
+        lib.optionalString (extraHeaders != {}) (
+          lib.concatStringsSep "\n" (
+            lib.mapAttrsToList (key: value: "          header_up ${key} \"${value}\"") extraHeaders
           )
-        }${lib.optionalString (extraConfig != "") "\n${extraConfig}"}
-      '';
-    };
+        )
+      }${lib.optionalString (extraConfig != "") "\n${extraConfig}"}
+    '';
+  };
 
-  mkSecret =
-    {
-      file,
-      owner ? "root",
-      group ? "root",
-      mode ? "400",
-      ...
-    }:
-    {
-      file = "${flake}/secrets/${file}.age";
-      inherit owner group mode;
-    };
+  mkSecret = {
+    file,
+    owner ? "root",
+    group ? "root",
+    mode ? "400",
+    ...
+  }: {
+    file = "${flake}/secrets/${file}.age";
+    inherit owner group mode;
+  };
 
   toList = attrs: (builtins.map (key: getAttr key attrs) (attrNames attrs));
 
@@ -83,16 +84,40 @@ rec {
 
   allSystems = toList flake.nixosConfigurations;
 
-  allMicroVMS = builtins.filter (
-    x: ((builtins.hasAttr "microvm" x.config.virt.microvm) && (x.config.virt.microvm.isGuest == true))
-  ) allSystems;
+  allMicroVMS =
+    builtins.filter (
+      x: ((builtins.hasAttr "microvm" x.config.virt.microvm) && (x.config.virt.microvm.isGuest == true))
+    )
+    allSystems;
 
-  toEnvValue = env: if isList env then concatStringsSep ":" (map toString env) else toString env;
+  toEnvValue = env:
+    if isList env
+    then concatStringsSep ":" (map toString env)
+    else toString env;
 
-  toEnvExport =
-    vars:
-    (concatStringsSep "\n" (
-      mapAttrsToList (name: value: "export ${name}=\"${toEnvValue value}\"") vars
-    ));
+  toEnvExport = vars: (concatStringsSep "\n" (
+    mapAttrsToList (name: value: "export ${name}=\"${toEnvValue value}\"") vars
+  ));
 
+  ## from github.com/Le0-dot/config.nix
+
+  btrfsVolume = disko-config: {
+    disk ? "main",
+    partition ? "root",
+    subvol,
+  }: let
+    devicePath =
+      disko-config.devices.disk.${disk}.content.partitions.${partition}.device;
+  in {
+    volumeConfig = {
+      type = "btrfs";
+      device = devicePath;
+      options = "subvol=${subvol}";
+    };
+  };
+  mountVolume = {
+    volume,
+    subpath ? "/",
+    destination,
+  }: "type=volume,source=${volume},subpath=${subpath},destination=${destination}";
 }

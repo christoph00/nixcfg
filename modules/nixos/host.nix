@@ -3,12 +3,9 @@
   flake,
   options,
   ...
-}:
-let
+}: let
   inherit (flake.lib) mkBoolOpt;
-
-in
-{
+in {
   imports = [
     inputs.nixos-facter-modules.nixosModules.facter
     inputs.srvos.nixosModules.common
@@ -20,6 +17,7 @@ in
     flake.modules.nixos.network
     flake.modules.nixos.shell
     flake.modules.nixos.services
+    flake.modules.nixos.containers
     flake.modules.nixos.hw
     flake.modules.nixos.desktop
     flake.modules.nixos.virt
@@ -34,5 +32,4 @@ in
     container = mkBoolOpt false;
     minimal = mkBoolOpt false;
   };
-
 }

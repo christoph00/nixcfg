@@ -28,7 +28,7 @@ in {
   svc.code-tunnel = enabled;
 
   # services.searx = enabled;
-  services.n8n = enabled;
+  # services.n8n = enabled;
   # services.audiobookshelf = enabled;
   # services.rss-bridge = enabled;
   # services.pinchflat = enabled;
@@ -38,6 +38,8 @@ in {
   # services.actual = enabled;
 
   services.altmount = enabled;
+
+  cnt.n8n.enable = true;
 
   svc.webserver =
     enabled
