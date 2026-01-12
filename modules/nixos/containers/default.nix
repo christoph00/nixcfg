@@ -7,7 +7,11 @@
   inherit (lib) mkIf mkDefault;
   inherit (flake.lib) mkBoolOpt;
 in {
-  imports = [./n8n.nix];
+  imports = [
+    ./n8n.nix
+    ./sillytavern.nix
+    ./qdrant.nix
+  ];
   options.cnt = {
     enable = mkBoolOpt false;
   };

@@ -5,12 +5,16 @@
   ...
 }: let
   inherit (lib) mkIf mkDefault mkForce;
-  inherit (flake.lib) btrfsVolume mountVolume mkBoolOpt;
+  inherit (flake.lib) btrfsVolume mountVolume mkBoolOpt mkSecret;
 in {
   options.cnt.n8n = {
     enable = mkBoolOpt false;
   };
   config = mkIf config.cnt.n8n.enable {
+    age.secrets."n8n-env" = mkSecret {
+      file = "n8n-env";
+    };
+
     virtualisation.quadlet = let
       inherit (config.virtualisation.quadlet) pods volumes;
       btrfsvol = btrfsVolume config.disko;
@@ -24,7 +28,6 @@ in {
         };
       };
       containers.n8n-main = {
-        # environmentFiles = [config.sops.templates."n8n.env".path];
         containerConfig = {
           image = "docker.n8n.io/n8nio/n8n:beta";
           pod = pods.n8n.ref;
@@ -44,20 +47,26 @@ in {
             N8N_PROTOCOL = "https";
             WEBHOOK_URL = "https://n8n.r505.de/";
             N8N_RUNNERS_ENABLED = "true";
+            N8N_RUNNERS_MODE = "external";
+            N8N_RUNNERS_JAVASCRIPT_ENABLED = "true";
+            N8N_RUNNERS_PYTHON_ENABLED = "true";
+            N8N_RUNNERS_BROKER_PORT = "5101";
             NODE_ENV = "production";
             N8N_SECURE_COOKIE = "true";
             N8N_PROXY_SSL_HEADER = "X-Forwarded-Proto";
           };
+          environmentFiles = [config.age.secrets."n8n-env".path];
         };
       };
-      containers.n8n-runner = {
-        image = "docker.n8n.io/n8nio/runners:beta";
+      containers.n8n-runner.containerConfig = {
+        image = "n8nio/runners:beta";
         pod = pods.n8n.ref;
-        user = 1000;
-        group = 100;
+        user = "1000";
+        group = "100";
         environments = {
-          N8N_RUNNERS_TASK_BROKER_URI = "http://localhost:5679";
+          N8N_RUNNERS_TASK_BROKER_URI = "http://localhost:5101";
         };
+        environmentFiles = [config.age.secrets."n8n-env".path];
       };
     };
   };

@@ -40,6 +40,8 @@ in {
   services.altmount = enabled;
 
   cnt.n8n.enable = true;
+  cnt.sillytavern.enable = true;
+  cnt.qdrant.enable = true;
 
   svc.webserver =
     enabled
