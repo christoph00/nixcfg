@@ -13,6 +13,7 @@ in {
     ./qdrant.nix
     ./home-assistant.nix
     ./music-assistant.nix
+    ./beszel.nix
   ];
   options.cnt = {
     enable = mkBoolOpt false;

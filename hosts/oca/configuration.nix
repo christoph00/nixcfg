@@ -45,6 +45,7 @@ in {
 
   cnt.home-assistant.enable = true;
   cnt.music-assistant.enable = true;
+  cnt.beszel.enable = true;
 
   svc.webserver =
     enabled
@@ -69,6 +70,11 @@ in {
           enable = true;
           subdomain = "music";
           port = 8095;
+        };
+        beszel = {
+          enable = true;
+          subdomain = "stat";
+          port = 8090;
         };
         #   litellm = {
         #     enable = true;
