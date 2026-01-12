@@ -15,6 +15,9 @@ in {
 
   hw.cpu = "other";
 
+
+  services.beszel.agent.enable = true;
+
   # virt.podman = true;
 
   host.vm = true;

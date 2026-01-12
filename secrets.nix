@@ -122,6 +122,7 @@ in {
     ++ users;
   "secrets/n8n-env.age".publicKeys = [oca] ++ users;
   "secrets/sillytavern-env.age".publicKeys = [oca] ++ users;
+  "secrets/beszel-env.age".publicKeys = all;
   #  "secrets/box-key.age".publicKeys = all;
   #  "secrets/actions-runner.age".publicKeys = all;
   #  "secrets/self.age".publicKeys = all;
