@@ -11,6 +11,8 @@ in {
     ./n8n.nix
     ./sillytavern.nix
     ./qdrant.nix
+    ./home-assistant.nix
+    ./music-assistant.nix
   ];
   options.cnt = {
     enable = mkBoolOpt false;

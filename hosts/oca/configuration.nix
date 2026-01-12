@@ -44,6 +44,7 @@ in {
   cnt.qdrant.enable = true;
 
   cnt.home-assistant.enable = true;
+  cnt.music-assistant.enable = true;
 
   svc.webserver =
     enabled
@@ -63,6 +64,11 @@ in {
           enable = true;
           subdomain = "home";
           port = 8123;
+        };
+        music-assistant = {
+          enable = true;
+          subdomain = "music";
+          port = 8095;
         };
         #   litellm = {
         #     enable = true;

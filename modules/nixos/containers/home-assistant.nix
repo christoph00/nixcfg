@@ -37,6 +37,11 @@ in {
           environments = {
             TZ = "Europe/Berlin";
           };
+          addCapabilities = [
+            "CAP_NET_RAW"
+            "NET_ADMIN"
+            "NET_RAW"
+          ]; 
         };
       };
     };
