@@ -43,6 +43,8 @@ in {
   cnt.sillytavern.enable = true;
   cnt.qdrant.enable = true;
 
+  cnt.home-assistant.enable = true;
+
   svc.webserver =
     enabled
     // {
@@ -56,6 +58,11 @@ in {
           enable = true;
           subdomain = "ai";
           port = config.services.open-webui.port;
+        };
+        home-assistant = {
+          enable = true;
+          subdomain = "home";
+          port = 8123;
         };
         #   litellm = {
         #     enable = true;

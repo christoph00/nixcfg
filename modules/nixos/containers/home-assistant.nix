@@ -33,17 +33,10 @@ in {
               subpath = "/config";
               destination = "/config";
             })
-            {
-              source = "/run/dbus/system_bus_socket";
-              destination = "/run/dbus/system_bus_socket";
-              readOnly = false;
-              type = "bind";
-            }
           ];
           environments = {
             TZ = "Europe/Berlin";
           };
-          capabilities = ["NET_ADMIN" "NET_RAW" "SYS_ADMIN"];
         };
       };
     };

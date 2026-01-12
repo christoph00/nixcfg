@@ -15,8 +15,8 @@ in {
       inherit (config.virtualisation.quadlet) pods volumes;
       btrfsvol = btrfsVolume config.disko;
     in {
-      pods.n8n.podConfig = {
-        publishPorts = ["127.0.0.1:6333:6333" "127.0.0.1:6334:6334"];
+      pods.qdrant.podConfig = {
+        publishPorts = ["6333:6333" "6334:6334"];
       };
       volumes = {
         qdrant = btrfsvol {
