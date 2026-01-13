@@ -16,7 +16,6 @@ in {
   hw.cpu = "other";
 
 
-  services.beszel.agent.enable = true;
 
   # virt.podman = true;
 
@@ -40,15 +39,17 @@ in {
   # services.sabnzbd = enabled;
   # services.actual = enabled;
 
-  services.altmount = enabled;
+  services.mosquitto = enabled;
+
 
   cnt.n8n.enable = true;
   cnt.sillytavern.enable = true;
   cnt.qdrant.enable = true;
-
   cnt.home-assistant.enable = true;
   cnt.music-assistant.enable = true;
   cnt.beszel.enable = true;
+  cnt.gonic.enable = true;
+  cnt.media-pod.enable = true;
 
   svc.webserver =
     enabled
@@ -59,10 +60,10 @@ in {
           subdomain = "n8n";
           port = 5678;
         };
-        open-webui = {
+        lobechat = {
           enable = true;
           subdomain = "ai";
-          port = config.services.open-webui.port;
+          port = 3210;
         };
         home-assistant = {
           enable = true;
@@ -78,6 +79,16 @@ in {
           enable = true;
           subdomain = "stat";
           port = 8090;
+        };
+        gonic = {
+          enable = true;
+          subdomain = "m";
+          port = 4747;
+        };
+        jellyfin = {
+          enable = true;
+          subdomain = "media";
+          port = 8096;
         };
         #   litellm = {
         #     enable = true;

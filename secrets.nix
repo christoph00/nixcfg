@@ -123,6 +123,7 @@ in {
   "secrets/n8n-env.age".publicKeys = [oca] ++ users;
   "secrets/sillytavern-env.age".publicKeys = [oca] ++ users;
   "secrets/beszel-env.age".publicKeys = all;
+  "secrets/rclone-conf.age".publicKeys = [oca] ++ users;
   #  "secrets/box-key.age".publicKeys = all;
   #  "secrets/actions-runner.age".publicKeys = all;
   #  "secrets/self.age".publicKeys = all;

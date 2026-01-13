@@ -11,9 +11,9 @@ in {
     enable = mkBoolOpt false;
   };
   config = mkIf config.cnt.lobechat.enable {
-    age.secrets."lobechat-env" = mkSecret {
-      file = "lobechat-env";
-    };
+    # age.secrets."lobechat-env" = mkSecret {
+    #   file = "lobechat-env";
+    # };
 
     virtualisation.quadlet = let
       inherit (config.virtualisation.quadlet) pods volumes;
@@ -42,7 +42,7 @@ in {
             PORT = "3210";
             TZ = "Europe/Berlin";
           };
-          environmentFiles = [config.age.secrets."lobechat-env".path];
+          # environmentFiles = [config.age.secrets."lobechat-env".path];
         };
       };
     };

@@ -39,6 +39,12 @@ in {
           };
         };
       };
+      containers.music-assistant-potoken = {
+        containerConfig = {
+          image = "brainicism/bgutil-ytdlp-pot-provider:latest";
+          pod = pods.music-assistant.ref;
+        };
+      };
     };
   };
 }

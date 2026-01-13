@@ -14,6 +14,9 @@ in {
     ./home-assistant.nix
     ./music-assistant.nix
     ./beszel.nix
+    ./gonic.nix
+    ./media-pod.nix
+    ./lobechat.nix
   ];
   options.cnt = {
     enable = mkBoolOpt false;

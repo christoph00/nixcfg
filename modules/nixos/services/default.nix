@@ -7,6 +7,7 @@
     ./audio.nix
     ./audiobookshelf.nix
     ./actual.nix
+    ./beszel-agent.nix
     ./code-tunnel.nix
     ./dnscrypt.nix
     ./fail2ban.nix
