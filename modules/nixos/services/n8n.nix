@@ -4,18 +4,18 @@
   pkgs,
   perSystem,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf mkDefault mkForce;
   package = perSystem.nixpkgs-unstable.n8n.overrideAttrs (old: {
-    meta = old.meta // {
-      license = lib.licenses.free;
-    };
+    meta =
+      old.meta
+      // {
+        license = lib.licenses.free;
+      };
   });
-in
-{
+in {
   config = mkIf config.services.n8n.enable {
-    sys.state.directories = [ "/var/lib/n8n" ];
+    sys.state.directories = ["/var/lib/n8n"];
     services.n8n.environment.WEBHOOK_URL = mkDefault "https://n8n.r505.de";
 
     systemd.services.n8n.path = [
@@ -36,7 +36,7 @@ in
       pkgs.nodejs
     ];
 
-    users.groups.n8n = { };
+    users.groups.n8n = {};
     users.users.n8n = {
       isSystemUser = true;
       group = "n8n";
@@ -44,6 +44,5 @@ in
       home = "/var/lib/n8n";
       createHome = true;
     };
-
   };
 }

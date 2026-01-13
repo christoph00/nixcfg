@@ -4,15 +4,12 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
 
   cfg = config.virt;
-
-in
-{
-  imports = [ inputs.quadlet-nix.nixosModules.quadlet ];
+in {
+  imports = [inputs.quadlet-nix.nixosModules.quadlet];
   config = mkIf cfg.podman {
     sys.state.directories = [
       "/var/lib/containers"
@@ -28,15 +25,11 @@ in
 
     virtualisation.quadlet.enable = true;
 
+    networking.firewall.trustedInterfaces = [ "podman0" ];
+
+
     virtualisation.podman = {
       enable = true;
-      autoPrune.enable = true;
-      dockerCompat = true;
-      dockerSocket.enable = true;
-      defaultNetwork.settings = {
-        # Required for container networking to be able to use names.
-        dns_enabled = true;
-      };
     };
   };
 }

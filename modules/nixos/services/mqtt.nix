@@ -15,6 +15,8 @@ in
 
     environment.systemPackages = with pkgs; [ mqttui ];
 
+    networking.firewall.allowedTCPPorts = [ 1883 ];
+
     services.mosquitto = {
       persistence = true;
       listeners = [

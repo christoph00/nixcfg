@@ -4,9 +4,9 @@
   flake,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkIf
     mkForce
     mapAttrs'
@@ -15,15 +15,15 @@ let
     filterAttrs
     types
     ;
-  inherit (flake.lib)
+  inherit
+    (flake.lib)
     mkBoolOpt
     mkStrOpt
     mkSecret
     mkOpt
     ;
   cfg = config.svc.webserver;
-in
-{
+in {
   options.svc.webserver = {
     enable = mkBoolOpt false;
     domain = mkStrOpt "r505.de";
@@ -43,12 +43,12 @@ in
             extraConfig = mkStrOpt "";
             extraHeaders = lib.mkOption {
               type = types.attrsOf types.str;
-              default = { };
+              default = {};
             };
           };
         }
       );
-      default = { };
+      default = {};
       description = "Service definitions for webserver reverse proxy";
     };
   };
@@ -80,7 +80,7 @@ in
     };
 
     systemd.services.caddy.serviceConfig = {
-      AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
+      AmbientCapabilities = ["CAP_NET_BIND_SERVICE"];
       ReadWritePaths = [
         "/var/lib/caddy"
         "/var/lib/acme"
@@ -90,13 +90,12 @@ in
     services.caddy = {
       enable = true;
       # Configure FrankenPHP
-      # package = pkgs.frankenphp;
+      package = pkgs.frankenphp;
 
       # Generate virtual hosts for enabled services
-      virtualHosts =
-        let
-          enabledServices = filterAttrs (_: service: service.enable) cfg.services;
-        in
+      virtualHosts = let
+        enabledServices = filterAttrs (_: service: service.enable) cfg.services;
+      in
         mapAttrs' (_name: service: {
           name = "${service.subdomain}.${cfg.domain}";
           value = {
@@ -105,10 +104,11 @@ in
               ${service.extraConfig}
             '';
           };
-        }) enabledServices;
+        })
+        enabledServices;
     };
 
-    users.users.caddy.extraGroups = [ "acme" ];
+    users.users.caddy.extraGroups = ["acme"];
     # systemd.tmpfiles.rules = [
     #   "Z /var/lib/acme 0755 acme acme - -"
     # ];
@@ -122,22 +122,22 @@ in
         #dnsPropagationCheck = true;
         #dnsResolver = "1.1.1.1:53";
         credentialsFile = config.age.secrets.cf-api-key.path;
-        reloadServices = [ "caddy.service" ];
+        reloadServices = ["caddy.service"];
         # Use lego client instead of minica for cloudflare DNS
         server = "https://acme-v02.api.letsencrypt.org/directory";
       };
       # Generate certs for each enabled service
-      certs =
-        let
-          enabledServices = filterAttrs (_: service: service.enable) cfg.services;
-        in
+      certs = let
+        enabledServices = filterAttrs (_: service: service.enable) cfg.services;
+      in
         mapAttrs' (_name: service: {
           name = "${service.subdomain}.${cfg.domain}";
           value = {
             domain = "${service.subdomain}.${cfg.domain}";
-            reloadServices = [ "caddy.service" ];
+            reloadServices = ["caddy.service"];
           };
-        }) enabledServices;
+        })
+        enabledServices;
     };
   };
 }

@@ -2,17 +2,14 @@
   config,
   lib,
   pkgs,
-  inputs,
   flake,
   perSystem,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
   inherit (flake.lib) mkBoolOpt mkSecret enabled;
   cfg = config.shell.devtools;
-in
-{
+in {
   options.shell.devtools = {
     enable = mkBoolOpt config.host.graphical;
     tmux = mkBoolOpt true;
@@ -20,17 +17,12 @@ in
 
   config = mkIf cfg.enable {
     programs.nvf = enabled;
+    # programs.neovim = enabled;
 
     environment.variables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
-
-    #    age.secrets.aider = mkSecret {
-    #      file = "aider";
-    #      mode = "0400";
-    #      owner = "christoph";
-    #    };
 
     environment.systemPackages =
       (with pkgs; [
@@ -48,6 +40,7 @@ in
         httrack
         nodejs
         uv
+        bun
         python3
         pass
         repomix
@@ -57,6 +50,15 @@ in
         intelephense
         gh
         watchgha
+        tree-sitter
+        marksman
+        fswatch
+        fd
+        ripgrep
+        nixd
+        nixfmt
+        # emmylua-ls
+        # stylua
       ])
       ++ (with perSystem.nix-ai-tools; [
         claude-code

@@ -4,18 +4,18 @@
   flake,
   config,
   ...
-}:
-let
+}: let
   inherit (flake.lib) create-caddy-proxy enabled;
-in
-{
-  imports = [ inputs.self.nixosModules.host ];
+in {
+  imports = [inputs.self.nixosModules.host];
 
   networking.hostName = "oca";
   sys.disk.device = "/dev/sda";
   sys.disk.forceDevice = true;
 
   hw.cpu = "other";
+
+
 
   # virt.podman = true;
 
@@ -30,38 +30,75 @@ in
   svc.code-tunnel = enabled;
 
   # services.searx = enabled;
-  services.n8n = enabled;
+  # services.n8n = enabled;
   # services.audiobookshelf = enabled;
   # services.rss-bridge = enabled;
   # services.pinchflat = enabled;
-  services.open-webui = enabled;
-  svc.litellm = enabled;
+  # services.open-webui = enabled;
+  # svc.litellm = enabled;
   # services.sabnzbd = enabled;
   # services.actual = enabled;
 
-  services.altmount = enabled;
+  services.mosquitto = enabled;
 
-  svc.webserver = enabled // {
-    services = {
-      n8n = {
-        enable = true;
-        subdomain = "n8n";
-        port = 5678;
+
+  cnt.n8n.enable = true;
+  cnt.sillytavern.enable = true;
+  cnt.qdrant.enable = true;
+  cnt.home-assistant.enable = true;
+  cnt.music-assistant.enable = true;
+  cnt.beszel.enable = true;
+  cnt.gonic.enable = true;
+  cnt.media-pod.enable = true;
+
+  svc.webserver =
+    enabled
+    // {
+      services = {
+        n8n = {
+          enable = true;
+          subdomain = "n8n";
+          port = 5678;
+        };
+        lobechat = {
+          enable = true;
+          subdomain = "ai";
+          port = 3210;
+        };
+        home-assistant = {
+          enable = true;
+          subdomain = "home";
+          port = 8123;
+        };
+        music-assistant = {
+          enable = true;
+          subdomain = "music";
+          port = 8095;
+        };
+        beszel = {
+          enable = true;
+          subdomain = "stat";
+          port = 8090;
+        };
+        gonic = {
+          enable = true;
+          subdomain = "m";
+          port = 4747;
+        };
+        jellyfin = {
+          enable = true;
+          subdomain = "media";
+          port = 8096;
+        };
+        #   litellm = {
+        #     enable = true;
+        #     subdomain = "llm";
+        #     port = config.services.litellm.port;
+        # };
       };
-      open-webui = {
-        enable = true;
-        subdomain = "ai";
-        port = config.services.open-webui.port;
-      };
-      #   litellm = {
-      #     enable = true;
-      #     subdomain = "llm";
-      #     port = config.services.litellm.port;
-      # };
     };
-  };
 
-  networking.timeServers = [ "169.254.169.254" ];
+  networking.timeServers = ["169.254.169.254"];
 
   network.publicIP = "152.70.42.43";
 
