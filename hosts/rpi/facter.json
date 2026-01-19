@@ -1,0 +1,957 @@
+{
+  "version": 1,
+  "system": "aarch64-linux",
+  "virtualisation": "none",
+  "hardware": {
+    "cpu": [
+      {
+        "architecture": "aarch64",
+        "vendor_name": "ARM Limited",
+        "family": 0,
+        "model": 4,
+        "stepping": 0,
+        "features": [
+          "fp",
+          "asimd",
+          "evtstrm",
+          "crc32",
+          "cpuid"
+        ],
+        "bogo": 38.4,
+        "physical_id": 0,
+        "fpu": false,
+        "fpu_exception": false,
+        "write_protect": false,
+        "address_sizes": {}
+      }
+    ],
+    "disk": [
+      {
+        "index": 9,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram2",
+        "unix_device_name": "/dev/ram2",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 2,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram2"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 10,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram0",
+        "unix_device_name": "/dev/ram0",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 0,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram0"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 11,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram9",
+        "unix_device_name": "/dev/ram9",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 9,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram9"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 12,
+        "attached_to": 8,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "serial": "0x41c23916",
+        "model": "Disk",
+        "sysfs_id": "/class/block/mmcblk0",
+        "sysfs_bus_id": "mmc0:aaaa",
+        "sysfs_device_link": "/devices/platform/soc/3f202000.mmc/mmc_host/mmc0/mmc0:aaaa",
+        "unix_device_name": "/dev/mmcblk0",
+        "unix_device_number": {
+          "type": 98,
+          "major": 179,
+          "minor": 0,
+          "range": 32
+        },
+        "unix_device_names": [
+          "/dev/disk/by-id/mmc-SC16G_0x41c23916",
+          "/dev/disk/by-path/platform-3f202000.mmc",
+          "/dev/mmcblk0"
+        ],
+        "resources": [
+          {
+            "type": "disk_geo",
+            "cylinders": 486192,
+            "heads": 4,
+            "sectors": 16,
+            "size": 0,
+            "geo_type": "logical"
+          },
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 31116288,
+            "value_2": 512
+          }
+        ],
+        "driver": "sdhost-bcm2835",
+        "drivers": [
+          "mmcblk",
+          "sdhost-bcm2835"
+        ]
+      },
+      {
+        "index": 13,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram14",
+        "unix_device_name": "/dev/ram14",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 14,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram14"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 14,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram7",
+        "unix_device_name": "/dev/ram7",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 7,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram7"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 15,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram12",
+        "unix_device_name": "/dev/ram12",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 12,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram12"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 16,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram5",
+        "unix_device_name": "/dev/ram5",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 5,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram5"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 17,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram10",
+        "unix_device_name": "/dev/ram10",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 10,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram10"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 18,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram3",
+        "unix_device_name": "/dev/ram3",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 3,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram3"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 19,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram1",
+        "unix_device_name": "/dev/ram1",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 1,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram1"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 20,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram15",
+        "unix_device_name": "/dev/ram15",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 15,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram15"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 21,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram8",
+        "unix_device_name": "/dev/ram8",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 8,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram8"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 22,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram13",
+        "unix_device_name": "/dev/ram13",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 13,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram13"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 23,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram6",
+        "unix_device_name": "/dev/ram6",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 6,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram6"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 24,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram11",
+        "unix_device_name": "/dev/ram11",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 11,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram11"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      },
+      {
+        "index": 25,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/ram4",
+        "unix_device_name": "/dev/ram4",
+        "unix_device_number": {
+          "type": 98,
+          "major": 1,
+          "minor": 4,
+          "range": 1
+        },
+        "unix_device_names": [
+          "/dev/ram4"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 8192,
+            "value_2": 512
+          }
+        ]
+      }
+    ],
+    "hub": [
+      {
+        "index": 26,
+        "attached_to": 0,
+        "class_list": [
+          "usb",
+          "hub"
+        ],
+        "bus_type": {
+          "hex": "0086",
+          "name": "USB",
+          "value": 134
+        },
+        "slot": {
+          "bus": 0,
+          "number": 0
+        },
+        "base_class": {
+          "hex": "010a",
+          "name": "Hub",
+          "value": 266
+        },
+        "vendor": {
+          "hex": "1d6b",
+          "name": "Linux 6.6.74 dwc2_hsotg",
+          "value": 7531
+        },
+        "device": {
+          "hex": "0002",
+          "name": "DWC OTG Controller",
+          "value": 2
+        },
+        "revision": {
+          "hex": "0000",
+          "name": "6.06",
+          "value": 0
+        },
+        "serial": "3f980000.usb",
+        "model": "Linux 6.6.74 dwc2_hsotg DWC OTG Controller",
+        "sysfs_id": "/devices/platform/soc/3f980000.usb/usb1/1-0:1.0",
+        "sysfs_bus_id": "1-0:1.0",
+        "resources": [
+          {
+            "type": "baud",
+            "speed": 480000000,
+            "bits": 0,
+            "stop_bits": 0,
+            "parity": 0,
+            "handshake": 0
+          }
+        ],
+        "detail": {
+          "device_class": {
+            "hex": "0009",
+            "name": "hub",
+            "value": 9
+          },
+          "device_subclass": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "device_protocol": 1,
+          "interface_class": {
+            "hex": "0009",
+            "name": "hub",
+            "value": 9
+          },
+          "interface_subclass": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "interface_protocol": 0,
+          "interface_number": 0,
+          "interface_alternate_setting": 0
+        },
+        "hotplug": "usb",
+        "driver": "hub",
+        "drivers": [
+          "hub"
+        ],
+        "module_alias": "usb:v1D6Bp0002d0606dc09dsc00dp01ic09isc00ip00in00"
+      }
+    ],
+    "memory": [
+      {
+        "index": 6,
+        "attached_to": 0,
+        "class_list": [
+          "memory"
+        ],
+        "base_class": {
+          "hex": "0101",
+          "name": "Internally Used Class",
+          "value": 257
+        },
+        "sub_class": {
+          "hex": "0002",
+          "name": "Main Memory",
+          "value": 2
+        },
+        "model": "Main Memory",
+        "resources": [
+          {
+            "type": "mem",
+            "base": 0,
+            "range": 424927232,
+            "enabled": true,
+            "access": "read_write",
+            "prefetch": "unknown"
+          },
+          {
+            "type": "phys_mem",
+            "range": 436207616
+          }
+        ]
+      }
+    ],
+    "mmc_controller": [
+      {
+        "index": 8,
+        "attached_to": 0,
+        "class_list": [
+          "mmc_controller"
+        ],
+        "bus_type": {
+          "hex": "0093",
+          "name": "MMC",
+          "value": 147
+        },
+        "slot": {
+          "bus": 0,
+          "number": 0
+        },
+        "base_class": {
+          "hex": "0117",
+          "name": "MMC Controller",
+          "value": 279
+        },
+        "vendor": "",
+        "device": "SD Controller 0",
+        "model": "SD Controller 0",
+        "sysfs_id": "/devices/platform/soc/3f202000.mmc/mmc_host/mmc0/mmc0:aaaa",
+        "sysfs_bus_id": "mmc0:aaaa",
+        "driver": "mmcblk",
+        "drivers": [
+          "mmcblk"
+        ]
+      }
+    ],
+    "network_controller": [
+      {
+        "index": 7,
+        "attached_to": 0,
+        "class_list": [
+          "network_controller"
+        ],
+        "base_class": {
+          "hex": "0002",
+          "name": "Network controller",
+          "value": 2
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Ethernet controller",
+          "value": 0
+        },
+        "device": {
+          "hex": "0000",
+          "name": "ARM Ethernet controller",
+          "value": 0
+        },
+        "model": "ARM Ethernet controller",
+        "sysfs_id": "/devices/platform/soc/3f980000.usb/gadget.0",
+        "sysfs_bus_id": "gadget.0",
+        "unix_device_name": "usb0",
+        "unix_device_names": [
+          "usb0"
+        ],
+        "resources": [
+          {
+            "type": "hwaddr",
+            "address": 102
+          }
+        ],
+        "driver": "g_ether",
+        "driver_module": "libcomposite",
+        "drivers": [
+          "g_ether"
+        ],
+        "driver_modules": [
+          "libcomposite"
+        ],
+        "module_alias": "of:NusbT(null)Cbrcm,bcm2835-usb"
+      }
+    ],
+    "network_interface": [
+      {
+        "index": 27,
+        "attached_to": 7,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "000c",
+          "name": "USB-Link",
+          "value": 12
+        },
+        "model": "USB-Link network interface",
+        "sysfs_id": "/class/net/usb0",
+        "sysfs_device_link": "/devices/platform/soc/3f980000.usb/gadget.0",
+        "unix_device_name": "usb0",
+        "unix_device_names": [
+          "usb0"
+        ],
+        "resources": [
+          {
+            "type": "hwaddr",
+            "address": 102
+          }
+        ],
+        "driver": "g_ether",
+        "driver_module": "libcomposite",
+        "drivers": [
+          "g_ether"
+        ],
+        "driver_modules": [
+          "libcomposite"
+        ]
+      },
+      {
+        "index": 28,
+        "attached_to": 0,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Loopback",
+          "value": 0
+        },
+        "model": "Loopback network interface",
+        "sysfs_id": "/class/net/lo",
+        "unix_device_name": "lo",
+        "unix_device_names": [
+          "lo"
+        ]
+      }
+    ],
+    "system": {}
+  },
+  "smbios": {}
+}
