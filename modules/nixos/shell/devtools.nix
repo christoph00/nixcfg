@@ -64,6 +64,9 @@ in {
         claude-code
         opencode
         gemini-cli
+        goose-cli
+        pi
+        vibe-kanban
         # qwen-code
         crush
         code
