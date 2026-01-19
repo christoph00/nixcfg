@@ -31,6 +31,7 @@ in {
         fd
         yazi
         bc
+        gcc
         gitu
         devenv
         curlie
@@ -70,6 +71,9 @@ in {
         # qwen-code
         crush
         code
+        agent-browser
+        clawdbot
+
       ]);
 
     home.rum.programs.tealdeer = {
