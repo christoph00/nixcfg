@@ -41,7 +41,7 @@ in
       home = "/home/${cfg.name}";
       group = "users";
 
-      shell = pkgs.zsh;
+      shell = pkgs.nushell;
 
       uid = 1000;
 

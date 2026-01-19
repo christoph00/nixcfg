@@ -20,6 +20,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.enableAllTerminfo = true;
     programs.direnv = enabled;
     programs.git = enabled;
     environment.systemPackages = with pkgs; [
@@ -35,80 +36,52 @@ in
       usbutils
       uutils-coreutils-noprefix
       dnsutils
-      bat
       fzf
-      lsd
-      starship
+    ];
+    environment.shells = with pkgs; [
+      nushell
+      dash
     ];
 
-    programs.rust-motd = enabled;
-
-    programs.zsh.enable = true;
-
-    home.rum.programs.zsh = {
+    home.rum.programs.nushell = {
       enable = true;
-      initConfig = ''
-        # enable vi mode
-        # bindkey -v
-        # export KEYTIMEOUT=1
-
-        # history
-        SAVEHIST=2000
-        HISTSIZE=5000
-
-
-        # aliases
-        alias ls=lsd
-
-        export PATH="$HOME/.local/bin:$PATH"
-        export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-        export PATH="$PATH:$HOME/.npm-packages/bin"
-
-
-        eval "$(${pkgs.starship}/bin/starship init zsh)"
-      '';
-
-      plugins = {
-        nix-zsh-completions = {
-          source = "${pkgs.nix-zsh-completions}/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh";
-          completions = [ "${pkgs.nix-zsh-completions}/share/zsh/site-functions" ];
+      settings = {
+        edit_mode = "vi";
+        buffer_editor = "nvim";
+        show_banner = false;
+        history = {
+          file_format = "sqlite";
+          max_size = "1_000_000";
+          sync_on_enter = true;
+          isolation = false;
         };
-        zsh-completions.completions = [ "${pkgs.zsh-completions}/share/zsh/site-functions" ];
-        zsh-fzf-tab = {
-          source = "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
-          config = ''
-            source <(fzf --zsh)
-
-            # use lsd for fzf preview
-            zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd'
-            zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'lsd'
-          '';
-        };
-        zsh-autosuggestions = {
-          source = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
-          config = ''
-            ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=gray,underline"
-          '';
-        };
-        zsh-syntax-highlighting = {
-          source = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
-          config = ''
-            zstyle ':completion:*:*:*:*:*' menu select
-            zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-            zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
-            zstyle ':completion:*' auto-description 'specify: %d'
-            zstyle ':completion:*' completer _expand _complete
-            zstyle ':completion:*' format 'Completing %d'
-            zstyle ':completion:*' group-name ' '
-            zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-            zstyle ':completion:*' rehash true
-            zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-            zstyle ':completion:*' use-compctl false
-            zstyle ':completion:*' verbose true
-            zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-          '';
+        table = {
+          mode = "light";
+          index_mode = "auto";
         };
       };
+      aliases = {
+        ll = "ls -l";
+
+      };
+      # plugins = with pkgs.nushellPlugins; [
+      #  units
+      #  formats
+      #  query
+      # ];
+      extraConfig = ''
+          const profile_file = $"($nu.home-path)/.profile.nu"
+
+          const file_to_source = if ($profile_file | path exists) {
+              $profile_file
+          } else {
+              null
+          }
+
+          source $file_to_source
+        '';
+
     };
+
   };
 }

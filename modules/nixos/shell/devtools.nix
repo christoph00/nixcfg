@@ -16,8 +16,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.nvf = enabled;
-    # programs.neovim = enabled;
+    # programs.nvf = enabled;
+    programs.neovim = enabled;
 
     environment.variables = {
       EDITOR = "nvim";
