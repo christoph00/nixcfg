@@ -51,6 +51,7 @@ in {
         # python312Packages.pylance
         intelephense
         gh
+        python313Packages.markitdown
         # watchgha
         tree-sitter
         # marksman
