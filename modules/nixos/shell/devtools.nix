@@ -35,24 +35,25 @@ in {
         gitu
         devenv
         curlie
-        dotenvy
+        # dotenvy
         go
-        katana
+        # katana
         httrack
         nodejs
         uv
         bun
         python3
         pass
-        repomix
+        # repomix
         php
+        blade-formatter
         php84Packages.composer
-        python312Packages.pylance
+        # python312Packages.pylance
         intelephense
         gh
-        watchgha
+        # watchgha
         tree-sitter
-        marksman
+        # marksman
         fswatch
         fd
         ripgrep
@@ -70,9 +71,9 @@ in {
         vibe-kanban
         # qwen-code
         crush
-        code
+        # code
         agent-browser
-        clawdbot
+        # clawdbot
 
       ]);
 
