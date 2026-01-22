@@ -70,14 +70,7 @@ in
       #  query
       # ];
       extraConfig = ''
-
-        $env.PATH = ($env.PATH |
-        split row (char esep) |
-        append /usr/bin/env |
-        append ~/.local/bin
-        )
-
-
+      $env.PATH = ($env.PATH | prepend ($env.HOME + "/.bun/bin"))
           const profile_file = $"($nu.home-path)/.profile.nu"
 
           const file_to_source = if ($profile_file | path exists) {

@@ -82,7 +82,7 @@ let
     erx = mkWgPeer {
       name = "erx.lan";
       ip = "10.100.100.1";
-      pubkey = "jEuJnsFIoWJ1WLyHG6Jih0TFCOupoPmhaMzCv0wBCQY=";
+      pubkey = "6axOWyLMrzSMkZxKQdM2drkin98uKkteohXStZ/5r0g=";
       # publicIP = "ROUTER_PUBLIC_IP";  # Optional
       extraAllowedIPs = [ "192.168.2.0/24" ];
     };

@@ -67,7 +67,7 @@ in {
         # };
         home-assistant = {
           enable = true;
-          subdomain = "home";
+          subdomain = "ha";
           port = 8123;
         };
         music-assistant = {
