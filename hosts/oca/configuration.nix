@@ -15,8 +15,6 @@ in {
 
   hw.cpu = "other";
 
-
-
   # virt.podman = true;
 
   host.vm = true;
@@ -40,7 +38,6 @@ in {
   # services.actual = enabled;
 
   services.mosquitto = enabled;
-
 
   cnt.n8n.enable = true;
   cnt.sillytavern.enable = true;
