@@ -60,11 +60,11 @@ in {
           subdomain = "n8n";
           port = 5678;
         };
-        lobechat = {
-          enable = true;
-          subdomain = "ai";
-          port = 3210;
-        };
+        # lobechat = {
+        #   enable = true;
+        #   subdomain = "ai";
+        #   port = 3210;
+        # };
         home-assistant = {
           enable = true;
           subdomain = "home";
@@ -75,22 +75,22 @@ in {
           subdomain = "music";
           port = 8095;
         };
-        beszel = {
-          enable = true;
-          subdomain = "stat";
-          port = 8090;
-        };
-        gonic = {
-          enable = true;
-          subdomain = "m";
-          port = 4747;
-        };
-        jellyfin = {
-          enable = true;
-          subdomain = "media";
-          port = 8096;
-        };
-        #   litellm = {
+        # beszel = {
+        #   enable = true;
+        #   subdomain = "stat";
+        #   port = 8090;
+        # };
+        # gonic = {
+        #   enable = true;
+        #   subdomain = "m";
+        #   port = 4747;
+        # };
+        # # jellyfin = {
+        #   enable = true;
+        #   subdomain = "media";
+        #   port = 8096;
+        # };
+        # #   litellm = {
         #     enable = true;
         #     subdomain = "llm";
         #     port = config.services.litellm.port;
