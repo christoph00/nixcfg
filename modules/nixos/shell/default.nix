@@ -70,7 +70,15 @@ in
       #  query
       # ];
       extraConfig = ''
-      $env.PATH = ($env.PATH | prepend ($env.HOME + "/.bun/bin"))
+          let extra_paths = [
+ 	   $"($env.HOME)/.local/bin"
+   	   $"($env.HOME)/.bun/bin"
+    	   $"($env.HOME)/.cargo/bin"
+    	   $"($env.HOME)/.config/composer/vendor/bin"
+	  ]
+	  let valid_paths = ($extra_paths | where { |p| $p | path exists })
+	  $env.PATH = ($env.PATH | split row (char esep) | append $valid_paths | uniq)
+
           const profile_file = $"($nu.home-path)/.profile.nu"
 
           const file_to_source = if ($profile_file | path exists) {

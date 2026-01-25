@@ -44,6 +44,7 @@ in {
         bun
         python3
         pass
+        esphome
         # repomix
         php
         blade-formatter
@@ -75,7 +76,6 @@ in {
         # code
         agent-browser
         # clawdbot
-
       ]);
 
     home.rum.programs.tealdeer = {
