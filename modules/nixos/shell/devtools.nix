@@ -52,8 +52,10 @@ in {
         # python312Packages.pylance
         intelephense
         gh
+        rustup
         python313Packages.markitdown
         # watchgha
+        adguardian
         tree-sitter
         # marksman
         fswatch
