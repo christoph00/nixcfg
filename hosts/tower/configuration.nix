@@ -36,6 +36,7 @@ in {
       what = "/dev/disk/by-label/KEYSEC";
       where = "/keysec";
       type = "vfat";
+      options = "ro,nofail";
     }
   ];
 
@@ -142,6 +143,10 @@ in {
       "xhci_pci"
       "ahci"
       "nvme"
+      "usbcore"
+      "usb_storage"
+      "uas"
+      "vfat"
     ];
   };
 
