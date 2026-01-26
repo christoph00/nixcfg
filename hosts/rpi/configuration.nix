@@ -17,7 +17,7 @@
   host.minimal = true;
 
   boot = {
-    kernelPackages = lib.mkDefault pkgs.linuxKernel.packages.linux_rpi3;
+    kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_rpi3;
     initrd.availableKernelModules = [
       "usbhid"
       "usb-storage"
