@@ -19,8 +19,7 @@ in
   config = mkIf config.desktop.wayfire.enable {
 
     programs.wayfire.enable = true;
-    programs.wayfire.plugins = with pkgs.wayfirePlugins; [ wcm wf-shell wayfire-plugins-extra wayfire-shadows
-      windecor ];
+    programs.wayfire.plugins = with pkgs.wayfirePlugins; [ wcm wf-shell wayfire-plugins-extra ];
     xdg.portal.config.wayfire = {
       default = "gtk;wlr";
     };
