@@ -14,5 +14,6 @@
     ./gtk.nix
     ./labwc.nix
     ./ghostty.nix
+    ./wayfire.nix
   ];
 }
