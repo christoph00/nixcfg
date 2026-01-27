@@ -8,6 +8,7 @@
     ./audiobookshelf.nix
     ./actual.nix
     ./beszel-agent.nix
+    ./clawdbot.nix
     ./code-tunnel.nix
     ./dnscrypt.nix
     ./fail2ban.nix

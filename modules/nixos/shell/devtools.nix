@@ -77,7 +77,7 @@ in {
         crush
         # code
         agent-browser
-        # clawdbot
+        clawdbot
       ]);
 
     home.rum.programs.tealdeer = {
