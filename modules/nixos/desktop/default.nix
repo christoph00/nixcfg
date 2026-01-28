@@ -15,5 +15,6 @@
     ./labwc.nix
     ./ghostty.nix
     ./wayfire.nix
+    ./xfce.nix
   ];
 }
