@@ -22,6 +22,7 @@ in {
   host.gaming = true;
 
   desktop.enable = true;
+  desktop.gaming.enable = true;
   desktop.remote = false;
   desktop.autologin = true;
 

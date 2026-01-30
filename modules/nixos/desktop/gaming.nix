@@ -37,6 +37,7 @@ in
       XKB_DEFAULT_LAYOUT = "de";
     };
 
+
     systemd.user.services = {
       gamemoded = {
         serviceConfig.Slice = "background-graphical.slice";
@@ -224,6 +225,7 @@ in
         # veloren
         protonhax
         umu-launcher
+	faugus-launcher
 
         cacert
         dos2unix
