@@ -69,13 +69,13 @@ in {
         # stylua
       ])
       ++ (with perSystem.nix-ai-tools; [
-        # claude-code
+        claude-code
         # opencode
         # gemini-cli
-        # goose-cli
+        goose-cli
         # pi
         # vibe-kanban
-        # qwen-code
+        qwen-code
         crush
         # code
         agent-browser
