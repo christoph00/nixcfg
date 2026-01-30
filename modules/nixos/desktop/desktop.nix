@@ -5,6 +5,7 @@
   options,
   inputs,
   pkgs,
+  perSystem,
   ...
 }:
 let
@@ -17,7 +18,8 @@ in
   options.desktop = {
     enable = mkBoolOpt false;
     headless = mkBoolOpt false;
-    waybar = mkBoolOpt true;
+    waybar = mkBoolOpt false;
+    ironbar = mkBoolOpt true;
     wlsunset = mkBoolOpt false;
   };
   config = mkIf cfg.enable {
@@ -53,6 +55,9 @@ in
       SDL_VIDEODRIVER = "wayland,x11,windows";
       CLUTTER_BACKEND = "wayland";
     };
+
+
+    home.packages = with perSystem.nixpkgs-unstable; [ ironbar ];
 
     hjem.users.christoph.files.".config/uwsm/env".text =
       toEnvExport config.hjem.users.christoph.environment.sessionVariables;
@@ -115,21 +120,21 @@ in
       #   serviceConfig.Slice = "app-graphical.slice";
       #
       # };
-      # ironbar = mkIf cfg.ironbar {
-      #   description = "ironbar";
-      #   script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.ironbar}/bin/ironbar";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "app-graphical.slice";
-      # };
-      swww-daemon = {
-        description = "swww-daemon as systemd service";
-        script = "${pkgs.swww}/bin/swww-daemon";
+      ironbar = mkIf cfg.ironbar {
+        description = "ironbar";
+        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.ironbar}/bin/ironbar";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-
+        serviceConfig.Slice = "app-graphical.slice";
       };
+      # swww-daemon = {
+      #   description = "swww-daemon as systemd service";
+      #   script = "${pkgs.swww}/bin/swww-daemon";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "background-graphical.slice";
+      #
+      # };
       syshud = {
         description = "syshud";
         script = "${pkgs.syshud}/bin/syshud";

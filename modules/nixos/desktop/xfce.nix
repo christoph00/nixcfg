@@ -23,7 +23,7 @@ in
       enable = true;
       enableXfwm = false;
       enableWaylandSession = true;
-      waylandSessionCompositor = "labwc --startup";
+      waylandSessionCompositor = "labwc";
       noDesktop = false;
       enableScreensaver = false;
 
