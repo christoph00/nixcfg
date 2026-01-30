@@ -63,21 +63,23 @@ in {
         ripgrep
         nixd
         nixfmt
+        himalaya
+        vdirsyncer
         # emmylua-ls
         # stylua
       ])
       ++ (with perSystem.nix-ai-tools; [
-        claude-code
-        opencode
-        gemini-cli
-        goose-cli
-        pi
-        vibe-kanban
+        # claude-code
+        # opencode
+        # gemini-cli
+        # goose-cli
+        # pi
+        # vibe-kanban
         # qwen-code
         crush
         # code
         agent-browser
-        clawdbot
+        # clawdbot
       ]);
 
     home.rum.programs.tealdeer = {

@@ -71,13 +71,16 @@ in
       # ];
       extraConfig = ''
           let extra_paths = [
- 	   $"($env.HOME)/.local/bin"
-   	   $"($env.HOME)/.bun/bin"
-    	   $"($env.HOME)/.cargo/bin"
-    	   $"($env.HOME)/.config/composer/vendor/bin"
-	  ]
-	  let valid_paths = ($extra_paths | where { |p| $p | path exists })
-	  $env.PATH = ($env.PATH | split row (char esep) | append $valid_paths | uniq)
+     $"($env.HOME)/.local/bin"
+       $"($env.HOME)/.bun/bin"
+         $"($env.HOME)/.cargo/bin"
+    $'(npm config get prefix)/bin',
+         $"($env.HOME)/.config/composer/vendor/bin"
+    ]
+    let valid_paths = ($extra_paths | where { |p| $p | path exists })
+    $env.PATH = ($env.PATH | split row (char esep) | append $valid_paths | uniq)
+    $env.GH_NPM_TOKEN = ^"gh" auth token
+
 
           const profile_file = $"($nu.home-path)/.profile.nu"
 

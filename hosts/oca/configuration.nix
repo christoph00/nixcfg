@@ -25,7 +25,7 @@ in {
   # svc.media = enabled;
   # svc.neovim-server = enabled;
 
-  svc.code-tunnel = enabled;
+  # svc.code-tunnel = enabled;
 
   # services.searx = enabled;
   # services.n8n = enabled;
@@ -33,7 +33,7 @@ in {
   # services.rss-bridge = enabled;
   # services.pinchflat = enabled;
   # services.open-webui = enabled;
-  # svc.litellm = enabled;
+  svc.clawdbot = enabled;
   # services.sabnzbd = enabled;
   # services.actual = enabled;
 
@@ -52,12 +52,12 @@ in {
     enabled
     // {
       services = {
-        n8n = {
-          enable = true;
-          subdomain = "n8n";
-          port = 5678;
-        };
-        # lobechat = {
+        # n8n = {
+        #   enable = true;
+        #   subdomain = "n8n";
+        #   port = 5678;
+        # };
+        # # lobechat = {
         #   enable = true;
         #   subdomain = "ai";
         #   port = 3210;
