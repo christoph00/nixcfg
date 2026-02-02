@@ -70,7 +70,7 @@ in {
         tailwindcss-language-server
         superhtml
         ast-grep
-        # stylua
+        stylua
       ])
       ++ (with perSystem.nix-ai-tools; [
         claude-code
@@ -83,7 +83,7 @@ in {
         crush
         code
         agent-browser
-      ]);
+      ] ++ []);
 
     home.rum.programs.tealdeer = {
       enable = true;
