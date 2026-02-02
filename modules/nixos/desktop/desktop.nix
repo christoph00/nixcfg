@@ -61,7 +61,7 @@ in
     };
 
 
-    home.packages = with perSystem.nixpkgs-unstable; [ ironbar ];
+    home.packages = with pkgs; [ clipman  ];
 
     hjem.users.christoph.files.".config/uwsm/env".text =
       toEnvExport config.hjem.users.christoph.environment.sessionVariables;

@@ -74,16 +74,15 @@ in {
       ])
       ++ (with perSystem.nix-ai-tools; [
         claude-code
-        # opencode
-        # gemini-cli
+        opencode
+        gemini-cli
         goose-cli
-        # pi
-        # vibe-kanban
+        pi
+        vibe-kanban
         qwen-code
         crush
-        # code
+        code
         agent-browser
-        # clawdbot
       ]);
 
     home.rum.programs.tealdeer = {
