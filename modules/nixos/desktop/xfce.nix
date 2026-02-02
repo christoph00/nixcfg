@@ -31,6 +31,12 @@ in
 
     environment.xfce.excludePackages = [ ];
     programs.xfconf.enable = true;
+    programs.thunar.plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+      thunar-vcs-plugin
+      thunar-media-tags-plugin
+    ];
 
     home.packages = with pkgs; [
     ];

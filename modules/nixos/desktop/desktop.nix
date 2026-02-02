@@ -18,10 +18,12 @@ in
   options.desktop = {
     enable = mkBoolOpt false;
     headless = mkBoolOpt false;
-    waybar = mkBoolOpt false;
+    waybar = mkBoolOpt true;
     ironbar = mkBoolOpt false;
+    sfwbar = mkBoolOpt false;
     wlsunset = mkBoolOpt false;
-    xfpanel = mkBoolOpt true;
+    xfpanel = mkBoolOpt false;
+    xfdesktop = mkBoolOpt true;
     xsettingsd = mkBoolOpt true;
   };
   config = mkIf cfg.enable {
@@ -100,22 +102,22 @@ in
     };
 
     systemd.user.services = {
-      #      waybar = mkIf cfg.waybar {
-      #        description = "Waybar as systemd service";
-      #        path = [ config.system.path ];
-      #        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
-      #        wantedBy = [ "graphical-session.target" ];
-      #        after = [ "graphical-session.target" ];
-      #        serviceConfig.Slice = "app-graphical.slice";
-      #      };
-      # sfwbar = mkIf cfg.sfwbar {
-      #   description = "sfwbar";
-      #   script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.sfwbar}/bin/sfwbar";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "app-graphical.slice";
-      #
-      # };
+           waybar = mkIf cfg.waybar {
+             description = "Waybar as systemd service";
+             path = [ config.system.path ];
+             script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
+             wantedBy = [ "graphical-session.target" ];
+             after = [ "graphical-session.target" ];
+             serviceConfig.Slice = "app-graphical.slice";
+           };
+      sfwbar = mkIf cfg.sfwbar {
+        description = "sfwbar";
+        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.sfwbar}/bin/sfwbar";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "app-graphical.slice";
+
+      };
       ironbar = mkIf cfg.ironbar {
         description = "ironbar";
         script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.ironbar}/bin/ironbar";
@@ -130,7 +132,14 @@ in
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
       };
-# swww-daemon = {
+      xfdesktop = mkIf cfg.xfdesktop {
+        description = "xfce desktop";
+        script = "/run/current-system/sw/bin/xfdesktop";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "app-graphical.slice";
+      };
+      # swww-daemon = {
       #   description = "swww-daemon as systemd service";
       #   script = "${pkgs.swww}/bin/swww-daemon";
       #   wantedBy = [ "graphical-session.target" ];
