@@ -24,6 +24,7 @@
     ./open-webui.nix
     ./pinchflat.nix
     ./proxy.nix
+    ./printserver.nix
     ./rclone.nix
     ./rssbridge.nix
     ./sabnzbd.nix
@@ -33,6 +34,7 @@
     # ./nas.nix
     # ./office-server.nix
     # ./vector.nix
+    ./postgresql.nix
     ./litellm.nix
   ];
 }

@@ -12,11 +12,6 @@ let
 in
 {
 
-  options.svc.searx = {
-    domain = mkStrOpt "search.${config.networking.domain}";
-
-  };
-
   config = mkIf config.services.searx.enable {
     users.users.nginx.extraGroups = [ "searx" ];
 
@@ -25,27 +20,27 @@ in
     sys.state.directories = [ "/var/lib/searx" ];
 
     services = {
-      nginx.enable = true;
-      nginx.virtualHosts.${cfg.domain} = {
-        listen = [
-          {
-            addr = "0.0.0.0";
-            port = 1033;
-            ssl = false;
-          }
-        ];
-        locations = {
-          "/" = {
-            extraConfig = ''
-              uwsgi_pass unix:${config.services.searx.uwsgiConfig.socket};
-            '';
-          };
-          "/static/" = {
-            alias = "${config.services.searx.package}/share/static/";
-          };
-        };
-      };
-
+      # nginx.enable = true;
+      # nginx.virtualHosts.${cfg.domain} = {
+      #   listen = [
+      #     {
+      #       addr = "0.0.0.0";
+      #       port = 1033;
+      #       ssl = false;
+      #     }
+      #   ];
+      #   locations = {
+      #     "/" = {
+      #       extraConfig = ''
+      #         uwsgi_pass unix:${config.services.searx.uwsgiConfig.socket};
+      #       '';
+      #     };
+      #     "/static/" = {
+      #       alias = "${config.services.searx.package}/share/static/";
+      #     };
+      #   };
+      # };
+      #
       searx = {
         runInUwsgi = true;
         redisCreateLocally = true;

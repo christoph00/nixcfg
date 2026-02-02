@@ -121,6 +121,7 @@ in {
     ]
     ++ users;
   "secrets/n8n-env.age".publicKeys = [oca] ++ users;
+  "secrets/openclaw-env.age".publicKeys = [oca] ++ users;
   "secrets/sillytavern-env.age".publicKeys = [oca] ++ users;
   "secrets/beszel-env.age".publicKeys = all;
   "secrets/rclone-conf.age".publicKeys = [oca] ++ users;

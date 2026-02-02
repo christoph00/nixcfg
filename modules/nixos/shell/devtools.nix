@@ -65,7 +65,11 @@ in {
         nixfmt
         himalaya
         vdirsyncer
-        # emmylua-ls
+        emmylua-ls
+        emmet-ls
+        tailwindcss-language-server
+        superhtml
+        ast-grep
         # stylua
       ])
       ++ (with perSystem.nix-ai-tools; [
