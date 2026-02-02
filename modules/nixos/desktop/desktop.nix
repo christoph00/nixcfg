@@ -18,11 +18,11 @@ in
   options.desktop = {
     enable = mkBoolOpt false;
     headless = mkBoolOpt false;
-    waybar = mkBoolOpt true;
+    waybar = mkBoolOpt false;
     ironbar = mkBoolOpt false;
     sfwbar = mkBoolOpt false;
     wlsunset = mkBoolOpt false;
-    xfpanel = mkBoolOpt false;
+    xfpanel = mkBoolOpt true;
     xfdesktop = mkBoolOpt true;
     xsettingsd = mkBoolOpt true;
   };
