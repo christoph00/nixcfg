@@ -19,8 +19,10 @@ in
     enable = mkBoolOpt false;
     headless = mkBoolOpt false;
     waybar = mkBoolOpt false;
-    ironbar = mkBoolOpt true;
+    ironbar = mkBoolOpt false;
     wlsunset = mkBoolOpt false;
+    xfpanel = mkBoolOpt true;
+    xsettingsd = mkBoolOpt true;
   };
   config = mkIf cfg.enable {
     hardware.graphics.enable = true;
@@ -75,12 +77,6 @@ in
       seatd.enable = true;
     };
 
-    programs.sway = {
-      enable = true;
-      wrapperFeatures = {
-        gtk = true;
-      };
-    };
 
     programs.uwsm = {
       enable = true;
@@ -127,7 +123,14 @@ in
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
       };
-      # swww-daemon = {
+      xfpanel = mkIf cfg.xfpanel {
+        description = "xfce panel";
+        script = "/run/current-system/sw/bin/xfce4-panel";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "app-graphical.slice";
+      };
+# swww-daemon = {
       #   description = "swww-daemon as systemd service";
       #   script = "${pkgs.swww}/bin/swww-daemon";
       #   wantedBy = [ "graphical-session.target" ];
@@ -151,29 +154,29 @@ in
         serviceConfig.Slice = "background-graphical.slice";
       };
 
-      # xsettingsd = mkIf cfg.xsettingsd {
-      #   description = "xsettingsd";
-      #   script = "${pkgs.xsettingsd}/bin/xsettingsd";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "background-graphical.slice";
-      # };
+      xsettingsd = mkIf cfg.xsettingsd {
+        description = "xsettingsd";
+        script = "${pkgs.xsettingsd}/bin/xsettingsd";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "background-graphical.slice";
+      };
 
-      # xfce-power-manager = mkIf cfg.xsettingsd {
-      #   description = "xfce-power-manager";
-      #   script = "${pkgs.xfce.xfce4-power-manager}/bin/xfce4-power-manager";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "background-graphical.slice";
-      # };
-      #
-      #   polkit-gnome-authentication-agent-1 = {
-      #     description = "polkit-gnome-authentication-agent-1";
-      #     script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-      #     wantedBy = [ "graphical-session.target" ];
-      #     after = [ "graphical-session.target" ];
-      #     serviceConfig.Slice = "background-graphical.slice";
-      #   };
+      xfce-power-manager = mkIf cfg.xsettingsd {
+        description = "xfce-power-manager";
+        script = "${pkgs.xfce.xfce4-power-manager}/bin/xfce4-power-manager";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "background-graphical.slice";
+      };
+
+        polkit-gnome-authentication-agent-1 = {
+          description = "polkit-gnome-authentication-agent-1";
+          script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          wantedBy = [ "graphical-session.target" ];
+          after = [ "graphical-session.target" ];
+          serviceConfig.Slice = "background-graphical.slice";
+        };
     };
 
     services.xserver.desktopManager.runXdgAutostartIfNone = true;

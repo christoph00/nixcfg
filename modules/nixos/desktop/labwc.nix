@@ -29,6 +29,9 @@ in
       brightnessctl
       fuzzel
       foot
+      labwc-gtktheme
+      labwc-tweaks-gtk
+      labwc-menu-generator
     ];
 
     programs.uwsm.waylandCompositors = {
