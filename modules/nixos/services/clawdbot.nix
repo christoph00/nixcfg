@@ -34,8 +34,9 @@ in
         pkgs.git
         pkgs.bashInteractive
         pkgs.signal-cli
+        perSystem.nix-ai-tools.gemini-cli
       ];
-      script = "${pkgs.nodejs}/bin/npx run openclaw@latest gateway";
+      script = "${pkgs.nodejs}/bin/npx openclaw@latest gateway";
       serviceConfig = {
         User = "${cfg.user}";
         RestartSec = 30;

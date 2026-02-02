@@ -26,6 +26,7 @@ in {
   # svc.neovim-server = enabled;
 
   # svc.code-tunnel = enabled;
+  svc.printserver = enabled;
 
   # services.searx = enabled;
   # services.n8n = enabled;
@@ -33,19 +34,20 @@ in {
   # services.rss-bridge = enabled;
   # services.pinchflat = enabled;
   # services.open-webui = enabled;
-  svc.clawdbot = enabled;
   # services.sabnzbd = enabled;
   # services.actual = enabled;
+  services.postgresql = enabled;
 
   services.mosquitto = enabled;
 
-  cnt.n8n.enable = true;
-  cnt.sillytavern.enable = true;
-  cnt.qdrant.enable = true;
+  # cnt.n8n.enable = true;
+  # cnt.openclaw = enabled;
+  # cnt.sillytavern.enable = true;
+  # cnt.qdrant.enable = true;
   cnt.home-assistant.enable = true;
   cnt.music-assistant.enable = true;
-  cnt.beszel.enable = true;
-  cnt.gonic.enable = true;
+  # cnt.beszel.enable = true;
+  # cnt.gonic.enable = true;
   cnt.media-pod.enable = true;
 
   svc.webserver =

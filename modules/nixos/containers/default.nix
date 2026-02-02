@@ -10,6 +10,7 @@ in {
   imports = [
     ./n8n.nix
     ./sillytavern.nix
+    ./openclaw.nix
     ./qdrant.nix
     ./home-assistant.nix
     ./music-assistant.nix

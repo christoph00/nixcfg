@@ -58,7 +58,7 @@ in {
               destination = "/media";
             })
           ];
-          volumes = ["/mnt/dav:/mnt/dav"];
+          # volumes = ["/mnt/dav:/mnt/dav"];
           environments = {
             TZ = "Europe/Berlin";
             JELLYFIN_PublishedServerUrl = "https://media.r505.de";
