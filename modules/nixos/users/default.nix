@@ -30,6 +30,7 @@ in
 
     user.passwordFile = mkIf (!config.host.bootstrap) config.age.secrets.user_christoph_pw.path;
 
+
     users.users.${cfg.name} = {
       isNormalUser = true;
 
@@ -41,7 +42,7 @@ in
       home = "/home/${cfg.name}";
       group = "users";
 
-      shell = pkgs.nushell;
+      # shell = pkgs.dash;
 
       uid = 1000;
 
