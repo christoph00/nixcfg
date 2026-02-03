@@ -19,6 +19,7 @@ in {
 
   host.vm = true;
   shell.devtools = enabled;
+  shell.office = enabled;
 
   # svc.proxy = enabled;
   # svc.mcp-proxy = enabled;

@@ -14,6 +14,7 @@ in
   imports = [
     ./neovim
     ./devtools.nix
+    ./office.nix
   ];
   options.shell = with types; {
     enable = mkBoolOpt true;
