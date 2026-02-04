@@ -60,8 +60,24 @@ in
       CLUTTER_BACKEND = "wayland";
     };
 
+    fonts.packages = with pkgs; [
+      dina-font
+      aporetic
+      monaspace
+      victor-mono
+    ];
 
-    home.packages = with pkgs; [ clipman  ];
+    fonts.fontconfig = {
+      defaultFonts = {
+        monospace = [
+          "Aporetic Sans Mono"
+        ];
+        sansSerif = [ "Aporetic Sans Mono" ];
+        serif = [ "Aporetic Sans Mono" ];
+      };
+    };
+
+    home.packages = with pkgs; [ clipman ];
 
     hjem.users.christoph.files.".config/uwsm/env".text =
       toEnvExport config.hjem.users.christoph.environment.sessionVariables;
@@ -78,7 +94,6 @@ in
 
       seatd.enable = true;
     };
-
 
     programs.uwsm = {
       enable = true;
@@ -102,14 +117,14 @@ in
     };
 
     systemd.user.services = {
-           waybar = mkIf cfg.waybar {
-             description = "Waybar as systemd service";
-             path = [ config.system.path ];
-             script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
-             wantedBy = [ "graphical-session.target" ];
-             after = [ "graphical-session.target" ];
-             serviceConfig.Slice = "app-graphical.slice";
-           };
+      waybar = mkIf cfg.waybar {
+        description = "Waybar as systemd service";
+        path = [ config.system.path ];
+        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "app-graphical.slice";
+      };
       sfwbar = mkIf cfg.sfwbar {
         description = "sfwbar";
         script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.sfwbar}/bin/sfwbar";
@@ -179,13 +194,13 @@ in
         serviceConfig.Slice = "background-graphical.slice";
       };
 
-        polkit-gnome-authentication-agent-1 = {
-          description = "polkit-gnome-authentication-agent-1";
-          script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          wantedBy = [ "graphical-session.target" ];
-          after = [ "graphical-session.target" ];
-          serviceConfig.Slice = "background-graphical.slice";
-        };
+      polkit-gnome-authentication-agent-1 = {
+        description = "polkit-gnome-authentication-agent-1";
+        script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig.Slice = "background-graphical.slice";
+      };
     };
 
     services.xserver.desktopManager.runXdgAutostartIfNone = true;
