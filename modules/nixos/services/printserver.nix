@@ -21,7 +21,7 @@ in
       enable = true;
       extraBackends = [ pkgs.sane-airscan ];
       disabledDefaultBackends = [ "escl" ];
-      netConf = "192.168.2.241";
+      netConf = "192.168.2.0/24";
     };
   };
 }

@@ -51,6 +51,8 @@ in {
   # cnt.gonic.enable = true;
   cnt.media-pod.enable = true;
 
+  cnt.cliproxy.enable = true;
+
   svc.webserver =
     enabled
     // {

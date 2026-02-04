@@ -9,6 +9,7 @@
 in {
   imports = [
     ./n8n.nix
+    ./cliproxy.nix
     ./sillytavern.nix
     ./openclaw.nix
     ./qdrant.nix
