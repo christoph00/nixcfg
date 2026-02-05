@@ -92,6 +92,11 @@ in {
       };
     };
 
+    home.environment.sessionVariables = {
+          PATH = "~/.bun/bin:~/.local/bin:~/.local/share/bin:~/.config/composer/vendor/bin/:$PATH";
+
+    };
+
     programs.tmux = {
       enable = cfg.tmux;
       terminal = "screen-256color";
