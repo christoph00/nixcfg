@@ -32,7 +32,7 @@ in {
       };
       containers.mosquitto-main = {
         containerConfig = {
-          image = "eclipse-mosquitto:latest";
+          image = "docker.io/library/eclipse-mosquitto:latest";
           pod = pods.mosquitto.ref;
           mounts = [
             (mountVolume {
@@ -50,6 +50,9 @@ in {
             MOSQUITTO_USERNAME = "mosquitto";
           };
           environmentFiles = [config.age.secrets."mosquitto-env".path];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

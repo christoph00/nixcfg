@@ -41,7 +41,10 @@ in {
             "CAP_NET_RAW"
             "NET_ADMIN"
             "NET_RAW"
-          ]; 
+          ];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

@@ -39,7 +39,7 @@ in {
       };
       containers.jellyfin = {
         containerConfig = {
-          image = "jellyfin/jellyfin:latest";
+          image = "docker.io/jellyfin/jellyfin:latest";
           pod = pods.media.ref;
           mounts = [
             (mountVolume {
@@ -63,6 +63,9 @@ in {
             TZ = "Europe/Berlin";
             JELLYFIN_PublishedServerUrl = "https://media.r505.de";
           };
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
       containers.nzbdav.containerConfig = mkIf cfg.nzbdav {
@@ -84,6 +87,9 @@ in {
           PUID = "1000";
           PGID = "1000";
           TZ = "Europe/Berlin";
+        };
+        labels = {
+          "io.containers.autoupdate" = "registry";
         };
       };
       containers.altmount = mkIf cfg.altmount {
@@ -111,6 +117,9 @@ in {
           };
           addCapabilities = ["SYS_ADMIN"];
           devices = ["/dev/fuse"];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

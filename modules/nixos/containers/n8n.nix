@@ -56,10 +56,13 @@ in {
             N8N_PROXY_SSL_HEADER = "X-Forwarded-Proto";
           };
           environmentFiles = [config.age.secrets."n8n-env".path];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
       containers.n8n-runner.containerConfig = {
-        image = "n8nio/runners:beta";
+        image = "docker.io/n8nio/runners:beta";
         pod = pods.n8n.ref;
         user = "1000";
         group = "100";
@@ -67,6 +70,9 @@ in {
           N8N_RUNNERS_TASK_BROKER_URI = "http://localhost:5101";
         };
         environmentFiles = [config.age.secrets."n8n-env".path];
+        labels = {
+          "io.containers.autoupdate" = "registry";
+        };
       };
     };
   };

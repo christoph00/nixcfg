@@ -29,7 +29,7 @@ in {
       };
       containers.postgres-main = {
         containerConfig = {
-          image = "pgvector/pgvector:pg16";
+          image = "docker.io/pgvector/pgvector:pg16";
           pod = pods.postgres.ref;
           mounts = [
             (mountVolume {
@@ -44,6 +44,9 @@ in {
             PGDATA = "/var/lib/postgresql/data/pgdata";
           };
           environmentFiles = [config.age.secrets."postgres-env".path];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

@@ -37,12 +37,18 @@ in {
           environments = {
             TZ = "Europe/Berlin";
           };
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
       containers.music-assistant-potoken = {
         containerConfig = {
-          image = "brainicism/bgutil-ytdlp-pot-provider:latest";
+          image = "docker.io/brainicism/bgutil-ytdlp-pot-provider:latest";
           pod = pods.music-assistant.ref;
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

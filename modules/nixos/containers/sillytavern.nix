@@ -59,6 +59,9 @@ in {
             NODE_ENV = "production";
           };
           environmentFiles = [config.age.secrets."sillytavern-env".path];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

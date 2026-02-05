@@ -73,6 +73,9 @@ in {
           };
          environmentFiles = [config.age.secrets."openclaw-env".path];
          exec = "node dist/index.js gateway --bind lan --port ${cfg.port} --allow-unconfigured";
+         labels = {
+           "io.containers.autoupdate" = "local";
+         };
         };
       };
     };

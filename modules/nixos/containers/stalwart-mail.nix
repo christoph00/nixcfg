@@ -38,7 +38,7 @@ in {
       };
       containers.stalwart-mail-main = {
         containerConfig = {
-          image = "stalwartlabs/mail-server:latest";
+          image = "docker.io/stalwartlabs/mail-server:latest";
           pod = pods.stalwart-mail.ref;
           mounts = [
             (mountVolume {
@@ -56,6 +56,9 @@ in {
             STALWART_LOG_LEVEL = "info";
           };
           environmentFiles = [config.age.secrets."stalwart-mail-env".path];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

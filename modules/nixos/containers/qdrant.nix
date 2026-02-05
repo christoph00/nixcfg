@@ -37,6 +37,9 @@ in {
           environments = {
             TZ = config.time.timeZone;
           };
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

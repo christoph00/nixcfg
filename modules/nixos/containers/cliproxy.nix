@@ -25,7 +25,7 @@ in {
       };
       containers.cliproxy-main = {
         containerConfig = {
-          image = "eceasy/cli-proxy-api-plus:latest";
+          image = "docker.io/eceasy/cli-proxy-api-plus:latest";
           pod = pods.cliproxy.ref;
           mounts = [
             (mountVolume {
@@ -46,6 +46,9 @@ in {
           ];
           environments = {
             TZ = "Europe/Berlin";
+          };
+          labels = {
+            "io.containers.autoupdate" = "registry";
           };
         };
       };

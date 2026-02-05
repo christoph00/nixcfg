@@ -29,7 +29,7 @@ in {
       };
       containers.lobechat-main = {
         containerConfig = {
-          image = "lobehub/lobe-chat:latest";
+          image = "docker.io/lobehub/lobe-chat:latest";
           pod = pods.lobechat.ref;
           mounts = [
             (mountVolume {
@@ -43,6 +43,9 @@ in {
             TZ = "Europe/Berlin";
           };
           # environmentFiles = [config.age.secrets."lobechat-env".path];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

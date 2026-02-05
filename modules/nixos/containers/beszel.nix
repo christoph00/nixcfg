@@ -37,6 +37,9 @@ in {
           environments = {
             TZ = "Europe/Berlin";
           };
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

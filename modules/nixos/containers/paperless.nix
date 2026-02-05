@@ -43,6 +43,9 @@ in {
           environments = {
           };
           environmentFiles = [config.age.secrets."paperless-env".path];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

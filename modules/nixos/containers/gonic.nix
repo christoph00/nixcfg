@@ -23,7 +23,7 @@ in {
       };
       containers.gonic-main = {
         containerConfig = {
-          image = "sentriz/gonic:latest";
+          image = "docker.io/sentriz/gonic:latest";
           pod = pods.gonic.ref;
           mounts = [
             (mountVolume {
@@ -54,6 +54,9 @@ in {
           ];
           environments = {
             TZ = "Europe/Berlin";
+          };
+          labels = {
+            "io.containers.autoupdate" = "registry";
           };
         };
       };

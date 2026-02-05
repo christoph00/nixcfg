@@ -45,6 +45,9 @@ in {
             DATABASE_URL = "sqlite:////data/karakeep.db";
           };
           environmentFiles = [config.age.secrets."karakeep-env".path];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };
