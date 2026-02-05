@@ -36,7 +36,13 @@ in {
       what = "/dev/disk/by-label/KEYSEC";
       where = "/keysec";
       type = "vfat";
-      options = "ro,nofail";
+      options = "ro";
+      wantedBy = [ "cryptsetup-pre.target" ];
+      before = [ "cryptsetup-pre.target" ];
+      unitConfig = {
+        DefaultDependencies = false;
+        ConditionPathExists = "/dev/disk/by-label/KEYSEC";
+      };
     }
   ];
 

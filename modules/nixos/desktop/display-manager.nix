@@ -94,8 +94,10 @@ in
       "tuigreet"
       "cosmic-greeter"
       "regreet"
-    ]) "tuigreet";
+      "ly"
+    ]) "ly";
     autologin = mkBoolOpt false;
+    greetd = mkBoolOpt false;
   };
   config = mkIf cfg.enable {
     sys.state.directories = [
@@ -106,8 +108,20 @@ in
 
     programs.regreet.enable = cfg.displayManager == "regreet";
 
+    services.displayManager.ly = {
+      enable = cfg.displaymanager == "ly";
+      settings = {
+        clear_password = true;
+        vi_mode = false;
+        animation = "matrix";
+        bigclock = true;
+        session_log = null;
+      };
+    };
+    sys.state.files = ["/etc/ly/save.ini"];
+
     services.greetd = {
-      enable = true;
+      enable = cfg.greetd;
       restart = false;
 
       settings = {
