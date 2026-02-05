@@ -92,7 +92,7 @@ in {
       };
     };
 
-    home.environment.sessionVariables = {
+       environment.sessionVariables = { 
           PATH = "~/.bun/bin:~/.local/bin:~/.local/share/bin:~/.config/composer/vendor/bin/:$PATH";
 
     };
