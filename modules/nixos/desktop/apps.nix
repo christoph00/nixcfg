@@ -36,8 +36,11 @@ in {
 
       neovide
 
+      pcmanfm
+
+
       phinger-cursors
-      # chicago95
+      chicago95
       adw-gtk3
 
       #nwg-look

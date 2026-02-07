@@ -182,7 +182,7 @@ layout {
         // If you enable the border, you probably want to disable the focus ring.
         // off
 
-        width 4
+        width 2
         active-color "#ffc87f"
         inactive-color "#505050"
 
@@ -322,7 +322,7 @@ window-rule {
 }
 
 window-rule {
-    geometry-corner-radius 6
+    geometry-corner-radius 1
     clip-to-geometry true
 }
 

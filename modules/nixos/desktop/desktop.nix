@@ -22,9 +22,10 @@ in
     ironbar = mkBoolOpt false;
     sfwbar = mkBoolOpt false;
     wlsunset = mkBoolOpt false;
-    xfpanel = mkBoolOpt true;
-    xfdesktop = mkBoolOpt true;
+    xfpanel = mkBoolOpt false;
+    xfdesktop = mkBoolOpt false;
     xsettingsd = mkBoolOpt true;
+    noctalia = mkBoolOpt true;
   };
   config = mkIf cfg.enable {
     hardware.graphics.enable = true;
@@ -77,7 +78,7 @@ in
       };
     };
 
-    home.packages = with pkgs; [ clipman ];
+    home.packages = with perSystem.nixpkgs-unstable; [ clipman quickshell noctalia-shell ];
 
     hjem.users.christoph.files.".config/uwsm/env".text =
       toEnvExport config.hjem.users.christoph.environment.sessionVariables;
@@ -140,20 +141,27 @@ in
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
       };
-      xfpanel = mkIf cfg.xfpanel {
-        description = "xfce panel";
-        script = "/run/current-system/sw/bin/xfce4-panel";
+      noctalia = mkIf cfg.noctalia {
+        description = "noctalica shell";
+        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${perSystem.nixpkgs-unstable.noctalia-shell}/bin/noctalia-shell";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
       };
-      xfdesktop = mkIf cfg.xfdesktop {
-        description = "xfce desktop";
-        script = "/run/current-system/sw/bin/xfdesktop";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "app-graphical.slice";
-      };
+      # xfpanel = mkIf cfg.xfpanel {
+      #   description = "xfce panel";
+      #   script = "/run/current-system/sw/bin/xfce4-panel";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "app-graphical.slice";
+      # };
+      # xfdesktop = mkIf cfg.xfdesktop {
+      #   description = "xfce desktop";
+      #   script = "/run/current-system/sw/bin/xfdesktop";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "app-graphical.slice";
+      # };
       # swww-daemon = {
       #   description = "swww-daemon as systemd service";
       #   script = "${pkgs.swww}/bin/swww-daemon";
@@ -162,21 +170,21 @@ in
       #   serviceConfig.Slice = "background-graphical.slice";
       #
       # };
-      syshud = {
-        description = "syshud";
-        script = "${pkgs.syshud}/bin/syshud";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
-
-      wlsunset = mkIf cfg.wlsunset {
-        description = "wlsunset";
-        script = "${pkgs.wlsunset}/bin/wlsunset";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
+      # syshud = {
+      #   description = "syshud";
+      #   script = "${pkgs.syshud}/bin/syshud";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "background-graphical.slice";
+      # };
+      # #
+      # wlsunset = mkIf cfg.wlsunset {
+      #   description = "wlsunset";
+      #   script = "${pkgs.wlsunset}/bin/wlsunset";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "background-graphical.slice";
+      # };
 
       xsettingsd = mkIf cfg.xsettingsd {
         description = "xsettingsd";
@@ -186,13 +194,13 @@ in
         serviceConfig.Slice = "background-graphical.slice";
       };
 
-      xfce-power-manager = mkIf cfg.xsettingsd {
-        description = "xfce-power-manager";
-        script = "${pkgs.xfce.xfce4-power-manager}/bin/xfce4-power-manager";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
+      # xfce-power-manager = mkIf cfg.xsettingsd {
+      #   description = "xfce-power-manager";
+      #   script = "${pkgs.xfce.xfce4-power-manager}/bin/xfce4-power-manager";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "background-graphical.slice";
+      # };
 
       polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";

@@ -43,6 +43,7 @@ in
             enable = true;
             netbootxyz = enabled;
           };
+	  timeout = 0;
           efi.canTouchEfiVariables = true;
           systemd-boot.configurationLimit = 5;
           grub = disabled;

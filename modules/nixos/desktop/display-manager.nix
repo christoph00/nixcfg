@@ -95,9 +95,9 @@ in
       "cosmic-greeter"
       "regreet"
       "ly"
-    ]) "ly";
-    autologin = mkBoolOpt false;
-    greetd = mkBoolOpt false;
+    ]) "tuigreet";
+    autologin = mkBoolOpt true;
+    greetd = mkBoolOpt (cfg.displayManager == "tuigreet" || cfg.displayManager == "cosmic-greeter");
   };
   config = mkIf cfg.enable {
     sys.state.directories = [
@@ -109,16 +109,18 @@ in
     programs.regreet.enable = cfg.displayManager == "regreet";
 
     services.displayManager.ly = {
-      enable = cfg.displaymanager == "ly";
+      enable = cfg.displayManager == "ly";
       settings = {
         clear_password = true;
         vi_mode = false;
-        animation = "matrix";
+        animation = "Doom";
         bigclock = true;
-        session_log = null;
+        # session_log = null;
       };
     };
     sys.state.files = ["/etc/ly/save.ini"];
+    services.displayManager.ly.x11Support = false;
+    systemd.user.targets.nixos-fake-graphical-session = lib.mkForce { };
 
     services.greetd = {
       enable = cfg.greetd;
