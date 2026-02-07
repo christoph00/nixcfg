@@ -34,7 +34,7 @@ in {
 
   boot.initrd.systemd.mounts = [
     {
-      what = "/dev/disk/by-label/KEYSEC";
+      what = "/dev/disk/by-uuid/29FD-C645";
       where = "/keysec";
       type = "vfat";
       options = "ro";
@@ -50,7 +50,7 @@ in {
   boot.initrd.luks.devices."cryptroot" = {
     device = "/dev/disk/by-partlabel/disk-main-luks";
     keyFile = "/keysec/root.key";
-    keyFileTimeout = 5;
+    keyFileTimeout = 10;
     # fallbackToPassword = true;
   };
 
