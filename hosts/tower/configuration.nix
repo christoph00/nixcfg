@@ -32,18 +32,18 @@ in {
 
   services.sabnzbd = enabled;
 
+  boot.initrd.supportedFilesystems = ["vfat"];
   boot.initrd.systemd.mounts = [
     {
-      what = "/dev/disk/by-uuid/29FD-C645";
+      what = "/dev/disk/by-label/KEYSEC";
       where = "/keysec";
       type = "vfat";
-      options = "ro";
+      options = "ro,iocharset=utf8,umask=0077,x-systemd.device-timeout=10s";
+      unitConfig = {
+        DefaultDependencies = "no";
+      };
       wantedBy = [ "cryptsetup-pre.target" ];
       before = [ "cryptsetup-pre.target" ];
-      unitConfig = {
-        DefaultDependencies = false;
-        ConditionPathExists = "/dev/disk/by-label/KEYSEC";
-      };
     }
   ];
 
@@ -51,6 +51,7 @@ in {
     device = "/dev/disk/by-partlabel/disk-main-luks";
     keyFile = "/keysec/root.key";
     keyFileTimeout = 10;
+    allowDiscards = true;
     # fallbackToPassword = true;
   };
 
@@ -143,8 +144,10 @@ in {
     "radeon.cik_support=0"
     "amdgpu.si_support=1"
     "amdgpu.cik_support=1"
+    "random.trust_cpu=on"
   ];
   boot.blacklistedKernelModules = ["fglrx"];
+  boot.initrd.kernelModules = [ "vfat" "nls_cp437" "nls_ascii" "nls_utf8" ];
   boot.initrd = {
     availableKernelModules = [
       "xhci_pci"
@@ -152,6 +155,7 @@ in {
       "nvme"
       "usbcore"
       "usb_storage"
+      "usbhid"
       "uas"
       "vfat"
     ];

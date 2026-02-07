@@ -127,6 +127,7 @@ in
       restart = false;
 
       settings = {
+        vt = "7";
         default_session = mkIf (cfg.displayManager == "tuigreet") {
           user = "greeter";
           command = concatStringsSep " " [
@@ -140,7 +141,7 @@ in
         };
         initial_session = mkIf cfg.autologin {
           # command = "${getExe config.programs.uwsm.package} start -F -S -N gamewm ${gamewm}/bin/gamewm";
-          command = "${getExe config.programs.uwsm.package} start -F -S labwc.desktop";
+          command = "${getExe config.programs.uwsm.package} start -F labwc.desktop";
           user = "christoph";
         };
       };
