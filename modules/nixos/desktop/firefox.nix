@@ -62,20 +62,11 @@ in
               "@contain-google".install_url = mozillaAddon "google-container";
               "@testpilot-containers".install_url = mozillaAddon "multi-account-containers";
 
-              "passbolt@passbolt.com" = {
-                install_url = mozillaAddon "passbolt";
-                installation_mode = "force_installed";
-                default_area = "navbar";
-              };
-
               "uBlock0@raymondhill.net".install_url = mozillaAddon "ublock-origin";
 
               "de-DE@dictionaries.addons.mozilla.org".install_url = mozillaAddon "dictionary-german";
 
-              "{3c078156-979c-498b-8990-85f7987dd929}".install_url = mozillaAddon "sidebery";
 
-              "{b86e4813-687a-43e6-ab65-0bde4ab75758}".install_url =
-                mozillaAddon "localcdn-fork-of-decentraleyes";
             };
 
             applyInstallationMode =

@@ -39,7 +39,7 @@ in
       ghostty
     ];
 
-    hjem.users.christoph.files.".config/niri/config.kdl".text = builtins.readFile ./niri.kdl;
+    # hjem.users.christoph.files.".config/niri/config.kdl".text = builtins.readFile ./niri.kdl;
 
     programs.uwsm.waylandCompositors = {
       niri = {

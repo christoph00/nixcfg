@@ -15,9 +15,11 @@ in {
       enable = true;
       enableGraphical = true;
     };
-    environment.systemPackages = with pkgs; [
+
+    programs.nm-applet.enable = false;
+
+    home.packages = with pkgs; [
       brightnessctl
-      gammastep
       wlsunset
 
       _7zz
@@ -26,7 +28,6 @@ in {
       desktop-file-utils
 
       wev
-      walker
 
       font-manager
       file-roller
@@ -49,7 +50,6 @@ in {
 
       moonlight-qt
 
-      vscode
 
       gohufont
     ];

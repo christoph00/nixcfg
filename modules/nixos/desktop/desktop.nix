@@ -15,6 +15,9 @@ let
   cfg = config.desktop;
 in
 {
+  imports = [
+    inputs.dms.nixosModules.dank-material-shell
+  ];
   options.desktop = {
     enable = mkBoolOpt false;
     headless = mkBoolOpt false;
@@ -22,10 +25,11 @@ in
     ironbar = mkBoolOpt false;
     sfwbar = mkBoolOpt false;
     wlsunset = mkBoolOpt false;
-    xfpanel = mkBoolOpt true;
-    xfdesktop = mkBoolOpt true;
-    xsettingsd = mkBoolOpt true;
-    noctalia = mkBoolOpt true;
+    xfpanel = mkBoolOpt false;
+    xfdesktop = mkBoolOpt false;
+    xsettingsd = mkBoolOpt false;
+    noctalia = mkBoolOpt false;
+    dms = mkBoolOpt true;
   };
   config = mkIf cfg.enable {
     hardware.graphics.enable = true;
@@ -78,7 +82,11 @@ in
       };
     };
 
-    home.packages = with perSystem.nixpkgs-unstable; [ clipman quickshell xdgmenumaker ];
+    home.packages = with perSystem.nixpkgs-unstable; [
+      clipman
+      quickshell
+      xdgmenumaker
+    ];
 
     hjem.users.christoph.files.".config/uwsm/env".text =
       toEnvExport config.hjem.users.christoph.environment.sessionVariables;
@@ -117,6 +125,17 @@ in
       };
     };
 
+    programs.dank-material-shell = {
+      enable = cfg.dms;
+      enableSystemMonitoring = true;
+      dgop.package = perSystem.nixpkgs-unstable.dgop;
+      enableVPN = false;
+      systemd = {
+        enable = true;
+
+      };
+    };
+
     systemd.user.services = {
       waybar = mkIf cfg.waybar {
         description = "Waybar as systemd service";
@@ -145,7 +164,7 @@ in
         description = "noctalica shell";
         script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${perSystem.nixpkgs-unstable.noctalia-shell}/bin/noctalia-shell";
         # wantedBy = [ "graphical-session.target" ];
-	wantedBy = ["wayland-session@niri.desktop.target"];
+        wantedBy = [ "wayland-session@niri.desktop.target" ];
         # after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
       };
@@ -171,19 +190,19 @@ in
       #   serviceConfig.Slice = "background-graphical.slice";
       #
       # };
-      syshud = {
-        description = "syshud";
-        script = "${pkgs.syshud}/bin/syshud";
-        wantedBy = [ "graphical-session.target" ];
-	# wantedBy = ["wayland-session@labwc.desktop.target"];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
-      #
+      #      syshud = {
+      #        description = "syshud";
+      #        script = "${pkgs.syshud}/bin/syshud";
+      #        wantedBy = [ "graphical-session.target" ];
+      # # wantedBy = ["wayland-session@labwc.desktop.target"];
+      #        after = [ "graphical-session.target" ];
+      #        serviceConfig.Slice = "background-graphical.slice";
+      #      };
+      #      #
       wlsunset = mkIf cfg.wlsunset {
         description = "wlsunset";
         script = "${pkgs.wlsunset}/bin/wlsunset";
-	# wantedBy = ["wayland-session@labwc.desktop.target"];
+        # wantedBy = ["wayland-session@labwc.desktop.target"];
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "background-graphical.slice";
