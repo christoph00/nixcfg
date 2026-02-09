@@ -58,7 +58,7 @@ jobs:
         large-packages: true
         docker-images: true
         swap-storage: true
-    - uses: actions/checkout@v6.0.1
+    - uses: actions/checkout@v6.0.2
     - uses: DeterminateSystems/nix-installer-action@v21
       with:
         extra-conf: |
