@@ -25,6 +25,8 @@ in {
       _7zz
       # _7zz-rar
 
+      emacs-pgtk
+
       desktop-file-utils
 
       wev

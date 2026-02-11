@@ -23,7 +23,7 @@ in
     enable = mkBoolOpt true;
     enableWifi = mkBoolOpt false;
     enableDHCPLAN = mkBoolOpt true;
-    enableNM = mkBoolOpt config.host.graphical;
+    enableNM = mkBoolOpt false;
     lanInterface = mkStrOpt "en*";
     publicIP = mkStrOpt "dynamic";
   };
@@ -105,7 +105,7 @@ in
       };
     };
 
-    environment.systemPackages = mkIf cfg.enableWifi [ pkgs.iwgtk ];
+    # environment.systemPackages = mkIf cfg.enableWifi [ pkgs.iwgtk ];
 
     sys.state.directories = mkMerge [
       (mkIf cfg.enableWifi [ "/var/lib/iwd" ])

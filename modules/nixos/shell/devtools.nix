@@ -24,7 +24,7 @@ in {
       VISUAL = "nvim";
     };
 
-    environment.systemPackages =
+    home.packages =
       (with pkgs; [
         iwe
         fzf
