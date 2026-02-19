@@ -74,6 +74,7 @@ in {
         superhtml
         ast-grep
         stylua
+        emacs-nox
       ])
       ++ (with perSystem.nix-ai-tools; [
         # claude-code
@@ -86,7 +87,7 @@ in {
         # crush
         # code
         agent-browser
-      ] ++ []);
+      ] ++ [perSystem.self.td]);
 
     home.rum.programs.tealdeer = {
       enable = true;

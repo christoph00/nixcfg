@@ -6,7 +6,7 @@ pkgs.buildGoModule rec {
   pname = "td";
   version = "0.34.0";
 
-  src = pkgs.lib.fetchFromGitHub {
+  src = pkgs.fetchFromGitHub {
     owner = "marcus";
     repo = "td";
     rev = "v${version}";
