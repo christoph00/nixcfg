@@ -26,8 +26,11 @@ in {
 
     home.packages =
       (with pkgs; [
+        (if config.desktop.enable then emacs-pgtk else emacs-nox)
         iwe
         fzf
+	nb
+	emacs-lsp-booster
         fd
         yazi
         bc
