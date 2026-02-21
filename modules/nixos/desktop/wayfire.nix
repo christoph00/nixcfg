@@ -34,7 +34,7 @@ in
       wayfire = {
         prettyName = "wayfire";
 	        comment = "Wayfire compositor managed by UWSM";
-	binPath = "/run/current-system/sw/bin/wayfire";
+	        binPath = "/run/current-system/sw/bin/wayfire";
       };
     };
 

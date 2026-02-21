@@ -29,6 +29,8 @@ in {
 
       desktop-file-utils
 
+      appimage-run
+
       wev
 
       font-manager

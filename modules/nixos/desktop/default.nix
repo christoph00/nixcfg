@@ -15,7 +15,7 @@
     ./gtk.nix
     ./labwc.nix
     ./ghostty.nix
-    # ./wayfire.nix
+    ./wayfire.nix
     ./kde.nix
     # ./xfce.nix
   ];
