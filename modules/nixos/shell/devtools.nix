@@ -87,6 +87,7 @@ in {
         # crush
         # code
         agent-browser
+        zeroclaw
       ] ++ [perSystem.self.td]);
 
     home.rum.programs.tealdeer = {
