@@ -16,6 +16,7 @@
 
   desktop.enable = true;
   host.gaming = true;
+  desktop.gaming.enable = true;
   network.enableWifi = true;
 
   hardware.graphics = {
