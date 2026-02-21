@@ -115,7 +115,6 @@ in
     };
 
     programs.uwsm = {
-      enable = true;
       # waylandCompositors = {
       # steam-gamescope = {
       #   prettyName = "Steam";
@@ -219,14 +218,13 @@ in
         protonplus
         protontricks
         gamemode
-        openmw
-        bottles
-        limo
+#       openmw
+#        bottles
+#        limo
         # veloren
         protonhax
         umu-launcher
-	faugus-launcher
-
+	      faugus-launcher
         cacert
         dos2unix
         samba

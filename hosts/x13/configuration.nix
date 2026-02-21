@@ -15,7 +15,7 @@
   sys.disk.encrypted = true;
 
   desktop.enable = true;
-
+  host.gaming = true;
   network.enableWifi = true;
 
   hardware.graphics = {
