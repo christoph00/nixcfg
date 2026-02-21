@@ -22,6 +22,7 @@
     ./n8n.nix
     ./neovim-server.nix
     ./open-webui.nix
+    # ./piagent.nix
     ./pinchflat.nix
     ./proxy.nix
     ./printserver.nix

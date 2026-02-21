@@ -29,7 +29,7 @@ in
     xfdesktop = mkBoolOpt false;
     xsettingsd = mkBoolOpt false;
     noctalia = mkBoolOpt false;
-    dms = mkBoolOpt true;
+        dms = mkBoolOpt true;
   };
   config = mkIf cfg.enable {
     hardware.graphics.enable = true;
@@ -38,6 +38,8 @@ in
     services.udev.extraRules = ''
       KERNEL=="uinput", GROUP="input", MODE="0660" OPTIONS+="static_node=uinput"
     '';
+
+    i18n.defaultLocale = "de_DE.UTF-8";
 
     xdg.portal = {
       enable = true;
@@ -52,7 +54,8 @@ in
           "wlr"
         ];
       };
-    };
+
+      };
 
     home.environment.sessionVariables = {
       XDG_SESSION_TYPE = "wayland";
@@ -70,22 +73,23 @@ in
       aporetic
       monaspace
       victor-mono
+      maple-mono.truetype
     ];
 
     fonts.fontconfig = {
       defaultFonts = {
         monospace = [
-          "Aporetic Sans Mono"
+          "Maple Mono"
         ];
-        sansSerif = [ "Aporetic Sans Mono" ];
-        serif = [ "Aporetic Sans Mono" ];
+        sansSerif = [ "Maple Mono" ];
+        serif = [ "Maple Mono" ];
       };
     };
 
     home.packages = with perSystem.nixpkgs-unstable; [
       clipman
       quickshell
-      xdgmenumaker
+      # xdgmenumaker
     ];
 
     hjem.users.christoph.files.".config/uwsm/env".text =
@@ -95,45 +99,21 @@ in
       dbus = {
         enable = true;
         implementation = "broker";
-
       };
-
       timesyncd.enable = true;
       chrony.enable = false;
-
       seatd.enable = true;
     };
 
-    programs.uwsm = {
-      enable = true;
-      waylandCompositors = {
-        # sway = {
-        #   prettyName = "Sway";
-        #   comment = "Sway compositor managed by UWSM";
-        #   binPath = "/run/current-system/sw/bin/sway";
-        # };
-        # # niri = {
-        #   prettyName = "Niri";
-        #   comment = "A scrollable-tiling Wayland compositor.";
-        #   binPath = "${pkgs.niri}/bin/niri";
-        # };
-        # labwc = {
-        #   prettyName = "Labwc";
-        #   comment = "A Wayland window-stacking compositor.";
-        #   binPath = "${pkgs.labwc}/bin/labwc";
-        # };
-      };
-    };
+    programs.uwsm.enable = true;
+    programs.uwsm.waylandCompositors = {};
 
     programs.dank-material-shell = {
       enable = cfg.dms;
       enableSystemMonitoring = true;
       dgop.package = perSystem.nixpkgs-unstable.dgop;
       enableVPN = false;
-      systemd = {
-        enable = true;
-
-      };
+      systemd.enable = true;
     };
 
     systemd.user.services = {
@@ -224,19 +204,19 @@ in
       #   serviceConfig.Slice = "background-graphical.slice";
       # };
 
-      polkit-gnome-authentication-agent-1 = {
-        description = "polkit-gnome-authentication-agent-1";
-        script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        wantedBy = [ "graphical-session.target" ];
-        # after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
+      # polkit-gnome-authentication-agent-1 = {
+      #   description = "polkit-gnome-authentication-agent-1";
+      #   script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      #   wantedBy = [ "graphical-session.target" ];
+      #   # after = [ "graphical-session.target" ];
+      #   serviceConfig.Slice = "background-graphical.slice";
+      # };
     };
 
     services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
     security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
-    #security.pam.services.waylock = { };
+    security.pam.services.waylock = { };
 
   };
 

@@ -95,32 +95,20 @@ in
       "cosmic-greeter"
       "regreet"
       "ly"
-    ]) "tuigreet";
-    autologin = mkBoolOpt true;
-    greetd = mkBoolOpt (cfg.displayManager == "tuigreet" || cfg.displayManager == "cosmic-greeter");
+      "sddm"
+    ]) "regreet";
+    autologin = mkBoolOpt false;
+    greetd = mkBoolOpt (cfg.displayManager == "tuigreet" || cfg.displayManager == "cosmic-greeter" || cfg.displayManager == "regreet" );
   };
   config = mkIf cfg.enable {
     sys.state.directories = [
       "/var/lib/cosmic-greeter"
       "/var/lib/regreet"
       "/var/lib/greetd"
+      "/var/lib/sddm"
     ];
 
     programs.regreet.enable = cfg.displayManager == "regreet";
-
-    services.displayManager.ly = {
-      enable = cfg.displayManager == "ly";
-      settings = {
-        clear_password = true;
-        vi_mode = false;
-        animation = "Doom";
-        bigclock = true;
-        # session_log = null;
-      };
-    };
-    sys.state.files = ["/etc/ly/save.ini"];
-    services.displayManager.ly.x11Support = false;
-    systemd.user.targets.nixos-fake-graphical-session = lib.mkForce { };
 
     services.greetd = {
       enable = cfg.greetd;
@@ -147,5 +135,9 @@ in
       };
     };
     services.displayManager.cosmic-greeter.enable = cfg.displayManager == "cosmic-greeter";
+    services.displayManager.sddm = {
+      enable = cfg.displayManager == "sddm";
+      wayland.enable = true;
+    };
   };
 }
