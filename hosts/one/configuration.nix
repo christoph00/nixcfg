@@ -39,7 +39,10 @@ in
         }
       ];
     };
-    defaultGateway = "185.228.136.1";
+    defaultGateway = {
+      address = "185.228.136.1";
+      interface = "ens3";
+    };
     defaultGateway6 = {
       address = "fe80::1";
       interface = "ens3";
