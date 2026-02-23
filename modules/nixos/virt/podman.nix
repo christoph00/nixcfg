@@ -26,6 +26,7 @@ in
     ];
 
     virtualisation.quadlet.enable = true;
+    virtualisation.quadlet.networks.podman.networkConfig.ipv6 = true;
 
     networking.firewall.trustedInterfaces = [ "podman0" ];
 
