@@ -26,6 +26,7 @@ in
     enableNM = mkBoolOpt false;
     lanInterface = mkStrOpt "en*";
     publicIP = mkStrOpt "dynamic";
+    ipv6 = mkStrOpt "";
   };
 
   config = (mkIf cfg.enable) {
@@ -101,6 +102,11 @@ in
           matchConfig.Name = cfg.lanInterface;
           networkConfig.DHCP = "yes";
           dhcpConfig.RouteMetric = 50;
+          addresses = mkIf (cfg.ipv6 != "") [
+            {
+              addressConfig.Address = "${cfg.ipv6}/64";
+            }
+          ];
         };
       };
     };

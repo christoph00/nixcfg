@@ -102,6 +102,7 @@ in
   networking.timeServers = [ "169.254.169.254" ];
 
   network.publicIP = "152.70.42.43";
+  network.ipv6 = "2a03:4000:23:cac::2025";
 
   # WireGuard configuration
   network.wireguard = {
