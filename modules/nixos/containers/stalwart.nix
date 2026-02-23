@@ -18,6 +18,7 @@ in
     enable = mkBoolOpt false;
   };
   config = mkIf config.cnt.stalwart.enable {
+    virt.podman = true;
     age.secrets."stalwart-env" = mkSecret {
       file = "stalwart-env";
     };
