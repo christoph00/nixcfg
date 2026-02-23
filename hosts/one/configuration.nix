@@ -31,12 +31,12 @@ in
       mail = {
         enable = true;
         subdomain = "mail";
-        port = 8088;
+        port = 8080;
       };
       jmap = {
         enable = true;
         subdomain = "jmap";
-        port = 8087;
+        port = 8081;
       };
       keep = {
         enable = true;
