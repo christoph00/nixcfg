@@ -34,7 +34,7 @@ in
       ];
       ipv6.addresses = [
         {
-          address = "2a03:4000:23:cac::";
+          address = "2a03:4000:23:cac::2025";
           prefixLength = 64;
         }
       ];
