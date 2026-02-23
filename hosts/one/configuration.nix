@@ -21,8 +21,10 @@ in
   hw.gpu = "vm";
   hw.cpu = "intel";
 
-  services.stalwart-mail = enabled;
+  # services.stalwart-mail = enabled;
   services.karakeep = enabled;
+
+  cnt.stalwart = enabled;
 
   svc.webserver = enabled // {
     services = {

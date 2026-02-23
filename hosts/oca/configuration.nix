@@ -2,12 +2,13 @@
   inputs,
   lib,
   flake,
-  config,
   ...
-}: let
+}:
+let
   inherit (flake.lib) create-caddy-proxy enabled;
-in {
-  imports = [inputs.self.nixosModules.host];
+in
+{
+  imports = [ inputs.self.nixosModules.host ];
 
   networking.hostName = "oca";
   sys.disk.device = "/dev/sda";
@@ -26,7 +27,7 @@ in {
   # svc.media = enabled;
   # svc.neovim-server = enabled;
 
-  # svc.code-tunnel = enabled;
+  svc.code-tunnel = enabled;
   svc.printserver = enabled;
 
   # services.searx = enabled;
@@ -53,54 +54,52 @@ in {
 
   cnt.cliproxy.enable = true;
 
-  svc.webserver =
-    enabled
-    // {
-      services = {
-        # n8n = {
-        #   enable = true;
-        #   subdomain = "n8n";
-        #   port = 5678;
-        # };
-        # # lobechat = {
-        #   enable = true;
-        #   subdomain = "ai";
-        #   port = 3210;
-        # };
-        home-assistant = {
-          enable = true;
-          subdomain = "ha";
-          port = 8123;
-        };
-        music-assistant = {
-          enable = true;
-          subdomain = "music";
-          port = 8095;
-        };
-        # beszel = {
-        #   enable = true;
-        #   subdomain = "stat";
-        #   port = 8090;
-        # };
-        # gonic = {
-        #   enable = true;
-        #   subdomain = "m";
-        #   port = 4747;
-        # };
-        # # jellyfin = {
-        #   enable = true;
-        #   subdomain = "media";
-        #   port = 8096;
-        # };
-        # #   litellm = {
-        #     enable = true;
-        #     subdomain = "llm";
-        #     port = config.services.litellm.port;
-        # };
+  svc.webserver = enabled // {
+    services = {
+      # n8n = {
+      #   enable = true;
+      #   subdomain = "n8n";
+      #   port = 5678;
+      # };
+      # # lobechat = {
+      #   enable = true;
+      #   subdomain = "ai";
+      #   port = 3210;
+      # };
+      home-assistant = {
+        enable = true;
+        subdomain = "ha";
+        port = 8123;
       };
+      music-assistant = {
+        enable = true;
+        subdomain = "music";
+        port = 8095;
+      };
+      # beszel = {
+      #   enable = true;
+      #   subdomain = "stat";
+      #   port = 8090;
+      # };
+      # gonic = {
+      #   enable = true;
+      #   subdomain = "m";
+      #   port = 4747;
+      # };
+      # # jellyfin = {
+      #   enable = true;
+      #   subdomain = "media";
+      #   port = 8096;
+      # };
+      # #   litellm = {
+      #     enable = true;
+      #     subdomain = "llm";
+      #     port = config.services.litellm.port;
+      # };
     };
+  };
 
-  networking.timeServers = ["169.254.169.254"];
+  networking.timeServers = [ "169.254.169.254" ];
 
   network.publicIP = "152.70.42.43";
 

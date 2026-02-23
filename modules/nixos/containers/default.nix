@@ -3,14 +3,17 @@
   config,
   flake,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkDefault;
   inherit (flake.lib) mkBoolOpt;
-in {
+in
+{
   imports = [
     ./n8n.nix
     ./cliproxy.nix
     ./sillytavern.nix
+    ./stalwart.nix
     ./openclaw.nix
     ./qdrant.nix
     ./home-assistant.nix
