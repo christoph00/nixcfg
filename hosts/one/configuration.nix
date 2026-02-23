@@ -21,6 +21,31 @@ in
   hw.gpu = "vm";
   hw.cpu = "intel";
 
+  network.enableDHCPLAN = false;
+
+  networking = {
+    interfaces.ens3 = {
+      useDHCP = false;
+      ipv4.addresses = [
+        {
+          address = "185.228.136.218";
+          prefixLength = 22;
+        }
+      ];
+      ipv6.addresses = [
+        {
+          address = "2a03:4000:23:cac::2025";
+          prefixLength = 64;
+        }
+      ];
+    };
+    defaultGateway = "185.228.136.1";
+    defaultGateway6 = {
+      address = "fe80::1";
+      interface = "ens3";
+    };
+  };
+
   # services.stalwart-mail = enabled;
   services.karakeep = enabled;
 
