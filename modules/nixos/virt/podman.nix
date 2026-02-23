@@ -26,17 +26,25 @@ in
     ];
 
     virtualisation.quadlet.enable = true;
-    virtualisation.quadlet.networks.main.networkConfig = {
-      name = "main";
-      ipv6 = true;
-      internal = true;
-      interfaceName = "podman1";
-    };
 
-    networking.firewall.trustedInterfaces = [ "podman1" ];
+    networking.firewall.trustedInterfaces = [ "podman0" ];
 
     virtualisation.podman = {
       enable = true;
+      defaultNetwork.settings = {
+        dns_enabled = true;
+        ipv6_enabled = true;
+        subnets = [
+          {
+            subnet = "10.88.0.0/16";
+            gateway = "10.88.0.1";
+          }
+          {
+            subnet = "fd00::/80";
+            gateway = "fd00::1";
+          }
+        ];
+      };
     };
   };
 }

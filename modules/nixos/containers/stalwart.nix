@@ -47,7 +47,6 @@ in
             "8080"
             "8081"
           ];
-          networks = [ "main" ];
         };
         volumes = {
           stalwart = btrfsvol {
