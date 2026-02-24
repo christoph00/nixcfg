@@ -47,6 +47,7 @@ in
             "8080"
             "8081"
           ];
+          networks = [ config.virtualisation.quadlet.networks.main.ref ];
         };
         volumes = {
           stalwart = btrfsvol {
@@ -71,7 +72,6 @@ in
             labels = {
               "io.containers.autoupdate" = "registry";
             };
-            networks = [ config.virtualisation.quadlet.networks.main.ref ];
           };
         };
       };
