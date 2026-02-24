@@ -40,14 +40,4 @@ in
       enable = true;
     };
   };
-  options.virtualisation.quadlet.containers = lib.mkOption {
-    type = lib.types.attrsOf (
-      lib.types.submodule (
-        { ... }:
-        {
-          containerConfig.networks = lib.mkDefault [ config.virtualisation.quadlet.networks.main ];
-        }
-      )
-    );
-  };
 }
