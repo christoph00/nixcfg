@@ -51,7 +51,7 @@ in
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwrR18ub6bgzehbzGzwFu4gBXPuBfkXCYLlqS9Qbal2 christoph@x13"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJznPNQqLgyHNL2Cxbtx3RO6BncMpC1Bpyae/edKW7oH christoph@tower"
 "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAYzFv4SU1LR4f5y78UszLtsQIum+eMVFEfDaKAuLoVc ipad"
-
+"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGPbyWhQy8gRapWN2ErcFgcQCJbrvgMSUQdCQAoPEckq christoph@x13"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBMM61ElzdrJV9KqIcktRE52m/TGZ4fWbbiddNcEj8s/" # w
       ];
 

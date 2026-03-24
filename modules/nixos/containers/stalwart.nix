@@ -72,7 +72,6 @@ in
             labels = {
               "io.containers.autoupdate" = "registry";
             };
-            networks = [ config.virtualisation.quadlet.networks.main.ref ];
           };
         };
       };
