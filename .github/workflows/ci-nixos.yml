@@ -59,7 +59,7 @@ jobs:
         docker-images: true
         swap-storage: true
     - uses: actions/checkout@v6.0.2
-    - uses: DeterminateSystems/nix-installer-action@v21
+    - uses: DeterminateSystems/nix-installer-action@v22
       with:
         extra-conf: |
           experimental-features = nix-command flakes
