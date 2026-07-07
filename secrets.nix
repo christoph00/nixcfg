@@ -6,7 +6,7 @@ let
   # Hosts
   csrv = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkYJjXoEofN3Nb/b9Dxsc0+J2S5fUU7fZOs6hqZCvGT";
   lsrv = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGzR8Ju+yw7yBpNlwIo74Ov0bidgrqRJjL/xi64I0qzu";
-  tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGb7cFRAsGnk/uXBceCiWwIwzev3qu/YQrZb/v166ufR";
+  tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJhCWZfP5/TSletDoFYpY3PyfmLO42n11dXQZum9nYlr";
   oca = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjzPAtQF1ysQyoos3mDAv7vnUtlHALu7EgU4bj0McoJ";
   oc1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQzfYiD7ugHkflIXEvCFj3o6skLLyFDlRkkoTjlyK5I";
   oc2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZwupfoft4N/wvB4DqXLcZtuFWNRbomxgf/WzhgCx2F";
@@ -36,7 +36,7 @@ in
   #  "secrets/netbird-io-setup.key".publicKeys = all;
   #  "secrets/tailscale-key.age".publicKeys = all;
   #  "secrets/vector.env".publicKeys = all;
-  "secrets/user_christoph_pw".publicKeys = all;
+  "secrets/user_christoph_pw.age".publicKeys = all;
   "secrets/cf-api-key.age".publicKeys = [
     lsrv
     oca
@@ -132,4 +132,8 @@ in
   #    x13
   #    tower
   #  ] ++ users;
+  "secrets/tower-root-key.age".publicKeys = [
+    tower
+    christoph_tower
+  ];
 }

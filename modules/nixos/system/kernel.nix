@@ -16,9 +16,9 @@ in {
     enable = mkBoolOpt true;
   };
   config = mkIf cfg.enable {
-    services.scx.enable = config.host.graphical;
-    services.scx.scheduler = "scx_bpfland";
-    systemd.services.scx.serviceConfig.LogNamespace = "sched-ext";
+    # services.scx.enable = config.host.graphical;
+    # services.scx.scheduler = "scx_bpfland";
+    # systemd.services.scx.serviceConfig.LogNamespace = "sched-ext";
 
     boot = {
       kernelPackages =

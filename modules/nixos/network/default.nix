@@ -31,16 +31,16 @@ in
   config = (mkIf cfg.enable) {
     services.resolved = {
       enable = mkDefault true;
-      dnssec = "allow-downgrade";
-      fallbackDns = [
-        "1.1.1.1"
-        "9.9.9.9"
-      ];
-      llmnr = "true";
-      extraConfig = ''
-        Domains=~.
-        MulticastDNS=true
-      '';
+      settings = {
+        Resolve = {
+          DNSSEC = "allow-downgrade";
+          FallbackDNS = [
+            "1.1.1.1"
+            "9.9.9.9"
+          ];
+          LLMNR = true;
+        };
+      };
     };
 
     system.nssDatabases.hosts = mkMerge [

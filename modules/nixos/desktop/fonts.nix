@@ -3,43 +3,39 @@
   flake,
   pkgs,
   config,
-  options,
+  perSystem,
   ...
 }:
 let
-  inherit (lib) mkIf attrValues;
-  inherit (flake.lib) mkBoolOpt;
+  inherit (lib) mkIf;
   cfg = config.desktop;
+  up = perSystem.nixpkgs-unstable;
 in
 {
   config = mkIf cfg.enable {
-    fonts.packages = lib.attrValues {
-      inherit (pkgs)
-        corefonts
-
-        source-sans
-        source-serif
-
-        dejavu_fonts
-        inter
-
-        noto-fonts
-
-        noto-fonts-cjk-sans
-        noto-fonts-cjk-serif
-
-        noto-fonts-color-emoji
-        material-icons
-        material-design-icons
-        ;
-
-      inherit (pkgs.nerd-fonts)
-        symbols-only
-        bigblue-terminal
-        agave
-        blex-mono
-        ;
-    };
+    fonts.packages = (with up; [
+      corefonts
+      source-sans
+      source-serif
+      dejavu_fonts
+      inter
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+      material-icons
+      material-design-icons
+      dina-font
+      aporetic
+      monaspace
+      victor-mono
+      gohufont
+      maple-mono.truetype
+    ]) ++ (with up.nerd-fonts; [
+      symbols-only
+      bigblue-terminal
+      agave
+      blex-mono
+    ]);
   };
-
 }

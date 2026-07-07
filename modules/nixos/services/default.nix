@@ -15,7 +15,7 @@
     ./headscale.nix
     ./homeassistant
     ./karakeep.nix
-    ./mail-server.nix
+    #./mail-server.nix
     ./media.nix
     ./mcp-proxy.nix
     ./mqtt.nix

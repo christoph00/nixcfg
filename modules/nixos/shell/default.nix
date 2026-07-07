@@ -49,7 +49,7 @@ in
 
     programs.bash = {
       enable = true;
-      enableCompletion = true;
+      completion.enable = true;
       promptInit = ''
         eval "$(${pkgs.starship}/bin/starship init bash)"
       '';

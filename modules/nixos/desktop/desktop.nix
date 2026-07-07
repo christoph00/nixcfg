@@ -2,9 +2,7 @@
   config,
   flake,
   lib,
-  options,
   inputs,
-  pkgs,
   perSystem,
   ...
 }:
@@ -13,25 +11,23 @@ let
   inherit (flake.lib) mkBoolOpt;
   inherit (inputs.hjem-rum.lib.generators.environment) toEnvExport;
   cfg = config.desktop;
+  up = perSystem.nixpkgs-unstable;
 in
 {
-  imports = [
-    inputs.dms.nixosModules.dank-material-shell
-  ];
+
   options.desktop = {
     enable = mkBoolOpt false;
-    headless = mkBoolOpt false;
     waybar = mkBoolOpt false;
-    ironbar = mkBoolOpt false;
-    sfwbar = mkBoolOpt false;
     wlsunset = mkBoolOpt false;
-    xfpanel = mkBoolOpt false;
-    xfdesktop = mkBoolOpt false;
-    xsettingsd = mkBoolOpt false;
-    noctalia = mkBoolOpt false;
-        dms = mkBoolOpt true;
+    dms = mkBoolOpt true;
   };
+
   config = mkIf cfg.enable {
+    programs.labwc.enable = true;
+
+    # for greeter + tools
+    programs.sway.enable = true;
+
     hardware.graphics.enable = true;
 
     boot.kernelModules = [ "uinput" ];
@@ -45,17 +41,10 @@ in
       enable = true;
       xdgOpenUsePortal = true;
       wlr.enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-      ];
-      config.common = {
-        default = [
-          "gtk"
-          "wlr"
-        ];
-      };
-
-      };
+      # ponytail: pulled in by labwc + wlr automatically
+      config.common = { default = [ "gtk" "wlr" ]; };
+      config.labwc = { default = [ "gtk" "wlr" ]; };
+    };
 
     home.environment.sessionVariables = {
       XDG_SESSION_TYPE = "wayland";
@@ -68,156 +57,69 @@ in
       CLUTTER_BACKEND = "wayland";
     };
 
-    fonts.packages = with pkgs; [
-      dina-font
-      aporetic
-      monaspace
-      victor-mono
-      maple-mono.truetype
-    ];
-
-    fonts.fontconfig = {
-      defaultFonts = {
-        monospace = [
-          "Maple Mono"
-        ];
-        sansSerif = [ "Maple Mono" ];
-        serif = [ "Maple Mono" ];
-      };
-    };
-
-    home.packages = with perSystem.nixpkgs-unstable; [
-      clipman
-      quickshell
-      # xdgmenumaker
-    ];
-
-    hjem.users.christoph.files.".config/uwsm/env".text =
-      toEnvExport config.hjem.users.christoph.environment.sessionVariables;
-
     services = {
-      dbus = {
-        enable = true;
-        implementation = "broker";
-      };
-      timesyncd.enable = true;
-      chrony.enable = false;
+      dbus = { enable = true; implementation = "broker"; };
       seatd.enable = true;
     };
 
     programs.uwsm.enable = true;
-    programs.uwsm.waylandCompositors = {};
-
-    programs.dank-material-shell = {
-      enable = cfg.dms;
-      enableSystemMonitoring = true;
-      dgop.package = perSystem.nixpkgs-unstable.dgop;
-      enableVPN = false;
-      systemd.enable = true;
+    programs.uwsm.waylandCompositors = {
+      labwc = {
+        prettyName = "Labwc";
+        comment = "A stacking Wayland compositor.";
+        binPath = "${up.labwc}/bin/labwc";
+      };
     };
 
+    hjem.users.christoph.files.".config/uwsm/env".text =
+      toEnvExport config.hjem.users.christoph.environment.sessionVariables;
+
+    home.packages = with up; [
+      labwc
+      labwc-gtktheme
+      labwc-tweaks-gtk
+      labwc-menu-generator
+      fuzzel
+      foot
+      brightnessctl
+      clipman
+      quickshell
+      dms-shell
+    ];
+
+    # ponytail: exported via uwsm/env, not consumed by Hjem Rum directly
+    home.rum.environment.hideWarning = true;
+
+    programs.dms-shell = {
+      enable = cfg.dms;
+      package = up.dms-shell;
+      enableAudioWavelength = false;
+      enableVPN = false;
+      quickshell.package = up.quickshell;
+    };
+
+    # ponytail: optional services, add when you actually need them
     systemd.user.services = {
       waybar = mkIf cfg.waybar {
-        description = "Waybar as systemd service";
+        description = "Waybar";
         path = [ config.system.path ];
-        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.waybar}/bin/waybar";
+        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${up.waybar}/bin/waybar";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "app-graphical.slice";
       };
-      sfwbar = mkIf cfg.sfwbar {
-        description = "sfwbar";
-        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.sfwbar}/bin/sfwbar";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "app-graphical.slice";
-
-      };
-      ironbar = mkIf cfg.ironbar {
-        description = "ironbar";
-        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${pkgs.ironbar}/bin/ironbar";
-        wantedBy = [ "graphical-session.target" ];
-        # after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "app-graphical.slice";
-      };
-      noctalia = mkIf cfg.noctalia {
-        description = "noctalica shell";
-        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${perSystem.nixpkgs-unstable.noctalia-shell}/bin/noctalia-shell";
-        # wantedBy = [ "graphical-session.target" ];
-        wantedBy = [ "wayland-session@niri.desktop.target" ];
-        # after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "app-graphical.slice";
-      };
-      xfpanel = mkIf cfg.xfpanel {
-        description = "xfce panel";
-        script = "/run/current-system/sw/bin/xfce4-panel";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
-      xfdesktop = mkIf cfg.xfdesktop {
-        description = "xfce desktop";
-        script = "/run/current-system/sw/bin/xfdesktop";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
-      # swww-daemon = {
-      #   description = "swww-daemon as systemd service";
-      #   script = "${pkgs.swww}/bin/swww-daemon";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "background-graphical.slice";
-      #
-      # };
-      #      syshud = {
-      #        description = "syshud";
-      #        script = "${pkgs.syshud}/bin/syshud";
-      #        wantedBy = [ "graphical-session.target" ];
-      # # wantedBy = ["wayland-session@labwc.desktop.target"];
-      #        after = [ "graphical-session.target" ];
-      #        serviceConfig.Slice = "background-graphical.slice";
-      #      };
-      #      #
       wlsunset = mkIf cfg.wlsunset {
         description = "wlsunset";
-        script = "${pkgs.wlsunset}/bin/wlsunset";
-        # wantedBy = ["wayland-session@labwc.desktop.target"];
+        script = "${up.wlsunset}/bin/wlsunset";
         wantedBy = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "background-graphical.slice";
       };
-
-      xsettingsd = mkIf cfg.xsettingsd {
-        description = "xsettingsd";
-        script = "${pkgs.xsettingsd}/bin/xsettingsd";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
-
-      # xfce-power-manager = mkIf cfg.xsettingsd {
-      #   description = "xfce-power-manager";
-      #   script = "${pkgs.xfce.xfce4-power-manager}/bin/xfce4-power-manager";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "background-graphical.slice";
-      # };
-
-      # polkit-gnome-authentication-agent-1 = {
-      #   description = "polkit-gnome-authentication-agent-1";
-      #   script = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-      #   wantedBy = [ "graphical-session.target" ];
-      #   # after = [ "graphical-session.target" ];
-      #   serviceConfig.Slice = "background-graphical.slice";
-      # };
     };
 
     services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
-    security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+    security.pam.services.gtklock.text = lib.readFile "${up.gtklock}/etc/pam.d/gtklock";
     security.pam.services.waylock = { };
-
   };
-
 }

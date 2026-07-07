@@ -1,17 +1,16 @@
 {
-  pkgs,
-  input,
-  lib,
   flake,
+  lib,
   config,
-  options,
+  perSystem,
   ...
 }:
 let
   inherit (flake.lib) mkBoolOpt mkSecret;
   inherit (lib) mkIf getExe;
   cfg = config.desktop;
-  switch-resolution = pkgs.writeShellScriptBin "switch-resolution" ''
+  up = perSystem.nixpkgs-unstable;
+  switch-resolution = up.writeShellScriptBin "switch-resolution" ''
     WIDTH=''${SUNSHINE_CLIENT_WIDTH:-1920}
     HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-1080}
     FPS=''${SUNSHINE_CLIENT_FPS:-60}.000
@@ -52,7 +51,6 @@ in
         capture = "wlr";
         min_threads = 3;
         encoder = "vaapi";
-        # global_prep_cmd = [{"do":"/run/current-system/sw/bin/switch-resolution","undo":"/run/current-system/sw/bin/switch-resolution reset"}]
         global_prep_cmd = builtins.toJSON [
           {
             do = "${switch-resolution}/bin/switch-resolution";
@@ -62,29 +60,25 @@ in
         key_rightalt_to_key_win = "enabled";
         fec_percentage = 3;
         high_resolution_scrolling = "disabled";
-
       };
     };
 
     systemd.user.services = {
       wayvnc = {
         description = "wayvnc";
-        script = "${getExe pkgs.wayvnc} --gpu --log-level info --output HEADLESS-1";
-        # wantedBy = [ "graphical-session.target" ];
+        script = "${getExe up.wayvnc} --gpu --log-level info --output HEADLESS-1";
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "background-graphical.slice";
       };
       novnc = {
         description = "novnc";
-        script = "${getExe pkgs.novnc} --listen 0.0.0.0:6080 --vnc 127.0.0.1:5900 --cert ${config.age.secrets.self-pem.path}";
-        # wantedBy = [ "graphical-session.target" ];
+        script = "${getExe up.novnc} --listen 0.0.0.0:6080 --vnc 127.0.0.1:5900 --cert ${config.age.secrets.self-pem.path}";
         path = [ config.system.path ];
         requires = [ "wayvnc.service" ];
         serviceConfig = {
           Slice = "background-graphical.slice";
           SuccessExitStatus = 143;
         };
-
       };
       sunshine = {
         path = [ config.system.path ];
@@ -92,7 +86,5 @@ in
         after = [ "graphical-session.target" ];
       };
     };
-
   };
-
 }

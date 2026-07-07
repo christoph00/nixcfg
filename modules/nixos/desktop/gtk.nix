@@ -1,26 +1,20 @@
 {
   config,
-  options,
-  flake,
-  pkgs,
   lib,
+  perSystem,
   ...
 }:
 let
   inherit (lib) mkIf;
+  up = perSystem.nixpkgs-unstable;
 in
 {
   config = mkIf config.desktop.enable {
     home.rum.misc.gtk = {
       enable = true;
       packages = [
-        # (pkgs.catppuccin-papirus-folders.override {
-        #   accent = "rosewater";
-        #   flavor = "mocha";
-        # })
-        pkgs.bibata-cursors
+        up.bibata-cursors
       ];
-
     };
   };
 }

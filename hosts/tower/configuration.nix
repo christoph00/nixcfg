@@ -7,6 +7,7 @@
   pkgs,
   flake,
   lib,
+  config,
   perSystem,
   ...
 }: let
@@ -23,37 +24,24 @@ in {
 
   desktop.enable = true;
   desktop.gaming.enable = true;
-  desktop.remote = false;
-  desktop.autologin = true;
+  #desktop.remote = false;
+  #desktop.autologin = true;
 
   sys.boot.secureBoot = false;
-  sys.disk.device = "/dev/disk/by-id/ata-Samsung_SSD_840_PRO_Series_S12PNEAD417298N";
+  sys.disk.device = "/dev/nvme0n1";
   sys.disk.encrypted = true;
 
-  services.sabnzbd = enabled;
-
-  boot.initrd.supportedFilesystems = ["vfat"];
-  boot.initrd.systemd.mounts = [
-    {
-      what = "/dev/disk/by-label/KEYSEC";
-      where = "/keysec";
-      type = "vfat";
-      options = "ro,iocharset=utf8,umask=0077,x-systemd.device-timeout=10s";
-      unitConfig = {
-        DefaultDependencies = "no";
-      };
-      wantedBy = [ "cryptsetup-pre.target" ];
-      before = [ "cryptsetup-pre.target" ];
-    }
-  ];
-
+  # ponytail: LUKS key embedded in initrd on ESP, no separate KEYSEC stick needed
+  age.secrets.tower-root-key = flake.lib.mkSecret { file = "tower-root-key"; };
+  boot.initrd.secrets."/root.key" = config.age.secrets.tower-root-key.path;
   boot.initrd.luks.devices."cryptroot" = {
     device = "/dev/disk/by-partlabel/disk-main-luks";
-    keyFile = "/keysec/root.key";
+    keyFile = "/root.key";
     keyFileTimeout = 10;
     allowDiscards = true;
     # fallbackToPassword = true;
   };
+
 
   fileSystems = {
     "/media/Games" = {
@@ -87,13 +75,9 @@ in {
     };
   };
 
-  services.lact.enable = true;
-  sys.state.directories = ["/etc/lact"];
-
   environment.systemPackages = [
     pkgs.amdgpu_top
     pkgs.libva-utils
-    pkgs.lact
   ];
 
   hardware.graphics = {
@@ -107,15 +91,6 @@ in {
     ];
   };
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
-
-  # WireGuard configuration
-  network.wireguard = {
-    enable = false;
-    ip = "10.100.100.105";
-    publicKey = "6CTpNoM92SEBu6LFMYs2dZNoOA/6Ad00a22NITmsH1w=";
-  };
-
   hardware.amdgpu = {
     opencl.enable = true;
     initrd.enable = true;
@@ -125,7 +100,7 @@ in {
     };
   };
 
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
   services.xserver.videoDrivers = [
     "amdgpu"
     "i915"

@@ -107,6 +107,9 @@ in {
       {
         boot.supportedFilesystems.zfs = lib.mkForce false;
 
+        # ponytail: grow root partition + btrfs on first boot after dd to larger disk
+        boot.growPartition = mkIf (!cfg.disk.tmpRoot) true;
+
         disko.devices = {
           nodev."/" = mkIf cfg.disk.tmpRoot {
             fsType = "tmpfs";
@@ -163,6 +166,21 @@ in {
       }
 
       (mkIf (cfg.disk.encrypted && cfg.disk.type == "btrfs") {
+        # ponytail: grow LUKS container after GPT partition was grown via boot.growPartition
+        boot.initrd.systemd.services.grow-luks = mkIf (!cfg.disk.tmpRoot) {
+          description = "Grow LUKS container to fill expanded partition";
+          wantedBy = [ "initrd.target" ];
+          after = [ "systemd-cryptsetup@cryptroot.service" ];
+          before = [ "sysroot.mount" ];
+          unitConfig.DefaultDependencies = "no";
+          serviceConfig.Type = "oneshot";
+          script = ''
+            if ! cryptsetup resize cryptroot 2>/dev/null; then
+              echo "grow-luks: cryptsetup resize skipped or not needed"
+            fi
+          '';
+        };
+
         disko.devices.disk.main.content = {
           type = "gpt";
           partitions = {

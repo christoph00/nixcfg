@@ -22,6 +22,11 @@ in
     ./gonic.nix
     ./media-pod.nix
     ./lobechat.nix
+    ./camofox.nix
+    ./degoog.nix
+    ./redlib.nix
+    ./tinyauth.nix
+    ./vaultwarden.nix
   ];
   options.cnt = {
     enable = mkBoolOpt false;
