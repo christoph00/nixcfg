@@ -71,6 +71,7 @@ in {
         "subvol=@data"
         "noatime"
         "compress-force=zstd"
+        "space_cache=v2"
       ];
     };
   };
@@ -103,23 +104,25 @@ in {
   #services.xserver.enable = true;
   services.xserver.videoDrivers = [
     "amdgpu"
-    "i915"
   ];
 
   boot.kernelModules = [
     "kvm-intel"
-    "acpi_call"
     "i2c_dev"
   ];
   boot.kernelParams = [
     # "mem_sleep_default=deep"
-    "amdgpu.gttsize=8192"
-    "amdgpu.ignore_crat=1"
     "radeon.si_support=0"
     "radeon.cik_support=0"
     "amdgpu.si_support=1"
     "amdgpu.cik_support=1"
     "random.trust_cpu=on"
+    # ttm.pages_limit=2097152 = 8GB GTT (GART), ersetzt deprecated amdgpu.gttsize=8192
+    "ttm.pages_limit=2097152"
+    # intremap=no_x2apic_optout: BIOS blockiert x2APIC, hiermit erzwingen
+    "intremap=no_x2apic_optout"
+    # pci=realloc=on: Erzwingt PCI BAR Reallocation (für Resizable BAR)
+    "pci=realloc=on"
   ];
   boot.blacklistedKernelModules = ["fglrx"];
   boot.initrd.kernelModules = [ "vfat" "nls_cp437" "nls_ascii" "nls_utf8" ];
@@ -136,8 +139,12 @@ in {
     ];
   };
 
+  # RBAR (Resizable BAR) für RX580: BAR0 auf 8GB setzen (2^13 MB)
+  # Läuft in initrd und runtime — initrd udev feuert vor amdgpu Treiber-Load
+  boot.initrd.services.udev.rules = ''
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource0_resize}="13"
+  '';
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource0_resize}="13"
-    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource2_resize}="3"
   '';
 }
