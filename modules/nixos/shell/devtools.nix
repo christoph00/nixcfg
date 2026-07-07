@@ -26,76 +26,23 @@ in {
 
     home.packages =
       (with pkgs; [
-        (if config.desktop.enable then emacs-pgtk else emacs-nox)
         iwe
         fzf
-	nb
-	emacs-lsp-booster
         fd
         yazi
-        bc
         gcc
         gitu
         devenv
-        curlie
-        # dotenvy
-        go
-        # katana
-        httrack
-        nodejs
         uv
         bun
-        python3
-        pass
-        esphome
-        # repomix
-        php
-        blade-formatter
-        php84Packages.composer
-        # python312Packages.pylance
-        intelephense
         gh
         rustup
-        python313Packages.markitdown
-        # watchgha
-        adguardian
-        tree-sitter
-        # marksman
-        fswatch
         fd
         ripgrep
-        nixd
-        nixfmt
-        himalaya
-        vdirsyncer
-        emmylua-ls
-        emmet-ls
-        tailwindcss-language-server
-        superhtml
-        ast-grep
-        stylua
-        emacs-nox
       ])
       ++ (with perSystem.nix-ai-tools; [
-        # claude-code
-        # opencode
-        # gemini-cli
-        # goose-cli
         pi
-        # vibe-kanban
-        # qwen-code
-        # crush
-        # code
-        agent-browser
-        zeroclaw
-      ] ++ [perSystem.self.td]);
-
-    home.rum.programs.tealdeer = {
-      enable = true;
-      settings = {
-        auto_update = true;
-      };
-    };
+      ]);
 
        environment.sessionVariables = { 
           PATH = "~/.bun/bin:~/.local/bin:~/.local/share/bin:~/.config/composer/vendor/bin/:$PATH";
