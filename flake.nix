@@ -5,6 +5,11 @@
     nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.xz";
     nixpkgs-unstable.url = "github:numtide/nixpkgs-unfree?ref=nixos-unstable";
 
+    chaotic={
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     blueprint = {
       url = "github:numtide/blueprint";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -71,11 +76,6 @@
 
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
-    };
-
-    microvm = {
-      url = "github:astro/microvm.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-anywhere = {

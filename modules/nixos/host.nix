@@ -10,6 +10,9 @@ in {
     inputs.nixos-facter-modules.nixosModules.facter
     inputs.srvos.nixosModules.common
     inputs.hjem.nixosModules.default
+    inputs.chaotic.nixosModules.nyx-registry
+    inputs.chaotic.nixosModules.nyx-cache
+
     flake.modules.nixos.secrets
     flake.modules.nixos.system
     flake.modules.nixos.users

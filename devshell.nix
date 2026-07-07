@@ -2,7 +2,7 @@
 pkgs.mkShell {
   packages = [
     pkgs.nixd
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
     pkgs.ragenix
     inputs.nixos-anywhere.packages.${pkgs.system}.nixos-anywhere
   ];
