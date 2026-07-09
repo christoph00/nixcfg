@@ -20,6 +20,11 @@ in
 
   options.sys.boot = with types; {
     enable = mkBoolOpt true;
+    mode = mkOption {
+      type = enum [ "uefi" "bios" ];
+      default = "uefi";
+      description = "Boot mode: UEFI (systemd-boot) or legacy BIOS (GRUB)";
+    };
     secureBoot = mkBoolOpt false;
     silentBoot = mkBoolOpt false;
     encryptedRoot = mkBoolOpt true;
@@ -111,6 +116,18 @@ in
         loader.timeout = 0;
       };
 
+    })
+
+    (mkIf (cfg.boot.mode == "bios") {
+      boot.loader = {
+        systemd-boot.enable = mkForce false;
+        efi.canTouchEfiVariables = mkForce false;
+        grub = mkForce {
+          enable = true;
+          efiSupport = false;
+        };
+        timeout = mkForce 5;
+      };
     })
   ]);
 }

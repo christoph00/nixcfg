@@ -9,7 +9,10 @@ with builtins;
 with lib;
 with flake.lib; let
   cfg = config.sys;
-  ESP = {
+  ESP = if config.sys.boot.mode == "bios" then {
+    size = "1M";
+    type = "EF02";
+  } else {
     size = "800M";
     type = "EF00";
     content = {
