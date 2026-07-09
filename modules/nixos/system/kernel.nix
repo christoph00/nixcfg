@@ -69,7 +69,6 @@ in {
         "jffs2"
         "hfs"
         "hfsplus"
-        "btusb"
         "hpfs"
         "jfs"
         "minix"
