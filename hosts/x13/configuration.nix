@@ -14,9 +14,12 @@
   sys.disk.device = "/dev/nvme0n1";
   sys.disk.encrypted = true;
 
-  desktop.enable = true;
-  host.gaming = true;
-  desktop.gaming.enable = true;
+
+  host.bootstrap = true;
+
+  #desktop.enable = true;
+  #host.gaming = true;
+  #desktop.gaming.enable = true;
   network.enableWifi = true;
 
   hardware.graphics = {
@@ -70,7 +73,6 @@
       "vt.global_cursor_default=0"
       "mem_sleep_default=deep"
       "ahci.mobile_lpm_policy=3"
-      "mitigations=off"
     ];
     initrd.kernelModules = ["i915"];
 
@@ -107,11 +109,4 @@
   services.power-profiles-daemon.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
-
-  # WireGuard configuration
-  network.wireguard = {
-    enable = false;
-    ip = "10.100.100.106";
-    publicKey = "5M1yv9GRgVSE/8/CO2BngITxugRLcHkUBaVz7g8/1QU=";
-  };
 }
