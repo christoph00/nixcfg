@@ -22,7 +22,6 @@ in
 
   config = mkIf cfg.enable {
     environment.enableAllTerminfo = true;
-    environment.binsh = "${pkgs.dash}/bin/dash";
     programs.direnv = enabled;
     programs.git = enabled;
     environment.systemPackages = with pkgs; [

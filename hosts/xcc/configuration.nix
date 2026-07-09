@@ -17,6 +17,7 @@ in
   sys.boot.mode = "bios";
   sys.disk.device = "/dev/sda";
   sys.disk.forceDevice = true;
+  sys.state.enable = false;
   host.vm = true;
   host.minimal = true;
   host.bootstrap = true;
