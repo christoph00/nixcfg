@@ -1,6 +1,6 @@
 let
   christoph_tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJznPNQqLgyHNL2Cxbtx3RO6BncMpC1Bpyae/edKW7oH";
-  christoph_x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICwrR18ub6bgzehbzGzwFu4gBXPuBfkXCYLlqS9Qbal2";
+  christoph_x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGPbyWhQy8gRapWN2ErcFgcQCJbrvgMSUQdCQAoPEckq";
   christoph_oca = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII1MrbLLO4xfy0qns7diUDklWd8LthvvdKIMdydKNb9f";
 
   # Hosts
@@ -10,7 +10,7 @@ let
   oca = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjzPAtQF1ysQyoos3mDAv7vnUtlHALu7EgU4bj0McoJ";
   oc1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQzfYiD7ugHkflIXEvCFj3o6skLLyFDlRkkoTjlyK5I";
   oc2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZwupfoft4N/wvB4DqXLcZtuFWNRbomxgf/WzhgCx2F";
-  x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICmYYt27qyW73/QHk2Q7oben7p4iLgRts//SwBzohaMx";
+  x13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN/q+S357Z66z5yyzlSQWI2hfDK4+iYx3LOLEoLfHQqw";
   one = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7STsorCqxsu+ZQZjgsD1Zqw8ihoLKKUQgdvNS+s3F8";
 
   servers = [
@@ -135,5 +135,9 @@ in
   "secrets/tower-root-key.age".publicKeys = [
     tower
     christoph_tower
+  ];
+  "secrets/x13-root-key.age".publicKeys = [
+    x13
+    christoph_x13
   ];
 }
