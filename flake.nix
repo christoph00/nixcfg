@@ -86,6 +86,9 @@
         nixos-stable.follows = "nixpkgs";
       };
     };
+
+ lsfg-vk-flake.url = "github:pabloaul/lsfg-vk-flake/main";
+  lsfg-vk-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs =

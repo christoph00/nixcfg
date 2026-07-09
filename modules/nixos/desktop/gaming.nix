@@ -5,6 +5,7 @@
   options,
   config,
   perSystem,
+  inputs,
   ...
 }:
 let
@@ -14,6 +15,7 @@ let
   up = perSystem.nixpkgs-unstable;
 in
 {
+  imports = [ inputs.lsfg-vk-flake.nixosModules.default ];
   options.desktop.gaming = {
     enable = mkBoolOpt false;
     proton = mkPackageOption up "proton-ge-bin" { };
@@ -50,6 +52,11 @@ in
     };
 
     services.input-remapper = enabled;
+
+    services.lsfg-vk = {
+      enable = true;
+      ui.enable = true; # installs gui for configuring lsfg-vk
+    };
 
     programs = {
       steam = {
@@ -92,7 +99,9 @@ in
         enable = true;
         enableRenice = true;
         settings = {
-          general = { renice = 10; };
+          general = {
+            renice = 10;
+          };
           custom = {
             start = "${up.libnotify}/bin/notify-send 'GameMode started'";
             end = "${up.libnotify}/bin/notify-send 'GameMode ended'";
@@ -101,66 +110,26 @@ in
       };
     };
 
-    environment.systemPackages =
-      with up;
-      let
-        protonhax = writeShellScriptBin "protonhax" ''
-          phd=''${XDG_RUNTIME_DIR:-/run/user/$UID}/protonhax
-          usage() {
-              echo "Usage:"
-              echo "protonhax init <cmd>"
-              printf "\tShould only be called by Steam with \"protonhax init %%COMMAND%%\"\n"
-              echo "protonhax ls"
-              printf "\tLists all currently running games\n"
-              echo "protonhax run <appid> <cmd>"
-              printf "\tRuns <cmd> in the context of <appid> with proton\n"
-              echo "protonhax cmd <appid>"
-              printf "\tRuns cmd.exe in the context of <appid>\n"
-              echo "protonhax exec <appid> <cmd>"
-              printf "\tRuns <cmd> in the context of <appid>\n"
-          }
-          if [[ $# -lt 1 ]]; then usage; exit 1; fi
-          c=$1; shift
-          if [[ "$c" == "init" ]]; then
-              mkdir -p $phd/$SteamAppId
-              printf "%s\n" "''${@}" | grep -m 1 "/proton" > $phd/$SteamAppId/exe
-              printf "%s" "$STEAM_COMPAT_DATA_PATH/pfx" > $phd/$SteamAppId/pfx
-              declare -px > $phd/$SteamAppId/env
-              "$@"; ec=$?; rm -r $phd/$SteamAppId; exit $ec
-          elif [[ "$c" == "ls" ]]; then
-              if [[ -d $phd ]]; then ls -1 $phd; fi
-          elif [[ "$c" == "run" ]] || [[ "$c" == "cmd" ]] || [[ "$c" == "exec" ]]; then
-              if [[ $# -lt 1 ]]; then usage; exit 1; fi
-              if [[ ! -d $phd/$1 ]]; then printf "No app running with appid \"%s\"\n" "$1"; exit 2; fi
-              SteamAppId=$1; shift
-              if [[ ! -f "$phd/$SteamAppId/env" ]]; then
-                notify-send "ProtonHax Error" "No environment file found for AppID $SteamAppId." --urgency=critical
-                exit 2
-              fi
-              source $phd/$SteamAppId/env
-              if [[ "$c" == "run" ]]; then exec "$(cat $phd/$SteamAppId/exe)" run "$@"; fi
-              if [[ "$c" == "cmd" ]]; then exec "$(cat $phd/$SteamAppId/exe)" run "$(cat $phd/$SteamAppId/pfx)/drive_c/windows/system32/cmd.exe"; fi
-              if [[ "$c" == "exec" ]]; then exec "$@"; fi
-          else printf "Unknown command %s\n" "$c"; usage; exit 1; fi
-        '';
-      in
-      [
-        steam
-        protonplus
-        protontricks
-        gamemode
-        protonhax
-        umu-launcher
-        faugus-launcher
-        cacert
-        dos2unix
-        samba
-        wine
-        winetricks
-        unzip
-        xlsfonts
-        zip
-        vulkan-tools
-      ];
+    environment.systemPackages = with up; [
+      steam
+      protonplus
+      protontricks
+      gamemode
+      umu-launcher
+      faugus-launcher
+      cacert
+      dos2unix
+      samba
+      wine
+      winetricks
+      unzip
+      xlsfonts
+      zip
+      vulkan-tools
+
+      openmw
+      openttd
+      opengothic
+    ];
   };
 }
