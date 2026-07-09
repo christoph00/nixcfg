@@ -32,11 +32,12 @@ in {
 
 
     };
-    home.packages = with pkgs; [
+    home.packages = with perSystem.nixpkgs-unstable; [
        aerc
        meli
        nchat
        csvlens
+       python314Packages.ddgs
     ];
   };
 }

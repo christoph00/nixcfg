@@ -41,7 +41,6 @@ in
       enable = true;
       xdgOpenUsePortal = true;
       wlr.enable = true;
-      # ponytail: pulled in by labwc + wlr automatically
       config.common = { default = [ "gtk" "wlr" ]; };
       config.labwc = { default = [ "gtk" "wlr" ]; };
     };
@@ -87,7 +86,6 @@ in
       dms-shell
     ];
 
-    # ponytail: exported via uwsm/env, not consumed by Hjem Rum directly
     home.rum.environment.hideWarning = true;
 
     programs.dms-shell = {
@@ -98,7 +96,6 @@ in
       quickshell.package = up.quickshell;
     };
 
-    # ponytail: optional services, add when you actually need them
     systemd.user.services = {
       waybar = mkIf cfg.waybar {
         description = "Waybar";

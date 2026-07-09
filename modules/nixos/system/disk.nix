@@ -107,7 +107,6 @@ in {
       {
         boot.supportedFilesystems.zfs = lib.mkForce false;
 
-        # ponytail: grow root partition + btrfs on first boot after dd to larger disk
         boot.growPartition = mkIf (!cfg.disk.tmpRoot) true;
 
         disko.devices = {
@@ -166,7 +165,6 @@ in {
       }
 
       (mkIf (cfg.disk.encrypted && cfg.disk.type == "btrfs") {
-        # ponytail: grow LUKS container after GPT partition was grown via boot.growPartition
         boot.initrd.systemd.services.grow-luks = mkIf (!cfg.disk.tmpRoot) {
           description = "Grow LUKS container to fill expanded partition";
           wantedBy = [ "initrd.target" ];
