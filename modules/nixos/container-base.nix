@@ -24,8 +24,11 @@ in {
 
   # nix deaktivieren — Store ist read-only vom Host
   config.nix.enable = false;
-  config.nix.gc.automatic = false;
-  config.nix.optimise.automatic = false;
+  config.nix.gc = lib.mkForce { automatic = false; };
+  config.nix.optimise = lib.mkForce { automatic = false; };
+  config.programs.nh.enable = lib.mkForce false;
+  config.programs.nh.clean.enable = lib.mkForce false;
+  config.system.disableInstallerTools = lib.mkForce true;
 
   # DNS kommt vom Host — resolved im Container aus
   config.services.resolved.enable = false;
