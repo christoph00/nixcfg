@@ -16,6 +16,7 @@ with inputs.nixpkgs; let
     optionalString
     mapAttrs
     filterAttrs
+    elem
     ;
 in rec {
   mkOpt = type: default: mkOption {inherit type default;};
@@ -114,4 +115,69 @@ in rec {
     subpath ? "/",
     destination,
   }: "type=volume,source=${volume},subpath=${subpath},destination=${destination}";
+
+  ## -- hjem generators --
+
+  # Generate labwc XML config from a Nix attrset.
+  #
+  # Conventions:
+  #   - `_attrs` → element attributes (self-closing if no children)
+  #   - `_content` → text content inside an element with attributes
+  #   - primitive value → text content: `<tag>value</tag>`
+  #   - attrset w/o `_attrs` → child elements (keys = tag names)
+  #   - list → multiple elements with same tag
+  #   - `{}` → self-closing: `<tag />`
+  #   - bool → `"yes"` / `"no"`
+  #
+  # Example:
+  #   toLabwcXml {
+  #     desktops._attrs = { number = 6; popupTime = 500; };
+  #     focus.followMouse = "no";
+  #     keyboard.keybind = [
+  #       { _attrs = { key = "W-Return"; };
+  #         action._attrs = { name = "Execute"; command = "ghostty"; };
+  #       }
+  #     ];
+  #   }
+  #
+  toLabwcXml =
+    { root ? "labwc_config", ... } @ params:
+    let
+      nodes = builtins.removeAttrs params ["root"];
+      inherit (builtins) isAttrs isList isBool;
+
+      esc = s:
+        builtins.replaceStrings ["&" "<" ">" "\"" "'"] ["&amp;" "&lt;" "&gt;" "&quot;" "&apos;"] (toString s);
+
+      toStr = v:
+        if isBool v then if v then "yes" else "no" else toString v;
+
+      renderAttrs = attrs:
+        concatStringsSep " " (mapAttrsToList (n: v: "${n}=\"${esc (toStr v)}\"") attrs);
+
+      render = indent: tag: val:
+        if isList val then
+          concatStringsSep "\n" (map (render indent tag) val)
+        else if !(isAttrs val) then
+          "${indent}<${tag}>${esc (toStr val)}</${tag}>"
+        else
+          let
+            a = val._attrs or {};
+            c = val._content or null;
+            kids = filterAttrs (n: _: n != "_attrs" && n != "_content") val;
+            aStr = renderAttrs a;
+          in
+          if c != null then
+            "${indent}<${tag}${optionalString (aStr != "") " ${aStr}"}>${esc c}</${tag}>"
+          else if kids != {} then
+            let kidsStr = concatStringsSep "\n" (mapAttrsToList (render "${indent}  ") kids);
+            in "${indent}<${tag}${optionalString (aStr != "") " ${aStr}"}>\n${kidsStr}\n${indent}</${tag}>"
+          else
+            "${indent}<${tag}${optionalString (aStr != "") " ${aStr}"} />"
+      ;
+    in ''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <${root}>
+${concatStringsSep "\n" (mapAttrsToList (render "  ") nodes)}
+      </${root}>'';
 }

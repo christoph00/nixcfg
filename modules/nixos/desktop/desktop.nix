@@ -75,7 +75,6 @@ in
       labwc-gtktheme
       labwc-tweaks-gtk
       labwc-menu-generator
-      fuzzel
       foot
       brightnessctl
       clipman

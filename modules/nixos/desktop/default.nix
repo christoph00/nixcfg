@@ -5,6 +5,7 @@
     ./fonts.nix
     ./gtk.nix
     ./ghostty.nix
+    ./labwc.nix
     ./display-manager.nix
     ./remote.nix
     ./firefox.nix
