@@ -11,22 +11,18 @@
   # Home Assistant — nutzt perSystem.nixpkgs-unstable via Modul
   services.home-assistant = {
     enable = true;
-    config = {
-      homeassistant = {
-        name = "SmartHome Test";
-        unit_system = "metric";
-        time_zone = "Europe/Berlin";
-      };
-      http = {
-        server_host = "0.0.0.0";
-        server_port = 8123;
-        use_x_forwarded_for = true;
-        trusted_proxies = [ "10.88.0.0/24" ];
-      };
-      mqtt = {
-        broker = "127.0.0.1";
-        port = 1883;
-      };
+    config.homeassistant.name = lib.mkForce "SmartHome Test";
+    config.homeassistant.unit_system = lib.mkForce "metric";
+    config.homeassistant.time_zone = lib.mkForce "Europe/Berlin";
+    config.http = lib.mkForce {
+      server_host = "0.0.0.0";
+      server_port = 8123;
+      use_x_forwarded_for = true;
+      trusted_proxies = [ "10.88.0.0/24" ];
+    };
+    config.mqtt = lib.mkForce {
+      broker = "127.0.0.1";
+      port = 1883;
     };
   };
 
