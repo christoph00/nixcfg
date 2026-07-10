@@ -22,7 +22,13 @@ in {
   # === Container-Optimierung ===
   config.boot.isContainer = true;
 
+  # nix deaktivieren — Store ist read-only vom Host
   config.nix.enable = false;
+  config.nix.gc.automatic = false;
+  config.nix.optimise.automatic = false;
+
+  # DNS kommt vom Host — resolved im Container aus
+  config.services.resolved.enable = false;
 
   config.services.openssh.enable = true;
   config.users.users.root.initialHashedPassword = "";
