@@ -22,47 +22,6 @@ in {
       "/var/lib/hass"
     ];
 
-    users.extraUsers."hass".extraGroups = ["dialout"];
-
-    security.doas.extraRules = [
-      {
-        users = ["hass"];
-        cmd = "systemctl";
-        args = [
-          "status"
-          "stop"
-          "start"
-          "restart"
-          "reboot"
-        ];
-        runAs = "root";
-        noPass = true;
-      }
-      {
-        users = ["hass"];
-        cmd = "nh";
-        noPass = true;
-        runAs = "root";
-      }
-    ];
-
-    hardware.bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
-
-    services.nginx.virtualHosts."ha.r505.de" = {
-      useACMEHost = "r505.de";
-      forceSSL = true;
-      kTLS = true;
-
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8123";
-        recommendedProxySettings = true;
-        proxyWebsockets = true;
-      };
-    };
-
     services.home-assistant = let
       package = perSystem.nixpkgs-unstable.home-assistant.override {
         extraPackages = ps:
@@ -77,19 +36,14 @@ in {
             #aiowithings
             python-otbr-api
             pyipp
-            pysnmp
             qingping-ble
             xiaomi-ble
             pyxiaomigateway
             radios
-            bluepy
-            pybluez
-            aioblescan
             grpcio-gcp
           ];
       };
     in {
-      openFirewall = true;
       package = package.overrideAttrs (o: {
         doInstallCheck = false;
       });
@@ -183,7 +137,6 @@ in {
           ];
         };
 
-        bluetooth = {};
         system_health = {};
         "automation ui" = "!include automations.yaml";
         "scene ui" = "!include scenes.yaml";
@@ -206,7 +159,6 @@ in {
       customComponents = (
         with pkgs.home-assistant-custom-components; [
           better_thermostat
-          prometheus_sensor
           spook
           waste_collection_schedule
           xiaomi_miot
@@ -234,12 +186,10 @@ in {
       );
       extraComponents = [
         "caldav"
-        "bluetooth"
         #"cloud"
         "calendar"
         "camera"
         "open_meteo"
-        "adguard"
         "speedtestdotnet"
         "google_travel_time"
         "device_sun_light_trigger"
@@ -250,8 +200,6 @@ in {
         "cloudflare"
         "http"
         "google_generative_ai_conversation"
-        "tailscale"
-        #"hyperion"
         "assist_pipeline"
         "jellyfin"
         "androidtv"
@@ -259,10 +207,8 @@ in {
         "openai_conversation"
         "lovelace"
         "mobile_app"
-        "nzbget"
         "ubus"
         "radio_browser"
-        "wake_on_lan"
         "cast"
         #  "wled"
         "xiaomi_miio"
@@ -272,25 +218,14 @@ in {
         "ipp"
         "met"
         "ping"
-        "snmp"
         "google"
         "spotify"
-        "isal"
-
         "webdav"
-
-        "zwave_js"
         "cookidoo"
         "file"
         "media_extractor"
         "youtube"
         "google_generative_ai_conversation"
-        "openai_conversation"
-
-        "cpuspeed"
-        "fail2ban"
-        "hddtemp"
-
         "python_script"
         "bthome"
         "bluetooth_adapters"

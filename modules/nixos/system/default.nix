@@ -9,5 +9,6 @@
     ./time.nix
     ./console.nix
     ./security.nix
+    ./locale.nix
   ];
 }

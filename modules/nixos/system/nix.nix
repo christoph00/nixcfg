@@ -15,7 +15,7 @@ in {
     enable = mkDefault true;
 
     clean = {
-      enable = !config.nix.gc.automatic;
+      enable = true;
       dates = "weekly";
     };
   };
@@ -32,9 +32,7 @@ in {
 
   nix = {
     gc = {
-      automatic = true;
-      dates = "Mon *-*-* 04:00";
-      options = "--delete-older-than 3d";
+      automatic = false;
     };
 
     optimise = {

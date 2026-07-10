@@ -259,10 +259,14 @@ in
       };
     };
 
-    environment.etc."libva.conf".text = ''
-      LIBVA_MESSAGING_LEVEL=1
-    '';
+    environment.etc."libva.conf" = mkIf config.hardware.graphics.enable {
+      text = ''
+        LIBVA_MESSAGING_LEVEL=1
+      '';
+    };
 
-    environment.sessionVariables.MOZ_DISABLE_RDD_SANDBOX = 1;
+    environment.sessionVariables = mkIf config.hardware.graphics.enable {
+      MOZ_DISABLE_RDD_SANDBOX = 1;
+    };
   };
 }

@@ -19,9 +19,6 @@ in
       enableGraphical = true;
     };
 
-    programs.fuse.enable = true;
-    programs.nm-applet.enable = false;
-
     programs.vscode = {
       package = up.vscode;
       enable = true;

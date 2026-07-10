@@ -16,12 +16,12 @@ let
 in
 {
   imports = [ inputs.lsfg-vk-flake.nixosModules.default ];
+
   options.desktop.gaming = {
     enable = mkBoolOpt false;
     proton = mkPackageOption up "proton-ge-bin" { };
   };
   config = mkIf cfg.enable {
-
     boot.kernelModules = [ "ntsync" ];
 
     boot.kernel.sysctl = {

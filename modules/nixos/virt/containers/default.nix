@@ -25,6 +25,15 @@ in {
             type = lib.types.str;
             description = "IP-Adresse auf dem Bridge-Netzwerk";
           };
+          rootfs = lib.mkOption {
+            type = lib.types.nullOr lib.types.path;
+            default = null;
+            description = ''
+              Pfad zu einem beliebigen Rootfs (z.B. Debian debootstrap).
+              Wenn null, wird das NixOS-Toplevel aus nixosConfigurations.cnt-<name> verwendet.
+            '';
+            example = "/var/lib/machines/debian";
+          };
           ports = lib.mkOption {
             type = lib.types.listOf (lib.types.submodule {
               options = {
@@ -39,6 +48,19 @@ in {
             default = [ ];
             description = "Port-Forwardings von WAN zum Container";
           };
+          volumes = lib.mkOption {
+            type = lib.types.attrsOf lib.types.str;
+            default = { };
+            description = ''
+              Persistente Volumes: containerPath = hostPath.
+              Host-Pfade sollten unter sys.state.stateDir liegen
+              damit sie persistent sind.
+            '';
+            example = {
+              "/var/lib/hass" = "/mnt/state/containers/smart-home/hass";
+            };
+          };
+
           secrets = lib.mkOption {
             type = lib.types.attrsOf (lib.types.submodule {
               options = {
@@ -76,6 +98,13 @@ in {
   config = mkIf cfg.enable {
     boot.enableContainers = true;
 
+    # Host-Verzeichnisse für Container-Volumes persistent halten
+    sys.state.directories = lib.flatten (
+      lib.mapAttrsToList (name: inst:
+        lib.mapAttrsToList (containerPath: hostPath: hostPath) inst.volumes
+      ) cfg.instances
+    );
+
     # Bridge für das interne Container-Netzwerk
     networking.bridges."${cfg.bridge}".interfaces = [ ];
 
@@ -99,17 +128,28 @@ in {
         privateNetwork = true;
         hostBridge = cfg.bridge;
         localAddress = "${inst.ip}/${mask}";
-        path = flake.nixosConfigurations."cnt-${name}".config.system.build.toplevel;
 
-        # Secrets per bind mount in den Container
-        bindMounts = lib.mapAttrs' (key: _: {
-          name = "/run/secrets/${key}";
-          value = {
-            hostPath = "/run/secrets/${key}";
-            isReadOnly = true;
-          };
-        }) inst.secrets;
-      };
+        # Secrets und Volumes per bind mount in den Container
+        bindMounts =
+          (lib.mapAttrs' (key: _: {
+            name = "/run/secrets/${key}";
+            value = {
+              hostPath = "/run/secrets/${key}";
+              isReadOnly = true;
+            };
+          }) inst.secrets)
+          // (lib.mapAttrs' (containerPath: hostPath: {
+            name = containerPath;
+            value = {
+              hostPath = hostPath;
+              isReadOnly = false;
+            };
+          }) inst.volumes);
+      } // (if inst.rootfs != null then {
+        rootfs = inst.rootfs;
+      } else {
+        path = flake.nixosConfigurations."cnt-${name}".config.system.build.toplevel;
+      });
     }) cfg.instances;
 
     # NAT (Container → Internet) + DNAT (WAN → Container)

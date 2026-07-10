@@ -37,12 +37,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    sys.state.directories = [
-      "/var/lib/cosmic-greeter"
-      "/var/lib/regreet"
-      "/var/lib/greetd"
-      "/var/lib/sddm"
-    ];
+    sys.state.directories =
+      lib.optional (cfg.displayManager == "cosmic-greeter") "/var/lib/cosmic-greeter"
+      ++ lib.optional (cfg.displayManager == "regreet") "/var/lib/regreet"
+      ++ lib.optional cfg.greetd "/var/lib/greetd"
+      ++ lib.optional (cfg.displayManager == "sddm") "/var/lib/sddm";
 
     programs.regreet.enable = cfg.displayManager == "regreet";
 

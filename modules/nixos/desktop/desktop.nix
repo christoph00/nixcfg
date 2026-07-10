@@ -17,9 +17,8 @@ in
 
   options.desktop = {
     enable = mkBoolOpt false;
-    waybar = mkBoolOpt false;
+    waybar = mkBoolOpt true;
     wlsunset = mkBoolOpt false;
-    dms = mkBoolOpt true;
   };
 
   config = mkIf cfg.enable {
@@ -28,14 +27,12 @@ in
     # for greeter + tools
     programs.sway.enable = true;
 
-    hardware.graphics.enable = true;
+    hardware.graphics.enable = mkDefault true;
 
     boot.kernelModules = [ "uinput" ];
     services.udev.extraRules = ''
       KERNEL=="uinput", GROUP="input", MODE="0660" OPTIONS+="static_node=uinput"
     '';
-
-    i18n.defaultLocale = "de_DE.UTF-8";
 
     xdg.portal = {
       enable = true;
@@ -57,7 +54,7 @@ in
     };
 
     services = {
-      dbus = { enable = true; implementation = "broker"; };
+      dbus.implementation = mkDefault "broker";
       seatd.enable = true;
     };
 
@@ -82,19 +79,12 @@ in
       foot
       brightnessctl
       clipman
-      quickshell
-      dms-shell
+      gtklock
+      swayidle
+      swaybg
     ];
 
     home.rum.environment.hideWarning = true;
-
-    programs.dms-shell = {
-      enable = cfg.dms;
-      package = up.dms-shell;
-      enableAudioWavelength = false;
-      enableVPN = false;
-      quickshell.package = up.quickshell;
-    };
 
     systemd.user.services = {
       waybar = mkIf cfg.waybar {
@@ -112,11 +102,38 @@ in
         after = [ "graphical-session.target" ];
         serviceConfig.Slice = "background-graphical.slice";
       };
+      swaybg = {
+        description = "Wallpaper daemon";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = {
+          Slice = "background-graphical.slice";
+          Restart = "always";
+          RestartSec = 3;
+        };
+        script = "${up.swaybg}/bin/swaybg -c '#2e3440' -m fill";
+      };
+      swayidle = {
+        description = "Idle management daemon";
+        wantedBy = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = {
+          Slice = "background-graphical.slice";
+          Restart = "always";
+          RestartSec = 3;
+        };
+        script = ''
+          ${up.swayidle}/bin/swayidle -w \
+            timeout 300 '${up.gtklock}/bin/gtklock' \
+            timeout 600 'swaymsg "output * dpms off"' \
+            resume 'swaymsg "output * dpms on"' \
+            before-sleep '${up.gtklock}/bin/gtklock'
+        '';
+      };
     };
 
     services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
     security.pam.services.gtklock.text = lib.readFile "${up.gtklock}/etc/pam.d/gtklock";
-    security.pam.services.waylock = { };
   };
 }

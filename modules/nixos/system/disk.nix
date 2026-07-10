@@ -5,7 +5,6 @@
   inputs,
   ...
 }:
-with builtins;
 with lib;
 with flake.lib; let
   cfg = config.sys;
@@ -96,7 +95,6 @@ in {
     };
 
     device = mkStrOpt "/dev/sda";
-    stateDevice = mkStrOpt config.sys.disk.device;
     encrypted = mkBoolOpt false;
     tmpRoot = mkBoolOpt cfg.state.enable;
     swap = mkBoolOpt true;

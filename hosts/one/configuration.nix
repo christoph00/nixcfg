@@ -50,7 +50,6 @@ in
   };
 
   # services.stalwart-mail = enabled;
-  services.karakeep = enabled;
 
   cnt.stalwart = enabled;
 
@@ -65,11 +64,6 @@ in
         enable = true;
         subdomain = "jmap";
         port = 8081;
-      };
-      keep = {
-        enable = true;
-        subdomain = "keep";
-        inherit (config.services.karakeep) port;
       };
     };
   };

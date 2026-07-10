@@ -8,7 +8,6 @@
   ...
 }:
 
-with builtins;
 with lib;
 with flake.lib;
 

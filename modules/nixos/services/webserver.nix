@@ -121,7 +121,9 @@ in {
         dnsProvider = "cloudflare";
         #dnsPropagationCheck = true;
         #dnsResolver = "1.1.1.1:53";
-        credentialsFile = config.age.secrets.cf-api-key.path;
+        credentialFiles = {
+          "CLOUDFLARE_DNS_API_TOKEN_FILE" = config.age.secrets.cf-api-key.path;
+        };
         reloadServices = ["caddy.service"];
         # Use lego client instead of minica for cloudflare DNS
         server = "https://acme-v02.api.letsencrypt.org/directory";

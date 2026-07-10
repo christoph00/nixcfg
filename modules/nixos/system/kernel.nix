@@ -33,7 +33,6 @@ in {
         "f2fs"
         "xfs"
         "ext4"
-        "vfat"
       ];
       blacklistedKernelModules = [
         # Novideo
@@ -64,8 +63,6 @@ in {
         "nfsv3"
         "cifs"
         "nfs"
-        "cramfs"
-        "freevxfs"
         "jffs2"
         "hfs"
         "hfsplus"

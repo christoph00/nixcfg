@@ -1,7 +1,9 @@
-{ config, lib, pkgs, flake, inputs, ... }: let
+{ config, lib, pkgs, flake, inputs, modulesPath, ... }: let
   inherit (flake.lib) mkBoolOpt;
 in {
   imports = [
+    "${modulesPath}/profiles/perlless.nix"
+
     # Eigene Module — Services, Netzwerk, Secrets, System
     flake.modules.nixos.services
     flake.modules.nixos.network

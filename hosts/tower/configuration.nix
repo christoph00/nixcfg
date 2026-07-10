@@ -163,6 +163,9 @@ in {
     instances = {
       smart-home = {
         ip = "10.88.0.10";
+        volumes = {
+          "/var/lib/hass" = "/mnt/state/containers/smart-home/hass";
+        };
       };
     };
   };

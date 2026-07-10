@@ -21,7 +21,6 @@
 #
 # ref: https://nixos.org/manual/nixos/stable/#ch-system-state
 
-with builtins;
 with lib;
 with flake.lib;
 
