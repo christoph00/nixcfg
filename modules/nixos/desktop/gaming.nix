@@ -120,8 +120,6 @@ in
       cacert
       dos2unix
       samba
-      wine
-      winetricks
       unzip
       xlsfonts
       zip

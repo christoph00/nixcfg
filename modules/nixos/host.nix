@@ -3,13 +3,13 @@
   flake,
   options,
   modulesPath,
+  lib,
+  config,
   ...
 }: let
   inherit (flake.lib) mkBoolOpt;
 in {
   imports = [
-    "${modulesPath}/profiles/perlless.nix"
-
     inputs.nixos-facter-modules.nixosModules.facter
     inputs.srvos.nixosModules.common
     inputs.hjem.nixosModules.default

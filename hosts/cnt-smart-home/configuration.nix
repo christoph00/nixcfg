@@ -20,10 +20,6 @@
       use_x_forwarded_for = true;
       trusted_proxies = [ "10.88.0.0/24" ];
     };
-    config.mqtt = lib.mkForce {
-      broker = "127.0.0.1";
-      port = 1883;
-    };
   };
 
   system.stateVersion = "25.11";

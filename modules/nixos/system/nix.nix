@@ -7,7 +7,7 @@
   inherit (lib) mkDefault mkForce;
 in {
   environment = {
-    systemPackages = [pkgs.git];
+    systemPackages = [pkgs.gitMinimal];
     variables.NIXPKGS_CONFIG = mkForce "";
   };
 

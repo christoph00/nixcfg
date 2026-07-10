@@ -62,12 +62,6 @@ in {
           server_host = "0.0.0.0";
           server_port = 8123;
           use_x_forwarded_for = true;
-          trusted_proxies = [
-            "127.0.0.1"
-            "::1"
-            "100.77.87.57" # oc1
-            # "${config.network.subnets.vpn}"
-          ];
         };
         mobile_app = {};
         frontend = {};
@@ -120,36 +114,19 @@ in {
         };
         lovelace.mode = "yaml";
 
-        mqtt = {
-          sensor = [
-            {
-              name = "Host Status";
-              state_topic = "host/+/heartbeat";
-              value_template = "{{ value_json.status }}";
-              json_attributes_topic = "host/+/heartbeat";
-            }
-            {
-              name = "Service Status";
-              state_topic = "host/+/service/+";
-              value_template = "{{ value_json.status }}";
-              json_attributes_topic = "host/+/service/+";
-            }
-          ];
-        };
-
         system_health = {};
         "automation ui" = "!include automations.yaml";
-        "scene ui" = "!include scenes.yaml";
+        #"scene ui" = "!include scenes.yaml";
         "script ui" = "!include scripts.yaml";
-        google_assistant = {
-          project_id = "!secret google_projectid";
-          service_account = "!include serviceaccount.json";
-          report_state = true;
-          exposed_domains = [
-            "switch"
-            "light"
-          ];
-        };
+        #google_assistant = {
+        #  project_id = "!secret google_projectid";
+        #  service_account = "!include serviceaccount.json";
+        #  report_state = true;
+        #  exposed_domains = [
+        #    "switch"
+        #    "light"
+        #  ];
+        #};
       };
       lovelaceConfig = {
         title = "Hidden";
