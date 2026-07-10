@@ -140,5 +140,21 @@ in {
         }) inst.secrets
       ) cfg.instances
     );
+
+    # Live-Reload: switch-to-configuration test im Container
+    # stopIfChanged=false verhindert Restart beim Host-Rebuild
+    systemd.services = lib.mkMerge (
+      lib.mapAttrsToList (name: inst: {
+        "container@${name}" = {
+          overrideStrategy = "asDropin";
+          serviceConfig.ExecReload = lib.mkForce (
+            "systemd-run --quiet --machine=${name} --collect " +
+            "--no-ask-password --pipe --service-type=exec " +
+            "/run/current-system/sw/bin/switch-to-configuration test"
+          );
+          stopIfChanged = false;
+        };
+      }) cfg.instances
+    );
   };
 }
