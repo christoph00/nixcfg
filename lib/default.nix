@@ -84,12 +84,6 @@ in rec {
 
   allSystems = toList flake.nixosConfigurations;
 
-  allMicroVMS =
-    builtins.filter (
-      x: ((builtins.hasAttr "microvm" x.config.virt.microvm) && (x.config.virt.microvm.isGuest == true))
-    )
-    allSystems;
-
   toEnvValue = env:
     if isList env
     then concatStringsSep ":" (map toString env)

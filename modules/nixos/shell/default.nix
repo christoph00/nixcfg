@@ -12,7 +12,6 @@ let
 in
 {
   imports = [
-    ./neovim
     ./devtools.nix
     ./office.nix
   ];
