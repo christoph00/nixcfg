@@ -152,4 +152,18 @@ in {
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67df", ATTR{resource0_resize}="13"
   '';
+
+  # === Test: nspawn-Container smart-home ===
+  virt.containers = {
+    enable = true;
+    bridge = "br-cnt";
+    subnet = "10.88.0.0/24";
+    hostAddress = "10.88.0.1";
+    externalInterface = "enp2s0";
+    instances = {
+      smart-home = {
+        ip = "10.88.0.10";
+      };
+    };
+  };
 }

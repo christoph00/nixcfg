@@ -9,12 +9,12 @@ in
 
   imports = [
     ./podman.nix
+    ./containers
     # ./microvm
   ];
 
   options.virt = {
     podman = mkBoolOpt false;
     microGuest = mkBoolOpt false;
-    container = mkBoolOpt false;
   };
 }

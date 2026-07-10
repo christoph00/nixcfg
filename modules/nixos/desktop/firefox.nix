@@ -250,7 +250,19 @@ in
         "media.hardwaremediakeys.enabled" = false;
         "widget.use-xdg-desktop-portal.file-picker" = 1;
         "editor.truncate_user_pastes" = false;
+
+        # Hardware video acceleration (VAAPI)
+        "gfx.x11-egl.force-enabled" = true;
+        "media.ffmpeg.vaapi.enabled" = true;
+        "media.hardware-video-decoding.force-enabled" = true;
+        "media.rdd-ffmpeg.enabled" = true;
       };
     };
+
+    environment.etc."libva.conf".text = ''
+      LIBVA_MESSAGING_LEVEL=1
+    '';
+
+    environment.sessionVariables.MOZ_DISABLE_RDD_SANDBOX = 1;
   };
 }
