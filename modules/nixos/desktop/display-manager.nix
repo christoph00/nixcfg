@@ -28,7 +28,7 @@ in
       "sddm"
       "dms"
     ]) "tuigreet";
-    autologin = mkBoolOpt true;
+    autologin = mkBoolOpt false;
     greetd = mkBoolOpt (
       cfg.displayManager == "tuigreet"
       || cfg.displayManager == "cosmic-greeter"

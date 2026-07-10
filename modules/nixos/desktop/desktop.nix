@@ -17,16 +17,9 @@ in
 
   options.desktop = {
     enable = mkBoolOpt false;
-    waybar = mkBoolOpt true;
-    wlsunset = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
-    programs.labwc.enable = true;
-
-    # for greeter + tools
-    programs.sway.enable = true;
-
     hardware.graphics.enable = mkDefault true;
 
     boot.kernelModules = [ "uinput" ];
@@ -37,9 +30,6 @@ in
     xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;
-      wlr.enable = true;
-      config.common = { default = [ "gtk" "wlr" ]; };
-      config.labwc = { default = [ "gtk" "wlr" ]; };
     };
 
     home.environment.sessionVariables = {
@@ -58,81 +48,10 @@ in
       seatd.enable = true;
     };
 
-    programs.uwsm.enable = true;
-    programs.uwsm.waylandCompositors = {
-      labwc = {
-        prettyName = "Labwc";
-        comment = "A stacking Wayland compositor.";
-        binPath = "${up.labwc}/bin/labwc";
-      };
-    };
+    services.desktopManager.plasma6.enable = true;
 
-    hjem.users.christoph.files.".config/uwsm/env".text =
-      toEnvExport config.hjem.users.christoph.environment.sessionVariables;
-
-    home.packages = with up; [
-      labwc
-      labwc-gtktheme
-      labwc-tweaks-gtk
-      labwc-menu-generator
-      foot
-      brightnessctl
-      clipman
-      gtklock
-      swayidle
-      swaybg
-    ];
-
-    home.rum.environment.hideWarning = true;
-
-    systemd.user.services = {
-      waybar = mkIf cfg.waybar {
-        description = "Waybar";
-        path = [ config.system.path ];
-        script = "unset __NIXOS_SET_ENVIRONMENT_DONE && . /run/current-system/etc/profile && ${up.waybar}/bin/waybar";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "app-graphical.slice";
-      };
-      wlsunset = mkIf cfg.wlsunset {
-        description = "wlsunset";
-        script = "${up.wlsunset}/bin/wlsunset";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig.Slice = "background-graphical.slice";
-      };
-      swaybg = {
-        description = "Wallpaper daemon";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig = {
-          Slice = "background-graphical.slice";
-          Restart = "always";
-          RestartSec = 3;
-        };
-        script = "${up.swaybg}/bin/swaybg -c '#2e3440' -m fill";
-      };
-      swayidle = {
-        description = "Idle management daemon";
-        wantedBy = [ "graphical-session.target" ];
-        after = [ "graphical-session.target" ];
-        serviceConfig = {
-          Slice = "background-graphical.slice";
-          Restart = "always";
-          RestartSec = 3;
-        };
-        script = ''
-          ${up.swayidle}/bin/swayidle -w \
-            timeout 300 '${up.gtklock}/bin/gtklock' \
-            timeout 600 'swaymsg "output * dpms off"' \
-            resume 'swaymsg "output * dpms on"' \
-            before-sleep '${up.gtklock}/bin/gtklock'
-        '';
-      };
-    };
 
     services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
-    security.pam.services.gtklock.text = lib.readFile "${up.gtklock}/etc/pam.d/gtklock";
   };
 }

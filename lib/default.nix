@@ -178,6 +178,6 @@ in rec {
     in ''
       <?xml version="1.0" encoding="UTF-8"?>
       <${root}>
-${concatStringsSep "\n" (mapAttrsToList (render "  ") nodes)}
+      ${concatStringsSep "\n" (mapAttrsToList (render "  ") nodes)}
       </${root}>'';
 }

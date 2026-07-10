@@ -14,44 +14,33 @@ in
 {
   config = mkIf cfg.enable {
 
-    # -- fuzzel (via hjem-rum, uses pkgs.formats.ini / toINI) --
-
     hjem.users.christoph.rum.programs.fuzzel = {
       enable = true;
       package = up.fuzzel;
       settings = {
         main = {
+          font = "FiraCode Nerd Font:size=12";
           lines = 15;
           prompt = "❯";
-          password = "●";
-          dmenu = false;
-          include-actions = false;
+          password-character = "●";
+          show-actions = false;
         };
         colors = {
           background = "2e3440dd";
-          text = "d8dee9";
-          match = "88c0d0";
+          text = "d8dee9ff";
+          match = "88c0d0ff";
           selection = "3b4252ff";
-          selection-text = "eceff4";
-          border = "88c0d0";
+          selection-text = "eceff4ff";
+          border = "88c0d0ff";
         };
         border = {
           width = 2;
           radius = 8;
         };
-        dmenu = {
-          vertical-placement = "below";
-          lines = 10;
-        };
-        font = {
-          name = "FiraCode Nerd Font:size=12";
-        };
       };
     };
 
-    # -- labwc config files (via hjem + toLabwcXml) --
-
-    hjem.users.christoph.files.".config/labwc/rc.xml" = {
+    home.files.".config/labwc/rc.xml" = {
       generator = flake.lib.toLabwcXml;
       value = {
         desktops = {
@@ -183,11 +172,6 @@ in
               _attrs.key = "W-n";
               action._attrs.name = "Iconify";
             }
-            # Show desktop
-            {
-              _attrs.key = "W-S-m";
-              action._attrs.name = "ShowDesktop";
-            }
             # Toggle always-on-top
             {
               _attrs.key = "W-t";
@@ -210,39 +194,7 @@ in
               _attrs.key = "W-S-Tab";
               action._attrs.name = "PreviousWindow";
             }
-            # Directional focus (Vim-style)
-            {
-              _attrs.key = "W-h";
-              action._attrs = { name = "FocusTo"; direction = "left"; };
-            }
-            {
-              _attrs.key = "W-j";
-              action._attrs = { name = "FocusTo"; direction = "down"; };
-            }
-            {
-              _attrs.key = "W-k";
-              action._attrs = { name = "FocusTo"; direction = "up"; };
-            }
-            {
-              _attrs.key = "W-l";
-              action._attrs = { name = "FocusTo"; direction = "right"; };
-            }
-            {
-              _attrs.key = "W-Left";
-              action._attrs = { name = "FocusTo"; direction = "left"; };
-            }
-            {
-              _attrs.key = "W-Down";
-              action._attrs = { name = "FocusTo"; direction = "down"; };
-            }
-            {
-              _attrs.key = "W-Up";
-              action._attrs = { name = "FocusTo"; direction = "up"; };
-            }
-            {
-              _attrs.key = "W-Right";
-              action._attrs = { name = "FocusTo"; direction = "right"; };
-            }
+            # ponytail: FocusTo unsupported in labwc, removed directional focus keybinds
             # Move window directional
             {
               _attrs.key = "W-S-h";
@@ -328,14 +280,14 @@ in
               _attrs.key = "W-bracketleft";
               action = [
                 { _attrs.name = "MoveToEdge"; direction = "left"; }
-                { _attrs.name = "ResizeToWidth"; width = "50%"; }
+                { _attrs.name = "ResizeTo"; width = "50%"; }
               ];
             }
             {
               _attrs.key = "W-bracketright";
               action = [
                 { _attrs.name = "MoveToEdge"; direction = "right"; }
-                { _attrs.name = "ResizeToWidth"; width = "50%"; }
+                { _attrs.name = "ResizeTo"; width = "50%"; }
               ];
             }
             # Screenshot
@@ -420,19 +372,19 @@ in
               mousebind._attrs = { button = "Left"; action = "Drag"; };
               mousebind.action._attrs.name = "Resize";
             }
-            { _attrs.name = "TopLeft";
+            { _attrs.name = "TLCorner";
               mousebind._attrs = { button = "Left"; action = "Drag"; };
               mousebind.action._attrs.name = "Resize";
             }
-            { _attrs.name = "TopRight";
+            { _attrs.name = "TRCorner";
               mousebind._attrs = { button = "Left"; action = "Drag"; };
               mousebind.action._attrs.name = "Resize";
             }
-            { _attrs.name = "BottomLeft";
+            { _attrs.name = "BLCorner";
               mousebind._attrs = { button = "Left"; action = "Drag"; };
               mousebind.action._attrs.name = "Resize";
             }
-            { _attrs.name = "BottomRight";
+            { _attrs.name = "BRCorner";
               mousebind._attrs = { button = "Left"; action = "Drag"; };
               mousebind.action._attrs.name = "Resize";
             }
@@ -480,7 +432,7 @@ in
             pointerSpeed = 0;
             accelProfile = "adaptive";
             tapToClick = "yes";
-            tapButtonMap = "left-right-middle";
+            tapButtonMap = "lrm";
             disableWhileTyping = "yes";
           };
         };
