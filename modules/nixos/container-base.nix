@@ -33,6 +33,9 @@ in {
   # DNS kommt vom Host — resolved im Container aus
   config.services.resolved.enable = false;
 
+  # Die IP setzt nspawn via localAddress — kein DHCP nötig
+  config.systemd.network.enable = lib.mkForce false;
+
   config.services.openssh.enable = true;
   config.users.users.root.initialHashedPassword = "";
 
