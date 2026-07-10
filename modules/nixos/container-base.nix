@@ -31,7 +31,7 @@ in {
   config.system.disableInstallerTools = lib.mkForce true;
 
   # DNS kommt vom Host — resolved im Container aus
-  config.services.resolved.enable = false;
+  config.services.resolved.enable = lib.mkForce false;
 
   # Die IP setzt nspawn via localAddress — kein DHCP nötig
   config.systemd.network.enable = lib.mkForce false;
